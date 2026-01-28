@@ -37,6 +37,14 @@
   ],
   "author": "Enhanced Legal MCP Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Number531/Legal-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Number531/Legal-API/issues"
+  },
+  "homepage": "https://github.com/Number531/Legal-API#readme",
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.61",
     "@anthropic-ai/sdk": "^0.39.0",

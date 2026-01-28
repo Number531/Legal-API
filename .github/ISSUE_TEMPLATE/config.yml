@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/Number531/Legal-API/tree/main/super-legal-mcp-refactored/docs
+    about: Check the documentation before opening an issue
+  - name: Discussions
+    url: https://github.com/Number531/Legal-API/discussions
+    about: Ask questions and discuss features
