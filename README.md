@@ -1063,6 +1063,374 @@ Super-Legal excels in complex, multi-domain legal research scenarios.
 
 ---
 
+## Quality Control: 12-Dimension Scoring Framework
+
+Super-Legal evaluates every memorandum against a rigorous 12-dimension quality framework, ensuring output meets law firm standards.
+
+<details>
+<summary><strong>View Complete Quality Control System</strong></summary>
+
+### The 12 Quality Dimensions
+
+| # | Dimension | Weight | What It Measures |
+|---|-----------|--------|------------------|
+| 0 | Questions Presented | 5% | Clear, properly framed legal questions |
+| 1 | CREAC Structure | 10% | All findings use Conclusion-Rule-Explanation-Application-Counter-Analysis |
+| 2 | Objectivity | 8% | Balanced presentation with counter-arguments |
+| 3 | Brief Answers | 5% | Concise, actionable answers to each question |
+| 4 | Executive Summary | 7% | 2,500-3,500 words, decision-focused |
+| 5 | Citation Quality | 12% | Bluebook compliance, verification tags |
+| 6 | Quantification | 10% | All risks have dollar exposure with methodology |
+| 7 | Cross-References | 8% | Native references, no placeholders |
+| 8 | Risk Tables | 8% | Complete tables with severity/probability/exposure |
+| 9 | Contract Language | 10% | Draft provisions for HIGH/CRITICAL risks |
+| 10 | Formatting | 7% | Proper structure, headers, no artifacts |
+| 11 | Completeness | 10% | All sections present, proper ordering |
+
+### Scoring Thresholds
+
+| Score | Status | Action |
+|-------|--------|--------|
+| 90-100 | **EXEMPLARY** | Ready for partner review |
+| 80-89 | **PROFICIENT** | Minor polish recommended |
+| 70-79 | **ACCEPTABLE** | Remediation recommended |
+| 60-69 | **DEFICIENT** | Remediation required |
+| <60 | **UNACCEPTABLE** | Major rework required |
+
+### Pre-QA Validation (Zero Token Cost)
+
+Before running the 12-dimension diagnostic, deterministic scripts catch blocking issues:
+
+```bash
+python3 scripts/pre-qa-validate.py final-memorandum.md
+```
+
+| Check | Threshold | Blocking? | Fix Script |
+|-------|-----------|-----------|------------|
+| CREAC Headers | ≥50 | **Yes** | `apply-creac-headers.py` |
+| Provision Coverage | 100% (HIGH/CRITICAL) | **Yes** | `validate-provisions.py` |
+| Executive Summary | ≤3,500 words | No | Manual compression |
+| Placeholders | 0 | **Yes** | Manual removal |
+| Citation Tag Coverage | ≥90% | **Yes** | `scan-citation-tags.py` |
+| HIGH Tags Verified | 100% | **Yes** | Manual verification |
+| Fact Conflicts | 0 | **Yes** | `extract-fact-registry.py` |
+| Risk Tables | 100% complete | **Yes** | `aggregate-risk-tables.py` |
+
+### CREAC Structure Scoring
+
+| Headers Found | Score | Assessment |
+|---------------|-------|------------|
+| 50+ | 10/10 | Full compliance |
+| 35-49 | 8/10 | Acceptable |
+| 20-34 | 5/10 | Needs improvement |
+| <20 | 3/10 | Significant gaps |
+
+**Detection command:**
+```bash
+grep -cEi "^###? ?(Conclusion|Rule|Explanation|Application|Counter-?Analysis)" final-memorandum.md
+```
+
+### Objectivity Validation (5 Checks)
+
+| Check | Criteria |
+|-------|----------|
+| **Adverse Authority** | Report acknowledges precedents unfavorable to acquirer |
+| **Counter-Arguments** | Each material finding includes target's counter-position |
+| **Advocacy Language** | Free from "clearly," "obviously," "must," "undoubtedly" |
+| **Uncertainty Acknowledged** | Report flags genuine legal uncertainty |
+| **Balanced Probabilities** | Probability estimates distributed (not all >80% or <20%) |
+
+**Scoring:**
+- 5/5 pass: Full credit
+- 4/5 pass: -1% deduction
+- 3/5 pass: -3% deduction
+- <3/5 pass: **REMEDIATE** required
+
+### Deduction Rules by Dimension
+
+| Issue | Deduction | Cap |
+|-------|-----------|-----|
+| Missing verification tag | -0.5% per citation | -3% |
+| Poorly framed question | -1% per question | -5% |
+| Missing pincite | -1% per citation | -2% |
+| Unquantified risk | -2% per risk | -10% |
+| Missing counter-analysis | -2% per finding | -8% |
+| Placeholder found | -5% per placeholder | -15% |
+| Missing section | -5% per section | -10% |
+| Missing contract provision | -2% per HIGH finding | -10% |
+
+### Hard Fail Conditions
+
+These issues immediately block approval:
+
+| Condition | Threshold |
+|-----------|-----------|
+| UNVERIFIED citations | >10% of total |
+| Missing sections | Any required section absent |
+| Placeholders | Any `[TBD]`, `[XREF:...]` remaining |
+| HIGH findings without provisions | Any HIGH finding missing draft language |
+
+</details>
+
+---
+
+## 6-Wave Remediation Process
+
+When QA identifies deficiencies, automated remediation executes in 6 sequential waves.
+
+<details>
+<summary><strong>View Complete Remediation Workflow</strong></summary>
+
+### Wave Overview
+
+| Wave | Focus | Type | Primary Agent |
+|------|-------|------|---------------|
+| 1 | Initialization | Agent-only | memo-remediation-writer |
+| 2 | Executive Summary Elements | Agent-only | memo-executive-summary-writer |
+| 3 | Structural Improvements | **Hybrid** | Scripts + Agents |
+| 4 | Language & Format | Agent-only | memo-remediation-writer |
+| 5 | Citations & Appendices | Sequential | citation-validator |
+| 6 | Final Assembly | Agent + Manifest | memo-remediation-writer |
+
+### Wave Dependencies
+
+```
+Wave 1 (Initialization)
+    │
+    ▼
+Wave 2 (Executive Summary)
+    │
+    ▼
+Wave 3 (Hybrid - Scripts then Agents)
+    │
+    ├─────────────────────┐
+    ▼                     ▼
+Wave 4 (Language)    [Wait for W4]
+    │                     │
+    ▼                     ▼
+Wave 5 (Citations)       │
+    │                     │
+    └─────────────────────┘
+              │
+              ▼
+Wave 6 (Assembly - requires BOTH Wave 4 and Wave 5)
+```
+
+### Wave 1: Initialization
+
+**Purpose:** Set up remediation environment and state tracking
+
+| Task ID | Description | Output |
+|---------|-------------|--------|
+| W1-001 | Initialize remediation-wave-state.json | State file |
+| W1-002 | Verify remediation-dispatch.md exists | Validation |
+
+### Wave 2: Executive Summary Elements
+
+**Purpose:** Fix Questions Presented and Brief Answers
+
+| Task ID | Priority | Description | Output |
+|---------|----------|-------------|--------|
+| W2-001 | HIGH | Format Questions with "Under...does...when" | W2-001.md |
+| W2-002 | HIGH | Expand Brief Answers with "Probably...because" | W2-002.md |
+| W2-003 | MEDIUM | Counter-Analysis additions | W2-003.md |
+| W2-004 | MEDIUM | Probability methodology disclosure | W2-004.md |
+
+**Gate Check:**
+```bash
+grep -c "Under.*does.*when" remediation-outputs/W2-001.md  # Expected: ≥12
+grep -c "Probably.*because" remediation-outputs/W2-002.md  # Expected: ≥12
+```
+
+### Wave 3: Hybrid Processing
+
+**Purpose:** Script-assisted structural improvements
+
+**Script Tasks (Execute First):**
+
+| Task ID | Script | Description |
+|---------|--------|-------------|
+| W3-CREAC | `apply-creac-headers.py` | Insert CREAC markdown headers |
+| W3-PROVISION-SCAN | `validate-provisions.py` | Identify missing provisions |
+| W3-COUNTER-SCAN | `detect-counter-analysis.py` | Detect scattered counter-analysis |
+| W3-CITE-EXTRACT | `extract-citations.py` | Extract citation registry |
+
+**Agent Tasks (Execute After Scripts):**
+
+| Task ID | Priority | Description |
+|---------|----------|-------------|
+| W3-001-VALIDATE | HIGH | CREAC semantic validation |
+| W3-COUNTER-[section] | MEDIUM | Consolidate counter-analysis |
+| W3-PROVISION-[section] | HIGH | Draft missing provisions |
+
+### Wave 4: Language & Format Fixes
+
+**Purpose:** Neutralize advocacy language, fix formatting
+
+| Task ID | Priority | Description |
+|---------|----------|-------------|
+| W4-001 | MEDIUM | Remove "clearly," "obviously," "undoubtedly" |
+| W4-002 | MEDIUM | Format 12 Questions with proper structure |
+| W4-003 | LOW | Add missing pincites to citations |
+
+### Wave 5: Citation & Appendix Cleanup
+
+**Purpose:** Sequential citation validation
+
+**IMPORTANT:** Wave 5 tasks run SEQUENTIALLY (not parallel)
+
+| Task ID | Priority | Description |
+|---------|----------|-------------|
+| W5-001 | HIGH | Validate all citations against sources |
+| W5-002 | HIGH | Add verification tags to each citation |
+| W5-003 | MEDIUM | Generate APPENDIX C (Document Index) |
+
+### Wave 6: Final Assembly
+
+**Purpose:** Merge all remediation outputs into final document
+
+| Task ID | Priority | Description |
+|---------|----------|-------------|
+| ASSEMBLY-001 | CRITICAL | Merge all W2-W5 outputs |
+
+**Prerequisites (MANDATORY):**
+1. Wave 4 status == "completed"
+2. Wave 5 status == "completed"
+3. All W5-001, W5-002, W5-003 validated
+
+**Gate Check:**
+```bash
+grep -c "\[INSERT" final-memorandum-v2.md         # Expected: 0
+grep -c "\[Omitted" final-memorandum-v2.md        # Expected: 0
+wc -w < final-memorandum-v2.md                    # Expected: ≥125,000
+```
+
+### Error Handling
+
+| Error Type | Wave Behavior |
+|------------|---------------|
+| Task failure | Mark failed, continue if non-blocking |
+| Script error | Block wave, set blocking_issue |
+| Gate check fail | Block next wave until resolved |
+| >2 task failures | Set wave status = "blocked", escalate |
+
+### State Tracking
+
+Waves communicate through:
+1. **State file:** `remediation-wave-state.json` tracks progress
+2. **Output files:** `remediation-outputs/*.md` contain completed work
+3. **Dispatch file:** `remediation-dispatch.md` defines all tasks
+
+### Recovery on Context Compaction
+
+If context is compacted mid-remediation:
+1. Read `remediation-wave-state.json`
+2. Identify current wave from `metrics.current_wave`
+3. Resume from first pending task
+4. **Do NOT repeat** tasks in `do_not_repeat` list
+
+</details>
+
+---
+
+## Completion Requirements
+
+Super-Legal enforces strict completion standards—no truncation, no skipped sections.
+
+<details>
+<summary><strong>View Completion Standards</strong></summary>
+
+### Prohibited Behaviors
+
+| ❌ NEVER | Why |
+|----------|-----|
+| "I've reached my practical limit" | Completeness is mandatory |
+| Truncate mid-section | Use progressive saves instead |
+| Omit footnotes block | Citations are required |
+| Skip risk assessment table | Quantification is mandatory |
+| Create multiple files for one section | Single authoritative output |
+
+### Required Behaviors
+
+| ✅ ALWAYS | Standard |
+|-----------|----------|
+| Generate complete section | 4,000-6,000 words |
+| Include all subsections | A through F |
+| Include risk assessment table | Quantified exposure |
+| Include all footnotes | With verification tags |
+| Use Edit tool to append | If approaching limits |
+
+### Section Writer Verification
+
+Before claiming `COMPLETE`:
+
+```bash
+# Structure checks
+WORD_COUNT=$(wc -w < section-IV-X.md)           # Must be ≥4,000
+SUBSECTION_COUNT=$(grep -c "^### [A-F]\." ...)  # Must be ≥6
+HAS_FOOTNOTES=$(grep -q "## F. Section ...")    # Must be PASS
+
+# Content quality checks
+HAS_COUNTER_ANALYSIS=$(grep -qi "however\|but see\|target may argue")  # Required
+RISK_TABLE_ROWS=$(grep -c "| HIGH\|| MEDIUM")   # Must be ≥3
+CITATIONS_TAGGED=$(grep -c "\[VERIFIED\|...")   # Must be ≥90%
+```
+
+### Final Synthesis Verification
+
+Before claiming `COMPLETE`:
+
+```bash
+WORD_COUNT=$(wc -w < final-memorandum.md)       # Must be ≥50,000
+SECTION_COUNT=$(grep -c "^## IV\." ...)         # Must be ≥10
+HAS_EXEC_SUMMARY=$(grep -q "## I. EXECUTIVE")   # Must be PASS
+HAS_FOOTER=$(grep -q "END OF MEMORANDUM")       # Must be PASS
+UNRESOLVED_XREFS=$(grep -c "\[XREF\|\[TBD")     # Must be 0
+TOTAL_FOOTNOTES=$(grep -c "^\[[0-9]\+\]")       # Must be ≥200
+```
+
+### Output Targets
+
+| Target | Value | Flexibility |
+|--------|-------|-------------|
+| Footnotes | ~400 | Exceeding OK if content requires |
+| Total words | ~100,000 | Exceeding OK for thoroughness |
+| Section length | 4,000-6,000 | Complex sections may exceed |
+| Exec summary | 2,500-3,500 | 5,000 max with justification |
+
+**Rule: COMPLETENESS > arbitrary limits**
+
+### Mandatory Deliverables
+
+| Component | Phase | Agent | Skip Allowed? |
+|-----------|-------|-------|---------------|
+| Executive Summary | G3 | memo-executive-summary-writer | **NEVER** |
+| All Section Reports | G1.1-G1.10 | memo-section-writer | **NEVER** |
+| Consolidated Footnotes | G4 | citation-validator | **NEVER** |
+| Final Memorandum | A1 | memo-final-synthesis | **NEVER** |
+| QA Assessment | A2 | memo-qa-diagnostic | **NEVER** |
+
+### Status Codes
+
+| Status | Meaning | Next Action |
+|--------|---------|-------------|
+| `COMPLETE` | Document fully generated | Proceed to QA |
+| `INCOMPLETE` | Truncation detected | Orchestrator triggers continuation |
+| `MISSING_COMPONENTS` | Input files not found | Return to previous phase |
+| `BLOCKED` | Cannot proceed | Escalate to orchestrator |
+
+### Progressive Save Pattern
+
+To prevent loss from context limits:
+
+1. After each major section → Append using Edit tool
+2. Update `synthesis-state.json` with progress
+3. On resume → Read state file first, continue from checkpoint
+
+</details>
+
+---
+
 ## Available Tools
 
 <details>
