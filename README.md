@@ -962,6 +962,213 @@ Every tool invocation logged with:
 
 ---
 
+## M&A, Investment Banking & Private Equity Integration
+
+Super-Legal is purpose-built for the rigorous demands of transaction due diligence—delivering the comprehensive legal analysis that investment committees, boards, and deal teams require.
+
+<details>
+<summary><strong>View Deal Process Integration</strong></summary>
+
+### The Traditional Deal Process Pain Points
+
+| Stage | Traditional Approach | Pain Points |
+|-------|---------------------|-------------|
+| **Preliminary Screening** | Associates manually search databases | Days to weeks per target |
+| **Legal Due Diligence** | External counsel teams ($800-1,500/hr) | $500K-$2M+ per transaction |
+| **Sector Analysis** | Industry specialists + legal research | Siloed, uncoordinated findings |
+| **Risk Assessment** | Manual compilation from multiple memos | Inconsistent quantification |
+| **Board Materials** | Senior associates synthesize | 2-4 weeks for final memo |
+| **Deal Documentation** | Negotiate from scratch | Repeated drafting cycles |
+
+### Super-Legal Deal Workflow
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         DEAL ORIGINATION                                │
+│  Target identified → Initial screening → Preliminary risk assessment    │
+└─────────────────────────────────────────┬───────────────────────────────┘
+                                          │
+                    ┌─────────────────────▼─────────────────────┐
+                    │         PARALLEL SPECIALIST RESEARCH       │
+                    │                                            │
+                    │  ┌──────────┐ ┌──────────┐ ┌──────────┐   │
+                    │  │Securities│ │Regulatory│ │Employment│   │
+                    │  │Researcher│ │ Analyst  │ │ Analyst  │   │
+                    │  └────┬─────┘ └────┬─────┘ └────┬─────┘   │
+                    │       │            │            │          │
+                    │  ┌────┴─────┐ ┌────┴─────┐ ┌────┴─────┐   │
+                    │  │  Tax     │ │Insurance │ │Commercial│   │
+                    │  │ Analyst  │ │ Analyst  │ │Contracts │   │
+                    │  └────┬─────┘ └────┬─────┘ └────┬─────┘   │
+                    │       │            │            │          │
+                    │  ┌────┴─────┐ ┌────┴─────┐ ┌────┴─────┐   │
+                    │  │Case Law  │ │ Patent   │ │  CFIUS   │   │
+                    │  │ Analyst  │ │ Analyst  │ │ Analyst  │   │
+                    │  └──────────┘ └──────────┘ └──────────┘   │
+                    └─────────────────────┬─────────────────────┘
+                                          │
+                    ┌─────────────────────▼─────────────────────┐
+                    │           VALIDATION & SYNTHESIS           │
+                    │                                            │
+                    │  Research Review → Fact Registry →         │
+                    │  Coverage Gap Analysis → Risk Aggregation  │
+                    └─────────────────────┬─────────────────────┘
+                                          │
+                    ┌─────────────────────▼─────────────────────┐
+                    │         DELIVERABLE GENERATION             │
+                    │                                            │
+                    │  Section Reports → Executive Summary →     │
+                    │  Citation Validation → Final Memorandum    │
+                    └─────────────────────┬─────────────────────┘
+                                          │
+                    ┌─────────────────────▼─────────────────────┐
+                    │           QUALITY ASSURANCE                │
+                    │                                            │
+                    │  12-Dimension Scoring → 6-Wave Remediation │
+                    │  → Board-Ready Memorandum                  │
+                    └─────────────────────────────────────────────┘
+```
+
+### Investment Banking Deliverables
+
+| Deliverable | Super-Legal Output | Traditional Timeline | Super-Legal Timeline |
+|-------------|-------------------|---------------------|---------------------|
+| **Preliminary Risk Memo** | 20-30 page initial assessment | 3-5 days | **2-4 hours** |
+| **Sector Analysis Report** | Industry-specific regulatory landscape | 1-2 weeks | **4-6 hours** |
+| **Full Due Diligence Memo** | 150-250 page comprehensive analysis | 3-6 weeks | **6-12 hours** |
+| **Board Presentation Materials** | Executive summary + risk matrices | 1-2 weeks | **2-4 hours** |
+| **Transaction Precedent Analysis** | Comparable deal terms and outcomes | 1 week | **3-5 hours** |
+| **Draft Contract Provisions** | Ready-to-negotiate legal language | 2-3 weeks | **Included in memo** |
+
+### Private Equity Due Diligence Integration
+
+**Phase 1: Screening (Pre-LOI)**
+- Rapid target assessment across regulatory, litigation, and compliance dimensions
+- Red flag identification before significant resource commitment
+- Output: 15-page screening memo with go/no-go recommendation
+
+**Phase 2: Confirmatory Due Diligence (Post-LOI)**
+- Comprehensive 17-specialist parallel research
+- Full regulatory, litigation, employment, tax, environmental, IP analysis
+- Output: 200+ page memorandum with quantified risk exposure
+
+**Phase 3: Deal Documentation Support**
+- Draft indemnification provisions for identified risks
+- Escrow and holdback recommendations with dollar amounts
+- Representation and warranty insurance analysis
+
+**Phase 4: Investment Committee Materials**
+- Board-level executive summary (2,500-3,500 words)
+- Risk/return framework with probability-weighted exposure
+- Transaction structure recommendations
+
+### Sector-Specific Analyst Expertise
+
+| Sector | Specialist Focus | Key Databases |
+|--------|-----------------|---------------|
+| **Healthcare** | CMS certification, FCA exposure, HIPAA, Stark/AKS | CMS CASPER, OIG exclusions, state licensing |
+| **Financial Services** | Banking regulations, securities compliance, BSA/AML | SEC EDGAR, FINRA BrokerCheck, OCC actions |
+| **Technology** | IP portfolio, data privacy, AI governance, export controls | USPTO, PTAB, state privacy laws, BIS |
+| **Manufacturing** | Environmental compliance, product liability, labor relations | EPA ECHO, CPSC recalls, NLRB decisions |
+| **Energy** | FERC compliance, environmental permits, renewable credits | FERC filings, EPA permits, state PUC |
+| **Real Estate** | Zoning, environmental contamination, lease analysis | EPA Brownfields, state DEQ, title records |
+| **Consumer** | Product safety, advertising compliance, franchise laws | CPSC, FTC enforcement, state AG actions |
+
+### Legal Research Capabilities by Domain
+
+| Domain | Research Depth | Sources Integrated |
+|--------|---------------|-------------------|
+| **Case Law** | Federal/state litigation history, judge analytics, docket monitoring | CourtListener, PACER, state courts |
+| **Regulatory** | Agency enforcement actions, consent decrees, compliance history | Federal Register, agency databases |
+| **Securities** | SEC filings, 8-K event analysis, insider transactions, proxy statements | EDGAR, Form 4, DEF 14A |
+| **Litigation Risk** | Pending matters, class action exposure, MDL involvement | CourtListener, judicial disclosures |
+| **Employment** | NLRB proceedings, EEOC charges, WARN compliance, union contracts | NLRB, EEOC, state labor boards |
+| **Tax Structure** | NOL utilization, Section 382 limitations, state tax exposure | SEC filings, state tax databases |
+| **Environmental** | EPA violations, CERCLA liability, permit compliance | EPA ECHO, state environmental agencies |
+| **IP Portfolio** | Patent validity, prosecution history, PTAB proceedings | USPTO, PTAB, patent litigation |
+
+### Transaction Precedent Analysis
+
+Super-Legal analyzes comparable transactions to inform deal structuring:
+
+| Precedent Type | Analysis Provided |
+|----------------|-------------------|
+| **Purchase Price Multiples** | Revenue, EBITDA, and sector-specific multiples from comparable deals |
+| **Indemnification Caps** | Typical cap percentages by deal size and risk profile |
+| **Escrow Terms** | Standard escrow amounts and release schedules |
+| **Earnout Structures** | Milestone-based payment terms from similar transactions |
+| **R&W Insurance** | Coverage terms, exclusions, and premium benchmarks |
+| **MAC Clause Outcomes** | How courts have interpreted material adverse change provisions |
+
+### Source Traceability: Audit-Ready Documentation
+
+Every finding includes complete audit trail:
+
+```markdown
+**Finding: Medicare Termination Risk - Orange County Facility**
+
+Source Chain:
+├── CMS Special Focus Facility List (accessed 2026-01-26)
+│   └── [VERIFIED:CMS-SFF-2026-Q1-OR-00234]
+├── State Survey Report (Oregon DHS, Sept 2024)
+│   └── [VERIFIED:OR-DHS-SURVEY-2024-09-15-00234]
+├── Deficiency History (CMS CASPER, 36-month lookback)
+│   └── [VERIFIED:CASPER-OR00234-DEFICIENCY-HISTORY]
+└── Case Precedent: Beverly Enterprises (D. Or. 2019)
+    └── [VERIFIED:CourtListener-4567890]
+
+Exposure Calculation:
+├── Annual Medicare Revenue: $24.6M [VERIFIED:CMS-Cost-Report-2024]
+├── Termination Probability: 65% [METHODOLOGY:CMS-SFF-graduation-data-2020-2025]
+└── Probability-Weighted Exposure: $16.0M [CALCULATION:$24.6M × 65%]
+```
+
+### Cost Comparison: External Counsel vs. Super-Legal
+
+| Transaction Size | Traditional External Counsel | Super-Legal | Savings |
+|-----------------|-----------------------------:|------------:|--------:|
+| **$50M acquisition** | $150,000 - $300,000 | ~$5,000 | **95-98%** |
+| **$250M acquisition** | $400,000 - $750,000 | ~$10,000 | **97-99%** |
+| **$500M+ acquisition** | $750,000 - $2,000,000 | ~$15,000 | **98-99%** |
+
+*Super-Legal costs based on API usage for comprehensive due diligence. External counsel still recommended for negotiation, documentation, and closing.*
+
+### Time-to-Deal Impact
+
+| Phase | Traditional | With Super-Legal | Acceleration |
+|-------|-------------|------------------|--------------|
+| **Screening** | 1-2 weeks | 1 day | **7-14x faster** |
+| **Due Diligence** | 4-8 weeks | 3-5 days | **6-12x faster** |
+| **Risk Assessment** | 2-3 weeks | Same day | **14-21x faster** |
+| **Board Materials** | 1-2 weeks | Same day | **7-14x faster** |
+| **Total Deal Timeline** | 8-16 weeks | 2-3 weeks | **4-6x faster** |
+
+### Integration with Deal Team Workflow
+
+**For Investment Bankers:**
+- Generate CIM (Confidential Information Memorandum) risk sections
+- Buyer due diligence preparation and management presentation support
+- Transaction structure optimization based on identified risks
+
+**For Private Equity:**
+- Pre-LOI screening across portfolio fit dimensions
+- 100-day plan risk identification
+- Post-acquisition integration planning
+
+**For Corporate Development:**
+- Strategic fit analysis with regulatory overlay
+- Synergy validation against legal constraints
+- Antitrust/HSR filing assessment
+
+**For Legal Teams:**
+- First-pass due diligence before external counsel engagement
+- Issue spotting for outside counsel scoping
+- Draft provision generation for negotiation kickoff
+
+</details>
+
+---
+
 ## Use Cases
 
 Super-Legal excels in complex, multi-domain legal research scenarios.
