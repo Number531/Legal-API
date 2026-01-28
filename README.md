@@ -252,6 +252,132 @@ The system doesn't just summarize—it provides **actionable intelligence**:
 
 ---
 
+## How It Works: Multi-Agent Legal Review
+
+Super-Legal replicates the methodical review process of a top-tier law firm, with specialized AI agents filling the roles of domain experts, reviewers, and quality assurance teams.
+
+<details>
+<summary><strong>View Multi-Agent Architecture</strong></summary>
+
+### Phase 1: Research Planning
+The orchestrator analyzes the query and creates a research plan, identifying:
+- Legal domains requiring analysis
+- Critical issues to address
+- Cross-domain dependencies
+- Specialist assignments
+
+### Phase 2: Parallel Specialist Research
+
+**17 Domain Specialist Agents** work in parallel, each with deep expertise:
+
+| Specialist | Domain | Example Focus Areas |
+|------------|--------|---------------------|
+| `securities-researcher` | SEC/EDGAR | 10-K filings, risk factors, executive compensation |
+| `case-law-analyst` | Litigation | Court opinions, judicial history, case precedent |
+| `regulatory-rulemaking-analyst` | Federal Register | Agency rules, CFR, regulatory guidance |
+| `employment-labor-analyst` | Employment | WARN Act, NLRA, ERISA, non-competes |
+| `tax-structure-analyst` | M&A Tax | Section 338/368, NOLs, state tax |
+| `insurance-coverage-analyst` | Coverage | D&O, CGL, E&O, policy interpretation |
+| `environmental-compliance-analyst` | EPA | ECHO facilities, permits, violations |
+| `privacy-data-protection-analyst` | Privacy | HIPAA, CCPA, GDPR, breach notification |
+| `commercial-contracts-analyst` | Contracts | Material contracts, change of control |
+| + 8 more specialists | Various | Patents, FDA, CFIUS, cybersecurity, AI governance |
+
+Each specialist produces a **80-120KB research report** with:
+- Executive summary (2,000-5,000 words)
+- Detailed findings with verification tags
+- Risk quantification with methodology disclosure
+- Cross-domain impact flags
+
+### Phase 3: Validation Gates
+
+Four sequential validation agents ensure completeness:
+
+```
+┌─────────────────────┐
+│ V1: Research Review │ → Checks coverage, triggers additional research if gaps found
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ V2: Fact Validator  │ → Creates canonical fact registry, resolves conflicts
+└──────────┬──────────┘
+           ↓
+┌─────────────────────────────────────────┐
+│ V3: Coverage Gap    │ V4: Risk          │ → Run in parallel after V2
+│     Analyzer        │     Aggregator    │
+└─────────────────────────────────────────┘
+```
+
+### Phase 4: Section Generation
+
+**Section Writer Agents** generate memorandum sections using CREAC structure:
+
+| Element | Purpose | Example |
+|---------|---------|---------|
+| **C**onclusion | Answer first | "The transaction likely triggers CFIUS mandatory filing." |
+| **R**ule | Legal authority | "Under 31 CFR § 800.401, mandatory filing is required when..." |
+| **E**xplanation | How rule applies | "Courts have interpreted this to require filing when..." |
+| **A**pplication | Apply to facts | "Here, the 32% foreign ownership stake exceeds the threshold..." |
+| **C**ounter-Analysis | Opposing view | "Target may argue the passive investment exception applies, however..." |
+
+Each section: 4,000-6,000 words with local footnotes and verification tags.
+
+### Phase 5: Quality Assurance
+
+**QA Diagnostic Agent** scores the memorandum across dimensions:
+- Structural completeness
+- CREAC compliance
+- Citation verification rate
+- Cross-reference density
+- Counter-analysis presence
+
+### Phase 6: Remediation (6-Wave Process)
+
+If QA score < 80%, automated remediation executes:
+
+| Wave | Focus | Actions |
+|------|-------|---------|
+| **Wave 1** | Initialization | Set up state tracking, verify prerequisites |
+| **Wave 2** | Executive Summary | Generate Questions Presented (Under/Does/When format), Brief Answers |
+| **Wave 3** | Structure | Insert CREAC headers, draft missing provisions, consolidate counter-analysis |
+| **Wave 4** | Language | Neutralize advocacy language, add pincites |
+| **Wave 5** | Citations | Validate all citations, add verification tags, generate appendices |
+| **Wave 6** | Assembly | Merge all outputs into final memorandum |
+
+### Phase 7: Final Synthesis
+
+**Citation Validator** consolidates all footnotes with global numbering (557 citations in Project Asclepius).
+
+**Final Synthesis Agent** assembles the complete memorandum:
+- Executive Summary
+- Questions Presented & Brief Answers
+- 7 detailed analysis sections
+- Cross-reference matrix
+- Consolidated footnotes
+
+### Quality Standards
+
+| Standard | Implementation |
+|----------|----------------|
+| **Verification Tags** | Every citation marked `[VERIFIED:source]` or `[ASSUMED:industry]` |
+| **Probability Methodology** | All percentages cite derivation (industry data, expert judgment, statutory certainty) |
+| **Database Provenance** | Every regulatory ID includes verification status |
+| **Cross-Domain Flags** | Findings affecting other domains explicitly flagged |
+| **Progressive Saves** | Work saved incrementally to prevent data loss |
+
+</details>
+
+### Why This Matters
+
+This architecture ensures:
+- **No gaps**: Validation gates catch missing analysis
+- **Consistency**: Fact registry prevents contradictory statements
+- **Traceability**: Every claim linked to verified source
+- **Objectivity**: Counter-analysis required for all conclusions
+- **Quality**: Automated QA with remediation for deficiencies
+
+---
+
 ## Available Tools
 
 <details>
