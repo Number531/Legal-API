@@ -1169,6 +1169,409 @@ Exposure Calculation:
 
 ---
 
+## Enterprise Configurability
+
+Super-Legal is fully configurable to match your firm's workflow, data sources, and analytical requirements.
+
+<details>
+<summary><strong>View Configuration Options</strong></summary>
+
+### Configurable Review Structure
+
+Customize the multi-agent workflow to match your firm's due diligence methodology:
+
+| Configuration | Options | Use Case |
+|---------------|---------|----------|
+| **Specialist Selection** | Enable/disable specific domain agents | Focus on relevant domains only |
+| **Validation Depth** | 2-stage (fast) to 4-stage (thorough) | Balance speed vs. rigor |
+| **Section Structure** | CREAC, IRAC, or custom format | Match firm standards |
+| **Citation Format** | Bluebook, ALWD, or firm-specific | Consistency with house style |
+| **Risk Thresholds** | Custom severity definitions | Align with risk appetite |
+| **Output Length** | Brief (50 pages) to comprehensive (300+ pages) | Match deliverable requirements |
+
+**Example Configuration:**
+
+```javascript
+// config/reviewConfig.js
+export const reviewConfig = {
+  specialists: {
+    enabled: ['securities', 'employment', 'tax', 'environmental'],
+    disabled: ['patent', 'cfius']  // Not relevant for this deal type
+  },
+  validation: {
+    stages: 4,  // Full validation pipeline
+    factRegistryRequired: true,
+    coverageGapAnalysis: true
+  },
+  output: {
+    format: 'CREAC',
+    citationStyle: 'bluebook-22nd',
+    targetLength: 'comprehensive',
+    includeDraftProvisions: true
+  },
+  thresholds: {
+    highSeverity: { minExposure: 5000000, minProbability: 0.4 },
+    dealBlocker: { minExposure: 25000000, minProbability: 0.6 }
+  }
+};
+```
+
+### Code Execution for Financial Modeling
+
+Super-Legal includes **sandboxed code execution** for sophisticated financial analysis:
+
+| Capability | Description | Example Use Case |
+|------------|-------------|------------------|
+| **DCF Modeling** | Discounted cash flow with scenario analysis | Valuation sensitivity to risk factors |
+| **Monte Carlo Simulation** | Probability distributions for exposure ranges | Aggregate risk quantification |
+| **Comparable Analysis** | Automated comp tables from EDGAR data | Transaction multiple benchmarking |
+| **Earnout Modeling** | Milestone probability and NPV calculations | Deal structure optimization |
+| **Tax Impact Analysis** | Section 338(h)(10) vs. stock purchase modeling | Structure recommendation |
+| **Synergy Quantification** | Cost/revenue synergy present value | Integration planning |
+
+**Example: Monte Carlo Risk Aggregation**
+
+```python
+# Executed in sandboxed environment
+import numpy as np
+
+def monte_carlo_exposure(risks, simulations=10000):
+    """
+    Aggregate risk exposure using Monte Carlo simulation.
+    Each risk has: base_exposure, probability, correlation_matrix
+    """
+    results = []
+    for _ in range(simulations):
+        total = 0
+        for risk in risks:
+            if np.random.random() < risk['probability']:
+                # Apply uncertainty range
+                exposure = np.random.triangular(
+                    risk['low'], risk['base'], risk['high']
+                )
+                total += exposure
+        results.append(total)
+
+    return {
+        'mean': np.mean(results),
+        'p50': np.percentile(results, 50),
+        'p75': np.percentile(results, 75),
+        'p95': np.percentile(results, 95),
+        'max': np.max(results)
+    }
+
+# Output: Probability-weighted aggregate exposure with confidence intervals
+```
+
+**Modeling Outputs Integrated into Memorandum:**
+
+```markdown
+## Risk Quantification Summary
+
+| Metric | Value | Methodology |
+|--------|-------|-------------|
+| Expected Value (Mean) | $47.3M | Monte Carlo (10,000 simulations) |
+| Median (P50) | $38.1M | 50th percentile |
+| Downside (P75) | $62.4M | 75th percentile |
+| Tail Risk (P95) | $94.7M | 95th percentile |
+| Maximum Exposure | $127.2M | All risks materialize |
+
+[METHODOLOGY: Monte Carlo simulation with triangular distributions per risk,
+correlation matrix applied for dependent risks, 10,000 iterations]
+```
+
+### Database Configurability
+
+Extend Super-Legal with your firm's proprietary data sources and premium APIs:
+
+#### Premium Legal Research APIs
+
+| Provider | Integration Type | Data Available |
+|----------|-----------------|----------------|
+| **Westlaw** | API connector | Case law, statutes, secondary sources, KeyCite |
+| **LexisNexis** | API connector | Legal research, news, public records, Shepard's |
+| **Bloomberg Law** | API connector | Legal analysis, dockets, transactional data |
+| **Practical Law** | API connector | Practice notes, standard documents, checklists |
+
+#### Financial Data APIs
+
+| Provider | Integration Type | Data Available |
+|----------|-----------------|----------------|
+| **Bloomberg Terminal** | B-PIPE / API | Real-time pricing, fundamentals, fixed income |
+| **Refinitiv/Reuters** | Eikon API | Market data, news, estimates, ownership |
+| **S&P Capital IQ** | API connector | Financials, transactions, credit ratings |
+| **PitchBook** | API connector | PE/VC deals, valuations, fund data |
+| **FactSet** | API connector | Fundamentals, estimates, supply chain |
+
+#### Regulatory & Compliance APIs
+
+| Provider | Integration Type | Data Available |
+|----------|-----------------|----------------|
+| **Intelligize** | API connector | SEC filings, board materials, proxy analysis |
+| **Audit Analytics** | API connector | Restatements, internal controls, auditor data |
+| **Glass Lewis / ISS** | API connector | Governance ratings, proxy recommendations |
+| **Compliance.ai** | API connector | Regulatory change tracking |
+
+#### Confidential Dataset Integration
+
+Connect your firm's proprietary data:
+
+```javascript
+// config/customDataSources.js
+export const customDataSources = {
+  // Internal deal database
+  dealPrecedents: {
+    type: 'postgres',
+    connection: process.env.DEAL_DB_URL,
+    tables: ['transactions', 'terms', 'outcomes'],
+    accessControl: 'deal-team-only'
+  },
+
+  // Proprietary risk models
+  riskModels: {
+    type: 'api',
+    endpoint: process.env.RISK_MODEL_API,
+    models: ['credit-risk', 'litigation-probability', 'regulatory-exposure']
+  },
+
+  // Client data room integration
+  dataRoom: {
+    type: 'intralinks',  // or 'datasite', 'firmex', 'box'
+    apiKey: process.env.DATAROOM_API_KEY,
+    indexing: 'on-demand'
+  },
+
+  // CRM integration for conflict checks
+  crm: {
+    type: 'salesforce',
+    endpoint: process.env.SF_ENDPOINT,
+    queries: ['conflict-check', 'relationship-mapping']
+  }
+};
+```
+
+### Custom API Connector Framework
+
+Build connectors for any data source:
+
+```javascript
+// src/api-clients/CustomClient.js
+import { BaseApiClient } from './BaseApiClient.js';
+
+export class CustomClient extends BaseApiClient {
+  constructor(config) {
+    super({
+      baseUrl: config.endpoint,
+      rateLimit: config.rateLimit || { requests: 10, period: 60 },
+      circuitBreaker: { threshold: 3, resetTime: 30000 },
+      cache: { ttl: config.cacheTTL || 3600 }
+    });
+  }
+
+  async search(query, options = {}) {
+    const response = await this.request('/search', {
+      method: 'POST',
+      body: { query, ...options }
+    });
+
+    return this.normalize(response);  // Transform to standard format
+  }
+
+  normalize(response) {
+    // Map provider-specific format to Super-Legal standard
+    return {
+      results: response.data.map(item => ({
+        title: item.name,
+        content: item.body,
+        source: this.providerName,
+        sourceId: item.id,
+        url: item.link,
+        metadata: item.attributes
+      })),
+      totalCount: response.meta.total,
+      hasMore: response.meta.hasNextPage
+    };
+  }
+}
+```
+
+### Tool Registration for Custom Sources
+
+Register custom data sources as MCP tools:
+
+```javascript
+// src/tools/customToolDefinitions.js
+export const customTools = [
+  {
+    name: 'search_westlaw',
+    description: 'Search Westlaw for case law, statutes, and secondary sources',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string', description: 'Search query' },
+        jurisdiction: { type: 'string', enum: ['federal', 'state', 'all'] },
+        dateRange: { type: 'string', description: 'e.g., "last 5 years"' },
+        contentType: { type: 'string', enum: ['cases', 'statutes', 'secondary'] }
+      },
+      required: ['query']
+    }
+  },
+  {
+    name: 'search_bloomberg_law',
+    description: 'Search Bloomberg Law for dockets, transactions, and legal analysis',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string' },
+        docType: { type: 'string', enum: ['dockets', 'deals', 'analysis', 'news'] }
+      },
+      required: ['query']
+    }
+  },
+  {
+    name: 'get_pitchbook_deal',
+    description: 'Retrieve deal details from PitchBook',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        dealId: { type: 'string' },
+        includeComps: { type: 'boolean', default: true }
+      },
+      required: ['dealId']
+    }
+  },
+  {
+    name: 'run_financial_model',
+    description: 'Execute financial model in sandboxed environment',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        modelType: { type: 'string', enum: ['dcf', 'lbo', 'merger', 'monte_carlo'] },
+        parameters: { type: 'object' },
+        scenarios: { type: 'array', items: { type: 'object' } }
+      },
+      required: ['modelType', 'parameters']
+    }
+  }
+];
+```
+
+### Workflow Customization
+
+Define custom review workflows:
+
+```yaml
+# config/workflows/healthcare-ma.yaml
+name: Healthcare M&A Due Diligence
+description: Comprehensive DD for healthcare sector acquisitions
+
+phases:
+  - name: regulatory-screening
+    specialists:
+      - cms-regulatory-analyst
+      - state-licensing-analyst
+      - fca-litigation-analyst
+    parallel: true
+    timeout: 2h
+
+  - name: financial-review
+    specialists:
+      - securities-researcher
+      - tax-structure-analyst
+      - reimbursement-analyst
+    parallel: true
+    requires: [regulatory-screening]
+
+  - name: operational-review
+    specialists:
+      - employment-labor-analyst
+      - commercial-contracts-analyst
+      - insurance-coverage-analyst
+    parallel: true
+    requires: [regulatory-screening]
+
+  - name: validation
+    agents:
+      - research-review-analyst
+      - fact-validator
+      - coverage-gap-analyzer
+      - risk-aggregator
+    sequential: [research-review-analyst, fact-validator]
+    parallel: [coverage-gap-analyzer, risk-aggregator]
+    requires: [financial-review, operational-review]
+
+  - name: synthesis
+    agents:
+      - memo-section-writer (7 instances)
+      - memo-executive-summary-writer
+      - citation-validator
+      - memo-final-synthesis
+    requires: [validation]
+
+  - name: quality-assurance
+    agents:
+      - memo-qa-diagnostic
+      - memo-remediation-writer (if score < 80)
+    requires: [synthesis]
+
+output:
+  format: CREAC
+  sections:
+    - CMS Regulatory Compliance
+    - False Claims Act Exposure
+    - State Licensure & CON
+    - Reimbursement Risk
+    - Employment & Labor
+    - Commercial Contracts
+    - Insurance Coverage
+  appendices:
+    - Transaction Precedents
+    - Financial Model Outputs
+    - Consolidated Footnotes
+```
+
+### Environment Variables for Enterprise Configuration
+
+```bash
+# .env.enterprise
+
+# Premium Legal Research
+WESTLAW_API_KEY=your_key_here
+WESTLAW_CLIENT_ID=your_client_id
+LEXIS_API_KEY=your_key_here
+BLOOMBERG_LAW_API_KEY=your_key_here
+
+# Financial Data
+BLOOMBERG_API_KEY=your_key_here
+REFINITIV_APP_KEY=your_key_here
+CAPITAL_IQ_USERNAME=your_username
+CAPITAL_IQ_PASSWORD=your_password
+PITCHBOOK_API_KEY=your_key_here
+FACTSET_USERNAME=your_username
+FACTSET_API_KEY=your_key_here
+
+# Internal Systems
+DEAL_DATABASE_URL=postgres://...
+RISK_MODEL_API_URL=https://internal.firm.com/risk-api
+DATAROOM_PROVIDER=intralinks
+DATAROOM_API_KEY=your_key_here
+CRM_INTEGRATION=salesforce
+SALESFORCE_ENDPOINT=https://firm.my.salesforce.com
+
+# Code Execution
+ENABLE_CODE_EXECUTION=true
+CODE_SANDBOX_TIMEOUT=300000
+CODE_SANDBOX_MEMORY_MB=2048
+
+# Custom Workflow
+WORKFLOW_CONFIG_PATH=/config/workflows/
+DEFAULT_WORKFLOW=healthcare-ma
+```
+
+</details>
+
+---
+
 ## Use Cases
 
 Super-Legal excels in complex, multi-domain legal research scenarios.
