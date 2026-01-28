@@ -526,6 +526,354 @@ Every probability range discloses its derivation:
 
 ---
 
+## Fact Registry: Single Source of Truth
+
+When multiple specialists analyze the same transaction, conflicting values can emerge. Super-Legal's Fact Registry ensures consistency across the entire memorandum.
+
+<details>
+<summary><strong>View Fact Registry Architecture</strong></summary>
+
+### The Problem: Conflicting Data
+
+In complex transactions, different specialists may report different values:
+- Securities researcher: "Purchase price: $425M"
+- Tax analyst: "Deal value: $430M (including earnout)"
+- Employment analyst: "Transaction size: $415M"
+
+Which value should the memorandum use?
+
+### The Solution: Canonical Fact Registry
+
+The **fact-validator agent (V2)** creates `fact-registry.md`—the authoritative source for all quantified values:
+
+```markdown
+## CANONICAL FACTS
+
+| Fact ID | Field | Value | Source | Confidence |
+|---------|-------|-------|--------|------------|
+| F-001 | purchase_price | $425,000,000 | SPA Section 2.1 | HIGH |
+| F-002 | employee_count | 1,850 | HR Data Room Doc 4.2.1 | HIGH |
+| F-003 | Medicare_revenue_pct | 72% | Management Presentation p.14 | MEDIUM |
+```
+
+### Enforcement Rules
+
+| Scenario | Action |
+|----------|--------|
+| Fact in registry | **Must use registry value exactly** |
+| Fact not in registry | Extract from specialist report, note as unverified |
+| Conflicting values | **Registry value wins**, note conflict exists |
+| CONFLICTED status | Document both values, explain uncertainty |
+
+### Conflict Resolution Hierarchy
+
+When no registry exists and multiple reports conflict:
+
+1. **Most recent iteration wins** (iteration 2 > iteration 1)
+2. **Higher confidence wins** (HIGH > MEDIUM > LOW)
+3. **Primary source wins** (EDGAR filing > expert opinion > industry estimate)
+4. If still tied: Document BOTH values with `[CONFLICTED]` status
+
+### Loop Prevention
+
+If QA flags the same conflict through multiple remediation cycles:
+
+| Cycle | Action |
+|-------|--------|
+| Cycle 1 | Attempt resolution via section writer |
+| Cycle 2 | If same conflict → Mark as `UNRESOLVABLE` |
+| Cycle 3+ | **Stop remediation** for this conflict |
+
+Unresolvable conflicts use registry value with notation:
+```
+[CONFLICT UNRESOLVED - REGISTRY VALUE USED]
+```
+
+### Verification Statement
+
+Every section includes:
+```
+**Fact Registry Verification**: All quantified values in this section verified
+against fact-registry.md as of 2026-01-26T14:30:00Z. Values used: purchase_price
+($425M), employee_count (1,850), Medicare_revenue_pct (72%).
+```
+
+</details>
+
+---
+
+## Actionable Output: Draft Contract Language
+
+Super-Legal doesn't just identify risks—it provides **ready-to-negotiate contract provisions** for every HIGH severity finding.
+
+<details>
+<summary><strong>View Draft Contract Language Standards</strong></summary>
+
+### Required Elements for HIGH Severity Findings
+
+| Element | Description | Example |
+|---------|-------------|---------|
+| **Provision Title** | Descriptive name | "Environmental Indemnification Provision" |
+| **Full Legal Text** | Complete contract language | [Actual provision text] |
+| **Trigger Condition** | When provision activates | "Upon discovery of undisclosed contamination" |
+| **Cap/Basket** | Limitation amounts | "$25M cap, $500K basket" |
+| **Survival Period** | Duration post-closing | "60 months from Closing Date" |
+
+### Example Output
+
+```markdown
+**DRAFT CONTRACT PROVISION - Medicare Certification Indemnification**
+
+> Seller shall indemnify and hold harmless Buyer from and against any and all
+> Losses arising from or related to (i) any termination, suspension, or
+> exclusion of any Target Company from participation in Medicare or Medicaid
+> programs resulting from events occurring prior to the Closing Date, (ii) any
+> civil monetary penalty imposed under 42 U.S.C. § 1320a-7a for conduct
+> occurring prior to Closing...
+
+*Trigger*: Medicare/Medicaid adverse action based on pre-closing conduct
+*Cap*: $50,000,000 (negotiating position: $75M opening, $50M target, $35M walk-away)
+*Basket*: $1,000,000 (mini-basket $100,000)
+*Survival*: 72 months from Closing Date (longer than standard due to 5-year FCA lookback)
+```
+
+### Negotiation Context
+
+Each provision includes:
+- **Opening position**: Where to start negotiations
+- **Target**: Realistic outcome
+- **Walk-away**: Minimum acceptable terms
+- **Rationale**: Why these numbers make sense
+
+### Counter-Party Analysis
+
+Every material finding addresses opposing positions:
+
+```markdown
+**Counter-Party Analysis - SFF Designation**
+
+*Target Position*: Target will argue SFF candidate status is temporary and
+poses no material risk, citing successful remediation of prior deficiencies.
+
+*Supporting Authority*: CMS SFF graduation statistics show 65% of facilities
+exit SFF within 18 months. *See* CMS SFF Program Update (Oct. 2025).
+
+*Acquirer Rebuttal*: Orange County facility has been SFF candidate for 24
+months with no improvement trajectory. March 2025 survey approaching with
+repeat IJ citations likely. *See* State Survey Report dated Sept. 2024.
+
+*Negotiation Implication*: Seek specific indemnity for Medicare termination
+plus escrow equal to facility's annual Medicare revenue ($24.6M).
+```
+
+</details>
+
+---
+
+## Intelligent Filtering: Gemini 2.5 Flash Integration
+
+Raw API responses can contain thousands of pages. Super-Legal uses **Gemini 2.5 Flash's 1M context window** to extract only relevant findings before Claude analysis.
+
+<details>
+<summary><strong>View Intelligent Filtering Architecture</strong></summary>
+
+### The Problem: Information Overload
+
+A single SEC 10-K filing can be 200+ pages. EPA ECHO returns facility data across dozens of programs. Searching CourtListener may return hundreds of cases.
+
+Sending raw data to Claude:
+- Wastes tokens (cost)
+- Dilutes relevant findings
+- Risks hitting context limits
+
+### The Solution: Domain-Specific Extraction
+
+**GeminiFilterModule** processes raw API data through Gemini's 1M context window:
+
+```
+Raw API Response (500KB) → Gemini Filter → Relevant Findings (5KB) → Claude Analysis
+```
+
+### 13 Domain-Specific Filter Prompts
+
+| Domain | Filter Focus |
+|--------|--------------|
+| `securities.js` | Risk factors, material contracts, executive compensation |
+| `caseLaw.js` | Holdings, procedural posture, distinguishing facts |
+| `environmental.js` | Violations, compliance status, enforcement history |
+| `pharmaceutical.js` | FDA actions, adverse events, approval status |
+| `patent.js` | Claims, prosecution history, invalidity risks |
+| `antitrust.js` | Market concentration, HSR requirements, consent decrees |
+| `federalRegister.js` | Proposed rules, effective dates, comment periods |
+| `legislation.js` | Bill status, amendments, legislative history |
+| `productSafety.js` | Recalls, defect investigations, injury reports |
+| `stateCourts.js` | State-specific procedural rules, local precedent |
+| `stateStatutes.js` | State law variations, preemption issues |
+| `patentAppeals.js` | PTAB decisions, claim construction, IPR outcomes |
+
+### Reliability Features
+
+| Feature | Implementation |
+|---------|----------------|
+| **Rate Limiting** | Sliding window, 10 req/min |
+| **Circuit Breaker** | 3 failures = open, 30s reset |
+| **Fallback Mode** | Limited preview when Gemini unavailable |
+| **Exponential Backoff** | For rate limit errors |
+| **Content Preprocessing** | Strips XBRL, HTML, limits size |
+
+### Example: SEC Filing Processing
+
+```
+Input: Apple 10-K (180 pages, 850KB)
+Query: "Environmental litigation and compliance risks"
+
+Gemini Filter Output:
+- Item 1A Risk Factors: Environmental regulation paragraph (p. 23)
+- Item 3 Legal Proceedings: EPA matter (p. 45)
+- Item 8 Note 12: Environmental accrual $45M (p. 112)
+
+Tokens saved: ~95% (850KB → 40KB relevant excerpts)
+```
+
+</details>
+
+---
+
+## Enterprise Observability
+
+Super-Legal includes production-grade monitoring for enterprise deployments.
+
+<details>
+<summary><strong>View Observability Stack</strong></summary>
+
+### Prometheus Metrics
+
+Exported at `/metrics` endpoint:
+
+| Metric | Type | Purpose |
+|--------|------|---------|
+| `claude_request_duration_ms` | Histogram | Request latency by model/status |
+| `claude_tool_duration_ms` | Histogram | Tool execution time |
+| `claude_tool_invocations_total` | Counter | Tool usage tracking |
+| `claude_tokens_input_total` | Counter | Input token consumption |
+| `claude_tokens_output_total` | Counter | Output token consumption |
+| `claude_tokens_cached_total` | Counter | Prompt cache hits |
+| `claude_circuit_breaker_trips_total` | Counter | Fault tolerance events |
+| `claude_errors_total` | Counter | Error tracking by code |
+| `claude_structured_output_success_total` | Counter | Schema validation success |
+
+### Alerting Rules
+
+Pre-configured alerts in `prometheus/alerts.yml`:
+
+| Alert | Condition | Severity |
+|-------|-----------|----------|
+| Tool Error Rate | >5% over 5 minutes | Warning |
+| Request Latency P95 | >10 seconds over 10 minutes | Warning |
+| Structured Output Failures | >2% over 5 minutes | Critical |
+| Circuit Breaker Trips | >3 in 15 minutes | Critical |
+| Rate Limit Errors | >10/min over 5 minutes | Warning |
+
+### Grafana Dashboard
+
+Import `grafana/claude-sdk-dashboard.json` for:
+
+- Request latency percentiles (P50/P95/P99)
+- Tool error rate by tool name
+- Structured output success rate
+- Token usage trends
+- Circuit breaker status
+- Thinking blocks rate
+
+### Structured Logging
+
+JSON logs with automatic secret masking:
+
+```json
+{
+  "timestamp": "2026-01-26T14:30:00.000Z",
+  "request_id": "req_abc123",
+  "level": "info",
+  "message": "Request completed",
+  "latency_ms": 2340,
+  "model": "claude-sonnet-4-20250514",
+  "tools_called": ["search_sec_filings", "get_case_details"],
+  "tokens": {"input": 15420, "output": 3200, "cached": 12000}
+}
+```
+
+**Masked automatically:** API keys, bearer tokens, SSNs, credit card numbers.
+
+### OpenTelemetry Tracing
+
+Distributed tracing via `@opentelemetry/api`:
+- Spans for each request and tool call
+- Correlation IDs propagated across services
+- Compatible with Jaeger, Zipkin, or cloud providers
+
+</details>
+
+---
+
+## Cost Optimization
+
+Legal research at scale requires cost discipline. Super-Legal implements multiple optimization strategies.
+
+<details>
+<summary><strong>View Cost Optimization Strategies</strong></summary>
+
+### Prompt Caching
+
+System prompts and tool definitions are cached:
+
+| Operation | Cost Multiplier |
+|-----------|-----------------|
+| Cache write | 1.25x input tokens |
+| Cache read | **0.1x input tokens** |
+
+**Savings calculation:**
+- Baseline: 50,000 input tokens
+- With 80% cache hit rate: 50,000 × (0.2 × 1.25 + 0.8 × 0.1) = **16,500 effective tokens**
+- **67% cost reduction**
+
+### Model Selection
+
+| Task Type | Model | Rationale |
+|-----------|-------|-----------|
+| Simple tool calls | Haiku | Fast, cheap, sufficient |
+| Standard analysis | Sonnet | Balanced cost/quality |
+| Complex reasoning | Opus | Only when necessary |
+
+### Token Discipline
+
+- **Parameter caps**: Enforced limits on search results, page counts
+- **Structured outputs**: Reduce retries from parse errors
+- **Progressive saves**: Prevent lost work from context exhaustion
+
+### Specialist Report Token Efficiency
+
+| Output Type | Token Budget | Rationale |
+|-------------|--------------|-----------|
+| Full report | 80-120KB | Saved to file, not returned |
+| Return JSON | ~200 tokens | Status only, file path reference |
+
+**17 specialists × 200 tokens = 3,400 tokens** vs **17 × 5,000 = 85,000 tokens** (96% reduction)
+
+### Metrics to Watch
+
+```yaml
+# High-value metrics for cost control
+claude_tokens_input_total
+claude_tokens_output_total
+claude_tokens_cached_total
+claude_cache_read_tokens_total
+claude_cache_creation_tokens_total
+```
+
+</details>
+
+---
+
 ## Available Tools
 
 <details>
