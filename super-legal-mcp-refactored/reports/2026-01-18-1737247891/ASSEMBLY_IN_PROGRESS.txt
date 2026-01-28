@@ -1,0 +1,7 @@
+ASSEMBLY STATUS: IN PROGRESS
+
+Due to Agent SDK Read tool 25K token limit, large section files (IV.B: 110KB, IV.C: 110KB) cannot be read directly.
+
+WORKAROUND: Creating shell script to concatenate files at OS level, then verifying result.
+
+This file will be deleted upon successful completion.

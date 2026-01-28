@@ -1,0 +1,38 @@
+# Wave 5 Verification Results
+# Executed: $(date)
+
+echo "=== FOOTNOTES HEADER VERIFICATION ==="
+grep -n "^## VI. CONSOLIDATED FOOTNOTES" W5-001-formatting-cleanup.md
+echo ""
+
+echo "=== ADVOCACY LANGUAGE VERIFICATION ==="
+echo "Instances of 'clearly before' or 'clearly revokes' (should be 0):"
+grep -c "clearly before\|clearly revokes" W5-001-formatting-cleanup.md || echo "0"
+echo ""
+echo "Instances of statutory 'clearly reflect' or 'clearly to reflect' (should be 2):"
+grep -c "clearly reflect income\|clearly to reflect" W5-001-formatting-cleanup.md
+echo ""
+
+echo "=== HEADER HIERARCHY VERIFICATION ==="
+echo "Main sections (##): $(grep -c '^## ' W5-001-formatting-cleanup.md)"
+echo "Subsections (###): $(grep -c '^### ' W5-001-formatting-cleanup.md)"
+echo "Sub-subsections (####): $(grep -c '^#### ' W5-001-formatting-cleanup.md)"
+echo ""
+
+echo "=== TABLE VERIFICATION ==="
+echo "Total table rows: $(grep -c '^| ' W5-001-formatting-cleanup.md)"
+echo ""
+
+echo "=== CREAC STRUCTURE VERIFICATION ==="
+echo "CREAC 'Application to Transaction' sections: $(grep -c '^### B. Application to Transaction' W5-001-formatting-cleanup.md)"
+echo "Risk Assessment sections: $(grep -c '^### C. Risk Assessment' W5-001-formatting-cleanup.md)"
+echo "Cross-Domain sections: $(grep -c '^### D. Cross-Domain Implications' W5-001-formatting-cleanup.md)"
+echo "Recommendations sections: $(grep -c '^### E. Recommendations' W5-001-formatting-cleanup.md)"
+echo ""
+
+echo "=== DOCUMENT METRICS ==="
+echo "Word count: $(wc -w < W5-001-formatting-cleanup.md)"
+echo "Line count: $(wc -l < W5-001-formatting-cleanup.md)"
+echo ""
+
+echo "=== VERIFICATION COMPLETE ==="

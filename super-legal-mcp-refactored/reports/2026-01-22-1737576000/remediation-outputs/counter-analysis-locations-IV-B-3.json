@@ -1,0 +1,44 @@
+{
+  "section_id": "IV.B.3",
+  "section_info": {
+    "title": "ERISA Excise Tax Exposure Uninsurable (MEDIUM)",
+    "has_counter_analysis_header": false,
+    "detections": 3,
+    "to_move": 3
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.3",
+      "paragraph_index": 1,
+      "line_number": 12889,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Rule:** ERISA fiduciary liability insurance covers defense costs and damages arising from breaches of fiduciary duty, but **excludes fines, penalties, taxes, and punitive damages** to the extent suc...",
+      "full_paragraph": "**Rule:** ERISA fiduciary liability insurance covers defense costs and damages arising from breaches of fiduciary duty, but **excludes fines, penalties, taxes, and punitive damages** to the extent such exclusions are permitted under applicable law.\u2077\u00b3 Internal Revenue Code Section 4975(a) imposes a 15% excise tax on the \"amount involved\" in a prohibited transaction, payable by the \"disqualified person\" who participated in the transaction.\u2077\u2074 Courts and the IRS have uniformly held that Section 4975 excise taxes are penalties, not compensatory damages, and therefore are not insurable as a matter of public policy.\u2077\u2075",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.3",
+      "paragraph_index": 4,
+      "line_number": 12895,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "The distinction between **defense costs** (covered) and **excise taxes** (excluded) is critical. Fiduciary liability insurance **will cover** the costs of defending against a DOL investigation or IRS ...",
+      "full_paragraph": "The distinction between **defense costs** (covered) and **excise taxes** (excluded) is critical. Fiduciary liability insurance **will cover** the costs of defending against a DOL investigation or IRS examination related to prohibited transactions.\u2078\u00b9 This includes legal counsel fees ($150,000-$400,000), document production, expert witness fees, and negotiation of settlement terms with the DOL or IRS.\u2078\u00b2 However, once the DOL or IRS determines that a prohibited transaction occurred and assesses the Section 4975(a) 15% excise tax, that tax assessment is **uninsured** and must be paid by Pinnacle.",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.3",
+      "paragraph_index": 10,
+      "line_number": 12914,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "This excise tax exposure is **entirely uninsured**. Pinnacle's fiduciary liability policy (estimated limits $15 million-$20 million)\u2079\u2076 will cover the DOL investigation defense costs ($150,000-$400,000...",
+      "full_paragraph": "This excise tax exposure is **entirely uninsured**. Pinnacle's fiduciary liability policy (estimated limits $15 million-$20 million)\u2079\u2076 will cover the DOL investigation defense costs ($150,000-$400,000) but will exclude the excise tax assessment via the policy's \"fines, penalties, taxes\" exclusion.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

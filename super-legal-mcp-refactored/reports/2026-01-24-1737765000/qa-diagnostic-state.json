@@ -1,0 +1,184 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "qa_cycle": {
+    "current_cycle": 1,
+    "max_cycles": 3,
+    "cycle_history": [
+      {
+        "cycle": 1,
+        "score": 78,
+        "outcome": "TIER_3_FULL_REMEDIATION",
+        "issues_before": 42,
+        "issues_resolved": 0,
+        "issues_remaining": 42,
+        "timestamp": "2026-01-24T00:00:00Z"
+      }
+    ]
+  },
+  "gate_attempts": {
+    "A1_to_A2": { "attempts": 1, "max": 3, "last_failure_reason": null }
+  },
+  "compaction_summary": {
+    "task": "Diagnostic assessment complete",
+    "progress": "All output files generated",
+    "next_action": "Orchestrator should execute remediation-dispatch.md tasks",
+    "critical_context": ["Score: 78%", "TIER 3 FULL remediation", "42 issues", "33 remediation tasks", "Estimated 13.75-14.75 hours"]
+  },
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_2_dimension_scoring": true,
+    "phase_3_issue_cataloging": true,
+    "phase_4_remediation_planning": true,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+  "dimensions_scored": {
+    "dim_0_questions_presented": { "status": "complete", "score": 0, "max": 5, "issues": 1 },
+    "dim_1_creac_structure": { "status": "complete", "score": 3, "max": 10, "issues": 1 },
+    "dim_2_objectivity": { "status": "complete", "score": 7, "max": 8, "issues": 2 },
+    "dim_3_brief_answer": { "status": "complete", "score": 0, "max": 5, "issues": 1 },
+    "dim_4_exec_summary": { "status": "complete", "score": 5, "max": 7, "issues": 3 },
+    "dim_5_citation_quality": { "status": "complete", "score": 11, "max": 12, "issues": 7 },
+    "dim_6_quantification": { "status": "complete", "score": 10, "max": 10, "issues": 0 },
+    "dim_7_cross_reference": { "status": "complete", "score": 6, "max": 8, "issues": 2 },
+    "dim_8_risk_tables": { "status": "complete", "score": 0, "max": 8, "issues": 13 },
+    "dim_9_draft_contracts": { "status": "complete", "score": 8, "max": 10, "issues": 5 },
+    "dim_10_formatting": { "status": "complete", "score": 7, "max": 7, "issues": 0 },
+    "dim_11_completeness": { "status": "complete", "score": 10, "max": 10, "issues": 1 }
+  },
+  "recovery_instructions": {
+    "on_compaction": "Diagnostic complete. All output files generated. Proceed to remediation execution.",
+    "do_not_repeat": ["dim_0", "dim_1", "dim_2", "dim_3", "dim_4", "dim_5", "dim_6", "dim_7", "dim_8", "dim_9", "dim_10", "dim_11"],
+    "do_not_rescore": true
+  },
+  "issues_found": [
+    {
+      "id": "CRIT-001",
+      "dimension": 0,
+      "severity": "CRITICAL",
+      "description": "Missing Questions Presented section",
+      "remediation_task": "W2-001"
+    },
+    {
+      "id": "CRIT-002",
+      "dimension": 3,
+      "severity": "CRITICAL",
+      "description": "Missing Brief Answers section",
+      "remediation_task": "W2-002"
+    },
+    {
+      "id": "CRIT-003",
+      "dimension": 1,
+      "severity": "CRITICAL",
+      "description": "Missing CREAC structure headers (0 of 50+ expected)",
+      "remediation_task": "W3-001 + W3-001-VALIDATE"
+    },
+    {
+      "id": "HIGH-001",
+      "dimension": 8,
+      "severity": "HIGH",
+      "description": "Missing risk assessment tables (13 sections)",
+      "remediation_task": "W2-003 through W2-015"
+    },
+    {
+      "id": "HIGH-002",
+      "dimension": 4,
+      "severity": "HIGH",
+      "description": "Executive Summary exceeds word limit",
+      "remediation_task": "W2-016"
+    },
+    {
+      "id": "HIGH-003",
+      "dimension": 4,
+      "severity": "HIGH",
+      "description": "Missing recommendation in first 100 words",
+      "remediation_task": "W4-002"
+    },
+    {
+      "id": "HIGH-004",
+      "dimension": 4,
+      "severity": "HIGH",
+      "description": "Missing overall transaction risk rating",
+      "remediation_task": "W2-017"
+    },
+    {
+      "id": "HIGH-005",
+      "dimension": 7,
+      "severity": "HIGH",
+      "description": "Cross-reference matrix non-standard placement",
+      "remediation_task": "W3-XREF-SCAN"
+    },
+    {
+      "id": "HIGH-006",
+      "dimension": 7,
+      "severity": "HIGH",
+      "description": "Siloed sections risk",
+      "remediation_task": "W3-XREF-{section}"
+    },
+    {
+      "id": "HIGH-007 through HIGH-012",
+      "dimension": 9,
+      "severity": "HIGH",
+      "description": "Missing draft contract provisions (5 sections)",
+      "remediation_task": "W2-018 through W2-022"
+    },
+    {
+      "id": "MED-001",
+      "dimension": 2,
+      "severity": "MEDIUM",
+      "description": "Advocacy language detected (3 instances)",
+      "remediation_task": "W4-001"
+    },
+    {
+      "id": "MED-002",
+      "dimension": 2,
+      "severity": "MEDIUM",
+      "description": "Missing counter-analysis depth",
+      "remediation_task": "W3-COUNTER-{section}"
+    },
+    {
+      "id": "MED-003 through MED-008",
+      "dimension": 5,
+      "severity": "MEDIUM",
+      "description": "Missing pincites (10-15 citations)",
+      "remediation_task": "W5-001"
+    },
+    {
+      "id": "MED-009",
+      "dimension": 5,
+      "severity": "MEDIUM",
+      "description": "Missing explanatory parentheticals",
+      "remediation_task": "W5-002"
+    },
+    {
+      "id": "LOW-001 through LOW-009",
+      "dimension": 11,
+      "severity": "LOW",
+      "description": "Final polish items",
+      "remediation_task": "ASSEMBLY-001"
+    }
+  ],
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 12,
+    "aggregate_score_so_far": 78,
+    "base_score": 67,
+    "red_flag_deductions": -22,
+    "critical_issues": 3,
+    "high_issues": 12,
+    "medium_issues": 18,
+    "low_issues": 9,
+    "total_issues": 42,
+    "remediation_tasks": 33,
+    "estimated_remediation_hours": 14.75,
+    "target_post_remediation_score": 91,
+    "last_checkpoint": "2026-01-24T00:00:00Z"
+  },
+  "output_files": {
+    "diagnostic_assessment": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-24-1737765000/qa-outputs/diagnostic-assessment.md",
+    "remediation_plan": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-24-1737765000/qa-outputs/remediation-plan.md",
+    "remediation_dispatch": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-24-1737765000/qa-outputs/remediation-dispatch.md",
+    "state_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-24-1737765000/qa-diagnostic-state.json"
+  }
+}

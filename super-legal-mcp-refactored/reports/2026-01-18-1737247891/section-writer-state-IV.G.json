@@ -1,0 +1,57 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "IV.G",
+  "section_name": "Reinsurance Agreements",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.G from specialist report T7",
+    "progress": "Phase 6: Finalized and complete",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": ["3 HIGH findings analyzed", "All subsections A-F complete", "91 footnotes with verification tags"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["reinsurance-agreements-analysis-report.md"]
+  },
+
+  "metrics": {
+    "word_count": 6200,
+    "findings_written": "3/3",
+    "footnotes_count": 91,
+    "last_checkpoint": "2026-01-18T23:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/reinsurance-agreements-analysis-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "pre_generation_validation": {
+    "pincites_validated": true,
+    "pincites_count": 91,
+    "placeholder_count": 0,
+    "methodology_disclosed": true,
+    "verification_tags_present": true
+  }
+}

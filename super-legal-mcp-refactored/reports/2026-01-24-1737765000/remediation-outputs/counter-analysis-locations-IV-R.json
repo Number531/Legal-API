@@ -1,0 +1,22 @@
+{
+  "section_id": "IV.R",
+  "section_info": {
+    "title": "egulatory and Market Flux",
+    "has_counter_analysis_header": false,
+    "detections": 1,
+    "to_move": 0
+  },
+  "locations": [
+    {
+      "section_id": "IV.R",
+      "paragraph_index": 13,
+      "line_number": 11445,
+      "pattern_matched": "While\\s+(?:it\\s+is\\s+true|some\\s+courts|there\\s+(?:are|is)|the)",
+      "pattern_type": "rebuttal",
+      "content_excerpt": "4. **Verification Required:** All findings, citations, and recommendations must be independently verified by qualified legal counsel before reliance. While the research platform employs verification p...",
+      "full_paragraph": "4. **Verification Required:** All findings, citations, and recommendations must be independently verified by qualified legal counsel before reliance. While the research platform employs verification protocols (98.6% of citations marked [VERIFIED]), AI-generated content may contain errors requiring human attorney review.",
+      "confidence": 0.63,
+      "should_move": false
+    }
+  ]
+}

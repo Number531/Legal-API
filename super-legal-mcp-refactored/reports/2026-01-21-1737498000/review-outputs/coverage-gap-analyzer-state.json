@@ -1,0 +1,209 @@
+{
+  "agent": "coverage-gap-analyzer",
+  "status": "complete",
+  "session_directory": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000",
+
+  "compaction_summary": {
+    "task": "Verify research coverage and detect inter-specialist conflicts for Project Chronos ($2.9B LLIC acquisition)",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "Orchestrator should proceed to Phase 4 (section generation) while spawning 4 supplemental specialists in parallel",
+    "critical_context": [
+      "V1 (research-review-gate) COMPLETE: 92% quality score",
+      "V2 (fact-validator) COMPLETE: 91 canonical facts established",
+      "V3 (coverage-gap-analyzer) COMPLETE: 11 gaps identified (1 CRITICAL, 3 HIGH, 4 MEDIUM, 3 LOW)",
+      "CRITICAL GAP: HSR antitrust filing requirements not analyzed (deal-blocking if required)",
+      "HIGH GAPS: Agent attrition long-term RBC, ERISA pension quantification, cybersecurity/data privacy"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_plan_extraction": true,
+    "phase_2_execution_inventory": true,
+    "phase_3_alignment_check": true,
+    "phase_4_conflict_detection": true,
+    "phase_5_gap_generation": true,
+    "phase_6_output_files": true,
+    "phase_7_return_status": true
+  },
+
+  "critical_issues_checked": {
+    "issue_1": { "status": "verified", "specialist": "T1", "coverage": "comprehensive" },
+    "issue_2": { "status": "verified", "specialist": "T2", "coverage": "comprehensive" },
+    "issue_3": { "status": "verified", "specialist": "T4", "coverage": "comprehensive" },
+    "issue_4": { "status": "verified", "specialist": "T1, T6", "coverage": "comprehensive" },
+    "issue_5": { "status": "verified", "specialist": "T5", "coverage": "comprehensive" },
+    "issue_6": { "status": "verified", "specialist": "T9", "coverage": "comprehensive" },
+    "issue_7": { "status": "verified", "specialist": "T1, T6", "coverage": "comprehensive" },
+    "issue_8": { "status": "verified", "specialist": "T1, T6", "coverage": "comprehensive" },
+    "issue_9": { "status": "verified", "specialist": "T8", "coverage": "comprehensive" },
+    "issue_10": { "status": "verified", "specialist": "T3", "coverage": "comprehensive" }
+  },
+
+  "cross_domain_patterns_verified": {
+    "pattern_1": { "status": "complete", "source": "T2", "target": "T1", "verified": "yes" },
+    "pattern_2": { "status": "complete", "source": "T4", "target": "T3", "verified": "yes" },
+    "pattern_3": { "status": "complete", "source": "T5", "target": "T3", "verified": "yes" },
+    "pattern_4": { "status": "complete", "source": "T6", "target": "T1", "verified": "yes" },
+    "pattern_5": { "status": "partial", "source": "T9", "target": "T1", "verified": "no", "gap": "agent attrition long-term RBC impact not analyzed by T1" },
+    "pattern_6": { "status": "complete", "source": "T7", "target": "T1", "verified": "yes" },
+    "pattern_7": { "status": "complete", "source": "T8", "target": "T1", "verified": "yes" },
+    "pattern_8": { "status": "complete", "source": "T10", "target": "T4", "verified": "yes" }
+  },
+
+  "conflicts_detected": [
+    {
+      "conflict_id": 1,
+      "type": "METHODOLOGICAL_TENSION",
+      "specialist_a": "T1",
+      "conclusion_a": "~115% RBC ratio (estimated)",
+      "specialist_b": "T2",
+      "conclusion_b": "114-129% range, canonical 114%",
+      "resolution_status": "RESOLVED",
+      "resolved_by": "V2 fact-validator",
+      "canonical_value": "[FACT-REG: #010] 114% worst-case"
+    }
+  ],
+
+  "gaps_identified": [
+    {
+      "gap_id": "GAP-001",
+      "severity": "CRITICAL",
+      "category": "HSR Antitrust Filing",
+      "description": "No specialist analyzed antitrust/competition issues for $2.9B transaction. HSR filing likely required (exceeds $111.4M threshold). Failure to file = $46K/day penalties + injunction risk (deal-blocking).",
+      "recommended_specialist": "antitrust-competition-analyst",
+      "priority": 1,
+      "estimated_exposure": "$1M-$5M if discovered 30-120 days post-closing",
+      "remediation_status": "pending"
+    },
+    {
+      "gap_id": "GAP-002",
+      "severity": "HIGH",
+      "category": "Agent Attrition Long-Term RBC Impact",
+      "description": "T9 flagged cross-domain implication but T1 did not analyze long-term RBC trajectory (Years 1-5) under sustained revenue decline from agent attrition ($220M annual sales loss).",
+      "recommended_specialist": "T1 regulatory-rulemaking-analyst (supplemental)",
+      "priority": 2,
+      "estimated_exposure": "$50M-$100M additional capital injection Years 3-5 (20-30% probability)",
+      "remediation_status": "pending"
+    },
+    {
+      "gap_id": "GAP-003",
+      "severity": "HIGH",
+      "category": "ERISA Pension Quantification",
+      "description": "T9 addressed ERISA as routine ($50K-$150K) but did not analyze if LLIC has defined benefit pension plan and funded status. If DB plan <80% funded, unfunded liability could be $10M-$50M.",
+      "recommended_specialist": "T9 employment-labor-analyst (supplemental)",
+      "priority": 2,
+      "estimated_exposure": "$3M-$20M weighted (30-40% probability DB plan exists and underfunded)",
+      "remediation_status": "pending"
+    },
+    {
+      "gap_id": "GAP-004",
+      "severity": "HIGH",
+      "category": "Cybersecurity/Data Privacy Compliance",
+      "description": "No specialist analyzed GLBA Safeguards Rule compliance, state breach notification laws, incident history, or cyber insurance. Life insurers handle sensitive PII (policyholder data, health information for underwriting).",
+      "recommended_specialist": "privacy-analyst",
+      "priority": 2,
+      "estimated_exposure": "$2M-$5M (base case breach), $10M-$20M (worst case with class action)",
+      "remediation_status": "pending"
+    },
+    {
+      "gap_id": "GAP-005",
+      "severity": "MEDIUM",
+      "category": "State Insurance Licensing Detail",
+      "description": "T1 addressed Nebraska DOI Form A comprehensively, but other states' change-of-control requirements (38 states + DC) not detailed. Some states may require separate filings (30-90 day timeline).",
+      "recommended_specialist": "data room document review (state licenses, prior change-of-control filings)",
+      "priority": 3,
+      "estimated_exposure": "$500K-$2M approval costs + timeline delay",
+      "remediation_status": "acknowledge in memorandum"
+    },
+    {
+      "gap_id": "GAP-006",
+      "severity": "MEDIUM",
+      "category": "Material Vendor Contracts",
+      "description": "No specialist analyzed vendor contracts (IT systems, policy administration, claims processing). Key vendors may have change-of-control provisions (termination rights, price increases).",
+      "recommended_specialist": "data room document review (Top 10 vendor contracts)",
+      "priority": 3,
+      "estimated_exposure": "$2M-$5M if vendor renegotiates or terminates",
+      "remediation_status": "acknowledge in memorandum"
+    },
+    {
+      "gap_id": "GAP-007",
+      "severity": "MEDIUM",
+      "category": "IP/Trademark Clearance",
+      "description": "No specialist analyzed trademarks. 'Liberty Life' is common name (Liberty Mutual, Liberty National Life); trademark clearance required to avoid confusion/opposition.",
+      "recommended_specialist": "data room document review (trademark registrations) or IP specialist",
+      "priority": 3,
+      "estimated_exposure": "$500K-$2M if rebrand required",
+      "remediation_status": "acknowledge in memorandum"
+    },
+    {
+      "gap_id": "GAP-008",
+      "severity": "MEDIUM",
+      "category": "Environmental Phase I ESA",
+      "description": "No specialist analyzed environmental risks for owned real estate. If LLIC owns Omaha headquarters, Phase I ESA is standard M&A due diligence.",
+      "recommended_specialist": "data room document review (real estate ownership, prior Phase I reports)",
+      "priority": 3,
+      "estimated_exposure": "$1M-$3M if contamination discovered (unlikely for office building)",
+      "remediation_status": "acknowledge in memorandum"
+    },
+    {
+      "gap_id": "GAP-009",
+      "severity": "LOW",
+      "category": "Tax Attributes (NOLs/Credits)",
+      "description": "No specialist analyzed NOL carryforwards or tax credit utilization. IRC § 382 change-of-ownership rules may limit utilization.",
+      "recommended_specialist": "none (life insurers typically profitable, unlikely to have material NOLs)",
+      "priority": 4,
+      "estimated_exposure": "<$5M",
+      "remediation_status": "acknowledge in memorandum"
+    },
+    {
+      "gap_id": "GAP-010",
+      "severity": "LOW",
+      "category": "CFIUS Filing",
+      "description": "No specialist analyzed Committee on Foreign Investment in United States (CFIUS) filing requirements. Only applicable if AFH has foreign ownership >10%.",
+      "recommended_specialist": "none (unless AFH corporate structure reveals foreign investors)",
+      "priority": 4,
+      "estimated_exposure": "0 days timeline if no foreign ownership, 30-90 days if filing required",
+      "remediation_status": "acknowledge in memorandum"
+    },
+    {
+      "gap_id": "GAP-011",
+      "severity": "LOW",
+      "category": "Real Estate Leases",
+      "description": "No specialist analyzed office leases. Omaha headquarters lease may require landlord consent for assignment.",
+      "recommended_specialist": "data room document review (lease agreements)",
+      "priority": 4,
+      "estimated_exposure": "<$500K (consent likely routine)",
+      "remediation_status": "acknowledge in memorandum"
+    }
+  ],
+
+  "recovery_instructions": {
+    "on_compaction": "Analysis COMPLETE. No recovery needed.",
+    "do_not_repeat": ["all_phases"],
+    "do_not_reverify_issues": ["issue_1", "issue_2", "issue_3", "issue_4", "issue_5", "issue_6", "issue_7", "issue_8", "issue_9", "issue_10"]
+  },
+
+  "metrics": {
+    "specialists_planned": 10,
+    "specialists_executed": 10,
+    "critical_issues_total": 10,
+    "critical_issues_checked": 10,
+    "critical_issues_addressed": 10,
+    "cross_domain_patterns_total": 8,
+    "cross_domain_patterns_verified": 7,
+    "cross_domain_patterns_partial": 1,
+    "gaps_found": 11,
+    "gaps_critical": 1,
+    "gaps_high": 3,
+    "gaps_medium": 4,
+    "gaps_low": 3,
+    "conflicts_found": 1,
+    "conflicts_resolved": 1,
+    "last_checkpoint": "2026-01-22T00:00:00Z"
+  },
+
+  "files_created": [
+    "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/review-outputs/coverage-gaps.md",
+    "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/review-outputs/coverage-gap-analyzer-state.json"
+  ]
+}

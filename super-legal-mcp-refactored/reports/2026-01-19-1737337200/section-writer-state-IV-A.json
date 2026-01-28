@@ -1,0 +1,64 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "A",
+  "section_name": "RBC Capital Adequacy & Regulatory Capital",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.A (RBC Capital Adequacy & Regulatory Capital) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "Section delivered to orchestrator",
+    "critical_context": [
+      "section_id=A",
+      "3 HIGH findings with full CREAC analysis",
+      "129 footnotes with verification tags",
+      "3 draft contract provisions (capital injection, Form A approval, surplus notes)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section IV.A complete - no recovery needed",
+    "do_not_repeat": [
+      "A_legal_framework",
+      "B_application",
+      "C_risk_assessment",
+      "D_cross_domain",
+      "E_recommendations",
+      "F_footnotes"
+    ],
+    "do_not_reread_reports": [
+      "state-insurance-regulation-rbc-report.md",
+      "orchestrator-state.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 5950,
+    "findings_written": "3/3",
+    "footnotes_count": 129,
+    "last_checkpoint": "2026-01-20T00:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/state-insurance-regulation-rbc-report.md",
+    "orchestrator-state.md"
+  ]
+}

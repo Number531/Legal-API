@@ -1,0 +1,119 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "session_directory": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000",
+
+  "compaction_summary": {
+    "task": "Diagnostic assessment of final memorandum (945 KB, 157,398 words)",
+    "progress": "Complete - all phases finished",
+    "next_action": "Orchestrator should dispatch remediation agents per remediation-dispatch.md",
+    "critical_context": [
+      "Score: 79.2% (below 93% certification threshold)",
+      "Remediation Tier: TIER 2 STANDARD (13 issues in scope)",
+      "Post-remediation projection: 92.7-94.2%",
+      "Substance is partner-quality, structure needs formatting fixes"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_2_dimension_scoring": true,
+    "phase_3_issue_cataloging": true,
+    "phase_4_remediation_planning": true,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+
+  "prerequisite_verification": {
+    "expected_sections": [
+      "I. EXECUTIVE SUMMARY",
+      "II. QUESTIONS PRESENTED",
+      "III. BRIEF ANSWERS",
+      "IV.A-IV.J. DISCUSSION SECTIONS (10 sections)",
+      "V. CROSS-REFERENCE MATRIX",
+      "VI. CONSOLIDATED FOOTNOTES"
+    ],
+    "expected_count": 15,
+    "sections_found": 15,
+    "sections_missing": [],
+    "placeholder_count": 0,
+    "truncation_detected": false,
+    "verification_passed": true
+  },
+
+  "dimensions_scored": {
+    "dim_1_questions_presented": {"score": 3.0, "max": 10.0, "issues": 2},
+    "dim_2_creac_structure": {"score": 5.0, "max": 10.0, "issues": 2},
+    "dim_3_objectivity": {"score": 9.2, "max": 10.0, "issues": 1},
+    "dim_4_brief_answers": {"score": 7.5, "max": 8.0, "issues": 1},
+    "dim_5_executive_summary": {"score": 10.0, "max": 12.0, "issues": 1},
+    "dim_6_citation_quality": {"score": 9.8, "max": 10.0, "issues": 1},
+    "dim_7_quantification": {"score": 11.5, "max": 12.0, "issues": 1},
+    "dim_8_cross_references": {"score": 7.5, "max": 8.0, "issues": 1},
+    "dim_9_risk_tables": {"score": 9.5, "max": 10.0, "issues": 1},
+    "dim_10_draft_contracts": {"score": 3.0, "max": 10.0, "issues": 3},
+    "dim_11_formatting": {"score": 4.8, "max": 5.0, "issues": 1},
+    "dim_12_completeness": {"score": 4.8, "max": 5.0, "issues": 1}
+  },
+
+  "scoring_summary": {
+    "base_score": 85.6,
+    "red_flag_deductions": -6.4,
+    "final_score": 79.2,
+    "certification_threshold": 93.0,
+    "gap": 13.8
+  },
+
+  "issues_found": [
+    {"id": "QP-001", "severity": "CRITICAL", "dimension": 1, "description": "Questions not in Under/Does/When format"},
+    {"id": "QP-002", "severity": "MEDIUM", "dimension": 1, "description": "Questions embed conclusions"},
+    {"id": "CREAC-001", "severity": "CRITICAL", "dimension": 2, "description": "Missing CREAC subsection headers"},
+    {"id": "CREAC-002", "severity": "HIGH", "dimension": 2, "description": "Counter-analysis not formally structured"},
+    {"id": "OBJ-001", "severity": "LOW", "dimension": 3, "description": "Advocacy language detected (7 instances)"},
+    {"id": "BA-001", "severity": "LOW", "dimension": 4, "description": "Brief Answers exceed optimal length"},
+    {"id": "ES-001", "severity": "MEDIUM", "dimension": 5, "description": "Executive Summary word count verification required"},
+    {"id": "CIT-001", "severity": "LOW", "dimension": 6, "description": "Pincite compliance verification required"},
+    {"id": "QUANT-001", "severity": "LOW", "dimension": 7, "description": "One perpetual liability needs NPV calculation"},
+    {"id": "XREF-001", "severity": "LOW", "dimension": 8, "description": "Some cross-references lack paragraph numbers"},
+    {"id": "RISK-001", "severity": "LOW", "dimension": 9, "description": "Verify risk table mitigation columns complete"},
+    {"id": "CONTRACT-001", "severity": "CRITICAL", "dimension": 10, "description": "Missing draft contract provisions for HIGH/CRITICAL findings"},
+    {"id": "CONTRACT-002", "severity": "HIGH", "dimension": 10, "description": "Escrow provisions not drafted"},
+    {"id": "CONTRACT-003", "severity": "HIGH", "dimension": 10, "description": "Indemnification provisions not drafted"},
+    {"id": "FORMAT-001", "severity": "LOW", "dimension": 11, "description": "Verify TOC page numbers"},
+    {"id": "COMP-001", "severity": "LOW", "dimension": 12, "description": "Missing document footer"}
+  ],
+
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 12,
+    "aggregate_score": 79.2,
+    "critical_issues": 3,
+    "high_issues": 3,
+    "medium_issues": 2,
+    "low_issues": 10,
+    "total_issues": 18,
+    "issues_in_scope": 13,
+    "last_checkpoint": "2026-01-22T00:30:00Z"
+  },
+
+  "remediation_plan": {
+    "tier": "TIER_2_STANDARD",
+    "issues_in_scope": 13,
+    "estimated_duration_minutes": 105,
+    "waves": 6,
+    "wave_1_skip": true,
+    "wave_2_duration": 45,
+    "wave_3_duration": 20,
+    "wave_4_duration": 25,
+    "wave_5_skip": true,
+    "wave_6_duration": 15,
+    "projected_post_remediation_score": 93.5,
+    "certification_probability": "HIGH"
+  },
+
+  "output_files": [
+    "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/qa-outputs/diagnostic-assessment.md",
+    "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/qa-outputs/remediation-plan.md",
+    "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/qa-outputs/remediation-dispatch.md"
+  ]
+}

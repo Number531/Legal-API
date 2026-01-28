@@ -1,0 +1,53 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "H",
+  "section_name": "Commercial Contracts and Client Concentration Risk",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV-H (Commercial Contracts) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "Section complete and saved",
+    "critical_context": ["section_id=H", "4 findings (2 HIGH, 2 CRITICAL)", "Using fact-registry values"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete. No recovery needed.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["commercial-contracts-analyst-report.md", "securities-researcher-report.md", "fact-registry.md", "risk-summary.json"]
+  },
+
+  "metrics": {
+    "word_count": 5850,
+    "findings_written": "4/4",
+    "footnotes_count": 31,
+    "last_checkpoint": "2026-01-23T00:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/commercial-contracts-analyst-report.md",
+    "specialist-reports/securities-researcher-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-22-1737576000/section-reports/section-IV-H-commercial-contracts.md"
+}

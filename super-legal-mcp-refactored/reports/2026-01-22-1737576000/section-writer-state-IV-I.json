@@ -1,0 +1,139 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "I",
+  "section_name": "Employment, Retention, and Non-Compete Enforceability",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.I (Employment, Retention, Non-Compete) from specialist reports",
+    "progress": "COMPLETE - All subsections A-G written, quality checks passed",
+    "next_action": "None - section complete and saved",
+    "critical_context": [
+      "section_id=I",
+      "8 senior PMs managing $35B (83% AUM)",
+      "MA Non-Compete Act § 24L compliance verified (70-80% enforceability)",
+      "Garden leave: 6 months at 100% base (meets 50% minimum exactly)",
+      "Retention pool: $45M over 3 years (adequate for mid-tier, insufficient for top 3)",
+      "Earnout: $150M ($50M/year if AUM >$40B)",
+      "Key findings: 30-40% client attrition despite enforcement, PM retention risk $127.5M",
+      "Founder key person risk: $318M-$495M if departs (15-25% probability)",
+      "CRITICAL: Non-competes unenforceable if 'terminated without cause' (§ 24L(c)(iii))"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_key_personnel": "complete",
+    "B_ma_noncompete": "complete",
+    "C_garden_leave": "complete",
+    "D_practical_enforceability": "complete",
+    "E_retention_earnout": "complete",
+    "F_succession_planning": "complete",
+    "G_risk_assessment": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE. No recovery needed. Read output file if continuation required.",
+    "do_not_repeat": [
+      "A_key_personnel",
+      "B_ma_noncompete",
+      "C_garden_leave",
+      "D_practical_enforceability",
+      "E_retention_earnout",
+      "F_succession_planning",
+      "G_risk_assessment"
+    ],
+    "do_not_reread_reports": [
+      "employment-labor-analyst-report.md",
+      "case-law-analyst-report.md",
+      "fact-registry.md",
+      "risk-summary.json"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 6280,
+    "findings_written": "5/5",
+    "footnotes_count": 147,
+    "last_checkpoint": "2026-01-23T02:15:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/employment-labor-analyst-report.md",
+    "specialist-reports/case-law-analyst-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json"
+  ],
+
+  "quality_verification": {
+    "word_count_adequate": true,
+    "all_subsections_present": true,
+    "high_findings_have_draft_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  },
+
+  "findings_summary": {
+    "finding_1": {
+      "title": "PM Retention Risk (1-2 Senior PM Departures Year 1)",
+      "severity": "CRITICAL",
+      "probability": "50-70%",
+      "gross_exposure": "$140M-$185M NPV",
+      "weighted_exposure": "$70M-$130M",
+      "draft_provisions": true
+    },
+    "finding_2": {
+      "title": "Founder Departure (Key Person Redemptions)",
+      "severity": "HIGH",
+      "probability": "15-25%",
+      "gross_exposure": "$318M-$495M",
+      "weighted_exposure": "$63.6M-$99M",
+      "draft_provisions": true
+    },
+    "finding_3": {
+      "title": "Non-Compete 'Terminated Without Cause' Risk",
+      "severity": "MEDIUM",
+      "probability": "20-40%",
+      "gross_exposure": "$12M-$16M per PM",
+      "weighted_exposure": "$4.8M-$12.8M",
+      "draft_provisions": true
+    },
+    "finding_4": {
+      "title": "Client Portability Despite Enforcement",
+      "severity": "MEDIUM",
+      "probability": "70-80%",
+      "gross_exposure": "$55M-$110M per PM",
+      "weighted_exposure": "$44M-$88M",
+      "draft_provisions": false
+    },
+    "finding_5": {
+      "title": "Inadequate Retention Pool (Top 3 PMs)",
+      "severity": "MEDIUM",
+      "probability": "60-80%",
+      "gross_exposure": "$6M supplement needed",
+      "weighted_exposure": "$3.6M-$4.8M",
+      "draft_provisions": false
+    }
+  },
+
+  "key_legal_authorities": [
+    "M.G.L. c. 149, § 24L (Massachusetts Non-Compete Agreement Act)",
+    "Miele v. Foundation Medicine Inc., 496 Mass. 171 (2025)",
+    "KPM Analytics v. Blue Sun Scientific (Mass. Super. Ct. 2021)",
+    "Cynosure LLC v. Reveal Lasers LLC, No. 1:22-cv-10324 (D. Mass. 2023)",
+    "Anaplan Parent, LP v. Brennan (Mass. Super. Ct. 2025)",
+    "Creative Montessori Learning Centers v. Ashford Gear LLC, 88 Mass. App. Ct. 427 (2017)",
+    "Investment Advisers Act § 205(a)(2), 15 U.S.C. § 80b-5(a)(2)"
+  ]
+}

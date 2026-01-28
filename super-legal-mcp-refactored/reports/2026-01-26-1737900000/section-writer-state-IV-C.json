@@ -1,0 +1,106 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "C",
+  "section_name": "Commercial Contracts & Change of Ownership",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-C (Commercial Contracts & CHOW) from commercial contracts specialist report",
+    "progress": "COMPLETE - All 6 subsections written with full CREAC analysis",
+    "next_action": "None - section complete",
+    "critical_context": [
+      "section_id=C",
+      "4 findings analyzed: Dr. Johnson FMV (HIGH), Orange County CHOW (HIGH), Landlord Consents (MED-HIGH), Managed Care (MED)",
+      "All draft contract provisions generated for HIGH/MED-HIGH findings",
+      "Used fact-registry values for all quantitative data"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["commercial-contracts-analysis-report.md", "cms-regulatory-compliance-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6200,
+    "findings_written": "4/4",
+    "footnotes_count": 110,
+    "last_checkpoint": "2026-01-26T12:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/commercial-contracts-analysis-report.md",
+    "specialist-reports/cms-regulatory-compliance-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "key_findings_analyzed": [
+    {
+      "finding": "Dr. Johnson Medical Director FMV Compliance",
+      "severity": "HIGH",
+      "probability": "65-75%",
+      "exposure": "$12M-$20M FCA settlement",
+      "creac_complete": true,
+      "counter_analysis": true,
+      "draft_provisions": true
+    },
+    {
+      "finding": "Orange County CHOW Approval Delay/Denial",
+      "severity": "HIGH",
+      "probability": "40% (delay), 15% (denial)",
+      "exposure": "$7.89M EV",
+      "creac_complete": true,
+      "counter_analysis": true,
+      "draft_provisions": true
+    },
+    {
+      "finding": "Landlord Consent Requirements (4 leased facilities)",
+      "severity": "MEDIUM-HIGH",
+      "probability": "35-50% (any issue), 15-20% (exclusion)",
+      "exposure": "$7.63M EV",
+      "creac_complete": true,
+      "counter_analysis": true,
+      "draft_provisions": true
+    },
+    {
+      "finding": "Managed Care Contract Terminations",
+      "severity": "MEDIUM",
+      "probability": "20-30%",
+      "exposure": "$4.62M EV",
+      "creac_complete": true,
+      "counter_analysis": true,
+      "draft_provisions": true
+    }
+  ],
+
+  "quality_verification": {
+    "all_subsections_present": true,
+    "word_count_target_met": true,
+    "high_findings_draft_language": true,
+    "all_citations_tagged": true,
+    "no_placeholders": true,
+    "counter_analysis_all_findings": true,
+    "creac_structure_followed": true,
+    "liability_valuation_methodology": true,
+    "probability_methodology_disclosed": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "section_id": "IV.F",
+  "section_info": {
+    "title": "INSURANCE COVERAGE ASSUMPTIONS",
+    "has_counter_analysis_header": false,
+    "detections": 2,
+    "to_move": 2
+  },
+  "locations": [
+    {
+      "section_id": "IV.F",
+      "paragraph_index": 0,
+      "line_number": 14091,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "1. **Policy Terms**: Insurance coverage analysis assumes standard RIA insurance policy terms, including:\n   - E&O: $25M limits, $250K retention, standard exclusions (prior acts, known circumstances, i...",
+      "full_paragraph": "1. **Policy Terms**: Insurance coverage analysis assumes standard RIA insurance policy terms, including:\n   - E&O: $25M limits, $250K retention, standard exclusions (prior acts, known circumstances, intentional fraud)\n   - D&O: $15M/$30M tower, standard Side A/B/C coverage\n   - Fiduciary Liability: $15M-$20M limits, ERISA prohibited transaction defense coverage\n   - NO Cyber Insurance: Pinnacle confirmed no cyber policy in force",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.F",
+      "paragraph_index": 2,
+      "line_number": 14099,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "3. **Coverage Gaps**: Identified insurance shortfalls assume:\n   - E&O benchmark: 0.1% of AUM ($42.5M \u00d7 0.1% = $4.25M minimum recommended limits)\n   - Current E&O limits ($25M) are $17.5M-$20M below b...",
+      "full_paragraph": "3. **Coverage Gaps**: Identified insurance shortfalls assume:\n   - E&O benchmark: 0.1% of AUM ($42.5M \u00d7 0.1% = $4.25M minimum recommended limits)\n   - Current E&O limits ($25M) are $17.5M-$20M below benchmark\n   - Cyber insurance recommended limits: $10M-$20M (forensics, notification, defense, settlements)",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

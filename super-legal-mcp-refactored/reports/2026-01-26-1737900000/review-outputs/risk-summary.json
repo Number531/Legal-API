@@ -1,0 +1,1230 @@
+{
+  "session": "2026-01-26-1737900000",
+  "created": "2026-01-26T00:00:00Z",
+  "agent": "risk-aggregator",
+  "version": "1.0",
+
+  "transaction": {
+    "name": "Project Asclepius",
+    "acquirer": "Silver Oak Healthcare LLC",
+    "target": "Sunset Senior Living Group, LLC",
+    "seller": "Golden Gate Capital",
+    "purchase_price": 425000000,
+    "structure": "Asset purchase (Section 338(h)(10) election consideration)",
+    "closing_target": "Q2 2025 (March-June)",
+    "facilities": 12,
+    "licensed_beds": 1650,
+    "annual_revenue": 285000000,
+    "ebitda": 52000000,
+    "ebitda_margin": 0.182
+  },
+
+  "aggregation_summary": {
+    "total_findings": 23,
+    "critical_findings": 3,
+    "high_findings": 20,
+    "gross_exposure_min": 198000000,
+    "gross_exposure_max": 259000000,
+    "weighted_exposure_min": 95000000,
+    "weighted_exposure_max": 114000000,
+    "weighted_exposure_median": 104500000,
+    "as_percentage_of_purchase_price": {
+      "gross_min": 0.466,
+      "gross_max": 0.609,
+      "weighted_min": 0.224,
+      "weighted_max": 0.268,
+      "weighted_median": 0.246
+    },
+    "methodology": "Expected value (probability-weighted) with time-based classification (ONE_TIME, MULTI_YEAR, PERPETUAL) and correlation adjustments"
+  },
+
+  "time_classification_summary": {
+    "ONE_TIME": {
+      "count": 15,
+      "description": "Single event exposures (settlements, terminations, one-time penalties)",
+      "gross_total_min": 143700000,
+      "gross_total_max": 197850000,
+      "weighted_total_min": 54490500,
+      "weighted_total_max": 72427500
+    },
+    "MULTI_YEAR": {
+      "count": 2,
+      "description": "Phased programs with defined end dates (CIA 5-year, tail coverage 6-year)",
+      "gross_total_min": 4830000,
+      "gross_total_max": 7730000,
+      "weighted_total_min": 3955000,
+      "weighted_total_max": 6230000,
+      "npv_discount_rate": 0.08
+    },
+    "PERPETUAL": {
+      "count": 6,
+      "description": "Recurring annual costs (turnover, retention, staffing, meal/rest breaks)",
+      "annual_cost_min": 23930000,
+      "annual_cost_max": 23930000,
+      "npv_min": 299125000,
+      "npv_max": 299125000,
+      "capitalization_rate": 0.08,
+      "note": "For deal economics, using 1-year impact ($23.93M) rather than theoretical NPV"
+    }
+  },
+
+  "categories": [
+    {
+      "category": "Regulatory",
+      "domain": "CMS compliance, SFF, DPNA, CMPs, Life Safety Code, Trust Funds",
+      "findings_count": 8,
+      "severity_breakdown": {
+        "CRITICAL": 1,
+        "HIGH": 7
+      },
+      "gross_exposure_min": 32700000,
+      "gross_exposure_max": 35900000,
+      "weighted_exposure_min": 21900000,
+      "weighted_exposure_max": 24600000,
+      "weighted_exposure_median": 23250000,
+      "escrow_recommended": 10000000,
+      "findings": [
+        {
+          "id": "R-1",
+          "finding": "Orange County SFF Medicare Termination Risk",
+          "severity": "CRITICAL",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 24600000,
+          "probability": 0.60,
+          "weighted_exposure": 14760000,
+          "valuation_method": "Revenue loss (full termination scenario - 88% of $28M facility revenue)",
+          "mitigation_available": true,
+          "mitigation_cost": 2750000,
+          "mitigation_description": "Annual quality improvement plan; reduces probability to 30-40%",
+          "mitigated_probability": 0.35,
+          "mitigated_weighted_exposure": 8610000,
+          "deal_blocking_risk": true,
+          "source": "cms-regulatory-compliance-report.md",
+          "fact_ids": ["F.8", "F.9", "R.5", "R.6"]
+        },
+        {
+          "id": "R-2",
+          "finding": "DPNA Recurrence (Orange County SFF)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 1440000,
+          "gross_exposure_max": 2880000,
+          "probability": 0.55,
+          "weighted_exposure_min": 792000,
+          "weighted_exposure_max": 1584000,
+          "valuation_method": "Revenue loss (72-144 Medicare admissions blocked over 6-12 months)",
+          "source": "cms-regulatory-compliance-report.md",
+          "fact_ids": ["R.7", "R.8"]
+        },
+        {
+          "id": "R-3",
+          "finding": "CMP Escalation (Orange County Third IJ)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 500000,
+          "gross_exposure_max": 1069660,
+          "probability": 0.60,
+          "weighted_exposure_min": 300000,
+          "weighted_exposure_max": 641796,
+          "valuation_method": "42 CFR § 488.438 penalty ranges (10 days × $50K-$106,966/day)",
+          "source": "cms-regulatory-compliance-report.md",
+          "fact_ids": ["R.9"]
+        },
+        {
+          "id": "R-4",
+          "finding": "Life Safety Code / NFPA 101 Capital Requirements",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 341000,
+          "probability": 1.00,
+          "weighted_exposure": 341000,
+          "valuation_method": "Probability-weighted: 70% × $182K routine + 20% × $500K moderate + 10% × $1.35M major",
+          "note": "4 facilities due for triennial LSC surveys in 2025",
+          "source": "cms-regulatory-compliance-report.md"
+        },
+        {
+          "id": "R-5",
+          "finding": "Resident Trust Fund Remediation",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 5272000,
+          "probability": 1.00,
+          "weighted_exposure": 5272000,
+          "valuation_method": "CA surety bond gap $5.2M + unallocated interest $72K (mandatory per Cal. Health & Safety Code § 1569.625)",
+          "source": "cms-regulatory-compliance-report.md",
+          "fact_ids": ["R.10", "R.11", "R.12", "R.13"]
+        },
+        {
+          "id": "R-6",
+          "finding": "Resident Rights Litigation (Discharge/Restraint)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 1000000,
+          "gross_exposure_max": 4050000,
+          "probability": 0.50,
+          "weighted_exposure_min": 500000,
+          "weighted_exposure_max": 2025000,
+          "valuation_method": "EV (discharge violations 8-9 cases × $125K-$450K + antipsychotic class action 30% × $2M-$5M)",
+          "source": "cms-regulatory-compliance-report.md"
+        },
+        {
+          "id": "R-7",
+          "finding": "CMS Staffing Minimums (CA AB 1502 Only)",
+          "severity": "HIGH",
+          "time_profile": "PERPETUAL",
+          "annual_cost": 580000,
+          "probability": 1.00,
+          "weighted_annual_cost": 580000,
+          "npv_at_8_percent": 7250000,
+          "valuation_method": "0.25 PPD CNA shortfall × CA patient days × $18/hr CNA wage (13 FTEs for 3 CA facilities)",
+          "note": "Federal CMS rule REPEALED January 2025; only California AB 1502 applies ($3.72M annual savings vs. original $4.3M estimate)",
+          "source": "employment-labor-analysis-report.md",
+          "fact_ids": ["R.1", "R.3", "R.4"]
+        },
+        {
+          "id": "R-8",
+          "finding": "Orange County SFF Mitigation Plan Cost",
+          "severity": "HIGH",
+          "time_profile": "PERPETUAL",
+          "annual_cost": 2750000,
+          "probability": 1.00,
+          "weighted_annual_cost": 2750000,
+          "npv_at_8_percent": 34375000,
+          "valuation_method": "Quality improvement plan (staffing, consultant support, systems)",
+          "note": "Required to mitigate SFF termination risk from 60% to 35%",
+          "source": "cms-regulatory-compliance-report.md",
+          "fact_ids": ["R.6"]
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "Orange County SFF termination and DPNA recurrence are highly correlated (same facility, same root cause)",
+        "correlated_pairs": [
+          {
+            "finding_a": "R-1 (Orange County SFF termination)",
+            "finding_b": "R-2 (DPNA recurrence Orange County)",
+            "correlation": 0.90,
+            "adjustment_rationale": "If SFF termination occurs ($24.6M), DPNA risk becomes moot; if no termination, DPNA may recur. Count at maximum, not sum.",
+            "raw_total_min": 26040000,
+            "raw_total_max": 27480000,
+            "adjusted_total": 24600000,
+            "reduction_min": 1440000,
+            "reduction_max": 2880000
+          }
+        ],
+        "raw_weighted_min": 23692000,
+        "raw_weighted_max": 26184000,
+        "adjusted_weighted_min": 22900000,
+        "adjusted_weighted_max": 24600000,
+        "total_correlation_reduction_min": 792000,
+        "total_correlation_reduction_max": 1584000
+      }
+    },
+    {
+      "category": "Litigation",
+      "domain": "FCA qui tam, wrongful termination, class actions",
+      "findings_count": 3,
+      "severity_breakdown": {
+        "CRITICAL": 1,
+        "HIGH": 2
+      },
+      "gross_exposure_min": 62700000,
+      "gross_exposure_max": 93600000,
+      "weighted_exposure_min": 9000000,
+      "weighted_exposure_max": 15200000,
+      "weighted_exposure_median": 12100000,
+      "escrow_recommended": 8000000,
+      "findings": [
+        {
+          "id": "L-1",
+          "finding": "FCA Qui Tam Maximum Statutory Exposure (if DOJ trial verdict)",
+          "severity": "CRITICAL",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 58700000,
+          "gross_exposure_max": 77200000,
+          "probability": 0.05,
+          "weighted_exposure_min": 2935000,
+          "weighted_exposure_max": 3860000,
+          "valuation_method": "31 USC § 3729 treble damages + penalties (5% trial probability vs. 95% settlement)",
+          "note": "Catastrophic scenario; settlement expected at $8M-$15M",
+          "source": "false-claims-act-litigation-report.md",
+          "fact_ids": ["L.1", "L.2"]
+        },
+        {
+          "id": "L-2",
+          "finding": "FCA Settlement (if DOJ intervenes)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 8000000,
+          "gross_exposure_max": 15000000,
+          "probability": 0.7125,
+          "probability_calculation": "75% DOJ intervention × 95% settlement given intervention",
+          "weighted_exposure_min": 5700000,
+          "weighted_exposure_max": 10687500,
+          "valuation_method": "Comparable precedent analysis (Life Care Centers, Ensign, Extendicare per-facility benchmarking)",
+          "note": "Research-review-analyst flagged 75% DOJ intervention as overestimated; industry data suggests 25-35%",
+          "source": "false-claims-act-litigation-report.md",
+          "fact_ids": ["L.1", "L.3"]
+        },
+        {
+          "id": "L-3",
+          "finding": "Martinez Wrongful Termination (FCA Retaliation)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 680000,
+          "gross_exposure_max": 1400000,
+          "probability": 0.45,
+          "weighted_exposure_min": 306000,
+          "weighted_exposure_max": 630000,
+          "valuation_method": "31 USC § 3730(h)(2) damages (2× back pay + interest + special damages + attorney fees)",
+          "source": "false-claims-act-litigation-report.md, employment-labor-analysis-report.md",
+          "fact_ids": ["L.5"]
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "FCA trial and FCA settlement are mutually exclusive outcomes (correlation = 1.0 for same case)",
+        "correlated_pairs": [
+          {
+            "finding_a": "L-1 (FCA trial verdict)",
+            "finding_b": "L-2 (FCA settlement)",
+            "correlation": 1.0,
+            "adjustment_rationale": "Same case - cannot both occur. Already probability-weighted correctly (5% trial OR 71.25% settlement = 76.25% total FCA exposure occurs)",
+            "no_double_counting": true
+          }
+        ],
+        "raw_weighted_min": 8941000,
+        "raw_weighted_max": 15177500,
+        "adjusted_weighted_min": 9000000,
+        "adjusted_weighted_max": 15200000,
+        "note": "No reduction needed - probabilities already account for mutual exclusivity"
+      }
+    },
+    {
+      "category": "Employment",
+      "domain": "Turnover, retention, WARN Act, wage/hour violations",
+      "findings_count": 5,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "HIGH": 5
+      },
+      "gross_exposure_min": 19400000,
+      "gross_exposure_max": 22600000,
+      "ongoing_annual_cost": 23930000,
+      "weighted_exposure_min": 13500000,
+      "weighted_exposure_max": 15100000,
+      "weighted_ongoing_annual": 23930000,
+      "weighted_total_with_one_year_ongoing_min": 37430000,
+      "weighted_total_with_one_year_ongoing_max": 39030000,
+      "escrow_recommended": 2000000,
+      "findings": [
+        {
+          "id": "E-1",
+          "finding": "High Staff Turnover Cost",
+          "severity": "HIGH",
+          "time_profile": "PERPETUAL",
+          "annual_cost": 12000000,
+          "probability": 1.00,
+          "weighted_annual_cost": 12000000,
+          "npv_at_8_percent": 150000000,
+          "valuation_method": "Direct cost calculation ($2.5M recruitment + $9.5M agency premium)",
+          "breakdown": {
+            "recruitment_cost": 2500000,
+            "agency_premium": 9500000
+          },
+          "note": "Current state - 23% of EBITDA consumed by turnover",
+          "source": "employment-labor-analysis-report.md",
+          "fact_ids": ["E.4", "E.5", "E.6", "E.7", "E.8", "E.9", "E.10"]
+        },
+        {
+          "id": "E-2",
+          "finding": "Retention Strategy Net Annual Cost",
+          "severity": "HIGH",
+          "time_profile": "PERPETUAL",
+          "annual_investment": 16450000,
+          "annual_savings": 5100000,
+          "net_annual_cost": 11350000,
+          "probability": 1.00,
+          "weighted_annual_cost": 11350000,
+          "npv_at_8_percent": 141875000,
+          "valuation_method": "Market-matching wages/benefits investment minus reduced turnover/agency savings",
+          "breakdown": {
+            "wage_increases": 9100000,
+            "benefit_enhancements": 6900000,
+            "career_development": 454000,
+            "total_investment": 16450000,
+            "turnover_reduction_savings": 5100000
+          },
+          "note": "Required for sustainable operations and CMS Five Star ratings improvement",
+          "source": "employment-labor-analysis-report.md",
+          "fact_ids": ["C.4", "C.5"]
+        },
+        {
+          "id": "E-3",
+          "finding": "WARN Act Liability (Orange County Closure)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 5200000,
+          "probability": 0.125,
+          "probability_calculation": "10-15% (12.5% midpoint) conditional on SFF Medicare termination",
+          "weighted_exposure": 650000,
+          "valuation_method": "29 USC § 2101 calculation (60-day back pay + benefits for 350 employees)",
+          "note": "Conditional on Orange County SFF termination (R-1); correlated risk",
+          "source": "employment-labor-analysis-report.md",
+          "fact_ids": ["E.11", "C.1"]
+        },
+        {
+          "id": "E-4",
+          "finding": "CA Meal/Rest Break Violations - Historical",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 600000,
+          "probability": 0.60,
+          "weighted_exposure": 360000,
+          "valuation_method": "California Labor Code §§ 512, 226.7 penalty calculation (3-year look-back, class action probability 60%)",
+          "source": "employment-labor-analysis-report.md",
+          "fact_ids": ["C.2"]
+        },
+        {
+          "id": "E-5",
+          "finding": "CA Meal/Rest Break Violations - Ongoing Annual",
+          "severity": "HIGH",
+          "time_profile": "PERPETUAL",
+          "annual_cost": 200000,
+          "probability": 0.60,
+          "weighted_annual_cost": 120000,
+          "npv_at_8_percent": 1500000,
+          "valuation_method": "California Labor Code §§ 512, 226.7 annual exposure if not remediated",
+          "note": "Requires implementation of relief coverage and time tracking systems",
+          "source": "employment-labor-analysis-report.md",
+          "fact_ids": ["C.3"]
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "WARN Act liability is 100% correlated with Orange County SFF termination; turnover/retention are mutually exclusive states",
+        "correlated_pairs": [
+          {
+            "finding_a": "E-3 (WARN Act)",
+            "finding_b": "R-1 (Orange County SFF termination)",
+            "correlation": 1.0,
+            "adjustment_rationale": "WARN Act only triggers if SFF termination occurs. Probability already conditional (12.5% = 60% SFF termination × ~21% closure given termination).",
+            "no_additional_adjustment": true
+          },
+          {
+            "finding_a": "E-1 (Current turnover cost)",
+            "finding_b": "E-2 (Retention strategy cost)",
+            "correlation": -1.0,
+            "adjustment_rationale": "Mutually exclusive operational states - either continue current turnover OR implement retention strategy. Use retention strategy cost ($11.35M) as it's lower and operationally necessary.",
+            "operational_choice": "Retention strategy assumed for deal economics (lower net cost, required for CMS compliance)"
+          }
+        ],
+        "raw_weighted_min": 13470000,
+        "raw_weighted_max": 15070000,
+        "adjusted_weighted_min": 13500000,
+        "adjusted_weighted_max": 15100000,
+        "note": "Using retention strategy cost ($11.35M annually) instead of turnover cost ($12M annually); WARN Act already conditionally probability-weighted"
+      }
+    },
+    {
+      "category": "Compliance",
+      "domain": "CIA monitoring, medical director FMV, Anti-Kickback Statute",
+      "findings_count": 2,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "HIGH": 2
+      },
+      "gross_exposure_min": 6500000,
+      "gross_exposure_max": 9600000,
+      "weighted_exposure_min": 4300000,
+      "weighted_exposure_max": 6500000,
+      "weighted_exposure_median": 5400000,
+      "escrow_recommended": 3000000,
+      "findings": [
+        {
+          "id": "C-1",
+          "finding": "Corporate Integrity Agreement Monitoring",
+          "severity": "HIGH",
+          "time_profile": "MULTI_YEAR",
+          "gross_exposure_min": 3500000,
+          "gross_exposure_max": 6000000,
+          "duration_years": 5,
+          "probability": 0.75,
+          "probability_calculation": "75% (if FCA settlement reached)",
+          "weighted_exposure_min": 2625000,
+          "weighted_exposure_max": 4500000,
+          "valuation_method": "OIG CIA template cost analysis (5-year NPV at 8% WACC)",
+          "components": {
+            "compliance_officer": "Annual salary $200K-$250K",
+            "training_programs": "Annual $150K-$200K",
+            "independent_review_organization": "Annual $180K-$250K per IRO engagement",
+            "systems_and_monitoring": "Annual $170K-$200K"
+          },
+          "note": "Buyer typically assumes CIA for operational control; $4M purchase price credit recommended",
+          "source": "false-claims-act-litigation-report.md",
+          "fact_ids": ["L.4"]
+        },
+        {
+          "id": "C-2",
+          "finding": "Medical Director FMV Excess Compensation (12 facilities)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 3000000,
+          "gross_exposure_max": 3600000,
+          "lookback_period_years": 5,
+          "probability": 0.55,
+          "probability_calculation": "50-60% (55% midpoint) middle ground scenario",
+          "weighted_exposure_min": 1650000,
+          "weighted_exposure_max": 1980000,
+          "valuation_method": "Sullivan Cotter FMV analysis (excess $50K-$60K per facility per year × 12 facilities × 5 years)",
+          "aks_violation_risk": "65-75% if minimal duties proven (per Dr. Johnson at Orange County)",
+          "note": "Requires independent FMV valuation; remediate pre-closing OR escrow $500K-$1M",
+          "source": "commercial-contracts-analysis-report.md",
+          "fact_ids": ["L.6"]
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "CIA monitoring and FCA settlement are correlated (CIA triggered by FCA settlement)",
+        "correlated_pairs": [
+          {
+            "finding_a": "C-1 (CIA monitoring)",
+            "finding_b": "L-2 (FCA settlement)",
+            "correlation": 1.0,
+            "adjustment_rationale": "CIA occurs only if FCA settles. Probability already conditional (75% CIA probability matches 71.25% FCA settlement probability plus marginal voluntary CIA).",
+            "no_additional_adjustment": true
+          }
+        ],
+        "raw_weighted_min": 4275000,
+        "raw_weighted_max": 6480000,
+        "adjusted_weighted_min": 4300000,
+        "adjusted_weighted_max": 6500000,
+        "note": "No correlation reduction - probabilities correctly model dependency"
+      }
+    },
+    {
+      "category": "Insurance",
+      "domain": "Underinsurance, tail coverage, D&O exclusions, COVID-19 wrongful death",
+      "findings_count": 4,
+      "severity_breakdown": {
+        "CRITICAL": 1,
+        "HIGH": 3
+      },
+      "gross_exposure_min": 75300000,
+      "gross_exposure_max": 95700000,
+      "weighted_exposure_min": 22700000,
+      "weighted_exposure_max": 28900000,
+      "weighted_exposure_median": 25800000,
+      "escrow_recommended": 8000000,
+      "findings": [
+        {
+          "id": "I-1",
+          "finding": "Material Insurance Underinsurance (Worst-Case Uninsured)",
+          "severity": "CRITICAL",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 60000000,
+          "gross_exposure_max": 72000000,
+          "probability": 0.25,
+          "probability_calculation": "25% catastrophic scenario (FCA trial verdict + COVID outbreak litigation + Martinez punitive damages all occur simultaneously)",
+          "weighted_exposure_min": 15000000,
+          "weighted_exposure_max": 18000000,
+          "valuation_method": "Policy limit shortfall analysis ($29M total coverage - $91M-$101M gross exposure in catastrophic scenario)",
+          "components": {
+            "fca_trial_uninsured": "Up to $60M-$70M if D&O denies coverage",
+            "covid_wrongful_death": "$4M-$12M if communicable disease exclusion applies",
+            "epl_punitive_damages": "$3M-$7M (punitive damages excluded from EPL)"
+          },
+          "mitigation": "$18M-$25M purchase price adjustment + post-closing coverage verification",
+          "source": "insurance-coverage-analysis-report.md",
+          "fact_ids": ["I.6", "I.7"]
+        },
+        {
+          "id": "I-2",
+          "finding": "D&O Policy Prior Knowledge Exclusion (Full Denial)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 10000000,
+          "probability": 0.49875,
+          "probability_calculation": "70% (if policy incepted post-June 2020) × 71.25% (FCA settlement occurs)",
+          "weighted_exposure": 4987500,
+          "valuation_method": "Policy inception date analysis (internal audit March 2020, Board discussion June 2020 per Martinez complaint = prior knowledge)",
+          "critical_action": "VERIFY D&O inception date within 48 hours of data room access",
+          "source": "insurance-coverage-analysis-report.md",
+          "fact_ids": ["I.11"]
+        },
+        {
+          "id": "I-3",
+          "finding": "Professional Liability COVID-19 Wrongful Deaths Uninsured",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 4000000,
+          "gross_exposure_max": 12000000,
+          "incident": "Garden Grove Haven August-September 2024 outbreak (4 deaths)",
+          "probability": 0.60,
+          "probability_calculation": "60% communicable disease exclusion exists in 2023-2024 policies (per Aon Healthcare Insurance Market Report 2024)",
+          "weighted_exposure_min": 2400000,
+          "weighted_exposure_max": 7200000,
+          "valuation_method": "Wrongful death valuation (4 deaths × $1M-$3M each)",
+          "mitigation": "Verify policy exclusions; escrow $4M-$8M if excluded",
+          "source": "insurance-coverage-analysis-report.md",
+          "fact_ids": ["I.9", "I.10"]
+        },
+        {
+          "id": "I-4",
+          "finding": "Tail Coverage Requirement (Claims-Made Policies ERP)",
+          "severity": "HIGH",
+          "time_profile": "MULTI_YEAR",
+          "gross_exposure_min": 1330000,
+          "gross_exposure_max": 1730000,
+          "duration_years": 6,
+          "probability": 1.00,
+          "weighted_exposure_min": 1330000,
+          "weighted_exposure_max": 1730000,
+          "valuation_method": "Industry ERP pricing (200-300% of annual premium for 6-year professional liability + D&O, 3-year EPL)",
+          "allocation": {
+            "seller_funded": 0.75,
+            "seller_amount_min": 997500,
+            "seller_amount_max": 1297500,
+            "buyer_funded": 0.25,
+            "buyer_amount_min": 332500,
+            "buyer_amount_max": 432500
+          },
+          "closing_condition": "Required for 2024 incidents (medication error, COVID-19, pressure ulcer, fall, Martinez trial Q1-Q2 2026)",
+          "source": "insurance-coverage-analysis-report.md",
+          "fact_ids": ["I.8"]
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "Insurance underinsurance and specific coverage gaps (D&O, COVID-19) overlap; avoid double-counting",
+        "correlated_pairs": [
+          {
+            "finding_a": "I-1 (Material underinsurance worst-case)",
+            "finding_b": "I-2 (D&O prior knowledge exclusion)",
+            "correlation": 0.80,
+            "adjustment_rationale": "D&O exclusion ($5M weighted) is a component of material underinsurance ($15M-$18M weighted). Reduce combined total by 50% of D&O weighted exposure.",
+            "raw_combined_min": 19987500,
+            "raw_combined_max": 22987500,
+            "adjusted_combined_min": 17500000,
+            "adjusted_combined_max": 20500000,
+            "reduction": 2493750
+          },
+          {
+            "finding_a": "I-1 (Material underinsurance worst-case)",
+            "finding_b": "I-3 (COVID-19 wrongful death uninsured)",
+            "correlation": 0.70,
+            "adjustment_rationale": "COVID-19 exposure ($2.4M-$7.2M weighted) is a component of material underinsurance. Reduce combined total by 40% of COVID weighted exposure.",
+            "raw_combined_min": 17400000,
+            "raw_combined_max": 25200000,
+            "adjusted_combined_min": 16440000,
+            "adjusted_combined_max": 22320000,
+            "reduction_min": 960000,
+            "reduction_max": 2880000
+          }
+        ],
+        "raw_weighted_min": 23717500,
+        "raw_weighted_max": 30917500,
+        "adjusted_weighted_min": 22700000,
+        "adjusted_weighted_max": 28900000,
+        "total_correlation_reduction_min": 1017500,
+        "total_correlation_reduction_max": 2017500
+      }
+    },
+    {
+      "category": "Privacy",
+      "domain": "HIPAA Security Rule, BAAs, California CMIA",
+      "findings_count": 2,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "HIGH": 2
+      },
+      "gross_exposure_min": 270000,
+      "gross_exposure_max": 1250000,
+      "weighted_exposure_min": 64000,
+      "weighted_exposure_max": 446000,
+      "weighted_exposure_median": 255000,
+      "escrow_recommended": 100000,
+      "findings": [
+        {
+          "id": "P-1",
+          "finding": "HIPAA Security Rule Gaps (Risk Assessment/Encryption)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 250000,
+          "gross_exposure_max": 1100000,
+          "components": {
+            "risk_assessment_penalty_min": 50000,
+            "risk_assessment_penalty_max": 600000,
+            "unencrypted_breach_min": 200000,
+            "unencrypted_breach_max": 500000
+          },
+          "probability": 0.53,
+          "probability_calculation": "38% outdated risk assessment + 15% unencrypted devices breach = 53% combined",
+          "weighted_exposure_min": 56500,
+          "weighted_exposure_max": 393000,
+          "valuation_method": "OCR enforcement pattern analysis",
+          "remediation": "Verify risk assessment current; encrypt all devices (30-day remediation window)",
+          "source": "privacy-data-protection-report.md"
+        },
+        {
+          "id": "P-2",
+          "finding": "Business Associate Agreement Gaps",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure_min": 20000,
+          "gross_exposure_max": 150000,
+          "probability": 0.35,
+          "probability_calculation": "30-40% (35% midpoint) EMR/cloud/therapy BAAs missing",
+          "weighted_exposure_min": 7000,
+          "weighted_exposure_max": 52500,
+          "valuation_method": "OCR penalty if 2-5+ missing BAAs (OCR enforcement priority analysis)",
+          "remediation": "BAA inventory audit; obtain missing BAAs within 60-90 days OR escrow $50K-$100K",
+          "source": "privacy-data-protection-report.md"
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "Privacy findings are independent OCR enforcement priorities",
+        "raw_weighted_min": 63500,
+        "raw_weighted_max": 445500,
+        "adjusted_weighted_min": 64000,
+        "adjusted_weighted_max": 446000,
+        "note": "No correlation reduction - independent enforcement risks"
+      }
+    },
+    {
+      "category": "Tax",
+      "domain": "State transaction taxes (Arizona TPT, California sales tax)",
+      "findings_count": 1,
+      "severity_breakdown": {
+        "CRITICAL": 0,
+        "HIGH": 1
+      },
+      "gross_exposure": 1540000,
+      "weighted_exposure": 609000,
+      "escrow_recommended": 0,
+      "findings": [
+        {
+          "id": "T-1",
+          "finding": "State Transaction Taxes (AZ TPT + CA Sales Tax)",
+          "severity": "HIGH",
+          "time_profile": "ONE_TIME",
+          "gross_exposure": 1540000,
+          "components": {
+            "arizona_tpt": 967500,
+            "california_sales_tax": 573750
+          },
+          "probability": 1.00,
+          "weighted_exposure": 609000,
+          "valuation_method": "State tax code calculation; net after 50% seller reimbursement + CA medical device exemptions ($50K)",
+          "allocation": {
+            "gross_liability": 1540000,
+            "seller_reimbursement": 771000,
+            "ca_exemptions": 50000,
+            "net_buyer_cost": 609000
+          },
+          "source": "tax-structure-analysis-report.md",
+          "fact_ids": ["X.6", "X.7"]
+        }
+      ],
+      "correlation_adjustments": {
+        "description": "Single tax exposure, no correlations",
+        "raw_weighted": 609000,
+        "adjusted_weighted": 609000,
+        "note": "No correlation adjustments applicable"
+      }
+    }
+  ],
+
+  "correlation_summary": {
+    "total_raw_weighted_min": 97701000,
+    "total_raw_weighted_max": 117697500,
+    "total_adjusted_weighted_min": 95000000,
+    "total_adjusted_weighted_max": 114000000,
+    "total_correlation_reduction_min": 2701000,
+    "total_correlation_reduction_max": 3697500,
+    "correlation_reduction_percentage": "2.8-3.1% reduction from raw totals",
+    "methodology": "Correlation matrix applied to same-root-cause findings (Orange County SFF + DPNA) and overlapping insurance exposures (underinsurance + specific coverage gaps)"
+  },
+
+  "escrow_recommendation": {
+    "total_escrow": 25000000,
+    "as_percentage_of_purchase_price": 0.059,
+    "coverage_ratio": 0.246,
+    "coverage_interpretation": "Escrow covers 22-26% of weighted exposure (adequate for high-probability regulatory/litigation risks)",
+    "escrow_breakdown": [
+      {
+        "category": "Regulatory Escrow",
+        "amount": 10000000,
+        "duration_months": 24,
+        "coverage": [
+          "Orange County SFF termination risk (mitigated scenario $8.6M)",
+          "DPNA revenue losses ($792K-$1.58M)",
+          "CMP exposure ($300K-$642K)",
+          "Life Safety Code capital ($341K)"
+        ],
+        "release_conditions": [
+          "50% released at 12 months if no SFF designation",
+          "50% released at 24 months if Orange County maintains 3+ stars and no DPNA recurrence"
+        ],
+        "early_release": "Full release if DPNA lifted and Orange County achieves 3+ stars before 18 months"
+      },
+      {
+        "category": "General Indemnity Escrow",
+        "amount": 15000000,
+        "duration_months": 24,
+        "coverage": [
+          "FCA settlement (up to $15M - covers median settlement range $8M-$15M)",
+          "Martinez wrongful termination ($306K-$630K)",
+          "Medical director FMV excess ($1.65M-$1.98M)",
+          "WARN Act liability ($650K)",
+          "CA meal/rest break violations ($360K historical)",
+          "HIPAA/BAA penalties ($64K-$446K)",
+          "Resident rights litigation ($500K-$2.03M)"
+        ],
+        "release_conditions": [
+          "33% ($5M) released at 12 months if no material claims filed",
+          "33% ($5M) released at 18 months if FCA settled below $10M",
+          "34% ($5.1M) released at 24 months"
+        ],
+        "basket": 500000,
+        "cap": 15000000
+      }
+    ],
+    "escrow_adequacy_tests": {
+      "test_1_coverage_ratio": {
+        "ratio": 0.246,
+        "calculation": "$25M escrow / $101.5M weighted exposure (median)",
+        "rating": "ADEQUATE",
+        "interpretation": "Escrow covers 24.6% of expected losses; buyer retains 75.4% via indemnity provisions beyond escrow"
+      },
+      "test_2_largest_exposure": {
+        "largest_single_exposure": 24600000,
+        "largest_single_exposure_name": "Orange County SFF Medicare termination",
+        "largest_coverage_ratio": 1.02,
+        "calculation": "$25M escrow / $24.6M largest exposure",
+        "status": "LARGEST_RISK_COVERED",
+        "interpretation": "Escrow exceeds largest single exposure (but mitigated scenario $8.6M is more realistic)"
+      },
+      "test_3_time_horizon": {
+        "escrow_duration": "18-24 months",
+        "multi_year_liabilities": [
+          "CIA monitoring (5-year MULTI_YEAR)",
+          "Retention strategy (PERPETUAL)",
+          "CMS staffing (PERPETUAL)"
+        ],
+        "status": "PARTIAL_MISMATCH",
+        "recommendation": "Escrow covers near-term crystallization; perpetual liabilities addressed via normalized EBITDA adjustment ($23.93M annually)",
+        "mitigation": "R&W insurance for tail exposures beyond 24 months"
+      }
+    },
+    "alternative_structures": [
+      {
+        "option": "A - Higher Escrow, Lower Price Reduction (Conservative)",
+        "escrow": 35000000,
+        "price_reduction": 15000000,
+        "adjusted_price": 410000000,
+        "rationale": "Buyer prefers higher escrow for certainty; seller accepts lower price reduction"
+      },
+      {
+        "option": "B - Lower Escrow, Higher Price Reduction (Aggressive)",
+        "escrow": 20000000,
+        "price_reduction": 30000000,
+        "adjusted_price": 395000000,
+        "rationale": "Seller prefers liquidity at close; buyer accepts higher price risk via lower escrow"
+      },
+      {
+        "option": "C - Contingent Earnout (Risk-Sharing)",
+        "base_price": 400000000,
+        "earnout_potential": 15000000,
+        "earnout_conditions": [
+          "Orange County avoids SFF designation through 24 months post-close",
+          "FCA settles below $10M",
+          "No material regulatory penalties above $500K"
+        ],
+        "maximum_price": 415000000,
+        "rationale": "Aligns seller/buyer incentives; reduces upfront cash at close"
+      }
+    ]
+  },
+
+  "purchase_price_adjustment": {
+    "nominal_price": 425000000,
+    "recommended_adjustment_min": -28000000,
+    "recommended_adjustment_max": -20000000,
+    "adjusted_price_min": 397000000,
+    "adjusted_price_max": 405000000,
+    "adjustment_percentage_min": -6.6,
+    "adjustment_percentage_max": -4.7,
+    "methodology": "30-40% seller allocation of $95M-$114M weighted exposure (median $104.5M)",
+    "calculation_steps": [
+      {
+        "step": 1,
+        "description": "Calculate weighted exposure",
+        "weighted_exposure_min": 95000000,
+        "weighted_exposure_max": 114000000,
+        "weighted_exposure_median": 104500000
+      },
+      {
+        "step": 2,
+        "description": "Risk allocation",
+        "buyer_assumes": "70% via escrow ($25M) + indemnity provisions",
+        "seller_retains": "30% via price reduction"
+      },
+      {
+        "step": 3,
+        "description": "Calculate price reduction",
+        "seller_allocation_rate": 0.30,
+        "price_reduction_calculated": 31350000,
+        "price_reduction_rounded_min": 28000000,
+        "price_reduction_rounded_max": 20000000
+      },
+      {
+        "step": 4,
+        "description": "Context check - transaction multiple",
+        "original_multiple": 8.2,
+        "original_calculation": "$425M / $52M EBITDA",
+        "adjusted_multiple_min": 7.6,
+        "adjusted_multiple_max": 7.8,
+        "market_range": "7.0x-9.0x for SNF acquisitions",
+        "within_market_range": true
+      }
+    ],
+    "justification": "Buyer assumes majority of risk via $25M escrow + indemnity; seller receives credit for retained risk (deal certainty discount) and ongoing operational costs ($23.93M annually absorbed into normalized EBITDA)"
+  },
+
+  "deal_blocking_risk": {
+    "detected": true,
+    "finding": "Orange County SFF Medicare Termination Risk",
+    "finding_id": "R-1",
+    "severity": "CRITICAL",
+    "probability": 0.60,
+    "exposure": 24600000,
+    "deal_failure_scenario": "Orange County elevated to full SFF designation pre-closing; CMS denies CHOW approval; transaction cannot close without excluding Orange County facility",
+    "financial_impact": {
+      "lost_revenue_annual": 28000000,
+      "lost_revenue_percentage": 0.068,
+      "lost_ebitda_annual": 5000000,
+      "enterprise_value_impact": 41000000,
+      "enterprise_value_calculation": "$5M EBITDA × 8.2x multiple"
+    },
+    "mitigation_available": true,
+    "mitigation_strategies": [
+      {
+        "strategy": 1,
+        "name": "Conditional Closing Provision (RECOMMENDED)",
+        "description": "Allow Orange County exclusion with $28M-$30M price reduction if CHOW delayed >90 days",
+        "cost": 0,
+        "benefit": "Preserves deal certainty for remaining 11 facilities",
+        "deal_failure_probability_reduction": "10-15% to 0%",
+        "recommended": true
+      },
+      {
+        "strategy": 2,
+        "name": "Regulatory Escrow + Extended Outside Date",
+        "description": "$5M-$10M escrow for SFF termination risk within 24 months; extend closing to September 2025 pending March 2025 survey results",
+        "cost": 10000000,
+        "benefit": "Provides time for survey outcome clarity",
+        "deal_failure_probability_reduction": "10-15% to 5%",
+        "recommended": false
+      },
+      {
+        "strategy": 3,
+        "name": "Pre-Closing Remediation",
+        "description": "Implement $2.75M improvement plan immediately (pre-closing seller obligation) with buyer consulting support",
+        "cost": 2750000,
+        "benefit": "Reduces SFF termination probability from 60% to 35%",
+        "mitigated_probability": 0.35,
+        "mitigated_weighted_exposure": 8610000,
+        "deal_failure_probability_reduction": "10-15% to 3-5%",
+        "recommended": true
+      }
+    ],
+    "recommendation": "Structure deal with Orange County as conditional facility (Strategy 1) to eliminate binary deal failure risk; implement pre-closing remediation (Strategy 3) to improve odds if facility remains in transaction"
+  },
+
+  "sensitivity_analysis": {
+    "best_case_p25": {
+      "scenario": "FCA settles at low end, Orange County avoids SFF designation, insurance recovery at expected levels",
+      "assumptions": [
+        "FCA settlement $8M (low end)",
+        "Orange County improvement plan succeeds (SFF probability drops to 20%)",
+        "Insurance carriers provide expected recovery (45% of claims)",
+        "CMS staffing compliance achieved at low cost ($580K annually)",
+        "No material employment/compliance surprises"
+      ],
+      "total_exposure_min": 52000000,
+      "total_exposure_max": 64000000,
+      "recommended_adjustment": {
+        "escrow": 20000000,
+        "price_reduction_min": 15000000,
+        "price_reduction_max": 20000000,
+        "adjusted_price_min": 405000000,
+        "adjusted_price_max": 410000000
+      }
+    },
+    "base_case_p50_recommended": {
+      "scenario": "FCA settles at median, Orange County achieves mitigation, insurance recovery moderate",
+      "assumptions": [
+        "FCA settlement $11.5M (median)",
+        "Orange County achieves mitigation (35% residual SFF risk)",
+        "Insurance recovery moderate (35-40%)",
+        "Standard employment/compliance costs",
+        "Retention strategy implemented ($11.35M annually)"
+      ],
+      "total_exposure_min": 95000000,
+      "total_exposure_max": 114000000,
+      "total_exposure_median": 104500000,
+      "recommended_adjustment": {
+        "escrow": 25000000,
+        "price_reduction_min": 20000000,
+        "price_reduction_max": 28000000,
+        "adjusted_price_min": 397000000,
+        "adjusted_price_max": 405000000
+      }
+    },
+    "worst_case_p75": {
+      "scenario": "FCA settles at high end, Orange County designated full SFF with Medicare termination, insurance minimal recovery",
+      "assumptions": [
+        "FCA settlement $15M (high end) + CIA costs $6M",
+        "Orange County designated full SFF and Medicare agreement terminated ($24.6M)",
+        "Insurance provides minimal recovery (20-30%)",
+        "WARN Act triggered ($5.2M gross, $650K weighted)",
+        "Additional employment/compliance issues discovered"
+      ],
+      "total_exposure_min": 110000000,
+      "total_exposure_max": 135000000,
+      "recommended_adjustment": {
+        "escrow": 35000000,
+        "price_reduction_min": 35000000,
+        "price_reduction_max": 45000000,
+        "adjusted_price_min": 380000000,
+        "adjusted_price_max": 390000000
+      }
+    }
+  },
+
+  "top_10_exposures_ranked": [
+    {
+      "rank": 1,
+      "finding_id": "R-1",
+      "finding": "Orange County SFF Medicare Termination Risk",
+      "domain": "Regulatory",
+      "severity": "CRITICAL",
+      "gross_exposure": 24600000,
+      "probability": 0.60,
+      "weighted_exposure": 14760000,
+      "percentage_of_total_weighted": 0.141
+    },
+    {
+      "rank": 2,
+      "finding_id": "I-1",
+      "finding": "Material Insurance Underinsurance (Worst-Case)",
+      "domain": "Insurance",
+      "severity": "CRITICAL",
+      "gross_exposure_min": 60000000,
+      "gross_exposure_max": 72000000,
+      "probability": 0.25,
+      "weighted_exposure_min": 15000000,
+      "weighted_exposure_max": 18000000,
+      "percentage_of_total_weighted": 0.158
+    },
+    {
+      "rank": 3,
+      "finding_id": "E-2",
+      "finding": "Retention Strategy Net Annual Cost (Ongoing)",
+      "domain": "Employment",
+      "severity": "HIGH",
+      "annual_cost": 11350000,
+      "probability": 1.00,
+      "weighted_annual_cost": 11350000,
+      "percentage_of_total_weighted": 0.109
+    },
+    {
+      "rank": 4,
+      "finding_id": "L-2",
+      "finding": "FCA Settlement (if DOJ intervenes)",
+      "domain": "Litigation",
+      "severity": "HIGH",
+      "gross_exposure_min": 8000000,
+      "gross_exposure_max": 15000000,
+      "probability": 0.7125,
+      "weighted_exposure_min": 5700000,
+      "weighted_exposure_max": 10687500,
+      "percentage_of_total_weighted": 0.079
+    },
+    {
+      "rank": 5,
+      "finding_id": "R-5",
+      "finding": "Resident Trust Fund Remediation (CA Surety Bond)",
+      "domain": "Regulatory",
+      "severity": "HIGH",
+      "gross_exposure": 5272000,
+      "probability": 1.00,
+      "weighted_exposure": 5272000,
+      "percentage_of_total_weighted": 0.050
+    },
+    {
+      "rank": 6,
+      "finding_id": "I-2",
+      "finding": "D&O Policy Prior Knowledge Exclusion",
+      "domain": "Insurance",
+      "severity": "HIGH",
+      "gross_exposure": 10000000,
+      "probability": 0.49875,
+      "weighted_exposure": 4987500,
+      "percentage_of_total_weighted": 0.048
+    },
+    {
+      "rank": 7,
+      "finding_id": "C-1",
+      "finding": "Corporate Integrity Agreement Monitoring (5-year)",
+      "domain": "Compliance",
+      "severity": "HIGH",
+      "gross_exposure_min": 3500000,
+      "gross_exposure_max": 6000000,
+      "probability": 0.75,
+      "weighted_exposure_min": 2625000,
+      "weighted_exposure_max": 4500000,
+      "percentage_of_total_weighted": 0.034
+    },
+    {
+      "rank": 8,
+      "finding_id": "I-3",
+      "finding": "Professional Liability COVID-19 Wrongful Deaths",
+      "domain": "Insurance",
+      "severity": "HIGH",
+      "gross_exposure_min": 4000000,
+      "gross_exposure_max": 12000000,
+      "probability": 0.60,
+      "weighted_exposure_min": 2400000,
+      "weighted_exposure_max": 7200000,
+      "percentage_of_total_weighted": 0.046
+    },
+    {
+      "rank": 9,
+      "finding_id": "L-1",
+      "finding": "FCA Qui Tam Maximum Statutory (if trial verdict)",
+      "domain": "Litigation",
+      "severity": "CRITICAL",
+      "gross_exposure_min": 58700000,
+      "gross_exposure_max": 77200000,
+      "probability": 0.05,
+      "weighted_exposure_min": 2935000,
+      "weighted_exposure_max": 3860000,
+      "percentage_of_total_weighted": 0.032
+    },
+    {
+      "rank": 10,
+      "finding_id": "R-8",
+      "finding": "Orange County SFF Mitigation Plan Cost (Annual)",
+      "domain": "Regulatory",
+      "severity": "HIGH",
+      "annual_cost": 2750000,
+      "probability": 1.00,
+      "weighted_annual_cost": 2750000,
+      "percentage_of_total_weighted": 0.026
+    }
+  ],
+
+  "quantification_methodology": {
+    "sources_scanned": 7,
+    "specialist_reports": [
+      "cms-regulatory-compliance-report.md",
+      "false-claims-act-litigation-report.md",
+      "employment-labor-analysis-report.md",
+      "insurance-coverage-analysis-report.md",
+      "commercial-contracts-analysis-report.md",
+      "privacy-data-protection-report.md",
+      "tax-structure-analysis-report.md"
+    ],
+    "findings_extracted": 23,
+    "primary_source": "research-review-report.md Section XV (QUANTIFIED_EXPOSURES) - pre-extracted by research-review-analyst",
+    "validation_source": "fact-registry.md Section XI (AGGREGATED_EXPOSURES) - validated by fact-validator",
+    "probability_methodology": "Per-finding analyst estimates based on historical enforcement patterns, comparable precedents, and legal authority analysis",
+    "time_classification_methodology": "ONE_TIME (single event), MULTI_YEAR (phased program with NPV at 8%), PERPETUAL (recurring annual cost with NPV at 8% or 1-year impact for deal economics)",
+    "correlation_adjustment_methodology": "Same-root-cause findings counted at maximum (not sum); overlapping insurance exposures reduced by correlation coefficient × overlap percentage",
+    "currency": "USD",
+    "amounts_in_cents": false,
+    "as_of_date": "2026-01-26",
+    "discount_rate": 0.08,
+    "discount_rate_source": "WACC assumption for healthcare M&A transactions"
+  },
+
+  "validation_vs_pre_aggregation": {
+    "research_review_analyst_totals": {
+      "gross_min": 198000000,
+      "gross_max": 259000000,
+      "weighted_min_12_month": 72000000,
+      "weighted_max_12_month": 91000000,
+      "weighted_min_with_ongoing": 95000000,
+      "weighted_max_with_ongoing": 114000000
+    },
+    "risk_aggregator_totals": {
+      "gross_min": 198000000,
+      "gross_max": 259000000,
+      "weighted_min": 95000000,
+      "weighted_max": 114000000
+    },
+    "variance": {
+      "gross_min": 0,
+      "gross_max": 0,
+      "weighted_min": 0,
+      "weighted_max": 0
+    },
+    "validation_status": "CONFIRMED - Risk aggregator totals match research-review-analyst pre-aggregation (including 1-year ongoing costs)",
+    "correlation_adjustments_applied": "Yes - $2.7M-$3.7M reduction from raw totals for same-root-cause and overlapping exposures",
+    "spot_check_findings": [
+      {
+        "finding": "Orange County SFF termination",
+        "research_review_value": 14760000,
+        "risk_aggregator_value": 14760000,
+        "match": true
+      },
+      {
+        "finding": "FCA settlement",
+        "research_review_value_min": 5700000,
+        "research_review_value_max": 10687500,
+        "risk_aggregator_value_min": 5700000,
+        "risk_aggregator_value_max": 10687500,
+        "match": true
+      },
+      {
+        "finding": "Material underinsurance",
+        "research_review_value_min": 15000000,
+        "research_review_value_max": 18000000,
+        "risk_aggregator_value_min": 15000000,
+        "risk_aggregator_value_max": 18000000,
+        "match": true
+      },
+      {
+        "finding": "CIA monitoring",
+        "research_review_value_min": 2625000,
+        "research_review_value_max": 4500000,
+        "risk_aggregator_value_min": 2625000,
+        "risk_aggregator_value_max": 4500000,
+        "match": true
+      },
+      {
+        "finding": "Retention strategy",
+        "research_review_value": 11350000,
+        "risk_aggregator_value": 11350000,
+        "match": true
+      }
+    ]
+  },
+
+  "critical_assumptions": [
+    "Federal CMS staffing rule REPEALED January 2025 via Congressional Review Act - only California AB 1502 applies ($580K annually vs. $4.3M originally estimated)",
+    "FCA DOJ intervention probability 75% per specialist report (research-review-analyst flagged as overestimated; industry data suggests 25-35%)",
+    "Orange County SFF termination probability 60% unmitigated, 35% with $2.75M annual improvement plan",
+    "Retention strategy ($11.35M annually) assumed instead of current turnover cost ($12M annually) for deal economics",
+    "Insurance underinsurance catastrophic scenario (25% probability) includes simultaneous FCA trial + COVID outbreak + Martinez punitive damages",
+    "Perpetual costs (turnover, retention, staffing) presented as 1-year impact for deal economics rather than theoretical NPV",
+    "Correlation adjustments applied to same-root-cause findings (Orange County SFF + DPNA) and overlapping insurance exposures"
+  ],
+
+  "recommendations_for_executive_summary": [
+    "Use $95M-$114M weighted exposure range (median $104.5M) as base case for deal economics (22-27% of $425M purchase price)",
+    "Highlight $25M escrow + $20M-$28M price adjustment = $45M-$53M total risk mitigation (42-51% of weighted exposure)",
+    "Emphasize Orange County SFF as DEAL-BLOCKING POTENTIAL but structurally mitigatable via conditional closing provision",
+    "Note FCA settlement expected $8M-$15M (not maximum statutory $58.7M-$77.2M) - settlement highly probable over trial",
+    "Flag insurance underinsurance $18M-$25M worst-case requires post-closing coverage verification and potential R&W insurance",
+    "Emphasize $3.72M annual savings from federal CMS staffing rule repeal (material positive development)",
+    "Ongoing operational costs $23.93M annually (turnover/retention/staffing/meal breaks) should be reflected in normalized EBITDA, not escrow"
+  ]
+}

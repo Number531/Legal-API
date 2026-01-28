@@ -1,0 +1,53 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "B",
+  "section_name": "Investment Company Act 1940 Compliance",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.B (Investment Company Act 1940) from securities-researcher-report.md",
+    "progress": "All phases complete",
+    "next_action": "None - section delivered",
+    "critical_context": ["section_id=B", "4 mutual funds $12.8B AUM", "Rule 15a-4 assignment analysis complete", "5 findings documented with draft provisions"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_mutual_fund_overview": "complete",
+    "B_board_composition": "complete",
+    "C_section_15c_renewal": "complete",
+    "D_12b1_distribution": "complete",
+    "E_investment_restrictions": "complete",
+    "F_rule_22e4_liquidity": "complete",
+    "G_rule_15a4_assignment": "complete",
+    "H_risk_assessment": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete. No recovery needed.",
+    "do_not_repeat": ["A_mutual_fund_overview", "B_board_composition", "C_section_15c_renewal", "D_12b1_distribution", "E_investment_restrictions", "F_rule_22e4_liquidity", "G_rule_15a4_assignment", "H_risk_assessment"],
+    "do_not_reread_reports": ["securities-researcher-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 9850,
+    "findings_written": "5/5",
+    "footnotes_count": 99,
+    "last_checkpoint": "2026-01-23T02:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/securities-researcher-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "output_file": "section-reports/section-IV-B-investment-company-act.md"
+}

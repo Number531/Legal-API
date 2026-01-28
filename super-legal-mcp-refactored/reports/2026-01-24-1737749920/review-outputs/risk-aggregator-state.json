@@ -1,0 +1,249 @@
+{
+  "agent": "risk-aggregator",
+  "status": "COMPLETE",
+  "compaction_summary": {
+    "task": "Aggregate and classify quantified risk exposures",
+    "progress": "All phases complete - risk-summary.json and risk-summary.md generated",
+    "next_action": "Return completion status to orchestrator",
+    "critical_context": [
+      "15 HIGH severity findings classified and aggregated",
+      "Total gross exposure (one-time): $471.6M-$743.2M",
+      "Total gross exposure (annual): $92.5M-$155.8M/year",
+      "Total weighted exposure (one-time): $487.9M-$535.4M",
+      "Total weighted exposure (annual): $56.8M-$101.4M/year (net: $43.3M-$87.4M after savings)",
+      "Escrow recommendation: $68M staged release",
+      "Purchase price adjustment: $300M-$500M reduction",
+      "No deal-blocking issues identified"
+    ]
+  },
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_time_classification": true,
+    "phase_3_category_aggregation": true,
+    "phase_4_probability_weighting": true,
+    "phase_5_correlation_adjustment": true,
+    "phase_6_recommendations": true,
+    "phase_7_output_files": true,
+    "phase_8_return_status": true
+  },
+  "exposures_classified": {
+    "exposure_1": {
+      "id": "STARK_AKS_ASC",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "regulatory_compliance",
+      "amount": 5000000,
+      "probability": 1.0,
+      "weighted": 5000000
+    },
+    "exposure_2": {
+      "id": "TAX_OPERATING_ANNUAL",
+      "status": "complete",
+      "type": "PERPETUAL",
+      "category": "tax_finance",
+      "amount": 36430000,
+      "probability": 1.0,
+      "weighted": 36430000,
+      "npv": 455375000
+    },
+    "exposure_3": {
+      "id": "BOND_REDEMPTION",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "tax_finance",
+      "amount": 428400000,
+      "probability": 1.0,
+      "weighted": 428400000
+    },
+    "exposure_4": {
+      "id": "PROPERTY_TAX_RECAPTURE",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "tax_finance",
+      "amount": 43200000,
+      "probability": 1.0,
+      "weighted": 43200000
+    },
+    "exposure_5": {
+      "id": "HIPAA_OCR_PENALTY",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "privacy_security",
+      "amount": 5200000,
+      "probability": 0.85,
+      "weighted": 4420000
+    },
+    "exposure_6": {
+      "id": "HIPAA_CLASS_ACTION",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "privacy_security",
+      "amount": 15000000,
+      "probability": 0.65,
+      "weighted": 9750000
+    },
+    "exposure_7": {
+      "id": "WARN_ACT",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "employment_labor",
+      "amount": 5400000,
+      "probability": 0.65,
+      "weighted": 3510000,
+      "note": "AVOIDABLE with proper 60-day notice"
+    },
+    "exposure_8": {
+      "id": "PHYSICIAN_TERMINATIONS",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "employment_labor",
+      "amount": 33000000,
+      "probability": 0.35,
+      "weighted": 11550000
+    },
+    "exposure_9": {
+      "id": "MA_CONTRACT_TERMINATION",
+      "status": "complete",
+      "type": "PERPETUAL",
+      "category": "commercial_contracts_revenue",
+      "amount": 45000000,
+      "probability": 0.25,
+      "weighted": 11250000,
+      "npv": 140625000
+    },
+    "exposure_10": {
+      "id": "COMMERCIAL_RATE_REDUCTION",
+      "status": "complete",
+      "type": "PERPETUAL",
+      "category": "commercial_contracts_revenue",
+      "amount": 43200000,
+      "probability": 0.55,
+      "weighted": 23760000,
+      "npv": 297000000
+    },
+    "exposure_11": {
+      "id": "340B_MANUFACTURER_LOSS",
+      "status": "complete",
+      "type": "PERPETUAL",
+      "category": "commercial_contracts_revenue",
+      "amount": 5000000,
+      "probability": 0.45,
+      "weighted": 2250000,
+      "npv": 28125000
+    },
+    "exposure_12": {
+      "id": "MEDICAID_MCO_REDUCTION",
+      "status": "complete",
+      "type": "PERPETUAL",
+      "category": "commercial_contracts_revenue",
+      "amount": 40000000,
+      "probability": 0.35,
+      "weighted": 14000000,
+      "npv": 175000000
+    },
+    "exposure_13": {
+      "id": "CON_DENIAL",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "regulatory_compliance",
+      "amount": 20000000,
+      "probability": 0.35,
+      "weighted": 7000000,
+      "note": "NPV already calculated"
+    },
+    "exposure_14": {
+      "id": "GME_ACCREDITATION_LOSS",
+      "status": "complete",
+      "type": "PERPETUAL",
+      "category": "regulatory_compliance",
+      "amount": 2500000,
+      "probability": 0.175,
+      "weighted": 437500,
+      "npv": 5468750
+    },
+    "exposure_15": {
+      "id": "JOINT_COMMISSION_DOWNGRADE",
+      "status": "complete",
+      "type": "ONE_TIME",
+      "category": "regulatory_compliance",
+      "amount": 17300000,
+      "probability": 0.075,
+      "weighted": 1297500,
+      "note": "Probability-weighted Medicare revenue loss"
+    }
+  },
+  "aggregations_in_progress": {
+    "regulatory_compliance": {
+      "gross": 44800000,
+      "weighted": 13735000
+    },
+    "tax_finance": {
+      "gross": 517475000,
+      "weighted": 517475000
+    },
+    "privacy_security": {
+      "gross": 20200000,
+      "weighted": 14170000,
+      "correlation_adjusted": 9930000
+    },
+    "employment_labor": {
+      "gross": 38400000,
+      "weighted": 15060000
+    },
+    "commercial_contracts_revenue": {
+      "gross": 133200000,
+      "weighted": 51260000
+    },
+    "commercial_contracts_cost": {
+      "gross": 23000000,
+      "weighted": 19000000
+    },
+    "commercial_contracts_savings": {
+      "gross": -40000000,
+      "weighted": -34000000
+    }
+  },
+  "recovery_instructions": {
+    "on_compaction": "Read risk-aggregator-state.json FIRST. All phases complete - no recovery needed.",
+    "do_not_repeat": [
+      "phase_1",
+      "phase_2",
+      "phase_3",
+      "phase_4",
+      "phase_5",
+      "phase_6",
+      "phase_7"
+    ],
+    "do_not_reclassify_exposures": [
+      "exposure_1",
+      "exposure_2",
+      "exposure_3",
+      "exposure_4",
+      "exposure_5",
+      "exposure_6",
+      "exposure_7",
+      "exposure_8",
+      "exposure_9",
+      "exposure_10",
+      "exposure_11",
+      "exposure_12",
+      "exposure_13",
+      "exposure_14",
+      "exposure_15"
+    ]
+  },
+  "metrics": {
+    "exposures_total": 15,
+    "exposures_classified": 15,
+    "exposures_weighted": 15,
+    "gross_total_one_time": 535400000,
+    "gross_total_annual": 155800000,
+    "probability_weighted_one_time": 487900000,
+    "probability_weighted_annual": 101400000,
+    "probability_weighted_annual_net": 87400000,
+    "escrow_recommendation": 68000000,
+    "purchase_price_adjustment_low": 300000000,
+    "purchase_price_adjustment_high": 500000000,
+    "last_checkpoint": "2026-01-24T00:30:00Z"
+  }
+}

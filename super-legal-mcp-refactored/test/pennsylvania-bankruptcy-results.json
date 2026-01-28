@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-08-15T20:22:03.977Z",
+  "scenario": "Pennsylvania Chemical Manufacturing Bankruptcy",
+  "model": "gpt-5",
+  "summary": {
+    "total": 5,
+    "successful": 4,
+    "failed": 1
+  },
+  "results": [
+    {
+      "test": "Chemical Bankruptcy Search",
+      "status": "failed",
+      "error": "MCP error -32603: MCP error -32603: Error executing search_cases: API request failed: 503 Service Temporarily Unavailable"
+    },
+    {
+      "test": "IP Retention Research",
+      "status": "success",
+      "duration": 291271,
+      "ipCoverage": 5
+    },
+    {
+      "test": "DIP Financing",
+      "status": "success",
+      "duration": 200422,
+      "dipCoverage": 5
+    },
+    {
+      "test": "Comprehensive Research",
+      "status": "success",
+      "duration": 128530,
+      "responseLength": 11134,
+      "sourcesUsed": 6
+    },
+    {
+      "test": "PA Precedents",
+      "status": "success",
+      "duration": 238071,
+      "paReferences": 6
+    }
+  ]
+}

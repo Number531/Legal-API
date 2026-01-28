@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Claude Legal Research — Insight Chat</title>
+<style>
+  :root{
+    --bg:#0a0f14; --panel:#0d141c; --panel2:#0f1723; --chip:#111a27;
+    --text:#e6eef8; --muted:#9eb0c6; --border:rgba(255,255,255,.08);
+    --primary:#67b1ff; --accent:#a48bff; --ok:#34d399; --warn:#f59e0b; --err:#ef4444;
+    --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:
+      radial-gradient(1200px 800px at 70% -10%, #101828 0, transparent 60%),
+      linear-gradient(180deg,#0b0f14,#0a0d12 55%);
+    color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  header{position:sticky;top:0;z-index:10;backdrop-filter:saturate(1.1) blur(8px);
+    background:linear-gradient(180deg,rgba(13,17,23,.9),rgba(13,17,23,.6));border-bottom:1px solid var(--border)}
+  .wrap{max-width:1240px;margin:0 auto;padding:14px 18px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:28px;height:28px;display:grid;place-items:center;border-radius:10px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 6px 16px rgba(91,177,255,.35)}
+  .brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.2px}
+  .sub{font-size:12px;color:var(--muted)}
+  .badge{font-size:11px;padding:4px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--border)}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
+
+  main{max-width:1240px;margin:18px auto;padding:0 18px;display:grid;grid-template-columns:320px 1fr;gap:14px}
+  @media (max-width: 980px){ main{grid-template-columns:1fr} }
+
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border)}
+  .hd h3{margin:0;font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:#cfe1ff}
+  .bd{padding:14px}
+
+  input,textarea,select,button{font:inherit}
+  input[type="text"],textarea,select{
+    width:100%;background:#0b1118;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:10px 12px;outline:none}
+  input:focus,textarea:focus,select:focus{border-color:#2a5fff}
+  textarea{min-height:90px;resize:vertical}
+
+  .row{display:flex;gap:10px;align-items:center}
+  .row.stretch>*{flex:1}
+  button{appearance:none;border:none;background:#162135;color:#deebff;padding:10px 14px;border-radius:12px;
+    font-weight:700;letter-spacing:.2px;cursor:pointer;transition:.15s transform,.15s filter}
+  button:hover{filter:brightness(1.05)}
+  button:active{transform:translateY(1px)}
+  .btn-primary{background:linear-gradient(180deg,#22406e,#1b2d4f);border:1px solid #27426e}
+  .btn-ghost{background:transparent;border:1px solid var(--border)}
+  .btn-danger{background:linear-gradient(180deg,#4a1d1d,#3b1616);border:1px solid #5b2323}
+
+  /* Chat area */
+  .chat{display:grid;grid-template-rows:auto 1fr auto;gap:10px;height:68vh}
+  .transcript{overflow:auto;display:flex;flex-direction:column;gap:10px;padding-right:6px}
+  .bubble{max-width:86%;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:#0c121b}
+  .me{margin-left:auto;background:#0f1726}
+  .bot{margin-right:auto}
+  .sys{margin:0 auto;background:#0f1a22;border-style:dashed}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+
+  /* Thinking + Rounds blocks (inline inside transcript) */
+  .thinking{border-left:3px solid var(--warn);background:rgba(245,158,11,.06)}
+  .thinking .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .signature{font-size:11px;color:var(--muted);margin-top:6px}
+  .round{border:1px dashed #2a4369;background:rgba(36,57,95,.22);border-radius:14px;padding:10px}
+  .round-h{display:flex;align-items:center;gap:8px;justify-content:space-between}
+  .round-tools{display:grid;gap:8px;margin-top:8px}
+  .tool{border:1px solid var(--border);border-radius:12px;padding:10px;background:#0f1726}
+  .tool .hdr{display:flex;gap:8px;align-items:center}
+  .tool .hdr .status{margin-left:auto;font-size:12px;color:var(--muted)}
+  .code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;background:#0b1118;border:1px solid var(--border);border-radius:10px;padding:8px;color:#b8d5ff;overflow:auto;max-height:150px}
+
+  .inputbar{display:flex;gap:8px}
+  .inputbar textarea{flex:1}
+
+  /* Side column */
+  .pill{border:1px solid var(--border);background:var(--chip);padding:7px 9px;border-radius:10px;font-size:12px;color:#cbd7e6}
+  .kv{display:grid;grid-template-columns:90px 1fr;gap:6px;align-items:center}
+  details summary{cursor:pointer;color:#cfe1ff}
+  .json{font-family:ui-monospace,Menlo,Consolas,monospace;background:#0b1118;border:1px solid var(--border);border-radius:12px;padding:10px;color:#b8d5ff;max-height:260px;overflow:auto}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo" aria-hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3l7.5 4.33v9.34L12 21l-7.5-4.33V7.33L12 3z" stroke="white" stroke-opacity=".9" stroke-width="1.2"/>
+          <path d="M12 7v10M8 9.25l8 4.5" stroke="white" stroke-opacity=".8" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Claude Legal Research — Insight Chat</h1>
+        <div class="sub">Live thinking, grouped tool rounds, sessions, and answers</div>
+      </div>
+      <div class="badge" id="healthChip">status: unknown</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Left: Controls -->
+  <section class="card">
+    <div class="hd"><h3>Configuration</h3></div>
+    <div class="bd">
+      <div class="row">
+        <input id="baseUrl" type="text" placeholder="http://localhost:8090" />
+      </div>
+      <div class="row">
+        <input id="sessionId" type="text" placeholder="Session ID (optional)" />
+      </div>
+      <div class="row">
+        <button id="btnCreate" class="btn-primary">Create Session</button>
+        <button id="btnInfo" class="btn-ghost">Get Info</button>
+        <button id="btnDelete" class="btn-danger">Delete</button>
+      </div>
+      <details style="margin-top:8px">
+        <summary>Health</summary>
+        <div class="kv" style="margin-top:8px">
+          <div class="muted">Model</div><div class="pill" id="modelPill">—</div>
+          <div class="muted">Features</div><div class="pill" id="featPill">—</div>
+        </div>
+        <pre id="healthJson" class="json" style="margin-top:8px"></pre>
+      </details>
+    </div>
+  </section>
+
+  <!-- Right: Chat/Stream -->
+  <section class="card" style="grid-column:span 1 / -1">
+    <div class="hd">
+      <h3>Console</h3>
+      <div class="chips">
+        <span class="badge" id="phase">phase: —</span>
+        <span class="badge" id="streamState">idle</span>
+      </div>
+    </div>
+    <div class="bd chat">
+      <!-- transcript -->
+      <div id="log" class="transcript" aria-live="polite">
+        <div class="bubble sys">Welcome! Ask a research question to see <strong>thinking blocks</strong>, <strong>tool rounds</strong>, and the <strong>final answer</strong> in order.</div>
+      </div>
+
+      <!-- input -->
+      <div>
+        <label class="muted" for="q">Query</label>
+        <div class="inputbar" style="margin-top:6px">
+          <textarea id="q" placeholder="e.g., Compare Rule 10b-5 scienter standards across circuits; include latest 2024–2025 cases" ></textarea>
+          <button id="btnStream" class="btn-primary">▶ Stream</button>
+          <button id="btnSync" class="btn-ghost">⌁ Non-Streaming</button>
+          <button id="btnStop" class="btn-danger">■</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Non-streaming output & Inspector -->
+  <section class="card">
+    <div class="hd"><h3>Non-Streaming Output</h3><button id="btnSave" class="btn-ghost">⇩ Save Transcript</button></div>
+    <div class="bd">
+      <pre id="syncOut" class="json"></pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="hd"><h3>Inspector</h3></div>
+    <div class="bd">
+      <details open>
+        <summary>Last raw event</summary>
+        <pre id="raw" class="json"></pre>
+      </details>
+      <details style="margin-top:8px">
+        <summary>Rounds & Tools</summary>
+        <pre id="roundDump" class="json"></pre>
+      </details>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const S = {
+    es:null,
+    rounds:[],           // [{index, tools:[{id,name,input,status}], startedAt, completedAt}]
+    curRound:null,
+    think:[],            // [{text, signature}]
+    finalTarget:null,    // DOM node of current assistant answer bubble
+    transcript:{ meta:{ started:null, completed:null, baseUrl:'', sessionId:'' }, events:[], rounds:[] }
+  };
+
+  // Init persisted config
+  $('baseUrl').value = localStorage.getItem('lr_base') || 'http://localhost:8090';
+  $('sessionId').value = localStorage.getItem('lr_session') || '';
+
+  // UI helpers
+  function chip(el, txt, cls){ el.textContent = txt; el.className = 'badge' + (cls? ' '+cls : ''); }
+  function esc(s){ return (''+s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c])) }
+
+  // Chat builders
+  function addBubble(role, html){
+    const b = document.createElement('div');
+    b.className = 'bubble ' + (role==='user'?'me':role==='assistant'?'bot':'sys');
+    b.innerHTML = html;
+    $('log').appendChild(b);
+    $('log').scrollTop = $('log').scrollHeight;
+    return b;
+  }
+  function addThinkingShell(){
+    const div = document.createElement('div');
+    div.className = 'bubble thinking';
+    div.innerHTML = `
+      <div class="meta">🧠 thinking<span class="meta-extra"></span></div>
+      <div class="txt" id="tcontent"></div>
+      <div class="signature" id="tsig" style="display:none"></div>`;
+    $('log').appendChild(div);
+    $('log').scrollTop = $('log').scrollHeight;
+    return div;
+  }
+  function ensureRound(){
+    if(!S.curRound){
+      const index = S.rounds.length+1;
+      S.curRound = { index, tools:[], startedAt:Date.now(), completedAt:null };
+      S.rounds.push(S.curRound);
+
+      const wrap = document.createElement('div');
+      wrap.className = 'round bubble bot';
+      wrap.dataset.roundIndex = index;
+      wrap.innerHTML = `
+        <div class="round-h">
+          <div><span class="badge">Round ${index}</span> <span class="muted">tool selection & execution</span></div>
+        </div>
+        <div class="round-tools"></div>`;
+      $('log').appendChild(wrap);
+      $('log').scrollTop = $('log').scrollHeight;
+    }
+    return S.curRound;
+  }
+  function addToolCard(tool){
+    const r = ensureRound();
+    r.tools.push({ id:tool.id, name:tool.name, input:tool.arguments||tool.input||{}, status:'running' });
+
+    const roundEl = [...document.querySelectorAll('.round')].pop();
+    const list = roundEl.querySelector('.round-tools');
+    const card = document.createElement('div');
+    card.className = 'tool';
+    card.dataset.toolId = tool.id;
+    card.innerHTML = `
+      <div class="hdr">
+        <span class="badge">tool_use</span>
+        <strong>${esc(tool.name)}</strong>
+        <span class="status">executing…</span>
+      </div>
+      <div class="code"><code>${esc(JSON.stringify(tool.arguments||tool.input||{}, null, 2))}</code></div>`;
+    list.appendChild(card);
+    $('log').scrollTop = $('log').scrollHeight;
+  }
+  function closeRound(){
+    if(!S.curRound) return;
+    const idx = S.curRound.index;
+    const el = [...document.querySelectorAll('.round')].find(r => +r.dataset.roundIndex===idx);
+    if(el){
+      el.querySelectorAll('.tool .status').forEach(s=> s.textContent = 'executed');
+    }
+    S.curRound.completedAt = Date.now();
+    S.curRound = null;
+    dumpRounds();
+  }
+  function dumpRounds(){ $('roundDump').textContent = JSON.stringify(S.rounds, null, 2); }
+
+  // Stream handlers
+  function startStream(){
+    stopStream(true);
+    clearView();
+
+    const q = $('q').value.trim();
+    if(!q) return alert('Enter a query');
+
+    addBubble('user', esc(q));
+    S.finalTarget = addBubble('assistant', '<div class="meta muted">📋 final answer (streaming)</div><div id="finalText"></div>');
+
+    const url = new URL(($('baseUrl').value || '').replace(/\/$/,'') + '/api/claude/stream');
+    url.searchParams.set('query', q);
+    if($('sessionId').value) url.searchParams.set('sessionId', $('sessionId').value);
+
+    localStorage.setItem('lr_base', $('baseUrl').value);
+    if($('sessionId').value) localStorage.setItem('lr_session', $('sessionId').value);
+
+    S.transcript = { meta:{ started:new Date().toISOString(), completed:null, baseUrl:$('baseUrl').value, sessionId:$('sessionId').value }, events:[], rounds:S.rounds };
+
+    chip($('streamState'),'connecting…');
+    S.es = new EventSource(url.toString());
+    S.es.onopen = ()=> chip($('streamState'),'streaming','ok');
+    S.es.onerror = ()=> chip($('streamState'),'error','err');
+
+    S.es.onmessage = (e)=>{
+      let ev={};
+      try{ ev=JSON.parse(e.data) }catch{ return }
+      S.transcript.events.push(ev);
+      $('raw').textContent = JSON.stringify(ev, null, 2);
+
+      // normalize top-level type
+      switch(ev.type){
+        case 'system_info':
+          addBubble('sys', esc((ev.message||'') + (ev.model? `\nmodel: ${ev.model}`:'')));
+          break;
+
+        case 'progress':
+          if(ev.type==='research_start'){ chip($('phase'),'phase: research_start'); addBubble('sys','Research started'); }
+          if(ev.type==='research_complete'){ chip($('phase'),'phase: research_complete'); addBubble('sys','Research phase complete'); closeRound(); }
+          break;
+
+        case 'thinking_start':
+          S.think.push({ text:'', signature:null });
+          S._lastThinkEl = addThinkingShell();
+          chip($('phase'),'phase: analysis / planning');
+          break;
+
+        case 'thinking_delta':
+          if(!S._lastThinkEl){ S._lastThinkEl = addThinkingShell(); }
+          const tdiv = S._lastThinkEl.querySelector('#tcontent');
+          const last = S.think[S.think.length-1];
+          last.text += ev.text || '';
+          tdiv.textContent = last.text;
+          break;
+
+        case 'thinking_stop':
+          if(S._lastThinkEl){
+            const sig = ev.signature || '';
+            if(sig){
+              S.think[S.think.length-1].signature = sig;
+              const sdiv = S._lastThinkEl.querySelector('#tsig');
+              sdiv.style.display = 'block';
+              sdiv.textContent = '✓ signed ' + sig.slice(0,12) + '…';
+            }
+            S._lastThinkEl = null;
+          }
+          break;
+
+        case 'tool_call':
+          // unified: payload.tool has {id,name,arguments}
+          addToolCard(ev.tool || { id:ev.id, name:ev.name, arguments:ev.arguments||ev.input });
+          dumpRounds();
+          break;
+
+        case 'delta':
+          if(S.finalTarget){
+            const f = S.finalTarget.querySelector('#finalText');
+            const span = document.createElement('span');
+            span.textContent = ev.text || '';
+            f.appendChild(span);
+          }
+          break;
+
+        case 'error':
+          addBubble('sys','⚠ ' + esc(ev.message || ev.error || 'error'));
+          break;
+
+        case 'final':
+          chip($('streamState'),'done','ok');
+          if(ev.sessionId){ $('sessionId').value = ev.sessionId; localStorage.setItem('lr_session', ev.sessionId); }
+          S.transcript.meta.completed = new Date().toISOString();
+          break;
+
+        // If the backend’s `onThinking` forwarded its inner type (overwrite), we still handle:
+        case 'thinking':
+        default:
+          // In your server, { type:'thinking', ...thinking } ends up with the inner type (thinking_start|delta|stop)
+          if(ev.type && /^thinking_/.test(ev.type)){ /* already handled above by exact cases */ }
+      }
+    };
+  }
+
+  function stopStream(silent){
+    if(S.es){ try{ S.es.close(); }catch{} S.es=null; if(!silent) chip($('streamState'),'stopped','warn'); }
+  }
+
+  async function doHealth(){
+    try{
+      const r = await fetch(($('baseUrl').value||'').replace(/\/$/,'') + '/health');
+      const j = await r.json();
+      $('healthJson').textContent = JSON.stringify(j, null, 2);
+      chip($('healthChip'), j.ok? 'healthy':'degraded', j.ok?'ok':'warn');
+      $('modelPill').textContent = j.model || '—';
+      $('featPill').textContent = Object.entries(j.features||{}).filter(([k,v])=>v).map(([k])=>k).join(', ') || '—';
+    }catch(e){ chip($('healthChip'),'unreachable','err'); }
+  }
+
+  async function doSync(){
+    stopStream(true);
+    const q = $('q').value.trim();
+    if(!q) return alert('Enter a query');
+
+    addBubble('user', esc(q));
+    try{
+      const r = await fetch(($('baseUrl').value||'').replace(/\/$/,'') + '/api/claude/research', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ query:q, sessionId: $('sessionId').value || undefined })
+      });
+      const j = await r.json();
+      $('syncOut').textContent = JSON.stringify(j, null, 2);
+      addBubble('assistant', esc(j.text || '(empty)'));
+      if(j.sessionId){ $('sessionId').value = j.sessionId; localStorage.setItem('lr_session', j.sessionId); }
+    }catch(e){
+      $('syncOut').textContent = 'Error: ' + e.message;
+      addBubble('sys','⚠ Non-streaming error: ' + esc(e.message));
+    }
+  }
+
+  function clearView(){
+    $('log').innerHTML = '<div class="bubble sys">Session ready. Thinking blocks and tool rounds will appear here.</div>';
+    $('raw').textContent = '';
+    $('syncOut').textContent = '';
+    $('roundDump').textContent = '';
+    chip($('streamState'),'idle');
+    chip($('phase'),'phase: —');
+    S.rounds=[]; S.curRound=null; S.think=[]; S.finalTarget=null;
+    S.transcript = { meta:{ started:new Date().toISOString(), completed:null, baseUrl:$('baseUrl').value, sessionId:$('sessionId').value }, events:[], rounds:S.rounds };
+  }
+
+  // Sessions
+  async function createSession(){
+    try{
+      const r = await fetch(($('baseUrl').value||'').replace(/\/$/,'') + '/api/sessions', { method:'POST' });
+      const j = await r.json();
+      $('sessionId').value = j.sessionId || '';
+      if(j.sessionId) localStorage.setItem('lr_session', j.sessionId);
+      addBubble('sys','Created session: ' + esc(j.sessionId||'(none)'));
+    }catch(e){ addBubble('sys','⚠ create session failed: '+esc(e.message)); }
+  }
+  async function infoSession(){
+    const id = $('sessionId').value.trim();
+    if(!id) return alert('No session ID');
+    try{
+      const r = await fetch(($('baseUrl').value||'').replace(/\/$/,'') + '/api/sessions/' + encodeURIComponent(id));
+      const j = await r.json();
+      addBubble('sys','Session info:\n' + esc(JSON.stringify(j,null,2)));
+    }catch(e){ addBubble('sys','⚠ get info failed: '+esc(e.message)); }
+  }
+  async function deleteSession(){
+    const id = $('sessionId').value.trim();
+    if(!id) return alert('No session ID');
+    if(!confirm('Delete session '+id+' ?')) return;
+    try{
+      const r = await fetch(($('baseUrl').value||'').replace(/\/$/,'') + '/api/sessions/' + encodeURIComponent(id), { method:'DELETE' });
+      const j = await r.json();
+      addBubble('sys','Delete: ' + esc(JSON.stringify(j)));
+      $('sessionId').value=''; localStorage.removeItem('lr_session');
+    }catch(e){ addBubble('sys','⚠ delete failed: '+esc(e.message)); }
+  }
+
+  function saveTranscript(){
+    const blob = new Blob([ JSON.stringify({
+      transcript:S.transcript, rounds:S.rounds, thinking:S.think
+    }, null, 2) ], { type:'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `research_transcript_${Date.now()}.json`;
+    a.click(); URL.revokeObjectURL(a.href);
+  }
+
+  // Wire listeners
+  $('btnStream').onclick = startStream;
+  $('btnStop').onclick = ()=> stopStream();
+  $('btnSync').onclick = doSync;
+  $('btnCreate').onclick = createSession;
+  $('btnInfo').onclick = infoSession;
+  $('btnDelete').onclick = deleteSession;
+  $('btnSave').onclick = saveTranscript;
+  $('baseUrl').addEventListener('change', ()=> localStorage.setItem('lr_base', $('baseUrl').value));
+  $('sessionId').addEventListener('change', ()=> localStorage.setItem('lr_session', $('sessionId').value));
+
+  // First health ping
+  doHealth().catch(()=>{});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Legal Research – Conversation Playground</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #11161d;
+      --muted: #2b3440;
+      --text: #e6edf3;
+      --subtle: #9aa7b2;
+      --accent: #67b3ff;
+      --accent-2: #7ae0a5;
+      --danger: #ff6b6b;
+      --warning: #ffd166;
+      --ok: #7bd88f;
+      --link: #86c8ff;
+      --code: #0c1116;
+      --chip: #1b2230;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { color-scheme: dark; }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #060a0f 0%, #0b0f14 100%);
+      color: var(--text);
+      font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      overflow: hidden;
+    }
+    a { color: var(--link); text-decoration: none; }
+    header {
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--muted);
+      background: rgba(12,17,22,0.8);
+      backdrop-filter: blur(8px);
+    }
+    header .brand { display:flex; align-items:center; gap:10px; font-weight:600; }
+    header .brand .dot { width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 18px var(--accent); }
+    header .actions { display:flex; gap:10px; align-items:center; }
+    .btn {
+      background: #111927;
+      color: var(--text);
+      border: 1px solid #1b2533;
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: transform .06s ease, background .15s ease, border .15s ease;
+    }
+    .btn:hover { background: #0f1621; border-color: #273548; }
+    .btn:active { transform: translateY(1px) scale(0.99); }
+    .btn.primary { background: linear-gradient(180deg, #1a6bd1 0%, #0e58b6 100%); border: 0; }
+    .btn.accent { background: linear-gradient(180deg, #1da36f 0%, #128557 100%); border: 0; }
+    .btn.warn { background: linear-gradient(180deg, #c28a0a 0%, #966f14 100%); border: 0; }
+    .btn.ghost { background: transparent; border-color: #273548; }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .container { height: calc(100% - 60px); display: grid; grid-template-columns: 320px 1fr 380px; gap: 16px; padding: 16px; }
+    .panel {
+      background: radial-gradient(120% 120% at 0% 0%, #0b1118 0%, #0b0f14 55%, #0b0f14 100%);
+      border: 1px solid var(--muted);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .panel h3 { margin: 0; padding: 14px 16px; border-bottom: 1px solid var(--muted); font-size: 13px; letter-spacing: .6px; text-transform: uppercase; color: var(--subtle); }
+    .controls { padding: 14px; display: grid; gap: 12px; }
+    .row { display: grid; gap: 8px; }
+    label { color: var(--subtle); font-size: 12px; }
+    input[type="text"], input[type="url"], textarea {
+      width: 100%;
+      background: #0c131c;
+      color: var(--text);
+      border: 1px solid #1b2533;
+      border-radius: 10px;
+      padding: 10px 12px;
+      outline: none;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .seg { display:flex; gap:8px; }
+    .chips { display:flex; flex-wrap: wrap; gap: 6px; }
+    .chip { background: var(--chip); border: 1px solid #263142; color: var(--subtle); border-radius: 100px; padding: 4px 8px; font-size: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .scroll { overflow: auto; }
+    .feed { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+    .bubble { background: #0e141c; border: 1px solid #1b2533; border-radius: 10px; padding: 12px; }
+    .bubble.user { border-color: #273548; background: #0d1521; }
+    .bubble.assistant { border-color: #203147; }
+    .bubble.system { border-color: #2a394f; background: #0c131b; color: #c9d6e1; }
+    .bubble h4 { margin: 0 0 6px 0; font-size: 13px; color: var(--subtle); }
+    .thinking { white-space: pre-wrap; color: #a7c0d8; }
+    .delta { white-space: pre-wrap; }
+    /* Markdown styling for assistant responses */
+    .md h1, .md h2, .md h3, .md h4 { margin: 12px 0 6px; line-height: 1.25; color: #d2dee9; }
+    .md h1 { font-size: 20px; }
+    .md h2 { font-size: 18px; border-bottom: 1px solid #1b2533; padding-bottom: 6px; }
+    .md h3 { font-size: 16px; color: #c7d6e2; }
+    .md p { margin: 8px 0; color: #dbe7f3; }
+    .md strong { color: #eaf3ff; }
+    .md em { color: #cfddee; font-style: italic; }
+    .md ul, .md ol { margin: 8px 0 8px 18px; }
+    .md li { margin: 4px 0; }
+    .md blockquote { margin: 8px 0; padding: 6px 10px; border-left: 3px solid #2a3a4f; background: #0c131b; color: #cfe0ef; }
+    .md hr { border: none; border-top: 1px solid #263142; margin: 10px 0; }
+    /* Footnotes */
+    .md sup.fn { cursor: help; color: var(--accent-2); }
+    .footnotes { margin-top: 12px; padding-top: 8px; border-top: 1px dashed #263142; }
+    .footnotes summary { cursor: pointer; color: var(--subtle); }
+    .footnotes ol { margin: 8px 0 0 18px; }
+    .footnotes li { margin: 4px 0; color: #cfe0ef; }
+    .timeline { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+    .event { background: #0c131b; border: 1px solid #1b2533; border-radius: 10px; padding: 10px; display:grid; gap:6px; }
+    .event .meta { display:flex; align-items:center; gap:8px; color: var(--subtle); font-size: 12px; }
+    .tag { font-size: 11px; padding: 2px 6px; border-radius: 100px; border: 1px solid #2a3a4f; background: #0f1520; color: #b7c7d6; }
+    .tag.ok { border-color: #234332; color: #9ee3b7; background: #0f1b15; }
+    .tag.warn { border-color: #5a4a21; color: #ffd966; background: #17130b; }
+    .tag.err { border-color: #55303a; color: #ff9aa8; background: #1c0f13; }
+    .json { background: #0a0f14; border: 1px dashed #233042; border-radius: 8px; padding: 8px; overflow: auto; max-height: 160px; }
+    /* Smart key-value renderer */
+    .kv { background: #0a0f14; border: 1px dashed #233042; border-radius: 10px; overflow: hidden; }
+    .kv-row { display: grid; grid-template-columns: 180px 1fr; gap: 10px; padding: 8px 10px; border-top: 1px solid #16202b; }
+    .kv-row:first-child { border-top: 0; }
+    .kv-key { color: #9fb3c8; font-weight: 600; word-break: break-word; }
+    .kv-type { color: #7ae0a5; font-size: 11px; margin-left: 6px; opacity: .9; }
+    .kv-value { color: #dbe7f3; word-break: break-word; }
+    .kv-array, .kv-value-block { position: relative; }
+    .kv-more { color: var(--link); cursor: pointer; font-size: 12px; user-select: none; display: inline-block; margin-top: 6px; }
+    .kv-list { display: grid; gap: 6px; }
+    .kv-item { background: #0c131b; border: 1px solid #1b2533; border-radius: 8px; padding: 6px 8px; }
+    .short, .full { white-space: pre-wrap; }
+    .full { display: none; }
+    [data-expanded="1"] > .short { display: none; }
+    [data-expanded="1"] > .full { display: block; }
+    .kv .kv { margin: 6px 0; border-color: #2a3a4f; }
+    /* Result cards */
+    .cards { display: grid; gap: 10px; }
+    .card { background: #0c131b; border: 1px solid #1b2533; border-radius: 10px; padding: 10px; }
+    .card-title { font-weight: 600; color: #e6eef7; margin-bottom: 4px; }
+    .card-meta { color: #9fb1c3; font-size: 12px; display:flex; gap:8px; align-items:center; }
+    .card a { color: var(--link); }
+    .footer { padding: 10px 14px; border-top: 1px solid var(--muted); display:flex; justify-content: space-between; color: var(--subtle); font-size: 12px; }
+    .footer.composer { gap: 10px; align-items: center; }
+    .footer.composer textarea { flex: 1; min-height: 44px; max-height: 160px; resize: vertical; }
+    .right-pane { display: grid; grid-template-rows: auto 1fr auto; }
+    .section-title { padding: 10px 14px; color: var(--subtle); font-size: 12px; text-transform: uppercase; letter-spacing: .6px; }
+    .hl { color: var(--accent-2); }
+    .kbd { padding: 2px 6px; border: 1px solid #293649; border-radius: 6px; background: #0b1118; font-size: 12px; color: #c5d4e0; }
+    details summary { cursor: pointer; color: var(--subtle); }
+  </style>
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0b0f14" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0f14' stroke='%2367b3ff' stroke-width='4'/%3E%3Ccircle cx='48' cy='48' r='8' fill='%2367b3ff'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="dot"></span>
+      <div>Claude Legal Research – Conversation Playground</div>
+    </div>
+    <div class="actions">
+      <button class="btn ghost" id="btnHealth">Health</button>
+      <a class="btn ghost" href="https://anthropic.com" target="_blank" rel="noopener">Docs</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="panel" id="left">
+      <h3>Controls</h3>
+      <div class="controls">
+        <div class="row">
+          <label for="serverUrl">Server URL</label>
+          <input type="url" id="serverUrl" placeholder="http://localhost:8090" />
+        </div>
+        <div class="row">
+          <label for="query">Query</label>
+          <textarea id="query" placeholder="Ask a comprehensive legal research question..."></textarea>
+        </div>
+        <div class="seg">
+          <button class="btn primary" id="btnStream">Stream</button>
+          <button class="btn warn" id="btnStop" disabled>Stop</button>
+        </div>
+        <div class="seg">
+          <button class="btn" id="btnNonStream">Non-Streaming</button>
+          <button class="btn ghost" id="btnClear">Clear</button>
+        </div>
+
+        <div class="row">
+          <label>Session</label>
+          <div class="seg">
+            <button class="btn accent" id="btnCreateSession">Create</button>
+            <button class="btn ghost" id="btnGetSession">Get</button>
+            <button class="btn ghost" id="btnDeleteSession">Delete</button>
+          </div>
+          <input type="text" id="sessionId" placeholder="session id (optional)" />
+          <div class="chips" id="sessionInfo"></div>
+        </div>
+
+        <div class="row">
+          <label>Quick Tips</label>
+          <div class="chips">
+            <span class="chip">Interleaved thinking</span>
+            <span class="chip">Fine-grained tool streaming</span>
+            <span class="chip">Parallel tool execution</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>SSE stream visualizes thinking, tools, and content.</div>
+      </div>
+    </div>
+
+    <div class="panel" id="center">
+      <h3>Transcript</h3>
+      <div class="scroll">
+        <div class="feed" id="feed"></div>
+      </div>
+      <div class="footer composer">
+        <textarea id="composer" placeholder="Type a message and press Enter to Stream, or use Send buttons…"></textarea>
+        <button class="btn primary" id="composerSendStream">Send (Stream)</button>
+        <button class="btn" id="composerSendNonStream">Send (Non-Stream)</button>
+      </div>
+      <div class="footer">
+        <div>Raw events in the right pane.</div>
+        <div class="kbd">Esc</div>
+      </div>
+    </div>
+
+    <div class="panel right-pane" id="right">
+      <div>
+        <div class="section-title">Thinking & Tools</div>
+      </div>
+      <div class="scroll">
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <div class="footer">
+        <details id="rawToggle">
+          <summary>Show raw events</summary>
+          <div class="json mono" id="raw"></div>
+        </details>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <script>
+    (function() {
+      const $ = (sel) => document.querySelector(sel);
+      const feed = $('#feed');
+      const timeline = $('#timeline');
+      const raw = $('#raw');
+      const query = $('#query');
+      const serverUrl = $('#serverUrl');
+      const sessionIdInput = $('#sessionId');
+      const sessionInfo = $('#sessionInfo');
+      const btnStream = $('#btnStream');
+      const btnStop = $('#btnStop');
+      const btnNonStream = $('#btnNonStream');
+      const btnClear = $('#btnClear');
+      const btnHealth = $('#btnHealth');
+      const btnCreateSession = $('#btnCreateSession');
+      const btnGetSession = $('#btnGetSession');
+      const btnDeleteSession = $('#btnDeleteSession');
+      const composer = $('#composer');
+      const composerSendStream = $('#composerSendStream');
+      const composerSendNonStream = $('#composerSendNonStream');
+
+      const FIXED_SERVER = 'http://localhost:8090';
+
+      function isAtBottom(scroller, threshold = 8) {
+        try { return (scroller.scrollTop + scroller.clientHeight) >= (scroller.scrollHeight - threshold); } catch { return true; }
+      }
+
+      function maybeScroll(scroller, should) {
+        try { if (should) scroller.scrollTop = scroller.scrollHeight; } catch {}
+      }
+
+      let es = null;
+      let currentAssistantBubble = null;
+      let currentThinkingBlock = null;
+      let started = false;
+      let assistantTextBuffer = '';
+
+      const ls = {
+        get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+        set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+      };
+
+      // Initialize defaults (fixed server URL)
+      serverUrl.value = FIXED_SERVER;
+      serverUrl.placeholder = FIXED_SERVER + ' (fixed)';
+      serverUrl.disabled = true;
+      sessionIdInput.value = ls.get('sessionId', '');
+      if (!query.value) {
+        query.value = 'Please research manufacturing companies in western Pennsylvania which have previous filed for bankruptcy. What were the similarities in their structuring, if EPA violations are present what is the remediation process required based on the bankruptcy filing? How does IP retention function.';
+      }
+
+      function setStreamingState(s) {
+        started = s;
+        btnStream.disabled = s;
+        btnStop.disabled = !s;
+        btnNonStream.disabled = s;
+        btnClear.disabled = s;
+        composer.disabled = s;
+        composerSendStream.disabled = s;
+        composerSendNonStream.disabled = s;
+      }
+
+      function addUserBubble(text) {
+        const b = document.createElement('div');
+        b.className = 'bubble user';
+        b.innerHTML = `<h4>User</h4><div class="mono">${escapeHtml(text)}</div>`;
+        const sc = feed.parentElement; const pin = isAtBottom(sc);
+        feed.appendChild(b);
+        maybeScroll(sc, pin);
+      }
+
+      function startAssistantBubble() {
+        const b = document.createElement('div');
+        b.className = 'bubble assistant';
+        b.innerHTML = `<h4>Assistant</h4><div class="delta md" id="assistantDelta"></div>`;
+        feed.appendChild(b);
+        currentAssistantBubble = b.querySelector('#assistantDelta');
+        assistantTextBuffer = '';
+      }
+
+      function appendAssistantText(text) {
+        if (!currentAssistantBubble) startAssistantBubble();
+        const sc = feed.parentElement; const pin = isAtBottom(sc);
+        assistantTextBuffer += decodeEntitiesDeep(text);
+        const rendered = renderMarkdown(assistantTextBuffer);
+        currentAssistantBubble.innerHTML = (rendered && rendered.trim()) ? rendered : escapeHtml(assistantTextBuffer);
+        enhanceAssistantContent(currentAssistantBubble, assistantTextBuffer);
+        maybeScroll(sc, pin);
+      }
+
+      // Minimal Markdown renderer for headings, bold, italics, lists, hr
+      function renderMarkdown(src) {
+        if (!src) return '';
+        let s = src;
+        // Escape existing HTML to avoid injection then re-apply simple formatting
+        s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        // Headings (##, ###)
+        s = s.replace(/^###\s+(.*)$/gm, '<h3>$1</h3>');
+        s = s.replace(/^##\s+(.*)$/gm, '<h2>$1</h2>');
+        s = s.replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+        // Horizontal rules
+        s = s.replace(/^---$/gm, '<hr />');
+        // Bold and italic
+        s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+        // Lists (basic)
+        s = s.replace(/^(\s*)-\s+(.+)$/gm, '$1<li>$2</li>');
+        // Wrap consecutive <li> into <ul>
+        s = s.replace(/(?:^|\n)(<li>.*?<\/li>)(?:(?:\n<li>.*?<\/li>)+)/gs, (m)=>{
+          const items = m.trim().split(/\n/).filter(Boolean).join('');
+          return `\n<ul>${items}</ul>`;
+        });
+        // Paragraphs: split on double newlines
+        s = s.split(/\n\n+/).map(block => {
+          if (/^<h\d|^<ul|^<hr|^<blockquote|^<li/.test(block)) return block;
+          return `<p>${block.replace(/\n/g, '<br/>')}</p>`;
+        }).join('');
+        return s;
+      }
+
+      function addSystemBubble(obj) {
+        const b = document.createElement('div');
+        b.className = 'bubble system';
+        const info = [obj.message, obj.model, obj.model_info && obj.model_info.current].filter(Boolean).join(' — ');
+        const feat = obj.features || obj.capabilities;
+        b.innerHTML = `<h4>System</h4><div>${escapeHtml(info || '')}</div>${feat ? `<div class="chips">${feat.map(x => `<span class=chip>${escapeHtml(x)}</span>`).join('')}</div>` : ''}`;
+        const sc = feed.parentElement; const pin = isAtBottom(sc);
+        feed.appendChild(b);
+        maybeScroll(sc, pin);
+      }
+
+      function addTimelineEvent({ kind, title, subtitle, tags = [], body = null }) {
+        const el = document.createElement('div');
+        el.className = 'event';
+        el.innerHTML = `
+          <div class="meta">
+            <span class="tag">${escapeHtml(kind)}</span>
+            <strong>${escapeHtml(title || '')}</strong>
+            <span style="flex:1"></span>
+            ${tags.map(t => `<span class="tag ${t.style || ''}">${escapeHtml(t.text)}</span>`).join('')}
+          </div>
+          ${subtitle ? `<div class="subtle">${escapeHtml(subtitle)}</div>` : ''}
+          ${body ? `<div>${body}</div>` : ''}
+        `;
+        const sc = timeline.parentElement; const pin = isAtBottom(sc);
+        timeline.appendChild(el);
+        maybeScroll(sc, pin);
+      }
+
+      function addRaw(obj) {
+        try {
+          raw.textContent += JSON.stringify(obj, null, 2) + "\n";
+          raw.scrollTop = raw.scrollHeight;
+        } catch {}
+      }
+
+      function escapeHtml(s) {
+        return String(s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+      }
+
+      function decodeOnce(s) {
+        const ta = document.createElement('textarea');
+        ta.innerHTML = s;
+        return ta.value;
+      }
+
+      function decodeEntitiesDeep(s, max = 3) {
+        let prev = String(s || '');
+        for (let i = 0; i < max; i++) {
+          const next = decodeOnce(prev);
+          if (next === prev) break;
+          prev = next;
+        }
+        return prev;
+      }
+
+      // --- Footnotes handling and superscript enhancement ---
+      const SUP_DIGITS = { '⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9' };
+      function supersToNum(s) {
+        return Array.from(String(s || '')).map(c => SUP_DIGITS[c] ?? '').join('');
+      }
+
+      function parseSuperscriptFootnotesFromText(text) {
+        const map = {};
+        const lines = String(text || '').split(/\n/);
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const m = line.match(/^\s*([⁰¹²³⁴⁵⁶⁷⁸⁹]+)\s+(.+)$/);
+          if (m) {
+            const n = supersToNum(m[1]);
+            if (n) {
+              map[n] = (map[n] ? map[n] + ' ' : '') + m[2].trim();
+            }
+          }
+        }
+        return map;
+      }
+
+      function enhanceAssistantContent(root, rawText) {
+        if (!root) return;
+        // 1) Annotate superscript numerals in text nodes
+        annotateSuperscripts(root);
+        // 2) Build/update footnotes section at the bottom
+        const notes = parseSuperscriptFootnotesFromText(rawText);
+        renderFootnotesSection(root, notes);
+        // 3) Attach simple hover/click tooltips using title and scroll to footnote
+        root.querySelectorAll('sup.fn').forEach((el) => {
+          const n = el.getAttribute('data-fn');
+          const txt = notes[n] || `Footnote ${n}`;
+          el.setAttribute('title', txt);
+          el.addEventListener('click', () => {
+            const sec = root.querySelector('.footnotes');
+            if (sec && typeof sec.open !== 'undefined') {
+              sec.open = true;
+              const target = root.querySelector(`#fn-${n}`);
+              try { target && target.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch {}
+            }
+          });
+        });
+      }
+
+      function annotateSuperscripts(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+        const toProcess = [];
+        while (true) {
+          const node = walker.nextNode();
+          if (!node) break;
+          const text = node.nodeValue;
+          if (!text) continue;
+          if (/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/.test(text)) {
+            toProcess.push(node);
+          }
+        }
+        toProcess.forEach((textNode) => {
+          const parent = textNode.parentNode;
+          if (!parent) return;
+          const parts = [];
+          const re = /[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g;
+          let lastIndex = 0; let m;
+          const t = textNode.nodeValue;
+          while ((m = re.exec(t))) {
+            const before = t.slice(lastIndex, m.index);
+            if (before) parts.push(document.createTextNode(before));
+            const sup = document.createElement('sup');
+            sup.className = 'fn';
+            sup.setAttribute('data-fn', supersToNum(m[0]) || '');
+            sup.textContent = m[0];
+            parts.push(sup);
+            lastIndex = re.lastIndex;
+          }
+          const after = t.slice(lastIndex);
+          if (after) parts.push(document.createTextNode(after));
+          parts.forEach(n => parent.insertBefore(n, textNode));
+          parent.removeChild(textNode);
+        });
+      }
+
+      function renderFootnotesSection(root, map) {
+        try {
+          if (!map || Object.keys(map).length === 0) {
+            const existing = root.querySelector('.footnotes');
+            if (existing) existing.parentElement.removeChild(existing);
+            return;
+          }
+          let sec = root.querySelector('.footnotes');
+          if (!sec) {
+            sec = document.createElement('details');
+            sec.className = 'footnotes';
+            root.appendChild(sec);
+          }
+          const items = Object.keys(map).sort((a,b)=>Number(a)-Number(b)).map(n => `<li id="fn-${n}"><span class="mono">${escapeHtml(n)}.</span> ${escapeHtml(map[n])}</li>`).join('');
+          sec.innerHTML = `<summary>Footnotes (${Object.keys(map).length})</summary><ol>${items}</ol>`;
+        } catch {}
+      }
+
+      async function callHealth() {
+        try {
+          const url = new URL('/health', FIXED_SERVER).toString();
+          const res = await fetch(url);
+          const j = await res.json();
+          addTimelineEvent({
+            kind: 'health',
+            title: 'Server Health',
+            tags: [{ text: j.ok ? 'ok' : 'not ok', style: j.ok ? 'ok' : 'warn' }],
+            body: renderKV(j)
+          });
+        } catch (e) {
+          addTimelineEvent({ kind: 'health', title: 'Health Error', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      function openSSE() {
+        const base = FIXED_SERVER.replace(/\/$/, '');
+        const q = encodeURIComponent(query.value.trim());
+        const sid = sessionIdInput.value.trim();
+        const qs = sid ? `?query=${q}&sessionId=${encodeURIComponent(sid)}` : `?query=${q}`;
+        const url = `${base}/api/claude/stream${qs}`;
+        addUserBubble(query.value.trim());
+        startAssistantBubble();
+        addTimelineEvent({ kind: 'stream', title: 'Stream opened', subtitle: url, tags: [{ text: 'SSE' }] });
+        raw.textContent = '';
+
+        es = new EventSource(url);
+
+        es.onmessage = (evt) => {
+          let data = null;
+          try { data = JSON.parse(evt.data); } catch { return; }
+          handleEvent(data);
+        };
+
+        es.onerror = (err) => {
+          addTimelineEvent({ kind: 'error', title: 'SSE error', tags: [{ text: 'error', style: 'err' }], subtitle: 'Check server logs' });
+          setStreamingState(false);
+          try { es && es.close(); } catch {}
+        };
+      }
+
+      function closeSSE(reason) {
+        if (es) {
+          try { es.close(); } catch {}
+          es = null;
+          addTimelineEvent({ kind: 'stream', title: 'Stream closed', subtitle: reason || '', tags: [{ text: 'closed' }] });
+        }
+      }
+
+      function handleEvent(e) {
+        addRaw(e);
+
+        // Robust type handling for both variants in server
+        const t = e.type;
+
+        // System info
+        if (t === 'system_info') {
+          addSystemBubble(e);
+          return;
+        }
+
+        // Thinking: may come as thinking_start/thinking_delta or wrapped
+        if (t === 'thinking' || t === 'thinking_start' || t === 'thinking_delta' || t === 'thinking_signature' || t === 'thinking_complete') {
+          const kind = t === 'thinking' && e.text ? 'thinking_delta' : t;
+          if (kind === 'thinking_start') {
+            currentThinkingBlock = document.createElement('div');
+            currentThinkingBlock.className = 'event';
+            currentThinkingBlock.innerHTML = `
+              <div class="meta"><span class="tag">thinking</span><strong>Strategy</strong><span style="flex:1"></span><span class="tag">start</span></div>
+              <div class="thinking mono" id="thinkBody"></div>
+            `;
+            timeline.appendChild(currentThinkingBlock);
+          } else if (kind === 'thinking_delta') {
+            if (!currentThinkingBlock) {
+              currentThinkingBlock = document.createElement('div');
+              currentThinkingBlock.className = 'event';
+              currentThinkingBlock.innerHTML = `
+                <div class="meta"><span class="tag">thinking</span><strong>Strategy</strong><span style="flex:1"></span><span class="tag">live</span></div>
+                <div class="thinking mono" id="thinkBody"></div>
+              `;
+              timeline.appendChild(currentThinkingBlock);
+            }
+            const body = currentThinkingBlock.querySelector('#thinkBody');
+            body.textContent += (e.text || e.thinking || '');
+          } else if (kind === 'thinking_signature') {
+            addTimelineEvent({ kind: 'thinking', title: 'Signature', subtitle: e.signature ? e.signature.slice(0, 18) + '…' : '', tags: [{ text: 'sig' }] });
+          } else if (kind === 'thinking_complete') {
+            addTimelineEvent({ kind: 'thinking', title: 'Thinking complete', tags: [{ text: 'done', style: 'ok' }], subtitle: (e.summary || '').toString() });
+          }
+          return;
+        }
+
+        // Tool calls: server emits { type: 'tool_call', phase: 'tool_start'|'tool_update'|'tool_execute'|'tool_result', ... }
+        if (t === 'tool_call') {
+          const phase = e.phase || 'update';
+          const tool = e.tool || {};
+          if (phase === 'tool_start') {
+            const domain = e.legal_domain || 'General';
+            let bodyHtml = tool.input ? renderKV(tool.input) : '';
+            // Isolate compact start card only for search_courtlistener_opinions_web
+            if ((tool.name || '') === 'search_courtlistener_opinions_web') {
+              const q = tool.input && (tool.input.query || tool.input.original_query || '');
+              const lim = tool.input && (tool.input.limit != null ? String(tool.input.limit) : '');
+              bodyHtml = `<div class="mono">${escapeHtml(q)}${lim ? ` • limit=${escapeHtml(lim)}` : ''}</div>`;
+            }
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'} started`,
+              subtitle: `id=${tool.id || ''} • domain=${domain}`,
+              tags: [{ text: 'start' }],
+              body: bodyHtml
+            });
+          } else if (phase === 'tool_update') {
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'} arguments`,
+              tags: [{ text: 'args' }],
+              body: renderKV(tool.input || {})
+            });
+          } else if (phase === 'tool_execute') {
+            addTimelineEvent({ kind: 'tool', title: `${tool.name || 'tool'} executing`, tags: [{ text: 'execute', style: 'warn' }] });
+          } else if (phase === 'tool_result') {
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'} result`,
+              tags: [{ text: e.success ? 'ok' : 'error', style: e.success ? 'ok' : 'err' }],
+              body: renderPreview(e.preview)
+            });
+          } else {
+            addTimelineEvent({ kind: 'tool', title: `${tool.name || 'tool'} ${phase}`, tags: [{ text: phase }] });
+          }
+          return;
+        }
+
+        // Content deltas
+        if (t === 'delta' || t === 'content_delta') {
+          const txt = (e && (e.text ?? (e.delta && e.delta.text) ?? e.content ?? (e.delta && e.delta.content))) || '';
+          appendAssistantText(String(txt));
+          return;
+        }
+
+        // Progress events (may be wrapped or raw)
+        if (t === 'progress' || t === 'research_start' || t === 'research_complete' || t === 'usage_update' || t === 'heartbeat') {
+          const label = (t === 'progress' ? (e.type || 'progress') : t).replace(/_/g, ' ');
+          addTimelineEvent({ kind: 'progress', title: label, tags: [{ text: (e.model || e.tools_executed != null ? 'info' : 'tick') }], body: renderKV(e) });
+          return;
+        }
+
+        // Errors
+        if (t === 'error') {
+          addTimelineEvent({ kind: 'error', title: e.message || e.error || 'Error', tags: [{ text: 'error', style: 'err' }] });
+          return;
+        }
+
+        // Final
+        if (t === 'final') {
+          if (e.sessionId) {
+            sessionIdInput.value = e.sessionId;
+            ls.set('sessionId', e.sessionId);
+          }
+          addTimelineEvent({ kind: 'final', title: 'Completed', subtitle: e.model || e.enhanced_by || '', tags: [{ text: 'done', style: 'ok' }] });
+          setStreamingState(false);
+          closeSSE('final');
+          return;
+        }
+
+        // Unknown
+        addTimelineEvent({ kind: 'event', title: `Unknown: ${escapeHtml(String(t))}`, body: renderKV(e) });
+      }
+
+      // Pretty JSON key-value renderer with expand/collapse
+      function renderKV(obj) {
+        try {
+          if (obj == null) return '';
+          if (typeof obj !== 'object') {
+            return `<div class="kv"><div class="kv-row"><div class="kv-key">value<span class=kv-type>${typeof obj}</span></div><div class="kv-value">${escapeHtml(String(obj))}</div></div></div>`;
+          }
+          const rows = Object.entries(obj).map(([k, v]) => {
+            const t = Array.isArray(v) ? 'array' : typeof v;
+            if (Array.isArray(v)) {
+              const rendered = v.slice(0, 5).map((it) => {
+                if (typeof it === 'object' && it !== null) {
+                  return `<div class="kv-item">${renderKV(it)}</div>`;
+                }
+                return `<div class="kv-item">${escapeHtml(previewValue(it))}</div>`;
+              }).join('');
+              const more = v.length > 5 ? `<div class="kv-more">… +${v.length - 5} more</div>` : '';
+              return `<div class="kv-row"><div class="kv-key">${escapeHtml(k)}<span class=kv-type>${t}[${v.length}]</span></div><div class="kv-array"><div class="kv-list">${rendered}${more}</div></div></div>`;
+            }
+            if (t === 'object' && v !== null) {
+              const id = 'kv' + Math.random().toString(36).slice(2);
+              const inner = renderKV(v);
+              return `<div class="kv-row"><div class="kv-key">${escapeHtml(k)}<span class=kv-type>${t}</span></div><div class="kv-value-block" id="${id}" data-expanded="0"><div class="short mono">${escapeHtml(JSON.stringify(v, replacerShort, 2))}</div><div class="full">${inner}</div><span class="kv-more" onclick="(function(){ const n=document.getElementById('${id}'); n.setAttribute('data-expanded', n.getAttribute('data-expanded')==='1'?'0':'1'); })()">Toggle details</span></div></div>`;
+            }
+            return `<div class="kv-row"><div class="kv-key">${escapeHtml(k)}<span class=kv-type>${t}</span></div><div class="kv-value">${escapeHtml(previewValue(v))}</div></div>`;
+          }).join('');
+          return `<div class="kv">${rows}</div>`;
+        } catch {
+          return `<div class="json mono">${escapeHtml(JSON.stringify(obj, null, 2))}</div>`;
+        }
+      }
+
+      function replacerShort(key, value) {
+        if (typeof value === 'string' && value.length > 160) return value.slice(0, 157) + '…';
+        if (Array.isArray(value) && value.length > 5) return value.slice(0, 5).concat(['… +' + (value.length - 5) + ' more']);
+        return value;
+      }
+
+      function previewValue(v) {
+        if (v == null) return String(v);
+        if (typeof v === 'string') return v.length > 120 ? v.slice(0, 117) + '…' : v;
+        if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+        if (Array.isArray(v)) return `[${v.length} items]`;
+        if (typeof v === 'object') return JSON.stringify(v, replacerShort);
+        return String(v);
+      }
+
+      function renderPreview(preview) {
+        if (!preview) return '';
+        try {
+          const maybe = JSON.parse(preview);
+          // If this looks like a search results payload, render as cards
+          const cards = tryRenderSearchCards(maybe);
+          if (cards) return cards;
+          return renderKV(maybe);
+        } catch {
+          return `<div class="json mono">${escapeHtml(String(preview))}</div>`;
+        }
+      }
+
+      function tryRenderSearchCards(obj) {
+        try {
+          // Heuristics: array of result-like objects or object with results array
+          const results = Array.isArray(obj) ? obj : (Array.isArray(obj.results) ? obj.results : null);
+          if (!results || results.length === 0) return null;
+          // Check if items look like case results
+          const looksLikeCase = (r) => typeof r === 'object' && (r.case_name || r.title || r.name) && (r.absolute_url || r.url || r.link);
+          const subset = results.filter(looksLikeCase).slice(0, 10);
+          if (subset.length === 0) return null;
+          const html = subset.map((r) => {
+            const title = r.case_name || r.title || r.name || 'Case';
+            const url = r.absolute_url || r.url || r.link || '';
+            const id = r.id != null ? `#${r.id}` : '';
+            const court = r.court || r.jurisdiction || '';
+            const date = r.date_filed || r.date || '';
+            return `<div class="card">
+              <div class="card-title">${escapeHtml(title)}</div>
+              <div class="card-meta">${escapeHtml([id, court, date].filter(Boolean).join(' • '))}</div>
+              ${url ? `<div><a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open</a></div>` : ''}
+            </div>`;
+          }).join('');
+          return `<div class="cards">${html}</div>`;
+        } catch {
+          return null;
+        }
+      }
+
+      async function nonStreaming() {
+        try {
+          addUserBubble(query.value.trim());
+          addTimelineEvent({ kind: 'request', title: 'POST /api/claude/research' });
+          const res = await fetch(new URL('/api/claude/research', FIXED_SERVER).toString(), {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: query.value.trim(), sessionId: sessionIdInput.value.trim() || undefined })
+          });
+          const j = await res.json();
+          startAssistantBubble();
+          appendAssistantText(j.text || '');
+          addTimelineEvent({ kind: 'response', title: 'Non-streaming complete', tags: [{ text: 'ok', style: 'ok' }], body: renderKV(j) });
+          if (j.sessionId) { sessionIdInput.value = j.sessionId; ls.set('sessionId', j.sessionId); }
+        } catch (e) {
+          addTimelineEvent({ kind: 'error', title: 'Non-streaming error', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      async function createSession() {
+        try {
+          const res = await fetch(new URL('/api/sessions', FIXED_SERVER).toString(), { method: 'POST' });
+          const j = await res.json();
+          sessionIdInput.value = j.sessionId || '';
+          ls.set('sessionId', sessionIdInput.value);
+          sessionInfo.innerHTML = `<span class=chip>created: ${escapeHtml(j.created || '')}</span>`;
+          addTimelineEvent({ kind: 'session', title: 'Session created', subtitle: j.sessionId, tags: [{ text: 'ok', style: 'ok' }] });
+        } catch (e) {
+          addTimelineEvent({ kind: 'session', title: 'Create failed', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      async function getSession() {
+        try {
+          const sid = sessionIdInput.value.trim();
+          if (!sid) return;
+          const res = await fetch(new URL(`/api/sessions/${encodeURIComponent(sid)}`, FIXED_SERVER).toString());
+          const j = await res.json();
+          sessionInfo.innerHTML = `<span class=chip>messages: ${escapeHtml(String(j.messageCount || 0))}</span><span class=chip>entities: ${j.entities ? j.entities.length : 0}</span>`;
+          addTimelineEvent({ kind: 'session', title: 'Session info', body: renderKV(j) });
+        } catch (e) {
+          addTimelineEvent({ kind: 'session', title: 'Get failed', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      async function deleteSession() {
+        try {
+          const sid = sessionIdInput.value.trim();
+          if (!sid) return;
+          const res = await fetch(new URL(`/api/sessions/${encodeURIComponent(sid)}`, FIXED_SERVER).toString(), { method: 'DELETE' });
+          const j = await res.json();
+          sessionInfo.innerHTML = '';
+          addTimelineEvent({ kind: 'session', title: 'Session delete', subtitle: JSON.stringify(j), tags: [{ text: j.deleted ? 'deleted' : 'not found', style: j.deleted ? 'ok' : 'warn' }] });
+        } catch (e) {
+          addTimelineEvent({ kind: 'session', title: 'Delete failed', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      // Wire up controls
+      btnStream.addEventListener('click', () => {
+        if (!query.value.trim()) return;
+        setStreamingState(true);
+        openSSE();
+      });
+      btnStop.addEventListener('click', () => { setStreamingState(false); closeSSE('manual'); });
+      btnNonStream.addEventListener('click', nonStreaming);
+      composerSendStream.addEventListener('click', () => {
+        const text = composer.value.trim();
+        if (!text) return;
+        query.value = text;
+        btnStream.click();
+      });
+      composerSendNonStream.addEventListener('click', () => {
+        const text = composer.value.trim();
+        if (!text) return;
+        query.value = text;
+        btnNonStream.click();
+      });
+      composer.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          const text = composer.value.trim();
+          if (!text) return;
+          query.value = text;
+          btnStream.click();
+        }
+      });
+      btnClear.addEventListener('click', () => { feed.innerHTML = ''; timeline.innerHTML = ''; raw.textContent = ''; currentAssistantBubble = null; currentThinkingBlock = null; assistantTextBuffer = ''; });
+      btnHealth.addEventListener('click', callHealth);
+      btnCreateSession.addEventListener('click', createSession);
+      btnGetSession.addEventListener('click', getSession);
+      btnDeleteSession.addEventListener('click', deleteSession);
+
+      // Keyboard: Esc to stop
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && started) { btnStop.click(); } });
+    })();
+  </script>
+</body>
+</html>
+
+
+
+ <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Legal Research – Streamlined Chat</title>
+  <style>
+    :root {
+      --bg-primary: #0f1419;
+      --bg-secondary: #1a1f26;
+      --surface: #222831;
+      --surface-hover: #2a303a;
+      --border: #363c48;
+      --border-light: #4a5568;
+      
+      --text-primary: #f7fafc;
+      --text-secondary: #e2e8f0;
+      --text-muted: #cbd5e1;
+      --text-subtle: #94a3b8;
+      
+      --user: #3b82f6;
+      --assistant: #10b981;
+      --thinking: #8b5cf6;
+      --tool: #f59e0b;
+      --system: #64748b;
+      
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      
+      --radius: 12px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    
+    body {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      height: 60px;
+      background: rgba(34, 40, 49, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      background: var(--surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-light);
+      color: var(--text-secondary);
+    }
+
+    /* Main Chat Container */
+    .chat-container {
+      height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      margin-bottom: 24px;
+      animation: messageSlide 0.3s ease-out;
+    }
+
+    @keyframes messageSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .avatar.user { background: linear-gradient(135deg, var(--user) 0%, #2563eb 100%); }
+    .avatar.assistant { background: linear-gradient(135deg, var(--assistant) 0%, #059669 100%); }
+    .avatar.thinking { background: linear-gradient(135deg, var(--thinking) 0%, #7c3aed 100%); }
+    .avatar.tool { background: linear-gradient(135deg, var(--tool) 0%, #d97706 100%); }
+    .avatar.system { background: linear-gradient(135deg, var(--system) 0%, #475569 100%); }
+
+    .message-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .message-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .message-time {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .message-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message.user .message-content {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .message.assistant .message-content {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .message.thinking .message-content {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+      border-color: rgba(139, 92, 246, 0.2);
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.tool .message-content {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    .message.system .message-content {
+      background: linear-gradient(135deg, rgba(100, 116, 139, 0.1) 0%, rgba(71, 85, 105, 0.05) 100%);
+      border-color: rgba(100, 116, 139, 0.2);
+      font-size: 14px;
+    }
+
+    /* Thinking Content */
+    .thinking-text {
+      white-space: pre-wrap;
+      color: var(--text-secondary);
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    /* Tool Content */
+    .tool-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tool-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--tool);
+    }
+
+    .tool-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-indicator.executing {
+      background: var(--warning);
+      animation: pulse 1s infinite;
+    }
+
+    .status-indicator.success {
+      background: var(--success);
+    }
+
+    .status-indicator.error {
+      background: var(--error);
+    }
+
+    .tool-details {
+      margin-top: 16px;
+    }
+
+    .tool-section {
+      margin-bottom: 16px;
+    }
+
+    .tool-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tool-params {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      color: var(--text-secondary);
+      overflow-x: auto;
+    }
+
+    .tool-result {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-height: 200px;
+      overflow-y: auto;
+      line-height: 1.4;
+    }
+
+    /* Collapsible Process Summary */
+    .process-summary {
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .process-header {
+      background: var(--surface-hover);
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s ease;
+    }
+
+    .process-header:hover {
+      background: var(--surface);
+    }
+
+    .process-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .process-toggle {
+      font-size: 12px;
+      color: var(--text-subtle);
+      transition: transform 0.2s ease;
+    }
+
+    .process-toggle.expanded {
+      transform: rotate(180deg);
+    }
+
+    .process-content {
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .process-content.expanded {
+      display: block;
+    }
+
+    .process-step {
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      font-size: 13px;
+      border-left: 3px solid var(--text-subtle);
+    }
+
+    .process-step.thinking {
+      border-left-color: var(--thinking);
+    }
+
+    .process-step.tool {
+      border-left-color: var(--tool);
+    }
+
+    /* Assistant Response */
+    .response-content {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .response-content h1,
+    .response-content h2,
+    .response-content h3,
+    .response-content h4 {
+      margin: 20px 0 12px 0;
+      line-height: 1.3;
+      color: var(--text-primary);
+    }
+
+    .response-content h2 {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .response-content p {
+      margin: 12px 0;
+    }
+
+    .response-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .response-content ul,
+    .response-content ol {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .response-content li {
+      margin: 6px 0;
+    }
+
+    /* Input Area */
+    .input-area {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      bottom: 0;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .input-field {
+      flex: 1;
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-family: inherit;
+      line-height: 1.4;
+      min-height: 48px;
+      max-height: 120px;
+      resize: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--user);
+    }
+
+    .input-field::placeholder {
+      color: var(--text-subtle);
+    }
+
+    .send-btn {
+      background: linear-gradient(135deg, var(--user) 0%, #2563eb 100%);
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: 12px 24px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 100px;
+      justify-content: center;
+    }
+
+    .send-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px -8px var(--user);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-light);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-subtle);
+    }
+
+    /* Settings Panel (Hidden by default) */
+    .settings-panel {
+      position: fixed;
+      top: 60px;
+      right: -400px;
+      width: 380px;
+      height: calc(100vh - 60px);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      transition: right 0.3s ease;
+      z-index: 90;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .settings-panel.open {
+      right: 0;
+    }
+
+    .settings-section {
+      margin-bottom: 24px;
+    }
+
+    .settings-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--user);
+    }
+
+    .form-textarea {
+      min-height: 80px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    .empty-text {
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .chat-container {
+        max-width: none;
+      }
+      
+      .messages-area {
+        padding: 16px;
+      }
+      
+      .input-area {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="status-dot"></div>
+      <span>Claude Legal Research</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn" id="toggleSettings">Settings</button>
+      <button class="btn" id="btnHealth">Health</button>
+    </div>
+  </header>
+
+  <div class="chat-container">
+    <div class="messages-area" id="messagesArea">
+      <div class="empty-state">
+        <div class="empty-icon">⚖️</div>
+        <h2 class="empty-title">Legal Research Assistant</h2>
+        <p class="empty-text">
+          Ask comprehensive legal questions and watch Claude's research process unfold in real-time. 
+          All thinking, tool execution, and analysis will be shown transparently.
+        </p>
+      </div>
+    </div>
+    
+    <div class="input-area">
+      <div class="input-container">
+        <textarea 
+          class="input-field" 
+          id="messageInput" 
+          placeholder="Ask a legal research question..."
+          rows="1"
+        ></textarea>
+        <button class="send-btn" id="sendButton">
+          <span id="sendText">Research</span>
+          <div class="spinner" id="sendSpinner" style="display: none;"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+

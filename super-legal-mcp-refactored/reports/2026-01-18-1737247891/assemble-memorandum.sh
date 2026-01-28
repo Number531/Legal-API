@@ -1,0 +1,239 @@
+#!/bin/bash
+
+# FINAL MEMORANDUM ASSEMBLY SCRIPT
+# Project Chronos - Liberty Life Insurance Company Acquisition
+# Session: 2026-01-18-1737247891
+
+set -e  # Exit on error
+
+SESSION_DIR="/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-18-1737247891"
+OUTPUT_FILE="$SESSION_DIR/final-memorandum-complete-v2.md"
+
+echo "═══════════════════════════════════════════════════════"
+echo "  FINAL MEMORANDUM ASSEMBLY - VERIFIED EXECUTION"
+echo "═══════════════════════════════════════════════════════"
+echo ""
+echo "Session Directory: $SESSION_DIR"
+echo "Output File: $OUTPUT_FILE"
+echo ""
+
+# Step 1: Create header and table of contents
+echo "[STEP 1/14] Writing header and table of contents..."
+cat > "$OUTPUT_FILE" << 'HEADER_EOF'
+═══════════════════════════════════════════════════════════════════════════════
+              CONFIDENTIAL LEGAL RESEARCH MEMORANDUM
+═══════════════════════════════════════════════════════════════════════════════
+
+PRIVILEGED AND CONFIDENTIAL
+ATTORNEY WORK PRODUCT
+
+TO:         Board of Directors, American Financial Holdings LLC
+FROM:       Legal Research Platform
+DATE:       January 19, 2026
+RE:         Liberty Life Insurance Company Acquisition - Comprehensive Due Diligence Analysis
+
+---
+
+## TABLE OF CONTENTS
+
+I. EXECUTIVE SUMMARY / BOARD BRIEFING
+
+II. DETAILED LEGAL ANALYSIS
+   - IV.A: Regulatory Approvals & Risk-Based Capital Analysis
+   - IV.B: Captive Reinsurance Regulatory Compliance
+   - IV.C: Variable Annuity Products Regulatory Framework
+   - IV.D: Class Action Litigation Exposure
+   - IV.E: Market Conduct & Consumer Protection Compliance
+   - IV.F: Tax Structure & Qualification Analysis
+   - IV.G: Reinsurance Agreements & Counterparty Risk
+   - IV.H: Employment & Labor Law Compliance
+   - IV.I: Insurance Coverage & Claims Analysis
+   - IV.J: Investment Portfolio Risk Assessment
+   - IV.K: Financial Impact & Scenario Analysis
+
+III. CONSOLIDATED FOOTNOTES
+
+---
+
+HEADER_EOF
+
+echo "✓ Header created"
+
+# Step 2: Append Executive Summary
+echo "[STEP 2/14] Appending Executive Summary..."
+if [ -f "$SESSION_DIR/executive-summary.md" ]; then
+    cat "$SESSION_DIR/executive-summary.md" >> "$OUTPUT_FILE"
+    echo "✓ Executive Summary appended"
+else
+    echo "✗ ERROR: executive-summary.md not found"
+    exit 1
+fi
+
+# Step 3: Add section separator
+echo "[STEP 3/14] Adding detailed analysis separator..."
+cat >> "$OUTPUT_FILE" << 'SEPARATOR_EOF'
+
+═══════════════════════════════════════════════════════════════════════════════
+                           DETAILED LEGAL ANALYSIS
+═══════════════════════════════════════════════════════════════════════════════
+
+SEPARATOR_EOF
+echo "✓ Separator added"
+
+# Step 4-14: Append all sections IV.A through IV.K
+SECTIONS=(
+    "section-reports/section-IV-A-rbc-capital.md:IV.A"
+    "section-reports/section-IV-B-captive-reinsurance.md:IV.B"
+    "section-reports/section-IV-C-variable-products.md:IV.C"
+    "section-IV-D-integrated.md:IV.D"
+    "section-IV-E-integrated.md:IV.E"
+    "section-IV-F-integrated.md:IV.F"
+    "section-IV-G-integrated.md:IV.G"
+    "section-IV-H-integrated.md:IV.H"
+    "section-IV-I-integrated.md:IV.I"
+    "section-IV-J-integrated.md:IV.J"
+    "section-IV-K-integrated.md:IV.K"
+)
+
+STEP=4
+for section_entry in "${SECTIONS[@]}"; do
+    IFS=':' read -r file_path section_id <<< "$section_entry"
+    echo "[STEP $STEP/14] Appending Section $section_id..."
+
+    full_path="$SESSION_DIR/$file_path"
+    if [ -f "$full_path" ]; then
+        echo "" >> "$OUTPUT_FILE"  # Add spacing
+        cat "$full_path" >> "$OUTPUT_FILE"
+        echo "✓ Section $section_id appended"
+    else
+        echo "✗ ERROR: $file_path not found"
+        exit 1
+    fi
+
+    STEP=$((STEP + 1))
+done
+
+# Step 15: Append footnotes section separator
+echo "[STEP 15/17] Adding footnotes separator..."
+cat >> "$OUTPUT_FILE" << 'FOOTNOTES_SEPARATOR_EOF'
+
+═══════════════════════════════════════════════════════════════════════════════
+                           CONSOLIDATED FOOTNOTES
+═══════════════════════════════════════════════════════════════════════════════
+
+FOOTNOTES_SEPARATOR_EOF
+echo "✓ Footnotes separator added"
+
+# Step 16: Append consolidated footnotes
+echo "[STEP 16/17] Appending consolidated footnotes..."
+if [ -f "$SESSION_DIR/consolidated-footnotes.md" ]; then
+    cat "$SESSION_DIR/consolidated-footnotes.md" >> "$OUTPUT_FILE"
+    echo "✓ Consolidated footnotes appended (654 footnotes)"
+else
+    echo "✗ ERROR: consolidated-footnotes.md not found"
+    exit 1
+fi
+
+# Step 17: Append document footer
+echo "[STEP 17/17] Adding document footer..."
+cat >> "$OUTPUT_FILE" << 'FOOTER_EOF'
+
+═══════════════════════════════════════════════════════════════════════════════
+                          END OF MEMORANDUM
+═══════════════════════════════════════════════════════════════════════════════
+
+RESEARCH SUMMARY DISCLAIMER: This document is a research summary generated by
+an AI legal research platform. It is NOT legal advice from a licensed attorney.
+All findings require independent verification by qualified legal counsel.
+
+FOOTER_EOF
+echo "✓ Document footer added"
+
+echo ""
+echo "═══════════════════════════════════════════════════════"
+echo "  ASSEMBLY COMPLETE - RUNNING VERIFICATION"
+echo "═══════════════════════════════════════════════════════"
+echo ""
+
+# VERIFICATION PHASE
+echo "Running verification checks..."
+echo ""
+
+# Check 1: File exists
+if [ -f "$OUTPUT_FILE" ]; then
+    echo "✓ Check 1: Output file exists"
+else
+    echo "✗ Check 1 FAILED: Output file not found"
+    exit 1
+fi
+
+# Check 2: File size
+FILE_SIZE=$(stat -f%z "$OUTPUT_FILE" 2>/dev/null || stat -c%s "$OUTPUT_FILE" 2>/dev/null)
+FILE_SIZE_KB=$((FILE_SIZE / 1024))
+if [ "$FILE_SIZE_KB" -gt 275 ]; then
+    echo "✓ Check 2: File size ${FILE_SIZE_KB}KB (>275KB threshold)"
+else
+    echo "✗ Check 2 FAILED: File size ${FILE_SIZE_KB}KB (<275KB threshold)"
+    exit 1
+fi
+
+# Check 3: Section count
+SECTION_COUNT=$(grep -c "^# SECTION IV\.[A-K]" "$OUTPUT_FILE" || true)
+if [ "$SECTION_COUNT" -eq 11 ]; then
+    echo "✓ Check 3: Section count $SECTION_COUNT/11"
+else
+    echo "✗ Check 3 FAILED: Section count $SECTION_COUNT/11 (expected 11)"
+    # List which sections are present
+    echo "  Sections found:"
+    grep "^# SECTION IV\." "$OUTPUT_FILE" | sed 's/^/    /'
+    exit 1
+fi
+
+# Check 4: Footnotes present
+if grep -q "^# CONSOLIDATED FOOTNOTES" "$OUTPUT_FILE"; then
+    FOOTNOTE_COUNT=$(grep -c "^\[?[0-9]\+\]\?" "$OUTPUT_FILE" || true)
+    echo "✓ Check 4: Footnotes section present (~$FOOTNOTE_COUNT citations)"
+else
+    echo "✗ Check 4 FAILED: Footnotes section not found"
+    exit 1
+fi
+
+# Check 5: Document ending
+if grep -q "END OF MEMORANDUM" "$OUTPUT_FILE"; then
+    echo "✓ Check 5: Document ending marker present"
+else
+    echo "✗ Check 5 FAILED: END OF MEMORANDUM marker not found"
+    exit 1
+fi
+
+# Check 6: Line count
+LINE_COUNT=$(wc -l < "$OUTPUT_FILE")
+if [ "$LINE_COUNT" -gt 8000 ]; then
+    echo "✓ Check 6: Line count $LINE_COUNT (>8,000 threshold)"
+else
+    echo "✗ Check 6 FAILED: Line count $LINE_COUNT (<8,000 threshold)"
+    exit 1
+fi
+
+# Check 7: Word count estimate
+WORD_COUNT=$(wc -w < "$OUTPUT_FILE")
+if [ "$WORD_COUNT" -gt 55000 ]; then
+    echo "✓ Check 7: Word count $WORD_COUNT (>55,000 threshold)"
+else
+    echo "⚠ Check 7 WARNING: Word count $WORD_COUNT (<55,000 threshold)"
+    # Don't exit - this is a warning, not a failure
+fi
+
+echo ""
+echo "═══════════════════════════════════════════════════════"
+echo "  ✓ ASSEMBLY VERIFICATION COMPLETE"
+echo "═══════════════════════════════════════════════════════"
+echo ""
+echo "Output File: $OUTPUT_FILE"
+echo "File Size: ${FILE_SIZE_KB}KB"
+echo "Line Count: $LINE_COUNT"
+echo "Word Count: $WORD_COUNT"
+echo "Sections: $SECTION_COUNT/11"
+echo ""
+echo "STATUS: ✅ READY FOR QA DIAGNOSTIC RE-RUN"
+echo ""

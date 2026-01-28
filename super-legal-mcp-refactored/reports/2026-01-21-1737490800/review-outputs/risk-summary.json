@@ -1,0 +1,689 @@
+{
+  "status": "COMPLETE",
+  "generation_date": "2026-01-21",
+  "session_id": "2026-01-21-1737490800",
+  "methodology": "Pre-extracted exposures from fact-registry.md SECTION 9, validated against financial-impact-analysis.md and research-review-report.md HIGH SEVERITY FINDINGS table",
+
+  "summary": {
+    "total_risks": 22,
+    "total_gross_exposure": "$1,652.3M",
+    "total_weighted_exposure": "$381.17M",
+    "total_correlation_adjusted": "$335.17M",
+    "diversification_benefit": "$46.0M",
+    "diversification_percentage": "12.1%",
+    "as_percent_of_purchase_price": "11.6%",
+    "recommended_escrow": "$400M",
+    "recommended_price_adjustment": "$200M-$250M",
+    "blended_irr_with_mitigations": "12.35%"
+  },
+
+  "by_severity": {
+    "CRITICAL": {
+      "count": 3,
+      "gross": "$1,103M",
+      "weighted": "$256.3M",
+      "percent_of_total": "67.2%",
+      "findings": [
+        "RBC Capital Injection Required ($150M, 100%)",
+        "Vermont Captive Recapture ($730M-$880M, 12.5%)",
+        "GMWB + Captive Combined Stress ($857M-$973M, 0.625%)"
+      ]
+    },
+    "HIGH": {
+      "count": 6,
+      "gross": "$310.8M",
+      "weighted": "$160.93M",
+      "percent_of_total": "42.2%",
+      "findings": [
+        "Agent Attrition Net ($130M-$163M, 75%)",
+        "Global Re LOC Renewal ($765M-$850M, 12.5%)",
+        "Investment Interest Rate Stress ($85M-$120M, 30%)",
+        "IUL Settlement Net ($6.5M-$12.5M, distributed)",
+        "GMWB 95th Percentile ($127M, 5%)",
+        "GMWB 99th Percentile ($243M, 1%)"
+      ]
+    },
+    "MEDIUM": {
+      "count": 9,
+      "gross": "$217.65M",
+      "weighted": "$103.42M",
+      "percent_of_total": "27.1%",
+      "findings": [
+        "GMWB Base Case ($36M-$72M, 95%)",
+        "Retention Bonuses Cost ($15M-$25M, 100%)",
+        "Swiss Re Downgrade ($800M-$1.2B, 2%)",
+        "Credit Defaults ($31M-$51M, 40%)",
+        "Mortgage Defaults ($50M, 25%)",
+        "Variable Products E&O ($5.4M-$7.15M, 100%)",
+        "WARN Act Risk ($5.1M-$5.4M, 50%)",
+        "Market Conduct Exam ($1.2M-$2.35M, 100%)",
+        "FINRA Latent ($1.85M-$3.7M, 40%)"
+      ]
+    },
+    "LOW": {
+      "count": 4,
+      "gross": "$20.838M",
+      "weighted": "$11.11M",
+      "percent_of_total": "2.9%",
+      "findings": [
+        "Executive Severance ($8M-$12M, 100%)",
+        "FINRA Current Arbitrations ($555K-$788K, 100%)",
+        "Swiss Re Minimal ($8M-$36M, 2%)",
+        "Munich Re Default ($25K-$50K, 0.5%)"
+      ]
+    }
+  },
+
+  "by_category": {
+    "regulatory_compliance": {
+      "count": 3,
+      "gross": "$6.95M",
+      "weighted": "$8.43M",
+      "percent_of_total": "2.2%",
+      "findings": [
+        "Market Conduct Exam (T6): $1.5M weighted",
+        "Variable Products Securities (T3): $6.28M weighted",
+        "FINRA Arbitrations (T7): $0.67M + $1.11M latent"
+      ]
+    },
+    "capital_adequacy": {
+      "count": 6,
+      "gross": "$1,263M",
+      "weighted": "$307.91M",
+      "percent_of_total": "80.7%",
+      "findings": [
+        "RBC Capital Injection (T1): $150M weighted (100% certain)",
+        "Captive Recapture (T2): $100.6M weighted (12.5% prob)",
+        "GMWB Base Case (T9): $42.98M weighted",
+        "GMWB 95th Percentile (T9): $6.35M weighted",
+        "GMWB 99th Percentile (T9): $2.43M weighted",
+        "GMWB + Captive Combined (T9+T2): $5.7M weighted (0.625% joint prob)"
+      ]
+    },
+    "litigation": {
+      "count": 1,
+      "gross": "$25M-$45M",
+      "weighted": "$8.3M",
+      "percent_of_total": "2.2%",
+      "findings": [
+        "IUL Class Action Settlement (T4): $30M-$35M target, $8.3M net after E&O coverage"
+      ]
+    },
+    "counterparty_credit": {
+      "count": 4,
+      "gross": "$1,646.5M",
+      "weighted": "$116.04M",
+      "percent_of_total": "30.4%",
+      "findings": [
+        "Global Re LOC Renewal (T5): $95.6M weighted (12.5% prob)",
+        "Swiss Re Downgrade (T5): $20M weighted (2% prob)",
+        "Munich Re Default (T5): $0.19K weighted (0.5% prob)",
+        "Investment Portfolio Stress (T8): $59.65M weighted (credit + mortgage + rate stress)"
+      ]
+    },
+    "operations_distribution": {
+      "count": 4,
+      "gross": "$205.6M",
+      "weighted": "$142.53M",
+      "percent_of_total": "37.4%",
+      "findings": [
+        "Agent Attrition Net (T10): $109.9M weighted (75% prob, after mitigation)",
+        "Retention Bonuses Cost (T10): $20M weighted (100% certain)",
+        "Executive Severance (T10): $10M weighted (100% certain)",
+        "WARN Act Risk (T10): $2.63M weighted (50% prob)"
+      ]
+    },
+    "tax_structure": {
+      "count": 1,
+      "gross": "$150M",
+      "weighted": "$150M",
+      "percent_of_total": "39.4%",
+      "note": "Capital injection is required investment, not a loss, but included for completeness",
+      "findings": [
+        "Capital Injection via Surplus Notes (T11): $150M, 5.14% after-tax cost, NPV optimal structure"
+      ]
+    }
+  },
+
+  "top_10_risks": [
+    {
+      "rank": 1,
+      "finding": "RBC Capital Injection Required",
+      "source": "T1: Insurance Regulation",
+      "severity": "CRITICAL",
+      "probability": "100%",
+      "exposure_low": "$150M",
+      "exposure_high": "$150M",
+      "weighted": "$150M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "Surplus notes structure (100% TAC credit, 5.14% after-tax cost, Nebraska DOI approval 95% probability)"
+    },
+    {
+      "rank": 2,
+      "finding": "Agent Attrition (Net After Mitigation)",
+      "source": "T10: Agent Retention",
+      "severity": "HIGH",
+      "probability": "75%",
+      "exposure_low": "$130M",
+      "exposure_high": "$163M",
+      "weighted": "$109.9M",
+      "time_profile": "MULTI_YEAR",
+      "mitigation": "$20M retention bonus program (ROI 450%, reduces attrition from 25% to 10-15%)"
+    },
+    {
+      "rank": 3,
+      "finding": "Vermont Captive Recapture",
+      "source": "T2: Captive Reinsurance",
+      "severity": "CRITICAL",
+      "probability": "12.5%",
+      "exposure_low": "$730M",
+      "exposure_high": "$880M",
+      "weighted": "$100.6M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "$300M LOC backstop (reduces probability to 5-8%, annual cost $2.55M-$3.45M)"
+    },
+    {
+      "rank": 4,
+      "finding": "Global Re LOC Renewal Risk",
+      "source": "T5: Reinsurance Counterparty",
+      "severity": "HIGH",
+      "probability": "12.5%",
+      "exposure_low": "$765M",
+      "exposure_high": "$850M",
+      "weighted": "$95.6M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "LOC renewal confirmation through 2030 or alternative reinsurer substitution"
+    },
+    {
+      "rank": 5,
+      "finding": "GMWB Tail Risk (Base Case)",
+      "source": "T9: GMWB Actuarial",
+      "severity": "MEDIUM",
+      "probability": "95% (50th-75th percentile)",
+      "exposure_low": "$36M",
+      "exposure_high": "$72M",
+      "weighted": "$42.98M",
+      "time_profile": "MULTI_YEAR",
+      "mitigation": "Excess of loss reinsurance $100M xs $50M (annual premium $2.0M-$2.8M)"
+    },
+    {
+      "rank": 6,
+      "finding": "Investment Portfolio Interest Rate Stress",
+      "source": "T8: Investment Portfolio",
+      "severity": "HIGH",
+      "probability": "30%",
+      "exposure_low": "$85M",
+      "exposure_high": "$120M",
+      "weighted": "$30.75M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "Market-driven risk, limited controllability, duration gap -0.7 years"
+    },
+    {
+      "rank": 7,
+      "finding": "Retention Bonuses (Cost)",
+      "source": "T10: Agent Retention",
+      "severity": "MEDIUM",
+      "probability": "100%",
+      "exposure_low": "$15M",
+      "exposure_high": "$25M",
+      "weighted": "$20M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "N/A - This is mitigation cost itself (ROI 450% net benefit $37.2M)"
+    },
+    {
+      "rank": 8,
+      "finding": "Swiss Re Downgrade Risk",
+      "source": "T5: Reinsurance Counterparty",
+      "severity": "MEDIUM",
+      "probability": "2%",
+      "exposure_low": "$800M",
+      "exposure_high": "$1.2B",
+      "weighted": "$20M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "A+ rating, authorized reinsurer, minimal risk given rating stability"
+    },
+    {
+      "rank": 9,
+      "finding": "Below-IG Credit Defaults (Recession)",
+      "source": "T8: Investment Portfolio",
+      "severity": "MEDIUM",
+      "probability": "40%",
+      "exposure_low": "$31M",
+      "exposure_high": "$51M",
+      "weighted": "$16.4M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "Portfolio diversification, 7% below-IG concentration (vs 4.8% industry avg)"
+    },
+    {
+      "rank": 10,
+      "finding": "Commercial Mortgage Office Defaults",
+      "source": "T8: Investment Portfolio",
+      "severity": "MEDIUM",
+      "probability": "25%",
+      "exposure_low": "$50M",
+      "exposure_high": "$50M",
+      "weighted": "$12.5M",
+      "time_profile": "ONE_TIME",
+      "mitigation": "CRE risk driven by WFH trend, office exposure $500M (35% of CML portfolio)"
+    }
+  ],
+
+  "deal_blocking_scenarios": [
+    {
+      "scenario": "Vermont Captive Recapture (Scenario 3)",
+      "trigger": "Nebraska DOI final examination report (Q1 2025) disallows $850M reserve credit",
+      "probability": "12.5%",
+      "combined_exposure": "$730M-$880M",
+      "rbc_impact": "188% → 129% (Regulatory Action Level 100-150%)",
+      "viability": "CRITICAL - DEAL-BLOCKING IF TRIGGERED",
+      "consequence": "Nebraska DOI authorized to seize company; rating downgrade A- → BBB; transaction likely fails state approval",
+      "mitigation": "$300M LOC backstop pre-closing (reduces probability to 5-8%), OR $150M purchase price reduction",
+      "mitigation_cost": "$2.55M-$3.45M annually (LOC fees)",
+      "benefit_to_cost_ratio": "16.8× to 22.8×"
+    },
+    {
+      "scenario": "Combined GMWB 95th Percentile + Captive Recapture",
+      "trigger": "Simultaneous: (1) Captive recapture 12.5% AND (2) GMWB 95th percentile stress 5%",
+      "joint_probability": "0.625%",
+      "combined_exposure": "$857M",
+      "rbc_impact": "188% → 101% (Regulatory Action Level, above 100% ACL)",
+      "viability": "CRITICAL - DEAL-BLOCKING",
+      "consequence": "RBC 101% triggers corrective action; no prudent acquirer closes with active regulatory intervention; conservatorship risk within 12-24 months",
+      "mitigation": "Dual: (1) Captive LOC $300M + (2) GMWB reinsurance excess of loss $100M xs $50M",
+      "mitigation_cost": "$4.55M-$6.25M annually combined",
+      "joint_probability_after_mitigation": "<0.3% (ACCEPTABLE)"
+    },
+    {
+      "scenario": "Combined GMWB 99th Percentile + Captive Recapture (Catastrophic)",
+      "trigger": "Simultaneous: (1) Captive recapture 12.5% AND (2) GMWB 99th percentile stress 1%",
+      "joint_probability": "0.125%",
+      "combined_exposure": "$973M",
+      "rbc_impact": "188% → 90% (Below 100% Authorized Control Level)",
+      "viability": "CATASTROPHIC - MANDATORY REGULATORY SEIZURE",
+      "consequence": "RBC <100% ACL requires Nebraska DOI seizure unless 90-day cure; deal unwinds; $2.9B transaction fails",
+      "mitigation": "Same dual mitigation reduces probability to <0.1%",
+      "mitigation_cost": "$4.55M-$6.25M annually",
+      "note": "Even at <0.15% probability, severity is catastrophic; mitigation IMPERATIVE"
+    }
+  ],
+
+  "scenarios": {
+    "base_case": {
+      "percentile": "50th",
+      "probability": "50%",
+      "total_exposure": "$434M",
+      "rbc_ratio": "179%",
+      "status": "Below 200% CAL, requires Nebraska DOI Plan, manageable",
+      "description": "No captive recapture, median GMWB ($54M), mild rate rise, 20% agent attrition, litigation within reserves"
+    },
+    "bear_case": {
+      "percentile": "75th",
+      "probability": "25%",
+      "total_exposure": "$771M",
+      "rbc_ratio": "162%",
+      "status": "Above 150% RAL but materially below 200% CAL; requires enhanced Plan + potential supplemental capital",
+      "description": "No captive recapture, 75th GMWB ($90M), Global Re LOC fails, 30% agent attrition, IUL settlement exceeds reserve"
+    },
+    "severe_downside": {
+      "percentile": "95th",
+      "probability": "5%",
+      "total_exposure": "$1,614M",
+      "rbc_ratio": "79%",
+      "status": "BETWEEN ACL (70-100%) AND MCL (<70%); Nebraska DOI authorized to seize; DEAL-BLOCKING",
+      "description": "Captive recaptures ($730M), 95th GMWB ($127M), severe investment stress, deep recession, 35% agent attrition"
+    },
+    "catastrophic": {
+      "percentile": "99th",
+      "probability": "1%",
+      "total_exposure": "$2,100M+",
+      "rbc_ratio": "45%",
+      "status": "BELOW 70% MCL; MANDATORY CONTROL LEVEL; Nebraska DOI MUST seize unless 90-day cure",
+      "description": "Captive recaptures, 99th GMWB ($243M), multiple reinsurer failures, black swan market event"
+    }
+  },
+
+  "exposure_ranges": {
+    "p10_optimistic": "$280M",
+    "p25_conservative": "$350M",
+    "p50_expected": "$434M",
+    "p75_bear": "$771M",
+    "p90_stress": "$1,150M",
+    "p95_severe": "$1,614M",
+    "p99_catastrophic": "$2,100M+"
+  },
+
+  "escrow_recommendation": {
+    "amount": "$400M",
+    "duration": "24 months",
+    "allocation": {
+      "captive_recapture": {
+        "amount": "$150M",
+        "release_trigger": "Nebraska DOI final exam report (Q1 2025) confirms no recapture required",
+        "timeline": "Month 3-6"
+      },
+      "agent_attrition": {
+        "amount": "$100M",
+        "release_trigger": "Actual attrition ≤25% at Month 24; release proportionally",
+        "timeline": "Month 24"
+      },
+      "gmwb_investment_stress": {
+        "amount": "$80M",
+        "release_trigger": "RBC ratio >180% for 18 consecutive months",
+        "timeline": "Month 18-24"
+      },
+      "global_re_reinsurance": {
+        "amount": "$40M",
+        "release_trigger": "Global Re LOC renewed through 2030; no counterparty defaults",
+        "timeline": "Month 12-18"
+      },
+      "litigation": {
+        "amount": "$30M",
+        "release_trigger": "IUL settles ≤$40M; no new class actions filed",
+        "timeline": "Month 12-18"
+      }
+    },
+    "release_schedule": {
+      "month_12": "25% ($100M) if captive cleared + attrition ≤15% Year 1",
+      "month_18": "25% ($100M) if RBC >180% for 12 months + Global Re renewed",
+      "month_24": "50% ($200M) if all conditions met"
+    },
+    "interest_on_escrow": "5.0% annually credited to seller",
+    "coverage_analysis": {
+      "base_case_coverage": "92% ($400M escrow / $434M base exposure)",
+      "bear_case_coverage": "52% ($400M escrow / $771M bear exposure) - industry standard 40-60%",
+      "severe_case_coverage": "25% ($400M escrow / $1,614M severe exposure) - acceptable given 5% probability"
+    }
+  },
+
+  "escrow_analysis": {
+    "recommended_amount": 400000000,
+    "calculation_basis": "HIGH_severity_total × 1.2 buffer + captive recapture allocation $150M",
+    "coverage_ratio": 0.52,
+    "coverage_rating": "ADEQUATE",
+    "largest_exposure": 730000000,
+    "largest_exposure_covered": false,
+    "largest_exposure_note": "Captive recapture $730M exceeds escrow, but probability only 12.5%; partial coverage $150M allocated",
+    "time_horizon_status": "ALIGNED",
+    "recommended_release_schedule": "25% at 12mo, 25% at 18mo, 50% at 24mo",
+    "adequacy_flags": [
+      "Escrow covers 92% of base case (50th percentile) exposure",
+      "Escrow covers 52% of bear case (75th percentile) - within industry standard 40-60%",
+      "Captive recapture $730M exceeds total escrow; mitigation via LOC backstop required"
+    ]
+  },
+
+  "correlation_adjustments": {
+    "methodology": "Portfolio correlation theory applied to major risk clusters; correlation coefficients based on financial theory and 2008-2009 crisis precedent",
+    "raw_total": 381170000,
+    "adjusted_total": 335170000,
+    "adjustment_applied": 46000000,
+    "diversification_benefit_percent": "12.1%",
+    "correlation_matrix": {
+      "gmwb_x_investment_stress": {
+        "correlation": 0.85,
+        "rationale": "Both driven by equity declines + rate shocks; 2008 analog showed high correlation"
+      },
+      "gmwb_x_captive_recapture": {
+        "correlation": 0.75,
+        "rationale": "Both triggered by capital pressure and market stress; regulatory scrutiny increases in parallel"
+      },
+      "investment_x_credit_defaults": {
+        "correlation": 0.70,
+        "rationale": "Rate stress coincides with recession credit stress; macroeconomic drivers correlated"
+      },
+      "agent_attrition_x_captive": {
+        "correlation": 0.60,
+        "rationale": "RBC decline triggers rating downgrade → agent exits; capital pressure drives distribution instability"
+      },
+      "credit_x_mortgage_losses": {
+        "correlation": 0.65,
+        "rationale": "Both driven by recession / CRE downturn; credit cycle correlation"
+      },
+      "captive_x_global_re": {
+        "correlation": 0.45,
+        "rationale": "Both reinsurance issues but different triggers; moderate correlation"
+      }
+    },
+    "clusters": {
+      "independent_risks": {
+        "total": 47860000,
+        "risks": ["IUL Settlement", "Variable Products E&O", "Market Conduct Exam", "FINRA Arbitrations", "Retention Bonuses", "Severance"]
+      },
+      "market_capital_stress_cluster": {
+        "raw_total": 203250000,
+        "correlation_adjustment": -0.15,
+        "adjusted_total": 172762500,
+        "risks": ["Captive Recapture", "GMWB Tail", "Investment Stress", "Credit Defaults", "Mortgage Losses"]
+      },
+      "distribution_channel_cluster": {
+        "raw_total": 124510000,
+        "correlation_adjustment": -0.08,
+        "adjusted_total": 114549200,
+        "risks": ["Agent Attrition", "WARN Act", "Global Re LOC"]
+      }
+    }
+  },
+
+  "findings_by_domain": [
+    {
+      "domain": "Insurance Regulation & RBC Capital",
+      "specialist": "T1: regulatory-rulemaking-analyst",
+      "exposure": 150000000,
+      "probability": 1.0,
+      "weighted_exposure": 150000000,
+      "severity": "CRITICAL",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "RBC 188% below 200% CAL; $150M capital injection required via surplus notes (optimal structure)"
+    },
+    {
+      "domain": "Captive Reinsurance",
+      "specialist": "T2: commercial-contracts-analyst",
+      "exposure": 805000000,
+      "probability": 0.125,
+      "weighted_exposure": 100600000,
+      "severity": "CRITICAL",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Vermont captive $850M reserves, $730M parental guarantee (2.6× leverage), 12.5% recapture risk"
+    },
+    {
+      "domain": "Variable Products Securities",
+      "specialist": "T3: securities-researcher",
+      "exposure": 6275000,
+      "probability": 1.0,
+      "weighted_exposure": 6275000,
+      "severity": "MEDIUM",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "SEC prospectus deficiency, FINRA violations, E&O exposure $5.4M-$7.15M within $5M SIR"
+    },
+    {
+      "domain": "IUL Class Action Litigation",
+      "specialist": "T4: case-law-analyst",
+      "exposure": 32500000,
+      "probability": 1.0,
+      "weighted_exposure": 8300000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Thompson v. Liberty Life, settlement $30M-$35M target, $8.3M net after E&O coverage"
+    },
+    {
+      "domain": "Reinsurance Counterparty Risk",
+      "specialist": "T5: commercial-contracts-analyst",
+      "exposure": 129500000,
+      "probability": 1.0,
+      "weighted_exposure": 115600000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Global Re $850M LOC renewal risk, Swiss Re downgrade risk, total weighted $115.6M"
+    },
+    {
+      "domain": "Market Conduct Examination",
+      "specialist": "T6: regulatory-rulemaking-analyst",
+      "exposure": 1500000,
+      "probability": 1.0,
+      "weighted_exposure": 1500000,
+      "severity": "MEDIUM",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Nebraska DOI 2024 exam, 20 violations, fines $100K-$200K + corrective actions $900K"
+    },
+    {
+      "domain": "FINRA Arbitrations",
+      "specialist": "T7: case-law-analyst",
+      "exposure": 1890000,
+      "probability": 1.0,
+      "weighted_exposure": 1780000,
+      "severity": "LOW-MEDIUM",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "3 pending VA suitability arbitrations + latent exposure, total $1.66M-$1.89M"
+    },
+    {
+      "domain": "Investment Portfolio Risk",
+      "specialist": "T8: financial-analyst",
+      "exposure": 221000000,
+      "probability": 1.0,
+      "weighted_exposure": 59650000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Interest rate stress $30.75M weighted, credit defaults $16.4M, mortgage losses $12.5M"
+    },
+    {
+      "domain": "GMWB Tail Risk",
+      "specialist": "T9: financial-analyst / actuary",
+      "exposure": 243000000,
+      "probability": 1.0,
+      "weighted_exposure": 42980000,
+      "severity": "CRITICAL",
+      "time_profile": "MULTI_YEAR",
+      "finding_summary": "Monte Carlo 10K scenarios: median $36M, 95th $127M, 99th $243M; combined with captive = RBC 101%"
+    },
+    {
+      "domain": "Agent Retention & Distribution",
+      "specialist": "T10: employment-labor-analyst",
+      "exposure": 163000000,
+      "probability": 0.75,
+      "weighted_exposure": 142530000,
+      "severity": "HIGH",
+      "time_profile": "MULTI_YEAR",
+      "finding_summary": "20-30% attrition risk, $109.9M net after $20M retention bonuses (ROI 450%)"
+    },
+    {
+      "domain": "Tax Structure & Capital Injection",
+      "specialist": "T11: tax-structure-analyst",
+      "exposure": 150000000,
+      "probability": 1.0,
+      "weighted_exposure": 150000000,
+      "severity": "CERTAIN",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "Surplus notes optimal: 100% TAC credit, 5.14% after-tax cost, $39.71M NPV advantage vs equity"
+    }
+  ],
+
+  "quantification_methodology": {
+    "sources_scanned": 11,
+    "findings_extracted": 22,
+    "extraction_source": "Pre-extracted from fact-registry.md SECTION 9: QUANTIFIED EXPOSURES BY DOMAIN",
+    "validation_sources": [
+      "financial-impact-analysis.md (comprehensive risk aggregation)",
+      "research-review-report.md (HIGH SEVERITY FINDINGS table)"
+    ],
+    "probability_methodology": "Per-finding analyst estimates based on: (1) regulatory precedent, (2) industry benchmarks, (3) Monte Carlo simulation (GMWB), (4) scenario analysis (investment stress), (5) actuarial modeling (agent attrition)",
+    "correlation_methodology": "Portfolio correlation theory with correlation matrix (0.45-0.85 coefficients) based on 2008-2009 financial crisis empirical data and risk factor analysis",
+    "time_profile_classification": {
+      "ONE_TIME": "Single event, near-term (face value, no adjustment)",
+      "MULTI_YEAR": "Phased program, defined end (DCF at 8% discount rate)",
+      "PERPETUAL": "Recurring annually, no end (NPV at 8% capitalization rate)"
+    },
+    "currency": "USD",
+    "as_of_date": "2026-01-21",
+    "discount_rate": "8%",
+    "capitalization_rate": "8%"
+  },
+
+  "critical_conditions_precedent": [
+    {
+      "condition_id": 1,
+      "priority": "DEAL-BLOCKER",
+      "description": "Vermont captive $300M LOC backstop implemented pre-closing OR $150M purchase price reduction",
+      "rationale": "Captive recapture 12.5% probability drives RBC to 129% (Regulatory Action Level); deal likely fails without mitigation",
+      "cost": "$2.55M-$3.45M annually (LOC fees)",
+      "benefit": "Reduces recapture probability from 12.5% to 5-8%; expected value savings $58.1M",
+      "status": "REQUIRED"
+    },
+    {
+      "condition_id": 2,
+      "priority": "DEAL-BLOCKER",
+      "description": "Nebraska DOI final examination report (Q1 2025) does NOT order captive recapture or collateral >$500M",
+      "rationale": "If Nebraska orders recapture, RBC falls to 129% even with $150M injection; transaction likely fails state approval",
+      "timeline": "Q1 2025 (before Q3 2025 expected closing)",
+      "status": "REQUIRED"
+    },
+    {
+      "condition_id": 3,
+      "priority": "STRONGLY_RECOMMENDED",
+      "description": "$400M escrow for 24 months OR $200M-$250M purchase price adjustment",
+      "rationale": "Escrow covers 92% of base case exposure ($434M), 52% of bear case ($771M) - industry standard",
+      "alternative": "$225M price adjustment (70% of $335M correlation-adjusted exposure per M&A standard)",
+      "status": "STRONGLY_RECOMMENDED"
+    },
+    {
+      "condition_id": 4,
+      "priority": "STRONGLY_RECOMMENDED",
+      "description": "Global Re $850M LOC renewal confirmed through 2030 or alternative reinsurer secured pre-closing",
+      "rationale": "Global Re LOC failure = $95.6M weighted exposure; LOC expires 2027, renewal critical",
+      "status": "STRONGLY_RECOMMENDED"
+    },
+    {
+      "condition_id": 5,
+      "priority": "HIGH",
+      "description": "IUL class action mediation accelerated to Q1-Q2 2025 with settlement target ≤$35M",
+      "rationale": "Settlement within $35M reserve avoids incremental surplus charge; mediation scheduled Q2 2025",
+      "status": "RECOMMENDED"
+    },
+    {
+      "condition_id": 6,
+      "priority": "HIGH",
+      "description": "$20M agent retention bonus program funded at closing",
+      "rationale": "Reduces attrition from 25% to 10-15%; ROI 450%; net benefit $37.2M over 2 years",
+      "status": "RECOMMENDED"
+    }
+  ],
+
+  "post_closing_commitments": [
+    {
+      "commitment": "GMWB reinsurance excess of loss ($100M xs $50M) executed within 6 months",
+      "cost": "$2.0M-$2.8M annually",
+      "benefit": "Caps GMWB tail loss at $50M (vs $127M-$243M); reduces combined stress RBC impact"
+    },
+    {
+      "commitment": "RBC >180% quarterly monitoring; supplemental capital $50M-$100M if RBC falls <190%",
+      "trigger": "RBC <190% requires $50M-$100M injection within 60 days; RBC <180% requires $100M-$150M within 90 days",
+      "total_backstop": "$250M available (in addition to $150M initial injection)"
+    },
+    {
+      "commitment": "R&W insurance $150M limit ($15M SIR) for unknown environmental, litigation, tax, regulatory risks",
+      "cost": "$2.25M-$3.0M annually (6-year tail period)",
+      "coverage_gaps": ["Environmental $50M sublimit", "Unknown litigation $30M", "Tax liability $25M", "Regulatory fines $20M"]
+    }
+  ],
+
+  "investment_returns": {
+    "base_case_irr": "14.2%",
+    "bear_case_irr": "9.8%",
+    "severe_downside_irr_unmitigated": "3.2%",
+    "severe_downside_irr_mitigated": "6.0%",
+    "blended_irr_probability_weighted": "12.35%",
+    "hurdle_rate": "10%",
+    "recommendation": "PROCEED - Blended IRR 12.35% exceeds 10% PE-backed insurance acquisition hurdle rate"
+  },
+
+  "purchase_price_impact": {
+    "original_price": "$2.9B",
+    "correlation_adjusted_exposure": "$335.17M",
+    "industry_adjustment_factor": "70%",
+    "recommended_adjustment": "$234.6M",
+    "rounded_recommendation": "$200M-$250M",
+    "midpoint": "$225M",
+    "adjusted_purchase_price": "$2.675B",
+    "required_capital_deployment": "$170M ($150M injection + $20M retention bonuses)",
+    "total_cash_at_closing": "$2.845B"
+  }
+}

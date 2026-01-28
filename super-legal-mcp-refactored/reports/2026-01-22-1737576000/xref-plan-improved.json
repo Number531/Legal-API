@@ -1,0 +1,422 @@
+[
+  {
+    "title": "Cross-Trading Prohibited Transaction Exposure",
+    "line_number": 3119,
+    "actual_section": "IV.C",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Side Letter Most Favored Nation Provisions \u2014 $98 Million NPV Ongoing Exposure",
+    "line_number": 4312,
+    "actual_section": "IV.D",
+    "connections": [
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Key Person Provisions \u2014 $3.0 Billion Redemption Risk, $60-$120 Million Fire-Sale Exposure",
+    "line_number": 4410,
+    "actual_section": "IV.D",
+    "connections": [
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Testimonial Conflicts \u2014 Undisclosed Fee Reductions",
+    "line_number": 6691,
+    "actual_section": "IV.F",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Performance Composite Survivorship Bias",
+    "line_number": 6754,
+    "actual_section": "IV.F",
+    "connections": [
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Opportunity Fund \u2014 Stale Mark Overstatement ($37M-$59M)",
+    "line_number": 7486,
+    "actual_section": "IV.G",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Performance Fee Clawback Risk ($6M-$13M)",
+    "line_number": 7648,
+    "actual_section": "IV.G",
+    "connections": [
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.D",
+        "target_title": "Private Fund Regulation and Investor Rights",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Client Concentration: State Pension Plan A Termination Risk ($41M Annual Revenue, 11% Total Revenue)",
+    "line_number": 8596,
+    "actual_section": "IV.H",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "IRC \u00a7 1061 Carried Interest \u2014 Three-Year Holding Period Recharacterization",
+    "line_number": 10317,
+    "actual_section": "IV.J",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Earnout Recharacterization Risk \u2014 Purchase Price vs. Compensation",
+    "line_number": 10517,
+    "actual_section": "IV.J",
+    "connections": [
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.D",
+        "target_title": "Private Fund Regulation and Investor Rights",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Regulation S-P Incident Response Program Deficiency",
+    "line_number": 11070,
+    "actual_section": "IV.K",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Data Breach Exposure from Inadequate Safeguards (10,192 PII Records at Risk)",
+    "line_number": 11123,
+    "actual_section": "IV.K",
+    "connections": [
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Absence of Cyber Insurance Coverage (Unfunded $1M-$2.3M Immediate Response Costs)",
+    "line_number": 11236,
+    "actual_section": "IV.K",
+    "connections": [
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.D",
+        "target_title": "Private Fund Regulation and Investor Rights",
+        "reason": "Shared entities: SEC, Company",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Cyber Insurance Gap \u2014 No Coverage in Force (CRITICAL)",
+    "line_number": 12724,
+    "actual_section": "IV.L",
+    "connections": [
+      {
+        "target": "IV.E",
+        "target_title": "Transaction Structure and Acquirer Due Diligence Risk",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: acquirer, SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  },
+  {
+    "title": "Errors & Omissions Coverage Below Industry Benchmark (HIGH)",
+    "line_number": 12765,
+    "actual_section": "IV.L",
+    "connections": [
+      {
+        "target": "IV.B",
+        "target_title": "Investment Company Act 1940 Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.A",
+        "target_title": "Investment Advisers Act Compliance",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      },
+      {
+        "target": "IV.C",
+        "target_title": "ERISA Fiduciary Obligations and Prohibited Transactions",
+        "reason": "Shared entities: SEC",
+        "type": "entity",
+        "priority": 2
+      }
+    ]
+  }
+]

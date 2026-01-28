@@ -1,0 +1,33 @@
+{
+  "section_id": "IV.B.2",
+  "section_info": {
+    "title": "D&O Fines/Penalties Exclusion\u2014STARK/AKS Settlement Uninsured",
+    "has_counter_analysis_header": false,
+    "detections": 2,
+    "to_move": 2
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 0,
+      "line_number": 9991,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Conclusion:** Mercy Regional's Directors and Officers liability insurance will **not** cover the OIG settlement payment for the Mercy Endoscopy Center LLC STARK/AKS violations. The D&O policy will c...",
+      "full_paragraph": "**Conclusion:** Mercy Regional's Directors and Officers liability insurance will **not** cover the OIG settlement payment for the Mercy Endoscopy Center LLC STARK/AKS violations. The D&O policy will cover defense costs ($500K-$1.5M) but exclude the settlement amount ($2M-$5M) due to standard fines/penalties exclusions. **Severity: HIGH**. **Uninsured Exposure: $2M-$5M** (settlement payment only; defense costs likely covered). **Confidence: HIGH** [BASIS: Standard D&O fines/penalties exclusion language; Seventh Circuit precedent in *Level 3 Communications*].",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 3,
+      "line_number": 9997,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "D&O policies provide a separate coverage grant for \"Defense Costs,\" defined as \"reasonable and necessary fees, costs and expenses incurred in defending or investigating a Claim.\" Defense cost coverage...",
+      "full_paragraph": "D&O policies provide a separate coverage grant for \"Defense Costs,\" defined as \"reasonable and necessary fees, costs and expenses incurred in defending or investigating a Claim.\" Defense cost coverage applies even when the underlying Loss is excluded. *See* Caterpillar Inc. v. Great Am. Ins. Co., 62 F.3d 955, 960 (7th Cir. 1995) [VERIFIED:Westlaw-1995-WL-443095] (defense costs covered even where settlement payment excluded under regulatory exclusion).",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

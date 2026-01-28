@@ -1,0 +1,202 @@
+[
+  {
+    "title": "Cross-Trading Prohibited Transaction Exposure",
+    "line_number": 3119,
+    "actual_section": "IV.C",
+    "connections": [
+      {
+        "target": "IV.B",
+        "reason": "Investment Company Act prohibited transaction framework",
+        "xref_text": "The cross-trading prohibited transaction exposure under ERISA Section 406 analyzed here has parallel violations under Investment Company Act Section 17(a), which prohibits affiliated person transactions. For analysis of the Section 17 prohibited transaction framework and its application to cross-trading between affiliated investment companies, see Section IV.B (Investment Company Act 1940 Compliance)."
+      },
+      {
+        "target": "IV.A",
+        "reason": "Investment Advisers Act disclosure requirements",
+        "xref_text": "Additionally, the failure to disclose cross-trading conflicts violates Investment Advisers Act Section 206(2), creating cumulative regulatory exposure. See Section IV.A (Investment Advisers Act Compliance) for analysis of the disclosure fraud framework."
+      }
+    ]
+  },
+  {
+    "title": "Side Letter Most Favored Nation Provisions",
+    "line_number": 4312,
+    "actual_section": "IV.D",
+    "connections": [
+      {
+        "target": "IV.A",
+        "reason": "private fund adviser preferential treatment disclosure",
+        "xref_text": "The side letter MFN provisions creating $98M NPV exposure interact with the Investment Advisers Act private fund adviser rules requiring disclosure of preferential treatment to investors. Section IV.A (Investment Advisers Act Compliance) analyzes the quarterly statement and annual report disclosure obligations under Rule 211(h)(1)-2."
+      }
+    ]
+  },
+  {
+    "title": "Key Person Provisions",
+    "line_number": 4410,
+    "actual_section": "IV.D",
+    "connections": [
+      {
+        "target": "IV.I",
+        "reason": "employment retention to prevent key person triggering events",
+        "xref_text": "The key person provisions triggering potential $3.0B redemption rights (creating $60M-$120M fire-sale exposure) are directly tied to the personnel retention mechanisms analyzed in Section IV.I (Employment, Retention, and Non-Compete Enforceability). The enforceability of non-compete agreements, garden leave provisions, and retention incentives examined in that section determine whether key personnel departures can be prevented or mitigated, directly affecting the probability of redemption rights activation."
+      },
+      {
+        "target": "IV.H",
+        "reason": "client redemption mechanics and portfolio liquidity",
+        "xref_text": "For analysis of the portfolio liquidity constraints and orderly redemption mechanics that would govern the $3.0B redemption process, see Section IV.H (Commercial Contracts and Client Concentration Risk)."
+      }
+    ]
+  },
+  {
+    "title": "Testimonial Conflicts",
+    "line_number": 6691,
+    "actual_section": "IV.F",
+    "connections": [
+      {
+        "target": "IV.A",
+        "reason": "Investment Advisers Act fraud and disclosure framework",
+        "xref_text": "The testimonial conflicts from undisclosed fee reductions violate both the Marketing Rule testimonial disclosure requirements (analyzed here) and the general anti-fraud provisions of Investment Advisers Act Section 206(2). Section IV.A (Investment Advisers Act Compliance) provides the broader fraud and disclosure framework applicable to these violations."
+      }
+    ]
+  },
+  {
+    "title": "Performance Composite Survivorship Bias",
+    "line_number": 6754,
+    "actual_section": "IV.F",
+    "connections": [
+      {
+        "target": "IV.G",
+        "reason": "valuation and performance calculation accuracy",
+        "xref_text": "The performance composite survivorship bias creating misleading returns relates to the valuation accuracy issues examined in Section IV.G (Valuation Methodologies and NAV Markdown Risk), particularly the treatment of discontinued funds in performance calculations and NAV determination."
+      }
+    ]
+  },
+  {
+    "title": "Opportunity Fund \u2014 Stale Mark Overstatement",
+    "line_number": 7486,
+    "actual_section": "IV.G",
+    "connections": [
+      {
+        "target": "IV.D",
+        "reason": "fair value determination and NAV recalculation investor rights",
+        "xref_text": "The Opportunity Fund stale mark overstatement ($37M-$59M exposure) creates potential investor redemption and clawback rights under fund governing documents. Section IV.D (Private Fund Regulation and Investor Rights) analyzes investor redemption rights and the contractual mechanisms through which valuation corrections may trigger investor claims."
+      },
+      {
+        "target": "IV.F",
+        "reason": "performance advertising implications",
+        "xref_text": "The use of overstated NAV in performance advertising creates Marketing Rule violations analyzed in Section IV.F (Marketing Rule 206(4)-1 Compliance)."
+      }
+    ]
+  },
+  {
+    "title": "Performance Fee Clawback Risk",
+    "line_number": 7648,
+    "actual_section": "IV.G",
+    "connections": [
+      {
+        "target": "IV.D",
+        "reason": "clawback mechanics under fund agreements",
+        "xref_text": "The $6M-$13M performance fee clawback risk from using unadjusted NAV in fee calculations triggers contractual clawback provisions in fund governing documents. Section IV.D (Private Fund Regulation and Investor Rights) examines clawback mechanisms, investor claimant rights, and the procedural requirements for fee recovery."
+      }
+    ]
+  },
+  {
+    "title": "Client Concentration: State Pension Plan A",
+    "line_number": 8596,
+    "actual_section": "IV.H",
+    "connections": [
+      {
+        "target": "IV.C",
+        "reason": "ERISA client termination and transition requirements",
+        "xref_text": "State Pension Plan A (representing $41M annual revenue, 11% of total) is an ERISA plan client subject to specialized termination and transition requirements. Section IV.C (ERISA Fiduciary Obligations and Prohibited Transactions) analyzes ERISA-specific transition duties, including the fiduciary obligations governing portfolio liquidation timelines and the coordination with successor advisers."
+      }
+    ]
+  },
+  {
+    "title": "IRC \u00a7 1061 Carried Interest",
+    "line_number": 10317,
+    "actual_section": "IV.J",
+    "connections": [
+      {
+        "target": "IV.E",
+        "reason": "transaction structure impact on holding period calculation",
+        "xref_text": "The IRC Section 1061 three-year holding period recharacterization risk depends on the transaction structure examined in Section IV.E (Transaction Structure and Acquirer Due Diligence Risk), particularly whether the acquisition constitutes a sale of partnership interests that resets holding periods or a continuation of existing interests."
+      }
+    ]
+  },
+  {
+    "title": "Earnout Recharacterization Risk",
+    "line_number": 10517,
+    "actual_section": "IV.J",
+    "connections": [
+      {
+        "target": "IV.I",
+        "reason": "employment requirements and compensation characterization",
+        "xref_text": "The earnout recharacterization risk turning capital gain into ordinary compensation income depends critically on whether the earnout payments are contingent on continued employment. Section IV.I (Employment, Retention, and Non-Compete Enforceability) analyzes the employment agreement terms, retention requirements, and their tax characterization implications under the Blum Capital test."
+      }
+    ]
+  },
+  {
+    "title": "Regulation S-P Incident Response Program Deficiency",
+    "line_number": 11070,
+    "actual_section": "IV.K",
+    "connections": [
+      {
+        "target": "IV.L",
+        "reason": "cyber insurance coverage for incident response costs",
+        "xref_text": "The Regulation S-P incident response program deficiency creates regulatory exposure for failing to maintain written policies and procedures. The insurance implications, including coverage for incident response costs and regulatory fines, are analyzed in Section IV.L (Insurance Coverage and Risk Transfer), which identifies a $1M-$2.3M gap in unfunded incident response costs."
+      }
+    ]
+  },
+  {
+    "title": "Data Breach Exposure from Inadequate Safeguards",
+    "line_number": 11123,
+    "actual_section": "IV.K",
+    "connections": [
+      {
+        "target": "IV.L",
+        "reason": "insurance coverage for data breach costs",
+        "xref_text": "The $21.6M-$56.5M data breach exposure from inadequate safeguards affecting 10,192 PII records creates unfunded losses due to the absence of cyber insurance. Section IV.L (Insurance Coverage and Risk Transfer) quantifies the cyber insurance gap and analyzes coverage options for data breach notification costs, credit monitoring, regulatory fines, and third-party liability claims."
+      }
+    ]
+  },
+  {
+    "title": "Absence of Cyber Insurance Coverage",
+    "line_number": 11236,
+    "actual_section": "IV.K",
+    "connections": [
+      {
+        "target": "IV.L",
+        "reason": "comprehensive cyber insurance gap analysis",
+        "xref_text": "The unfunded $1M-$2.3M cyber incident response costs identified here are part of the comprehensive cyber insurance gap analyzed in Section IV.L (Insurance Coverage and Risk Transfer), which examines market conditions, coverage terms, and procurement recommendations for addressing this critical risk transfer deficiency."
+      }
+    ]
+  },
+  {
+    "title": "Cyber Insurance Gap",
+    "line_number": 12724,
+    "actual_section": "IV.L",
+    "connections": [
+      {
+        "target": "IV.K",
+        "reason": "underlying cybersecurity exposures requiring coverage",
+        "xref_text": "The absence of cyber insurance coverage in force creates unfunded exposure for the cybersecurity compliance deficiencies identified in Section IV.K (Cybersecurity and Data Protection Compliance), including Regulation S-P violations, data breach risks affecting 10,192 PII records, and $21.6M-$56.5M in potential incident costs."
+      }
+    ]
+  },
+  {
+    "title": "Errors & Omissions Coverage Below Industry Benchmark",
+    "line_number": 12765,
+    "actual_section": "IV.L",
+    "connections": [
+      {
+        "target": "IV.G",
+        "reason": "valuation errors creating professional liability exposure",
+        "xref_text": "The $25M E&O coverage limit falling $15M below the $40M industry benchmark creates unfunded professional liability exposure for the valuation errors analyzed in Section IV.G (Valuation Methodologies and NAV Markdown Risk), particularly the $37M-$59M Opportunity Fund stale mark overstatement and $6M-$13M performance fee clawback risk."
+      },
+      {
+        "target": "IV.A",
+        "reason": "Investment Advisers Act breach of duty claims",
+        "xref_text": "E&O insurance provides defense and indemnity for Investment Advisers Act breach of fiduciary duty claims analyzed in Section IV.A (Investment Advisers Act Compliance), making the coverage gap particularly material given the identified SEC examination deficiencies."
+      }
+    ]
+  }
+]

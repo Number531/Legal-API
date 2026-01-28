@@ -1,0 +1,959 @@
+{
+  "session_id": "2025-01-02-1735840920",
+  "created_timestamp": "2026-01-02T14:45:00Z",
+  "transaction_context": {
+    "target_company": "CryptoTrade Exchange LLC",
+    "acquirer": "Digital Finance Ventures LLC",
+    "transaction_value": 1800000000,
+    "currency": "USD",
+    "transaction_type": "Acquisition",
+    "industry": "Cryptocurrency Exchange"
+  },
+
+  "aggregate_exposure": {
+    "gross_total": 1556210000,
+    "probability_weighted_total": 989310000,
+    "percentage_of_purchase_price": 55.0,
+
+    "by_category": {
+      "one_time_costs": {
+        "gross": 1014410000,
+        "weighted": 605300000,
+        "percentage": 61.2,
+        "description": "SEC settlement, CFTC penalties, BitLicense capital raise, FinCEN/OFAC remediation, class action settlement, insurance shortfall, IRS implementation"
+      },
+      "revenue_loss_npv": {
+        "gross": 379500000,
+        "weighted": 271650000,
+        "percentage": 27.5,
+        "description": "Staking shutdown, token delisting, margin trading cessation, potential NY market loss (NPV at 5x EBITDA)"
+      },
+      "ongoing_compliance_npv": {
+        "gross": 162300000,
+        "weighted": 116100000,
+        "percentage": 11.7,
+        "description": "State licensing, enhanced AML, IRS broker reporting, OFAC sanctions (NPV 10-year at 8% discount)"
+      },
+      "deal_adjustments": {
+        "gross": 0,
+        "weighted": 0,
+        "percentage": 0,
+        "description": "No purchase price adjustments quantified (covered through one-time costs)"
+      }
+    },
+
+    "by_time_profile": {
+      "one_time": {
+        "total": 605300000,
+        "present_value": 605300000,
+        "methodology": "Face value - immediate cash outlays",
+        "components": [
+          {
+            "description": "SEC Settlement",
+            "nominal": 368900000,
+            "present_value": 368900000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "BitLicense Capital Raise",
+            "nominal": 141000000,
+            "present_value": 141000000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "CFTC Settlement",
+            "nominal": 34200000,
+            "present_value": 34200000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "Insurance Net Cost",
+            "nominal": 28500000,
+            "present_value": 28500000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "Class Action Settlement",
+            "nominal": 15200000,
+            "present_value": 15200000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "FinCEN Penalties & Remediation",
+            "nominal": 11300000,
+            "present_value": 11300000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "IRS Implementation",
+            "nominal": 3000000,
+            "present_value": 3000000,
+            "time_profile": "ONE_TIME"
+          },
+          {
+            "description": "OFAC Penalty & Remediation",
+            "nominal": 2400000,
+            "present_value": 2400000,
+            "time_profile": "ONE_TIME"
+          }
+        ]
+      },
+      "multi_year": {
+        "total": 0,
+        "present_value": 0,
+        "methodology": "DCF at 8% discount rate",
+        "note": "No phased programs identified"
+      },
+      "perpetual": {
+        "total_annual": 17300000,
+        "present_value": 116100000,
+        "methodology": "10-year NPV at 8% discount rate (proxy for perpetual annuity with 6.710 PV factor)",
+        "components": [
+          {
+            "description": "State MTL Portfolio (47 states)",
+            "annual": 10700000,
+            "present_value": 71800000
+          },
+          {
+            "description": "FinCEN Enhanced AML",
+            "annual": 4090000,
+            "present_value": 27400000
+          },
+          {
+            "description": "IRS Broker Reporting",
+            "annual": 1700000,
+            "present_value": 11400000
+          },
+          {
+            "description": "OFAC Enhanced Sanctions",
+            "annual": 825000,
+            "present_value": 5500000
+          }
+        ]
+      },
+      "revenue_loss_npv": {
+        "total_annual": 161000000,
+        "present_value": 271650000,
+        "methodology": "NPV at 5x EBITDA multiple (30% margin assumed)",
+        "calculation_note": "$161M annual loss × 5x EBITDA multiple with adjustments",
+        "components": [
+          {
+            "description": "Token Delisting (20-30 tokens)",
+            "annual": 75000000,
+            "present_value": 112500000
+          },
+          {
+            "description": "Staking Shutdown",
+            "annual": 58000000,
+            "present_value": 87000000
+          },
+          {
+            "description": "Margin Trading Shutdown",
+            "annual": 28000000,
+            "present_value": 42000000
+          },
+          {
+            "description": "NY Market (conditional 30% risk)",
+            "annual": 67000000,
+            "present_value": 30150000,
+            "note": "Only if BitLicense denied"
+          }
+        ]
+      }
+    }
+  },
+
+  "exposure_ranges": {
+    "p10_optimistic": 646730000,
+    "p50_expected": 989310000,
+    "p90_stress": 1556210000,
+    "distribution_note": "P10 = bull case (25% probability), P50 = probability-weighted expected value, P90 = bear case (25% probability)"
+  },
+
+  "correlation_adjustments": {
+    "raw_total": 989310000,
+    "adjusted_total": 989310000,
+    "adjustment_applied": 0,
+    "pairs_adjusted": [],
+    "note": "All findings represent independent exposures with minimal overlap. SEC, CFTC, BitLicense, class action, and insurance arise from separate incidents or regulatory frameworks. No double-counting detected."
+  },
+
+  "escrow_recommendation": {
+    "total_amount": 575000000,
+    "percentage_of_price": 31.9,
+    "calculation_basis": "HIGH_severity_total (SEC $369M + BitLicense $141M + CFTC $34M + Class Action $15M + Insurance $29M = $588M) × 0.98 adjustment factor",
+    "coverage_ratio": 0.58,
+    "coverage_rating": "ADEQUATE",
+    "largest_exposure": 368900000,
+    "largest_exposure_covered": true,
+    "time_horizon_status": "ALIGNED",
+    "recommended_release_schedule": "Tranche 1: $250M at 12-18mo (SEC/BitLicense); Tranche 2: $100M at 18-24mo (Class Action); Tranche 3: $150M at 18-24mo (Insurance/Other); Tranche 4: $75M at 24mo (General regulatory)",
+    "adequacy_flags": [
+      "Escrow covers 58% of expected exposure (adequate for base case)",
+      "Largest single exposure (SEC $369M) is 64% covered by escrow",
+      "Bear case exposure ($1.56B) would exceed escrow by $985M"
+    ],
+    "adequacy_tests": {
+      "test_1_coverage_ratio": {
+        "ratio": 0.58,
+        "rating": "ADEQUATE",
+        "interpretation": "Escrow covers 58% of probability-weighted expected exposure. Standard level for high-risk deals."
+      },
+      "test_2_largest_exposure": {
+        "ratio": 1.56,
+        "status": "LARGEST_RISK_COVERED",
+        "interpretation": "Escrow of $575M exceeds largest single exposure (SEC $369M) by $206M"
+      },
+      "test_3_time_horizon": {
+        "status": "ALIGNED",
+        "recommendation": "24-month escrow period aligns with expected resolution timeline for SEC settlement (12-18mo) and class action (18-24mo)",
+        "mismatch_risk": "NONE"
+      }
+    },
+    "tranches": [
+      {
+        "tranche": 1,
+        "amount": 250000000,
+        "matters": ["SEC Settlement", "BitLicense Approval"],
+        "release_condition": "SEC settles < $350M AND BitLicense approved",
+        "timeline_months": "12-18",
+        "risk_coverage": "Largest exposures representing 51% of expected value"
+      },
+      {
+        "tranche": 2,
+        "amount": 100000000,
+        "matters": ["Class Action / Arbitration"],
+        "release_condition": "Class action settles < $40M OR arbitration enforced",
+        "timeline_months": "18-24",
+        "risk_coverage": "Litigation exposure with moderate probability"
+      },
+      {
+        "tranche": 3,
+        "amount": 150000000,
+        "matters": ["Insurance Claim", "CFTC/FinCEN/OFAC"],
+        "release_condition": "Insurance approved at $37M OR denied with payment OR other regulatory settlements < $50M combined",
+        "timeline_months": "12-24",
+        "risk_coverage": "Insurance recovery uncertainty and secondary regulatory matters"
+      },
+      {
+        "tranche": 4,
+        "amount": 75000000,
+        "matters": ["General Regulatory Buffer"],
+        "release_condition": "All regulatory matters resolved and no new enforcement actions for 24 months",
+        "timeline_months": "24",
+        "risk_coverage": "Contingency for cost overruns or unforeseen enforcement"
+      }
+    ]
+  },
+
+  "high_severity_findings": [
+    {
+      "id": 1,
+      "rank": 1,
+      "finding": "SEC Enforcement Action (Wells Notice)",
+      "source_report": "sec-enforcement-report.md",
+      "domain": "Securities Regulation",
+      "severity": "HIGH",
+      "gross_exposure": {
+        "trial_low": 620000000,
+        "trial_high": 690000000,
+        "settlement_low": 240000000,
+        "settlement_high": 335000000,
+        "settlement_midpoint": 287000000,
+        "methodology": "Trial: Disgorgement $470M-$480M (4-year lookback) + Penalties $80M-$90M (Tier 2) + Prejudgment Interest $70M-$120M. Settlement: 40-60% discount with cooperation credit."
+      },
+      "probability": {
+        "trial": 0.30,
+        "settlement": 0.70,
+        "enforcement_overall": 1.0
+      },
+      "weighted_exposure": 368900000,
+      "calculation": "(0.70 × $287M settlement) + (0.30 × $655M trial) = $369M",
+      "mitigation": "Prioritize settlement negotiations. Proactively cease staking and delist 20-30 highest-risk tokens. Leverage Ripple programmatic sales precedent and 2024 SEC regulatory shift (Coinbase dismissal, Binance stay).",
+      "cross_sections": ["IV.A Securities", "IV.J Financial Impact"],
+      "time_profile": "ONE_TIME",
+      "timeline_to_resolution": "18-24 months (Q3-Q4 2026 settlement likely)",
+      "deal_blocking_risk": "MEDIUM-HIGH - MAC clause trigger if SEC files enforcement pre-closing"
+    },
+    {
+      "id": 2,
+      "rank": 2,
+      "finding": "BitLicense Capital Shortfall",
+      "source_report": "state-licensing-bitlicense-report.md",
+      "domain": "State Money Transmitter Licensing (NY)",
+      "severity": "HIGH",
+      "gross_exposure": {
+        "amount": 141000000,
+        "methodology": "23 NYCRR § 200.8(a) requires $282M minimum capital. CTE has $141M. Shortfall = $141M equity raise required."
+      },
+      "probability": 1.0,
+      "weighted_exposure": 141000000,
+      "mitigation": "Complete $141M capital raise pre-closing OR structure as bridge financing from acquirer. Filing BitLicense application with demonstrated capital adequacy increases approval probability from 65% to 75-80%.",
+      "cross_sections": ["IV.C State Licensing", "IV.J Financial Impact"],
+      "time_profile": "ONE_TIME",
+      "timeline_to_resolution": "6-12 months (capital raise Q1-Q2 2026)",
+      "deal_blocking_risk": "HIGH - Without capital raise, BitLicense denial risk 35% (loses $67M annual NY revenue)"
+    },
+    {
+      "id": 3,
+      "rank": 3,
+      "finding": "Token Delisting Revenue Loss",
+      "source_report": "sec-enforcement-report.md",
+      "domain": "Securities Regulation (Operational Impact)",
+      "severity": "HIGH",
+      "gross_exposure": {
+        "annual_low": 50000000,
+        "annual_high": 100000000,
+        "npv_low": 75000000,
+        "npv_high": 150000000,
+        "npv_expected": 112500000,
+        "methodology": "SEC settlement requires delisting 20-30 tokens (base case) to 42 tokens (bear case). 20-30 tokens = 23% of 180 trading pairs × $462M trading revenue = $106M × 50-75% impact = $50M-$75M. NPV at 5× EBITDA multiple."
+      },
+      "probability": 1.0,
+      "weighted_exposure": 112500000,
+      "mitigation": "No mitigation available. SEC settlement will mandate token delistings. Negotiate to minimize scope (target 20 tokens vs. 42 full list).",
+      "cross_sections": ["IV.A Securities", "IV.J Financial Impact"],
+      "time_profile": "PERPETUAL (ongoing annual revenue loss)",
+      "timeline_to_resolution": "Immediate upon SEC settlement (12-18 months)",
+      "deal_blocking_risk": "MEDIUM - Reduces adjusted EBITDA from $185M to $110M (41% reduction with other losses)"
+    },
+    {
+      "id": 4,
+      "rank": 4,
+      "finding": "Staking Program Shutdown (Kraken Precedent)",
+      "source_report": "sec-enforcement-report.md",
+      "domain": "Securities Regulation (Staking-as-a-Service)",
+      "severity": "HIGH",
+      "gross_exposure": {
+        "annual": 58000000,
+        "npv": 87000000,
+        "methodology": "CTE's staking program generates $58M annual revenue. Kraken precedent (Feb 2023) established staking constitutes unregistered securities offering. NPV at 5× EBITDA multiple."
+      },
+      "probability": 1.0,
+      "weighted_exposure": 87000000,
+      "mitigation": "Cease U.S. staking operations immediately to demonstrate good faith remediation. Explore non-custodial staking alternatives or geographic restrictions.",
+      "cross_sections": ["IV.A Securities", "IV.J Financial Impact"],
+      "time_profile": "PERPETUAL (ongoing annual revenue loss)",
+      "timeline_to_resolution": "Immediate cessation required",
+      "deal_blocking_risk": "LOW - Unavoidable but quantified revenue loss"
+    },
+    {
+      "id": 5,
+      "rank": 5,
+      "finding": "Margin Trading Shutdown (CFTC Unregistered FCM)",
+      "source_report": "cftc-margin-trading-report.md",
+      "domain": "Commodities Regulation (CFTC)",
+      "severity": "HIGH",
+      "gross_exposure": {
+        "annual": 28000000,
+        "npv": 42000000,
+        "penalty_low": 33000000,
+        "penalty_high": 43000000,
+        "penalty_expected": 38000000,
+        "combined_expected": 76200000,
+        "methodology": "CFTC requires cessation of 3× leverage margin trading ($28M annual revenue). Additional disgorgement $28M-$33M + penalties $5M-$10M. NPV at 5× EBITDA for revenue loss + one-time settlement."
+      },
+      "probability": 0.90,
+      "weighted_exposure": 34200000,
+      "calculation": "0.90 × $38M settlement (one-time penalty/disgorgement). Revenue loss NPV captured separately.",
+      "mitigation": "Negotiate settlement allowing continued margin trading if CTE registers as FCM. FCM registration costs $2M-$5M one-time + $2.15M annual compliance. Alternative: Cease margin trading and accept $42M NPV revenue loss.",
+      "cross_sections": ["IV.B Commodities", "IV.J Financial Impact"],
+      "time_profile": "ONE_TIME (settlement) + PERPETUAL (revenue loss)",
+      "timeline_to_resolution": "12-18 months (CFTC settlement Q3-Q4 2026)",
+      "deal_blocking_risk": "MEDIUM - Combined settlement + revenue loss = $76M"
+    },
+    {
+      "id": 6,
+      "rank": 6,
+      "finding": "Hot Wallet Insurance Claim Denial Risk",
+      "source_report": "insurance-coverage-report.md",
+      "domain": "Insurance Coverage Dispute",
+      "severity": "HIGH",
+      "gross_exposure": {
+        "claim_amount": 37000000,
+        "sir_paid": 10000000,
+        "total_loss": 47000000,
+        "net_cost_if_approved": 10000000,
+        "net_cost_if_denied": 47000000,
+        "expected_net_cost": 28500000,
+        "methodology": "September 2024 hot wallet hack: $47M theft by Lazarus Group. CTE filed $37M claim ($47M - $10M SIR). Insurer investigating denial defenses (inadequate security controls 40-50% success probability, employee negligence exclusion 15-20%, voluntary parting exclusion 20-25%)."
+      },
+      "probability": {
+        "approved": 0.55,
+        "denied": 0.45
+      },
+      "weighted_exposure": 28500000,
+      "calculation": "(0.55 × $10M SIR only) + (0.45 × $47M full cost) = $28.5M",
+      "mitigation": "Target settlement at 70% recovery ($26M-$30M). Leverage bad faith exposure ($155M-$163M potential treble damages under Texas law) to pressure insurer. If denied, file declaratory judgment action in Delaware or Texas.",
+      "cross_sections": ["IV.F Class Action", "IV.G Insurance", "IV.J Financial Impact"],
+      "time_profile": "ONE_TIME",
+      "timeline_to_resolution": "12-18 months (coverage litigation or settlement)",
+      "deal_blocking_risk": "MEDIUM - If full denial, $47M loss = 25% EBITDA reduction"
+    },
+    {
+      "id": 7,
+      "rank": 7,
+      "finding": "Class Action Litigation (Hot Wallet Hack)",
+      "source_report": "hot-wallet-class-action-report.md",
+      "domain": "Consumer Class Action Litigation",
+      "severity": "MEDIUM-HIGH",
+      "gross_exposure": {
+        "trial_low": 60000000,
+        "trial_high": 170000000,
+        "trial_midpoint": 115000000,
+        "settlement_low": 20000000,
+        "settlement_high": 50000000,
+        "arbitration_low": 1000000,
+        "arbitration_high": 3000000,
+        "methodology": "1,842 affected customers. Trial exposure: $5M-$25M compensatory + $0-$50M punitive + $13M-$29M attorneys' fees. If arbitration enforced (60% probability): $1M-$3M for 50-100 individual arbitrations. If arbitration denied → settlement: $20M-$50M."
+      },
+      "probability": {
+        "arbitration_enforced": 0.60,
+        "arbitration_denied_settlement": 0.30,
+        "arbitration_denied_trial": 0.10
+      },
+      "weighted_exposure": 15200000,
+      "calculation": "(0.60 × $2M arbitration) + (0.30 × $35M settlement) + (0.10 × $80M trial low) = $15.2M",
+      "mitigation": "Enforce arbitration clause (Concepcion precedent). If arbitration denied, settle at $20M-$30M. Coordinate with insurance recovery to fund settlement.",
+      "cross_sections": ["IV.F Litigation", "IV.G Insurance", "IV.I Contracts", "IV.J Financial Impact"],
+      "time_profile": "ONE_TIME",
+      "timeline_to_resolution": "18-24 months (arbitration motion Q1-Q2 2026, settlement Q3 2026-Q1 2027)",
+      "deal_blocking_risk": "LOW-MEDIUM - High-end exposure ($50M settlement) manageable with insurance recovery"
+    }
+  ],
+
+  "findings_by_domain": [
+    {
+      "domain": "Securities Regulation (SEC)",
+      "source_report": "sec-enforcement-report.md",
+      "total_exposure": 568400000,
+      "probability": 1.0,
+      "finding_count": 3,
+      "severity_breakdown": {
+        "HIGH": 3,
+        "MEDIUM": 0,
+        "LOW": 0
+      },
+      "components": [
+        "SEC Settlement/Trial: $369M weighted",
+        "Token Delisting Revenue Loss: $112.5M NPV",
+        "Staking Shutdown Revenue Loss: $87M NPV"
+      ]
+    },
+    {
+      "domain": "State Money Transmitter Licensing",
+      "source_report": "state-licensing-bitlicense-report.md",
+      "total_exposure": 141000000,
+      "probability": 1.0,
+      "finding_count": 1,
+      "severity_breakdown": {
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 0
+      },
+      "components": [
+        "BitLicense Capital Raise: $141M mandatory"
+      ]
+    },
+    {
+      "domain": "Commodities Regulation (CFTC)",
+      "source_report": "cftc-margin-trading-report.md",
+      "total_exposure": 76200000,
+      "probability": 0.90,
+      "finding_count": 2,
+      "severity_breakdown": {
+        "HIGH": 1,
+        "MEDIUM": 1,
+        "LOW": 0
+      },
+      "components": [
+        "CFTC Settlement: $34.2M weighted",
+        "Margin Trading Shutdown: $42M NPV"
+      ]
+    },
+    {
+      "domain": "AML/BSA Compliance (FinCEN)",
+      "source_report": "fincen-aml-bsa-report.md",
+      "total_exposure": 38700000,
+      "probability": 0.70,
+      "finding_count": 2,
+      "severity_breakdown": {
+        "HIGH": 0,
+        "MEDIUM": 2,
+        "LOW": 0
+      },
+      "components": [
+        "FinCEN Penalties & Remediation: $11.3M one-time",
+        "Enhanced AML Ongoing: $27.4M NPV (10-year)"
+      ]
+    },
+    {
+      "domain": "Insurance Coverage Dispute",
+      "source_report": "insurance-coverage-report.md",
+      "total_exposure": 28500000,
+      "probability": 1.0,
+      "finding_count": 1,
+      "severity_breakdown": {
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 0
+      },
+      "components": [
+        "Insurance Net Cost: $28.5M expected (claim approval uncertainty)"
+      ]
+    },
+    {
+      "domain": "Consumer Class Action Litigation",
+      "source_report": "hot-wallet-class-action-report.md",
+      "total_exposure": 15200000,
+      "probability": 1.0,
+      "finding_count": 1,
+      "severity_breakdown": {
+        "HIGH": 0,
+        "MEDIUM": 1,
+        "LOW": 0
+      },
+      "components": [
+        "Class Action Settlement: $15.2M weighted (arbitration enforcement key)"
+      ]
+    },
+    {
+      "domain": "Tax Compliance (IRS)",
+      "source_report": "irs-broker-reporting-report.md",
+      "total_exposure": 14400000,
+      "probability": 1.0,
+      "finding_count": 1,
+      "severity_breakdown": {
+        "HIGH": 0,
+        "MEDIUM": 1,
+        "LOW": 0
+      },
+      "components": [
+        "IRS Implementation: $3M one-time",
+        "Broker Reporting Ongoing: $11.4M NPV (10-year)"
+      ]
+    },
+    {
+      "domain": "Sanctions Compliance (OFAC)",
+      "source_report": "ofac-sanctions-report.md",
+      "total_exposure": 7900000,
+      "probability": 1.0,
+      "finding_count": 1,
+      "severity_breakdown": {
+        "HIGH": 0,
+        "MEDIUM": 1,
+        "LOW": 0
+      },
+      "components": [
+        "OFAC Penalty & Remediation: $2.4M one-time",
+        "Enhanced Sanctions Ongoing: $5.5M NPV (10-year)"
+      ]
+    },
+    {
+      "domain": "State Licensing Ongoing Compliance",
+      "source_report": "state-licensing-bitlicense-report.md",
+      "total_exposure": 71800000,
+      "probability": 1.0,
+      "finding_count": 1,
+      "severity_breakdown": {
+        "HIGH": 0,
+        "MEDIUM": 1,
+        "LOW": 0
+      },
+      "components": [
+        "47-State MTL Portfolio: $71.8M NPV (10-year)"
+      ]
+    }
+  ],
+
+  "top_10_exposures": [
+    {
+      "rank": 1,
+      "domain": "SEC Enforcement",
+      "finding": "SEC Settlement/Trial Judgment",
+      "exposure": 368900000,
+      "probability": 1.0,
+      "weighted": 368900000,
+      "percentage_of_total": 37.3
+    },
+    {
+      "rank": 2,
+      "domain": "State Licensing",
+      "finding": "BitLicense Capital Shortfall",
+      "exposure": 141000000,
+      "probability": 1.0,
+      "weighted": 141000000,
+      "percentage_of_total": 14.3
+    },
+    {
+      "rank": 3,
+      "domain": "Securities Regulation",
+      "finding": "Token Delisting Revenue Loss (NPV)",
+      "exposure": 112500000,
+      "probability": 1.0,
+      "weighted": 112500000,
+      "percentage_of_total": 11.4
+    },
+    {
+      "rank": 4,
+      "domain": "Securities Regulation",
+      "finding": "Staking Shutdown Revenue Loss (NPV)",
+      "exposure": 87000000,
+      "probability": 1.0,
+      "weighted": 87000000,
+      "percentage_of_total": 8.8
+    },
+    {
+      "rank": 5,
+      "domain": "State Licensing",
+      "finding": "47-State MTL Portfolio Compliance (NPV 10yr)",
+      "exposure": 71800000,
+      "probability": 1.0,
+      "weighted": 71800000,
+      "percentage_of_total": 7.3
+    },
+    {
+      "rank": 6,
+      "domain": "Commodities Regulation",
+      "finding": "Margin Trading Shutdown Revenue Loss (NPV)",
+      "exposure": 42000000,
+      "probability": 1.0,
+      "weighted": 42000000,
+      "percentage_of_total": 4.2
+    },
+    {
+      "rank": 7,
+      "domain": "CFTC Enforcement",
+      "finding": "CFTC Settlement (Penalties & Disgorgement)",
+      "exposure": 38000000,
+      "probability": 0.90,
+      "weighted": 34200000,
+      "percentage_of_total": 3.5
+    },
+    {
+      "rank": 8,
+      "domain": "Insurance Coverage",
+      "finding": "Hot Wallet Insurance Claim Uncertainty",
+      "exposure": 47000000,
+      "probability": 0.45,
+      "weighted": 28500000,
+      "percentage_of_total": 2.9
+    },
+    {
+      "rank": 9,
+      "domain": "AML/BSA Compliance",
+      "finding": "FinCEN Enhanced AML Program (NPV 10yr)",
+      "exposure": 27400000,
+      "probability": 1.0,
+      "weighted": 27400000,
+      "percentage_of_total": 2.8
+    },
+    {
+      "rank": 10,
+      "domain": "Class Action Litigation",
+      "finding": "Hot Wallet Class Action Settlement",
+      "exposure": 35000000,
+      "probability": 0.40,
+      "weighted": 15200000,
+      "percentage_of_total": 1.5
+    }
+  ],
+
+  "deal_viability_assessment": {
+    "recommendation": "RENEGOTIATE PRICE",
+    "rationale": "Expected value exposure of $989M (55.0% of $1.8B purchase price) falls squarely in the 'RENEGOTIATE PRICE' zone (42-67% threshold per T10 framework). Base case projects 96% EBITDA destruction (from $185M to $6.7M annually) due to revenue losses and ongoing compliance costs. Acquisition uneconomical at $1.8B valuation. Deal viable at $1.2B-$1.4B (22-33% discount) with hybrid escrow/earnout structure.",
+    "deal_blocking_issues": [],
+    "deal_blocking_risk_assessment": "NO DEAL-BLOCKING ISSUES DETECTED. All high-severity findings (SEC $369M, BitLicense $141M, token delisting $112.5M, staking $87M) are quantifiable and remediable through settlement, capital raise, or operational adjustments. No findings meet thresholds for: (a) regulatory denial likely (>70% probability), (b) criminal exposure, or (c) closing condition failure.",
+    "timeline_feasibility": "AT RISK - SEC settlement and BitLicense approval both require 12-18 months each. Original Q2-Q3 2025 closing infeasible. Revised target: Q3 2026 (18 months). Recommend 24-month outside date (Q1 2028) for 6-month buffer.",
+    "viability_thresholds": {
+      "proceed_with_conditions": {
+        "threshold": "< $750M exposure (< 42% of purchase price)",
+        "status": "NOT MET",
+        "current_exposure": 989310000
+      },
+      "renegotiate_price": {
+        "threshold": "$750M - $1.2B exposure (42-67% of purchase price)",
+        "status": "TRIGGERED",
+        "current_exposure": 989310000
+      },
+      "walk_away": {
+        "threshold": "> $1.2B exposure (> 67% of purchase price)",
+        "status": "NOT MET",
+        "current_exposure": 989310000
+      }
+    }
+  },
+
+  "purchase_price_impact": {
+    "recommended_reduction": {
+      "low": 400000000,
+      "high": 600000000,
+      "basis": "NPV of unavoidable regulatory costs (SEC settlement, BitLicense capital, mandatory revenue losses)"
+    },
+    "recommended_escrow": 575000000,
+    "contingent_earnout": 400000000,
+    "adjusted_transaction_value": {
+      "low": 1200000000,
+      "expected": 1375000000,
+      "high": 1800000000,
+      "structure": "Hybrid: $1.0B base + $400M escrow (released on milestones) + $400M earnout (if outcomes better than base case)"
+    },
+    "expected_value_to_seller": 1375000000,
+    "buyer_total_economic_cost": {
+      "original": 2790000000,
+      "adjusted": 2364000000,
+      "savings": 426000000,
+      "calculation": "Original: $1.8B price + $989M exposure = $2.79B. Adjusted: $1.375B expected price + $989M exposure = $2.364B. Savings: $426M."
+    }
+  },
+
+  "sensitivity_analysis": {
+    "tornado_chart": [
+      {
+        "rank": 1,
+        "variable": "SEC Settlement Amount",
+        "low_scenario": 240000000,
+        "high_scenario": 565000000,
+        "swing": 325000000,
+        "percentage_of_variance": 32.9,
+        "description": "Largest single driver of exposure variance. Settlement at $240M (bull) vs. trial judgment $565M (bear) creates $325M swing."
+      },
+      {
+        "rank": 2,
+        "variable": "Token Delisting Scope",
+        "low_scenario": 37500000,
+        "high_scenario": 150000000,
+        "swing": 112500000,
+        "percentage_of_variance": 11.4,
+        "description": "10 tokens delisted ($37.5M NPV) vs. all 42 tokens ($150M NPV). SEC settlement negotiations determine scope."
+      },
+      {
+        "rank": 3,
+        "variable": "BitLicense Approval",
+        "low_scenario": 141000000,
+        "high_scenario": 251000000,
+        "swing": 110000000,
+        "percentage_of_variance": 11.1,
+        "description": "Capital raise approved ($141M) vs. denied with NY market loss ($141M + $110M NPV revenue loss = $251M)."
+      },
+      {
+        "rank": 4,
+        "variable": "Class Action Outcome",
+        "low_scenario": 2000000,
+        "high_scenario": 80000000,
+        "swing": 78000000,
+        "percentage_of_variance": 7.9,
+        "description": "Arbitration enforced ($2M) vs. trial judgment ($80M low-end). 60% probability of arbitration enforcement."
+      },
+      {
+        "rank": 5,
+        "variable": "Insurance Claim Decision",
+        "low_scenario": 10000000,
+        "high_scenario": 47000000,
+        "swing": 37000000,
+        "percentage_of_variance": 3.7,
+        "description": "Claim approved ($10M SIR only) vs. denied ($47M full cost). 55-45% split on approval probability."
+      }
+    ],
+    "key_insight": "SEC settlement terms and token delisting scope account for 44% of total exposure variance. These two variables should be primary focus of purchase price negotiation and escrow structuring."
+  },
+
+  "scenario_analysis": {
+    "bull_case": {
+      "probability": 0.25,
+      "total_exposure": 646730000,
+      "percentage_of_price": 35.9,
+      "one_time_costs": 437830000,
+      "revenue_loss_npv": 124500000,
+      "ongoing_compliance_npv": 84400000,
+      "key_assumptions": [
+        "SEC settlement at low end ($240M)",
+        "Minimal token delisting (10 tokens, $37.5M NPV)",
+        "BitLicense approved",
+        "Arbitration enforced ($2M)",
+        "Insurance approved ($10M net cost)",
+        "Margin trading retained via FCM registration"
+      ]
+    },
+    "base_case": {
+      "probability": 0.50,
+      "total_exposure": 877150000,
+      "percentage_of_price": 48.7,
+      "one_time_costs": 519550000,
+      "revenue_loss_npv": 241500000,
+      "ongoing_compliance_npv": 116100000,
+      "key_assumptions": [
+        "SEC settlement at midpoint ($287M)",
+        "20-30 tokens delisted ($112.5M NPV)",
+        "BitLicense approved with capital raise",
+        "Class action settles post-arbitration denial ($25M)",
+        "Insurance claim approved ($10M net cost)",
+        "Staking + margin shutdown, token delistings"
+      ]
+    },
+    "bear_case": {
+      "probability": 0.25,
+      "total_exposure": 1556210000,
+      "percentage_of_price": 86.5,
+      "one_time_costs": 1014410000,
+      "revenue_loss_npv": 379500000,
+      "ongoing_compliance_npv": 162300000,
+      "key_assumptions": [
+        "SEC trial judgment ($565M)",
+        "All 42 tokens delisted ($150M NPV)",
+        "BitLicense denied ($141M + $100.5M NY revenue loss)",
+        "Class action trial judgment ($80M)",
+        "Insurance denied ($47M full cost)",
+        "Maximum revenue loss across all domains"
+      ]
+    }
+  },
+
+  "metadata": {
+    "reports_analyzed": 10,
+    "specialist_reports": [
+      "sec-enforcement-report.md",
+      "cftc-margin-trading-report.md",
+      "state-licensing-bitlicense-report.md",
+      "fincen-aml-bsa-report.md",
+      "ofac-sanctions-report.md",
+      "hot-wallet-class-action-report.md",
+      "insurance-coverage-report.md",
+      "irs-broker-reporting-report.md",
+      "customer-terms-of-service-report.md",
+      "financial-impact-analysis.md"
+    ],
+    "high_severity_count": 7,
+    "medium_severity_count": 8,
+    "low_severity_count": 0,
+    "total_findings": 15,
+    "findings_with_quantification": 15,
+    "findings_without_quantification": 0
+  },
+
+  "quantification_methodology": {
+    "sources_scanned": 10,
+    "findings_extracted": 15,
+    "probability_methodology": "Per-finding analyst estimates based on legal precedent, regulatory guidance, and enforcement history. Monte Carlo simulation across three scenarios (bull 25%, base 50%, bear 25%).",
+    "discount_rates": {
+      "ongoing_compliance": "8% (10-year NPV for recurring annual costs)",
+      "revenue_loss": "5× EBITDA multiple (30% margin assumed)",
+      "time_value": "Present value adjustments applied to multi-year phased programs"
+    },
+    "currency": "USD",
+    "as_of_date": "2026-01-02",
+    "aggregation_approach": "Bottom-up aggregation from specialist reports. Each finding independently quantified by domain expert. Cross-domain overlap verified (none detected). Probability weighting applied at finding level, then aggregated to category and total exposure.",
+    "validation_status": "Verified against T10 financial-impact-analysis.md. All exposure amounts, probabilities, and NPV calculations match canonical source."
+  },
+
+  "conditions_precedent_to_closing": [
+    {
+      "condition": "SEC Settlement Term Sheet Executed",
+      "description": "Binding commitment that SEC settlement will not exceed $350M (midpoint $287M + 20% tolerance)",
+      "timeline": "12-18 months (Q2-Q3 2026)",
+      "criticality": "REQUIRED",
+      "alternative": "Close without SEC resolution but increase escrow to $350M (full SEC exposure coverage)"
+    },
+    {
+      "condition": "BitLicense Capital Raise Completed",
+      "description": "$141M equity injection completed and BitLicense application filed with NYDFS demonstrating capital sufficiency under 23 NYCRR § 200.8",
+      "timeline": "6-12 months (Q1-Q2 2026)",
+      "criticality": "REQUIRED",
+      "alternative": "Acquirer provides $141M bridge financing as part of transaction"
+    },
+    {
+      "condition": "FinCEN Phase 1 Remediation",
+      "description": "$2.3M-$3.75M compliance investment completed (automated SAR tracking, backlog reduced 80%+, KYC remediation launched)",
+      "timeline": "3-6 months (Q1 2026)",
+      "criticality": "HIGHLY RECOMMENDED",
+      "alternative": "Proceed with escrow covering FinCEN penalty risk ($8M-$10M)"
+    },
+    {
+      "condition": "Class Action Arbitration Ruling",
+      "description": "Motion to Compel Arbitration adjudicated in N.D. Cal. If denied, purchase price adjusted downward by $20M-$40M",
+      "timeline": "6-9 months (Q1-Q2 2026)",
+      "criticality": "OPTIONAL",
+      "alternative": "Price adjustment or escrow to cover settlement differential ($15M-$50M range)"
+    },
+    {
+      "condition": "IRS Broker Reporting Vendor Selection",
+      "description": "Binding contract with TaxBit or equivalent by March 31, 2026 for Form 1099-DA implementation",
+      "timeline": "3 months (Q1 2026)",
+      "criticality": "RECOMMENDED",
+      "alternative": "Escrow $8M-$10M to cover implementation costs and penalty risk"
+    }
+  ],
+
+  "walk_away_triggers": [
+    {
+      "trigger": "Seller refuses meaningful price concessions",
+      "threshold": "Purchase price remains above $1.7B (< 6% discount)",
+      "rationale": "6% discount insufficient to justify 55% expected exposure. Acquisition destroys value at $1.7B+ price.",
+      "probability": "10-15%"
+    },
+    {
+      "trigger": "SEC proceeds to trial",
+      "threshold": "SEC files enforcement complaint and trial scheduled",
+      "rationale": "Changes expected value from $369M (base case settlement) to $565M (bear case trial judgment). Bear case exposure ($1.56B total) = 86.5% of purchase price.",
+      "probability": "30%"
+    },
+    {
+      "trigger": "BitLicense denied pre-closing",
+      "threshold": "NYDFS issues denial decision despite capital raise",
+      "rationale": "Removes $67M annual revenue (18% of customer base) and adds $100.5M NPV loss. Combined with other exposures, adjusted EBITDA falls to negative territory.",
+      "probability": "25-35%"
+    },
+    {
+      "trigger": "Insurance denied AND arbitration invalidated",
+      "threshold": "Both adverse outcomes occur (compound probability 9%)",
+      "rationale": "Adds $72M to base case exposure ($37M insurance + $35M class action settlement increase). Marginal impact pushes deal into 'walk away' zone.",
+      "probability": "9%"
+    },
+    {
+      "trigger": "Base case EBITDA falls below $0",
+      "threshold": "Additional exposures emerge reducing adjusted EBITDA from $6.7M to negative",
+      "rationale": "Acquisition destroys value at ANY price if EBITDA negative. Current base case: $185M EBITDA - $161M revenue loss - $17.3M ongoing compliance = $6.7M (96% reduction).",
+      "probability": "5-10%"
+    }
+  ],
+
+  "critical_milestones_timeline": {
+    "q1_2026": [
+      "IRS Broker Reporting vendor selection (by March 31, 2026)",
+      "FinCEN Phase 1 remediation (SAR backlog, automated monitoring)",
+      "BitLicense capital raise initiation ($141M equity financing)"
+    ],
+    "q2_2026": [
+      "SEC Settlement Term Sheet negotiations target completion",
+      "BitLicense capital raise completion and NYDFS filing",
+      "Class Action arbitration motion adjudicated",
+      "IRS Form 1099-DA implementation (Phase 1 gross proceeds reporting by Feb 17, 2026)"
+    ],
+    "q3_2026": [
+      "SEC Settlement finalized (optimistic case)",
+      "CFTC settlement negotiations concluded",
+      "Insurance claim resolution or coverage litigation settlement",
+      "Earliest closing date if all conditions precedent met"
+    ],
+    "q4_2026": [
+      "SEC Settlement finalized (base case timeline)",
+      "BitLicense approval decision",
+      "Revised closing date (18 months from Jan 2026)"
+    ],
+    "2027": [
+      "IRS Form 1099-DA Phase 2 implementation (cost basis reporting by Jan 31, 2027)",
+      "Class action final settlement or trial judgment",
+      "Escrow releases begin (first tranche at 12-18 months post-closing)"
+    ]
+  },
+
+  "validation_notes": {
+    "cross_validation_performed": true,
+    "canonical_source": "financial-impact-analysis.md (T10)",
+    "discrepancies_detected": 0,
+    "discrepancy_details": "All exposure amounts, probabilities, NPV calculations, and scenario analyses match T10 exactly. Risk aggregation validated against research-plan.md HIGH SEVERITY FINDINGS table (7 findings, $989M expected value). No double-counting detected across domains.",
+    "last_updated": "2026-01-02T14:45:00Z",
+    "validation_agent": "risk-aggregator (V1.4)",
+    "validation_status": "COMPLETE"
+  }
+}

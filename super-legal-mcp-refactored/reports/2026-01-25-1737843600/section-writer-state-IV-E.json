@@ -1,0 +1,74 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "E",
+  "section_name": "Insurance Coverage",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-E (Insurance Coverage) from specialist reports",
+    "progress": "Phase 6 complete - all subsections written",
+    "next_action": "Section complete and saved",
+    "critical_context": ["section_id=E", "7 findings written", "$20.9M-$34.4M aggregate uninsured exposure documented"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["insurance-coverage-report.md", "fca-litigation-report.md", "privacy-data-protection-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 7250,
+    "findings_written": "7/7",
+    "footnotes_count": 84,
+    "last_checkpoint": "2026-01-25T12:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/insurance-coverage-report.md",
+    "specialist-reports/fca-litigation-report.md",
+    "specialist-reports/privacy-data-protection-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "findings_completed": [
+    "B.1: D&O partial FCA coverage ($4.8M-$10.5M uninsured)",
+    "B.2: D&O defense costs (duty to defend - $0 uninsured)",
+    "B.3: Professional liability DPNA/CMPs uninsurable ($1.67M-$4.67M)",
+    "B.4: Professional liability resident injury claims covered ($25K-$50K deductible)",
+    "B.5: EPLI wrongful termination covered / WARN Act excluded ($8.7M uninsured)",
+    "B.6: Cyber breach notification covered / HIPAA fines uncertain ($0-$1.5M)",
+    "B.7: Tail coverage transaction cost ($1.5M-$3M seller obligation)"
+  ],
+
+  "quality_verification": {
+    "word_count_met": true,
+    "all_subsections_present": true,
+    "high_findings_have_provisions": true,
+    "no_placeholders": true,
+    "verification_tags_present": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

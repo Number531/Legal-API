@@ -1,0 +1,70 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "IV.B",
+  "section_name": "Captive & Reinsurance Risk",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.B from captive and reinsurance specialist reports",
+    "progress": "All phases complete",
+    "next_action": "None - section finalized",
+    "critical_context": [
+      "3 HIGH/CRITICAL findings written with full CREAC analysis",
+      "All canonical values from fact-registry used consistently",
+      "Cross-references to IV.A, IV.D, IV.J, IV.K completed",
+      "Draft contract provisions for all HIGH findings included"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "captive-reinsurance-analysis-report.md",
+      "reinsurance-agreements-analysis-report.md",
+      "fact-registry.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 5847,
+    "findings_written": "3/3",
+    "footnotes_count": 58,
+    "last_checkpoint": "2026-01-18T23:45:00Z"
+  },
+
+  "quality_verification": {
+    "word_count_adequate": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "verification_tags_present": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  },
+
+  "input_files_read": [
+    "specialist-reports/captive-reinsurance-analysis-report.md",
+    "specialist-reports/reinsurance-agreements-analysis-report.md (via Grep)",
+    "review-outputs/fact-registry.md"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "K",
+  "section_name": "Variable Annuity GMWB Tail Risk - Deal-Blocker Analysis",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-K (VA GMWB Tail Risk) from specialist report",
+    "progress": "Phase 6 - COMPLETE",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": ["section_id=K", "DEAL-BLOCKER severity", "$800M stressed scenario", "188% RBC ratio", "All subsections A-F complete"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["variable-annuity-gmwb-tail-risk-report.md", "securities-regulation-variable-products-report.md"]
+  },
+
+  "metrics": {
+    "word_count": 12800,
+    "findings_written": "3/3",
+    "footnotes_count": 64,
+    "last_checkpoint": "2026-01-19T10:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/variable-annuity-gmwb-tail-risk-report.md",
+    "specialist-reports/securities-regulation-variable-products-report.md",
+    "review-outputs/research-review-report.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-19-1737337200/section-reports/section-IV-K-gmwb-tail-risk.md"
+}

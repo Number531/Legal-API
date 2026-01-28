@@ -1,0 +1,114 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Corporate Practice of Medicine Doctrine Compliance",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.G (Corporate Practice of Medicine) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "None - section complete",
+    "critical_context": [
+      "section_id=G",
+      "0 HIGH findings, 1 MEDIUM finding (IRS misclassification), 2 LOW findings",
+      "Florida/Georgia permissive (0% CPOM risk), South Carolina case law (5% risk)",
+      "Using fact-registry values for Dr. Mitchell compensation and agency counts"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_state_analysis": "complete",
+    "C_medical_director_ic": "complete",
+    "D_risk_assessment": "complete",
+    "E_cross_domain": "complete",
+    "F_recommendations": "complete",
+    "G_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": [
+      "A_legal_framework",
+      "B_state_analysis",
+      "C_medical_director_ic",
+      "D_risk_assessment",
+      "E_cross_domain",
+      "F_recommendations",
+      "G_footnotes"
+    ],
+    "do_not_reread_reports": [
+      "corporate-practice-medicine-report.md",
+      "employment-labor-report.md",
+      "fact-registry.md",
+      "coverage-gaps.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 6800,
+    "findings_written": "3/3",
+    "footnotes_count": 97,
+    "last_checkpoint": "2026-01-26T03:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/corporate-practice-medicine-report.md",
+    "specialist-reports/employment-labor-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "findings_summary": {
+    "finding_1": {
+      "title": "Florida CPOM Compliance",
+      "severity": "VERY LOW",
+      "exposure": "$0",
+      "status": "No violation - permissive jurisdiction"
+    },
+    "finding_2": {
+      "title": "Georgia CPOM Compliance",
+      "severity": "VERY LOW",
+      "exposure": "$0",
+      "status": "No violation - permissive jurisdiction"
+    },
+    "finding_3": {
+      "title": "South Carolina Case Law Risk",
+      "severity": "LOW",
+      "exposure": "$1,250-$2,500 weighted",
+      "status": "5% probability, IC structure minimizes risk"
+    },
+    "finding_4": {
+      "title": "IRS Medical Director Misclassification",
+      "severity": "MEDIUM",
+      "exposure": "$133,812 weighted (10-18% probability × $896,852)",
+      "status": "IC classification defensible, VCSP mitigation available ($20,655)"
+    }
+  },
+
+  "cross_references_included": [
+    "Section IV.A (STARK/AKS) - Dr. Mitchell IC status does not cure federal fraud violations",
+    "Section IV.H (Employment/Labor) - IRS misclassification exposure $896,852",
+    "Section IV.K (Tax Structure) - VCSP settlement option $20,655"
+  ],
+
+  "quality_verification": {
+    "word_count_met": true,
+    "all_subsections_present": true,
+    "high_findings_have_provisions": "N/A - no HIGH findings",
+    "citations_have_tags": true,
+    "no_placeholders": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true,
+    "creac_structure_followed": true
+  }
+}

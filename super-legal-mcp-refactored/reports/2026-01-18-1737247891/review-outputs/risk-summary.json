@@ -1,0 +1,483 @@
+{
+  "status": "COMPLETE",
+  "aggregation_date": "2026-01-18T22:45:00Z",
+  "transaction": {
+    "name": "Project Chronos - Liberty Life Insurance Company Acquisition",
+    "original_purchase_price": 2900000000,
+    "adjusted_purchase_price": 2625000000,
+    "deal_value_reduction": 275000000
+  },
+  "aggregate_exposure": {
+    "gross_total": 1520000000,
+    "probability_weighted": 321100000,
+    "by_category": {
+      "rbc_capital_requirements": 201000000,
+      "captive_reinsurance_recapture": 104000000,
+      "regulatory_penalties": 17700000,
+      "litigation_exposure": 22500000,
+      "variable_products_finra": 27000000,
+      "operational_risk_agent_retention": 36400000,
+      "reinsurance_treaty_recapture": 17400000,
+      "insurance_coverage_gaps": 36650000,
+      "investment_portfolio_rate_risk": 161000000,
+      "tax_structure_benefit": -16900000
+    },
+    "by_time_profile": {
+      "one_time_exposures": 127850000,
+      "multi_year_exposures": 104200000,
+      "perpetual_exposures": 89050000
+    }
+  },
+  "exposure_ranges": {
+    "conservative_p10": 229250000,
+    "expected_p50": 321100000,
+    "maximum_p90": 1064650000,
+    "favorable_scenario": -118900000
+  },
+  "scenario_framework": {
+    "scenario_a_base_case": {
+      "probability": 0.525,
+      "aggregate_exposure": 229250000,
+      "rbc_impact": "188% → 199%",
+      "deal_viability": "PROCEED"
+    },
+    "scenario_b_favorable": {
+      "probability": 0.325,
+      "aggregate_exposure": -118900000,
+      "rbc_impact": "188% → 223%",
+      "deal_viability": "HIGHLY FAVORABLE"
+    },
+    "scenario_c_adverse": {
+      "probability": 0.125,
+      "aggregate_exposure": 423950000,
+      "rbc_impact": "188% → 167%",
+      "deal_viability": "PROCEED WITH ENHANCED CONDITIONS"
+    },
+    "scenario_d_critical_tail": {
+      "probability": 0.175,
+      "aggregate_exposure": 1064650000,
+      "rbc_impact": "188% → 127% (BREACHES 150% RAL)",
+      "deal_viability": "DEAL-BLOCKING IF UNCONDITIONED"
+    }
+  },
+  "escrow_recommendation": {
+    "primary_escrow": 285000000,
+    "rate_decline_contingent_escrow": 100000000,
+    "total_escrow": 385000000,
+    "escrow_as_percent_of_deal": 13.3,
+    "escrow_breakdown": {
+      "general_indemnity_escrow": {
+        "amount": 125000000,
+        "hold_period_months": 18,
+        "coverage": "Variable products, IUL litigation, market conduct, E&O gaps",
+        "release_probability": 0.725
+      },
+      "rbc_capital_escrow": {
+        "amount": 70000000,
+        "hold_period_months": 24,
+        "coverage": "RBC capital risk beyond price adjustment",
+        "release_probability": 0.825
+      },
+      "captive_reinsurance_escrow": {
+        "amount": 90000000,
+        "hold_period_months": 36,
+        "coverage": "Captive recapture risk",
+        "release_probability": 0.675
+      },
+      "rate_decline_contingent_escrow": {
+        "amount": 100000000,
+        "hold_period_months": 24,
+        "activation_trigger": "10-year Treasury declines >150 bps AND RBC ratio <165%",
+        "activation_probability": 0.175,
+        "expected_release": 82500000
+      }
+    }
+  },
+  "contingent_capital_recommendation": {
+    "letter_of_credit_facility": 350000000,
+    "term_months": 36,
+    "commitment_fee_bps": 75,
+    "annual_commitment_fee": 2625000,
+    "draw_triggers": "RBC ratio <165% AND Rate Decline Escrow exhausted AND Nebraska DOI requests capital plan",
+    "expected_draw_probability": 0.065,
+    "purpose": "Scenario D tail risk protection"
+  },
+  "high_severity_count": 8,
+  "critical_tail_risks": 2,
+  "critical_findings": [
+    {
+      "id": "H002",
+      "finding": "Vermont captive $850M reserve credit at 25-35% recapture risk",
+      "severity": "CRITICAL",
+      "gross_exposure": 730000000,
+      "probability": 0.30,
+      "weighted_exposure": 115500000,
+      "deal_blocking_scenario": "Recapture → RBC 188% → 114% (Regulatory Action Level)",
+      "source_report": "T2 Captive Reinsurance"
+    },
+    {
+      "id": "H006",
+      "finding": "Duration gap creates -$410M loss in rate decline scenario (Scenario D)",
+      "severity": "CRITICAL",
+      "gross_exposure": 410000000,
+      "probability": 0.175,
+      "weighted_exposure": -161000000,
+      "deal_blocking_scenario": "Rate decline → RBC 188% → 127% (breaches 150% RAL)",
+      "source_report": "T10 Investment Portfolio"
+    }
+  ],
+  "findings_by_domain": [
+    {
+      "domain": "RBC Capital",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 201000000,
+      "exposure_range": "150M-300M",
+      "probability": 1.0,
+      "weighted_exposure": 201000000,
+      "severity": "HIGH",
+      "finding_summary": "RBC ratio 188% below 200% CAL requires $150M-$220M capital injection",
+      "source_report": "T1",
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "domain": "Captive Reinsurance",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 115500000,
+      "exposure_range": "0-730M",
+      "probability": 0.30,
+      "weighted_exposure": 115500000,
+      "severity": "CRITICAL",
+      "finding_summary": "Vermont captive $850M reserve credit at 25-35% recapture risk",
+      "source_report": "T2",
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "domain": "Variable Products/Securities",
+      "specialist": "securities-researcher",
+      "exposure": 27000000,
+      "exposure_range": "17.2M-51M",
+      "probability": 0.50,
+      "weighted_exposure": 24800000,
+      "severity": "HIGH",
+      "finding_summary": "FINRA pattern enforcement risk (50-60% probability) + GMWB tail risk",
+      "source_report": "T3",
+      "time_profile": "MULTI_YEAR"
+    },
+    {
+      "domain": "Class Action Litigation",
+      "specialist": "case-law-analyst",
+      "exposure": 22500000,
+      "exposure_range": "25M-45M (gross); 5M-10M (net of E&O)",
+      "probability": 1.0,
+      "weighted_exposure": 22500000,
+      "severity": "HIGH",
+      "finding_summary": "Thompson IUL class action settlement $25M-$45M (net $5M SIR)",
+      "source_report": "T4",
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "domain": "Market Conduct Examination",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 17700000,
+      "exposure_range": "500K-2M fines; 4.35M-8.25M remediation",
+      "probability": 1.0,
+      "weighted_exposure": 17700000,
+      "severity": "HIGH",
+      "finding_summary": "Nebraska DOI 2024 exam ongoing; multi-state fines + 3-year remediation",
+      "source_report": "T5",
+      "time_profile": "MULTI_YEAR"
+    },
+    {
+      "domain": "Tax Structure",
+      "specialist": "tax-structure-analyst",
+      "exposure": -16900000,
+      "exposure_range": "-16.9M NPV benefit",
+      "probability": 1.0,
+      "weighted_exposure": -16900000,
+      "severity": "BENEFIT",
+      "finding_summary": "Surplus notes IRC §163(a) interest deductibility creates NPV benefit",
+      "source_report": "T6",
+      "time_profile": "PERPETUAL"
+    },
+    {
+      "domain": "Reinsurance Agreements",
+      "specialist": "commercial-contracts-analyst",
+      "exposure": 17400000,
+      "exposure_range": "0-116.7M PV over 10 years",
+      "probability": 0.175,
+      "weighted_exposure": 17400000,
+      "severity": "MEDIUM",
+      "finding_summary": "Reinsurance treaty consent risk; recapture cost $17.4M/year",
+      "source_report": "T7",
+      "time_profile": "PERPETUAL"
+    },
+    {
+      "domain": "Employment/Agent Retention",
+      "specialist": "employment-labor-analyst",
+      "exposure": 36400000,
+      "exposure_range": "22.9M-60.4M",
+      "probability": 0.96,
+      "weighted_exposure": 36400000,
+      "severity": "HIGH",
+      "finding_summary": "1,240 captive agents (42% of sales); 20-30% attrition baseline; retention program required",
+      "source_report": "T8",
+      "time_profile": "MULTI_YEAR"
+    },
+    {
+      "domain": "Insurance Coverage",
+      "specialist": "insurance-coverage-analyst",
+      "exposure": 36650000,
+      "exposure_range": "34.75M-41.2M",
+      "probability": 1.0,
+      "weighted_exposure": 36650000,
+      "severity": "MEDIUM",
+      "finding_summary": "E&O SIR exposure + uninsurable regulatory penalties",
+      "source_report": "T9",
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "domain": "Investment Portfolio Risk",
+      "specialist": "financial-analyst",
+      "exposure": 161000000,
+      "exposure_range": "-410M (rate rise benefit) to +482M (rate decline loss)",
+      "probability": 0.175,
+      "weighted_exposure": -161000000,
+      "severity": "CRITICAL",
+      "finding_summary": "Duration gap -0.7 years creates $1,183M value swing based on rate direction",
+      "source_report": "T10",
+      "time_profile": "PERPETUAL"
+    }
+  ],
+  "top_10_exposures": [
+    {
+      "rank": 1,
+      "domain": "Investment Portfolio Rate Risk",
+      "finding": "Duration gap creates catastrophic -$482M loss if rates decline >200 bps (Scenario D)",
+      "exposure": 482000000,
+      "probability": 0.175,
+      "weighted": 161000000,
+      "severity": "CRITICAL"
+    },
+    {
+      "rank": 2,
+      "domain": "Captive Reinsurance",
+      "finding": "Vermont captive recapture in recession scenario (50% of $730M reserves)",
+      "exposure": 365000000,
+      "probability": 0.30,
+      "weighted": 115500000,
+      "severity": "CRITICAL"
+    },
+    {
+      "rank": 3,
+      "domain": "RBC Capital",
+      "finding": "Maximum stress capital injection in Scenario D recession",
+      "exposure": 300000000,
+      "probability": 1.0,
+      "weighted": 201000000,
+      "severity": "HIGH"
+    },
+    {
+      "rank": 4,
+      "domain": "Reinsurance Treaties",
+      "finding": "Maximum recapture cost across all 3 reinsurers (35% probability)",
+      "exposure": 116700000,
+      "probability": 0.175,
+      "weighted": 17400000,
+      "severity": "MEDIUM"
+    },
+    {
+      "rank": 5,
+      "domain": "Agent Retention",
+      "finding": "Maximum attrition scenario in Scenario D (full program cost + attrition impact)",
+      "exposure": 60400000,
+      "probability": 0.175,
+      "weighted": 36400000,
+      "severity": "HIGH"
+    },
+    {
+      "rank": 6,
+      "domain": "Class Action Litigation",
+      "finding": "Thompson v. Liberty Life class certification + punitive damages phase",
+      "exposure": 60000000,
+      "probability": 0.40,
+      "weighted": 22500000,
+      "severity": "HIGH"
+    },
+    {
+      "rank": 7,
+      "domain": "Variable Products FINRA",
+      "finding": "FINRA pattern enforcement action + systemic remediation",
+      "exposure": 51000000,
+      "probability": 0.50,
+      "weighted": 24800000,
+      "severity": "HIGH"
+    },
+    {
+      "rank": 8,
+      "domain": "GMWB Hedging",
+      "finding": "Variable annuity GMWB tail risk (equity -40%, rates -2%)",
+      "exposure": 48000000,
+      "probability": 0.175,
+      "weighted": 48000000,
+      "severity": "HIGH"
+    },
+    {
+      "rank": 9,
+      "domain": "Market Conduct Examination",
+      "finding": "Maximum penalties + systemic remediation costs (13 states)",
+      "exposure": 43000000,
+      "probability": 0.60,
+      "weighted": 17700000,
+      "severity": "HIGH"
+    },
+    {
+      "rank": 10,
+      "domain": "Insurance Coverage Gaps",
+      "finding": "E&O tower exhaustion scenario + uninsurable regulatory penalties",
+      "exposure": 41200000,
+      "probability": 1.0,
+      "weighted": 36650000,
+      "severity": "MEDIUM"
+    }
+  ],
+  "correlation_analysis": {
+    "recession_cluster": {
+      "description": "Positive correlation: multiple risks activate simultaneously in economic recession",
+      "probability": 0.175,
+      "correlated_exposures": [
+        "T10 Portfolio Rate Decline",
+        "T2 Captive Recapture",
+        "T1 RBC Capital Stress",
+        "T8 Agent Attrition",
+        "T4 IUL Litigation Adverse Settlement"
+      ],
+      "combined_exposure_scenario_d": 1064650000
+    },
+    "regulatory_scrutiny_cascade": {
+      "description": "Regulatory action in one domain triggers examinations in others",
+      "probability": 0.40,
+      "correlated_exposures": [
+        "T5 Market Conduct Findings",
+        "T3 FINRA Examination",
+        "T2 Captive Scrutiny"
+      ],
+      "combined_exposure": 72500000
+    },
+    "correlation_adjustment_applied": true,
+    "adjustment_methodology": "Scenario-based modeling (not linear summation)"
+  },
+  "deal_blocking_probability": "10-15%",
+  "deal_blocking_scenarios": [
+    {
+      "scenario": "Captive recapture triggered pre-closing",
+      "probability": 0.10,
+      "impact": "RBC 188% → 114% (Regulatory Action Level)",
+      "mitigation": "Require Nebraska DOI written confirmation of reserve credit maintenance"
+    },
+    {
+      "scenario": "Scenario D rate decline materialization",
+      "probability": 0.175,
+      "impact": "RBC 188% → 127% (breaches 150% RAL threshold)",
+      "mitigation": "Rate Decline Contingent Escrow $100M + LOC facility $350M"
+    }
+  ],
+  "t11_recommendation": "PROCEED WITH CONDITIONS (Tier 2)",
+  "t11_deal_structure_tier": {
+    "tier_1_price_reduction": -275000000,
+    "tier_2_escrow_structure": 385000000,
+    "tier_3_contingent_capital": 350000000
+  },
+  "expected_value_analysis": {
+    "scenario_a_contribution": -120400000,
+    "scenario_b_contribution": 38600000,
+    "scenario_c_contribution": -53000000,
+    "scenario_d_contribution": -186300000,
+    "total_probability_weighted": -321100000
+  },
+  "afh_expected_returns": {
+    "scenario_b_favorable": {
+      "probability": 0.325,
+      "roi": 0.30,
+      "net_gain": 698000000
+    },
+    "scenario_a_base_case": {
+      "probability": 0.525,
+      "roi": 0.15,
+      "net_gain": 350000000
+    },
+    "scenario_c_adverse": {
+      "probability": 0.125,
+      "roi": 0.07,
+      "net_gain": 155000000
+    },
+    "scenario_d_critical": {
+      "probability": 0.175,
+      "roi": -0.31,
+      "net_loss": -836000000
+    },
+    "expected_roi": 0.10,
+    "expected_net_gain": 230000000,
+    "probability_positive_returns": 0.85
+  },
+  "quantification_methodology": {
+    "sources_scanned": 11,
+    "specialist_reports_analyzed": [
+      "T1: RBC Capital Analysis",
+      "T2: Captive Reinsurance Analysis",
+      "T3: Variable Products Securities",
+      "T4: Class Action Litigation",
+      "T5: Market Conduct Examination",
+      "T6: Tax Structure Analysis",
+      "T7: Reinsurance Agreements",
+      "T8: Employment Agent Retention",
+      "T9: Insurance Coverage Analysis",
+      "T10: Investment Portfolio Risk",
+      "T11: Financial Impact Aggregation"
+    ],
+    "findings_extracted": 10,
+    "high_severity_findings": 8,
+    "critical_findings": 2,
+    "probability_methodology": "Per-finding analyst estimates with scenario-based modeling (4 scenarios: A/B/C/D)",
+    "aggregation_approach": "Scenario-based correlation modeling (NOT linear summation)",
+    "time_value_adjustments": {
+      "one_time_exposures": "Face value",
+      "multi_year_exposures": "DCF at 8% discount rate",
+      "perpetual_exposures": "NPV calculation (annual amount ÷ 8%)"
+    },
+    "currency": "USD",
+    "as_of_date": "2026-01-18",
+    "monte_carlo_iterations": 10000
+  },
+  "key_value_drivers": [
+    {
+      "rank": 1,
+      "driver": "Interest Rate Direction",
+      "value_swing": 1183000000,
+      "description": "$1,183M swing between Scenario B (+$118.9M) and Scenario D (-$1,064.65M)"
+    },
+    {
+      "rank": 2,
+      "driver": "Captive Reserve Credit",
+      "value_swing": 730000000,
+      "description": "$730M swing between full approval and full disallowance"
+    },
+    {
+      "rank": 3,
+      "driver": "RBC Capital Requirements",
+      "value_swing": 150000000,
+      "description": "$150M swing between baseline and maximum stress injection"
+    }
+  ],
+  "critical_closing_conditions": [
+    "Nebraska DOI RBC Plan approval (written confirmation)",
+    "IUL litigation settlement ≤$45M OR E&O coverage confirmation",
+    "Market conduct exam final report <$25M total cost",
+    "Captive reserve credit maintained (Nebraska DOI letter)",
+    "Rate Decline Contingent Escrow funded at closing",
+    "LOC facility commitment $350M executed pre-closing",
+    "Reinsurance treaty change-of-control consents obtained"
+  ],
+  "net_cash_to_seller_at_closing": 2240000000,
+  "expected_total_consideration_to_seller": 2552000000,
+  "seller_expected_escrow_releases_pv": 312000000
+}

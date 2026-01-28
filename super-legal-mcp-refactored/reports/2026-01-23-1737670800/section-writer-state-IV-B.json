@@ -1,0 +1,53 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "B",
+  "section_name": "Investment Company Act of 1940 Compliance",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.B (Investment Company Act) from specialist reports",
+    "progress": "Complete - all phases finished",
+    "next_action": "None - section generation complete",
+    "critical_context": ["section_id=B", "1 HIGH finding (12b-1 disclosure gap $8.5M)", "All subsections A-F complete"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["regulatory-investment-company-act-report.md", "fact-registry.md", "research-review-report.md", "coverage-gaps.md"]
+  },
+
+  "metrics": {
+    "word_count": 6250,
+    "findings_written": "4/4",
+    "footnotes_count": 74,
+    "last_checkpoint": "2026-01-23T12:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/regulatory-investment-company-act-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-23-1737670800/section-reports/section-IV-B-investment-company-act.md"
+}

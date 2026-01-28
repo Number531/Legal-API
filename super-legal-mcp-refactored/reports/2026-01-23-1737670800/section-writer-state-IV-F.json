@@ -1,0 +1,72 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "F",
+  "section_name": "ERISA Fiduciary Obligations and Prohibited Transactions",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.F (ERISA Fiduciary Obligations) from specialist report",
+    "progress": "Phase 6 complete - section finalized",
+    "next_action": "Return to orchestrator",
+    "critical_context": [
+      "section_id=F",
+      "$17.4B ERISA assets (74% institutional AUM)",
+      "HIGH finding: $1.5M-$16.1M prohibited transaction excise tax",
+      "3 findings with full CREAC analysis",
+      "6,450 words, 28 footnotes, all verification tags present"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete. No recovery needed.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "specialist-reports/employment-erisa-fiduciary-obligations-report.md",
+      "review-outputs/fact-registry.md",
+      "review-outputs/research-review-report.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 6450,
+    "findings_written": "3/3",
+    "footnotes_count": 28,
+    "last_checkpoint": "2026-01-23T14:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/employment-erisa-fiduciary-obligations-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "quality_checks": {
+    "word_count_adequate": true,
+    "all_high_findings_have_contract_language": true,
+    "all_citations_have_verification_tags": true,
+    "no_placeholders": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true,
+    "creac_structure_followed": true,
+    "liability_valuation_methodology_disclosed": true
+  }
+}

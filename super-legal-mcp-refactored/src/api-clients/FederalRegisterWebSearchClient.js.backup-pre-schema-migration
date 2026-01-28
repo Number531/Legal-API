@@ -1,0 +1,1417 @@
+/**
+ * Federal Register Web Search Client (Exa-only)
+ * Searches Federal Register documents via Exa web search
+ * Replaces FederalRegisterClient with web-based search for better coverage
+ */
+
+import { validateDate, validateLimit } from '../utils/validation.js';
+import { BaseWebSearchClient } from './BaseWebSearchClient.js';
+
+export class FederalRegisterWebSearchClient extends BaseWebSearchClient {
+  constructor(rateLimiter, exaApiKey = process.env.EXA_API_KEY) {
+    super(rateLimiter, exaApiKey);
+    this.federalRegisterDomains = ['federalregister.gov'];
+
+    // Document type configuration
+    this.documentTypes = {
+      'rule': 'Final Rule',
+      'proposed_rule': 'Proposed Rule',
+      'notice': 'Notice',
+      'presidential_document': 'Presidential Document'
+    };
+
+    // Agency abbreviations for enhanced search
+    this.agencies = {
+      'EPA': 'Environmental Protection Agency',
+      'FDA': 'Food and Drug Administration',
+      'FTC': 'Federal Trade Commission',
+      'DOT': 'Department of Transportation',
+      'DOJ': 'Department of Justice',
+      'HHS': 'Department of Health and Human Services',
+      'USDA': 'Department of Agriculture',
+      'DOL': 'Department of Labor',
+      'Treasury': 'Department of the Treasury',
+      'Commerce': 'Department of Commerce'
+    };
+
+    // Confidence assessment levels for permissive extraction
+    this.confidenceLevels = {
+      high: { min: 0.8, description: 'High confidence regulatory document' },
+      medium: { min: 0.6, description: 'Medium confidence regulatory content' },
+      low: { min: 0.3, description: 'Low confidence but potentially relevant' },
+      minimal: { min: 0.0, description: 'Minimal regulatory indicators found' }
+    };
+
+    // Federal Register specific extraction patterns
+    this.frPatterns = {
+      documentNumber: [
+        /\b(\d{4}-\d{5})\b/,
+        /Document\s+(?:No|Number)[\s.:]+(\d{4}-\d{5})/i,
+        /FR\s+Doc[\s.:]+(\d{4}-\d{5})/i
+      ],
+      cfrReferences: [
+        /\b(\d+)\s+CFR\s+(\d+(?:\.\d+)?)/gi,
+        /Code\s+of\s+Federal\s+Regulations[,\s]+(?:Title\s+)?(\d+)[,\s]+(?:Part\s+)?(\d+)/gi,
+        /(?:Section|§)\s*(\d+)\.(\d+)/gi
+      ],
+      commentDeadlines: [
+        /Comments?\s+(?:must\s+be\s+)?(?:received|submitted)\s+(?:by|before)\s+([A-Za-z]+\s+\d{1,2},\s+\d{4})/gi,
+        /Comment\s+period\s+(?:ends|closes)\s+(?:on\s+)?([A-Za-z]+\s+\d{1,2},\s+\d{4})/gi,
+        /(?:Written\s+)?comments?\s+(?:are\s+)?due\s+(?:by\s+)?([A-Za-z]+\s+\d{1,2},\s+\d{4})/gi
+      ],
+      effectiveDates: [
+        /Effective\s+(?:date|Date)[\s.:]+([A-Za-z]+\s+\d{1,2},\s+\d{4})/gi,
+        /This\s+rule\s+(?:is\s+)?effective\s+([A-Za-z]+\s+\d{1,2},\s+\d{4})/gi,
+        /becomes?\s+effective\s+(?:on\s+)?([A-Za-z]+\s+\d{1,2},\s+\d{4})/gi
+      ],
+      regulatoryStages: [
+        /(?:PROPOSED|NOTICE\s+OF\s+PROPOSED)\s+RULE/i,
+        /FINAL\s+RULE/i,
+        /INTERIM\s+FINAL\s+RULE/i,
+        /DIRECT\s+FINAL\s+RULE/i,
+        /EMERGENCY\s+RULE/i
+      ]
+    };
+
+    // Environment-based feature flags
+    this.featureFlags = {
+      enablePermissiveExtraction: process.env.FR_PERMISSIVE_EXTRACTION !== 'false',
+      enableCommentTracking: process.env.FR_COMMENT_TRACKING !== 'false',
+      enableComplianceAdvisories: process.env.FR_COMPLIANCE_ADVISORIES !== 'false',
+      enableRegulatoryUrgency: process.env.FR_REGULATORY_URGENCY !== 'false'
+    };
+  }
+
+  /**
+   * Search Federal Register documents via Exa web search
+   * @param {Object} args
+   * @param {string} args.search_term - Search query for Federal Register documents (required)
+   * @param {string} [args.document_type] - Type of document (rule, proposed_rule, notice, presidential_document)
+   * @param {string} [args.agency] - Agency acronym (e.g., 'EPA', 'FDA', 'FTC')
+   * @param {string} [args.date_after] - Find documents published after this date (YYYY-MM-DD)
+   * @param {string} [args.date_before] - Find documents published before this date (YYYY-MM-DD)
+   * @param {number} [args.limit=10] - Maximum results (1-50)
+   * @param {boolean} [args.include_text=false] - Include full document text
+   * @param {boolean} [args.include_snippet=false] - Include smart snippet with key sections
+   */
+  async searchFederalRegisterWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const {
+      search_term = '',
+      document_type,
+      agency,
+      date_after,
+      date_before,
+      limit = 10,
+      include_text = false,
+      include_snippet = false
+    } = args;
+
+    // No validation required - buildFederalRegisterQuery provides smart fallbacks
+
+    if (date_after) validateDate(date_after, 'date_after');
+    if (date_before) validateDate(date_before, 'date_before');
+    const validatedLimit = validateLimit(limit, 10);
+
+    // Build Federal Register query
+    const query = this.buildFederalRegisterQuery({
+      search_term,
+      document_type,
+      agency
+    });
+
+    // Use BaseWebSearchClient's executeExaSearch with proper options
+    const results = await this.executeExaSearch(query, validatedLimit, {
+      domain: 'federal_regulation',
+      highlightQuery: 'federal register rule regulation CFR agency ACTION AGENCY SUMMARY comment period',
+      numSentences: 5,
+      includeDomains: this.federalRegisterDomains,
+      includeFullText: include_text,
+      fallbackToText: true
+    });
+
+    // Permissive mapping - no filtering, all results processed
+    const mapped = results
+      .filter(r => (r.url || '').includes('federalregister.gov'))
+      .map(r => this.mapFederalRegisterResult(r, include_text, include_snippet));
+
+    // Apply date filters
+    let final = mapped;
+    if (date_after) final = final.filter(f => !f.publication_date || f.publication_date >= date_after);
+    if (date_before) final = final.filter(f => !f.publication_date || f.publication_date <= date_before);
+
+    // Calculate quality metadata for query-result alignment
+    const qualityMetadata = this.assessRegulatoryQueryRelevance(search_term || '', results, final, args);
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'federal_register_web',
+          query: query,
+          search_term: search_term,
+          total_results: final.length,
+          documents: final,
+          ...qualityMetadata
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Convenience: Notices
+   */
+  async searchNoticesWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    return this.searchFederalRegisterWeb({
+      ...args,
+      document_type: 'notice'
+    });
+  }
+
+  /**
+   * Convenience: Proposed Rules
+   */
+  async searchProposedRulesWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    return this.searchFederalRegisterWeb({
+      ...args,
+      document_type: 'proposed_rule'
+    });
+  }
+
+  /**
+   * Convenience: Final Rules
+   */
+  async searchFinalRulesWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    return this.searchFederalRegisterWeb({
+      ...args,
+      document_type: 'rule'
+    });
+  }
+
+  /**
+   * Convenience: Presidential Documents
+   */
+  async searchPresidentialDocsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    return this.searchFederalRegisterWeb({
+      ...args,
+      document_type: 'presidential_document'
+    });
+  }
+
+  /**
+   * Public Inspection desk search (pre-publication documents)
+   */
+  async searchPublicInspectionWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const {
+      search_term = '',
+      agency,
+      date_after,
+      date_before,
+      limit = 10,
+      include_text = false,
+      include_snippet = false
+    } = args;
+
+    if (date_after) validateDate(date_after, 'date_after');
+    if (date_before) validateDate(date_before, 'date_before');
+    const validatedLimit = validateLimit(limit, 10);
+
+    // Build Public Inspection-scoped query (fixed to remove path from site operator)
+    let query = 'site:federalregister.gov ';
+
+    // Add search term if provided
+    if (search_term?.trim()) {
+      query += `"${search_term}" `;
+    }
+
+    // Add agency if provided
+    if (agency) {
+      const fullAgencyName = this.agencies[(agency || '').toUpperCase()] || agency;
+      query += `"${fullAgencyName}" `;
+    }
+
+    // Add public inspection specific terms
+    query += '"public inspection" ("Public Inspection" OR "public-inspection" OR "on public inspection")';
+    query = query.trim();
+
+    let results;
+    try {
+      results = await this.executeExaSearch(query, validatedLimit, {
+        domain: 'federal_regulation',
+        highlightQuery: 'Federal Register Public Inspection agency rule notice ACTION AGENCY SUMMARY pre-publication',
+        numSentences: 4,
+        includeDomains: this.federalRegisterDomains,
+        includeFullText: include_text,
+        fallbackToText: true
+      });
+    } catch (error) {
+      console.error('Public Inspection search failed:', error);
+      // Return empty results instead of failing completely
+      results = [];
+    }
+
+    // Filter for public inspection related URLs (more permissive filtering)
+    const mapped = results
+      .filter(r => {
+        const url = (r.url || '').toLowerCase();
+        const title = (r.title || '').toLowerCase();
+        return url.includes('public-inspection') ||
+               url.includes('public_inspection') ||
+               title.includes('public inspection') ||
+               title.includes('public-inspection');
+      })
+      .map(r => this.mapFederalRegisterResult(r, include_text, include_snippet));
+
+    let final = mapped;
+    if (date_after) final = final.filter(f => !f.publication_date || f.publication_date >= date_after);
+    if (date_before) final = final.filter(f => !f.publication_date || f.publication_date <= date_before);
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'federal_register_public_inspection_web',
+          query,
+          search_term,
+          total_results: final.length,
+          documents: final
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Build optimized query for Federal Register search
+   * @private
+   */
+  buildFederalRegisterQuery(args) {
+    const { search_term, document_type, agency } = args;
+    
+    let query = 'site:federalregister.gov/documents ';
+    
+    // Add search term with quotes for exact phrase matching (if provided)
+    if (search_term?.trim()) {
+      query += `"${search_term}" `;
+    }
+    
+    // Add document type filter if specified
+    if (document_type && this.documentTypes[document_type]) {
+      query += `"${this.documentTypes[document_type]}" `;
+    }
+    
+    // Add agency filter if specified
+    if (agency) {
+      const fullAgencyName = this.agencies[agency.toUpperCase()] || agency;
+      query += `"${fullAgencyName}" `;
+    }
+    
+    // Smart fallback for empty search - provide recent regulatory activity
+    if (!search_term?.trim() && !document_type && !agency) {
+      query += 'regulation rule notice "federal register" recent updated ';
+    }
+    
+    // Add biasing terms for better Federal Register content
+    query += '(CFR OR "Code of Federal Regulations" OR "Federal Register")';
+    
+    return query.trim();
+  }
+
+  /**
+   * Map Exa result to Federal Register document format (Permissive)
+   * @private
+   */
+  mapFederalRegisterResult(result, includeText, includeSnippet) {
+    // Permissive approach - never return null, always provide structured data
+    if (!result) {
+      return this.createMinimalFRDocument('No result data', 0.0);
+    }
+
+    // Extract document metadata with confidence scoring
+    const agency = this.extractAgencyPermissive(result);
+    const document_type = this.extractDocumentTypePermissive(result);
+    const documentNumber = this.extractDocumentNumberPermissive(result);
+    const abstract = this.extractAbstractPermissive(result);
+
+    // Build base document structure
+    const mapped = {
+      title: result.title || 'Untitled Federal Register Document',
+      url: result.url || '',
+      publication_date: result.publishedDate || null,
+      document_number: documentNumber.value,
+      agency: agency.value,
+      document_type: document_type.value,
+      abstract: abstract.value,
+      score: result.score || 0
+    };
+
+    // Calculate overall confidence score
+    const overallConfidence = this.calculateOverallConfidence(result, {
+      agency: agency.confidence,
+      document_type: document_type.confidence,
+      document_number: documentNumber.confidence,
+      abstract: abstract.confidence
+    });
+
+    // Add comprehensive metadata with confidence scoring
+    mapped._fr_confidence = {
+      overall: overallConfidence,
+      components: {
+        agency: agency.confidence,
+        document_type: document_type.confidence,
+        document_number: documentNumber.confidence,
+        abstract: abstract.confidence,
+        url_validity: result.url ? (result.url.includes('federalregister.gov') ? 1.0 : 0.3) : 0.0
+      },
+      quality_tier: this.getConfidenceTier(overallConfidence),
+      extraction_method: 'permissive'
+    };
+
+    // Add regulatory-specific assessments if feature flags enabled
+    if (this.featureFlags.enableRegulatoryUrgency) {
+      mapped._regulatory_urgency = this.assessRegulatoryUrgency(result);
+    }
+
+    if (this.featureFlags.enableCommentTracking) {
+      mapped._comment_tracking = this.extractCommentPeriodInfo(result);
+    }
+
+    if (this.featureFlags.enableComplianceAdvisories) {
+      mapped._compliance_advisory = this.generateComplianceAdvisory(result, overallConfidence);
+    }
+
+    // Add content based on parameters
+    if (includeSnippet && result.text) {
+      mapped.snippet = this.extractSmartSnippetPermissive(result.text);
+    }
+
+    if (includeText && result.text) {
+      mapped.full_text = result.text;
+      // If we have full text but no snippet, create one
+      if (!mapped.snippet) {
+        mapped.snippet = this.extractSmartSnippetPermissive(result.text);
+      }
+    }
+
+    return mapped;
+  }
+
+  /**
+   * Create minimal FR document structure for edge cases
+   * @private
+   */
+  createMinimalFRDocument(title, confidence) {
+    return {
+      title: title,
+      url: '',
+      publication_date: null,
+      document_number: null,
+      agency: 'Unknown Agency',
+      document_type: 'Document',
+      abstract: null,
+      score: 0,
+      _fr_confidence: {
+        overall: confidence,
+        components: {
+          agency: 0.0,
+          document_type: 0.0,
+          document_number: 0.0,
+          abstract: 0.0,
+          url_validity: 0.0
+        },
+        quality_tier: 'minimal',
+        extraction_method: 'fallback'
+      }
+    };
+  }
+
+  /**
+   * Extract smart snippet focusing on key Federal Register sections
+   * @private
+   */
+  extractSmartSnippet(text, maxLength = 500) {
+    if (!text || typeof text !== 'string') return '';
+    
+    const cleaned = text.replace(/\s+/g, ' ').trim();
+    
+    // Federal Register specific patterns - prioritize most important sections
+    const meaningfulSections = [
+      /SUMMARY:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /SUPPLEMENTARY\s+INFORMATION:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /BACKGROUND:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /PURPOSE:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /ACTION:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /EFFECTIVE\s+DATE:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is
+    ];
+    
+    // Try to extract from meaningful sections first
+    for (const pattern of meaningfulSections) {
+      const match = cleaned.match(pattern);
+      if (match && match[1]) {
+        const snippet = match[1].trim();
+        if (snippet.length >= 50) {
+          return snippet.length > maxLength 
+            ? snippet.substring(0, maxLength - 3) + '...'
+            : snippet;
+        }
+      }
+    }
+    
+    // Fallback to beginning of document
+    return cleaned.length > maxLength
+      ? cleaned.substring(0, maxLength - 3) + '...'
+      : cleaned;
+  }
+
+  /**
+   * Extract document number from URL or text
+   * @private
+   */
+  extractDocumentNumber(result) {
+    if (result.url) {
+      const match = result.url.match(/\/(\d{4}-\d{5})/);
+      if (match) return match[1];
+    }
+    
+    if (result.text) {
+      const match = result.text.match(/Document Number:\s*(\d{4}-\d{5})/i);
+      if (match) return match[1];
+    }
+    
+    return null;
+  }
+
+  /**
+   * Extract agency from document (enhanced with URL/title parsing)
+   * @private
+   */
+  extractAgency(result) {
+    // First try URL and title parsing (more reliable)
+    const urlAgency = this.extractAgencyFromURL(result);
+    if (urlAgency) {
+      return urlAgency;
+    }
+
+    // Fall back to text parsing
+    if (result.text) {
+      const match = result.text.match(/AGENCY:\s*([^\n]+?)(?:\s+ACTION:|$)/i);
+      if (match) return match[1].trim();
+      
+      // Try alternative patterns
+      const altMatch = result.text.match(/DEPARTMENT OF\s+([^\n]+?)(?:\s+ACTION:|$)/i);
+      if (altMatch) return 'Department of ' + altMatch[1].trim();
+    }
+    return 'Unknown Agency';
+  }
+
+  /**
+   * Extract document type (enhanced with URL/title parsing)
+   * @private
+   */
+  extractDocumentType(result) {
+    // First try URL and title parsing (more reliable)
+    const urlType = this.extractDocumentTypeFromURL(result);
+    if (urlType) {
+      return urlType;
+    }
+
+    // Fall back to text parsing from ACTION field
+    if (result.text) {
+      const match = result.text.match(/ACTION:\s*([^\n]+)/i);
+      if (match) {
+        const action = match[1].trim();
+        // Clean up the action - extract just the document type
+        if (action.toLowerCase().includes('final rule')) return 'Final Rule';
+        if (action.toLowerCase().includes('proposed rule')) return 'Proposed Rule';
+        if (action.toLowerCase().includes('notice')) return 'Notice';
+        if (action.toLowerCase().includes('presidential document')) return 'Presidential Document';
+        return action;
+      }
+    }
+    return 'Document';
+  }
+
+  /**
+   * Extract abstract from SUMMARY field
+   * @private
+   */
+  extractAbstract(result) {
+    if (result.text) {
+      const match = result.text.match(/SUMMARY:\s*([^\n]+(?:\n[^A-Z][^\n]*)*)/i);
+      if (match) return match[1].trim();
+    }
+    return null;
+  }
+
+  /**
+   * Extract agency from URL patterns and title
+   * @private
+   */
+  extractAgencyFromURL(result) {
+    if (!result.url && !result.title) return null;
+
+    // URL patterns for common agencies
+    const agencyUrlPatterns = {
+      '/epa/': 'Environmental Protection Agency',
+      '/fda/': 'Food and Drug Administration',
+      '/ftc/': 'Federal Trade Commission',
+      '/dot/': 'Department of Transportation',
+      '/doj/': 'Department of Justice',
+      '/hhs/': 'Department of Health and Human Services',
+      '/usda/': 'Department of Agriculture',
+      '/dol/': 'Department of Labor',
+      '/treasury/': 'Department of the Treasury',
+      '/commerce/': 'Department of Commerce',
+      '/sec/': 'Securities and Exchange Commission',
+      '/cftc/': 'Commodity Futures Trading Commission',
+      '/occ/': 'Office of the Comptroller of the Currency'
+    };
+
+    // Check URL for agency patterns
+    if (result.url) {
+      const urlLower = result.url.toLowerCase();
+      for (const [pattern, agency] of Object.entries(agencyUrlPatterns)) {
+        if (urlLower.includes(pattern)) {
+          return agency;
+        }
+      }
+    }
+
+    // Check title for agency names
+    if (result.title) {
+      const titleLower = result.title.toLowerCase();
+      
+      // Look for full agency names in title
+      for (const agency of Object.values(agencyUrlPatterns)) {
+        if (titleLower.includes(agency.toLowerCase())) {
+          return agency;
+        }
+      }
+
+      // Look for agency abbreviations in title
+      const agencyAbbrevs = {
+        'epa': 'Environmental Protection Agency',
+        'fda': 'Food and Drug Administration',
+        'ftc': 'Federal Trade Commission',
+        'dot': 'Department of Transportation',
+        'doj': 'Department of Justice',
+        'hhs': 'Department of Health and Human Services',
+        'usda': 'Department of Agriculture',
+        'dol': 'Department of Labor',
+        'sec': 'Securities and Exchange Commission',
+        'cftc': 'Commodity Futures Trading Commission',
+        'occ': 'Office of the Comptroller of the Currency'
+      };
+
+      for (const [abbrev, fullName] of Object.entries(agencyAbbrevs)) {
+        const regex = new RegExp(`\\b${abbrev}\\b`, 'i');
+        if (regex.test(titleLower)) {
+          return fullName;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Extract document type from URL patterns and title
+   * @private
+   */
+  extractDocumentTypeFromURL(result) {
+    if (!result.url && !result.title) return null;
+
+    const combined = ((result.url || '') + ' ' + (result.title || '')).toLowerCase();
+
+    // Document type patterns
+    const typePatterns = {
+      'proposed rule': /\b(proposed[\s-]rule|notice[\s-]of[\s-]proposed[\s-]rulemaking|nprm)\b/i,
+      'final rule': /\b(final[\s-]rule|direct[\s-]final[\s-]rule)\b/i,
+      'notice': /\b(notice|announcement|advisory)\b/i,
+      'presidential document': /\b(executive[\s-]order|presidential[\s-]document|proclamation)\b/i,
+      'guidance': /\b(guidance|policy[\s-]statement|interpretation)\b/i
+    };
+
+    for (const [type, pattern] of Object.entries(typePatterns)) {
+      if (pattern.test(combined)) {
+        return type.charAt(0).toUpperCase() + type.slice(1);
+      }
+    }
+
+    // Check URL path segments for document type indicators
+    if (result.url) {
+      if (result.url.includes('/proposed-rules/')) return 'Proposed Rule';
+      if (result.url.includes('/final-rules/')) return 'Final Rule';
+      if (result.url.includes('/notices/')) return 'Notice';
+      if (result.url.includes('/presidential-documents/')) return 'Presidential Document';
+    }
+
+    return null;
+  }
+
+  /**
+   * Assess metadata extraction confidence
+   * @private
+   */
+  assessMetadataConfidence(result, extractedAgency, extractedType) {
+    let confidence = 0;
+    const sources = [];
+
+    // Agency confidence
+    if (extractedAgency && extractedAgency !== 'Unknown Agency') {
+      if (result.url && result.url.toLowerCase().includes(extractedAgency.toLowerCase().split(' ')[0])) {
+        confidence += 0.3;
+        sources.push('url_agency');
+      }
+      if (result.title && result.title.toLowerCase().includes(extractedAgency.toLowerCase())) {
+        confidence += 0.2;
+        sources.push('title_agency');
+      }
+      if (result.text && result.text.match(/AGENCY:\s*([^\n]+)/i)) {
+        confidence += 0.4;
+        sources.push('text_agency');
+      }
+    }
+
+    // Document type confidence
+    if (extractedType && extractedType !== 'Document') {
+      if (result.url && (result.url.includes('proposed-rules') || result.url.includes('final-rules'))) {
+        confidence += 0.3;
+        sources.push('url_type');
+      }
+      if (result.title && result.title.toLowerCase().includes(extractedType.toLowerCase())) {
+        confidence += 0.2;
+        sources.push('title_type');
+      }
+      if (result.text && result.text.match(/ACTION:\s*([^\n]+)/i)) {
+        confidence += 0.4;
+        sources.push('text_type');
+      }
+    }
+
+    return {
+      confidence: Math.min(confidence, 1.0),
+      sources: sources,
+      method: sources.length > 0 ? 'enhanced' : 'fallback'
+    };
+  }
+
+  /**
+   * Assess query relevance specific to Federal Register searches
+   * @param {string} searchTerm - Search term used
+   * @param {Array} rawResults - Raw Exa results
+   * @param {Array} mappedDocuments - Processed Federal Register documents
+   * @param {Object} toolArgs - Tool arguments
+   * @returns {Object} Federal Register specific quality metadata
+   */
+  assessRegulatoryQueryRelevance(searchTerm, rawResults, mappedDocuments, toolArgs) {
+    const baseAssessment = this.assessQueryRelevance(searchTerm, mappedDocuments, toolArgs);
+    
+    // Federal Register specific enhancements
+    const regulatoryMetadata = {
+      document_type_analysis: this.analyzeDocumentTypes(toolArgs.document_type, mappedDocuments),
+      agency_coverage: this.analyzeAgencyCoverage(toolArgs.agency, mappedDocuments),
+      regulatory_stage_analysis: this.analyzeRegulatoryStages(mappedDocuments),
+      comment_period_status: this.analyzeCommentPeriods(mappedDocuments),
+      cfr_impact_analysis: this.analyzeCFRImpact(mappedDocuments)
+    };
+    
+    // Override suggestions with regulatory specific ones
+    baseAssessment._search_quality.query_suggestions = this.generateRegulatorySuggestions(
+      searchTerm, mappedDocuments, toolArgs
+    );
+    
+    // Add regulatory metadata
+    baseAssessment._search_quality.regulatory_metadata = regulatoryMetadata;
+    
+    return baseAssessment;
+  }
+
+  /**
+   * Analyze document type distribution
+   */
+  analyzeDocumentTypes(requestedType, documents) {
+    if (!documents.length) return { no_documents: true };
+    
+    const typeDistribution = {};
+    documents.forEach(doc => {
+      const type = doc.document_type || 'Unknown';
+      typeDistribution[type] = (typeDistribution[type] || 0) + 1;
+    });
+    
+    const analysis = {
+      total_documents: documents.length,
+      document_types_found: Object.keys(typeDistribution),
+      type_distribution: typeDistribution,
+      requested_type: requestedType
+    };
+    
+    if (requestedType) {
+      const matchingDocs = documents.filter(d => 
+        d.document_type && d.document_type.toLowerCase().includes(requestedType.toLowerCase())
+      );
+      analysis.type_match_ratio = matchingDocs.length / documents.length;
+      analysis.exact_matches = matchingDocs.length;
+      analysis.relevance = analysis.type_match_ratio >= 0.7 ? 'high' : 
+                          analysis.type_match_ratio >= 0.3 ? 'medium' : 'low';
+    } else {
+      analysis.relevance = 'general';
+    }
+    
+    return analysis;
+  }
+
+  /**
+   * Analyze agency coverage
+   */
+  analyzeAgencyCoverage(requestedAgency, documents) {
+    if (!documents.length) return { no_documents: true };
+    
+    const agencies = [...new Set(documents.map(d => d.agency).filter(Boolean))];
+    const agencyDistribution = {};
+    
+    documents.forEach(doc => {
+      const agency = doc.agency || 'Unknown Agency';
+      agencyDistribution[agency] = (agencyDistribution[agency] || 0) + 1;
+    });
+    
+    const analysis = {
+      total_documents: documents.length,
+      agencies_found: agencies.length,
+      agency_list: agencies,
+      agency_distribution: agencyDistribution,
+      requested_agency: requestedAgency
+    };
+    
+    if (requestedAgency) {
+      const matchingDocs = documents.filter(d => 
+        d.agency && d.agency.toLowerCase().includes(requestedAgency.toLowerCase())
+      );
+      analysis.agency_match_ratio = matchingDocs.length / documents.length;
+      analysis.exact_matches = matchingDocs.length;
+      analysis.coverage_quality = analysis.agency_match_ratio >= 0.8 ? 'focused' : 
+                                 analysis.agency_match_ratio >= 0.3 ? 'mixed' : 'scattered';
+    } else {
+      analysis.coverage_quality = agencies.length <= 3 ? 'focused' : 'broad';
+    }
+    
+    return analysis;
+  }
+
+  /**
+   * Analyze regulatory stages (proposed vs final rules)
+   */
+  analyzeRegulatoryStages(documents) {
+    if (!documents.length) return { no_documents: true };
+    
+    const stages = {
+      proposed_rules: 0,
+      final_rules: 0,
+      notices: 0,
+      presidential_documents: 0,
+      other: 0
+    };
+    
+    documents.forEach(doc => {
+      const type = (doc.document_type || '').toLowerCase();
+      if (type.includes('proposed rule') || type.includes('proposed')) {
+        stages.proposed_rules++;
+      } else if (type.includes('final rule') || type.includes('rule')) {
+        stages.final_rules++;
+      } else if (type.includes('notice')) {
+        stages.notices++;
+      } else if (type.includes('presidential')) {
+        stages.presidential_documents++;
+      } else {
+        stages.other++;
+      }
+    });
+    
+    const totalWithStages = stages.proposed_rules + stages.final_rules + stages.notices + stages.presidential_documents;
+    
+    return {
+      stage_distribution: stages,
+      regulatory_balance: {
+        proposed_to_final_ratio: stages.final_rules > 0 ? stages.proposed_rules / stages.final_rules : null,
+        rule_to_notice_ratio: stages.notices > 0 ? (stages.proposed_rules + stages.final_rules) / stages.notices : null
+      },
+      coverage_completeness: totalWithStages / documents.length
+    };
+  }
+
+  /**
+   * Analyze comment periods status
+   */
+  analyzeCommentPeriods(documents) {
+    // This would need to parse document content for comment period information
+    // For now, we'll do a basic analysis based on document types and dates
+    const proposedRules = documents.filter(d => 
+      (d.document_type || '').toLowerCase().includes('proposed')
+    );
+    
+    if (!proposedRules.length) {
+      return { no_proposed_rules: true };
+    }
+    
+    const recentProposed = proposedRules.filter(d => {
+      if (!d.publication_date) return false;
+      const pubDate = new Date(d.publication_date);
+      const now = new Date();
+      const daysSince = (now - pubDate) / (1000 * 60 * 60 * 24);
+      return daysSince <= 60; // Within 60 days, likely still open for comment
+    });
+    
+    return {
+      total_proposed_rules: proposedRules.length,
+      recent_proposed_rules: recentProposed.length,
+      potential_open_comments: recentProposed.length,
+      comment_period_relevance: recentProposed.length > 0 ? 'active' : 'historical'
+    };
+  }
+
+  /**
+   * Analyze CFR (Code of Federal Regulations) impact
+   */
+  analyzeCFRImpact(documents) {
+    const cfrReferences = documents.filter(d => {
+      const text = (d.snippet || d.abstract || '').toLowerCase();
+      return text.includes('cfr') || text.includes('code of federal regulations');
+    });
+    
+    const analysis = {
+      total_documents: documents.length,
+      cfr_references: cfrReferences.length,
+      cfr_relevance_ratio: documents.length > 0 ? cfrReferences.length / documents.length : 0
+    };
+    
+    analysis.regulatory_impact = analysis.cfr_relevance_ratio >= 0.5 ? 'high' : 
+                                analysis.cfr_relevance_ratio >= 0.2 ? 'medium' : 'low';
+    
+    return analysis;
+  }
+
+  /**
+   * Generate regulatory specific suggestions
+   */
+  generateRegulatorySuggestions(searchTerm, documents, toolArgs) {
+    const suggestions = [];
+    
+    // No results suggestions
+    if (!documents.length) {
+      suggestions.push("Try broader search terms or remove restrictive filters");
+      if (toolArgs.agency) {
+        suggestions.push("Try agency abbreviation or full name");
+      }
+      return suggestions.join('; ');
+    }
+    
+    // Document type suggestions
+    const docTypeAnalysis = this.analyzeDocumentTypes(toolArgs.document_type, documents);
+    if (!toolArgs.document_type) {
+      const topTypes = Object.entries(docTypeAnalysis.type_distribution)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 3)
+        .map(([type]) => type);
+      suggestions.push(`Consider document_type filter: ${topTypes.join(', ')}`);
+    }
+    
+    // Agency suggestions
+    const agencyAnalysis = this.analyzeAgencyCoverage(toolArgs.agency, documents);
+    if (!toolArgs.agency && agencyAnalysis.agencies_found > 3) {
+      suggestions.push(`Filter by specific agency (found ${agencyAnalysis.agencies_found} agencies)`);
+    }
+    
+    // Date range suggestions
+    if (!toolArgs.date_after && !toolArgs.date_before) {
+      const recentDocs = documents.filter(d => {
+        if (!d.publication_date) return false;
+        const pubDate = new Date(d.publication_date);
+        const now = new Date();
+        return (now - pubDate) < (365 * 24 * 60 * 60 * 1000); // Within 1 year
+      });
+      
+      if (recentDocs.length < documents.length * 0.5) {
+        suggestions.push("Add date_after for recent regulations only");
+      }
+    }
+    
+    // Comment period suggestions
+    const commentAnalysis = this.analyzeCommentPeriods(documents);
+    if (commentAnalysis.comment_period_relevance === 'active') {
+      suggestions.push(`${commentAnalysis.potential_open_comments} rules may have active comment periods`);
+    }
+    
+    // Regulatory stage suggestions
+    const stageAnalysis = this.analyzeRegulatoryStages(documents);
+    if (stageAnalysis.stage_distribution.proposed_rules > stageAnalysis.stage_distribution.final_rules * 2) {
+      suggestions.push("Many proposed rules found - search for final rules to see enacted regulations");
+    }
+    
+    // CFR impact suggestions
+    const cfrAnalysis = this.analyzeCFRImpact(documents);
+    if (cfrAnalysis.regulatory_impact === 'low') {
+      suggestions.push("Add 'CFR' to search for specific regulatory changes");
+    }
+    
+    // Coverage suggestions
+    if (documents.length === toolArgs.limit) {
+      suggestions.push(`Increase limit beyond ${toolArgs.limit} for comprehensive regulatory coverage`);
+    }
+    
+    return suggestions.length > 0 ? suggestions.join('; ') : '';
+  }
+
+  // ===== PERMISSIVE EXTRACTION METHODS =====
+
+  /**
+   * Permissive agency extraction with confidence scoring
+   * @private
+   */
+  extractAgencyPermissive(result) {
+    const fallback = { value: 'Unknown Agency', confidence: 0.0, source: 'fallback' };
+
+    if (!result) return fallback;
+
+    // Try URL-based extraction (highest confidence)
+    const urlAgency = this.extractAgencyFromURL(result);
+    if (urlAgency && urlAgency !== 'Unknown Agency') {
+      return { value: urlAgency, confidence: 0.9, source: 'url_pattern' };
+    }
+
+    // Try text-based extraction
+    if (result.text) {
+      const agencyMatch = result.text.match(/AGENCY:\s*([^\n]+?)(?:\s+ACTION:|$)/i);
+      if (agencyMatch && agencyMatch[1].trim()) {
+        return { value: agencyMatch[1].trim(), confidence: 0.8, source: 'text_agency_field' };
+      }
+
+      // Try department patterns
+      const deptMatch = result.text.match(/DEPARTMENT OF\s+([^\n]+?)(?:\s+ACTION:|$)/i);
+      if (deptMatch && deptMatch[1].trim()) {
+        return { value: 'Department of ' + deptMatch[1].trim(), confidence: 0.7, source: 'text_department_field' };
+      }
+    }
+
+    // Try title-based extraction
+    if (result.title) {
+      for (const [abbrev, fullName] of Object.entries(this.agencies)) {
+        const regex = new RegExp(`\\b${abbrev}\\b`, 'i');
+        if (regex.test(result.title)) {
+          return { value: fullName, confidence: 0.6, source: 'title_abbreviation' };
+        }
+      }
+    }
+
+    return fallback;
+  }
+
+  /**
+   * Permissive document type extraction with confidence scoring
+   * @private
+   */
+  extractDocumentTypePermissive(result) {
+    const fallback = { value: 'Document', confidence: 0.0, source: 'fallback' };
+
+    if (!result) return fallback;
+
+    // Try URL-based extraction (highest confidence)
+    const urlType = this.extractDocumentTypeFromURL(result);
+    if (urlType && urlType !== 'Document') {
+      return { value: urlType, confidence: 0.9, source: 'url_pattern' };
+    }
+
+    // Try text-based ACTION field extraction
+    if (result.text) {
+      const actionMatch = result.text.match(/ACTION:\s*([^\n]+)/i);
+      if (actionMatch && actionMatch[1].trim()) {
+        const action = actionMatch[1].trim();
+        let detectedType = action;
+        let confidence = 0.5;
+
+        // Classify common action types
+        if (action.toLowerCase().includes('final rule')) {
+          detectedType = 'Final Rule';
+          confidence = 0.8;
+        } else if (action.toLowerCase().includes('proposed rule')) {
+          detectedType = 'Proposed Rule';
+          confidence = 0.8;
+        } else if (action.toLowerCase().includes('notice')) {
+          detectedType = 'Notice';
+          confidence = 0.7;
+        } else if (action.toLowerCase().includes('presidential document')) {
+          detectedType = 'Presidential Document';
+          confidence = 0.8;
+        }
+
+        return { value: detectedType, confidence: confidence, source: 'text_action_field' };
+      }
+
+      // Try regulatory stage patterns
+      for (const pattern of this.frPatterns.regulatoryStages) {
+        const match = result.text.match(pattern);
+        if (match) {
+          return { value: match[0], confidence: 0.7, source: 'text_regulatory_pattern' };
+        }
+      }
+    }
+
+    // Try title-based extraction
+    if (result.title) {
+      const combined = result.title.toLowerCase();
+      if (combined.includes('proposed rule') || combined.includes('nprm')) {
+        return { value: 'Proposed Rule', confidence: 0.6, source: 'title_pattern' };
+      }
+      if (combined.includes('final rule')) {
+        return { value: 'Final Rule', confidence: 0.6, source: 'title_pattern' };
+      }
+      if (combined.includes('notice')) {
+        return { value: 'Notice', confidence: 0.5, source: 'title_pattern' };
+      }
+    }
+
+    return fallback;
+  }
+
+  /**
+   * Permissive document number extraction with confidence scoring
+   * @private
+   */
+  extractDocumentNumberPermissive(result) {
+    const fallback = { value: null, confidence: 0.0, source: 'fallback' };
+
+    if (!result) return fallback;
+
+    // Try multiple patterns in order of reliability
+    for (let i = 0; i < this.frPatterns.documentNumber.length; i++) {
+      const pattern = this.frPatterns.documentNumber[i];
+
+      // Try URL first (highest confidence)
+      if (result.url) {
+        const urlMatch = result.url.match(pattern);
+        if (urlMatch && urlMatch[1]) {
+          return {
+            value: urlMatch[1],
+            confidence: 0.9,
+            source: `url_pattern_${i}`
+          };
+        }
+      }
+
+      // Try text content
+      if (result.text) {
+        const textMatch = result.text.match(pattern);
+        if (textMatch && textMatch[1]) {
+          return {
+            value: textMatch[1],
+            confidence: 0.8 - (i * 0.1),
+            source: `text_pattern_${i}`
+          };
+        }
+      }
+    }
+
+    return fallback;
+  }
+
+  /**
+   * Permissive abstract extraction with confidence scoring
+   * @private
+   */
+  extractAbstractPermissive(result) {
+    const fallback = { value: null, confidence: 0.0, source: 'fallback' };
+
+    if (!result) return fallback;
+
+    if (result.text) {
+      // Try SUMMARY field (highest confidence)
+      const summaryMatch = result.text.match(/SUMMARY:\s*([^\n]+(?:\n[^A-Z][^\n]*)*)/i);
+      if (summaryMatch && summaryMatch[1].trim()) {
+        return {
+          value: summaryMatch[1].trim(),
+          confidence: 0.9,
+          source: 'text_summary_field'
+        };
+      }
+
+      // Try first paragraph as fallback
+      const firstParagraph = result.text.split('\n\n')[0];
+      if (firstParagraph && firstParagraph.length > 50) {
+        return {
+          value: firstParagraph.trim(),
+          confidence: 0.4,
+          source: 'text_first_paragraph'
+        };
+      }
+    }
+
+    return fallback;
+  }
+
+  /**
+   * Extract smart snippet with permissive approach
+   * @private
+   */
+  extractSmartSnippetPermissive(text, maxLength = 500) {
+    if (!text || typeof text !== 'string') return '';
+
+    const cleaned = text.replace(/\s+/g, ' ').trim();
+    if (!cleaned) return '';
+
+    // Federal Register specific patterns - prioritize most important sections
+    const meaningfulSections = [
+      /SUMMARY:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /SUPPLEMENTARY\s+INFORMATION:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /BACKGROUND:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /PURPOSE:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /ACTION:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is,
+      /EFFECTIVE\s+DATE:\s*(.*?)(?=\n\s*[A-Z][^a-z]*:|$)/is
+    ];
+
+    // Try to extract from meaningful sections first
+    for (const pattern of meaningfulSections) {
+      const match = cleaned.match(pattern);
+      if (match && match[1] && match[1].trim().length >= 50) {
+        const snippet = match[1].trim();
+        return snippet.length > maxLength
+          ? snippet.substring(0, maxLength - 3) + '...'
+          : snippet;
+      }
+    }
+
+    // Fallback to beginning of document (always returns something)
+    return cleaned.length > maxLength
+      ? cleaned.substring(0, maxLength - 3) + '...'
+      : cleaned;
+  }
+
+  /**
+   * Calculate overall confidence score from components
+   * @private
+   */
+  calculateOverallConfidence(result, componentConfidences) {
+    if (!result) return 0.0;
+
+    // Weight factors for different components
+    const weights = {
+      agency: 0.25,
+      document_type: 0.25,
+      document_number: 0.20,
+      abstract: 0.15,
+      url_validity: 0.15
+    };
+
+    const urlConfidence = result.url ?
+      (result.url.includes('federalregister.gov') ? 1.0 : 0.3) : 0.0;
+
+    const weightedScore = (
+      (componentConfidences.agency * weights.agency) +
+      (componentConfidences.document_type * weights.document_type) +
+      (componentConfidences.document_number * weights.document_number) +
+      (componentConfidences.abstract * weights.abstract) +
+      (urlConfidence * weights.url_validity)
+    );
+
+    return Math.min(Math.max(weightedScore, 0.0), 1.0);
+  }
+
+  /**
+   * Get confidence tier label
+   * @private
+   */
+  getConfidenceTier(confidence) {
+    if (confidence >= 0.8) return 'high';
+    if (confidence >= 0.6) return 'medium';
+    if (confidence >= 0.3) return 'low';
+    return 'minimal';
+  }
+
+  /**
+   * Assess regulatory urgency indicators
+   * @private
+   */
+  assessRegulatoryUrgency(result) {
+    if (!result || !result.text) {
+      return { urgency_level: 'unknown', indicators: [], days_to_deadline: null };
+    }
+
+    const urgencyIndicators = [];
+    let urgencyLevel = 'low';
+    let daysToDeadline = null;
+
+    // Check for emergency/urgent language
+    const emergencyPatterns = [
+      /emergency\s+rule/i,
+      /immediate\s+effect/i,
+      /urgent\s+action/i,
+      /expedited\s+review/i,
+      /good\s+cause/i
+    ];
+
+    for (const pattern of emergencyPatterns) {
+      if (pattern.test(result.text)) {
+        urgencyIndicators.push(pattern.source.replace(/[\/ig]/g, ''));
+        urgencyLevel = 'high';
+      }
+    }
+
+    // Check for comment deadlines
+    for (const pattern of this.frPatterns.commentDeadlines) {
+      const matches = [...result.text.matchAll(pattern)];
+      for (const match of matches) {
+        if (match[1]) {
+          const deadlineDate = new Date(match[1]);
+          if (!isNaN(deadlineDate.getTime())) {
+            const now = new Date();
+            const daysDiff = Math.ceil((deadlineDate - now) / (1000 * 60 * 60 * 24));
+
+            if (daysDiff > 0) {
+              daysToDeadline = daysDiff;
+              urgencyIndicators.push(`comment_deadline_${daysDiff}_days`);
+
+              if (daysDiff <= 7) urgencyLevel = 'high';
+              else if (daysDiff <= 30) urgencyLevel = 'medium';
+            }
+          }
+        }
+      }
+    }
+
+    return {
+      urgency_level: urgencyLevel,
+      indicators: urgencyIndicators,
+      days_to_deadline: daysToDeadline
+    };
+  }
+
+  /**
+   * Extract comment period information
+   * @private
+   */
+  extractCommentPeriodInfo(result) {
+    if (!result || !result.text) {
+      return { has_comment_period: false, status: 'unknown' };
+    }
+
+    const commentInfo = {
+      has_comment_period: false,
+      deadline: null,
+      days_remaining: null,
+      status: 'unknown'
+    };
+
+    // Look for comment deadline patterns
+    for (const pattern of this.frPatterns.commentDeadlines) {
+      const matches = [...result.text.matchAll(pattern)];
+      for (const match of matches) {
+        if (match[1]) {
+          commentInfo.has_comment_period = true;
+          commentInfo.deadline = match[1];
+
+          const deadlineDate = new Date(match[1]);
+          if (!isNaN(deadlineDate.getTime())) {
+            const now = new Date();
+            const daysDiff = Math.ceil((deadlineDate - now) / (1000 * 60 * 60 * 24));
+
+            commentInfo.days_remaining = daysDiff;
+            commentInfo.status = daysDiff > 0 ? 'open' : 'closed';
+          }
+          break;
+        }
+      }
+      if (commentInfo.has_comment_period) break;
+    }
+
+    return commentInfo;
+  }
+
+  /**
+   * Generate compliance advisory based on document analysis
+   * @private
+   */
+  generateComplianceAdvisory(result, confidence) {
+    const advisory = {
+      compliance_risk: 'low',
+      recommendations: [],
+      critical_dates: [],
+      requires_attention: false
+    };
+
+    if (!result) return advisory;
+
+    // High confidence documents warrant closer review
+    if (confidence >= 0.8) {
+      advisory.recommendations.push('High confidence regulatory document - review for compliance impacts');
+    }
+
+    // Check for compliance-critical language
+    if (result.text) {
+      const compliancePatterns = [
+        { pattern: /penalty|fine|enforcement/i, risk: 'high', rec: 'Contains enforcement language - compliance review required' },
+        { pattern: /shall|must|required|mandatory/i, risk: 'medium', rec: 'Contains mandatory language - assess compliance obligations' },
+        { pattern: /effective\s+immediately/i, risk: 'high', rec: 'Immediate effective date - urgent compliance review needed' }
+      ];
+
+      for (const { pattern, risk, rec } of compliancePatterns) {
+        if (pattern.test(result.text)) {
+          advisory.compliance_risk = risk;
+          advisory.recommendations.push(rec);
+          advisory.requires_attention = true;
+        }
+      }
+
+      // Extract critical dates
+      for (const pattern of this.frPatterns.effectiveDates) {
+        const matches = [...result.text.matchAll(pattern)];
+        for (const match of matches) {
+          if (match[1]) {
+            advisory.critical_dates.push({
+              type: 'effective_date',
+              date: match[1]
+            });
+          }
+        }
+      }
+    }
+
+    return advisory;
+  }
+
+  // Override parent methods for regulatory specificity
+  isExactDocumentMatch(query, result) {
+    const queryLower = query.toLowerCase();
+    
+    // Check for CFR section references
+    if (/\b\d+\s+cfr\s+\d+/i.test(query)) {
+      const text = (result.title + ' ' + (result.snippet || '') + ' ' + (result.abstract || '')).toLowerCase();
+      return text.includes(queryLower);
+    }
+    
+    // Check for agency acronyms
+    if (/^[A-Z]{2,6}$/.test(query)) {
+      return (result.agency || '').toLowerCase().includes(queryLower);
+    }
+    
+    // Check for document number patterns
+    if (/\d{4}-\d{5}/.test(query)) {
+      return (result.document_number || '').includes(query);
+    }
+    
+    return super.isExactDocumentMatch(query, result);
+  }
+
+  hasRecentResults(results, daysThreshold = 365) {
+    if (!results || results.length === 0) return false;
+    
+    const thresholdDate = new Date();
+    thresholdDate.setDate(thresholdDate.getDate() - daysThreshold);
+    
+    return results.some(result => {
+      const resultDate = new Date(result.publication_date || '1900-01-01');
+      return resultDate >= thresholdDate;
+    });
+  }
+}

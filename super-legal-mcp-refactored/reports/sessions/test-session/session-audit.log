@@ -1,0 +1,9 @@
+{"timestamp":"2025-12-22T21:21:27.317Z","event":"pre_tool_use","tool":"execute_financial_model","tool_type":"code_execution","session_id":"test-session","tool_use_id":"tool-123","model_type":"dcf"}
+{"timestamp":"2025-12-22T21:21:27.318Z","event":"pre_tool_use","tool":"mcp__super-legal-tools__search_sec_filings","tool_type":"mcp","session_id":"test-session","tool_use_id":"tool-456","mcp_server":"super-legal-tools","mcp_action":"search_sec_filings"}
+{"timestamp":"2025-12-22T21:21:27.318Z","event":"post_tool_use","tool":"execute_financial_model","tool_type":"code_execution","session_id":"test-session","tool_use_id":"tool-123","duration_ms":1,"success":true,"model_type":"dcf","has_result":true}
+{"timestamp":"2025-12-22T21:21:27.319Z","event":"notification","session_id":"test-session","notification_type":"status","title":"Status","message":"Analysis complete"}
+{"timestamp":"2025-12-22T21:21:57.534Z","event":"pre_tool_use","tool":"execute_financial_model","tool_type":"code_execution","session_id":"test-session","tool_use_id":"tool-123","model_type":"dcf"}
+{"timestamp":"2025-12-22T21:21:57.535Z","event":"post_tool_use","tool":"execute_financial_model","tool_type":"code_execution","session_id":"test-session","tool_use_id":"tool-123","duration_ms":1,"success":true,"model_type":"dcf","has_result":true}
+{"timestamp":"2025-12-22T21:21:57.535Z","event":"subagent_start","agent_type":"memo-section-writer","agent_id":"agent-789","session_id":"test-session","tool_use_id":"tool-789","memo_phase":"section_generation"}
+{"timestamp":"2025-12-22T21:21:57.535Z","event":"memo_section_complete","agent_type":"memo-section-writer","agent_id":"agent-789","session_id":"test-session","transcript_path":null,"tool_use_id":"tool-789","memo_phase":"section_generation"}
+{"timestamp":"2026-01-19T22:26:21.376Z","event":"permission_request","tool":"Write","session_id":"test-session","tool_use_id":"perm-id","decision":"auto_allow","reason":"Trusted reports directory"}

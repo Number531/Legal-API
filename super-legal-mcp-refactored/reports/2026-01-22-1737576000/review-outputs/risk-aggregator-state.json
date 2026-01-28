@@ -1,0 +1,133 @@
+{
+  "agent": "risk-aggregator",
+  "status": "complete",
+  "timestamp": "2026-01-23T00:00:00Z",
+  "completion_time": "2026-01-23T00:05:00Z",
+
+  "compaction_summary": {
+    "task": "Aggregate and classify quantified risk exposures from 19 pre-extracted findings",
+    "progress": "COMPLETE - All 8 phases finished successfully",
+    "next_action": "Return status to orchestrator",
+    "critical_context": [
+      "19 exposures classified by time profile (13 ONE_TIME, 3 MULTI_YEAR, 3 PERPETUAL)",
+      "Total gross exposure: $401.58M - $677.485M",
+      "Total weighted exposure: $410.71M",
+      "Correlation-adjusted exposure: $378.45M (-$32.3M for overlapping risks)",
+      "Monte Carlo 75th percentile: $178M (escrow sizing target)",
+      "Recommended escrow: $180M (10% of deal value)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_time_classification": true,
+    "phase_3_category_aggregation": true,
+    "phase_4_probability_weighting": true,
+    "phase_5_correlation_adjustment": true,
+    "phase_6_recommendations": true,
+    "phase_7_output_files": true,
+    "phase_8_return_status": false
+  },
+
+  "exposures_loaded": {
+    "total_count": 19,
+    "source": "orchestrator-state.md QUANTIFIED_EXPOSURES table",
+    "gross_range_low": 401580000,
+    "gross_range_high": 677485000,
+    "weighted_total_precomputed": 410710000
+  },
+
+  "exposures_classified": {
+    "one_time": 13,
+    "multi_year": 3,
+    "perpetual": 3,
+    "total_classified": 19
+  },
+
+  "aggregations_complete": {
+    "regulatory_penalties": {
+      "gross": 4315000,
+      "weighted": 3952500,
+      "findings_count": 4
+    },
+    "litigation_exposure": {
+      "gross": 6500000,
+      "weighted": 3250000,
+      "findings_count": 1
+    },
+    "commercial_contracts": {
+      "gross": 308000000,
+      "weighted": 204650000,
+      "findings_count": 4
+    },
+    "valuation_markdown": {
+      "gross": 70550000,
+      "weighted": 115150000,
+      "findings_count": 4
+    },
+    "cybersecurity": {
+      "gross": 49175000,
+      "weighted": 14142500,
+      "findings_count": 3
+    },
+    "tax_liabilities": {
+      "gross": 7960000,
+      "weighted": 7960000,
+      "findings_count": 1
+    },
+    "employment_retention": {
+      "gross": 127500000,
+      "weighted": 67950000,
+      "findings_count": 2
+    },
+    "erisa_compliance": {
+      "gross": 1750000,
+      "weighted": 1575000,
+      "findings_count": 1
+    }
+  },
+
+  "correlation_adjustments_applied": {
+    "raw_total": 410710000,
+    "adjusted_total": 378450000,
+    "reduction": 32260000,
+    "pairs_adjusted": 4,
+    "methodology": "High positive correlations (0.70-0.95) among valuation, performance fees, and LP disputes"
+  },
+
+  "recommendations_generated": {
+    "primary_escrow": 180000000,
+    "percentage_of_deal": 10.0,
+    "monte_carlo_percentile_coverage": 78,
+    "alternative_1_price_reduction": 130000000,
+    "alternative_2_blended": 150000000
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "All phases complete. Read risk-summary.json and risk-aggregation-report.md for full analysis.",
+    "do_not_repeat": ["phase_1", "phase_2", "phase_3", "phase_4", "phase_5", "phase_6", "phase_7"],
+    "do_not_reclassify_exposures": ["all 19 exposures fully classified"]
+  },
+
+  "metrics": {
+    "exposures_total": 19,
+    "exposures_classified": 19,
+    "exposures_weighted": 19,
+    "gross_total": 539532500,
+    "probability_weighted_total": 410710000,
+    "correlation_adjusted_total": 378450000,
+    "monte_carlo_p50": 127000000,
+    "monte_carlo_p75": 178000000,
+    "monte_carlo_p90": 245000000,
+    "escrow_recommendation": 180000000,
+    "high_severity_count": 6,
+    "critical_findings_count": 4,
+    "last_checkpoint": "2026-01-23T00:05:00Z"
+  },
+
+  "output_files_created": [
+    "risk-summary.json",
+    "risk-aggregation-report.md",
+    "risk-aggregator-state.json"
+  ]
+}

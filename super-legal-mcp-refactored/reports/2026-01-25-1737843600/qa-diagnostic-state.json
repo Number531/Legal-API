@@ -1,0 +1,109 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "session_directory": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600",
+
+  "qa_cycle": {
+    "current_cycle": 1,
+    "max_cycles": 3,
+    "cycle_history": [
+      {
+        "cycle": 1,
+        "score": 73,
+        "outcome": "REMEDIATE",
+        "tier": "TIER_3_FULL",
+        "issues_before": 40,
+        "issues_resolved": 0,
+        "issues_remaining": 40,
+        "timestamp": "2026-01-25T00:00:00Z"
+      }
+    ]
+  },
+
+  "gate_attempts": {
+    "A1_to_A2": { "attempts": 1, "max": 3, "last_failure_reason": "Score 73% < 88% threshold" }
+  },
+
+  "compaction_summary": {
+    "task": "Diagnostic assessment of final memorandum — COMPLETE",
+    "progress": "All 12 dimensions scored, 40 issues cataloged, remediation plan generated",
+    "next_action": "Orchestrator execute remediation waves W0-W6 (330 minutes estimated)",
+    "critical_context": ["Score: 73% (TIER 3 FULL remediation)", "CRITICAL: 12 (CREAC headers)", "HIGH: 19 (provisions + tables)", "Projected post-remediation: 96.5%"]
+  },
+
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_2_dimension_scoring": true,
+    "phase_3_issue_cataloging": true,
+    "phase_4_remediation_planning": true,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+
+  "dimensions_scored": {
+    "dim_0_questions_presented": { "status": "complete", "score": 4.5, "max": 5 },
+    "dim_1_creac_structure": { "status": "complete", "score": 3.0, "max": 10 },
+    "dim_2_objectivity": { "status": "complete", "score": 7.5, "max": 8 },
+    "dim_3_brief_answer": { "status": "complete", "score": 4.5, "max": 5 },
+    "dim_4_exec_summary": { "status": "complete", "score": 7.0, "max": 7 },
+    "dim_5_citation_quality": { "status": "complete", "score": 11.0, "max": 12 },
+    "dim_6_quantification": { "status": "complete", "score": 10.0, "max": 10 },
+    "dim_7_cross_reference": { "status": "complete", "score": 8.0, "max": 8 },
+    "dim_8_risk_tables": { "status": "complete", "score": 6.0, "max": 8 },
+    "dim_9_draft_contracts": { "status": "complete", "score": 2.0, "max": 10 },
+    "dim_10_formatting": { "status": "complete", "score": 6.5, "max": 7 },
+    "dim_11_completeness": { "status": "complete", "score": 9.0, "max": 10 }
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Read qa-diagnostic-state.json FIRST. All dimensions scored - proceed to remediation execution.",
+    "do_not_repeat": ["dim_0", "dim_1", "dim_2", "dim_3", "dim_4", "dim_5", "dim_6", "dim_7", "dim_8", "dim_9", "dim_10", "dim_11"],
+    "do_not_rescore": true
+  },
+
+  "issues_found": [
+    { "id": "CRITICAL-CREAC-001", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.A — Zero CREAC headers (6 subsections requiring 30 headers)" },
+    { "id": "CRITICAL-CREAC-002", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.B — Zero CREAC headers (4 subsections requiring 20 headers)" },
+    { "id": "CRITICAL-CREAC-003", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.C — Zero CREAC headers (4 subsections requiring 20 headers)" },
+    { "id": "CRITICAL-CREAC-004", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.D — Zero CREAC headers (4 subsections requiring 20 headers)" },
+    { "id": "CRITICAL-CREAC-005", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.E — Zero CREAC headers (4 subsections requiring 20 headers)" },
+    { "id": "CRITICAL-CREAC-006", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.F — Zero CREAC headers (3 subsections requiring 15 headers)" },
+    { "id": "CRITICAL-CREAC-007", "dimension": 1, "severity": "CRITICAL", "description": "Section IV.G — Zero CREAC headers (3 subsections requiring 15 headers)" },
+    { "id": "CRITICAL-PROV-001", "dimension": 9, "severity": "CRITICAL", "description": "Orange County SFF (CRITICAL) — No draft closing condition, seller obligation, or escrow provision" },
+    { "id": "HIGH-PROV-002", "dimension": 9, "severity": "HIGH", "description": "Martinez FCA Settlement (HIGH) — No draft indemnification or representation provision" },
+    { "id": "HIGH-PROV-003", "dimension": 9, "severity": "HIGH", "description": "CIA Compliance (HIGH) — No draft escrow release condition provision" },
+    { "id": "HIGH-PROV-004", "dimension": 9, "severity": "HIGH", "description": "D&O Coverage Gap (HIGH) — No draft tail coverage provision" },
+    { "id": "HIGH-PROV-005", "dimension": 9, "severity": "HIGH", "description": "Medical Director FMV (HIGH) — No draft pre-closing renegotiation or representation provision" }
+  ],
+
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 12,
+    "aggregate_score": 73.0,
+    "base_score": 79.0,
+    "red_flag_deductions": -6.0,
+    "critical_issues": 12,
+    "high_issues": 19,
+    "medium_issues": 6,
+    "low_issues": 3,
+    "last_checkpoint": "2026-01-25T00:00:00Z"
+  },
+
+  "document_metrics": {
+    "word_count": 112000,
+    "footnote_count": 789,
+    "expected_sections": 13,
+    "sections_found": 13,
+    "creac_headers_found": 0,
+    "placeholders_found": 0,
+    "cross_references_found": 108,
+    "verification_tags": 902
+  },
+
+  "output_files": {
+    "diagnostic_assessment": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/qa-outputs/diagnostic-assessment.md",
+    "remediation_plan": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/qa-outputs/remediation-plan.md",
+    "remediation_dispatch": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/qa-outputs/remediation-dispatch.md",
+    "state_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/qa-diagnostic-state.json"
+  }
+}

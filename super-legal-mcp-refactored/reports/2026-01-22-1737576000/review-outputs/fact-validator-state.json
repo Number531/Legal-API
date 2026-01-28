@@ -1,0 +1,61 @@
+{
+  "agent": "fact-validator",
+  "status": "complete",
+  "timestamp": "2026-01-23T00:45:00Z",
+
+  "compaction_summary": {
+    "task": "Validate facts and detect conflicts across 8 specialist reports",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "Return success status to orchestrator",
+    "critical_context": ["208 canonical facts extracted", "0 conflicts detected", "fact-registry.md created", "All 12 sections mapped"]
+  },
+
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_fact_enrichment": true,
+    "phase_3_conflict_detection": true,
+    "phase_4_section_mapping": true,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+
+  "categories_processed": {
+    "key_dates": { "status": "complete", "facts_count": 15 },
+    "quantitative_facts": { "status": "complete", "facts_count": 82 },
+    "financial_facts": { "status": "complete", "facts_count": 45 },
+    "regulatory_facts": { "status": "complete", "facts_count": 38 },
+    "entity_names": { "status": "complete", "facts_count": 12 },
+    "liability_exposures": { "status": "complete", "facts_count": 22 },
+    "insurance_coverage": { "status": "complete", "facts_count": 9 },
+    "tax_facts": { "status": "complete", "facts_count": 12 },
+    "cross_trades": { "status": "complete", "facts_count": 8 },
+    "employment": { "status": "complete", "facts_count": 11 },
+    "cybersecurity": { "status": "complete", "facts_count": 13 },
+    "performance": { "status": "complete", "facts_count": 6 }
+  },
+
+  "conflicts_detected": [],
+
+  "conflicts_resolved": {
+    "auto_resolved": 0,
+    "manual_review_required": 0,
+    "resolution_log": []
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Task complete. Read fact-registry.md for all canonical facts.",
+    "do_not_repeat": ["all_phases_complete"],
+    "do_not_reextract_categories": ["all"]
+  },
+
+  "metrics": {
+    "facts_total": 208,
+    "facts_processed": 208,
+    "conflicts_found": 0,
+    "sections_mapped": 12,
+    "completeness_score": 2.97,
+    "completeness_rating": "COMPLETE",
+    "sparse_reports": [],
+    "last_checkpoint": "2026-01-23T00:45:00Z"
+  }
+}

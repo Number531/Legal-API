@@ -1,0 +1,380 @@
+/**
+ * Tool Implementations Mapping
+ * Maps tool names to their respective client methods
+ */
+
+export function createToolImplementations(clients, conversationBridge = null) {
+  const {
+    courtListener,
+    courtListenerWeb,
+    financialDisclosure,
+    federalRegisterWeb,
+    uspto,
+    usptoWeb,
+    govInfo,
+    exa,
+    comprehensiveAnalysis,
+    ptab,
+    ptabWebSearch,
+    ftcWeb,
+    epa,
+    epaWeb,
+    fdaWeb,
+    cpsc,
+    nhtsaWeb,
+    filingDraft,
+    stateCourtRules,
+    stateStatute,
+    secWeb
+  } = clients;
+
+  // Helper function to wrap tool calls with conversation logging
+  const wrapWithConversation = (toolName, toolFunction) => {
+    return async (args) => {
+      const result = await toolFunction(args);
+      
+      // Log to conversation bridge if available and conversation_id is provided
+      if (conversationBridge && args.conversation_id) {
+        try {
+          await conversationBridge.logToolCall(toolName, args, result, args.conversation_id);
+        } catch (error) {
+          // Don't fail the tool call if conversation logging fails
+          console.warn(`Failed to log ${toolName} to conversation:`, error.message);
+        }
+      }
+      
+      return result;
+    };
+  };
+
+  return {
+    // CourtListener tools (using web search as primary to avoid API issues)
+    "search_cases": wrapWithConversation("search_cases", (args) => {
+      // Map search_cases to web search with equivalent parameters
+      return courtListenerWeb.searchOpinionsWeb({
+        query: args.query || args.case_name || '',
+        case_name: args.case_name,
+        citation: args.citation,
+        date_after: args.date_filed_after,
+        date_before: args.date_filed_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_full_text: args.include_full_text || false
+      });
+    }),
+    "get_case_details": wrapWithConversation("get_case_details", (args) => courtListenerWeb.getCaseDetailsWeb(args)),
+    "lookup_citation": wrapWithConversation("lookup_citation", (args) => {
+      // Map lookup_citation to web search with equivalent parameters
+      return courtListenerWeb.lookupCitationWeb({
+        citation: args.citation,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_full_text: args.include_full_text || false
+      });
+    }),
+    "search_judges": wrapWithConversation("search_judges", (args) => courtListenerWeb.searchJudgesWeb(args)),
+    "get_judge_details": wrapWithConversation("get_judge_details", (args) => courtListenerWeb.getJudgeDetailsWeb(args)),
+    "get_court_info": wrapWithConversation("get_court_info", (args) => courtListenerWeb.getCourtInfoWeb(args)),
+    "list_courts": wrapWithConversation("list_courts", (args) => courtListenerWeb.listCourtsWeb(args)),
+    "search_opinions": wrapWithConversation("search_opinions", (args) => courtListenerWeb.searchOpinionsWeb(args)),
+    "search_audio": wrapWithConversation("search_audio", (args) => courtListenerWeb.searchAudioWeb(args)),
+    "get_audio_details": wrapWithConversation("get_audio_details", (args) => courtListenerWeb.getAudioDetailsWeb(args)),
+    "get_opinion_with_citations": wrapWithConversation("get_opinion_with_citations", (args) => courtListenerWeb.getOpinionWithCitationsWeb(args)),
+    "search_dockets": wrapWithConversation("search_dockets", (args) => courtListenerWeb.searchDocketsWeb(args)),
+
+
+    // Financial Disclosure tools
+    "search_financial_disclosures": wrapWithConversation("search_financial_disclosures", (args) => financialDisclosure.searchFinancialDisclosures(args)),
+    "get_financial_disclosure_details": wrapWithConversation("get_financial_disclosure_details", (args) => financialDisclosure.getFinancialDisclosureDetails(args)),
+    "search_judge_investments": wrapWithConversation("search_judge_investments", (args) => financialDisclosure.searchJudgeInvestments(args)),
+    "get_judge_gifts": wrapWithConversation("get_judge_gifts", (args) => financialDisclosure.getJudgeGifts(args)),
+    "get_judge_positions": wrapWithConversation("get_judge_positions", (args) => financialDisclosure.getJudgePositions(args)),
+    "search_judge_spouse_income": wrapWithConversation("search_judge_spouse_income", (args) => financialDisclosure.searchJudgeSpouseIncome(args)),
+    "search_judge_reimbursements": wrapWithConversation("search_judge_reimbursements", (args) => financialDisclosure.searchJudgeReimbursements(args)),
+    "search_judge_debts": wrapWithConversation("search_judge_debts", (args) => financialDisclosure.searchJudgeDebts(args)),
+    "get_disclosure_positions": wrapWithConversation("get_disclosure_positions", (args) => financialDisclosure.getDisclosurePositions(args)),
+
+    // SEC tools - now fully web-based via Exa
+    "search_sec_filings": wrapWithConversation("search_sec_filings", (args) => secWeb.searchSECFilingsWeb(args)),
+    "get_sec_company_facts": wrapWithConversation("get_sec_company_facts", (args) => secWeb.getSECCompanyFactsWeb(args)),
+    "get_sec_xbrl_frames": wrapWithConversation("get_sec_xbrl_frames", (args) => secWeb.getSECXBRLFramesWeb(args)),
+    "search_sec_company_tickers": wrapWithConversation("search_sec_company_tickers", (args) => secWeb.searchSECCompanyTickersWeb(args)),
+
+    // Federal Register tools
+    "search_federal_register": wrapWithConversation("search_federal_register", (args) => {
+      // Use unified Exa-powered web search with parameter mapping
+      // Support both 'query' and 'search_term' parameter names for backward compatibility
+      const searchTerm = args.search_term || args.query || '';
+      
+      return federalRegisterWeb.searchFederalRegisterWeb({
+        search_term: searchTerm,
+        agency: args.agency,
+        document_type: args.document_type?.toLowerCase(),
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5
+        include_text: false,
+        include_snippet: false
+      });
+    }),
+    "search_federal_register_notices": wrapWithConversation("search_federal_register_notices", (args) => {
+      // Support both 'query' and 'search_term' parameter names for backward compatibility
+      const searchTerm = args.search_term || args.query || '';
+      
+      return federalRegisterWeb.searchNoticesWeb({
+        search_term: searchTerm,
+        agency: args.agency,
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5
+        include_text: false,
+        include_snippet: false
+      });
+    }),
+    "search_federal_register_proposed_rules": wrapWithConversation("search_federal_register_proposed_rules", (args) => {
+      // Support both 'query' and 'search_term' parameter names for backward compatibility
+      const searchTerm = args.search_term || args.query || '';
+      
+      return federalRegisterWeb.searchProposedRulesWeb({
+        search_term: searchTerm,
+        agency: args.agency,
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5
+        include_text: false,
+        include_snippet: false
+      });
+    }),
+    "search_federal_register_final_rules": wrapWithConversation("search_federal_register_final_rules", (args) => {
+      // Support both 'query' and 'search_term' parameter names for backward compatibility
+      const searchTerm = args.search_term || args.query || '';
+      
+      return federalRegisterWeb.searchFinalRulesWeb({
+        search_term: searchTerm,
+        agency: args.agency,
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5
+        include_text: false,
+        include_snippet: false
+      });
+    }),
+    "search_federal_register_presidential_documents": wrapWithConversation("search_federal_register_presidential_documents", (args) => {
+      // Support both 'query' and 'search_term' parameter names for backward compatibility
+      const searchTerm = args.search_term || args.query || '';
+      
+      return federalRegisterWeb.searchPresidentialDocsWeb({
+        search_term: searchTerm,
+        agency: args.agency,
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5
+        include_text: false,
+        include_snippet: false
+      });
+    }),
+    "search_federal_register_public_inspection": wrapWithConversation("search_federal_register_public_inspection", (args) => {
+      // Support both 'query' and 'search_term' parameter names for backward compatibility
+      const searchTerm = args.search_term || args.query || '';
+      
+      return federalRegisterWeb.searchPublicInspectionWeb({
+        search_term: searchTerm,
+        agency: args.agency,
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5
+        include_text: false,
+        include_snippet: false
+      });
+    }),
+
+    // USPTO tools (using web search as primary to enhance discovery and coverage)
+    "search_patents": wrapWithConversation("search_patents", (args) => {
+      // Map to web search with equivalent parameters
+      return usptoWeb.searchPatentsWeb({
+        query_type: args.query_type || 'patents',
+        search_text: args.search_text,
+        assignee_organization: args.assignee_organization,
+        inventor_name: args.inventor_name,
+        patent_date_start: args.patent_date_start,
+        patent_date_end: args.patent_date_end,
+        technology_area: args.technology_area,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_text: false
+      });
+    }),
+    "search_patent_locations": wrapWithConversation("search_patent_locations", (args) => {
+      // Map to web search with equivalent parameters
+      return usptoWeb.searchPatentLocationsWeb({
+        location_city: args.location_city,
+        location_state: args.location_state,
+        location_country: args.location_country,
+        min_patents: args.min_patents,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_text: false
+      });
+    }),
+    "search_cpc_classifications": wrapWithConversation("search_cpc_classifications", (args) => {
+      // Map to web search with equivalent parameters
+      return usptoWeb.searchCPCClassificationsWeb({
+        cpc_section: args.cpc_section,
+        cpc_subsection_id: args.cpc_subsection_id,
+        search_text: args.search_text,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_text: false
+      });
+    }),
+    "search_cpc_groups": wrapWithConversation("search_cpc_groups", (args) => {
+      // Map to web search with equivalent parameters
+      return usptoWeb.searchCPCGroupsWeb({
+        cpc_group_id: args.cpc_group_id,
+        cpc_subclass_id: args.cpc_subclass_id,
+        search_text: args.search_text,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_text: false
+      });
+    }),
+    "search_uspc_classifications": wrapWithConversation("search_uspc_classifications", (args) => {
+      // Map to web search with equivalent parameters
+      return usptoWeb.searchUSPCClassificationsWeb({
+        classification_type: args.classification_type,
+        uspc_mainclass_id: args.uspc_mainclass_id,
+        search_text: args.search_text,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_text: false
+      });
+    }),
+    "search_wipo_classifications": wrapWithConversation("search_wipo_classifications", (args) => {
+      // Map to web search with equivalent parameters
+      return usptoWeb.searchWIPOClassificationsWeb({
+        wipo_field_id: args.wipo_field_id,
+        search_text: args.search_text,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_snippet: false,
+        include_text: false
+      });
+    }),
+
+    // GovInfo USC tools (Enhanced with WebSearch)
+    "search_us_code": wrapWithConversation("search_us_code", (args) => govInfo.searchUSCodeWeb(args)),
+    "get_usc_section": wrapWithConversation("get_usc_section", (args) => govInfo.getUSCSectionWeb(args)),
+    "get_usc_title_structure": wrapWithConversation("get_usc_title_structure", (args) => govInfo.getUSCTitleStructureWeb(args)),
+    "list_usc_titles": wrapWithConversation("list_usc_titles", (args) => govInfo.listUSCTitlesWeb(args)),
+
+    // State Statute tools
+    "search_state_statute": wrapWithConversation("search_state_statute", (args) => stateStatute.searchStateStatute(args)),
+
+    // PTAB tools
+    "search_ptab_proceedings": wrapWithConversation("search_ptab_proceedings", (args) => ptabWebSearch.searchPTABProceedings(args)),
+    "get_ptab_decisions": wrapWithConversation("get_ptab_decisions", (args) => ptab.getDecisions(args)),
+    
+    // PTAB Web Search tools (for IPR/PGR/CBM missing from API)
+    "search_ptab_ipr_proceedings": wrapWithConversation("search_ptab_ipr_proceedings", (args) => ptabWebSearch.searchIPRProceedings(args)),
+    "search_ptab_pgr_proceedings": wrapWithConversation("search_ptab_pgr_proceedings", (args) => ptabWebSearch.searchPGRProceedings(args)),
+    "search_ptab_cbm_proceedings": wrapWithConversation("search_ptab_cbm_proceedings", (args) => ptabWebSearch.searchCBMProceedings(args)),
+    "search_all_ptab_aia_proceedings": wrapWithConversation("search_all_ptab_aia_proceedings", (args) => ptabWebSearch.searchAllAIAProceedings(args)),
+
+    // FTC tools (consolidated from 12 to 6 endpoints)
+    "search_ftc_enforcement_cases": wrapWithConversation("search_ftc_enforcement_cases", (args) => ftcWeb.searchEnforcementCasesWeb(args)),
+    "search_ftc_competition_matters": wrapWithConversation("search_ftc_competition_matters", (args) => ftcWeb.searchCompetitionMattersWeb(args)),
+    "search_ftc_guidance_policy": wrapWithConversation("search_ftc_guidance_policy", (args) => ftcWeb.searchGuidancePolicyWeb(args)),
+    "search_ftc_rulemaking": wrapWithConversation("search_ftc_rulemaking", (args) => ftcWeb.searchRulemakingWeb(args)),
+    "search_ftc_consumer_alerts": wrapWithConversation("search_ftc_consumer_alerts", (args) => ftcWeb.searchConsumerAlertsWeb(args)),
+    "search_ftc_news": wrapWithConversation("search_ftc_news", (args) => ftcWeb.searchNewsWeb(args)),
+
+    // EPA tools (using web search as primary to avoid API 500 errors)
+    "search_epa_facilities": wrapWithConversation("search_epa_facilities", (args) => {
+      // Map to web search with equivalent parameters
+      return epaWeb.searchFacilitiesWeb({
+        facility_name: args.facility_name,
+        company_name: args.company_name,
+        city: args.city,
+        state: args.state,
+        zip_code: args.zip_code,
+        compliance_status: args.compliance_status,
+        violations_last_3_years: args.violations_last_3_years,
+        limit: Math.min(args.limit || 5, 5),  // Cap at 5 regardless of Claude's request
+        include_full_text: args.include_full_text || false
+      });
+    }),
+    "get_epa_facility_compliance_report": wrapWithConversation("get_epa_facility_compliance_report", (args) => {
+      // Map to web search with equivalent parameters
+      return epaWeb.getFacilityComplianceReportWeb({
+        facility_id: args.facility_id,
+        include_violations: args.include_violations !== false,
+        include_enforcement: args.include_enforcement !== false,
+        include_full_text: args.include_full_text || false
+      });
+    }),
+    "search_epa_violations": wrapWithConversation("search_epa_violations", (args) => {
+      // Map to web search with equivalent parameters
+      return epaWeb.searchViolationsWeb({
+        facility_id: args.facility_id,
+        program: args.program,
+        date_after: args.date_after,
+        date_before: args.date_before,
+        limit: Math.min(args.limit || 5, 5)  // Cap at 5
+      });
+    }),
+
+    // EPA tools now use WebSearch by default (duplicate "_web" tools removed)
+
+    // FDA tools (via Exa WebSearch)
+    "search_fda_drug_adverse_events": wrapWithConversation("search_fda_drug_adverse_events", (args) => fdaWeb.searchDrugAdverseEventsWeb(args)),
+    "search_fda_device_events": wrapWithConversation("search_fda_device_events", (args) => fdaWeb.searchDeviceEventsWeb(args)),
+    "search_fda_drug_labels": wrapWithConversation("search_fda_drug_labels", (args) => fdaWeb.searchDrugLabelsWeb(args)),
+    "search_fda_recalls": wrapWithConversation("search_fda_recalls", (args) => fdaWeb.searchRecallsWeb(args)),
+
+    // FDA specialized tools (new)
+    "search_fda_warning_letters": wrapWithConversation("search_fda_warning_letters", (args) => fdaWeb.searchWarningLettersWeb(args)),
+    "search_fda_drug_safety_communications": wrapWithConversation("search_fda_drug_safety_communications", (args) => fdaWeb.searchDrugSafetyCommunicationsWeb(args)),
+    "search_fda_device_safety_communications": wrapWithConversation("search_fda_device_safety_communications", (args) => fdaWeb.searchDeviceSafetyCommunicationsWeb(args)),
+    "search_fda_drug_shortages": wrapWithConversation("search_fda_drug_shortages", (args) => fdaWeb.searchDrugShortagesWeb(args)),
+    "search_fda_510k": wrapWithConversation("search_fda_510k", (args) => fdaWeb.search510kWeb(args)),
+    "search_fda_pma_approvals": wrapWithConversation("search_fda_pma_approvals", (args) => fdaWeb.searchPMAApprovalsWeb(args)),
+    "search_fda_orange_book": wrapWithConversation("search_fda_orange_book", (args) => fdaWeb.searchOrangeBookWeb(args)),
+    "search_fda_purple_book": wrapWithConversation("search_fda_purple_book", (args) => fdaWeb.searchPurpleBookWeb(args)),
+
+    // CPSC tools (consolidated from 10 to 7 endpoints)
+    "search_cpsc_recalls": wrapWithConversation("search_cpsc_recalls", (args) => cpsc.searchRecallsWeb(args)),
+    "search_cpsc_enforcement": wrapWithConversation("search_cpsc_enforcement", (args) => cpsc.searchEnforcementWeb(args)),
+    "search_cpsc_business_guidance": wrapWithConversation("search_cpsc_business_guidance", (args) => cpsc.searchBusinessGuidanceWeb(args)),
+    "search_cpsc_safety_standards": wrapWithConversation("search_cpsc_safety_standards", (args) => cpsc.searchSafetyStandardsWeb(args)),
+    "search_cpsc_injury_data": wrapWithConversation("search_cpsc_injury_data", (args) => cpsc.searchInjuryDataWeb(args)),
+    "search_cpsc_news": wrapWithConversation("search_cpsc_news", (args) => cpsc.searchNewsWeb(args)),
+    "search_cpsc_reports_studies": wrapWithConversation("search_cpsc_reports_studies", (args) => cpsc.searchReportsStudiesWeb(args)),
+
+    // NHTSA tools
+    "nhtsa_decode_vin": wrapWithConversation("nhtsa_decode_vin", (args) => nhtsaWeb.decodeVinWeb(args)),
+    "nhtsa_models_for_make": wrapWithConversation("nhtsa_models_for_make", (args) => nhtsaWeb.getModelsForMakeWeb(args)),
+    "nhtsa_recalls_by_vin": wrapWithConversation("nhtsa_recalls_by_vin", (args) => nhtsaWeb.getRecallsByVinWeb(args)),
+    "nhtsa_recalls_by_make_model_year": wrapWithConversation("nhtsa_recalls_by_make_model_year", (args) => nhtsaWeb.getRecallsByMakeModelYearWeb(args)),
+    "nhtsa_search_complaints": wrapWithConversation("nhtsa_search_complaints", (args) => nhtsaWeb.searchComplaintsWeb(args)),
+    "nhtsa_safety_ratings": wrapWithConversation("nhtsa_safety_ratings", (args) => nhtsaWeb.getSafetyRatingsWeb(args)),
+
+    // Comprehensive analysis tools
+    "comprehensive_legal_entity_analysis": wrapWithConversation("comprehensive_legal_entity_analysis", (args) => comprehensiveAnalysis.comprehensiveLegalEntityAnalysis(args)),
+
+    // Filing draft tools
+    "draft_legal_filing": wrapWithConversation("draft_legal_filing", (args) => filingDraft.draftLegalFiling(args)),
+
+    // State Court Rules tools
+    "search_court_rules": wrapWithConversation("search_court_rules", (args) => stateCourtRules.searchCourtRules(args)),
+    "get_formatting_requirements": wrapWithConversation("get_formatting_requirements", (args) => stateCourtRules.getFormattingRequirements(args)),
+    "get_electronic_filing_rules": wrapWithConversation("get_electronic_filing_rules", (args) => stateCourtRules.getElectronicFilingRules(args)),
+    "search_local_rules": wrapWithConversation("search_local_rules", (args) => stateCourtRules.searchLocalRules(args)),
+    "get_court_specific_procedures": wrapWithConversation("get_court_specific_procedures", (args) => stateCourtRules.getCourtSpecificProcedures(args)),
+    "check_rule_updates": wrapWithConversation("check_rule_updates", (args) => stateCourtRules.checkRuleUpdates(args)),
+    "get_document_templates": wrapWithConversation("get_document_templates", (args) => stateCourtRules.getDocumentTemplates(args)),
+    "validate_document_compliance": wrapWithConversation("validate_document_compliance", (args) => stateCourtRules.validateDocumentCompliance(args)),
+    "get_citation_requirements": wrapWithConversation("get_citation_requirements", (args) => stateCourtRules.getCitationRequirements(args)),
+    "get_discovery_rules": wrapWithConversation("get_discovery_rules", (args) => stateCourtRules.getDiscoveryRules(args)),
+    "get_appellate_requirements": wrapWithConversation("get_appellate_requirements", (args) => stateCourtRules.getAppellateRequirements(args)),
+    "get_emergency_procedures": wrapWithConversation("get_emergency_procedures", (args) => stateCourtRules.getEmergencyProcedures(args))
+  };
+}

@@ -1,0 +1,57 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "IV.A",
+  "section_name": "Regulatory Approvals & RBC Capital",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.A covering RBC capital analysis and regulatory approvals",
+    "progress": "Complete - all 6 subsections written",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": [
+      "RBC ratio 188% below 200% CAL threshold",
+      "Capital injection required: $150M-$220M ($201M weighted)",
+      "Vermont captive recapture risk: $730M gross, $126M weighted",
+      "3 findings: 2 HIGH, 1 CRITICAL"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["fact-registry.md", "coverage-gaps.md", "research-plan.md"]
+  },
+
+  "metrics": {
+    "word_count": 6850,
+    "findings_written": "3/3",
+    "footnotes_count": 72,
+    "last_checkpoint": "2026-01-18T23:45:00Z"
+  },
+
+  "input_files_read": [
+    "review-outputs/fact-registry.md",
+    "review-outputs/coverage-gaps.md",
+    "research-plan.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-18-1737247891/section-reports/section-IV-A-rbc-capital.md"
+}

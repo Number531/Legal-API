@@ -1,0 +1,104 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "F",
+  "section_name": "Reinsurance Agreements & Counterparty Risk",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.F (Reinsurance Counterparty) from specialist reports T6+T2",
+    "progress": "Phase 6: Complete - All subsections written, quality checks passed",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": [
+      "section_id=F",
+      "PRIMARY: reinsurance-agreements-counterparty-risk-report.md (T6)",
+      "SECONDARY: captive-reinsurance-structure-report.md (T2)",
+      "COMPLETE: 6,100 words, 67 footnotes, 2 HIGH findings with draft contract language",
+      "Mandatory cross-ref Pattern #9 completed: Reinsurance → Captive structure (IV.B)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete. No recovery needed.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["reinsurance-agreements-counterparty-risk-report.md", "captive-reinsurance-structure-report.md", "orchestrator-state.md"]
+  },
+
+  "metrics": {
+    "word_count": 6100,
+    "findings_written": "4/4",
+    "footnotes_count": 67,
+    "last_checkpoint": "2026-01-19T00:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/reinsurance-agreements-counterparty-risk-report.md",
+    "specialist-reports/captive-reinsurance-structure-report.md",
+    "orchestrator-state.md"
+  ],
+
+  "quality_validation": {
+    "word_count_target_met": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "creac_structure_followed": true,
+    "footnotes_have_verification_tags": true,
+    "no_placeholders": true,
+    "cross_references_complete": true,
+    "counter_analysis_present": true
+  },
+
+  "findings_summary": {
+    "finding_1_global_re_recapture": {
+      "severity": "HIGH",
+      "probability": "18%",
+      "gross_exposure": "$89.8M",
+      "weighted_exposure": "$16.2M",
+      "methodology": "EV + DCF",
+      "contract_language": "complete"
+    },
+    "finding_2_concentration_risk": {
+      "severity": "HIGH",
+      "probability": "65%",
+      "gross_exposure": "$1.2M NPV",
+      "weighted_exposure": "$1.2M",
+      "methodology": "NPV",
+      "contract_language": "complete"
+    },
+    "finding_3_swiss_re_modco": {
+      "severity": "LOW",
+      "probability": "2%",
+      "gross_exposure": "$30M",
+      "weighted_exposure": "$0.6M",
+      "methodology": "EV",
+      "contract_language": "covered by general escrow"
+    },
+    "finding_4_munich_re_yrt": {
+      "severity": "VERY LOW",
+      "probability": "0.5%",
+      "gross_exposure": "$17.5M",
+      "weighted_exposure": "$0.1M",
+      "methodology": "EV",
+      "contract_language": "covered by general escrow"
+    }
+  },
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-19-1737337200/section-reports/section-IV-F-reinsurance-counterparty.md"
+}

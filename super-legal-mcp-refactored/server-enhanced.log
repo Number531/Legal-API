@@ -1,0 +1,63 @@
+🧠 Claude Sonnet-4 Legal Research System v3.1-BACKWARDS-COMPATIBLE
+📍 Listening on http://localhost:8090
+
+✅ 100% Backwards Compatible:
+   🔄 Original MCP connection behavior maintained
+   📝 Stateless requests by default (no memory leaks)
+   🎯 Exact same API response formats
+   💾 Original graceful degradation on MCP failures
+
+🚀 Optional Enhanced Features (Disabled by Default):
+   💭 Conversational memory (enableSessionMemory: true)
+   🔗 MCP connection pooling (enableConnectionPooling: true)
+   💾 Automatic memory management
+   🤔 Interleaved thinking between tool calls
+   🌊 Fine-grained tool parameter streaming
+
+📋 Available Endpoints:
+   - GET  /health                    (Enhanced system status)
+   - GET  /api/claude/stream         (100% compatible streaming)
+   - POST /api/claude/research       (100% compatible non-streaming)
+   - POST /api/sessions              (Optional: if sessions enabled)
+   - GET  /api/sessions/:id          (Optional: if sessions enabled)
+   - DELETE /api/sessions/:id        (Optional: if sessions enabled)
+
+🎯 Migration Path:
+   1. Deploy immediately - 100% backwards compatible
+   2. Test thoroughly with existing clients
+   3. Enable enhanced features when ready:
+      new ClaudeLegalResearch({
+        enableSessionMemory: true,
+        enableConnectionPooling: true
+      })
+
+✨ Ready for Professional Legal Research - Zero Risk Deployment!
+📨 GET /health - 2025-11-03T05:02:28.570Z
+📨 GET /health - 2025-11-03T05:02:30.630Z
+📨 POST /api/claude/research - 2025-11-03T05:02:30.638Z
+✅ All API keys configured - full functionality available
+🚀 Starting Enhanced Legal MCP Server v2.0.0...
+📚 Available APIs: CourtListener, SEC EDGAR, Federal Register, USPTO, GovInfo, Exa
+
+🔗 Initializing conversation bridge...
+⚠️ Supabase credentials not configured - conversation features disabled
+   Required: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY
+⚠️ PostgreSQL client not provided - conversation bridge disabled
+⚠️ Conversation bridge not initialized - PostgreSQL client missing
+📊 Conversation Bridge Health:
+   PostgreSQL: ❌ Not connected
+   Supabase: ❌ Not connected
+   Bridge: ❌ Disabled
+   Tools: ❌ Disabled
+Enhanced Legal MCP server running on stdio
+✅ MCP connected successfully
+📋 Discovered 96 legal research tools
+📨 POST /api/claude/research - 2025-11-03T05:02:42.260Z
+📋 Discovered 96 legal research tools
+📨 POST /api/claude/research - 2025-11-03T05:02:53.115Z
+📋 Discovered 96 legal research tools
+🔄 Graceful shutdown initiated...
+🔄 Shutting down Claude Legal Research System...
+✅ MCP client disconnected
+Received SIGTERM, shutting down gracefully...
+✅ Cleanup complete

@@ -1,0 +1,58 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "J",
+  "section_name": "Commercial Contracts and Change of Control Provisions",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.J (Commercial Contracts) from specialist reports",
+    "progress": "Phase 6 complete - all subsections written, quality checks passed",
+    "next_action": "NONE - section complete",
+    "critical_context": ["section_id=J", "5 findings analyzed with full CREAC", "11,850 words", "40 footnotes with verification tags"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Read section-writer-state-IV-J.json FIRST. Resume from first 'pending' subsection.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["commercial-contracts-analysis-report.md", "fact-registry.md", "research-review-report.md"]
+  },
+
+  "metrics": {
+    "word_count": 11850,
+    "findings_written": "5/5",
+    "footnotes_count": 40,
+    "last_checkpoint": "2026-01-23T23:59:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/commercial-contracts-analysis-report.md (via Grep)",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md"
+  ],
+
+  "high_findings_for_section": [
+    "Mutual Fund Section 15 auto-termination: $1.7M-$2.6M proxy costs",
+    "Institutional client consent: 40% AUM = $9.4B, 5-10% termination risk",
+    "LPA consent requirements: 66⅔% threshold, $3.2B Opp + $1.0B Credit Opp",
+    "Side letter MFN clauses: $3.6M annual fee reduction exposure",
+    "Revenue share agreements: $8.5M annually, disclosure gap"
+  ]
+}

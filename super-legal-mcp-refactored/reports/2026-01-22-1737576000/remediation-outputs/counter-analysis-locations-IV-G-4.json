@@ -1,0 +1,44 @@
+{
+  "section_id": "IV.G.4",
+  "section_info": {
+    "title": "Counter-Party Response Anticipation (TIER 3 ENHANCEMENT)",
+    "has_counter_analysis_header": false,
+    "detections": 3,
+    "to_move": 3
+  },
+  "locations": [
+    {
+      "section_id": "IV.G.4",
+      "paragraph_index": 0,
+      "line_number": 4843,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Anticipate Seller and Limited Partner responses to proposed protections:",
+      "full_paragraph": "Anticipate Seller and Limited Partner responses to proposed protections:",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.G.4",
+      "paragraph_index": 1,
+      "line_number": 4845,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| **Seller: \"MFN escrow of $50M is excessive; actua...",
+      "full_paragraph": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| **Seller: \"MFN escrow of $50M is excessive; actual triggered amount is only $3.6M annually\"** | HIGH | Counter: Escrow covers *ongoing* MFN exposure over 7-year fund life ($98M NPV), not merely past triggered amount. Comparable transactions (TPG/Angelo Gordon, Carlyle/NGP) employed escrow of 10-15% purchase price for MFN risk. $50M = 2.8% of $1.8B purchase price, well below market benchmark. | TPG/Angelo Gordon precedent; Carlyle/NGP 15% escrow |\n| **Seller: \"Key person escrow of $90M is punitive; John Doe committed to 3-year earnout, departure probability overstated\"** | MEDIUM | Counter: Earnout creates perverse incentive (departure after Year 3 when earnout vests). Actuarial data shows 64.1% probability of key person event (death, disability, retirement, voluntary departure) over 5 years for 62-year-old executive post-PE acquisition. $90M escrow = probability-weighted expected loss, not worst-case. Seller retains $30M Tranche 1 at 12 months if John Doe remains employed and succession plan implemented\u2014provides upside if mitigation succeeds. | Preqin 2024 data (62% redemption rate); SSA mortality tables (5.8% death probability); PE acquisition executive retention studies (40% departure within 2 years) |\n| **MFN Holders: \"We refuse to amend MFN provisions; negotiated protection is valuable, no incentive to waive\"** | MEDIUM | Counter: Offer 5-10 bps fee reduction (\"sweetener\") in exchange for (a) MFN scope limitation (economic terms only, excluding liquidity and transparency), OR (b) 5-year sunset clause (MFN expires January 1, 2031), OR (c) 12-month notice period before MFN trigger effective (allows GP time to evaluate cumulative impact). TPG/Angelo Gordon achieved 67% amendment success rate with similar offer. Even if only 5 of 8 holders accept (62.5%), eliminates $61M of $98M exposure. | TPG/Angelo Gordon 67% success rate; industry precedent for MFN amendments with sweetener |\n| **Seller: \"Form PF $3,750 exposure is de minimis; excessive focus on low-probability operational risk\"** | LOW | Concede: Agree that Form PF exposure is low magnitude ($3,750 expected value). However, SEC late filing triggers examination and reputational harm disproportionate to financial penalty. Covenant requiring Seller cooperation on EDGAR credential transfer and Q1 2026 filing preparation is low-cost mitigation (no escrow required, covered by general indemnity). Critical path dependency: Q1 2026 filing due May 29, 2026 = 30-60 days post-closing in high-chaos integration period. | SEC examination priorities (Form PF timeliness); industry precedent (4 late filings in 27 PE acquisitions 2018-2023 = 14.8% historical failure rate) |",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.G.4",
+      "paragraph_index": 3,
+      "line_number": 4862,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Response Playbook:**\n- **If Seller argues escrow excessive**: Offer escrow reduction conditioned on (a) John Doe 5-year employment agreement executed pre-Closing, (b) Co-CIO appointed within 90 days...",
+      "full_paragraph": "**Response Playbook:**\n- **If Seller argues escrow excessive**: Offer escrow reduction conditioned on (a) John Doe 5-year employment agreement executed pre-Closing, (b) Co-CIO appointed within 90 days with board approval, (c) MFN amendment campaign achieves \u22655 of 8 holders within 6 months. Each mitigation success reduces escrow by $15M-$20M.\n- **If Seller proposes capped indemnity instead of escrow**: Require separate sub-cap for MFN/Key Person claims ($100M+) with survival of 48-60 months, plus uncapped indemnity for John Doe voluntary departure within 24 months (reflects heightened post-PE acquisition departure risk).\n- **If MFN holders refuse amendments**: Consider secondary transaction\u2014offer to purchase MFN holders' LP interests at 105% of NAV (5% premium), removing key person and MFN risk entirely for those LPs willing to exit. Cost: $2.4B \u00d7 5% = $120M, but eliminates $98M MFN exposure + reduces key person exposure by 38% (if MFN holders overlap with key person LPs), net cost $22M for full risk elimination.",
+      "confidence": 0.8,
+      "should_move": true
+    }
+  ]
+}

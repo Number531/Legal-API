@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "super-legal-refactored": {
+      "command": "node",
+      "args": ["/Users/ej/Google Grounding/super-legal-mcp-refactored/index.js"],
+      "env": {
+        "COURTLISTENER_API_TOKEN": "857ac50fcb2e4f2c77402e51c2fb83ed93498009",
+        "USPTO_API_KEY": "BPT34cAq.ylNuvHWfRf0WaqskKaVeQy2yP2X4X7it",
+        "GOVINFO_API_KEY": "hx9RWaWtGHhwYRCPTq2raq7C7z1QgdkcR3vhvMRv",
+        "EXA_API_KEY": "dbcb656b-61e0-48c2-8237-b9205b1b84db",
+        "BRAVE_API_KEY": "BSAqKFw3JWWaF8FUnGKev34jtOYUCw5"
+      }
+    }
+  }
+}

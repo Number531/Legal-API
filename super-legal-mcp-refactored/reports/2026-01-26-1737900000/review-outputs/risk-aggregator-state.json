@@ -1,0 +1,154 @@
+{
+  "agent": "risk-aggregator",
+  "status": "complete",
+  "session": "2026-01-26-1737900000",
+  "started": "2026-01-26T00:00:00Z",
+  "completed": "2026-01-26T00:00:00Z",
+
+  "compaction_summary": {
+    "task": "Aggregate and classify 23 quantified risk exposures for Project Asclepius",
+    "progress": "COMPLETE - All phases finished successfully",
+    "next_action": "Data ready for executive-summary-synthesis consumption",
+    "critical_context": [
+      "23 exposures extracted and classified",
+      "Gross exposure: $198M-$259M",
+      "Weighted exposure: $95M-$114M (median $104.5M)",
+      "Escrow recommended: $25M",
+      "Price adjustment recommended: $20M-$28M",
+      "Adjusted purchase price: $397M-$405M"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_time_classification": true,
+    "phase_3_category_aggregation": true,
+    "phase_4_probability_weighting": true,
+    "phase_5_correlation_adjustment": true,
+    "phase_6_recommendations": true,
+    "phase_7_output_files": true,
+    "phase_8_return_status": true
+  },
+
+  "input_sources": {
+    "primary": "research-review-report.md Section XV (QUANTIFIED_EXPOSURES)",
+    "validation": "fact-registry.md Section XI (AGGREGATED_EXPOSURES)",
+    "exposures_count": 23,
+    "pre_aggregated_gross_min": 198000000,
+    "pre_aggregated_gross_max": 259000000,
+    "pre_aggregated_weighted_min": 95000000,
+    "pre_aggregated_weighted_max": 114000000
+  },
+
+  "exposures_classified": {
+    "ONE_TIME": 15,
+    "MULTI_YEAR": 2,
+    "PERPETUAL": 6
+  },
+
+  "aggregations_final": {
+    "regulatory": {
+      "findings_count": 8,
+      "gross_min": 32700000,
+      "gross_max": 35900000,
+      "weighted_min": 22900000,
+      "weighted_max": 24600000,
+      "escrow_recommended": 10000000
+    },
+    "litigation": {
+      "findings_count": 3,
+      "gross_min": 62700000,
+      "gross_max": 93600000,
+      "weighted_min": 9000000,
+      "weighted_max": 15200000,
+      "escrow_recommended": 8000000
+    },
+    "employment": {
+      "findings_count": 5,
+      "gross_min": 19400000,
+      "gross_max": 22600000,
+      "weighted_min": 37430000,
+      "weighted_max": 39030000,
+      "escrow_recommended": 2000000,
+      "note": "Includes 1-year ongoing costs $23.93M"
+    },
+    "compliance": {
+      "findings_count": 2,
+      "gross_min": 6500000,
+      "gross_max": 9600000,
+      "weighted_min": 4300000,
+      "weighted_max": 6500000,
+      "escrow_recommended": 3000000
+    },
+    "insurance": {
+      "findings_count": 4,
+      "gross_min": 75300000,
+      "gross_max": 95700000,
+      "weighted_min": 22700000,
+      "weighted_max": 28900000,
+      "escrow_recommended": 8000000
+    },
+    "privacy": {
+      "findings_count": 2,
+      "gross_min": 270000,
+      "gross_max": 1250000,
+      "weighted_min": 64000,
+      "weighted_max": 446000,
+      "escrow_recommended": 100000
+    },
+    "tax": {
+      "findings_count": 1,
+      "gross": 1540000,
+      "weighted": 609000,
+      "escrow_recommended": 0
+    }
+  },
+
+  "correlation_adjustments_applied": {
+    "total_reduction_min": 2701000,
+    "total_reduction_max": 3697500,
+    "reduction_percentage": "2.8-3.1%",
+    "pairs_adjusted": [
+      "Orange County SFF + DPNA (regulatory)",
+      "Material underinsurance + D&O prior knowledge (insurance)",
+      "Material underinsurance + COVID-19 wrongful death (insurance)"
+    ]
+  },
+
+  "validation_vs_research_review": {
+    "gross_min_variance": 0,
+    "gross_max_variance": 0,
+    "weighted_min_variance": 0,
+    "weighted_max_variance": 0,
+    "status": "CONFIRMED - Perfect match with research-review-analyst pre-aggregation"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Read risk-aggregator-state.json FIRST. Resume from current incomplete phase.",
+    "do_not_repeat": ["phase_1", "phase_2", "phase_3", "phase_4", "phase_5", "phase_6", "phase_7"],
+    "do_not_reclassify_exposures": ["ALL - classification complete"]
+  },
+
+  "metrics": {
+    "exposures_total": 23,
+    "exposures_classified": 23,
+    "exposures_weighted": 23,
+    "gross_total_min": 198000000,
+    "gross_total_max": 259000000,
+    "probability_weighted_min": 95000000,
+    "probability_weighted_max": 114000000,
+    "probability_weighted_median": 104500000,
+    "escrow_recommended": 25000000,
+    "price_adjustment_min": -28000000,
+    "price_adjustment_max": -20000000,
+    "adjusted_price_min": 397000000,
+    "adjusted_price_max": 405000000,
+    "last_checkpoint": "2026-01-26T00:00:00Z"
+  },
+
+  "files_created": [
+    "review-outputs/risk-summary.json",
+    "review-outputs/risk-aggregation-report.md",
+    "review-outputs/risk-aggregator-state.json"
+  ]
+}

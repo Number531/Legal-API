@@ -1,0 +1,159 @@
+{
+  "overwrite": true,
+  "dashboard": {
+    "title": "Claude SDK Observability",
+    "uid": "claude-sdk",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "30s",
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "timeseries",
+        "title": "Request Latency (P50/P95/P99)",
+        "datasource": "${DS_PROMETHEUS}",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "histogram_quantile(0.50, sum(rate(claude_request_duration_ms_bucket[5m])) by (le))"
+          },
+          {
+            "refId": "B",
+            "expr": "histogram_quantile(0.95, sum(rate(claude_request_duration_ms_bucket[5m])) by (le))"
+          },
+          {
+            "refId": "C",
+            "expr": "histogram_quantile(0.99, sum(rate(claude_request_duration_ms_bucket[5m])) by (le))"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ms"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 2,
+        "type": "timeseries",
+        "title": "Tool Error Rate by Tool",
+        "datasource": "${DS_PROMETHEUS}",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(rate(claude_tool_invocations_total{status=\"error\"}[5m])) by (tool) / sum(rate(claude_tool_invocations_total[5m])) by (tool)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 3,
+        "type": "timeseries",
+        "title": "Structured Output Success Rate",
+        "datasource": "${DS_PROMETHEUS}",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(rate(claude_structured_output_success_total[5m])) / sum(rate(claude_structured_output_attempts_total[5m]))"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 4,
+        "type": "timeseries",
+        "title": "Token Usage (Input/Output/Cached)",
+        "datasource": "${DS_PROMETHEUS}",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(rate(claude_tokens_input_total[5m]))",
+            "legendFormat": "input"
+          },
+          {
+            "refId": "B",
+            "expr": "sum(rate(claude_tokens_output_total[5m]))",
+            "legendFormat": "output"
+          },
+          {
+            "refId": "C",
+            "expr": "sum(rate(claude_tokens_cached_total[5m]))",
+            "legendFormat": "cached"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 5,
+        "type": "timeseries",
+        "title": "Circuit Breaker Trips (15m)",
+        "datasource": "${DS_PROMETHEUS}",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "increase(claude_circuit_breaker_trips_total[15m])",
+            "legendFormat": "{{domain}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 6,
+        "type": "timeseries",
+        "title": "Thinking Blocks (rate)",
+        "datasource": "${DS_PROMETHEUS}",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(rate(claude_thinking_blocks_total[5m])) by (path)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none"
+          },
+          "overrides": []
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "type": "datasource",
+          "name": "DS_PROMETHEUS",
+          "query": "prometheus",
+          "label": "Prometheus",
+          "current": {
+            "text": "Prometheus",
+            "value": "Prometheus"
+          }
+        }
+      ]
+    }
+  }
+}
+

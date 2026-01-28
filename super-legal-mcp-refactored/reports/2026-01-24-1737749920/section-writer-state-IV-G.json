@@ -1,0 +1,67 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Tax-Exempt Status Loss and Conversion to For-Profit Operations",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.G (Tax-Exempt Status Conversion) - COMPLETE",
+    "progress": "All phases complete - section ready for validation",
+    "next_action": "Section complete and saved",
+    "critical_context": [
+      "section_id=G",
+      "5 HIGH findings analyzed with CREAC structure",
+      "$36.43M/year new taxes (100% certain)",
+      "Tax minimization reduces to $16M-$31M/year",
+      "Cross-referenced STARK/AKS → private inurement $120M",
+      "Draft contract provisions for all HIGH findings"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["tax-exempt-conversion-bonds-report.md", "fact-registry.md", "research-review-report.md"]
+  },
+
+  "metrics": {
+    "word_count": 5850,
+    "findings_written": "5/5",
+    "footnotes_count": 250,
+    "last_checkpoint": "2026-01-24T20:45:00Z"
+  },
+
+  "quality_checks": {
+    "all_subsections_present": true,
+    "statistics_table_included": true,
+    "no_placeholders": true,
+    "creac_structure_complete": true,
+    "counter_analysis_present": true,
+    "citations_have_verification_tags": true,
+    "draft_provisions_for_high_findings": true
+  },
+
+  "input_files_read": [
+    "specialist-reports/tax-exempt-conversion-bonds-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md"
+  ]
+}

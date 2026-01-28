@@ -1,0 +1,39 @@
+{
+  "title": "BankruptcyResearchMemo",
+  "type": "object",
+  "required": ["query", "jurisdictions", "issues", "authorities", "analysis", "recommendations", "citations"],
+  "properties": {
+    "query": { "type": "string" },
+    "jurisdictions": { "type": "array", "items": { "type": "string" } },
+    "issues": { "type": "array", "items": { "type": "string" } },
+    "authorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "name", "citation", "uri"],
+        "properties": {
+          "type": { "enum": ["case", "statute", "regulation", "agency_action", "treatise"] },
+          "name": { "type": "string" },
+          "citation": { "type": "string" },
+          "uri": { "type": "string" }
+        }
+      }
+    },
+    "analysis": { "type": "string" },
+    "recommendations": { "type": "string" },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["authority_uri", "quote", "pages_or_paras"],
+        "properties": {
+          "authority_uri": { "type": "string" },
+          "quote": { "type": "string" },
+          "pages_or_paras": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Legal Research Chat - Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            height: 100vh;
+            display: flex;
+        }
+        
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+        
+        .tools-sidebar {
+            width: 350px;
+            background: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #1a252f;
+        }
+        
+        .thinking-section {
+            background: #34495e;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            font-size: 14px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .thinking-header {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .thinking-content {
+            color: #ecf0f1;
+            line-height: 1.5;
+            font-style: italic;
+        }
+        
+        .sidebar-header {
+            padding: 15px;
+            background: #1a252f;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tool-history {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .tool-entry {
+            background: #34495e;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            animation: slideIn 0.3s ease-in;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        .tool-entry.pending {
+            opacity: 0.6;
+            border-left: 3px solid #f39c12;
+        }
+        
+        .tool-entry.completed {
+            border-left: 3px solid #27ae60;
+        }
+        
+        .tool-entry.error {
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .tool-timestamp {
+            font-size: 11px;
+            color: #95a5a6;
+            margin-bottom: 5px;
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        
+        .tool-args-full {
+            background: #1a252f;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #ecf0f1;
+            max-height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .tool-stats {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #1a252f;
+            font-size: 12px;
+            color: #95a5a6;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tool-counter {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+        
+        .counter-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .counter-badge {
+            background: #34495e;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 70%;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message.user {
+            align-self: flex-end;
+        }
+        
+        .message.assistant {
+            align-self: flex-start;
+        }
+        
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        
+        .message.user .message-content {
+            background: #007bff;
+            color: white;
+        }
+        
+        .message.assistant .message-content {
+            background: #f1f3f5;
+            color: #333;
+            white-space: pre-wrap;
+        }
+        
+        .tool-call-inline {
+            background: #e8f4fd;
+            border-left: 3px solid #2196F3;
+            padding: 6px 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1565C0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tool-icon {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 12px 16px;
+            background: #f1f3f5;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .typing-indicator.active {
+            display: block;
+        }
+        
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .input-area {
+            border-top: 1px solid #e0e0e0;
+            padding: 20px;
+            background: white;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+            font-family: inherit;
+            line-height: 1.4;
+            max-height: 120px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
+        }
+        
+        .send-button {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .send-button:hover:not(:disabled) {
+            background: #0056b3;
+        }
+        
+        .send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .suggestions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .suggestion {
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .suggestion:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .status-bar {
+            padding: 8px 20px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+        }
+        
+        .status-dot.offline {
+            background: #dc3545;
+        }
+        
+        .clear-button {
+            padding: 4px 12px;
+            background: transparent;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .clear-button:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="chat-section">
+            <div class="header">
+                <h1>⚖️ Legal Research Assistant - 60+ Tools Available</h1>
+                <div class="tool-counter">
+                    <div class="counter-item">
+                        <span>Tools Used:</span>
+                        <span class="counter-badge" id="toolCount">0</span>
+                    </div>
+                    <div class="counter-item">
+                        <span>APIs Called:</span>
+                        <span class="counter-badge" id="apiCount">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="messages" id="messages">
+                <div class="message assistant">
+                    <div class="message-content">
+                        <strong>Welcome to the Legal Research Assistant!</strong>
+                        
+I have access to 60+ tools across multiple legal databases:
+
+• <strong>Court Records:</strong> CourtListener (cases, dockets, opinions, judges)
+• <strong>Corporate/Financial:</strong> SEC EDGAR (filings, company facts, insider trading)
+• <strong>Intellectual Property:</strong> USPTO (patents, trademarks, PTAB proceedings)
+• <strong>Regulatory:</strong> Federal Register, Code of Federal Regulations, state statutes
+• <strong>Environmental/Safety:</strong> EPA facilities, FDA recalls, CPSC products, NHTSA vehicles
+• <strong>Legal Research:</strong> GovInfo documents, Exa semantic search
+
+Ask me any legal research question, and I'll use the appropriate tools to find comprehensive answers. The sidebar shows all API calls in real-time.
+
+<strong>Example queries:</strong>
+• "Find recent data privacy class actions in California"
+• "Search for FDA warning letters to pharmaceutical companies"
+• "What patents does Apple have on display technology?"
+• "Environmental violations for chemical plants in Texas"
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="input-area">
+                <div class="suggestions">
+                    <div class="suggestion" onclick="sendMessage('Find recent Supreme Court decisions on administrative law')">
+                        Supreme Court cases
+                    </div>
+                    <div class="suggestion" onclick="sendMessage('Search for Tesla SEC filings and patent portfolio')">
+                        Corporate + IP search
+                    </div>
+                    <div class="suggestion" onclick="sendMessage('Environmental violations for oil refineries in Louisiana')">
+                        EPA enforcement
+                    </div>
+                    <div class="suggestion" onclick="sendMessage('Recent FDA drug approvals for cancer treatments')">
+                        FDA regulatory
+                    </div>
+                </div>
+                
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ask any legal research question..."
+                            rows="2"
+                            onkeypress="handleKeyPress(event)"
+                            oninput="autoResize(this)"
+                        ></textarea>
+                    </div>
+                    <button class="send-button" id="sendButton" onclick="sendMessage()">
+                        Send
+                    </button>
+                </div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="connection-status">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Connected to Legal Research System</span>
+                </div>
+                <button class="clear-button" onclick="clearChat()">Clear Chat</button>
+            </div>
+        </div>
+        
+        <div class="tools-sidebar">
+            <div class="sidebar-header">
+                <h2>🔧 Tool Call History</h2>
+            </div>
+            <div class="tool-history" id="toolHistory">
+                <div class="tool-stats">
+                    Waiting for queries...
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let eventSource = null;
+        let conversationHistory = [];
+        let isProcessing = false;
+        let toolCallCount = 0;
+        let apiCallCount = 0;
+        let allToolCalls = [];
+        
+        // Track unique APIs used
+        const apisUsed = new Set();
+        
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+        
+        function sendMessage(text) {
+            const input = document.getElementById('messageInput');
+            const message = text || input.value.trim();
+            
+            if (!message || isProcessing) return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            conversationHistory.push({ role: 'user', content: message });
+            
+            // Clear input
+            if (!text) {
+                input.value = '';
+                input.style.height = 'auto';
+            }
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Disable input
+            setProcessing(true);
+            
+            // Clear tool history for new query
+            document.getElementById('toolHistory').innerHTML = '<div class="tool-stats">Processing query...</div>';
+            allToolCalls = [];
+            
+            // Send to server
+            streamResponse(message);
+        }
+        
+        function addMessage(content, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = content;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function addToolToSidebar(toolData) {
+            const toolHistory = document.getElementById('toolHistory');
+            
+            // Remove "waiting" message if it exists
+            const stats = toolHistory.querySelector('.tool-stats');
+            if (stats && stats.textContent.includes('Waiting')) {
+                stats.remove();
+            }
+            
+            const toolEntry = document.createElement('div');
+            toolEntry.className = 'tool-entry pending';
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const toolName = toolData.name || toolData.tool;
+            const args = toolData.arguments || {};
+            const context = toolData.context || '';
+            const category = toolData.category || '';
+            const percentage = toolData.percentage || 0;
+            
+            // Track the API being used
+            const apiName = toolName.split('_')[0];
+            apisUsed.add(apiName);
+            
+            toolEntry.innerHTML = `
+                <div class="tool-timestamp">${timestamp}</div>
+                <div class="tool-name">${toolName}</div>
+                ${category ? `<div style="color: #3498db; font-size: 11px; margin: 2px 0;">Category: ${category}</div>` : ''}
+                ${context ? `<div style="color: #95a5a6; font-size: 11px; margin: 2px 0;">${context}</div>` : ''}
+                ${percentage ? `<div style="color: #27ae60; font-size: 11px; margin: 2px 0;">Progress: ${percentage}%</div>` : ''}
+                <div class="tool-args-full">${JSON.stringify(args, null, 2)}</div>
+            `;
+            
+            // Insert at the top of the history
+            toolHistory.insertBefore(toolEntry, toolHistory.firstChild);
+            
+            // Mark as completed after a short delay
+            setTimeout(() => {
+                toolEntry.classList.remove('pending');
+                toolEntry.classList.add('completed');
+            }, 1000);
+            
+            // Update counters
+            toolCallCount++;
+            apiCallCount = apisUsed.size;
+            document.getElementById('toolCount').textContent = toolCallCount;
+            document.getElementById('apiCount').textContent = apiCallCount;
+            
+            // Store for summary
+            allToolCalls.push({ name: toolName, args, timestamp });
+            
+            // Add inline indicator in chat
+            return toolEntry;
+        }
+        
+        function showTyping() {
+            document.getElementById('typingIndicator').classList.add('active');
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideTyping() {
+            document.getElementById('typingIndicator').classList.remove('active');
+        }
+        
+        function setProcessing(processing) {
+            isProcessing = processing;
+            const sendButton = document.getElementById('sendButton');
+            const input = document.getElementById('messageInput');
+            
+            sendButton.disabled = processing;
+            input.disabled = processing;
+            
+            if (!processing) {
+                input.focus();
+                
+                // Add summary to sidebar
+                if (allToolCalls.length > 0) {
+                    const toolHistory = document.getElementById('toolHistory');
+                    const summary = document.createElement('div');
+                    summary.className = 'tool-stats';
+                    summary.innerHTML = `
+                        Query completed: ${allToolCalls.length} tools called across ${apisUsed.size} APIs
+                    `;
+                    toolHistory.appendChild(summary);
+                }
+            }
+        }
+        
+        function streamResponse(query) {
+            // Build context from conversation history
+            const context = conversationHistory.slice(-4).map(msg => 
+                `${msg.role}: ${msg.content}`
+            ).join('\n');
+            
+            const fullQuery = conversationHistory.length > 1 
+                ? `Previous context:\n${context}\n\nCurrent query: ${query}`
+                : query;
+            
+            // Enhanced URL with verbosity and reasoning parameters
+        const url = `http://localhost:8089/api/gpt5/stream?mode=chat&query=${encodeURIComponent(fullQuery)}&verbosity=medium&reasoning=medium`;
+            
+            eventSource = new EventSource(url);
+            let currentResponse = '';
+            let messageDiv = null;
+            
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    
+                    // Handle reasoning summary from GPT-5
+                    if (data.type === 'reasoning_summary') {
+                        hideTyping();
+                        
+                        if (!messageDiv) {
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        const reasoningSection = document.createElement('div');
+                        reasoningSection.className = 'thinking-section';
+                        reasoningSection.innerHTML = `
+                            <div class="thinking-header">
+                                💭 GPT-5 Reasoning Summary
+                            </div>
+                            <div class="thinking-content">${data.text}</div>
+                        `;
+                        messageDiv.querySelector('.message-content').appendChild(reasoningSection);
+                        
+                        // Auto-scroll
+                        const messagesDiv = document.getElementById('messages');
+                        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        
+                    } else if (data.type === 'thinking' || data.type === 'reasoning') {
+                        // Display GPT-5's thinking process
+                        hideTyping();
+                        
+                        if (!messageDiv) {
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        const thinkingSection = document.createElement('div');
+                        thinkingSection.className = 'thinking-section';
+                        thinkingSection.innerHTML = `
+                            <div class="thinking-header">
+                                🧠 GPT-5 Reasoning Process
+                            </div>
+                            <div class="thinking-content">${data.text || data.reasoning_summary}</div>
+                        `;
+                        messageDiv.querySelector('.message-content').appendChild(thinkingSection);
+                        
+                        // Auto-scroll
+                        const messagesDiv = document.getElementById('messages');
+                        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        
+                    } else if (data.type === 'tool') {
+                        // Enhanced tool handling with progress and context
+                        const toolData = {
+                            ...data.tool,
+                            context: data.context,
+                            category: data.progress?.category,
+                            percentage: data.progress?.percentage
+                        };
+                        addToolToSidebar(toolData);
+                        
+                        // Show inline indicator in chat
+                        if (!messageDiv) {
+                            hideTyping();
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        const toolIndicator = document.createElement('div');
+                        toolIndicator.className = 'tool-call-inline';
+                        toolIndicator.innerHTML = `
+                            <span class="tool-icon">🔧</span>
+                            <span>Searching: ${data.tool.name || data.tool.tool}</span>
+                        `;
+                        messageDiv.querySelector('.message-content').appendChild(toolIndicator);
+                        
+                    } else if (data.type === 'delta') {
+                        hideTyping();
+                        
+                        if (!messageDiv) {
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        currentResponse += data.text;
+                        // Update the last text node or create new one
+                        const contentDiv = messageDiv.querySelector('.message-content');
+                        const textNodes = Array.from(contentDiv.childNodes).filter(n => n.nodeType === 3);
+                        
+                        if (textNodes.length > 0) {
+                            textNodes[textNodes.length - 1].textContent = currentResponse;
+                        } else {
+                            contentDiv.appendChild(document.createTextNode(currentResponse));
+                        }
+                        
+                        // Auto-scroll
+                        const messagesDiv = document.getElementById('messages');
+                        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        
+                    } else if (data.type === 'tool_complete') {
+                        // Update tool status in sidebar
+                        const toolEntries = document.querySelectorAll('.tool-entry');
+                        toolEntries.forEach(entry => {
+                            if (entry.querySelector('.tool-name')?.textContent === data.tool) {
+                                entry.classList.remove('pending');
+                                entry.classList.add(data.success ? 'completed' : 'error');
+                            }
+                        });
+                    } else if (data.type === 'warning') {
+                        // Display warning message
+                        console.warn('Research warning:', data.message);
+                        if (data.metrics) {
+                            console.log('Quality metrics:', data.metrics);
+                        }
+                    } else if (data.type === 'final') {
+                        conversationHistory.push({ role: 'assistant', content: currentResponse });
+                        setProcessing(false);
+                        
+                        // Display final metrics if available
+                        if (data.metrics) {
+                            console.log('Final research metrics:', data.metrics);
+                        }
+                        
+                        closeStream();
+                    } else if (data.type === 'error') {
+                        hideTyping();
+                        addMessage(`Error: ${data.error}`, 'assistant');
+                        setProcessing(false);
+                        closeStream();
+                    }
+                } catch (e) {
+                    console.error('Parse error:', e);
+                }
+            };
+            
+            eventSource.onerror = (error) => {
+                console.error('SSE Error:', error);
+                hideTyping();
+                
+                if (!currentResponse) {
+                    addMessage('Connection lost. Please check if the server is running.', 'assistant');
+                }
+                
+                setProcessing(false);
+                closeStream();
+                updateConnectionStatus(false);
+            };
+        }
+        
+        function closeStream() {
+            if (eventSource) {
+                eventSource.close();
+                eventSource = null;
+            }
+        }
+        
+        function clearChat() {
+            if (confirm('Clear all messages and tool history?')) {
+                document.getElementById('messages').innerHTML = '';
+                document.getElementById('toolHistory').innerHTML = '<div class="tool-stats">Waiting for queries...</div>';
+                conversationHistory = [];
+                toolCallCount = 0;
+                apiCallCount = 0;
+                apisUsed.clear();
+                allToolCalls = [];
+                document.getElementById('toolCount').textContent = '0';
+                document.getElementById('apiCount').textContent = '0';
+                addInitialMessage();
+            }
+        }
+        
+        function updateConnectionStatus(connected) {
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            
+            if (connected) {
+                dot.classList.remove('offline');
+                text.textContent = 'Connected to Legal Research System';
+            } else {
+                dot.classList.add('offline');
+                text.textContent = 'Disconnected - Check server';
+            }
+        }
+        
+        function addInitialMessage() {
+            const initialMessage = `<strong>Welcome to the Legal Research Assistant!</strong>
+                        
+I have access to 60+ tools across multiple legal databases:
+
+• <strong>Court Records:</strong> CourtListener (cases, dockets, opinions, judges)
+• <strong>Corporate/Financial:</strong> SEC EDGAR (filings, company facts, insider trading)
+• <strong>Intellectual Property:</strong> USPTO (patents, trademarks, PTAB proceedings)
+• <strong>Regulatory:</strong> Federal Register, Code of Federal Regulations, state statutes
+• <strong>Environmental/Safety:</strong> EPA facilities, FDA recalls, CPSC products, NHTSA vehicles
+• <strong>Legal Research:</strong> GovInfo documents, Exa semantic search
+
+Ask me any legal research question, and I'll use the appropriate tools to find comprehensive answers. The sidebar shows all API calls in real-time.
+
+<strong>Example queries:</strong>
+• "Find recent data privacy class actions in California"
+• "Search for FDA warning letters to pharmaceutical companies"
+• "What patents does Apple have on display technology?"
+• "Environmental violations for chemical plants in Texas"`;
+            
+            addMessage(initialMessage, 'assistant');
+        }
+        
+        // Check server connection on load
+        fetch('http://localhost:8089/health')
+            .then(r => r.json())
+            .then(() => updateConnectionStatus(true))
+            .catch(() => updateConnectionStatus(false));
+    </script>
+</body>
+</html>

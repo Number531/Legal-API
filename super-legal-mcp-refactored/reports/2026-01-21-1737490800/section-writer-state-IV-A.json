@@ -1,0 +1,51 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "A",
+  "section_name": "Insurance Regulation & Risk-Based Capital Adequacy",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-A (Insurance Regulation & RBC Capital) from specialist reports",
+    "progress": "All phases complete - section delivered",
+    "next_action": "None - section complete",
+    "critical_context": ["section_id=A", "RBC 188% below 200% threshold", "3 HIGH/CRITICAL findings analyzed"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["insurance-regulation-rbc-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6200,
+    "findings_written": "4/4",
+    "footnotes_count": 157,
+    "last_checkpoint": "2026-01-21T11:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/insurance-regulation-rbc-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737490800/section-reports/section-IV-A-insurance-regulation-rbc.md"
+}

@@ -1,0 +1,22 @@
+{
+  "section_id": "IV.B.4",
+  "section_info": {
+    "title": "Service Provider Oversight Program Deficiency",
+    "has_counter_analysis_header": false,
+    "detections": 1,
+    "to_move": 1
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.4",
+      "paragraph_index": 1,
+      "line_number": 11378,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Rule:** SEC Regulation S-P Rule 30(a)(2)(iv) requires covered institutions to \"select service providers that are capable of maintaining appropriate safeguards for customer information\" and \"require ...",
+      "full_paragraph": "**Rule:** SEC Regulation S-P Rule 30(a)(2)(iv) requires covered institutions to \"select service providers that are capable of maintaining appropriate safeguards for customer information\" and \"require service providers by contract to implement and maintain such safeguards.\"125 Additionally, 17 CFR \u00a7 248.30(a)(2)(v) mandates that covered institutions \"periodically assess the service providers' safeguards.\"126 The incident response program requirement under 17 CFR \u00a7 248.30(b)(2)(v) further requires \"policies and procedures reasonably designed to require oversight of service providers, through due diligence and monitoring, to satisfy the notification requirements\" for data breaches.127",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

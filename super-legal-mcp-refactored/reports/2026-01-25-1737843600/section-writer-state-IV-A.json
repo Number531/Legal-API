@@ -1,0 +1,54 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "A",
+  "section_name": "CMS Regulatory Compliance",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-A (CMS Regulatory Compliance) from specialist reports",
+    "progress": "COMPLETE - All subsections A-F written",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": ["section_id=A", "CRITICAL finding: Orange County SFF $24.6M exposure", "4 findings with CREAC structure", "All draft contract provisions included"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["cms-regulatory-compliance-report.md", "fca-litigation-report.md", "employment-labor-report.md", "fact-registry.md", "risk-summary.json"]
+  },
+
+  "metrics": {
+    "word_count": 8200,
+    "findings_written": "4/4",
+    "footnotes_count": 47,
+    "last_checkpoint": "2026-01-25T19:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/cms-regulatory-compliance-report.md",
+    "specialist-reports/fca-litigation-report.md",
+    "specialist-reports/employment-labor-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/section-reports/section-IV-A-cms-regulatory.md"
+}

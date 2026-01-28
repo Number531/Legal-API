@@ -1,0 +1,22 @@
+{
+  "section_id": "IV.G.2",
+  "section_info": {
+    "title": "Draft Contract Language",
+    "has_counter_analysis_header": false,
+    "detections": 1,
+    "to_move": 1
+  },
+  "locations": [
+    {
+      "section_id": "IV.G.2",
+      "paragraph_index": 5,
+      "line_number": 4735,
+      "pattern_matched": "(?:Admittedly|Granted|Concededly),?",
+      "pattern_type": "rebuttal",
+      "content_excerpt": "(d) No Undisclosed Preferential Terms. Seller has not granted any preferential terms, side letter arrangements, or other rights or benefits to any Limited Partner that would trigger MFN provisions but...",
+      "full_paragraph": "(d) No Undisclosed Preferential Terms. Seller has not granted any preferential terms, side letter arrangements, or other rights or benefits to any Limited Partner that would trigger MFN provisions but that have not been disclosed to existing MFN holders in accordance with notification requirements in Side Letters.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

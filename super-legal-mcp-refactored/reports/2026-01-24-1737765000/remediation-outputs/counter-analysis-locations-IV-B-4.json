@@ -1,0 +1,22 @@
+{
+  "section_id": "IV.B.4",
+  "section_info": {
+    "title": "Employment Practices Liability Coverage Gaps\u2014WARN Act and Physician Turnover Claims",
+    "has_counter_analysis_header": false,
+    "detections": 1,
+    "to_move": 1
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.4",
+      "paragraph_index": 12,
+      "line_number": 10165,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**EPL Coverage Analysis:** EPL policies exclude \"wages, overtime, salary, or other compensation\" from the definition of covered \"Loss.\" WARN Act back pay constitutes \"wages\" under *Reboans* and *Tech ...",
+      "full_paragraph": "**EPL Coverage Analysis:** EPL policies exclude \"wages, overtime, salary, or other compensation\" from the definition of covered \"Loss.\" WARN Act back pay constitutes \"wages\" under *Reboans* and *Tech Flex*. Accordingly, the $5M-$7M WARN Act exposure is **uninsured**. EPL defense costs (legal fees to defend WARN Act claims) may be covered under the separate \"Defense Costs\" coverage grant, but the back pay and penalties are excluded.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "agent": "memo-executive-summary-writer",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Synthesize executive summary from section reports",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "None - document delivered",
+    "critical_context": ["Deal viability warning NOT required", "Gross exposure $318.1M", "Weighted exposure $85.4M"]
+  },
+
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_section_synthesis": true,
+    "phase_3_aggregate_calculations": true,
+    "phase_4_document_structure": true,
+    "phase_5_quality_check": true,
+    "phase_6_output": true
+  },
+
+  "sections_read": {
+    "IV-A": { "status": "complete", "key_finding": "Form ADV deficiencies 5 items, custody rule gaps" },
+    "IV-B": { "status": "complete", "key_finding": "75.0% board independence at threshold, 12b-1 disclosure gap" },
+    "IV-C": { "status": "complete", "key_finding": "5 SEC exam deficiency categories, $1.35M-$2.05M remediation" },
+    "IV-D": { "status": "complete", "key_finding": "Testimonial violations $10.08M undisclosed, survivorship bias 25 bps" },
+    "IV-E": { "status": "complete", "key_finding": "HWM $326M underwater, MFN $3.6M/yr triggered" },
+    "IV-F": { "status": "complete", "key_finding": "8 cross-trades, $11.5M ERISA excise tax exposure" },
+    "IV-G": { "status": "complete", "key_finding": "$360M Level 3 illiquid, 40% markdown risk" },
+    "IV-H": { "status": "complete", "key_finding": "Founder/CIO age 62, no successor; 8 PMs control 83% AUM" },
+    "IV-I": { "status": "complete", "key_finding": "Section 1061 carried interest $3.9M/yr ordinary income" },
+    "IV-J": { "status": "complete", "key_finding": "40% AUM change-of-control consent required" },
+    "IV-K": { "status": "complete", "key_finding": "E&O/D&O inadequate, cyber insurance absent" },
+    "IV-L": { "status": "complete", "key_finding": "8,749 client PII, Reg S-P gaps, breach costs uninsured" }
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Document complete. No further action required.",
+    "do_not_repeat": ["All sections read and synthesized"],
+    "do_not_recalculate": ["All aggregations complete"]
+  },
+
+  "metrics": {
+    "sections_total": 12,
+    "sections_read": 12,
+    "high_severity_findings": 18,
+    "word_count": 3400,
+    "last_checkpoint": "2026-01-23T23:59:00Z"
+  },
+
+  "aggregations": {
+    "gross_exposure": "$318.1M",
+    "probability_weighted": "$85.4M",
+    "percent_of_deal_value": "4.7%",
+    "recommended_escrow": "$120M-$160M",
+    "recommended_price_adjustment": "$60M-$100M"
+  },
+
+  "output": {
+    "file_path": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-23-1737670800/executive-summary.md",
+    "recommendation": "PROCEED WITH CONDITIONS",
+    "deal_viability_warning_included": false
+  }
+}

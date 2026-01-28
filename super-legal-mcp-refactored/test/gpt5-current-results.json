@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-08-15T19:29:45.091Z",
+  "model": "gpt-4o-2024-08-06",
+  "summary": {
+    "total": 9,
+    "passed": 4,
+    "failed": 5
+  },
+  "results": [
+    {
+      "test": "Tool Discovery",
+      "status": "passed",
+      "duration": 58,
+      "toolCount": 60,
+      "apis": 6
+    },
+    {
+      "test": "Simple Query",
+      "status": "passed",
+      "duration": 8488,
+      "responseLength": 1571
+    },
+    {
+      "test": "Case Law Search",
+      "status": "failed",
+      "error": "MCP error -32603: MCP error -32603: Error executing search_cases: API request failed: 500 Internal Server Error"
+    },
+    {
+      "test": "SEC Filing Search",
+      "status": "passed",
+      "duration": 4512,
+      "responseLength": 494,
+      "filingRefs": 3
+    },
+    {
+      "test": "Patent Search",
+      "status": "passed",
+      "duration": 3805,
+      "responseLength": 157,
+      "patentRefs": 1
+    },
+    {
+      "test": "Complex Query",
+      "status": "failed",
+      "error": "MCP error -32603: MCP error -32603: Error executing search_cases: API request failed: 500 Internal Server Error"
+    },
+    {
+      "test": "Direct: courtlistener_search_cases",
+      "status": "failed",
+      "error": "MCP error -32601: MCP error -32601: Unknown tool: courtlistener_search_cases"
+    },
+    {
+      "test": "Direct: sec_edgar_search_companies",
+      "status": "failed",
+      "error": "MCP error -32601: MCP error -32601: Unknown tool: sec_edgar_search_companies"
+    },
+    {
+      "test": "Direct: uspto_patent_search",
+      "status": "failed",
+      "error": "MCP error -32601: MCP error -32601: Unknown tool: uspto_patent_search"
+    }
+  ]
+}

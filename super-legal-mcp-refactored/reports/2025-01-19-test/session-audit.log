@@ -1,0 +1,2 @@
+{"timestamp":"2026-01-19T22:26:21.373Z","event":"session_start","session_id":"2025-01-19-test","source":"resume","transcript_path":"/tmp/test.jsonl","cwd":"/Users/ej/Super-Legal","verification_attempted":true,"verification_status":"NO_STATE_FILE"}
+{"timestamp":"2026-01-19T22:26:21.376Z","event":"pre_compact","session_id":"2025-01-19-test","trigger":"manual","has_custom_instructions":false}

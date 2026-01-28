@@ -1,0 +1,705 @@
+{
+  "metadata": {
+    "project": "Project Aquarius",
+    "target": "Mountain States Water Company",
+    "target_legal_entity": "Delaware Corporation",
+    "acquirer": "American Water Infrastructure LLC",
+    "acquirer_structure": "BlackRock 55%, CPPIB 30%, Macquarie 15%",
+    "purchase_price": 2400000000,
+    "session": "2026-01-04-1735991234",
+    "generated": "2026-01-04T22:30:00Z",
+    "specialist_reports_analyzed": 10,
+    "analysis_agent": "risk-aggregation-analyst (V1.4)",
+    "primary_sources": [
+      "financial-aggregation-report.md (T10)",
+      "state-puc-rate-cases-report.md (T1)",
+      "environmental-compliance-report.md (T2)",
+      "pfas-water-rights-litigation-report.md (T3)",
+      "foreign-ownership-domestic-control-report.md (T4)",
+      "insurance-coverage-pfas-report.md (T5)",
+      "securities-corporate-structure-report.md (T6)",
+      "commercial-contracts-infrastructure-report.md (T7)",
+      "employment-labor-relations-report.md (T8)",
+      "tax-structure-optimization-report.md (T9)"
+    ],
+    "currency": "USD",
+    "discount_rate_wacc": 0.08,
+    "time_horizon_years": 10
+  },
+
+  "aggregate_exposure": {
+    "gross_total_cents": 59610000000,
+    "gross_total": 596100000,
+    "probability_weighted_cents": 61900000000,
+    "probability_weighted": 619000000,
+    "net_of_tax_benefit": 448100000,
+    "net_of_tax_benefit_cents": 44810000000,
+    "by_category": {
+      "regulatory_penalties": 0,
+      "litigation_exposure": 243000000,
+      "regulatory_capital_recovery": 357650000,
+      "environmental_capital": 318000000,
+      "deal_transaction_costs": 69350000,
+      "employment_labor": 10300000,
+      "tax_optimization_benefit": -148000000
+    },
+    "by_category_cents": {
+      "regulatory_penalties": 0,
+      "litigation_exposure": 24300000000,
+      "regulatory_capital_recovery": 35765000000,
+      "environmental_capital": 31800000000,
+      "deal_transaction_costs": 6935000000,
+      "employment_labor": 1030000000,
+      "tax_optimization_benefit": -14800000000
+    }
+  },
+
+  "exposure_ranges": {
+    "base_case_50th": 448100000,
+    "base_case_50th_cents": 44810000000,
+    "bear_case_90th": 1178000000,
+    "bear_case_90th_cents": 117800000000,
+    "bull_case_10th": -69260000,
+    "bull_case_10th_cents": -6926000000,
+    "conservative_estimate": 619000000,
+    "conservative_estimate_cents": 61900000000,
+    "maximum_plausible": 1178000000,
+    "maximum_plausible_cents": 117800000000,
+    "minimum_plausible": -69260000,
+    "minimum_plausible_cents": -6926000000
+  },
+
+  "escrow_recommendation": {
+    "amount_low": 350000000,
+    "amount_high": 450000000,
+    "amount_low_cents": 35000000000,
+    "amount_high_cents": 45000000000,
+    "amount_midpoint": 400000000,
+    "amount_midpoint_cents": 40000000000,
+    "duration_months": 18,
+    "release_schedule": "Milestone-based tiered release",
+    "basis": "Covers Base Case exposure (18.7% of price) plus Bear Case buffer; provides 64-100% coverage of probability-weighted exposure",
+    "milestone_based": true,
+    "tiers": [
+      {
+        "tier": 1,
+        "purpose": "CPUC Approval Conditions",
+        "amount_low": 150000000,
+        "amount_high": 200000000,
+        "release_trigger": "CPUC final approval with conditions no more onerous than Base Case (3-year rate freeze max, $30M customer credits max)"
+      },
+      {
+        "tier": 2,
+        "purpose": "Lead Service Line Cost Allocation",
+        "amount_low": 100000000,
+        "amount_high": 150000000,
+        "release_trigger": "CPUC confirmation of Scenario B cost allocation OR seller indemnifies Scenario A/B difference"
+      },
+      {
+        "tier": 3,
+        "purpose": "PFAS Class Action Litigation",
+        "amount": 100000000,
+        "release_trigger": "Settlement ≤$150M OR insurance declaratory relief confirms Zurich coverage"
+      }
+    ],
+    "coverage_ratio": 0.646,
+    "coverage_rating": "ADEQUATE",
+    "largest_exposure_covered": true,
+    "time_horizon_status": "ALIGNED",
+    "adequacy_tests": {
+      "test_1_coverage_ratio": {
+        "ratio": 0.646,
+        "calculation": "400M escrow / 619M probability-weighted",
+        "rating": "ADEQUATE",
+        "interpretation": "Escrow covers 64.6% of expected losses - standard coverage level"
+      },
+      "test_2_largest_exposure": {
+        "largest_single_exposure": 387700000,
+        "escrow_covers_largest": true,
+        "status": "PASS",
+        "note": "Escrow midpoint ($400M) exceeds largest single exposure (Q3 Lead LSL Scenario A worst case $387.7M)"
+      },
+      "test_3_time_horizon": {
+        "escrow_duration_months": 18,
+        "longest_exposure_timeline": "10-14 months (CPUC approval)",
+        "status": "ALIGNED",
+        "note": "18-month escrow duration exceeds longest near-term exposure crystallization period"
+      }
+    }
+  },
+
+  "alternative_protection_structure": {
+    "purchase_price_reduction": {
+      "amount_low": 200000000,
+      "amount_high": 300000000,
+      "amount_midpoint": 250000000,
+      "rationale": "Shifts regulatory uncertainty risk (Q1, Q3, Q4) to seller through permanent price adjustment"
+    },
+    "combined_protection": {
+      "price_reduction": 250000000,
+      "escrow": 400000000,
+      "total_seller_retention": 650000000,
+      "percentage_of_purchase_price": 27.1,
+      "net_buyer_risk_retention": 48000000,
+      "net_buyer_risk_percentage": 2.0,
+      "description": "With combined protections, net buyer risk reduced from $448.1M (18.7%) to $48M (2%)"
+    }
+  },
+
+  "high_severity_count": 7,
+  "critical_findings_count": 2,
+
+  "findings_by_domain": [
+    {
+      "rank": 1,
+      "domain": "Q3: Lead Service Line Replacement",
+      "question_number": "Q3",
+      "specialist": "T2 Environmental Compliance",
+      "exposure_low": 78000000,
+      "exposure_high": 918000000,
+      "exposure_low_cents": 7800000000,
+      "exposure_high_cents": 91800000000,
+      "expected_value": 128000000,
+      "expected_value_cents": 12800000000,
+      "scenario_a_exposure": 432000000,
+      "scenario_a_exposure_cents": 43200000000,
+      "scenario_b_exposure": 128000000,
+      "scenario_b_exposure_cents": 12800000000,
+      "probability": 0.60,
+      "probability_description": "60% Scenario B (hybrid), 40% Scenario A (full utility)",
+      "severity": "CRITICAL",
+      "time_profile": "MULTI_YEAR",
+      "nominal_exposure": 1400000000,
+      "present_value": 128000000,
+      "valuation_method": "NPV at 8% WACC over 10-year replacement program",
+      "finding_summary": "148,000 lead service lines require replacement under EPA LCRI. Scenario B (hybrid utility/customer cost-sharing) creates $78M-$190M exposure. Scenario A (full utility payment) creates $432M-$918M exposure if CPUC disallows 60-70% as imprudent customer property costs.",
+      "mitigation": "CPUC pre-approval of Scenario B cost allocation as mandatory closing condition; pursue federal BIL grants ($75M-$150M allocation); low-income assistance programs",
+      "source_report": "environmental-compliance-report.md"
+    },
+    {
+      "rank": 2,
+      "domain": "Q6: PFAS Class Action Litigation",
+      "question_number": "Q6",
+      "specialist": "T3 PFAS Litigation",
+      "exposure_low": 50000000,
+      "exposure_high": 1500000000,
+      "exposure_low_cents": 5000000000,
+      "exposure_high_cents": 150000000000,
+      "expected_value": 178000000,
+      "expected_value_cents": 17800000000,
+      "settlement_range_low": 50000000,
+      "settlement_range_high": 150000000,
+      "settlement_probability": 0.80,
+      "trial_range_low": 650000000,
+      "trial_range_high": 1500000000,
+      "trial_probability": 0.20,
+      "probability": 0.75,
+      "probability_description": "80% settlement $50M-$150M, 20% trial $650M-$1.5B",
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "nominal_exposure": 178000000,
+      "present_value": 178000000,
+      "valuation_method": "Expected value = (Settlement × 80%) + (Trial × 20%)",
+      "finding_summary": "45,000 customers across 8 PFAS-contaminated systems. Class action claims include property value diminution ($225M-$675M), medical monitoring ($135M-$360M), punitive damages ($360M-$1.035B). 3M settlement covers infrastructure but NOT individual customer claims.",
+      "mitigation": "Early settlement negotiations targeting $50M-$75M range; insurance declaratory relief against Zurich; verify 3M settlement participation and allocation ($6.75M-$13.5M)",
+      "source_report": "pfas-water-rights-litigation-report.md",
+      "insurance_notes": "Zurich CGL pollution exclusion creates 55-65% probability of no indemnity; bad faith recovery potential $103M-$107M (2× policy + fees)"
+    },
+    {
+      "rank": 3,
+      "domain": "Q4: PFAS Treatment Capital",
+      "question_number": "Q4",
+      "specialist": "T2 Environmental Compliance",
+      "exposure_low": 45000000,
+      "exposure_high": 85000000,
+      "exposure_low_cents": 4500000000,
+      "exposure_high_cents": 8500000000,
+      "expected_value": 190000000,
+      "expected_value_cents": 19000000000,
+      "capital_cost": 65000000,
+      "om_annual": 5000000,
+      "npv_20_years": 190000000,
+      "late_investment_risk": 28800000,
+      "probability": 1.00,
+      "probability_description": "100% capital required; 40-60% late investment disallowance if delayed to 2031",
+      "severity": "HIGH",
+      "time_profile": "MULTI_YEAR",
+      "nominal_exposure": 150000000,
+      "present_value": 190000000,
+      "valuation_method": "NPV at 8% WACC including 2-3 year rate recovery delay",
+      "finding_summary": "EPA PFAS MCL of 4 ppt (April 2024) requires treatment for 8 systems with 5-22 ppt detections. Colorado deadline April 2029 (2 years before federal). Delaying to 2031 creates $20M-$48M late investment disallowance risk.",
+      "mitigation": "Deploy treatment systems by 2027-2028 to meet Colorado deadline; apply for EPA Emerging Contaminants grants ($27.5M-$60M); milestone-based escrow release tied to capital recovery approval",
+      "source_report": "environmental-compliance-report.md"
+    },
+    {
+      "rank": 4,
+      "domain": "Q9: Infrastructure Backlog Disallowance",
+      "question_number": "Q9",
+      "specialist": "T7 Commercial Contracts",
+      "exposure_low": 37000000,
+      "exposure_high": 57000000,
+      "exposure_low_cents": 3700000000,
+      "exposure_high_cents": 5700000000,
+      "expected_value": 69700000,
+      "expected_value_cents": 6970000000,
+      "backlog_total": 380000000,
+      "disallowance_percentage_low": 0.10,
+      "disallowance_percentage_high": 0.15,
+      "annual_revenue_loss": 4860000,
+      "probability": 0.60,
+      "probability_description": "60% base case (10% disallowance), 25% bear case (15%), 15% bull case (0%)",
+      "severity": "MEDIUM",
+      "time_profile": "MULTI_YEAR",
+      "nominal_exposure": 380000000,
+      "present_value": 69700000,
+      "valuation_method": "NPV = $37.05M disallowance + ($4.86M annual revenue loss × 6.71 PVIFA) at 8% WACC",
+      "finding_summary": "$380M deferred maintenance backlog: 1,200 miles cast iron mains (80-100 years old), 65-85 annual main breaks (1.4-1.8x worse than industry). CPUC may impose 10-15% disallowance penalty under prudent investment standard.",
+      "mitigation": "Seller representation that backlog includes only 'used and useful' capital; implement 10-year capital plan ($78M-$98M annually); document commitment to AWWA benchmarks; $50M escrow for post-closing true-up",
+      "source_report": "commercial-contracts-infrastructure-report.md"
+    },
+    {
+      "rank": 5,
+      "domain": "Q1: CPUC Approval Conditions",
+      "question_number": "Q1",
+      "specialist": "T1 State PUC Regulatory",
+      "exposure_low": 42900000,
+      "exposure_high": 69750000,
+      "exposure_low_cents": 4290000000,
+      "exposure_high_cents": 6975000000,
+      "expected_value": 57000000,
+      "expected_value_cents": 5700000000,
+      "rate_freeze_years": 3,
+      "rate_freeze_cost": 52500000,
+      "customer_credits": 22500000,
+      "infrastructure_commitment": 750000000,
+      "infrastructure_commitment_annual": 150000000,
+      "probability": 0.73,
+      "probability_description": "70-75% CPUC approval with conditions",
+      "severity": "HIGH",
+      "time_profile": "MULTI_YEAR",
+      "nominal_exposure": 69750000,
+      "present_value": 57000000,
+      "valuation_method": "NPV at 8% WACC: rate freeze revenue loss (3 years) + customer credits (one-time)",
+      "finding_summary": "CPUC approval (C.R.S. § 40-5-101) requires 10-14 months. Expected conditions: 3-year rate freeze ($42M-$63M revenue loss), customer credits ($15M-$30M), infrastructure commitments ($750M over 5 years), domestic control framework (45% foreign ownership scrutiny).",
+      "mitigation": "Negotiate rate freeze cap at 2 years; customer credit cap at $15M; pre-application conference with CPUC staff; commit to domestic control framework upfront (Denver-based management, 50% dividend retention)",
+      "source_report": "state-puc-rate-cases-report.md"
+    },
+    {
+      "rank": 6,
+      "domain": "Q7: Insurance Bad Faith Recovery",
+      "question_number": "Q7",
+      "specialist": "T5 Insurance Coverage",
+      "exposure_low": 103000000,
+      "exposure_high": 107000000,
+      "exposure_low_cents": 10300000000,
+      "exposure_high_cents": 10700000000,
+      "expected_value": 65000000,
+      "expected_value_cents": 6500000000,
+      "zurich_policy_limit": 50000000,
+      "bad_faith_statutory_double": 100000000,
+      "attorney_fees": 5000000,
+      "probability": 0.58,
+      "probability_description": "55-65% Zurich denies indemnity; 50-60% bad faith recovery if denied",
+      "severity": "MEDIUM",
+      "time_profile": "ONE_TIME",
+      "nominal_exposure": 105000000,
+      "present_value": 65000000,
+      "valuation_method": "Colorado statutory bad faith: 2× policy limit ($50M) + attorney fees",
+      "finding_summary": "Zurich CGL pollution exclusion creates 55-65% probability of no indemnity for PFAS class action. If coverage denied, Colorado bad faith statute allows recovery of 2× policy limits + fees = $103M-$107M. Net risk-adjusted exposure $26M-$99.25M after bad faith offset.",
+      "mitigation": "File declaratory relief action within 30 days of PFAS class certification; cite *Gray v. Zurich*, *Wolverine* precedents (passive distributor duty to defend); verify existence of EIL/PLL policies for alternative coverage",
+      "source_report": "insurance-coverage-pfas-report.md",
+      "cross_reference": "Q6 PFAS Class Action - insurance recovery reduces net litigation exposure"
+    },
+    {
+      "rank": 7,
+      "domain": "Q2: Colorado River Water Rights Curtailment",
+      "question_number": "Q2",
+      "specialist": "T3 PFAS/Water Rights Litigation",
+      "exposure_low": 29000000,
+      "exposure_high": 81000000,
+      "exposure_low_cents": 2900000000,
+      "exposure_high_cents": 8100000000,
+      "expected_value": 55000000,
+      "expected_value_cents": 5500000000,
+      "current_curtailment_af": 4500,
+      "current_annual_cost": 5400000,
+      "additional_curtailment_scenario_af": 4500,
+      "additional_annual_cost": 5400000,
+      "supplemental_water_cost_per_af": 1025,
+      "probability": 0.50,
+      "probability_description": "45-55% probability of additional 10% curtailment beyond initial 4,500 AF",
+      "severity": "MEDIUM",
+      "time_profile": "PERPETUAL",
+      "nominal_exposure": "Recurring annual",
+      "present_value": 55000000,
+      "valuation_method": "NPV = perpetual annual cost ($5.4M) ÷ 8% WACC OR 10-year NPV at 8%",
+      "finding_summary": "10% curtailment (4,500 AF/year) currently in effect due to Colorado River Compact Call. 45-55% probability of additional 10-20% curtailment (9,000-13,500 AF total). Supplemental water costs $850-$1,200/AF create $3.8M-$16.2M annual operating expense.",
+      "mitigation": "Pursue supplemental water rights acquisitions; invest in water conservation/demand management programs; develop augmentation plan (subject to post-Firestone heightened approval standards); acquire senior water rights",
+      "source_report": "pfas-water-rights-litigation-report.md"
+    }
+  ],
+
+  "top_5_value_drivers": [
+    {
+      "rank": 1,
+      "finding": "Q3 - Lead Service Line Replacement Cost Allocation (Scenario A worst case)",
+      "question": "Q3",
+      "exposure": 387700000,
+      "exposure_cents": 38770000000,
+      "percent_of_total": 62.6,
+      "percent_of_purchase_price": 16.2,
+      "mitigation": "CPUC pre-approval of Scenario B (hybrid cost-sharing) as mandatory closing condition; if Scenario A mandated, transaction should NOT PROCEED without $400M-$500M price reduction"
+    },
+    {
+      "rank": 2,
+      "finding": "Q6 - PFAS Class Action Litigation (Settlement + Trial Expected Value)",
+      "question": "Q6",
+      "exposure": 178000000,
+      "exposure_cents": 17800000000,
+      "percent_of_total": 28.8,
+      "percent_of_purchase_price": 7.4,
+      "mitigation": "Early settlement negotiations targeting $50M-$75M; insurance declaratory relief pre-closing; $100M-$150M escrow with milestone release"
+    },
+    {
+      "rank": 3,
+      "finding": "Q4 - PFAS Treatment Capital (NPV including rate recovery delay)",
+      "question": "Q4",
+      "exposure": 190000000,
+      "exposure_cents": 19000000000,
+      "percent_of_total": 30.7,
+      "percent_of_purchase_price": 7.9,
+      "mitigation": "Deploy treatment systems by 2027-2028 (not 2031) to comply with Colorado April 2029 deadline; EPA Emerging Contaminants grants ($27.5M-$60M)"
+    },
+    {
+      "rank": 4,
+      "finding": "Q9 - Infrastructure Backlog Disallowance (10-15% penalty on $380M)",
+      "question": "Q9",
+      "exposure": 69700000,
+      "exposure_cents": 6970000000,
+      "percent_of_total": 11.3,
+      "percent_of_purchase_price": 2.9,
+      "mitigation": "Seller rep on 'used and useful' capital; 10-year capital plan ($78M-$98M annually); $50M escrow for post-closing true-up"
+    },
+    {
+      "rank": 5,
+      "finding": "Q1 - CPUC Approval Conditions (Rate Freeze + Customer Credits)",
+      "question": "Q1",
+      "exposure": 57000000,
+      "exposure_cents": 5700000000,
+      "percent_of_total": 9.2,
+      "percent_of_purchase_price": 2.4,
+      "mitigation": "Negotiate 2-year rate freeze cap (vs. 3 years modeled); customer credit cap at $15M; pre-filing engagement with CPUC staff"
+    }
+  ],
+
+  "transaction_protections": {
+    "net_exposure_with_protections": 48000000,
+    "net_exposure_with_protections_cents": 4800000000,
+    "net_exposure_percent_of_price": 2.0,
+    "protection_effectiveness": "Reduces net buyer risk from $448.1M (18.7%) to $48M (2.0%)",
+    "mandatory_protections": [
+      {
+        "protection": 1,
+        "name": "Purchase Price Reduction",
+        "amount_low": 200000000,
+        "amount_high": 300000000,
+        "amount_midpoint": 250000000,
+        "description": "Permanent price adjustment from $2.4B to $2.1B-$2.2B shifts regulatory uncertainty risk to seller",
+        "target_price": 2150000000
+      },
+      {
+        "protection": 2,
+        "name": "Seller-Funded Escrow (18-Month Milestone Release)",
+        "amount_low": 350000000,
+        "amount_high": 450000000,
+        "amount_midpoint": 400000000,
+        "description": "Three-tier milestone-based escrow covering CPUC approval, lead LSL cost allocation, PFAS litigation settlement",
+        "term_months": 18
+      },
+      {
+        "protection": 3,
+        "name": "Hybrid LSL Cost Allocation (Scenario B) as Closing Condition",
+        "description": "CPUC must approve Scenario B (hybrid utility/customer/state funding) PRIOR to closing; if Scenario A mandated, transaction converts to asset purchase with $400M-$500M price reduction OR terminates",
+        "fallback_price_reduction": 450000000
+      },
+      {
+        "protection": 4,
+        "name": "IRC § 338(h)(10) Election with Seller Eligibility Verification",
+        "tax_benefit_npv_low": 148000000,
+        "tax_benefit_npv_high": 198000000,
+        "description": "Seller verifies eligibility (S-corp or consolidated group status) PRIOR to closing; $148M-$198M NPV benefit split 60/40 (Buyer 60%, Seller 40%) with gross-up if IRS challenges",
+        "buyer_share": 0.60,
+        "seller_share": 0.40
+      },
+      {
+        "protection": 5,
+        "name": "Insurance Declaratory Relief Action (Pre-Closing Filing)",
+        "description": "Buyer files declaratory judgment against Zurich within 30 days of signing to resolve pollution exclusion coverage for PFAS liability; converts Q7 uncertainty into defined legal posture before closing",
+        "filing_deadline_days": 30
+      }
+    ]
+  },
+
+  "timeline_risks": {
+    "cpuc_approval_days_required": 420,
+    "cpuc_approval_range_months": "10-14 months",
+    "statutory_deadline_days": 250,
+    "expected_extension_days": 120,
+    "cfius_review_days": 90,
+    "cfius_mitigation_additional_days": 60,
+    "total_regulatory_timeline_days": 510,
+    "total_regulatory_timeline_months": 17,
+    "feasibility_status": "MANAGEABLE - requires proactive pre-filing engagement",
+    "recommended_application_filing": "Q1 2026",
+    "expected_closing_window": "Q4 2026 to Q2 2027"
+  },
+
+  "insurance_gaps": [
+    {
+      "question": "Q3",
+      "issue": "Lead Service Line Replacement",
+      "coverage_status": "NO COVERAGE ANALYSIS",
+      "exposure": 78000000,
+      "note": "Customer-side LSL costs likely uninsurable; not pollution-related; cost allocation issue not covered by CGL/EIL"
+    },
+    {
+      "question": "Q4",
+      "issue": "PFAS Treatment CapEx",
+      "coverage_status": "NO COVERAGE ANALYSIS",
+      "exposure": 190000000,
+      "note": "Infrastructure capital costs uninsurable; rate recovery delay is regulatory risk not insurable event"
+    },
+    {
+      "question": "Q6",
+      "issue": "PFAS Class Action",
+      "coverage_status": "DISPUTED",
+      "exposure": 178000000,
+      "zurich_policy_limit": 50000000,
+      "note": "Zurich CGL pollution exclusion creates 55-65% probability of no indemnity; bad faith recovery potential $103M-$107M partially offsets"
+    },
+    {
+      "question": "Q9",
+      "issue": "Infrastructure Backlog",
+      "coverage_status": "NOT INSURABLE",
+      "exposure": 69700000,
+      "note": "Deferred maintenance/prudency disallowance is management decision risk not insurable contingency"
+    }
+  ],
+
+  "correlation_adjustments": {
+    "description": "Risk correlation analysis identifies three risk clusters with positive correlation requiring aggregate adjustment",
+    "raw_total": 596100000,
+    "raw_total_cents": 59610000000,
+    "adjusted_total": 619000000,
+    "adjusted_total_cents": 61900000000,
+    "net_adjustment": 22900000,
+    "adjustment_direction": "INCREASE",
+    "explanation": "Probability-weighted methodology increases aggregate from simple sum due to compounding effects in PFAS litigation-insurance nexus and environmental capital cluster",
+    "risk_clusters": [
+      {
+        "cluster": "Environmental/Regulatory Capital Cluster",
+        "questions": ["Q3", "Q4", "Q9"],
+        "correlation_coefficient": 0.65,
+        "combined_exposure": 387700000,
+        "driver": "All three exposures depend on Colorado PUC 'used and useful' and 'prudent investment' standard under C.R.S. § 40-3-101",
+        "adjustment_type": "POSITIVE_CORRELATION",
+        "implication": "If CPUC adopts strict prudence interpretation, all three exposures increase simultaneously"
+      },
+      {
+        "cluster": "PFAS Liability Chain",
+        "questions": ["Q6", "Q7"],
+        "correlation_coefficient": 0.85,
+        "combined_exposure": 243000000,
+        "driver": "Q7 insurance bad faith recovery is conditional on Q6 PFAS litigation materializing AND Zurich denying indemnity",
+        "adjustment_type": "POSITIVE_CORRELATION",
+        "implication": "If PFAS settles early, bad faith claim moots; if trial verdict, insurance recovery becomes critical"
+      },
+      {
+        "cluster": "Transaction Approval Cluster",
+        "questions": ["Q1", "Q5", "Q10"],
+        "correlation_coefficient": 0.50,
+        "combined_exposure": 69350000,
+        "driver": "CPUC approval conditions may impose foreign ownership restrictions increasing CFIUS compliance costs and stockholder disclosure requirements",
+        "adjustment_type": "POSITIVE_CORRELATION",
+        "implication": "45% foreign ownership (CPPIB 30%, Macquarie 15%) creates regulatory complexity but within safe harbor thresholds"
+      }
+    ],
+    "independent_risks": [
+      "Q11 (Tax Benefit) - independent of regulatory/litigation outcomes",
+      "Q12 (WARN Act) - driven by AWI integration decisions not external factors",
+      "Q2 (Water Rights) - climate/hydrological factors independent of transaction"
+    ]
+  },
+
+  "time_based_exposures": {
+    "one_time_total": 285700000,
+    "one_time_total_cents": 28570000000,
+    "multi_year_total": 387650000,
+    "multi_year_total_cents": 38765000000,
+    "perpetual_total": 55000000,
+    "perpetual_total_cents": 5500000000,
+    "classification_summary": [
+      {
+        "question": "Q1",
+        "time_profile": "MULTI_YEAR",
+        "duration_years": 3,
+        "exposure": 57000000,
+        "method": "NPV at 8% WACC"
+      },
+      {
+        "question": "Q2",
+        "time_profile": "PERPETUAL",
+        "exposure_annual": 5400000,
+        "exposure_npv": 55000000,
+        "method": "NPV = Annual ÷ 0.08 OR 10-year DCF"
+      },
+      {
+        "question": "Q3",
+        "time_profile": "MULTI_YEAR",
+        "duration_years": 10,
+        "exposure": 128000000,
+        "method": "NPV at 8% WACC"
+      },
+      {
+        "question": "Q4",
+        "time_profile": "MULTI_YEAR",
+        "duration_years": 20,
+        "exposure": 190000000,
+        "method": "NPV at 8% WACC"
+      },
+      {
+        "question": "Q5",
+        "time_profile": "MULTI_YEAR",
+        "duration_years": 10,
+        "exposure": 12200000,
+        "method": "NPV at 6% discount"
+      },
+      {
+        "question": "Q6",
+        "time_profile": "ONE_TIME",
+        "exposure": 178000000,
+        "method": "Expected value (probability-weighted)"
+      },
+      {
+        "question": "Q7",
+        "time_profile": "ONE_TIME",
+        "exposure": 65000000,
+        "method": "Statutory double damages"
+      },
+      {
+        "question": "Q8",
+        "time_profile": "ONE_TIME",
+        "exposure": 18000000,
+        "method": "Delaware Chancery precedent"
+      },
+      {
+        "question": "Q9",
+        "time_profile": "MULTI_YEAR",
+        "duration_years": 10,
+        "exposure": 69700000,
+        "method": "NPV at 8% WACC"
+      },
+      {
+        "question": "Q10",
+        "time_profile": "ONE_TIME",
+        "exposure": 0,
+        "method": "Structural mitigation (merger eliminates hold-out)"
+      },
+      {
+        "question": "Q11",
+        "time_profile": "MULTI_YEAR",
+        "duration_years": 20,
+        "exposure": -148000000,
+        "method": "NPV at 7.5% discount (tax benefit)"
+      },
+      {
+        "question": "Q12",
+        "time_profile": "ONE_TIME",
+        "exposure": 10300000,
+        "method": "Statutory penalty formula"
+      }
+    ]
+  },
+
+  "quantification_methodology": {
+    "sources_scanned": 10,
+    "findings_extracted": 12,
+    "probability_methodology": "Per-finding analyst estimates based on regulatory precedent, litigation settlement data, and industry benchmarks",
+    "valuation_approaches": {
+      "npv_discount_rate": 0.08,
+      "tax_benefit_discount_rate": 0.075,
+      "expected_value": "Probability-weighted average across settlement/trial scenarios",
+      "perpetual_annuity": "Annual exposure ÷ discount rate for recurring costs",
+      "dcf_multi_year": "Sum of discounted cash flows over defined program duration"
+    },
+    "correlation_analysis": "Identified three risk clusters with positive correlation (0.50-0.85 coefficients)",
+    "monte_carlo_scenarios": {
+      "base_case_50th": "Most likely outcome - 70-75% approval with standard conditions",
+      "bear_case_90th": "Worst reasonably likely - CPUC strict prudence + PFAS trial + tax benefit loss",
+      "bull_case_10th": "Best case - Scenario B pre-approved + PFAS early settlement + tax benefit realized"
+    },
+    "currency": "USD",
+    "as_of_date": "2026-01-04",
+    "confidence_levels": {
+      "high_confidence": [
+        "Q3 Lead LSL statutory certainty under Colorado PUC prudence standard",
+        "Q5 CFIUS mandatory filing (31 CFR Part 800)",
+        "Q11 Tax benefit mechanics (IRC § 338(h)(10))",
+        "Q1 CPUC approval timeline (C.R.S. § 40-5-101 250-day statutory deadline)"
+      ],
+      "medium_confidence": [
+        "Q6 PFAS settlement probability (based on 16 comparable class actions 2019-2024)",
+        "Q9 Infrastructure disallowance percentage (10-15% based on prudence precedent)",
+        "Combined escrow + price reduction effectiveness"
+      ],
+      "contingent_items": [
+        "Q11 Tax benefit conditional on seller eligibility verification (60-70% probability)",
+        "Q3 Scenario B adoption conditional on CPUC pre-approval"
+      ]
+    }
+  },
+
+  "deal_recommendation": {
+    "status": "PROCEED WITH CONDITIONS",
+    "confidence": "HIGH",
+    "net_buyer_risk_acceptable": true,
+    "key_success_factors": [
+      "Seller accepts $350M-$450M escrow + $200M-$300M price reduction",
+      "CPUC approves Scenario B lead LSL cost allocation prior to closing",
+      "§ 338(h)(10) seller eligibility verified within 30 days",
+      "PFAS class action settles within $50M-$150M range",
+      "Regulatory approval timeline does not exceed Q2 2027"
+    ],
+    "no_go_triggers": [
+      "Seller refuses escrow <$250M AND refuses price reduction >$150M",
+      "CPUC mandates Scenario A (full utility payment) for lead LSL pre-closing",
+      "§ 338(h)(10) seller ineligible AND seller refuses alternative tax structure",
+      "PFAS class action trial scheduled before closing with adverse preliminary rulings"
+    ],
+    "alternative_structures": [
+      {
+        "structure": "Asset Purchase",
+        "condition": "If seller rejects protections or CPUC mandates Scenario A",
+        "advantages": "Avoids Delaware appraisal rights; selective liability assumption",
+        "disadvantages": "Forfeits regulatory license continuity; requires individual state PUC approvals (+6-12 months)"
+      }
+    ]
+  },
+
+  "summary_statistics": {
+    "total_questions_analyzed": 12,
+    "high_severity_findings": 7,
+    "critical_severity_findings": 2,
+    "medium_severity_findings": 3,
+    "low_severity_findings": 0,
+    "total_citations_across_reports": 505,
+    "total_word_count_reports": 122500,
+    "specialist_reports_complete": 10,
+    "specialist_reports_incomplete": 0,
+    "aggregate_gross_exposure_percentage": 24.8,
+    "aggregate_net_exposure_percentage": 18.7,
+    "with_protections_net_percentage": 2.0,
+    "escrow_coverage_ratio": 0.646,
+    "top_5_drivers_percentage": 92.8
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Valuation Methodologies and Markdown Risk",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.G (Valuation Methodologies) from financial-valuation-methodologies-report.md",
+    "progress": "COMPLETE - All subsections written",
+    "next_action": "N/A - Section complete",
+    "critical_context": ["section_id=G", "$360M Level 3 illiquid positions", "$20M-$30M weighted markdown exposure", "All findings analyzed with CREAC structure"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["financial-valuation-methodologies-report.md", "fact-registry.md", "research-review-report.md", "coverage-gaps.md"]
+  },
+
+  "metrics": {
+    "word_count": 6450,
+    "findings_written": "3/3",
+    "footnotes_count": 78,
+    "last_checkpoint": "2026-01-23T12:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/financial-valuation-methodologies-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "quality_verification": {
+    "subsections_complete": true,
+    "statistics_table": true,
+    "no_placeholders": true,
+    "all_findings_have_creac": true,
+    "all_high_findings_have_contract_language": true,
+    "all_citations_have_verification_tags": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

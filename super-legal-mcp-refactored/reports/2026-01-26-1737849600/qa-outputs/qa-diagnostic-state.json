@@ -1,0 +1,257 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "session_directory": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-26-1737849600",
+  "memorandum_path": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-26-1737849600/final-memorandum.md",
+
+  "qa_cycle": {
+    "current_cycle": 1,
+    "max_cycles": 3,
+    "cycle_history": [
+      {
+        "cycle": 1,
+        "score": 86.7,
+        "outcome": "REMEDIATE",
+        "issues_before": 5,
+        "issues_resolved": 0,
+        "issues_remaining": 5,
+        "timestamp": "2026-01-26T12:30:00Z"
+      }
+    ]
+  },
+
+  "gate_attempts": {
+    "A1_to_A2": {
+      "attempts": 1,
+      "max": 3,
+      "last_failure_reason": null
+    }
+  },
+
+  "compaction_summary": {
+    "task": "Diagnostic assessment COMPLETE - Score 86.7% (REMEDIATE status)",
+    "progress": "All 12 dimensions scored, 5 issues identified, remediation plan generated",
+    "next_action": "Orchestrator should execute remediation dispatch (TIER 2 - 5 waves)",
+    "critical_context": [
+      "Single CRITICAL issue (CREAC headers) accounts for -14 weighted points",
+      "Resolving CREAC issue alone raises score to 93.1% (CERTIFY threshold)",
+      "All other dimensions score 9-10/10 (exceptional substantive quality)",
+      "Estimated remediation time: 2-3 hours (Wave 1 dominates at 60-90 min)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_2_dimension_scoring": true,
+    "phase_3_issue_cataloging": true,
+    "phase_4_remediation_planning": true,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+
+  "prerequisite_verification": {
+    "file_exists": true,
+    "expected_sections": ["IV.A", "IV.B", "IV.C", "IV.D", "IV.E", "IV.F", "IV.G", "IV.H", "IV.I", "IV.J", "IV.K", "IV.L"],
+    "expected_count": 12,
+    "sections_found": 12,
+    "sections_missing": [],
+    "executive_summary_present": true,
+    "footnotes_present": true,
+    "word_count": 154324,
+    "line_count": 9446,
+    "placeholders_found": 0,
+    "verification_status": "PASS"
+  },
+
+  "dimensions_scored": {
+    "dim_0_questions_presented": {
+      "status": "complete",
+      "score": "N/A",
+      "raw_score": 0,
+      "weight": 1,
+      "weighted_score": 0,
+      "notes": "N/A - Due diligence memo format does not require Questions Presented"
+    },
+    "dim_1_brief_answers": {
+      "status": "complete",
+      "score": "N/A",
+      "raw_score": 0,
+      "weight": 1,
+      "weighted_score": 0,
+      "notes": "N/A - Due diligence memo format does not require Brief Answers"
+    },
+    "dim_2_creac_structure": {
+      "status": "complete",
+      "score": "3/10",
+      "raw_score": 3,
+      "weight": 2,
+      "weighted_score": 6,
+      "notes": "CRITICAL: 0 explicit CREAC headers found (expected 50-95). Substantive CREAC reasoning present but no structural signposting."
+    },
+    "dim_3_objectivity": {
+      "status": "complete",
+      "score": "9/10",
+      "raw_score": 9,
+      "weight": 2,
+      "weighted_score": 18,
+      "notes": "MINOR: 10 advocacy language matches (4 'clearly', 1 'excellent'). Exceptional objectivity overall."
+    },
+    "dim_4_executive_summary": {
+      "status": "complete",
+      "score": "10/10",
+      "raw_score": 10,
+      "weight": 2,
+      "weighted_score": 20,
+      "notes": "GOLD STANDARD: BLUF, risk rating, 18.4% IRR, scenario analysis, all 9 required elements present."
+    },
+    "dim_5_citation_quality": {
+      "status": "complete",
+      "score": "10/10",
+      "raw_score": 10,
+      "weight": 2,
+      "weighted_score": 20,
+      "notes": "PRE-VALIDATED PASS: 974 footnotes, 100% verification, 98.5% Bluebook compliance."
+    },
+    "dim_6_quantification_risk_tables": {
+      "status": "complete",
+      "score": "9/10",
+      "raw_score": 9,
+      "weight": 2,
+      "weighted_score": 18,
+      "notes": "MINOR: 11 of 12 sections have risk tables (1 missing). Quantification exceptional."
+    },
+    "dim_7_cross_references": {
+      "status": "complete",
+      "score": "10/10",
+      "raw_score": 10,
+      "weight": 2,
+      "weighted_score": 20,
+      "notes": "GOLD STANDARD: 242 cross-references (242% of minimum), Matrix present, zero placeholders."
+    },
+    "dim_8_draft_contract_language": {
+      "status": "complete",
+      "score": "9/10",
+      "raw_score": 9,
+      "weight": 2,
+      "weighted_score": 18,
+      "notes": "MINOR: 13 provisions present (130% of minimum), but precedent citations inconsistent."
+    },
+    "dim_9_formatting_structure": {
+      "status": "complete",
+      "score": "9/10",
+      "raw_score": 9,
+      "weight": 1,
+      "weighted_score": 9,
+      "notes": "MINOR: TOC header level notation mismatch (cosmetic issue only)."
+    },
+    "dim_10_completeness": {
+      "status": "complete",
+      "score": "10/10",
+      "raw_score": 10,
+      "weight": 2,
+      "weighted_score": 20,
+      "notes": "GOLD STANDARD: All 12 sections, 154,324 words (281% of target), zero truncation."
+    },
+    "dim_11_scenario_analysis": {
+      "status": "complete",
+      "score": "10/10",
+      "raw_score": 10,
+      "weight": 2,
+      "weighted_score": 20,
+      "notes": "GOLD STANDARD: P10/P50/P90 across all sections, IRR calculated (18.4%), methodology transparent."
+    }
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Assessment complete. Read diagnostic-assessment.md for full report.",
+    "do_not_repeat": ["dim_0", "dim_1", "dim_2", "dim_3", "dim_4", "dim_5", "dim_6", "dim_7", "dim_8", "dim_9", "dim_10", "dim_11"],
+    "do_not_rescore": true
+  },
+
+  "issues_found": [
+    {
+      "issue_id": "ISSUE-001",
+      "dimension": 2,
+      "severity": "CRITICAL",
+      "description": "Missing CREAC structural headers (0 of 50-95 expected)",
+      "location": "All sections IV.A-IV.L",
+      "impact_weighted_points": -14,
+      "remediation_agent": "memo-remediation-writer + apply-creac-headers.py",
+      "wave": "W1"
+    },
+    {
+      "issue_id": "ISSUE-002",
+      "dimension": 7,
+      "severity": "MEDIUM",
+      "description": "One section missing formal risk assessment table (11 of 12 found)",
+      "location": "Unknown section (requires verification)",
+      "impact_weighted_points": -2,
+      "remediation_agent": "memo-remediation-writer",
+      "wave": "W3"
+    },
+    {
+      "issue_id": "ISSUE-003",
+      "dimension": 3,
+      "severity": "MEDIUM",
+      "description": "Minor advocacy language instances (10 matches)",
+      "location": "Lines 2651, 4171, 4798, 5223, 7464-7465",
+      "impact_weighted_points": -2,
+      "remediation_agent": "memo-remediation-writer",
+      "wave": "W4"
+    },
+    {
+      "issue_id": "ISSUE-004",
+      "dimension": 9,
+      "severity": "MEDIUM",
+      "description": "Incomplete precedent transaction citations in draft provisions",
+      "location": "13 draft provisions (various sections)",
+      "impact_weighted_points": -2,
+      "remediation_agent": "memo-remediation-writer",
+      "wave": "W4"
+    },
+    {
+      "issue_id": "ISSUE-005",
+      "dimension": 10,
+      "severity": "LOW",
+      "description": "Table of Contents header level notation mismatch (cosmetic)",
+      "location": "Lines 17-40 (TOC)",
+      "impact_weighted_points": -1,
+      "remediation_agent": "memo-remediation-writer",
+      "wave": "W5"
+    }
+  ],
+
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 12,
+    "dimensions_na": 2,
+    "applicable_dimensions": 10,
+    "raw_score_sum": 89,
+    "raw_max_applicable": 100,
+    "weighted_score_sum": 169,
+    "weighted_max_applicable": 195,
+    "aggregate_score_percentage": 86.7,
+    "critical_issues": 1,
+    "high_issues": 0,
+    "medium_issues": 3,
+    "low_issues": 1,
+    "total_issues": 5,
+    "last_checkpoint": "2026-01-26T12:30:00Z"
+  },
+
+  "score_calculation": {
+    "formula": "weighted_score_sum / weighted_max_applicable × 100",
+    "weighted_score_sum": 169,
+    "weighted_max_applicable": 195,
+    "note": "Excludes N/A dimensions (1 & 4) from denominator: 200 total - (1×10 + 1×10) = 195",
+    "percentage": 86.7
+  },
+
+  "remediation_tier": "TIER_2_STANDARD",
+  "remediation_waves_required": 5,
+  "estimated_remediation_minutes": 190,
+  "projected_post_remediation_score": {
+    "w1_only": 93.1,
+    "all_waves": 95.4
+  }
+}

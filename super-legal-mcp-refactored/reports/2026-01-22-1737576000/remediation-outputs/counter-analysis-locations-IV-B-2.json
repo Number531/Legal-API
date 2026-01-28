@@ -1,0 +1,77 @@
+{
+  "section_id": "IV.B.2",
+  "section_info": {
+    "title": "Errors & Omissions Coverage Below Industry Benchmark (HIGH)",
+    "has_counter_analysis_header": false,
+    "detections": 6,
+    "to_move": 5
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 0,
+      "line_number": 12813,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Conclusion:** Pinnacle's estimated E&O coverage limits of $30 million per claim / $60 million aggregate fall **$10 million-$20 million below the industry benchmark** for a $42.5 billion AUM RIA. The...",
+      "full_paragraph": "**Conclusion:** Pinnacle's estimated E&O coverage limits of $30 million per claim / $60 million aggregate fall **$10 million-$20 million below the industry benchmark** for a $42.5 billion AUM RIA. The 0.1% of AUM industry rule suggests minimum limits of $42.5 million (rounded to $40 million-$50 million standard policy limits). **Severity: HIGH.** **Exposure: $0-$31.8 million uninsured shortfall** if multiple concurrent claims (State Pension Plan A performance dispute, Taft-Hartley breach, hedge fund valuation claim, SEC defense) aggregate to $55 million-$62 million. **Confidence: MEDIUM** [BASIS: E&O limits estimated using industry benchmarks; actual policy limits unknown without reviewing Pinnacle's declarations pages; exposure scenarios use analyst-quantified claim values].",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 2,
+      "line_number": 12817,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "E&O insurance provides defense and indemnity for Investment Advisers Act breach of fiduciary duty claims analyzed in Section IV.A (Investment Advisers Act Compliance), making the coverage gap particul...",
+      "full_paragraph": "E&O insurance provides defense and indemnity for Investment Advisers Act breach of fiduciary duty claims analyzed in Section IV.A (Investment Advisers Act Compliance), making the coverage gap particularly material given the identified SEC examination deficiencies.",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 6,
+      "line_number": 12826,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "In *Teachers' Retirement System of Louisiana v. ACIC* (unreported settlement, 2018), the pension plan sued its investment consultant for breach of fiduciary duty related to unsuitable private equity r...",
+      "full_paragraph": "In *Teachers' Retirement System of Louisiana v. ACIC* (unreported settlement, 2018), the pension plan sued its investment consultant for breach of fiduciary duty related to unsuitable private equity recommendations.\u2075\u2076 The case settled for an undisclosed amount rumored to exceed $25 million. Defense costs through settlement exceeded $3 million. This case illustrates that a single institutional client claim can approach or exceed $30 million in total exposure.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 13,
+      "line_number": 12843,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Scenario D: SEC Defense Costs**\nOctober 2023 SEC examination defense costs: $400,000-$800,000.\u2076\u2076 Follow-up examination (60% probability): $750,000-$2 million.\u2076\u2077 Marketing Rule violation fines: $125,...",
+      "full_paragraph": "**Scenario D: SEC Defense Costs**\nOctober 2023 SEC examination defense costs: $400,000-$800,000.\u2076\u2076 Follow-up examination (60% probability): $750,000-$2 million.\u2076\u2077 Marketing Rule violation fines: $125,000-$275,000.\u2076\u2078 Total SEC-related costs: **$1.3 million-$3.1 million**.",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 14,
+      "line_number": 12846,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Aggregate Adverse Case:**\nIf Scenarios A-D occur within the same policy period (not implausible if State Pension Plan A termination triggers reputational cascade and SEC follow-up exam):\n- State Pen...",
+      "full_paragraph": "**Aggregate Adverse Case:**\nIf Scenarios A-D occur within the same policy period (not implausible if State Pension Plan A termination triggers reputational cascade and SEC follow-up exam):\n- State Pension Plan A settlement: $25M-$33M\n- Taft-Hartley settlement: $3M-$8M\n- Hedge fund valuation settlement: $3M-$20M\n- SEC defense costs (within SIR): $0.8M-$1.5M\n- **Total: $31.8M-$62.5M**",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 20,
+      "line_number": 12876,
+      "pattern_matched": "While\\s+(?:it\\s+is\\s+true|some\\s+courts|there\\s+(?:are|is)|the)",
+      "pattern_type": "rebuttal",
+      "content_excerpt": "This counter-argument has merit but does not eliminate the risk. First, the independent pricing service engagement reduces but does not eliminate valuation dispute risk; the financial-analyst identifi...",
+      "full_paragraph": "This counter-argument has merit but does not eliminate the risk. First, the independent pricing service engagement reduces but does not eliminate valuation dispute risk; the financial-analyst identified that marks are stale (18-20 months old) and public comparables have declined 30-40%, suggesting markdowns are probable despite prudent quarterly procedures.\u2077\u00b9 Second, clean prior loss history is relevant to underwriting but does not constrain future claim severity; institutional clients asserting claims for the first time may seek damages reflecting years of accumulated fees and alleged losses. Third, while the 0.1% benchmark is not legally binding, it reflects insurance market pricing and industry actuarial data; falling significantly below the benchmark increases uninsured tail risk in adverse scenarios. The 30% probability assessment accounts for these competing considerations.",
+      "confidence": 0.63,
+      "should_move": false
+    }
+  ]
+}

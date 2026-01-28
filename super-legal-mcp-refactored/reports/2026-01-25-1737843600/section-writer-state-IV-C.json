@@ -1,0 +1,149 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "C",
+  "section_name": "Employment & Labor Analysis",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-C (Employment & Labor) from specialist reports",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "None - section delivered to orchestrator",
+    "critical_context": [
+      "section_id=C",
+      "6 findings analyzed with CREAC structure",
+      "CMS staffing minimums REPEALED (December 2025) - $4.3M cost avoidance",
+      "California SB 525 non-compliance - $1.25M annually ($15.0M NPV)",
+      "Staff retention investment - $11M gross, $9.9M net ($123.7M NPV)",
+      "WARN Act exposure - $3.75M-$4.5M (3.5% probability, $144K EV)",
+      "Union organizing risk - SEIU-UHW, $20M annually (26% probability, $67.4M weighted)",
+      "California meal/rest breaks - $606K class action (25% probability)",
+      "All canonical values from fact-registry used",
+      "170 verification tags on citations",
+      "30 CREAC components (all findings structured properly)",
+      "43 liability valuation methodology disclosures"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE. No recovery needed. Read section-IV-C-employment-labor.md for deliverable.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "specialist-reports/employment-labor-report.md",
+      "specialist-reports/cms-regulatory-compliance-report.md",
+      "specialist-reports/tax-structure-report.md",
+      "review-outputs/fact-registry.md",
+      "review-outputs/risk-summary.json",
+      "review-outputs/coverage-gaps.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 8147,
+    "findings_written": "6/6",
+    "footnotes_count": 261,
+    "verification_tags": 170,
+    "creac_components": 30,
+    "liability_valuations": 43,
+    "last_checkpoint": "2026-01-25T11:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/employment-labor-report.md",
+    "specialist-reports/cms-regulatory-compliance-report.md",
+    "specialist-reports/tax-structure-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "key_findings": [
+    {
+      "id": 1,
+      "title": "CMS Staffing Minimums REPEALED (Cost Avoidance)",
+      "severity": "HIGH",
+      "exposure": "$4.3M annually avoided",
+      "status": "complete",
+      "creac_verified": true,
+      "valuation_methodology": "Annual cost avoidance (factual, 100% certain)"
+    },
+    {
+      "id": 2,
+      "title": "California SB 525 Minimum Wage Non-Compliance",
+      "severity": "HIGH",
+      "exposure": "$1.25M annually ($15.0M NPV)",
+      "status": "complete",
+      "creac_verified": true,
+      "valuation_methodology": "NPV = $1,198,080/year ÷ 8% WACC = $15.0M",
+      "draft_contract_language": true
+    },
+    {
+      "id": 3,
+      "title": "Staff Retention Investment",
+      "severity": "HIGH",
+      "exposure": "$11M investment, $9.9M net cost ($123.7M NPV)",
+      "status": "complete",
+      "creac_verified": true,
+      "valuation_methodology": "NPV = $9,896,663/year ÷ 8% WACC = $123.7M",
+      "draft_contract_language": true
+    },
+    {
+      "id": 4,
+      "title": "WARN Act Liability (Orange County Closure)",
+      "severity": "MEDIUM",
+      "exposure": "$3.75M-$4.5M (3.5% probability, $144K EV)",
+      "status": "complete",
+      "creac_verified": true,
+      "valuation_methodology": "Expected Value = 3.5% × $4,125,000 = $144,375",
+      "draft_contract_language": true
+    },
+    {
+      "id": 5,
+      "title": "Union Organizing Risk (SEIU-UHW)",
+      "severity": "CRITICAL",
+      "exposure": "$20M annually (26% probability, $67.4M weighted)",
+      "status": "complete",
+      "creac_verified": true,
+      "valuation_methodology": "Weighted NPV = 26% × ($20,740,200/year ÷ 8%) = $67.4M"
+    },
+    {
+      "id": 6,
+      "title": "California Meal/Rest Break Violations",
+      "severity": "MEDIUM",
+      "exposure": "$606K class action (25% probability)",
+      "status": "complete",
+      "creac_verified": true,
+      "valuation_methodology": "Expected Value + ongoing NPV"
+    }
+  ],
+
+  "quality_verification": {
+    "all_subsections_present": true,
+    "no_placeholder_text": true,
+    "all_high_findings_have_draft_language": true,
+    "all_citations_have_verification_tags": true,
+    "creac_structure_verified": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true,
+    "word_count_target_met": true
+  },
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/section-reports/section-IV-C-employment-labor.md"
+}

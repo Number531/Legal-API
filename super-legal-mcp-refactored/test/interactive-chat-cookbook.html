@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Research Assistant - Cookbook Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --primary-dark: #1a252f;
+            --primary-light: #34495e;
+            --accent: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --text-light: #ecf0f1;
+            --text-muted: #95a5a6;
+            --bg-main: #f0f2f5;
+            --bg-white: #ffffff;
+            --bg-gray: #f8f9fa;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        /* Chat Section */
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-white);
+            min-width: 0;
+        }
+        
+        /* Enhanced Sidebar with Tabs */
+        .tools-sidebar {
+            width: 400px;
+            background: var(--primary);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--primary-dark);
+        }
+        
+        .sidebar-tabs {
+            display: flex;
+            background: var(--primary-dark);
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .sidebar-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .sidebar-tab:hover {
+            background: var(--primary-light);
+        }
+        
+        .sidebar-tab.active {
+            background: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+        
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .sidebar-content.active {
+            display: block;
+        }
+        
+        /* Enhanced Thinking Display */
+        .thinking-analysis {
+            background: var(--primary-light);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            border-left: 4px solid var(--accent);
+            animation: slideIn 0.5s ease-in;
+        }
+        
+        .thinking-phase {
+            display: inline-block;
+            padding: 3px 8px;
+            background: var(--accent);
+            border-radius: 12px;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+        
+        .confidence-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        
+        .confidence-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--primary-dark);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+            transition: width 0.5s ease;
+        }
+        
+        .quality-score {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: var(--primary-dark);
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        
+        .quality-score-value {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--accent);
+        }
+        
+        /* Research Phases Display */
+        .research-phases {
+            padding: 15px;
+        }
+        
+        .phase-card {
+            background: var(--primary-light);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            position: relative;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .phase-card.active {
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .phase-card.completed {
+            opacity: 0.8;
+            border-left: 4px solid var(--success);
+        }
+        
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .phase-title {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .phase-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+        
+        .phase-status-icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+        
+        .phase-status-icon.active {
+            background: var(--accent);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .phase-status-icon.completed {
+            background: var(--success);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .phase-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 11px;
+        }
+        
+        .phase-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 8px;
+            background: var(--primary-dark);
+            border-radius: 4px;
+        }
+        
+        .phase-metric-value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* Tool Reflection Display */
+        .tool-reflection {
+            background: var(--primary-dark);
+            border-radius: 6px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        
+        .reflection-section {
+            margin: 6px 0;
+            padding: 6px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        .reflection-label {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+        
+        .reflection-content {
+            color: var(--text-light);
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        /* Enhanced Tool Entry */
+        .tool-entry-enhanced {
+            background: var(--primary-light);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px;
+            position: relative;
+            animation: slideIn 0.3s ease-in;
+        }
+        
+        .tool-entry-enhanced.pending {
+            border-left: 4px solid var(--warning);
+        }
+        
+        .tool-entry-enhanced.completed {
+            border-left: 4px solid var(--success);
+        }
+        
+        .tool-entry-enhanced.error {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .tool-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-dark);
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+        
+        .tool-progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.5s ease;
+        }
+        
+        /* Multi-turn Controls */
+        .research-controls {
+            padding: 15px;
+            background: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-light);
+        }
+        
+        .control-group {
+            margin-bottom: 12px;
+        }
+        
+        .control-label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .control-select {
+            width: 100%;
+            padding: 8px;
+            background: var(--primary);
+            border: 1px solid var(--primary-light);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+        
+        .control-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .control-checkbox input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        /* Cookbook Compliance Indicators */
+        .compliance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            background: var(--primary-dark);
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .compliance-badge.compliant {
+            background: var(--success);
+            color: white;
+        }
+        
+        .compliance-badge.partial {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .compliance-badge.non-compliant {
+            background: var(--danger);
+            color: white;
+        }
+        
+        /* Enhanced Message Display */
+        .message-enhanced {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .message-enhanced::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-light);
+        }
+        
+        .message-enhanced.planning::before {
+            background: var(--accent);
+        }
+        
+        .message-enhanced.execution::before {
+            background: var(--warning);
+        }
+        
+        .message-enhanced.synthesis::before {
+            background: var(--success);
+        }
+        
+        /* Quality Metrics Dashboard */
+        .metrics-dashboard {
+            padding: 15px;
+            background: var(--primary-dark);
+            border-radius: 8px;
+            margin: 10px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .metric-card {
+            background: var(--primary);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        /* Existing styles (keep all the original styles) */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 70%;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .message.user {
+            align-self: flex-end;
+        }
+        
+        .message.assistant {
+            align-self: flex-start;
+        }
+        
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        
+        .message.user .message-content {
+            background: #007bff;
+            color: white;
+        }
+        
+        .message.assistant .message-content {
+            background: #f1f3f5;
+            color: #333;
+            white-space: pre-wrap;
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 12px 16px;
+            background: #f1f3f5;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .typing-indicator.active {
+            display: block;
+        }
+        
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .input-area {
+            border-top: 1px solid #e0e0e0;
+            padding: 20px;
+            background: white;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .input-wrapper {
+            flex: 1;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+            font-family: inherit;
+            line-height: 1.4;
+            max-height: 120px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
+        }
+        
+        .send-button {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .send-button:hover:not(:disabled) {
+            background: #0056b3;
+        }
+        
+        .send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .status-bar {
+            padding: 8px 20px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="chat-section">
+            <div class="header">
+                <h1>⚖️ Legal Research Assistant - Cookbook Enhanced</h1>
+                <div class="tool-counter">
+                    <span class="compliance-badge compliant" id="complianceBadge">
+                        ✓ Cookbook Compliant
+                    </span>
+                </div>
+            </div>
+            
+            <div class="messages" id="messages">
+                <div class="message assistant">
+                    <div class="message-content">
+                        <strong>🚀 Welcome to the Cookbook-Enhanced Legal Research Assistant!</strong>
+                        
+This system implements OpenAI Cookbook best practices for GPT-5:
+
+<strong>✨ Enhanced Features:</strong>
+• <strong>Structured Thinking:</strong> Mandatory planning → execution → reflection workflow
+• <strong>Multi-Turn Research:</strong> Progressive, phase-based investigation
+• <strong>Quality Gates:</strong> Automatic completion when quality thresholds are met
+• <strong>Enhanced Analysis:</strong> Confidence scoring, complexity assessment, and progress tracking
+• <strong>Tool Reflection:</strong> Pre/post execution analysis for every tool call
+
+<strong>🎯 Research Modes:</strong>
+• <strong>Standard:</strong> Single-turn comprehensive research
+• <strong>Multi-Turn:</strong> Up to 3 iterative research phases
+• <strong>Progressive:</strong> 5-phase deep investigation with quality gates
+
+<strong>📊 Available Tools (60+):</strong>
+• Court Records, SEC Filings, Patents & Trademarks
+• Federal Register, Environmental Records, FDA/EPA Data
+• State Statutes, USC Sections, Case Law Precedents
+
+Try these enhanced queries:
+• "Analyze bankruptcy trends for retail companies with IP retention strategies"
+• "Multi-jurisdictional environmental compliance for chemical manufacturers"
+• "Progressive research on AI patent litigation trends"
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="input-area">
+                <div class="research-controls">
+                    <div class="control-group">
+                        <label class="control-label">Research Mode</label>
+                        <select class="control-select" id="researchMode">
+                            <option value="standard">Standard (Single-turn with Tools)</option>
+                            <option value="multi-turn">Multi-Turn (3 phases - No Tools)</option>
+                            <option value="progressive">Progressive (5 phases - No Tools)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Reasoning Effort</label>
+                        <select class="control-select" id="reasoningEffort">
+                            <option value="minimal">Minimal (Fast)</option>
+                            <option value="medium" selected>Medium (Balanced)</option>
+                            <option value="high">High (Comprehensive)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Verbosity</label>
+                        <select class="control-select" id="verbosity">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Show Reasoning</label>
+                        <select class="control-select" id="showReasoning">
+                            <option value="false">Hidden</option>
+                            <option value="true" selected>Visible</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ask any legal research question..."
+                            rows="2"
+                            onkeypress="handleKeyPress(event)"
+                            oninput="autoResize(this)"
+                        ></textarea>
+                    </div>
+                    <button class="send-button" id="sendButton" onclick="sendMessage()">
+                        Send
+                    </button>
+                </div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="connection-status">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Connected to Cookbook-Enhanced System</span>
+                </div>
+                <button class="clear-button" onclick="clearChat()">Clear Chat</button>
+            </div>
+        </div>
+        
+        <div class="tools-sidebar">
+            <div class="sidebar-tabs">
+                <div class="sidebar-tab active" onclick="switchTab('thinking')">
+                    🧠 Thinking
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('phases')">
+                    📋 Phases
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tools')">
+                    🔧 Tools
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('metrics')">
+                    📊 Metrics
+                </div>
+            </div>
+            
+            <!-- Thinking Tab -->
+            <div class="sidebar-content active" id="thinkingTab">
+                <div class="thinking-analysis" id="thinkingContent">
+                    <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                        Waiting for research query...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phases Tab -->
+            <div class="sidebar-content" id="phasesTab">
+                <div class="research-phases" id="phasesContent">
+                    <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                        No active research phases
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools Tab -->
+            <div class="sidebar-content" id="toolsTab">
+                <div id="toolsContent" style="padding: 10px;">
+                    <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                        No tools executed yet
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Metrics Tab -->
+            <div class="sidebar-content" id="metricsTab">
+                <div class="metrics-dashboard">
+                    <h3 style="color: var(--text-light); font-size: 14px; margin-bottom: 10px;">
+                        Research Quality Metrics
+                    </h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value" id="planningScore">0</div>
+                            <div class="metric-label">Planning Depth</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="reflectionScore">0</div>
+                            <div class="metric-label">Reflection Quality</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="coverageScore">0</div>
+                            <div class="metric-label">Legal Coverage</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="qualityScore">0</div>
+                            <div class="metric-label">Overall Quality</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let eventSource = null;
+        let conversationHistory = [];
+        let isProcessing = false;
+        let currentPhase = null;
+        let researchPhases = [];
+        let toolCalls = [];
+        let thinkingAnalysis = {};
+        let qualityMetrics = {
+            planning: 0,
+            reflection: 0,
+            coverage: 0,
+            overall: 0
+        };
+        
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.sidebar-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.sidebar-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+        
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+        
+        function sendMessage(text) {
+            const input = document.getElementById('messageInput');
+            const message = text || input.value.trim();
+            
+            if (!message || isProcessing) return;
+            
+            // Get research settings
+            const mode = document.getElementById('researchMode').value;
+            const reasoningEffort = document.getElementById('reasoningEffort').value;
+            const verbosity = document.getElementById('verbosity').value;
+            const showReasoning = document.getElementById('showReasoning').value === 'true';
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            conversationHistory.push({ role: 'user', content: message });
+            
+            // Clear input
+            if (!text) {
+                input.value = '';
+                input.style.height = 'auto';
+            }
+            
+            // Reset metrics and phases
+            resetResearchState();
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Disable input
+            setProcessing(true);
+            
+            // Send to server based on mode
+            if (mode === 'multi-turn' || mode === 'progressive') {
+                executeMultiTurnResearch(message, mode, reasoningEffort, verbosity);
+            } else {
+                streamResponse(message, reasoningEffort, verbosity);
+            }
+        }
+        
+        function resetResearchState() {
+            currentPhase = null;
+            researchPhases = [];
+            toolCalls = [];
+            thinkingAnalysis = {};
+            qualityMetrics = { planning: 0, reflection: 0, coverage: 0, overall: 0 };
+            
+            // Clear sidebar content
+            document.getElementById('thinkingContent').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Processing...</div>';
+            document.getElementById('phasesContent').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Initializing research phases...</div>';
+            document.getElementById('toolsContent').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Waiting for tool execution...</div>';
+            
+            // Reset metrics
+            updateMetrics(qualityMetrics);
+        }
+        
+        function addMessage(content, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = content;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function displayEnhancedThinking(data) {
+            const thinkingContent = document.getElementById('thinkingContent');
+            
+            // Handle different thinking data types
+            if (data.analysis) {
+                // Enhanced thinking analysis
+                thinkingAnalysis = data.analysis;
+                
+                thinkingContent.innerHTML = `
+                    <div class="thinking-phase">
+                        ${data.analysis.research_phase || 'general'}
+                    </div>
+                    <h4 style="color: var(--text-light); margin: 10px 0 5px 0; font-size: 13px;">
+                        GPT-5 Reasoning Process
+                    </h4>
+                    <div style="color: var(--text-muted); font-size: 12px; line-height: 1.5; margin-bottom: 10px;">
+                        ${data.text}
+                    </div>
+                    
+                    <div class="confidence-indicator">
+                        <span>Confidence:</span>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${
+                                data.analysis.confidence_level === 'high' ? '90%' : 
+                                data.analysis.confidence_level === 'medium' ? '60%' : '30%'
+                            }"></div>
+                        </div>
+                        <span>${data.analysis.confidence_level || 'medium'}</span>
+                    </div>
+                    
+                    <div class="quality-score">
+                        <span>Thinking Quality</span>
+                        <span class="quality-score-value">${data.analysis.quality_score || 0}</span>
+                    </div>
+                    
+                    ${data.analysis.predicted_next_step ? `
+                        <div style="margin-top: 10px; padding: 8px; background: var(--primary-dark); border-radius: 4px;">
+                            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 3px;">Next Step:</div>
+                            <div style="font-size: 12px; color: var(--accent);">${data.analysis.predicted_next_step}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${data.analysis.complexity_assessment ? `
+                        <div style="margin-top: 8px; font-size: 11px; color: var(--text-muted);">
+                            Complexity: <span style="color: var(--accent); font-weight: 600;">${data.analysis.complexity_assessment}</span>
+                        </div>
+                    ` : ''}
+                `;
+                
+                // Update quality metrics if available
+                if (data.analysis.quality_score) {
+                    qualityMetrics.planning = data.analysis.planning_indicators?.strategy_statements || 0;
+                    qualityMetrics.reflection = data.analysis.reflection_indicators?.assessments || 0;
+                    updateMetrics(qualityMetrics);
+                }
+            } else {
+                // Simple thinking display
+                thinkingContent.innerHTML = `
+                    <h4 style="color: var(--text-light); margin-bottom: 10px; font-size: 13px;">
+                        ${data.category === 'strategy_planning' ? '📋 Strategic Planning' : '🧠 Reasoning Process'}
+                    </h4>
+                    <div style="color: var(--text-muted); font-size: 12px; line-height: 1.5;">
+                        ${data.text}
+                    </div>
+                    ${data.timestamp ? `
+                        <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted);">
+                            ${new Date(data.timestamp).toLocaleTimeString()}
+                        </div>
+                    ` : ''}
+                `;
+            }
+        }
+        
+        function displayToolWithReflection(data) {
+            const toolsContent = document.getElementById('toolsContent');
+            
+            // Clear initial message if needed
+            if (toolsContent.innerHTML.includes('No tools executed')) {
+                toolsContent.innerHTML = '';
+            }
+            
+            const toolEntry = document.createElement('div');
+            toolEntry.className = 'tool-entry-enhanced pending';
+            
+            const progress = data.progress || {};
+            const preReflection = data.pre_reflection || {};
+            const execution = data.execution || {};
+            
+            toolEntry.innerHTML = `
+                <div class="tool-progress-bar">
+                    <div class="tool-progress-fill" style="width: ${progress.percentage || 0}%"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <div style="font-weight: 600; color: var(--accent); font-size: 14px;">
+                        ${data.tool?.name || 'Unknown Tool'}
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-muted);">
+                        ${progress.current || 0}/${progress.total || 0}
+                    </div>
+                </div>
+                
+                ${data.context ? `
+                    <div style="color: var(--text-muted); font-size: 12px; margin-bottom: 8px;">
+                        ${data.context}
+                    </div>
+                ` : ''}
+                
+                ${preReflection.strategic_rationale ? `
+                    <div class="tool-reflection">
+                        <div class="reflection-section">
+                            <div class="reflection-label">Pre-Execution Planning</div>
+                            <div class="reflection-content">
+                                <div>📋 Strategy: ${preReflection.strategic_rationale}</div>
+                                <div>🎯 Expected: ${preReflection.expected_outcomes}</div>
+                                <div>📊 Coverage: ${preReflection.coverage_assessment}</div>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <div style="background: var(--primary-dark); border-radius: 4px; padding: 8px; margin-top: 8px; font-family: monospace; font-size: 10px; max-height: 100px; overflow-y: auto;">
+                    ${JSON.stringify(data.tool?.arguments || {}, null, 2)}
+                </div>
+                
+                ${execution.started ? `
+                    <div style="margin-top: 8px; font-size: 10px; color: var(--text-muted);">
+                        Started: ${new Date(execution.started).toLocaleTimeString()}
+                    </div>
+                ` : ''}
+            `;
+            
+            toolsContent.insertBefore(toolEntry, toolsContent.firstChild);
+            toolCalls.push({ element: toolEntry, data });
+            
+            return toolEntry;
+        }
+        
+        function updateToolCompletion(data) {
+            // Find and update the corresponding tool entry
+            const toolEntry = toolCalls.find(tc => 
+                tc.data.tool?.name === data.tool
+            )?.element;
+            
+            if (toolEntry) {
+                toolEntry.classList.remove('pending');
+                toolEntry.classList.add(data.success ? 'completed' : 'error');
+                
+                // Add post-reflection if available
+                if (data.post_reflection) {
+                    const reflectionDiv = document.createElement('div');
+                    reflectionDiv.className = 'tool-reflection';
+                    reflectionDiv.style.marginTop = '8px';
+                    reflectionDiv.innerHTML = `
+                        <div class="reflection-section">
+                            <div class="reflection-label">Post-Execution Reflection</div>
+                            <div class="reflection-content">
+                                <div>✅ Quality: ${data.post_reflection.result_quality}</div>
+                                <div>📈 Impact: ${data.post_reflection.strategic_impact}</div>
+                                <div>📊 Coverage: ${data.post_reflection.coverage_contribution}</div>
+                            </div>
+                        </div>
+                    `;
+                    toolEntry.appendChild(reflectionDiv);
+                }
+                
+                // Update metrics if provided
+                if (data.metrics) {
+                    const metricsDiv = document.createElement('div');
+                    metricsDiv.style.marginTop = '8px';
+                    metricsDiv.style.fontSize = '11px';
+                    metricsDiv.style.color = 'var(--text-muted)';
+                    metricsDiv.innerHTML = `
+                        Result size: ${data.metrics.resultLength} chars | 
+                        Quality: ${data.metrics.qualityScore || 'N/A'}
+                    `;
+                    toolEntry.appendChild(metricsDiv);
+                }
+            }
+        }
+        
+        function displayResearchPhase(phaseName, status = 'active') {
+            const phasesContent = document.getElementById('phasesContent');
+            
+            // Clear initial message if needed
+            if (phasesContent.innerHTML.includes('No active research')) {
+                phasesContent.innerHTML = '';
+            }
+            
+            // Check if phase already exists
+            let phaseCard = document.getElementById(`phase-${phaseName}`);
+            
+            if (!phaseCard) {
+                phaseCard = document.createElement('div');
+                phaseCard.id = `phase-${phaseName}`;
+                phaseCard.className = `phase-card ${status}`;
+                phasesContent.appendChild(phaseCard);
+                researchPhases.push({ name: phaseName, element: phaseCard });
+            }
+            
+            phaseCard.innerHTML = `
+                <div class="phase-header">
+                    <div class="phase-title">${phaseName}</div>
+                    <div class="phase-status">
+                        <div class="phase-status-icon ${status}"></div>
+                        <span>${status === 'active' ? 'In Progress' : status === 'completed' ? 'Completed' : 'Pending'}</span>
+                    </div>
+                </div>
+                <div class="phase-metrics">
+                    <div class="phase-metric">
+                        <span>Planning</span>
+                        <span class="phase-metric-value">${qualityMetrics.planning}</span>
+                    </div>
+                    <div class="phase-metric">
+                        <span>Reflection</span>
+                        <span class="phase-metric-value">${qualityMetrics.reflection}</span>
+                    </div>
+                    <div class="phase-metric">
+                        <span>Coverage</span>
+                        <span class="phase-metric-value">${qualityMetrics.coverage}%</span>
+                    </div>
+                    <div class="phase-metric">
+                        <span>Quality</span>
+                        <span class="phase-metric-value">${qualityMetrics.overall}%</span>
+                    </div>
+                </div>
+            `;
+            
+            currentPhase = phaseName;
+        }
+        
+        function updateMetrics(metrics) {
+            qualityMetrics = { ...qualityMetrics, ...metrics };
+            
+            document.getElementById('planningScore').textContent = 
+                Math.round(qualityMetrics.planning * 10);
+            document.getElementById('reflectionScore').textContent = 
+                Math.round(qualityMetrics.reflection * 10);
+            document.getElementById('coverageScore').textContent = 
+                Math.round(qualityMetrics.coverage);
+            document.getElementById('qualityScore').textContent = 
+                Math.round(qualityMetrics.overall);
+        }
+        
+        function updateComplianceBadge(isCompliant, metrics) {
+            const badge = document.getElementById('complianceBadge');
+            
+            if (metrics?.cookbook_compliance) {
+                const compliance = metrics.cookbook_compliance;
+                const allCompliant = compliance.planning_evident && 
+                                    compliance.reflection_captured && 
+                                    compliance.multi_domain_coverage;
+                
+                badge.className = `compliance-badge ${allCompliant ? 'compliant' : 'partial'}`;
+                badge.innerHTML = allCompliant ? 
+                    '✓ Cookbook Compliant' : 
+                    '⚠ Partial Compliance';
+            }
+        }
+        
+        function showTyping() {
+            document.getElementById('typingIndicator').classList.add('active');
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideTyping() {
+            document.getElementById('typingIndicator').classList.remove('active');
+        }
+        
+        function setProcessing(processing) {
+            isProcessing = processing;
+            const sendButton = document.getElementById('sendButton');
+            const input = document.getElementById('messageInput');
+            
+            sendButton.disabled = processing;
+            input.disabled = processing;
+            
+            if (!processing) {
+                input.focus();
+            }
+        }
+        
+        function streamResponse(query, reasoningEffort, verbosity) {
+            const url = `http://localhost:8089/api/gpt5/stream?mode=chat&query=${encodeURIComponent(query)}&verbosity=${verbosity}&reasoning=${reasoningEffort}`;
+            
+            eventSource = new EventSource(url);
+            let currentResponse = '';
+            let messageDiv = null;
+            
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    
+                    // Handle enhanced thinking with analysis
+                    if (data.type === 'enhanced_thinking') {
+                        hideTyping();
+                        displayEnhancedThinking(data);
+                        
+                        // Also show in chat if it's strategic planning
+                        if (!messageDiv && data.analysis?.research_phase === 'planning') {
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant message-enhanced planning';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            contentDiv.innerHTML = `<strong>📋 Planning Phase:</strong>\n${data.text.substring(0, 200)}...`;
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                    } else if (data.type === 'enhanced_tool_call') {
+                        // Handle tool with pre-reflection
+                        displayToolWithReflection(data);
+                        
+                    } else if (data.type === 'enhanced_tool_complete') {
+                        // Handle tool completion with post-reflection
+                        updateToolCompletion(data);
+                        
+                    } else if (data.type === 'quality_warning') {
+                        // Display quality warning
+                        console.warn('Quality Warning:', data.message);
+                        if (data.suggestion) {
+                            console.log('Suggestion:', data.suggestion);
+                        }
+                        
+                    } else if (data.type === 'delta') {
+                        hideTyping();
+                        
+                        if (!messageDiv || messageDiv.classList.contains('planning')) {
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant message-enhanced execution';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        currentResponse += data.text;
+                        messageDiv.querySelector('.message-content').textContent = currentResponse;
+                        
+                        // Auto-scroll
+                        const messagesDiv = document.getElementById('messages');
+                        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        
+                    } else if (data.type === 'final') {
+                        conversationHistory.push({ role: 'assistant', content: currentResponse });
+                        setProcessing(false);
+                        
+                        // Update compliance badge if metrics available
+                        if (data.metrics || data.cookbook_compliance) {
+                            updateComplianceBadge(true, data);
+                            
+                            if (data.metrics) {
+                                updateMetrics({
+                                    coverage: data.metrics.comprehensivenessScore || 0,
+                                    overall: data.cookbook_compliance?.quality_assessment || 0
+                                });
+                            }
+                        }
+                        
+                        closeStream();
+                        
+                    } else if (data.type === 'error') {
+                        hideTyping();
+                        addMessage(`Error: ${data.error}`, 'assistant');
+                        setProcessing(false);
+                        closeStream();
+                    }
+                } catch (e) {
+                    console.error('Parse error:', e);
+                }
+            };
+            
+            eventSource.onerror = (error) => {
+                console.error('SSE Error:', error);
+                hideTyping();
+                setProcessing(false);
+                closeStream();
+            };
+        }
+        
+        async function executeMultiTurnResearch(query, mode, reasoningEffort, verbosity) {
+            try {
+                const response = await fetch('http://localhost:8089/api/gpt5/multi-turn-research', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query,
+                        maxTurns: mode === 'progressive' ? 5 : 3,
+                        verbosity,
+                        reasoningEffort,
+                        useProgressiveResearch: mode === 'progressive',
+                        enableReasoningVisibility: showReasoning
+                    })
+                });
+                
+                const result = await response.json();
+                
+                hideTyping();
+                
+                // Display comprehensive results
+                displayMultiTurnResults(result);
+                
+                setProcessing(false);
+                
+            } catch (error) {
+                console.error('Multi-turn research error:', error);
+                hideTyping();
+                addMessage(`Error: ${error.message}`, 'assistant');
+                setProcessing(false);
+            }
+        }
+        
+        function displayMultiTurnResults(result) {
+            // Create comprehensive result message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant message-enhanced synthesis';
+            
+            let content = `<strong>📊 ${result.research_method === 'progressive_phase_based' ? 'Progressive' : 'Multi-Turn'} Research Complete</strong>\n\n`;
+            
+            // ✅ DISPLAY THE ACTUAL RESEARCH CONTENT FIRST
+            if (result.content) {
+                content += result.content + '\n\n';
+                content += '---\n\n';
+            }
+            
+            // ✅ NEW: Display reasoning if available
+            if (result.reasoning) {
+                content += '<strong>🧠 Reasoning Process:</strong>\n';
+                content += `<div style="background: #f0f4f8; padding: 10px; border-radius: 5px; margin: 10px 0; font-style: italic;">`;
+                content += result.reasoning.substring(0, 500) + '...';
+                content += '</div>\n\n';
+            }
+            
+            // Then show metadata summary
+            content += '<strong>📈 Research Summary:</strong>\n\n';
+            
+            if (result.comprehensive_analysis) {
+                content += '<strong>Research Phases Completed:</strong>\n';
+                result.comprehensive_analysis.forEach(phase => {
+                    content += `• ${phase.phase}: Quality Score ${phase.quality_score || 0}\n`;
+                    displayResearchPhase(phase.phase, 'completed');
+                });
+                content += '\n';
+            }
+            
+            if (result.strategic_synthesis) {
+                const synthesis = result.strategic_synthesis;
+                content += `<strong>Analysis Highlights:</strong>\n`;
+                content += `• Legal Issues: ${synthesis.key_legal_issues}\n`;
+                content += `• Authority: ${synthesis.authority_hierarchy}\n`;
+                content += `• Jurisdiction: ${synthesis.jurisdictional_considerations}\n`;
+                content += `• Risk: ${synthesis.risk_assessment}\n\n`;
+                content += `<strong>Recommendations:</strong>\n${synthesis.strategic_recommendations}\n\n`;
+            }
+            
+            if (result.overall_quality) {
+                const quality = result.overall_quality;
+                content += `<strong>Quality Assessment:</strong>\n`;
+                content += `• Overall Rating: ${quality.overall_rating}\n`;
+                content += `• Completeness: ${quality.completeness}\n`;
+                content += `• Methodology: ${quality.methodology_compliance}\n`;
+                
+                // Update metrics
+                updateMetrics({
+                    overall: quality.average_quality || 0
+                });
+            }
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = content;
+            messageDiv.appendChild(contentDiv);
+            
+            document.getElementById('messages').appendChild(messageDiv);
+            
+            // Scroll to bottom
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Update compliance badge
+            updateComplianceBadge(true, {
+                cookbook_compliance: {
+                    planning_evident: true,
+                    reflection_captured: true,
+                    multi_domain_coverage: true,
+                    quality_assessment: result.overall_quality?.average_quality || 0
+                }
+            });
+        }
+        
+        function closeStream() {
+            if (eventSource) {
+                eventSource.close();
+                eventSource = null;
+            }
+        }
+        
+        function clearChat() {
+            if (confirm('Clear all messages and research data?')) {
+                location.reload();
+            }
+        }
+        
+        // Check server connection on load
+        fetch('http://localhost:8089/health')
+            .then(r => r.json())
+            .then(data => {
+                console.log('Server health:', data);
+                if (data.cookbook_optimizations) {
+                    console.log('Cookbook features available:', data.cookbook_optimizations);
+                }
+            })
+            .catch(error => {
+                console.error('Server connection error:', error);
+                document.getElementById('statusText').textContent = 'Disconnected - Check server';
+            });
+    </script>
+</body>
+</html>

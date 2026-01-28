@@ -1,0 +1,172 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "BLOCKED",
+  "target_file": "final-memorandum-complete-ASSEMBLED.md",
+  "file_size_bytes": 6861,
+  "completion_date": "2026-01-19T00:00:00Z",
+
+  "compaction_summary": {
+    "task": "Diagnostic assessment of Liberty Life Insurance final memorandum",
+    "progress": "BLOCKED at Phase 1: Prerequisite verification",
+    "next_action": "Orchestrator must invoke memo-final-synthesis to complete assembly",
+    "critical_context": [
+      "Target file only 6.7 KB (expected 275+ KB)",
+      "0 of 11 expected sections found",
+      "Document truncates after 102 lines",
+      "All source section files exist and are available for assembly"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_1_result": "FAILED - BLOCKED",
+    "phase_2_dimension_scoring": false,
+    "phase_3_issue_cataloging": false,
+    "phase_4_remediation_planning": false,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+
+  "prerequisite_verification_results": {
+    "check_1_1_received_parameters": {
+      "status": "PASS",
+      "expected_sections": ["IV.A", "IV.B", "IV.C", "IV.D", "IV.E", "IV.F", "IV.G", "IV.H", "IV.I", "IV.J", "IV.K"],
+      "expected_count": 11,
+      "min_file_size_kb": 275
+    },
+    "check_1_2_read_file": {
+      "status": "PASS",
+      "file_accessible": true,
+      "file_size_kb": 6.7
+    },
+    "check_1_3_section_count": {
+      "status": "FAIL",
+      "expected": 11,
+      "found": 0,
+      "missing": ["IV.A", "IV.B", "IV.C", "IV.D", "IV.E", "IV.F", "IV.G", "IV.H", "IV.I", "IV.J", "IV.K"]
+    },
+    "check_1_4_section_content": {
+      "status": "FAIL",
+      "reason": "No sections exist to evaluate content"
+    },
+    "check_1_5_executive_summary": {
+      "status": "PARTIAL",
+      "present": true,
+      "complete": false,
+      "subsections_expected": 9,
+      "subsections_found": 1,
+      "missing_subsections": ["I.B", "I.C", "I.D", "I.E", "I.F", "I.G", "I.H", "I.I"]
+    },
+    "check_1_6_footnotes": {
+      "status": "FAIL",
+      "expected": 654,
+      "found": 0,
+      "percentage": 0
+    },
+    "check_1_7_gate": {
+      "status": "BLOCKED",
+      "reason": "Multiple prerequisite checks failed - cannot proceed to dimension scoring",
+      "failed_checks": ["1.3", "1.4", "1.5", "1.6"]
+    }
+  },
+
+  "expected_validation": {
+    "expected_sections": ["IV.A", "IV.B", "IV.C", "IV.D", "IV.E", "IV.F", "IV.G", "IV.H", "IV.I", "IV.J", "IV.K"],
+    "expected_count": 11,
+    "min_file_size_kb": 275,
+    "actual_file_size_kb": 6.7,
+    "expected_footnotes": 654,
+    "actual_footnotes": 0,
+    "expected_cross_references": 220,
+    "actual_cross_references": 5,
+    "expected_word_count_range": [55000, 80000],
+    "actual_word_count_estimate": 900
+  },
+
+  "dimensions_scored": {
+    "dim_0_questions_presented": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_1_creac_structure": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_2_objectivity": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_3_brief_answer": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_4_exec_summary": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_5_citation_quality": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_6_quantification": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_7_cross_reference": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_8_risk_tables": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_9_draft_contracts": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_10_formatting": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" },
+    "dim_11_completeness": { "status": "not_evaluated", "score": null, "reason": "Document incomplete" }
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Assessment completed with BLOCKED status. Do not resume - orchestrator must complete assembly first.",
+    "do_not_repeat": ["prerequisite_verification"],
+    "do_not_rescore": true,
+    "next_agent": "memo-final-synthesis",
+    "next_task": "Complete assembly of final memorandum from 11 section files"
+  },
+
+  "issues_found": [
+    {
+      "issue_id": "BLOCKING-001",
+      "dimension": "prerequisite",
+      "severity": "CRITICAL",
+      "category": "ASSEMBLY_FAILURE",
+      "description": "Target document final-memorandum-complete-ASSEMBLED.md is severely incomplete (1.2% of expected content)",
+      "location": "Entire document",
+      "impact": "Cannot perform quality assessment on incomplete document",
+      "resolution_agent": "memo-final-synthesis",
+      "resolution_action": "Complete assembly of 11 sections into unified memorandum",
+      "estimated_resolution_time_minutes": 15
+    }
+  ],
+
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 0,
+    "aggregate_score": null,
+    "diagnostic_score": null,
+    "remediation_tier": null,
+    "critical_issues": 1,
+    "high_issues": 0,
+    "medium_issues": 0,
+    "low_issues": 0,
+    "total_issues": 1,
+    "completion_percentage": 1.2,
+    "last_checkpoint": "2026-01-19T00:00:00Z"
+  },
+
+  "output_files_generated": {
+    "diagnostic_assessment": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-18-1737247891/qa-outputs/diagnostic-assessment.md",
+    "remediation_plan": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-18-1737247891/qa-outputs/remediation-plan.md",
+    "remediation_dispatch": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-18-1737247891/qa-outputs/remediation-dispatch.json",
+    "qa_state": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-18-1737247891/qa-diagnostic-state.json"
+  },
+
+  "blocking_resolution": {
+    "blocking_agent": "memo-final-synthesis",
+    "blocking_task": "Assemble 11 sections into final-memorandum-complete-ASSEMBLED-v2.md",
+    "inputs_required": [
+      "section-IV-A-integrated.md (or section-reports/section-IV-A-rbc-capital.md)",
+      "section-IV-B-integrated.md",
+      "section-IV-C-integrated.md",
+      "section-IV-D-integrated.md",
+      "section-IV-E-integrated.md",
+      "section-IV-F-integrated.md",
+      "section-IV-G-integrated.md",
+      "section-IV-H-integrated.md",
+      "section-IV-I-integrated.md",
+      "section-IV-J-integrated.md",
+      "section-IV-K-integrated.md"
+    ],
+    "outputs_required": {
+      "file": "final-memorandum-complete-ASSEMBLED-v2.md",
+      "min_size_kb": 275,
+      "min_word_count": 55000,
+      "sections": 11,
+      "footnotes": 654,
+      "cross_references": 220
+    },
+    "post_assembly_action": "Re-invoke memo-qa-diagnostic with completed file"
+  }
+}

@@ -1,0 +1,56 @@
+groups:
+  - name: claude-sdk
+    interval: 30s
+    rules:
+      - alert: ClaudeToolErrorRateHigh
+        expr: sum(rate(claude_tool_invocations_total{status="error"}[5m]))
+          /
+          sum(rate(claude_tool_invocations_total[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Tool error rate above 5% (5m)"
+          description: "Rate: {{ $value | printf \"%.2f\" }}"
+
+      - alert: ClaudeLatencyRegression
+        expr: histogram_quantile(
+          0.95,
+          sum(rate(claude_request_duration_ms_bucket[5m])) by (le)
+        ) > 10000
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "P95 request latency above 10s (10m)"
+          description: "P95 latency (ms): {{ $value | printf \"%.0f\" }}"
+
+      - alert: StructuredOutputValidationFailure
+        expr: sum(rate(claude_structured_output_failures_total[5m]))
+          /
+          sum(rate(claude_structured_output_attempts_total[5m])) > 0.02
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Structured output validation failure rate above 2% (5m)"
+          description: "Failure rate: {{ $value | printf \"%.2f\" }}"
+
+      - alert: CircuitBreakerTripping
+        expr: increase(claude_circuit_breaker_trips_total[15m]) > 3
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Circuit breaker tripped 3+ times in 15m"
+          description: "Trips: {{ $value | printf \"%.0f\" }}"
+
+      - alert: RateLimitExhaustion
+        expr: sum(rate(claude_errors_total{code="RATE_LIMIT_ERROR"}[5m])) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Rate limit errors above 10/min (5m)"
+          description: "Rate limit errors: {{ $value | printf \"%.2f\" }}"
+

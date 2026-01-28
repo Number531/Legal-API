@@ -1,0 +1,65 @@
+{
+  "agent": "coverage-gap-analyzer",
+  "status": "in_progress",
+
+  "compaction_summary": {
+    "task": "Verify research coverage and detect inter-specialist conflicts",
+    "progress": "Phase 3, verifying critical issues and extracting cross-domain patterns",
+    "next_action": "Complete critical issues matrix and conflict detection",
+    "critical_context": [
+      "7 specialist reports completed (all T1-T7 executed)",
+      "10 critical issues from research plan to verify",
+      "MAJOR CONFLICT DETECTED: FCA report recommends asset purchase, Tax report recommends stock purchase with 338(h)(10)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_plan_extraction": true,
+    "phase_2_execution_inventory": true,
+    "phase_3_alignment_check": false,
+    "phase_4_conflict_detection": false,
+    "phase_5_gap_generation": false,
+    "phase_6_output_files": false,
+    "phase_7_return_status": false
+  },
+
+  "critical_issues_checked": {
+    "issue_1_martinez_fca": { "status": "verified", "specialist": "fca-litigation-report.md", "depth": "comprehensive" },
+    "issue_2_orange_county_sff": { "status": "verified", "specialist": "cms-regulatory-compliance-report.md", "depth": "comprehensive" },
+    "issue_3_cms_staffing": { "status": "verified", "specialist": "employment-labor-report.md", "depth": "comprehensive", "note": "REPEALED - material update" },
+    "issue_4_dpna_revenue_loss": { "status": "verified", "specialist": "cms-regulatory-compliance-report.md", "depth": "comprehensive" },
+    "issue_5_cmps": { "status": "verified", "specialist": "cms-regulatory-compliance-report.md", "depth": "comprehensive" },
+    "issue_6_chow_delay": { "status": "verified", "specialist": "cms-regulatory-compliance-report.md", "depth": "comprehensive" },
+    "issue_7_low_stars": { "status": "verified", "specialist": "cms-regulatory-compliance-report.md", "depth": "comprehensive" },
+    "issue_8_staff_turnover": { "status": "verified", "specialist": "employment-labor-report.md", "depth": "comprehensive" },
+    "issue_9_sale_leaseback": { "status": "verified", "specialist": "tax-structure-report.md", "depth": "comprehensive" },
+    "issue_10_medical_director": { "status": "verified", "specialist": "commercial-contracts-report.md + fca-litigation-report.md", "depth": "comprehensive" }
+  },
+
+  "conflicts_detected": [
+    {
+      "conflict_id": 1,
+      "type": "CONTRADICTION",
+      "specialist_a": "fca-litigation-report.md",
+      "conclusion_a": "Asset purchase recommended to isolate FCA liabilities",
+      "specialist_b": "tax-structure-report.md",
+      "conclusion_b": "Stock purchase with 338(h)(10) election recommended for optimal tax treatment",
+      "severity": "HIGH",
+      "affects_section": "Transaction Structure"
+    }
+  ],
+
+  "recovery_instructions": {
+    "on_compaction": "Read coverage-gap-analyzer-state.json FIRST. Resume from current incomplete phase.",
+    "do_not_repeat": ["phase_1", "phase_2"],
+    "do_not_reverify_issues": ["issue_1", "issue_2", "issue_3", "issue_4", "issue_5", "issue_6", "issue_7", "issue_8", "issue_9", "issue_10"]
+  },
+
+  "metrics": {
+    "critical_issues_total": 10,
+    "critical_issues_checked": 10,
+    "gaps_found": 0,
+    "conflicts_found": 1,
+    "last_checkpoint": "2026-01-25T00:00:00Z"
+  }
+}

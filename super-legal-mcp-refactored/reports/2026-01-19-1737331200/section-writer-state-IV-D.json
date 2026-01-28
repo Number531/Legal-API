@@ -1,0 +1,60 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "D",
+  "section_name": "IUL Class Action Litigation",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.D (IUL Class Action Litigation) from specialist reports",
+    "progress": "COMPLETE - All 6 subsections written",
+    "next_action": "Return status JSON to orchestrator",
+    "critical_context": ["section_id=D", "HIGH finding: $27.23M settlement EV", "$36.55M escrow recommended"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete. Read section-IV-D-iul-litigation.md for full content.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["case-law-analyst-report.md", "insurance-coverage-analyst-report.md", "research-plan.md"]
+  },
+
+  "metrics": {
+    "word_count": 7425,
+    "findings_written": "4/4",
+    "footnotes_count": 148,
+    "last_checkpoint": "2026-01-20T01:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/case-law-analyst-report.md",
+    "specialist-reports/insurance-coverage-analyst-report.md",
+    "research-plan.md"
+  ],
+
+  "quality_checks": {
+    "subsections_complete": true,
+    "statistics_table": true,
+    "no_placeholders": true,
+    "all_high_findings_have_contract_language": true,
+    "all_citations_have_verification_tags": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

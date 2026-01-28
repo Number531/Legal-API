@@ -1,0 +1,471 @@
+/**
+ * USPTO Patents API Client
+ * Handles all USPTO patent database related API calls
+ */
+
+import { makePostRequest } from '../utils/apiHelpers.js';
+
+export class UsptoClient {
+  constructor(rateLimiter) {
+    this.rateLimiter = rateLimiter;
+  }
+
+  async searchPatents(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    
+    const {
+      query_type,
+      search_text,
+      assignee_organization,
+      inventor_name,
+      patent_date_start,
+      patent_date_end,
+      technology_area,
+      limit = 10  // Reduced from 25 to prevent token overflow in conversation history
+    } = args;
+
+    if (!process.env.USPTO_API_KEY) {
+      throw new Error("USPTO API key not configured. Set USPTO_API_KEY environment variable.");
+    }
+
+    try {
+      let endpoint = '';
+      let requestBody = {
+        o: { per_page: limit }
+      };
+
+      switch (query_type) {
+        case 'patents':
+          endpoint = '/patent/';
+          requestBody.q = {};
+          requestBody.f = ["patent_id", "patent_title", "patent_date", "assignees.assignee_organization", "inventors.inventor_name_last", "inventors.inventor_name_first"];
+          
+          // Build query conditions array for combining with _and
+          const conditions = [];
+          
+          // Patent number detection: If search_text looks like a patent number, query patent_id directly
+          if (search_text) {
+            const cleanedText = search_text.trim().replace(/[,\s]/g, '');
+            
+            // Detect patent number formats:
+            // - 7 or 8 digit numbers: 5123456, 10123456
+            // - With kind codes: 10123456B2
+            // - Design patents: D890123
+            if (/^D?\d{6,8}[A-Z]?\d?$/i.test(cleanedText)) {
+              // Direct patent number lookup using patent_id field
+              conditions.push({ patent_id: cleanedText.replace(/^D/i, 'D') }); // Preserve D prefix
+            } else {
+              // Text search in patent title/abstract
+              conditions.push({ _text_any: { patent_title: search_text }});
+            }
+          }
+          if (assignee_organization) {
+            conditions.push({ "assignees.assignee_organization": assignee_organization });
+          }
+          if (inventor_name) {
+            conditions.push({ "inventors.inventor_name_last": inventor_name });
+          }
+          if (patent_date_start && patent_date_end) {
+            conditions.push({ _gte: { patent_date: patent_date_start }});
+            conditions.push({ _lte: { patent_date: patent_date_end }});
+          }
+          if (technology_area) {
+            // CPC classification filtering - using nested cpcs array
+            // Supports: section (G), class (G06), subclass (G06F), group (G06F3), subgroup (G06F3/01)
+            if (technology_area.includes('/')) {
+              // Full subgroup code: use exact match
+              conditions.push({ "cpcs.cpc_subgroup_id": technology_area });
+            } else {
+              // Section/class/subclass: use prefix match with _begins operator
+              conditions.push({ _begins: { "cpcs.cpc_subgroup_id": technology_area }});
+            }
+          }
+          
+          // Build the query
+          if (conditions.length > 1) {
+            requestBody.q = { _and: conditions };
+          } else if (conditions.length === 1) {
+            requestBody.q = conditions[0];
+          } else {
+            // USPTO API requires at least one query parameter
+            // Default to recent patents from 2024
+            requestBody.q = { _gte: { patent_date: "2024-01-01" }};
+          }
+          
+          requestBody.s = [{ patent_date: "desc" }];
+          break;
+
+        case 'inventors':
+          endpoint = '/inventor/';
+          requestBody.f = ["inventor_id", "inventor_name_last", "inventor_name_first", "inventor_num_patents"];
+          
+          if (inventor_name) {
+            requestBody.q = { inventor_name_last: inventor_name };
+          } else if (search_text) {
+            requestBody.q = { _text_any: { inventor_name_last: search_text }};
+          } else {
+            // Default to inventors with at least 10 patents
+            requestBody.q = { _gte: { inventor_num_patents: 10 }};
+          }
+          
+          requestBody.s = [{ inventor_num_patents: "desc" }];
+          break;
+
+        case 'assignees':
+          endpoint = '/assignee/';
+          requestBody.f = ["assignee_id", "assignee_organization", "assignee_num_patents"];
+          
+          if (assignee_organization) {
+            requestBody.q = { assignee_organization: assignee_organization };
+          } else if (search_text) {
+            requestBody.q = { _text_any: { assignee_organization: search_text }};
+          } else {
+            // Default to assignees with at least 100 patents
+            requestBody.q = { _gte: { assignee_num_patents: 100 }};
+          }
+          
+          requestBody.s = [{ assignee_num_patents: "desc" }];
+          break;
+      }
+
+      const response = await makePostRequest('uspto_patents', endpoint, requestBody, this.rateLimiter);
+
+      // USPTO API often returns more results than requested (default 100)
+      // Enforce the limit client-side to prevent token overflow
+      const allResults = response[query_type] || [];
+      const limitedResults = allResults.slice(0, Number(limit) || 10);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            query_type,
+            total_hits: response.total_hits,
+            count: limitedResults.length,
+            results: limitedResults,
+            api_returned: allResults.length, // Show how many the API actually returned
+            requested_limit: Number(limit) || 25,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      // Differentiate expected parameter rejections from real errors
+      // Error message format: "USPTO_PATENTS API error 400: ..." (status is in message, not as property)
+      const is400Error = error.message && error.message.includes('API error 400');
+
+      if (is400Error && args.technology_area) {
+        console.log('[USPTO] Native API does not support technology_area with this query - falling back to websearch');
+      } else if (is400Error) {
+        console.log('[USPTO] Native API parameter validation failed - falling back to websearch');
+      } else {
+        console.error('USPTO search error:', error);
+      }
+      throw new Error(`USPTO search failed: ${error.message}`);
+    }
+  }
+
+  async searchPatentLocations(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    
+    const {
+      location_city,
+      location_state,
+      location_country,
+      min_patents,
+      limit = 10
+    } = args;
+
+    try {
+      const endpoint = '/location/';
+      const requestBody = {
+        o: { per_page: limit },
+        s: [{ location_num_patents: "desc" }]
+      };
+
+      // Build query
+      const conditions = [];
+      if (location_city) conditions.push({ location_city: location_city });
+      if (location_state) conditions.push({ location_state: location_state });
+      if (location_country) conditions.push({ location_country: location_country });
+      if (min_patents) conditions.push({ _gte: { location_num_patents: min_patents }});
+
+      if (conditions.length > 1) {
+        requestBody.q = { _and: conditions };
+      } else if (conditions.length === 1) {
+        requestBody.q = conditions[0];
+      } else {
+        // Default to US locations
+        requestBody.q = { location_country: "US" };
+      }
+
+      const response = await makePostRequest('uspto_patents', endpoint, requestBody, this.rateLimiter);
+
+      // Enforce client-side limit to prevent token overflow
+      const allLocations = response.locations || [];
+      const limitedLocations = allLocations.slice(0, Number(limit) || 10);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            endpoint: "locations",
+            total_hits: response.total_hits,
+            count: limitedLocations.length,
+            results: limitedLocations.map(loc => ({
+              location_id: loc.location_id,
+              location_name: loc.location_name || loc.location_city,
+              location_city: loc.location_name,
+              location_state: loc.location_state,
+              location_country: loc.location_country,
+              location_latitude: loc.location_latitude,
+              location_longitude: loc.location_longitude,
+              location_num_patents: loc.location_num_patents,
+              location_num_inventors: loc.location_num_inventors,
+              location_num_assignees: loc.location_num_assignees
+            })),
+            api_returned: allLocations.length,
+            requested_limit: Number(limit) || 10,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('USPTO locations search error:', error);
+      throw new Error(`USPTO locations search failed: ${error.message}`);
+    }
+  }
+
+  async searchCPCClassifications(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    
+    const {
+      cpc_section,
+      cpc_subsection_id,
+      search_text,
+      limit = 10
+    } = args;
+
+    try {
+      const endpoint = '/cpc_subclass/';
+      const requestBody = {
+        o: { per_page: limit }
+      };
+
+      // Build query - simplified without field selection since API returns default fields
+      if (cpc_subsection_id) {
+        requestBody.q = { cpc_subclass_id: cpc_subsection_id };
+      } else if (cpc_section) {
+        requestBody.q = { _begins: { cpc_subclass_id: cpc_section }};
+      } else if (search_text) {
+        requestBody.q = { _text_any: { cpc_subclass_title: search_text }};
+      }
+      // If no query specified, the API returns all records
+
+      const response = await makePostRequest('uspto_patents', endpoint, requestBody, this.rateLimiter);
+
+      // Enforce client-side limit to prevent token overflow
+      const allResults = response.cpc_subclasses || [];
+      const limitedResults = allResults.slice(0, Number(limit) || 10);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            endpoint: "cpc_classifications",
+            total_hits: response.total_hits,
+            count: limitedResults.length,
+            results: limitedResults,
+            api_returned: allResults.length,
+            requested_limit: Number(limit) || 10,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('CPC search error:', error);
+      throw new Error(`CPC search failed: ${error.message}`);
+    }
+  }
+
+  async searchCPCGroups(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    
+    const {
+      cpc_group_id,
+      cpc_subclass_id,
+      search_text,
+      limit = 10
+    } = args;
+
+    try {
+      const endpoint = '/cpc_group/';
+      const requestBody = {
+        f: ["cpc_group_id", "cpc_group_title", "cpc_class_id", "cpc_subclass_id"],
+        o: { per_page: limit }
+      };
+
+      // Build query
+      if (cpc_group_id) {
+        requestBody.q = { cpc_group_id: cpc_group_id };
+      } else if (cpc_subclass_id) {
+        requestBody.q = { cpc_subclass_id: cpc_subclass_id };
+      } else if (search_text) {
+        requestBody.q = { _text_any: { cpc_group_title: search_text }};
+      }
+      // If no query specified, returns all groups
+
+      const response = await makePostRequest('uspto_patents', endpoint, requestBody, this.rateLimiter);
+
+      // Enforce client-side limit to prevent token overflow
+      const allResults = response.cpc_groups || [];
+      const limitedResults = allResults.slice(0, Number(limit) || 10);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            endpoint: "cpc_groups",
+            total_hits: response.total_hits,
+            count: limitedResults.length,
+            results: limitedResults,
+            api_returned: allResults.length,
+            requested_limit: Number(limit) || 10,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('CPC groups search error:', error);
+      throw new Error(`CPC groups search failed: ${error.message}`);
+    }
+  }
+
+  async searchUSPCClassifications(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    
+    const {
+      classification_type,
+      uspc_mainclass_id,
+      search_text,
+      limit = 10
+    } = args;
+
+    try {
+      const endpoint = classification_type === 'mainclass' ? '/uspc_mainclass/' : '/uspc_subclass/';
+      const resultKey = classification_type === 'mainclass' ? 'uspc_mainclasses' : 'uspc_subclasses';
+      
+      const requestBody = {
+        o: { per_page: limit }
+      };
+
+      if (classification_type === 'mainclass') {
+        requestBody.f = ["uspc_mainclass_id", "uspc_mainclass_title", "uspc_mainclass_num_patents", "uspc_mainclass_num_inventors", "uspc_mainclass_num_assignees"];
+        requestBody.s = [{ uspc_mainclass_num_patents: "desc" }];
+        
+        if (uspc_mainclass_id) {
+          requestBody.q = { uspc_mainclass_id: uspc_mainclass_id };
+        } else if (search_text) {
+          requestBody.q = { _text_any: { uspc_mainclass_title: search_text }};
+        } else {
+          throw new Error("Please provide uspc_mainclass_id or search_text");
+        }
+      } else {
+        requestBody.f = ["uspc_subclass_id", "uspc_subclass_title", "uspc_subclass_num_patents", "uspc_subclass_num_inventors", "uspc_subclass_num_assignees"];
+        requestBody.s = [{ uspc_subclass_num_patents: "desc" }];
+        
+        if (search_text) {
+          requestBody.q = { _text_any: { uspc_subclass_title: search_text }};
+        } else {
+          throw new Error("Please provide search_text for subclass search");
+        }
+      }
+
+      const response = await makePostRequest('uspto_patents', endpoint, requestBody, this.rateLimiter);
+
+      // Enforce client-side limit to prevent token overflow
+      const allResults = response[resultKey] || [];
+      const limitedResults = allResults.slice(0, Number(limit) || 10);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            endpoint: `uspc_${classification_type}`,
+            total_hits: response.total_hits,
+            count: limitedResults.length,
+            results: limitedResults,
+            api_returned: allResults.length,
+            requested_limit: Number(limit) || 10,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('USPC search error:', error);
+      throw new Error(`USPC search failed: ${error.message}`);
+    }
+  }
+
+  async searchWIPOClassifications(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    
+    const {
+      wipo_field_id,
+      search_text,
+      limit = 10
+    } = args;
+
+    try {
+      const endpoint = '/wipo/';
+      const requestBody = {
+        f: ["wipo_id", "field_title", "sector_title"],
+        o: { per_page: limit }
+      };
+
+      // Build query
+      if (wipo_field_id) {
+        requestBody.q = { wipo_id: wipo_field_id };
+      } else if (search_text) {
+        requestBody.q = { _text_any: { field_title: search_text }};
+      }
+      // If no query specified, the API returns all records by default
+
+      const response = await makePostRequest('uspto_patents', endpoint, requestBody, this.rateLimiter);
+
+      // Enforce client-side limit to prevent token overflow
+      const allResults = response.wipo || [];
+      const limitedResults = allResults.slice(0, Number(limit) || 10);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            endpoint: "wipo_classifications",
+            total_hits: response.total_hits,
+            count: limitedResults.length,
+            results: limitedResults,
+            api_returned: allResults.length,
+            requested_limit: Number(limit) || 10,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('WIPO search error:', error);
+      throw new Error(`WIPO search failed: ${error.message}`);
+    }
+  }
+}

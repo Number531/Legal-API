@@ -1,0 +1,33 @@
+{
+  "section_id": "IV.H.7",
+  "section_info": {
+    "title": "Draft Contract Language",
+    "has_counter_analysis_header": false,
+    "detections": 2,
+    "to_move": 2
+  },
+  "locations": [
+    {
+      "section_id": "IV.H.7",
+      "paragraph_index": 12,
+      "line_number": 2612,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Losses under this Section 8.12 shall include: (i) the net present value of advisory fee revenue from the affected Fund(s) calculated at an 8% discount rate over a 10-year period, (ii) costs of proxy s...",
+      "full_paragraph": "Losses under this Section 8.12 shall include: (i) the net present value of advisory fee revenue from the affected Fund(s) calculated at an 8% discount rate over a 10-year period, (ii) costs of proxy solicitation, shareholder meetings, and legal fees related to the shareholder approval process, and (iii) defense costs and settlements of any shareholder litigation challenging the transaction or alleging breach of fiduciary duty by Fund directors.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.H.7",
+      "paragraph_index": 37,
+      "line_number": 2686,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "(c) To Seller's Knowledge, no broker-dealer receiving revenue sharing payments has notified Seller of intent to cease distributing the Funds or reduce sales efforts in response to revenue sharing disc...",
+      "full_paragraph": "(c) To Seller's Knowledge, no broker-dealer receiving revenue sharing payments has notified Seller of intent to cease distributing the Funds or reduce sales efforts in response to revenue sharing disclosure requirements;",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

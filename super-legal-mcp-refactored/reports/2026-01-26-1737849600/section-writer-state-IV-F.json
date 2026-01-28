@@ -1,0 +1,73 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "F",
+  "section_name": "Change of Ownership Requirements",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.F (Change of Ownership Requirements) from state-health-licensure-chow-report.md",
+    "progress": "ALL PHASES COMPLETE",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": [
+      "section_id=F",
+      "1 HIGH severity finding: Jacksonville CHOW delay risk ($1.43M weighted exposure)",
+      "All canonical values verified from fact-registry.md"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section IV.F complete. No recovery needed.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["state-health-licensure-chow-report.md", "fact-registry.md", "coverage-gaps.md"]
+  },
+
+  "metrics": {
+    "word_count": 6450,
+    "findings_written": "1/1",
+    "footnotes_count": 63,
+    "last_checkpoint": "2026-01-26T12:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/state-health-licensure-chow-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "pre_generation_validation": {
+    "pincites_validated": true,
+    "pincites_count": 63,
+    "placeholder_count": 0,
+    "methodology_disclosed": true,
+    "verification_tags_present": true
+  },
+
+  "quality_checks": {
+    "word_count_adequate": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

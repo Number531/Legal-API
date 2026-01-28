@@ -1,0 +1,1215 @@
+{
+  "by_file": {
+    "executive-summary.md": {
+      "verification_tags": {
+        "count": 0,
+        "samples": []
+      },
+      "inferred_tags": {
+        "count": 0,
+        "samples": []
+      },
+      "methodology_tags": {
+        "count": 0,
+        "samples": []
+      },
+      "assumed_tags": {
+        "count": 0,
+        "samples": []
+      },
+      "usc_citations": {
+        "count": 0,
+        "samples": []
+      },
+      "cfr_citations": {
+        "count": 0,
+        "samples": []
+      },
+      "federal_reporter": {
+        "count": 0,
+        "samples": []
+      },
+      "section_symbols": {
+        "count": 0,
+        "samples": []
+      }
+    },
+    "section-reports/section-IV-A-nrc-regulatory.md": {
+      "verification_tags": {
+        "count": 158,
+        "samples": [
+          "[VERIFIED: NRC ADAMS ML993160254]",
+          "[VERIFIED: FederalRegister.gov]",
+          "[VERIFIED: specialist-report-T14]",
+          "[VERIFIED: NRC.gov + specialist-report-T1]",
+          "[VERIFIED: NRC-ADAMS-ML21292A148]",
+          "[VERIFIED: search_us_code + ecfr.gov]",
+          "[VERIFIED: search_us_code]",
+          "[VERIFIED: fact-registry]",
+          "[VERIFIED: NRC-Draft-Reg-Guide-ML16137A520]",
+          "[VERIFIED: FederalRegister.gov https://www.federalregister.gov/documents/2021/02/04/2021-02357]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 4,
+        "samples": [
+          "[INFERRED: Amergen-holding-application]",
+          "[INFERRED: proliferation-risk-analysis]",
+          "[INFERRED:...]",
+          "[INFERRED: legislative-history-AEA-1954]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 16,
+        "samples": [
+          "[METHODOLOGY: Industry precedent analysis - 12 comparable license transfers 2015-2024 in Federal Register show 100% approval rate for transactions with (1) financial qualifications demonstrated through parent guarantees or contracted revenues, (2) management retention commitments, and (3) acceptable Negation Action Plans for foreign ownership <50%. QIA unprecedented factor reduces base 85-90% approval probability by 5-10 points to 75-80%]",
+          "[METHODOLOGY: Expert judgment + GAO 2005 report]",
+          "[METHODOLOGY:...]",
+          "[METHODOLOGY: Precedent analysis - Calvert Cliffs 3 foreign government ownership approaching 50% received Commission-level review but no denial (applicant withdrew for economic reasons, not regulatory denial). Zero precedent for Middle Eastern sovereign wealth fund reduces base 90% foreign ownership approval probability by 10-15 points. Enhanced NAP offering (voluntary restriction beyond regulatory minimum) increases approval probability from 60-65% to 75-80% by converting potential NRC objection into evidence of defense-in-depth commitment]",
+          "[METHODOLOGY: Expert judgment weighing (1) Qatar-U.S. bilateral relationship strength (Major Non-NATO Ally, Al Udeid Air Base hosting), (2) QIA passive investment mandate vs. strategic nuclear technology interest, (3) NRC historical deference to applicants proposing robust mitigation vs. categorical prohibition approach]",
+          "[METHODOLOGY: Expert judgment based on (1) post-9/11 heightened nuclear security posture, (2) IAEA safeguards emphasis on foreign government access to SNM data, (3) absence of Qatar bilateral nuclear cooperation agreement under Atomic Energy Act \u00a7 123]",
+          "[METHODOLOGY: NUREG-1021 Operator Licensing Standards permit qualified SROs with sufficient experience to assume Plant Manager roles without additional licensing, reducing absolute requirement for external recruitment. However, first-time private equity nuclear owner without proven track record will face higher scrutiny than utility-to-utility transfers]",
+          "[METHODOLOGY: Precedent analysis\u2014100% of license transfers 2015-2024 with documented management retention commitments and qualified SRO staffing received NRC approval without technical qualifications objections. PE ownership novel factor does not reduce probability if management continuity assured]",
+          "[METHODOLOGY: Precedent analysis - South Texas Project SNM license transfer approved concurrently with operating license in 4.5 months (2024), Vallecitos Nuclear Center concurrent Part 70 approval (2023), Westinghouse SNM transfer approved May 2023. 100% approval rate for transactions demonstrating MC&A continuity. Foreign ownership reduces base 90-95% probability by 5 points to 85-90% due to QIA unprecedented factor requiring enhanced safeguards review]",
+          "[METHODOLOGY: NUREG-1577 at \u00a7 3.3 permits applicants to demonstrate financial qualifications through \"projections based on reasonable assumptions\" including future market conditions, provided independent analysis supports assumptions rather than unsupported speculation]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 1,
+        "samples": [
+          "[ASSUMED: 8% WACC per fact-registry line 69 - adjust per acquirer's actual cost of capital]"
+        ]
+      },
+      "usc_citations": {
+        "count": 22,
+        "samples": [
+          "42 U.S.C. \u00a7 2077",
+          "42 U.S.C. \u00a7 2133",
+          "42 U.S.C. \u00a7 2153",
+          "42 U.S.C. \u00a7 2184"
+        ]
+      },
+      "cfr_citations": {
+        "count": 0,
+        "samples": []
+      },
+      "federal_reporter": {
+        "count": 0,
+        "samples": []
+      },
+      "section_symbols": {
+        "count": 124,
+        "samples": [
+          "\u00a7\u00a7 3",
+          "\u00a7 2133",
+          "\u00a7 72",
+          "\u00a7 2153",
+          "\u00a7 2077",
+          "\u00a7 50",
+          "\u00a7 123",
+          "\u00a7 2751",
+          "\u00a7 70",
+          "\u00a7 280"
+        ]
+      }
+    },
+    "section-reports/section-IV-B-foreign-ownership.md": {
+      "verification_tags": {
+        "count": 101,
+        "samples": [
+          "[VERIFIED:Westlaw-2014-WL-3605607]",
+          "[VERIFIED:Delaware-Code-Title-6]",
+          "[VERIFIED:NATO-treaty-database]",
+          "[VERIFIED: fact-registry.md Lines 524-528 of foreign-ownership-report.md]",
+          "[VERIFIED:NRC-RIS-database]",
+          "[VERIFIED:White-House-press-release-2017]",
+          "[VERIFIED:https://www.ecfr.gov/current/title-31/subtitle-B/chapter-VIII/part-800/subpart-A/section-800.248]",
+          "[VERIFIED:https://www.pillsburylaw.com/a/web/65448/AlertJuly2013EnergyTheNuclearRegulatoryCommissionsForeignOwnersh.pdf]",
+          "[VERIFIED:https://www.nrc.gov/reading-rm/doc-collections/gen-comm/reg-issues/2000/ri00001.html]",
+          "[VERIFIED:https://www.federalregister.gov/documents/2016/05/26/2016-12283/foreign-ownership-control-or-domination-of-nuclear-power-and-non-power-production-or-utilization]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 6,
+        "samples": [
+          "[INFERRED:EDF-public-disclosure]",
+          "[INFERRED:Treasury-CFIUS-informal-guidance]",
+          "[INFERRED:ABA-Model-Agreement-2011]",
+          "[INFERRED:Hogan-Lovells-CFIUS-practice]",
+          "[INFERRED:Morgan-Lewis-legal-analysis-2009]",
+          "[INFERRED:Hogan-Lovells-mitigation-precedent]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 16,
+        "samples": [
+          "[METHODOLOGY: CFIUS annual reports to Congress 2019-2024]",
+          "[METHODOLOGY: Expert judgment based on NRC staff practice in foreign ownership pre-application consultations]",
+          "[METHODOLOGY: Historical denial rate for foreign government investors from non-NATO countries exceeds 30%; APH's below-50% ownership and U.S. management continuity reduce baseline risk by half]",
+          "[METHODOLOGY:Typical-CFIUS-timeline-statutory-plus-mitigation-negotiation]",
+          "[METHODOLOGY:Expert-Judgment-based-on-CFIUS-counsel-experience]",
+          "[METHODOLOGY: Historical CFIUS statistics show <2% Presidential prohibition rate overall; subset of MNNA countries near 0%; Qatar strategic alliance (Al Udeid Air Base) makes prohibition diplomatically untenable; mitigation measures adequately address national security concerns]",
+          "[METHODOLOGY: Expert judgment based on (1) MNNA designation statutory criteria, (2) U.S. military dependence on Al Udeid infrastructure, (3) NRC precedent providing favorable treatment to strategic U.S. allies]",
+          "[METHODOLOGY:CFIUS-standard-timeline-statutory]",
+          "[METHODOLOGY: Statutory certainty under Section 103d and 10 CFR \u00a7 50.38]",
+          "[METHODOLOGY: Calvert Cliffs precedent shows intervenors successfully challenged 100% foreign ownership; high-profile $3.2B transaction with Qatari government investor may attract environmental group or anti-nuclear advocacy intervention]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 2,
+        "samples": [
+          "[ASSUMED: 8% WACC - adjust per acquirer's actual cost of capital]"
+        ]
+      },
+      "usc_citations": {
+        "count": 29,
+        "samples": [
+          "15 U.S.C. \u00a7 18",
+          "42 U.S.C. \u00a7 2184",
+          "28 U.S.C. \u00a7 2462",
+          "42 U.S.C. \u00a7 2273",
+          "42 U.S.C. \u00a7 2133",
+          "50 U.S.C. \u00a7 4565",
+          "22 U.S.C. \u00a7 2780",
+          "18 U.S.C. \u00a7 2339",
+          "18 U.S.C. \u00a7 1001"
+        ]
+      },
+      "cfr_citations": {
+        "count": 22,
+        "samples": [
+          "31 C.F.R. \u00a7 800.501",
+          "31 C.F.R. \u00a7 800.405",
+          "31 C.F.R. \u00a7 800.401.",
+          "31 C.F.R. \u00a7 800.402",
+          "31 C.F.R. \u00a7 800.248",
+          "31 C.F.R. \u00a7 800.401",
+          "31 C.F.R. \u00a7 800.224"
+        ]
+      },
+      "federal_reporter": {
+        "count": 3,
+        "samples": [
+          "758 F.3d 296"
+        ]
+      },
+      "section_symbols": {
+        "count": 81,
+        "samples": [
+          "\u00a7 73",
+          "\u00a7 2273",
+          "\u00a7 50",
+          "\u00a7 2339",
+          "\u00a7 4565",
+          "\u00a7 800",
+          "\u00a7 18",
+          "\u00a7 2133",
+          "\u00a7 2780",
+          "\u00a7 9"
+        ]
+      }
+    },
+    "section-reports/section-IV-C-environmental.md": {
+      "verification_tags": {
+        "count": 104,
+        "samples": [
+          "[VERIFIED:session-report-T9]",
+          "[VERIFIED:Illinois-gov-Quad-Cities-variance]",
+          "[VERIFIED:NCBI-NBK201991]",
+          "[VERIFIED:EDGAR-CIK-0001031296]",
+          "[VERIFIED:epa.gov]",
+          "[VERIFIED:nrc.gov]",
+          "[VERIFIED:EDGAR-CIK-0001004440]",
+          "[VERIFIED:session-report-T7]",
+          "[VERIFIED:KQED-Diablo-Canyon]",
+          "[VERIFIED:Westlaw-Supreme-Court]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 14,
+        "samples": [
+          "[INFERRED:EPRI-fish-protection-study]",
+          "[INFERRED:Northern-Illinois-Gas]",
+          "[INFERRED:Great-Lakes-Commission-fisheries-economics]",
+          "[INFERRED:Michigan-Fermi-2-litigation]",
+          "[INFERRED:New-York-Indian-Point-litigation]",
+          "[INFERRED:EPA-316a-Technical-Guidance-1977]",
+          "[INFERRED:GLFC-lake-trout-report]",
+          "[INFERRED:California-Coastal-Commission-Diablo]",
+          "[INFERRED:EPA-thermal-plume-study]",
+          "[INFERRED:...]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 8,
+        "samples": [
+          "[METHODOLOGY: (1) Nuclear safety exception under 40 C.F.R. \u00a7 125.94(d) provides strong legal defense, (2) economic infeasibility argument compelling (Illinois EPA considers grid reliability), (3) no Illinois nuclear plant ever required cooling tower retrofit, OFFSET BY (4) aggressive environmental group litigation strategy demonstrated at Fermi 2, (5) EPA Region 5 intervention risk if Illinois EPA determination deemed inadequate]",
+          "[METHODOLOGY: Expert judgment based on (1) environmental group argument that traveling screens insufficient, (2) BTA upgrade pressure from cooling tower advocates, OFFSET BY (3) nuclear safety exception under 40 C.F.R. \u00a7 125.94(d) provides defense]",
+          "[METHODOLOGY: Expert judgment based on (1) climate change increasing Lake Michigan baseline temperatures creating cumulative stress argument, (2) environmental group pressure documented at comparable facilities, (3) evolution of Section 316(a) scientific standards since original variance issuance 1970s-1980s]",
+          "[METHODOLOGY: Expert judgment based on (1) Illinois EPA zero historical denials of nuclear plant NPDES renewals, (2) state policy support for nuclear generation under 2021 Climate and Equitable Jobs Act, (3) grid reliability dependency (2,400 MW baseload critical), (4) Illinois EPA compliance-focused enforcement culture (95% violations resolved administratively), OFFSET BY (5) environmental group intervention precedent at Great Lakes nuclear facilities (Fermi 2, Palisades), (6) Lake Michigan thermal sensitivity (oligotrophic ecosystem vulnerable to thermal stress)]",
+          "[METHODOLOGY: Expert judgment based on (1) zero historical Illinois EPA denials, (2) economic and grid reliability considerations strongly favor approval, OFFSET BY (3) environmental group litigation combined with EPA Region 5 objection could force denial if 316(a) variance demonstration fails, (4) Lake Michigan thermal sensitivity creates ecological vulnerability]",
+          "[METHODOLOGY: Expert judgment based on (1) Quad Cities 316(a) demonstration cost precedent, (2) environmental consulting industry rate structures, (3) Great Lakes sampling complexity vs. river systems (higher boat costs, longer sampling transects), (4) enhanced scrutiny requiring more comprehensive statistical analysis]",
+          "[METHODOLOGY: Expert judgment based on (1) EPA Region 5 historical willingness to object to state permits perceived as insufficiently protective, (2) cold-water fishery stakeholder opposition (lake trout, whitefish commercial and recreational value), (3) potential biological study findings showing measurable population impacts]",
+          "[METHODOLOGY: Regulatory certainty\u201440 C.F.R. \u00a7 125.73 requires multi-year field data; Illinois EPA will deem application incomplete without adequate biological studies; administrative permit continuance creates operational uncertainty and litigation exposure from environmental groups; no precedent exists for Illinois EPA approving nuclear plant 316(a) variance without comprehensive biological demonstration]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 5,
+        "samples": [
+          "[ASSUMED:fisheries-statistics-methodology]",
+          "[ASSUMED: 8% WACC - adjust per acquirer's actual cost of capital]",
+          "[ASSUMED:NOAA-Great-Lakes-temperature-data]",
+          "[ASSUMED:...]"
+        ]
+      },
+      "usc_citations": {
+        "count": 32,
+        "samples": [
+          "33 U.S.C. \u00a7 1326",
+          "33 U.S.C. \u00a7 1319",
+          "33 U.S.C. \u00a7 1342",
+          "42 U.S.C. \u00a7 7661",
+          "33 U.S.C. \u00a7 1311",
+          "33 U.S.C. \u00a7 1365",
+          "42 U.S.C. \u00a7 2201"
+        ]
+      },
+      "cfr_citations": {
+        "count": 47,
+        "samples": [
+          "40 C.F.R. \u00a7 124",
+          "40 C.F.R. \u00a7 122.6",
+          "40 C.F.R. \u00a7 124.19",
+          "40 C.F.R. \u00a7 125.94",
+          "40 C.F.R. \u00a7 125.92",
+          "40 C.F.R. \u00a7 125.73",
+          "40 C.F.R. \u00a7 125.71",
+          "10 C.F.R. \u00a7 50.75",
+          "40 C.F.R. \u00a7 124.10",
+          "40 C.F.R. \u00a7 122.21"
+        ]
+      },
+      "federal_reporter": {
+        "count": 21,
+        "samples": [
+          "172 F.3d 65",
+          "582 F.2d 77",
+          "913 F.2d 64",
+          "475 F.3d 83",
+          "710 F.3d 150",
+          "446 F.3d 140",
+          "566 F.2d 451"
+        ]
+      },
+      "section_symbols": {
+        "count": 97,
+        "samples": [
+          "\u00a7 50",
+          "\u00a7 402",
+          "\u00a7 1326",
+          "\u00a7 2201",
+          "\u00a7 124",
+          "\u00a7 122",
+          "\u00a7\u00a7 125",
+          "\u00a7 125",
+          "\u00a7 1342",
+          "\u00a7 505"
+        ]
+      }
+    },
+    "section-reports/section-IV-D-price-anderson.md": {
+      "verification_tags": {
+        "count": 148,
+        "samples": [
+          "[VERIFIED: Fact registry]",
+          "[VERIFIED: Regulatory requirement]",
+          "[VERIFIED: T3 specialist report citing Energy Harbor precedent]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-140]",
+          "[VERIFIED: Fact registry calculation]",
+          "[VERIFIED: Atomic Energy Act statutory requirement]",
+          "[VERIFIED: https://www.nrc.gov/docs/ML2133/ML21335A064.pdf]",
+          "[VERIFIED: T3 specialist report timeline recommendations]",
+          "[VERIFIED: WNA documentation]",
+          "[VERIFIED: T3 specialist report establishing precedent pattern]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 34,
+        "samples": [
+          "[INFERRED: Standard securities law disclosure requirements for contingent liabilities]",
+          "[INFERRED: Standard NRC guidance documents for financial qualifications]",
+          "[INFERRED: NRC regulatory policy rationale]",
+          "[INFERRED: Standard securities law disclosure requirements]",
+          "[INFERRED: Key NRC Commission policy decision cited in insurance-coverage-report.md]",
+          "[INFERRED: Pattern in NRC license transfer precedents]",
+          "[INFERRED: Standard precedent on Price-Anderson license transfer obligations cited in insurance-coverage-report.md]",
+          "[INFERRED: Interaction between CFIUS mitigation measures and NRC financial qualifications]",
+          "[INFERRED: Typical NRC staff reasoning in financial qualifications review]",
+          "[INFERRED: Precedent analysis]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 50,
+        "samples": [
+          "[METHODOLOGY: Conditional probability estimate based on 6.4-year assessment payment period potentially overlapping with 2032-2037 PPA renegotiation window; merchant market EBITDA projected at $400-500M compared to current $680M, reducing financial cushion.\u2078\u2075]",
+          "[METHODOLOGY: Decommissioning-report.md estimates NDT shortfall of $187M expected value under premature shutdown scenarios; if NEIL premature decommissioning insurance unavailable, APH bears uninsured exposure of $100-300M depending on timing of shutdown and NDT fund investment performance]",
+          "[METHODOLOGY: Standard commercial insurance policies include change-of-control provisions permitting insurer to adjust premiums based on new owner's credit profile, claims history, and risk management practices upon policy assignment]",
+          "[METHODOLOGY: Standard nuclear acquisition purchase agreements include 18-24 month outside dates reflecting NRC review timeline; delays beyond this period trigger seller termination rights or require buyer to pay extension fees; financing commitments from lenders typically expire 18 months post-signing, requiring costly extension negotiations if closing delayed]",
+          "[METHODOLOGY: Cumulative probability calculation over extended time horizon: 1 - (0.99)^35 years = 0.30 or 30% cumulative probability; adjusted to 40% to account for tail risk in aging reactor fleet.]",
+          "[METHODOLOGY: NRC review timeline extends when contested issues arise requiring multiple RAI rounds or Environmental Assessment; typical 12-18 month timeline can extend to 24-30 months if financial qualifications become contested, particularly if intervenors file hearing requests]",
+          "[METHODOLOGY: Parent guarantee commitment fees typically 0.5-1.0% annually on guaranteed amount for contingent obligations unlikely to be called; $316M \u00d7 0.5-1.0% = $1.6-3.2M annual cost reducing LP returns by 10-20 basis points on $1.6B equity]",
+          "[METHODOLOGY: If Blackstone negotiates limitations on parent guarantee (capped amount, restrictive conditions precedent), NRC may require alternative assurances such as letters of credit from commercial banks ($316M LOC would cost approximately 1.5-2.5% annually = $4.7-7.9M) or escrow accounts funded at closing]",
+          "[METHODOLOGY: Insurance-coverage-report.md identifies Blackstone parent guarantee negotiation timeline as a red flag requiring early attention.\u00b9\u2077\u2079 PE funds typically resist parent guarantees for operating liabilities not directly within management's control, preferring to ring-fence portfolio company liabilities. Retrospective premium risk is triggered by incidents at other nuclear plants nationwide, creating reluctance to provide uncapped guarantees.]",
+          "[METHODOLOGY: Energy Harbor transaction occurred under previous NRC inflation adjustment with retrospective premium at $137.6M per reactor; 2 reactors \u00d7 $137.6M = $275M total, compared to GLNS current exposure of $316M under 2023 adjustment to $158M per reactor]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 29,
+        "samples": [
+          "[ASSUMED: Standard insurance exclusions]",
+          "[ASSUMED: Insurance underwriting standards based on credit risk]",
+          "[ASSUMED: Rating agency methodologies]",
+          "[ASSUMED: Mutual insurer underwriting discretion]",
+          "[ASSUMED: Industry benchmark based on public company disclosure]",
+          "[ASSUMED: Industry-standard practice]",
+          "[ASSUMED: Transaction structure typical for PE nuclear acquisitions]",
+          "[ASSUMED: Market standard for nuclear financing]",
+          "[ASSUMED: Standard insurance policy terms]",
+          "[ASSUMED: Market-standard M&A terms for nuclear transactions]"
+        ]
+      },
+      "usc_citations": {
+        "count": 32,
+        "samples": [
+          "42 U.S.C. \u00a7 2210",
+          "42 U.S.C. \u00a7 2133",
+          "42 U.S.C. \u00a7 2014"
+        ]
+      },
+      "cfr_citations": {
+        "count": 59,
+        "samples": [
+          "10 C.F.R. \u00a7 140.84",
+          "10 C.F.R. \u00a7 140.92",
+          "10 C.F.R. \u00a7 140.21",
+          "10 C.F.R. \u00a7 140.11",
+          "10 C.F.R. \u00a7 140.84.",
+          "10 C.F.R. \u00a7 50.63",
+          "10 C.F.R. \u00a7 50.75",
+          "10 C.F.R. \u00a7 50.80",
+          "10 C.F.R. \u00a7 50.33",
+          "10 C.F.R. \u00a7 140.21."
+        ]
+      },
+      "federal_reporter": {
+        "count": 2,
+        "samples": [
+          "838 F.2d 1341"
+        ]
+      },
+      "section_symbols": {
+        "count": 93,
+        "samples": [
+          "\u00a7 50",
+          "\u00a7 2210",
+          "\u00a7 2133",
+          "\u00a7 140",
+          "\u00a7 2014",
+          "\u00a7 107"
+        ]
+      }
+    },
+    "section-reports/section-IV-E-doe-litigation.md": {
+      "verification_tags": {
+        "count": 84,
+        "samples": [
+          "[VERIFIED: world-nuclear-news.org source, footnote 36]",
+          "[VERIFIED: same source footnote 11]",
+          "[VERIFIED: U.S. Code database]",
+          "[VERIFIED: Supreme Court, Justia]",
+          "[VERIFIED: Federal Circuit precedent, Justia]",
+          "[VERIFIED: Supreme Court, Justia Supreme Court Center]",
+          "[VERIFIED: ABA publications, general M&A market data]",
+          "[VERIFIED: ABA publications]",
+          "[VERIFIED: fact-registry.md Line 92]",
+          "[VERIFIED: NRC regulatory framework]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 21,
+        "samples": [
+          "[INFERRED: general Illinois tort law from case law patterns]",
+          "[INFERRED: EEOC Compliance Manual guidance on Reasonable Factor Other Than Age]",
+          "[INFERRED: EEOC Compliance Manual, ADEA RFOA guidance]",
+          "[INFERRED: ADEA RIF case law patterns]",
+          "[INFERRED: Court of Federal Claims precedent]",
+          "[INFERRED: general Illinois civil procedure\u2014claim accrues when injury occurs, not discovery]",
+          "[INFERRED: general Illinois tort precedents]",
+          "[INFERRED: general Illinois civil procedure]",
+          "[INFERRED: general ADEA employment jurisprudence from EEOC Compliance Manual]",
+          "[INFERRED: EEOC guidance and employment case law patterns]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 21,
+        "samples": [
+          "[METHODOLOGY:...]",
+          "[METHODOLOGY: Expert Judgment based on: (1) 42-46 years since operations commenced exceeds 5-year Illinois statute of limitations by 800-900%; (2) Entergy Indian Point precedent (30-year operations barred regulatory challenges on limitations grounds); (3) plaintiffs must demonstrate new injury within 5-year window; (4) judicial discretion in \"continuing nuisance\" doctrine allows 20-25% probability of denial if court credits plaintiffs' tritium trespass theory or finds disputed fact issues requiring discovery]",
+          "[METHODOLOGY: EEOC Charge Statistics - in mass RIF scenarios where one employee files a high-profile ADEA charge, 25-35% of similarly situated employees subsequently file EEOC charges within 12-18 months, based on EEOC FY 2020-2024 charge intake data]",
+          "[METHODOLOGY: NRC rulemaking cost estimates for enhanced security (10 C.F.R. \u00a7 73.54 cyber security, 2015) and monitoring requirements]",
+          "[METHODOLOGY: NRC rulemaking cost estimates]",
+          "[METHODOLOGY: Statistical analysis - chi-square test for expected vs. actual age distribution; assumes workforce is 40% age 55+ based on nuclear industry benchmarks]",
+          "[METHODOLOGY: Industry Precedent - 100% utility success rate in 78+ DOE breach claims filed since 1998 per Congressional Research Service Dec 2024 report; 5-10% probability deduction for settlement at 90-95% of claim or adverse quantum rulings reducing award to $110M-$120M range; Phase I success eliminates liability uncertainty]",
+          "[METHODOLOGY: Industry standard pricing from Duke Energy, NSP precedents\u2014dry cask unit costs $1.5M-$2.5M per industry procurement data]",
+          "[METHODOLOGY: EEOC Statistics - 60-70% of ADEA cases settle before trial per EEOC FY 2023 Alternative Dispute Resolution data]",
+          "[METHODOLOGY: Expert Judgment based on Federal Circuit appellate history\u2014no liability reversals, occasional remands on quantum]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 7,
+        "samples": [
+          "[ASSUMED: 4% average inflation rate - adjust per actual CPI-U]",
+          "[ASSUMED:...]",
+          "[ASSUMED: NRC AREOR reports publicly available via ADAMS\u2014standard NRC transparency practice]",
+          "[ASSUMED: 4% average annual inflation 2010-2035 per CPI-U projections; nuclear vendor cost premiums for limited supplier base under 10 C.F.R. Part 72]",
+          "[ASSUMED: general tort law principles]",
+          "[ASSUMED: same]"
+        ]
+      },
+      "usc_citations": {
+        "count": 21,
+        "samples": [
+          "42 U.S.C. \u00a7 10222",
+          "42 U.S.C. \u00a7\u00a7 10101",
+          "29 U.S.C. \u00a7 623",
+          "29 U.S.C. \u00a7 626",
+          "29 U.S.C. \u00a7\u00a7 621"
+        ]
+      },
+      "cfr_citations": {
+        "count": 12,
+        "samples": [
+          "10 C.F.R. \u00a7 50.47",
+          "10 C.F.R. \u00a7 50.80",
+          "10 C.F.R. \u00a7 73.54"
+        ]
+      },
+      "federal_reporter": {
+        "count": 6,
+        "samples": [
+          "422 F.3d 1369",
+          "225 F.3d 1336"
+        ]
+      },
+      "section_symbols": {
+        "count": 41,
+        "samples": [
+          "\u00a7 623",
+          "\u00a7 73",
+          "\u00a7 50",
+          "\u00a7 822",
+          "\u00a7 15",
+          "\u00a7\u00a7 10101",
+          "\u00a7 626",
+          "\u00a7\u00a7 621",
+          "\u00a7 158",
+          "\u00a7 159"
+        ]
+      }
+    },
+    "section-reports/section-IV-F-decommissioning.md": {
+      "verification_tags": {
+        "count": 71,
+        "samples": [
+          "[VERIFIED: Environmental Compliance Report T6 - NPDES permit renewal 10-15% denial probability]",
+          "[VERIFIED:VermontBiz.com]",
+          "[VERIFIED: Fact Registry - PPA expiration 2035-12-31]",
+          "[VERIFIED:EIA.gov]",
+          "[VERIFIED: Commercial Contracts Report T9, GLNS PPA with NIEC]",
+          "[VERIFIED:Illinois-legislation]",
+          "[VERIFIED:AdvisorPerspectives.com]",
+          "[VERIFIED:Commercial-Contracts-Report-T9]",
+          "[VERIFIED:Callan.com]",
+          "[VERIFIED:ecfr.gov]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 9,
+        "samples": [
+          "[INFERRED: NRC \"reasonably foreseeable circumstances\" standard from Pacific Gas & Electric precedent]",
+          "[INFERRED:bankruptcy-case-precedent]",
+          "[INFERRED: NRC materiality standards for license transfer financial qualifications]",
+          "[INFERRED: NRC precedent treating 100%+ funding as adequate for normal shutdown, absent extraordinary circumstances]",
+          "[INFERRED:Vermont-Yankee-litigation]",
+          "[INFERRED: NRC foreign ownership scrutiny patterns in license transfer reviews]",
+          "[INFERRED: Illinois EPA enforcement patterns post-Great Lakes Compact]",
+          "[INFERRED: NRC discretion under 10 CFR \u00a7 50.33(f) to consider reasonably foreseeable circumstances]",
+          "[INFERRED: NRC prospective risk assessment authority]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 5,
+        "samples": [
+          "[METHODOLOGY: $620M per reactor \u00d7 2 reactors = $1.24B NRC minimum]",
+          "[METHODOLOGY: GAO-02-48 precedent showing non-utility purchasers of 15 plants all provided enhanced assurance including parent guarantees; GLNS-specific risk factors (PE structure, 45% foreign ownership, NPDES 2028, PPA 2035) exceed historical baseline that triggered guarantees in 1999-2019 transfers; NRC public statements emphasizing financial assurance for non-utility licensees post-Entergy Vermont Yankee 2014 bankruptcy concerns]",
+          "[METHODOLOGY: NPDES permit denial 10-15% (Environmental Compliance Report T6: Illinois EPA enforcement data; Section 316(a) variance denial precedents San Onofre, Indian Point); major equipment failure 5-10% (Nuclear Energy Institute industry survey 2020: steam generator replacement frequency in aging PWR fleet); merchant economics shutdown 5-10% (U.S. EIA data on premature closures 2013-2019 due to unfavorable economics)]",
+          "[METHODOLOGY: Historical industry precedents show approximately 50% of U.S. nuclear plants reach license expiration without premature closure; the balance face early shutdown due to unfavorable economics (20%), major equipment failures (10%), or regulatory issues (10-15%); sources include U.S. Energy Information Administration data on premature closures 2013-2019 and GAO Report GAO-02-48 identifying 21 premature retirements]",
+          "[METHODOLOGY: Site-wide NPDES permit denial 5-8% (Environmental Compliance Report T6: single cooling water intake structure serves both units; Illinois EPA denial of shared 316(a) variance forces facility-wide closure; Indian Point precedent); catastrophic merchant market collapse 3-5% (U.S. EIA forward price scenarios 2025-2035; Illinois Clean Energy Jobs Act renewable displacement modeling); site-wide NRC safety action 2% (NRC aging reactor safety bulletin history; Crystal River common-cause containment failure precedent)]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 11,
+        "samples": [
+          "[ASSUMED: Diablo Canyon retirement announcement and subsequent extension]",
+          "[ASSUMED: Renewable energy pricing analysis from multiple ISO/RTO markets]",
+          "[ASSUMED: APH will meet net worth test; requires verification in license transfer application]",
+          "[ASSUMED: NUREG-1307 Rev. 20 formula application]",
+          "[ASSUMED: Blackstone infrastructure fund investment horizons 7-10 years]",
+          "[ASSUMED: Industry-leading nuclear plants maintain 150%+ NDT funding ratios]",
+          "[ASSUMED:industry-standard]",
+          "[ASSUMED:SEC-EDGAR]",
+          "[ASSUMED: EPA Region 5 enforcement emphasis post-Great Lakes Compact]",
+          "[ASSUMED:industry-database]"
+        ]
+      },
+      "usc_citations": {
+        "count": 1,
+        "samples": [
+          "33 U.S.C. \u00a7 1326"
+        ]
+      },
+      "cfr_citations": {
+        "count": 18,
+        "samples": [
+          "10 C.F.R. \u00a7 50.82",
+          "10 C.F.R. \u00a7 50.75",
+          "40 C.F.R. \u00a7 125.73",
+          "10 C.F.R. \u00a7 50.33"
+        ]
+      },
+      "federal_reporter": {
+        "count": 0,
+        "samples": []
+      },
+      "section_symbols": {
+        "count": 69,
+        "samples": [
+          "\u00a7 50",
+          "\u00a7 1326",
+          "\u00a7 125",
+          "\u00a7 401",
+          "\u00a7 316"
+        ]
+      }
+    },
+    "section-reports/section-IV-G-securities-financial.md": {
+      "verification_tags": {
+        "count": 116,
+        "samples": [
+          "[VERIFIED: Same document, Chapter 1]",
+          "[VERIFIED: Securities-financial-report.md citations 14-15]",
+          "[VERIFIED: https://www.cppinvestments.com/newsroom/cpp-investments-reports-699-6-billion-in-net-assets/]",
+          "[VERIFIED: Supreme Court precedent]",
+          "[VERIFIED: https://www.nrc.gov/reading-rm/doc-collections/fact-sheets/price-anderson.html]",
+          "[VERIFIED: NRC ADAMS Accession No. ML003677182]",
+          "[VERIFIED: Same NUREG guidance]",
+          "[VERIFIED: https://www.nrc.gov/docs/ML2018/ML20188B086.pdf]",
+          "[VERIFIED: https://holtecinternational.com/2019/06/21/oyster-creek-approval/]",
+          "[VERIFIED: https://www.cppinvestments.com/wp-content/uploads/2025/02/CPPI-2024-Annual-Report.pdf]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 18,
+        "samples": [
+          "[INFERRED: SEC interpretive release on registration exemptions]",
+          "[INFERRED: Energy Harbor corporate restructuring precedent]",
+          "[INFERRED: NRC Safety Evaluation Report precedent; specific ADAMS accession number not available in research report]",
+          "[INFERRED: Japanese utility participation precedent]",
+          "[INFERRED: NRC Safety Evaluation Report precedent]",
+          "[INFERRED: NRC Commission decision on Exelon/Constellation spin]",
+          "[INFERRED: Same Safety Evaluation Report]",
+          "[INFERRED: NRC precedent from Press Release 19-061]",
+          "[INFERRED: NRC precedent for creditor-equity ownership approval]",
+          "[INFERRED: Precedent from Duke Energy Indiana transaction]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 39,
+        "samples": [
+          "[METHODOLOGY: Current NDT balance at 127% of minimum exceeds *Exelon/Constellation* and *Energy Harbor* precedents where no guarantee was required; NRC historically requires guarantees only when NDT funding ratios fall below 105-110% or when licensee is private company with limited balance sheet (*Holtec* model); APH's sponsor capacity ($1.19T AUM) and strong projected cash flows reduce likelihood of mandatory guarantee requirement]",
+          "[METHODOLOGY: Precedent synthesis]",
+          "[METHODOLOGY: NRC license transfer orders typically address financial qualifications through cash flow projections, parent guarantees, and NDT adequacy rather than governance structure mandates; Staff focuses on financial capacity, not corporate formalities]",
+          "[METHODOLOGY: Standard industry practice for performance-based financial assurance]",
+          "[METHODOLOGY: Application of regulatory formula to GLNPC facility characteristics]",
+          "[METHODOLOGY: Proportional calculation; note research report uses $3.2B all-equity assumption for conservative analysis]",
+          "[METHODOLOGY: Application of Regulation D requirements to transaction facts]",
+          "[METHODOLOGY: Arithmetic calculation from verified sponsor AUM figures]",
+          "[METHODOLOGY: Proportional allocation rounding to whole directors]",
+          "[METHODOLOGY: Comparative analysis to precedents]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 13,
+        "samples": [
+          "[ASSUMED: Industry-standard NDT benchmarking data not directly verified but consistent with reported industry practice]",
+          "[ASSUMED: Institutional investor characteristics based on entity type]",
+          "[ASSUMED: Historical market performance impact on NDT balances consistent with equity market correlation]",
+          "[ASSUMED: Industry-standard NDT investment practices; returns consistent with market indices]",
+          "[ASSUMED: Industry-standard governance cost estimates for mid-sized companies]",
+          "[ASSUMED: industry-standard NDT benchmarking data]",
+          "[ASSUMED: Corporate governance best practices]",
+          "[ASSUMED: Institutional investor standard portfolio management practices]",
+          "[ASSUMED: Entity business descriptions confirming financial investment focus]",
+          "[ASSUMED: Sovereign wealth fund ownership structure consistent with standard SWF governance]"
+        ]
+      },
+      "usc_citations": {
+        "count": 20,
+        "samples": [
+          "42 U.S.C. \u00a7 2210",
+          "15 U.S.C. \u00a7 78",
+          "42 U.S.C. \u00a7 2133",
+          "15 U.S.C. \u00a7 77"
+        ]
+      },
+      "cfr_citations": {
+        "count": 26,
+        "samples": [
+          "10 C.F.R. \u00a7 50.38",
+          "10 C.F.R. \u00a7 50.33",
+          "17 C.F.R. \u00a7 230.506",
+          "17 C.F.R. \u00a7 240.10",
+          "31 C.F.R. \u00a7 800.248",
+          "17 C.F.R. \u00a7 249.308",
+          "10 C.F.R. \u00a7 50.76",
+          "10 C.F.R. \u00a7 50.80",
+          "10 C.F.R. \u00a7 50.75"
+        ]
+      },
+      "federal_reporter": {
+        "count": 0,
+        "samples": []
+      },
+      "section_symbols": {
+        "count": 49,
+        "samples": [
+          "\u00a7 240",
+          "\u00a7 77",
+          "\u00a7 50",
+          "\u00a7 2210",
+          "\u00a7 800",
+          "\u00a7 2133",
+          "\u00a7\u00a7 50",
+          "\u00a7 230",
+          "\u00a7 249",
+          "\u00a7 78"
+        ]
+      }
+    },
+    "section-reports/section-IV-H-spent-fuel.md": {
+      "verification_tags": {
+        "count": 134,
+        "samples": [
+          "[VERIFIED: eCFR database current as of 2026-01-03]",
+          "[VERIFIED: fact-registry.md lines 14-15]",
+          "[VERIFIED: T8 lines 130, 333-334, 556, 833-836]",
+          "[VERIFIED: NRC NUREG]",
+          "[VERIFIED: Westlaw D.C. Circuit precedent]",
+          "[VERIFIED: NRC public fact sheet]",
+          "[VERIFIED: eCFR Title 10 Part 72]",
+          "[VERIFIED: eCFR Title 10 current]",
+          "[VERIFIED: GAO public reports]",
+          "[VERIFIED: GAO public reports database]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 49,
+        "samples": [
+          "[INFERRED: Court of Federal Claims damage award]",
+          "[INFERRED: Court of Federal Claims precedent]",
+          "[INFERRED: Court of Federal Claims]",
+          "[INFERRED: Court of Federal Claims methodology]",
+          "[INFERRED: Court of Federal Claims discount rate methodology]",
+          "[INFERRED: Court of Federal Claims policy statement]",
+          "[INFERRED: Federal Circuit precedent on DOE spent fuel litigation]",
+          "[INFERRED: NRC regulatory guidance on financial qualifications review]",
+          "[INFERRED: Federal Circuit precedent]",
+          "[INFERRED: Congressional report on Yucca Mountain defunding]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 16,
+        "samples": [
+          "[METHODOLOGY: Historical win rate in DOE Phase I/II cases 2000-2025 = 95%; GLNPC Phase I success establishes facility-specific precedent; deduct 2.5% for quantum disputes (DOE may successfully challenge discount rate or security cost projections, reducing recovery by 10-20%)]",
+          "[METHODOLOGY: Cash flow analysis]",
+          "[METHODOLOGY: DCF calculation]",
+          "[METHODOLOGY: Transaction structure recommendation based on market precedent for DOE litigation rights assignment]",
+          "[METHODOLOGY: Mathematical calculation; T8 line 519]",
+          "[METHODOLOGY: Expert judgment; T8 lines 104, 275, 536-537]",
+          "[METHODOLOGY: Mathematical calculation; T8 line 130]",
+          "[METHODOLOGY: Legal interpretation of 10 CFR 50.82 scope\u2014spent fuel management arguably within \"decommissioning activities\" but NRC guidance uncertain]",
+          "[METHODOLOGY: Mathematical calculation; T8 lines 81, 514]",
+          "[METHODOLOGY: Mathematical certainty based on verified pool capacity (2,500 assemblies) and discharge rate (95/year); 5% uncertainty accounts for potential early Unit 1 shutdown or extended power uprates reducing refueling frequency]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 6,
+        "samples": [
+          "[ASSUMED: Market transaction comparable\u2014FERC public filing reference estimated]",
+          "[ASSUMED: Industry source, NEI public data]",
+          "[ASSUMED: Typical PPA language regarding operational cost minimization; would require review of actual NIEC PPA contract (not provided in transaction materials)]",
+          "[ASSUMED: Market transaction comparable\u2014NRC ADAMS accession number estimated; would require ADAMS database verification]",
+          "[ASSUMED: Market transaction comparable\u2014specific page citations estimated; would require EDGAR verification]",
+          "[ASSUMED: Industry practice in nuclear M&A transactions\u2014DOE litigation rights transfer under UCC Article 9 or explicit assignment provisions; based on Exelon/Constellation, ArcLight/Oyster Creek precedents]"
+        ]
+      },
+      "usc_citations": {
+        "count": 20,
+        "samples": [
+          "42 U.S.C. \u00a7 10222",
+          "42 U.S.C. \u00a7 10134",
+          "42 U.S.C. \u00a7\u00a7 10101",
+          "28 U.S.C. \u00a7 1491",
+          "41 U.S.C. \u00a7 7104"
+        ]
+      },
+      "cfr_citations": {
+        "count": 23,
+        "samples": [
+          "10 C.F.R. \u00a7 50.82",
+          "10 C.F.R. \u00a7 73.51",
+          "10 C.F.R. \u00a7 72.104",
+          "10 C.F.R. \u00a7 50.54",
+          "10 C.F.R. \u00a7 72.212",
+          "10 C.F.R. \u00a7\u00a7 72.210",
+          "10 C.F.R. \u00a7 50.33",
+          "10 C.F.R. \u00a7 72.40"
+        ]
+      },
+      "federal_reporter": {
+        "count": 9,
+        "samples": [
+          "422 F.3d 1369",
+          "725 F.3d 255"
+        ]
+      },
+      "section_symbols": {
+        "count": 49,
+        "samples": [
+          "\u00a7 73",
+          "\u00a7 50",
+          "\u00a7 302",
+          "\u00a7 1",
+          "\u00a7 7104",
+          "\u00a7\u00a7 10101",
+          "\u00a7 72",
+          "\u00a7 1491",
+          "\u00a7 10134",
+          "\u00a7 10222"
+        ]
+      }
+    },
+    "section-reports/section-IV-I-commercial-ppa.md": {
+      "verification_tags": {
+        "count": 80,
+        "samples": [
+          "[VERIFIED:Westlaw-1985-WL-43921]",
+          "[VERIFIED:Westlaw-1984-WL-2745]",
+          "[VERIFIED: NRC-50-33-f]",
+          "[VERIFIED:ALI-Restatement-Contracts-2d-322]",
+          "[VERIFIED:Brattle-Merit-Order-Study-2023]",
+          "[VERIFIED:Westlaw-2006-WL-278852]",
+          "[VERIFIED:UtilityDive-June-2025]",
+          "[VERIFIED:ALI-Restatement-Contracts-2d]",
+          "[VERIFIED:SCOTUS-558-US-165-2010]",
+          "[VERIFIED:UtilityDive-Illinois-Chamber-Nov-2021]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 13,
+        "samples": [
+          "[INFERRED:oyster-creek-shutdown-economics]",
+          "[INFERRED:IPA-LTRRPP-2023]",
+          "[INFERRED:ComEd-electricity-property]",
+          "[INFERRED:ICC-nuclear-policy-order]",
+          "[INFERRED:Indiana-electricity-UCC]",
+          "[INFERRED:FERC-change-of-control-policy]",
+          "[INFERRED:pizza-vending-machine-precedent]",
+          "[INFERRED:seabrook-nuclear-PPA-precedent]",
+          "[INFERRED:ICC-v-FERC-renewable-precedent]",
+          "[INFERRED:assignment-restriction-enforcement]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 11,
+        "samples": [
+          "[METHODOLOGY: NREL wind capacity factors for Illinois (35-42% annual, higher overnight/shoulder hours)]",
+          "[METHODOLOGY: Merit order dispatch modeling using PLEXOS software; PJM historical renewable generation and pricing data; NREL renewable capacity factor profiles; Illinois Commerce Commission renewable procurement reports showing 8,200 MW renewable capacity already contracted for delivery 2025-2030]",
+          "[METHODOLOGY: Review of 18 publicly available nuclear PPAs executed 2010-2025, identifying anti-assignment provisions in 14 agreements (78%)]",
+          "[METHODOLOGY: PJM historical load and renewable generation data 2020-2024; NREL renewable capacity factor profiles for Illinois wind and solar; merit order dispatch simulation using PLEXOS market modeling software]",
+          "[METHODOLOGY: GLNPC operates at 93% capacity factor with NRC \"green\" Reactor Oversight Process status and only one Severity Level IV violation in 2024; historical nuclear plant performance data 2010-2024 shows <5% incidence of contract-terminating outages or NRC enforcement actions]",
+          "[METHODOLOGY: Economic incentive analysis\u2014NIEC faces $1.42B annual take-or-pay liability, grid reliability requirements under Illinois Clean Energy Jobs Act, and 7-10 year lead time for alternative baseload supply; factors weighing against unreasonable withholding]",
+          "[METHODOLOGY: PLEXOS market modeling using NREL solar capacity factors for Illinois (18-22% annual, 60-80% daytime)]",
+          "[METHODOLOGY: Analysis of Illinois Clean Energy Jobs Act renewable energy mandates (40% by 2030, 50% by 2040) causing zero-marginal-cost wind/solar displacement of nuclear baseload under merit order dispatch; PJM capacity market reform uncertainty under FERC Order No. 2023; Congressional Research Service merchant nuclear economics study indicating break-even energy prices of $30-35/MWh]",
+          "[METHODOLOGY: Probability-weighted scenario analysis based on (1) 70% probability merchant revenues fall below break-even, (2) 40-50% probability APH voluntarily shuts down vs. operating at sustained losses, (3) countervailing 30% probability APH secures alternative revenue (hyperscaler PPA, ZEC extension, capacity market reforms)]",
+          "[METHODOLOGY: Industry precedent analysis\u2014commercial contracts specialist reviewed 18 nuclear PPAs executed 2010-2025, finding anti-assignment provisions in 14 agreements (78%)]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 8,
+        "samples": [
+          "[ASSUMED:Williston-assignment-treatise]",
+          "[ASSUMED:law-review-PPA-assignment]",
+          "[ASSUMED: Illinois-governing-law-standard]",
+          "[ASSUMED: 8% WACC - adjust per acquirer's actual cost of capital]",
+          "[ASSUMED:FRBNY-take-or-pay]"
+        ]
+      },
+      "usc_citations": {
+        "count": 6,
+        "samples": [
+          "16 U.S.C. \u00a7 824",
+          "16 U.S.C. \u00a7\u00a7 791",
+          "42 U.S.C. \u00a7 2184"
+        ]
+      },
+      "cfr_citations": {
+        "count": 1,
+        "samples": [
+          "18 C.F.R. \u00a7 35.36"
+        ]
+      },
+      "federal_reporter": {
+        "count": 17,
+        "samples": [
+          "363 F.2d 312",
+          "615 F.2d 561",
+          "766 F.3d 241",
+          "775 F.2d 305",
+          "966 F.2d 273",
+          "721 F.3d 764",
+          "861 F.3d 82"
+        ]
+      },
+      "section_symbols": {
+        "count": 20,
+        "samples": [
+          "\u00a7 824",
+          "\u00a7 2",
+          "\u00a7 30",
+          "\u00a7 1",
+          "\u00a7 261",
+          "\u00a7 2184",
+          "\u00a7 322",
+          "\u00a7 35",
+          "\u00a7\u00a7 791",
+          "\u00a7 316"
+        ]
+      }
+    },
+    "section-reports/section-IV-J-employment.md": {
+      "verification_tags": {
+        "count": 84,
+        "samples": [
+          "[VERIFIED: Employment-labor-report.md T11:Line 332-336]",
+          "[VERIFIED: NUREG-1556, Vol. 15, Rev. 1 (Sept. 2016)]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-50/section-50.40]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-50/section-50.80]",
+          "[VERIFIED: 554 U.S. 84, 97 (2008)]",
+          "[VERIFIED: Fact-registry.md Line 33-35]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-55]",
+          "[VERIFIED: Employment-labor-report.md T11:Line 685]",
+          "[VERIFIED: https://www.law.cornell.edu/uscode/text/29/chapter-23]",
+          "[VERIFIED: Illinois General Assembly]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 31,
+        "samples": [
+          "[INFERRED: Carpenters Dist. Council precedent]",
+          "[INFERRED: Smith v. Xerox precedent]",
+          "[INFERRED: Exelon/Oyster Creek license transfer]",
+          "[INFERRED:...]",
+          "[INFERRED: Calvert Cliffs/EDF license transfer precedent]",
+          "[INFERRED: Calvert Cliffs/EDF precedent]",
+          "[INFERRED: Smith v. Xerox statistical analysis]",
+          "[INFERRED: Citizens Awareness Network precedent]",
+          "[INFERRED: Citizens Awareness Network]",
+          "[INFERRED: Calvert Cliffs NAP provisions]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 16,
+        "samples": [
+          "[METHODOLOGY: Statutory certainty under 42 U.S.C. \u00a7 2133(d); Calvert Cliffs, Nine Mile Point, and all post-2010 foreign ownership approvals include similar NAP provisions]",
+          "[METHODOLOGY: Fed. R. Civ. P. 23(a) requirements analysis\u2014numerosity satisfied (35 potential class members), commonality likely satisfied (single RIF decision affecting all class members), typicality depends on individual circumstances, adequacy depends on Peterson's representation quality); ADEA class certification rates average 45-55% per Federal Judicial Center studies 2015-2023]",
+          "[METHODOLOGY: Comparable analysis of SEC Form 8-K filings, Exelon/Constellation 2022]",
+          "[METHODOLOGY: Nuclear Energy Institute 2023 compensation survey; expert judgment on retention competition]",
+          "[METHODOLOGY:...]",
+          "[METHODOLOGY: Exelon/Constellation 2022 management turnover data (40% non-retained management departed within 18 months); HR Policy Association M&A studies showing 50-70% senior management voluntary departure absent retention incentives]",
+          "[METHODOLOGY: Statistical certainty based on 7.5:1 termination rate ratio grossly exceeding 80% rule; absence of documented RFOA defense in transaction materials; *Smith v. Xerox* and *McDonnell Douglas* precedents finding liability on weaker statistical showings]",
+          "[METHODOLOGY: Comparable analysis of publicly disclosed retention terms]",
+          "[METHODOLOGY: Comparable analysis\u2014SEC EDGAR CIK 0001109357]",
+          "[METHODOLOGY: Expert Judgment based on (1) NRC practice generally accepting continuity of existing access authorizations for acquisition transactions, (2) heightened scrutiny for 45% foreign ownership potentially triggering enhanced background checks, (3) Pre-application meeting with NRC Office of Nuclear Security and Incident Response can clarify whether re-verification required]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 1,
+        "samples": [
+          "[ASSUMED: industry standard for corporate acquisitions]"
+        ]
+      },
+      "usc_citations": {
+        "count": 44,
+        "samples": [
+          "29 U.S.C. \u00a7 2104",
+          "29 U.S.C. \u00a7 2102",
+          "29 U.S.C. \u00a7\u00a7 2101",
+          "29 U.S.C. \u00a7 623",
+          "29 U.S.C. \u00a7 2101",
+          "29 U.S.C. \u00a7 216",
+          "42 U.S.C. \u00a7 2133",
+          "29 U.S.C. \u00a7 626",
+          "29 U.S.C. \u00a7\u00a7 621"
+        ]
+      },
+      "cfr_citations": {
+        "count": 46,
+        "samples": [
+          "10 C.F.R. \u00a7 73.56",
+          "10 C.F.R. \u00a7 73.21",
+          "10 C.F.R. \u00a7 50.40",
+          "10 C.F.R. \u00a7 73.2",
+          "10 C.F.R. \u00a7 50.54",
+          "29 C.F.R. \u00a7 1607.4",
+          "10 C.F.R. \u00a7\u00a7 50.40",
+          "29 C.F.R. \u00a7 1625.7",
+          "10 C.F.R. \u00a7 50.80",
+          "10 C.F.R. \u00a7 50.54."
+        ]
+      },
+      "federal_reporter": {
+        "count": 17,
+        "samples": [
+          "15 F.3d 1275",
+          "255 F.3d 1322",
+          "196 F.3d 358",
+          "173 F.3d 175",
+          "59 F.3d 284",
+          "191 F.3d 948"
+        ]
+      },
+      "section_symbols": {
+        "count": 103,
+        "samples": [
+          "\u00a7 623",
+          "\u00a7 1625",
+          "\u00a7 73",
+          "\u00a7 50",
+          "\u00a7 1607",
+          "\u00a7 216",
+          "\u00a7 2101",
+          "\u00a7 103",
+          "\u00a7\u00a7 50",
+          "\u00a7 2133"
+        ]
+      }
+    },
+    "section-reports/section-IV-K-tax-structure.md": {
+      "verification_tags": {
+        "count": 143,
+        "samples": [
+          "[VERIFIED: report calculates seller tax cost at $252M-$357M assuming 21% corporate tax rate on gain of $900M-$1.4B]",
+          "[VERIFIED: report calculates $1.0B NPV benefit from IRC \u00a7 754 election and describes impact on IRR]",
+          "[VERIFIED: IRS.gov]",
+          "[VERIFIED: 26 U.S.C. \u00a7 197(d)(1)(F); 26 C.F.R. \u00a7 1.197-2]",
+          "[VERIFIED: 26 C.F.R. \u00a7 1.468A-6]",
+          "[VERIFIED: report describes IRC \u00a7 468A deductibility and coordination with 10 CFR 50.75]",
+          "[VERIFIED: 26 U.S.C. \u00a7 1060(a)]",
+          "[VERIFIED: tax-structure-report.md line 80; consistent with nuclear utility asset WACC estimates]",
+          "[VERIFIED: report provides numerical example of $150M gross-up resulting in buyer retaining $850M benefit (85% of $1.0B NPV)]",
+          "[VERIFIED: 26 U.S.C. \u00a7 197(d)(1)(A)]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 4,
+        "samples": [
+          "[INFERRED: Bankruptcy docket; tax election provisions referenced in expert testimony]",
+          "[INFERRED:precedent]",
+          "[INFERRED: NDT adequacy calculation referenced in fact registry]",
+          "[INFERRED: report references *Jones* for proposition that IRC \u00a7 754 election must be timely filed]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 39,
+        "samples": [
+          "[METHODOLOGY: Arithmetic calculation: $1.42B Illinois sales \u00f7 $1.42B total sales = 100%]",
+          "[METHODOLOGY: Estimated depreciation for mature nuclear plant with original construction cost $4-5B (1970s-1980s dollars), escalated to $8-10B replacement cost, with 80-90% accumulated depreciation; remaining depreciable basis ~$1.5B-$2.0B \u00f7 15-20 year remaining life = ~$75M-$133M annually, increased to $180M to account for ongoing capital additions; estimate consistent with tax-structure-report.md line 637]",
+          "[METHODOLOGY: Expert judgment based on (1) market practice for IRC \u00a7 754 elections in M&A transactions, (2) seller's economic incentive to cooperate given purchase price gross-up, (3) low compliance risk for properly documented elections]",
+          "[METHODOLOGY: Probability calculation combines three independent probabilities using multiplicative rule: 90% (seller cooperation) \u00d7 99% (filing compliance) \u00d7 95% (IRS acceptance) = 84.65%, rounded to 92.5% to account for correlation among factors and qualitative upward adjustment for commercial reasonableness of terms]",
+          "[METHODOLOGY: Ancillary services revenue may be treated as \"incidental\" to primary electricity sales under Illinois regulations and sourced the same as primary sales; alternatively, if separately sourced, revenue is de minimis (<$15M on $1.42B total revenue) and does not materially affect 100% Illinois apportionment]",
+          "[METHODOLOGY: Expert judgment based on GLNPC's business model as single-site nuclear plant with bilateral PPA; no evidence in specialist reports of out-of-state revenue sources]",
+          "[METHODOLOGY: Probability of material Illinois Department challenge is 20-30% based on practitioner experience with single-state utilities; expected value of challenge is favorable (not adverse) because successful challenge would reduce Illinois apportionment below 100%, reducing Illinois tax liability]",
+          "[METHODOLOGY: Expert judgment based on GLNPC's NDT balance of $1.58B-$1.62B exceeding NRC minimum by 27%, indicating prepayment method under 10 CFR 50.75(e)(1)(i)]",
+          "[METHODOLOGY: Cannot quantify Finnigan impact without APH combined group data showing (1) out-of-state entities, (2) Illinois-sourced sales by those entities, (3) nexus status of those entities in Illinois]",
+          "[METHODOLOGY: If $300M-$350M reclassified as excess, incremental tax = ($300M-$350M) \u00d7 5% return \u00d7 (21% - 20%) = $15M-$17.5M annually; cumulative over 15 years = $225M-$262.5M undiscounted; NPV at 7% = ($15M-$17.5M) \u00d7 9.108 (15-year annuity factor) = $137M-$159M, but risk probability only 5%, so expected value = $137M-$159M \u00d7 5% = $6.8M-$8.0M, rounded to $80M-$100M gross exposure in risk table]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 0,
+        "samples": []
+      },
+      "usc_citations": {
+        "count": 27,
+        "samples": [
+          "26 U.S.C. \u00a7\u00a7 468",
+          "26 U.S.C. \u00a7 468",
+          "26 U.S.C. \u00a7 741",
+          "26 U.S.C. \u00a7 1060",
+          "26 U.S.C. \u00a7 743",
+          "26 U.S.C. \u00a7 754",
+          "26 U.S.C. \u00a7 197",
+          "26 U.S.C. \u00a7\u00a7 168",
+          "26 U.S.C. \u00a7 755",
+          "26 U.S.C. \u00a7 338"
+        ]
+      },
+      "cfr_citations": {
+        "count": 21,
+        "samples": [
+          "26 C.F.R. \u00a7 1.743",
+          "26 C.F.R. \u00a7 1.755",
+          "26 C.F.R. \u00a7 301.7701",
+          "26 C.F.R. \u00a7 1.1060",
+          "26 C.F.R. \u00a7 1.338",
+          "26 C.F.R. \u00a7 1.197",
+          "26 C.F.R. \u00a7\u00a7 1.468",
+          "26 C.F.R. \u00a7 1.468",
+          "26 C.F.R. \u00a7 1.754"
+        ]
+      },
+      "federal_reporter": {
+        "count": 3,
+        "samples": [
+          "634 F.2d 12"
+        ]
+      },
+      "section_symbols": {
+        "count": 290,
+        "samples": [
+          "\u00a7 705",
+          "\u00a7 5",
+          "\u00a7 754",
+          "\u00a7\u00a7 1",
+          "\u00a7 734",
+          "\u00a7\u00a7 734",
+          "\u00a7 167",
+          "\u00a7 6664",
+          "\u00a7 168",
+          "\u00a7 301"
+        ]
+      }
+    },
+    "section-reports/section-IV-L-security-safeguards.md": {
+      "verification_tags": {
+        "count": 177,
+        "samples": [
+          "[VERIFIED: https://www.nrc.gov/reading-rm/doc-collections/nuregs/staff/sr1649/]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-73/section-73.55]",
+          "[VERIFIED: NRC-ADAMS-ML13274A223]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-50/section-50.80]",
+          "[VERIFIED: Federal Register document 2009-E9-6102]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-26/section-26.77]",
+          "[VERIFIED: https://www.ecfr.gov/current/title-10/chapter-I/part-50/section-50.33]",
+          "[VERIFIED: Westlaw-2006-WL-2135462]",
+          "[VERIFIED: /reports/2025-12-10-1765324800/security-safeguards-report.md]",
+          "[VERIFIED: Westlaw-2014-WL-2440287]"
+        ]
+      },
+      "inferred_tags": {
+        "count": 56,
+        "samples": [
+          "[INFERRED: NRC IMC 2201 Security Baseline Inspection Program framework for FOF evaluations]",
+          "[INFERRED: DOE clearance processing requirements]",
+          "[INFERRED: Industry survey data on cyber security inspection finding rates]",
+          "[INFERRED: FBI counterintelligence risk factors for sovereign wealth funds]",
+          "[INFERRED: NRC Staff observation in transaction precedent]",
+          "[INFERRED: Industry standard staffing calculation methodology]",
+          "[INFERRED: NRC-SER-Exelon-Constellation-2012]",
+          "[INFERRED: Industry precedent severe cyber security inspection finding]",
+          "[INFERRED: QIA governance structure and counterintelligence concerns]",
+          "[INFERRED: DOE IG audit of foreign national clearance processing statistics]"
+        ]
+      },
+      "methodology_tags": {
+        "count": 33,
+        "samples": [
+          "[METHODOLOGY: Expert judgment based on EDF-Constellation precedent where French government representatives were denied access despite France's NATO ally status and nuclear weapons state status, suggesting NRC applies restrictions even to close allies]",
+          "[METHODOLOGY: Expert judgment based on industry best practices and Exelon precedent where retention bonuses reduced peak turnover from projected 22-25% to actual 18%]",
+          "[METHODOLOGY: NRC enforcement data indicating 5-10% of FOF evaluations result in enforcement actions; license transfer delays occur when corrective actions are incomplete at time of transfer application]",
+          "[METHODOLOGY: Industry standard CDA identification per Specialist Report T13 Line 219-223]",
+          "[METHODOLOGY: Industry precedent from Exelon-Constellation (18% turnover) and Vistra-Comanche Peak (22% turnover) demonstrates elevated attrition during ownership transitions; APH's PE+foreign ownership structure adds additional risk factors beyond those present in utility-to-utility transfers]",
+          "[METHODOLOGY: Best practices from Exelon-Constellation and Vistra-Comanche Peak precedents]",
+          "[METHODOLOGY: Industry precedent for single-finding corrective actions at plants with existing cyber security programs requiring incremental improvements rather than wholesale redesign]",
+          "[METHODOLOGY: Expected value calculation using probability-weighted scenarios]",
+          "[METHODOLOGY: Industry cost data for nuclear facility security officer recruiting and training]",
+          "[METHODOLOGY: Industry timeline for initial cyber security plan approval + assessment of currency risk]"
+        ]
+      },
+      "assumed_tags": {
+        "count": 0,
+        "samples": []
+      },
+      "usc_citations": {
+        "count": 10,
+        "samples": [
+          "42 U.S.C. \u00a7 2167",
+          "42 U.S.C. \u00a7 2201"
+        ]
+      },
+      "cfr_citations": {
+        "count": 46,
+        "samples": [
+          "10 C.F.R. \u00a7 73.55",
+          "10 C.F.R. \u00a7 73.56",
+          "10 C.F.R. \u00a7 26.205",
+          "10 C.F.R. \u00a7 73.1",
+          "10 C.F.R. \u00a7 50.80",
+          "10 C.F.R. \u00a7 26.1",
+          "10 C.F.R. \u00a7 26.77",
+          "10 C.F.R. \u00a7 26.31",
+          "10 C.F.R. \u00a7 73.54",
+          "10 C.F.R. \u00a7 50.33"
+        ]
+      },
+      "federal_reporter": {
+        "count": 6,
+        "samples": [
+          "751 F.3d 1076",
+          "457 F.3d 941"
+        ]
+      },
+      "section_symbols": {
+        "count": 56,
+        "samples": [
+          "\u00a7 73",
+          "\u00a7 50",
+          "\u00a7 2201",
+          "\u00a7 26",
+          "\u00a7 2167"
+        ]
+      }
+    }
+  },
+  "totals": {
+    "verification_tags": 1400,
+    "inferred_tags": 259,
+    "methodology_tags": 270,
+    "assumed_tags": 83,
+    "usc_citations": 264,
+    "cfr_citations": 321,
+    "federal_reporter": 84,
+    "section_symbols": 1072
+  },
+  "coverage_pct": 69.58250497017893
+}

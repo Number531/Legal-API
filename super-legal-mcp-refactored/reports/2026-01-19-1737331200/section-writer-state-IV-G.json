@@ -1,0 +1,72 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Tax Structure & Capital Optimization",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.G (Tax Structure & Capital Optimization) from specialist reports",
+    "progress": "ALL PHASES COMPLETE",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": [
+      "section_id=G",
+      "$148.36M NPV tax benefit from HoldCo debt structure",
+      "5 findings analyzed with CREAC structure",
+      "All cross-refs implemented (IV.A, IV.H, IV.F)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "tax-structure-analyst-report.md",
+      "financial-analyst-report.md",
+      "research-plan.md",
+      "orchestrator-state.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 7420,
+    "findings_written": "5/5",
+    "footnotes_count": 217,
+    "last_checkpoint": "2026-01-20T00:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/tax-structure-analyst-report.md",
+    "specialist-reports/financial-analyst-report.md",
+    "research-plan.md",
+    "orchestrator-state.md"
+  ],
+
+  "quality_validation": {
+    "word_count_target_met": true,
+    "all_subsections_present": true,
+    "all_high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "verification_tags_present": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

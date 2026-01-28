@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Streaming</title>
+</head>
+<body>
+    <h1>Test Streaming Events</h1>
+    <button onclick="testStream()">Test Stream</button>
+    <div id="output"></div>
+    
+    <script>
+        function testStream() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<h3>Starting stream...</h3>';
+            
+            const eventSource = new EventSource('http://localhost:8089/api/gpt5/stream?query=Find%20recent%20bankruptcy%20cases%20for%20chemical%20companies');
+            
+            eventSource.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                console.log('Event received:', data);
+                
+                const div = document.createElement('div');
+                div.style.margin = '10px';
+                div.style.padding = '10px';
+                div.style.border = '1px solid #ccc';
+                
+                if (data.type === 'enhanced_tool_call') {
+                    div.style.backgroundColor = '#e3f2fd';
+                    div.innerHTML = `<strong>🔧 Tool Call:</strong> ${data.tool.name}<br>
+                                    Progress: ${data.progress.current}/${data.progress.total}<br>
+                                    Category: ${data.progress.category}`;
+                } else if (data.type === 'enhanced_tool_complete') {
+                    div.style.backgroundColor = data.success ? '#e8f5e9' : '#ffebee';
+                    div.innerHTML = `<strong>✅ Tool Complete:</strong> ${data.tool}<br>
+                                    Success: ${data.success}`;
+                } else if (data.type === 'enhanced_thinking') {
+                    div.style.backgroundColor = '#fff3e0';
+                    div.innerHTML = `<strong>💭 Thinking:</strong> ${data.text}`;
+                } else if (data.type === 'delta') {
+                    div.innerHTML = `<strong>📝 Content:</strong> ${data.text}`;
+                } else if (data.type === 'final') {
+                    div.style.backgroundColor = '#f5f5f5';
+                    div.innerHTML = `<strong>🏁 Final:</strong> Completed`;
+                    eventSource.close();
+                } else {
+                    div.innerHTML = `<strong>${data.type}:</strong> ${JSON.stringify(data)}`;
+                }
+                
+                output.appendChild(div);
+            };
+            
+            eventSource.onerror = (error) => {
+                console.error('EventSource error:', error);
+                output.innerHTML += '<div style="color: red;">Error occurred</div>';
+                eventSource.close();
+            };
+        }
+    </script>
+</body>
+</html>

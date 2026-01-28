@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Legal Research — Modern Frontend</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="brand">
+      <div class="dot" id="healthDot"></div>
+      <div>
+        <div class="title">Claude Legal Research</div>
+        <div class="subtitle" id="modelSub" aria-live="polite">Initializing…</div>
+      </div>
+    </div>
+    <div class="controls">
+      <select id="endpointSelect" class="select" aria-label="Response mode">
+        <option value="stream">Streaming</option>
+        <option value="research">Non‑streaming</option>
+      </select>
+      <select id="maxTokens" class="select" aria-label="Max tokens">
+        <option value="4000">4,000</option>
+        <option value="8000" selected>8,000</option>
+        <option value="16000">16,000</option>
+        <option value="32000">32,000 (thinking)</option>
+      </select>
+      <label class="toggle" title="Buffer main output until final">
+        <input type="checkbox" id="finalOnly" aria-label="Final-only output" />
+        <span>Final-only</span>
+      </label>
+      <label class="toggle" title="Stateless deterministic testing (ignore session)">
+        <input type="checkbox" id="deterministicMode" aria-label="Deterministic test mode" />
+        <span>Deterministic</span>
+      </label>
+      <button id="newSessionBtn" class="btn ghost" aria-label="Start new conversation">New Conversation</button>
+      <button id="insightsToggle" class="btn" aria-label="Open insights" aria-controls="insights" aria-expanded="false">Insights</button>
+    </div>
+  </header>
+
+  <div class="progress"><div class="bar" id="progressBar"></div></div>
+
+  <main class="main" role="main">
+    <section class="chat" id="chat" role="log" aria-live="polite" aria-label="Chat transcript"></section>
+    <aside class="insights" id="insights" role="complementary" aria-label="Insights drawer" aria-hidden="true">
+      <div class="insights-header">
+        <div class="tabs">
+          <button class="tab active" data-tab="thinking">Thinking</button>
+          <button class="tab" data-tab="tools">Tools</button>
+          <button class="tab" data-tab="metrics">Metrics</button>
+        </div>
+        <button class="btn ghost" id="closeInsights">✕</button>
+      </div>
+      <div class="insights-body">
+        <div class="panel" data-panel="thinking">
+          <div class="panel-title">Reasoning Stream</div>
+          <pre id="thinking" class="thinking" aria-live="polite"></pre>
+        </div>
+        <div class="panel" data-panel="tools" style="display:none">
+          <div class="panel-title">Tool Calls</div>
+          <div id="tools" aria-live="polite"></div>
+        </div>
+        <div class="panel" data-panel="metrics" style="display:none">
+          <div class="panel-title">Session Metrics</div>
+          <div class="metrics">
+            <div class="metric"><div class="metric-label">Tools</div><div id="mTools" class="metric-value">0</div></div>
+            <div class="metric"><div class="metric-label">Tokens</div><div id="mTokens" class="metric-value">0</div></div>
+            <div class="metric"><div class="metric-label">Time</div><div id="mTime" class="metric-value">0s</div></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="meta" id="meta">
+      <span id="sessionMeta" class="pill">Session: none</span>
+      <span id="toolsMeta" class="pill">Tools: 0</span>
+      <span id="tokensMeta" class="pill">Tokens: 0</span>
+      <span id="timeMeta" class="pill">Time: 0s</span>
+    </div>
+    <div class="composer">
+      <textarea id="input" class="input" placeholder="Ask a legal research question…" aria-label="Message input"></textarea>
+      <button id="send" class="btn primary" aria-label="Send message">Send</button>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,397 @@
+/**
+ * EPA ECHO (Enforcement and Compliance History Online) API Client
+ * Provides facility search and detailed compliance reporting
+ * Docs: ECHO REST Services (get_facilities, get_dfr, get_violations, get_enforcement)
+ */
+
+import { makeApiRequest } from '../utils/apiHelpers.js';
+
+/**
+ * Custom error class for parameter validation failures
+ * These should NOT trigger circuit breaker failures since they're client-side errors
+ */
+class ParameterValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ParameterValidationError';
+    this.isValidationError = true;
+  }
+}
+
+export class EPAComplianceClient {
+  constructor(rateLimiter) {
+    this.rateLimiter = rateLimiter;
+  }
+
+  /**
+   * Search EPA-regulated facilities
+   */
+  async searchFacilities(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+
+    const {
+      facility_name,
+      company_name,
+      city,
+      state,
+      zip_code,
+      compliance_status,
+      violations_last_3_years,
+      // Optional QueryID pagination support
+      query_id,
+      page_number,
+      limit = 50
+    } = args;
+
+    // If query_id is provided, use get_qid endpoint for pagination
+    if (query_id) {
+      const params = {
+        output: 'JSON',
+        qid: query_id,
+        pageno: page_number || 1
+      };
+
+      const response = await makeApiRequest('/echo_rest_services.get_qid', params, {
+        apiType: 'epa_echo',
+        rateLimiter: this.rateLimiter
+      });
+
+      const facilities = response.Results?.Facilities || [];
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            facilities: facilities.slice(0, 25).map(f => ({
+              name: f.FacName,
+              epa_registry_id: f.RegistryID || f.FRSID,
+              location: {
+                address: f.FacStreet,
+                city: f.FacCity,
+                state: f.FacState
+              },
+              compliance_status: f.FacComplianceStatus,
+              total_penalties: f.FacTotalPenalties,
+              clean_air: f.CAAFlag === 'Y',
+              clean_water: f.CWAFlag === 'Y'
+            })),
+            total_facilities: response.Results?.QueryRows || 0,
+            query_id: query_id,
+            page_number: response.Results?.PageNo || page_number || 1,
+            high_priority_violators: facilities.filter(f => f.CAAHpvFlag === 'Y').length
+          }, null, 2)
+        }]
+      };
+    }
+
+    // Initial query - returns QueryID for large result sets
+    // Column mapping: 1=Name, 2=RegistryID, 3=Street, 4=City, 5=State, 12=ComplianceStatus, 15=TotalPenalties, 22=CAA, 23=CWA
+    const params = {
+      output: 'JSON',
+      qcolumns: '1,2,3,4,5,12,15,22,23',  // Essential columns only to reduce response size
+      p_rows: Math.min(Number(limit) || 25, 25)  // Reduced max rows from 100 to 25
+    };
+
+    if (facility_name) params.p_fn = facility_name;
+    if (company_name) params.p_owname = company_name;
+    if (city) params.p_ct = city;
+    if (state) params.p_st = state;
+    if (zip_code) params.p_zip = zip_code;
+
+    if (compliance_status === 'violation') {
+      params.p_qnc = 'Y'; // quarters in non-compliance
+    }
+    if (violations_last_3_years) {
+      params.p_qiv = '12'; // last 12 quarters
+    }
+    
+    // Prevent overly broad queries that EPA will reject
+    const hasSpecificLocation = city || zip_code || facility_name;
+    const isLikelyBroad = state && !hasSpecificLocation;
+    
+    if (isLikelyBroad && company_name) {
+      // For company searches without specific location, require more specific company name
+      if (company_name.length < 5 || company_name.toLowerCase() === 'chemical') {
+        throw new ParameterValidationError('EPA search too broad. Please provide: 1) More specific company name, 2) City name, or 3) ZIP code');
+      }
+    } else if (isLikelyBroad) {
+      // State-only searches are too broad
+      throw new ParameterValidationError('EPA search requires more specific criteria. Please add: city, zip_code, or facility_name');
+    }
+
+    const response = await makeApiRequest('/echo_rest_services.get_facilities', params, {
+      apiType: 'epa_echo',
+      rateLimiter: this.rateLimiter
+    });
+
+    // Check if we got an error about query being too broad
+    if (response.Results?.Error?.ErrorMessage) {
+      // If query is too broad, we need more specific parameters
+      throw new ParameterValidationError(`EPA Query Error: ${response.Results.Error.ErrorMessage}. Please provide more specific search criteria.`);
+    }
+
+    // Check if we got a QueryID (for large result sets)
+    const queryId = response.Results?.QueryID;
+    
+    // If we have a QueryID but no facilities, fetch them with get_qid
+    if (queryId && (!response.Results?.Facilities || response.Results.Facilities.length === 0)) {
+      const qidParams = {
+        output: 'JSON',
+        qid: queryId,
+        pageno: 1,
+        qcolumns: '1,2,3,4,5,12,15,22,23',  // Same reduced columns
+        p_rows: 25  // Limit rows for qid response too
+      };
+
+      const qidResponse = await makeApiRequest('/echo_rest_services.get_qid', qidParams, {
+        apiType: 'epa_echo',
+        rateLimiter: this.rateLimiter
+      });
+
+      const facilities = qidResponse.Results?.Facilities || [];
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            facilities: facilities.slice(0, 25).map(f => ({
+              name: f.FacName,
+              epa_registry_id: f.RegistryID || f.FRSID,
+              location: {
+                address: f.FacStreet,
+                city: f.FacCity,
+                state: f.FacState
+              },
+              compliance_status: f.FacComplianceStatus,
+              total_penalties: f.FacTotalPenalties,
+              clean_air: f.CAAFlag === 'Y',
+              clean_water: f.CWAFlag === 'Y'
+            })),
+            total_facilities: qidResponse.Results?.QueryRows || response.Results?.QueryRows || 0,
+            query_id: queryId,
+            page_number: 1,
+            high_priority_violators: facilities.filter(f => f.CAAHpvFlag === 'Y').length
+          }, null, 2)
+        }]
+      };
+    }
+
+    // For small result sets, facilities might be returned directly
+    const facilities = response.Results?.Facilities || [];
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          facilities: facilities.map(f => ({
+            name: f.FacName,
+            epa_registry_id: f.RegistryID || f.FRSID,
+            company: f.FacParentCo,
+            location: {
+              address: f.FacStreet,
+              city: f.FacCity,
+              state: f.FacState,
+              zip: f.FacZip
+            },
+            compliance: {
+              current_status: f.FacComplianceStatus,
+              quarters_in_noncompliance: f.FacQtrsWithNC,
+              formal_enforcement_actions: f.FacFormalActionCount,
+              total_penalties: f.FacTotalPenalties
+            },
+            programs: {
+              clean_air: f.AIRFlag === 'Y' || f.CAAFlag === 'Y',
+              clean_water: f.CWAFlag === 'Y',
+              rcra: f.RCRAFlag === 'Y'
+            }
+          })),
+          total_facilities: response.Results?.QueryRows || 0,
+          query_id: queryId || null,
+          high_priority_violators: facilities.filter(f => f.CAAHpvFlag === 'Y').length
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get detailed compliance report for a specific facility (DFR)
+   */
+  async getFacilityComplianceReport(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+
+    const { facility_id, include_violations = true, include_enforcement = true } = args;
+    if (!facility_id) {
+      throw new Error('facility_id is required');
+    }
+
+    const baseParams = { output: 'JSON', p_id: facility_id };
+
+    const report = {};
+
+    // DFR (Detailed Facility Report)
+    const dfr = await makeApiRequest(
+      '/dfr_rest_services.get_dfr',
+      baseParams,
+      { apiType: 'epa_echo', rateLimiter: this.rateLimiter }
+    );
+    report.facility = dfr.Results?.Facility || dfr.Facility || {};
+    report.compliance_summary = dfr.Results?.ComplianceSummary || dfr.ComplianceSummary || {};
+    report.three_year_compliance = dfr.Results?.ThreeYearComplianceHistory || dfr.ThreeYearComplianceHistory || [];
+
+    if (include_violations) {
+      try {
+        const violations = await makeApiRequest(
+          '/echo_rest_services.get_violations',
+          baseParams,
+          { apiType: 'epa_echo', rateLimiter: this.rateLimiter }
+        );
+        report.violations = violations.Results?.Violations || violations.Violations || [];
+      } catch (error) {
+        console.error('Error fetching violations:', error);
+        report.violations = [];
+      }
+    }
+
+    if (include_enforcement) {
+      try {
+        const enforcement = await makeApiRequest(
+          '/echo_rest_services.get_enforcement',
+          baseParams,
+          { apiType: 'epa_echo', rateLimiter: this.rateLimiter }
+        );
+        report.enforcement_actions = enforcement.Results?.EnforcementActions || enforcement.EnforcementActions || [];
+      } catch (error) {
+        console.error('Error fetching enforcement actions:', error);
+        report.enforcement_actions = [];
+      }
+    }
+
+    return {
+      content: [{ type: 'text', text: JSON.stringify(report, null, 2) }]
+    };
+  }
+
+  /**
+   * Search violations for a facility and optionally filter by program
+   * Note: This uses the DFR endpoint as the violations endpoint requires specific formats
+   */
+  async searchViolations(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+
+    const { facility_id, program, date_after, date_before, limit = 200 } = args;
+    if (!facility_id) {
+      throw new Error('facility_id is required');
+    }
+
+    try {
+      // Use the DFR (Detailed Facility Report) to get violations
+      // This is more reliable than the direct violations endpoint
+      const baseParams = { output: 'JSON', p_id: facility_id };
+      
+      // Try the DFR endpoint first
+      const dfrResponse = await makeApiRequest(
+        '/dfr_rest_services.get_dfr',
+        baseParams,
+        { apiType: 'epa_echo', rateLimiter: this.rateLimiter }
+      );
+      
+      // Extract violations from the DFR response
+      let violations = [];
+      
+      // Check various possible locations for violations in the response
+      if (dfrResponse.Results?.ViolationsHistory) {
+        violations = dfrResponse.Results.ViolationsHistory;
+      } else if (dfrResponse.ViolationsHistory) {
+        violations = dfrResponse.ViolationsHistory;
+      } else if (dfrResponse.Results?.Violations) {
+        violations = dfrResponse.Results.Violations;
+      } else if (dfrResponse.Violations) {
+        violations = dfrResponse.Violations;
+      }
+      
+      // If no violations found in DFR, try to get compliance summary
+      if (violations.length === 0 && dfrResponse.Results?.ComplianceSummary) {
+        // Extract violation indicators from compliance summary
+        const summary = dfrResponse.Results.ComplianceSummary;
+        const violationInfo = {
+          quarters_in_noncompliance: summary.QtrsInNC || 0,
+          current_status: summary.Status || 'Unknown',
+          has_violations: (summary.QtrsInNC && parseInt(summary.QtrsInNC) > 0) || false
+        };
+        
+        // Return summary info if no detailed violations available
+        return {
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              facility_id,
+              message: 'Detailed violations not available. Showing compliance summary.',
+              compliance_summary: violationInfo,
+              count: 0,
+              results: []
+            }, null, 2)
+          }]
+        };
+      }
+
+      // Convert violations to array if needed
+      if (!Array.isArray(violations)) {
+        violations = Object.values(violations);
+      }
+
+      // Client-side filters
+      if (program) {
+        const p = String(program).toUpperCase();
+        violations = violations.filter(v => 
+          (v.Program || v.ViolProgram || '').toUpperCase().includes(p)
+        );
+      }
+      if (date_after) {
+        violations = violations.filter(v => {
+          const vDate = v.ViolationDate || v.ViolDate || v.Date;
+          return !vDate || vDate >= date_after;
+        });
+      }
+      if (date_before) {
+        violations = violations.filter(v => {
+          const vDate = v.ViolationDate || v.ViolDate || v.Date;
+          return !vDate || vDate <= date_before;
+        });
+      }
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            facility_id,
+            count: Math.min(violations.length, limit),
+            results: violations.slice(0, Math.min(Number(limit) || 200, violations.length))
+          }, null, 2)
+        }]
+      };
+      
+    } catch (error) {
+      // If all else fails, return a helpful error message
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            facility_id,
+            error: `Unable to retrieve violations: ${error.message}`,
+            suggestion: 'Try using get_epa_facility_compliance_report with include_violations=true instead',
+            count: 0,
+            results: []
+          }, null, 2)
+        }]
+      };
+    }
+  }
+}
+
+

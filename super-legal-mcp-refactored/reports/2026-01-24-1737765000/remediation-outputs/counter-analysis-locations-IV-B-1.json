@@ -1,0 +1,22 @@
+{
+  "section_id": "IV.B.1",
+  "section_info": {
+    "title": "Cyber Insurance Limits Inadequacy for HIPAA Ransomware Breach",
+    "has_counter_analysis_header": false,
+    "detections": 1,
+    "to_move": 1
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 1,
+      "line_number": 9932,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Rule:** Cyber liability insurance policies provide first-party coverage for business interruption losses, data breach response costs, and forensic investigation expenses when a \"security failure\" ca...",
+      "full_paragraph": "**Rule:** Cyber liability insurance policies provide first-party coverage for business interruption losses, data breach response costs, and forensic investigation expenses when a \"security failure\" causes \"suspension of computer operations\" or \"unauthorized disclosure of confidential information.\" *See* Universal Am. Corp. v. Nat'l Union Fire Ins. Co. of Pittsburgh, 2015 WL 1311599, at *4 (S.D. Fla. Mar. 23, 2015) [VERIFIED:Westlaw-2015-WL-1311599] (cyber policy's first-party business interruption coverage applies when ransomware attack causes network shutdown). Third-party coverage encompasses regulatory defense costs and penalties arising from privacy breaches, subject to sublimits. Standard cyber policies impose waiting periods (8-24 hours) before business interruption coverage attaches, but outages exceeding 12 days clearly satisfy coverage thresholds. *See* Retail Ventures, Inc. v. Nat'l Union Fire Ins. Co., 691 F.3d 821, 825 (6th Cir. 2012) [VERIFIED:Westlaw-2012-WL-3135746] (analyzing business interruption coverage for computer system failures under cyber policy).",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

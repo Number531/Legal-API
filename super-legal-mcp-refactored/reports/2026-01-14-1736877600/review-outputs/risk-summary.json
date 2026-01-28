@@ -1,0 +1,467 @@
+{
+  "status": "COMPLETE",
+  "metadata": {
+    "session_id": "2026-01-14-1736877600",
+    "generated_date": "2026-01-14T23:30:00Z",
+    "specialist_reports_analyzed": 14,
+    "methodology": "Pre-extracted exposures from specialist reports with time-based classification, category aggregation, probability weighting, and correlation adjustments",
+    "currency": "USD",
+    "confidence_level": "HIGH"
+  },
+  "aggregate_exposure": {
+    "gross_total": 347440000000,
+    "probability_weighted": 94340000000,
+    "correlation_adjusted": 88100000000,
+    "by_category": {
+      "regulatory_penalties": 8500000000,
+      "litigation_exposure": 9020000000,
+      "operational_risks": 29000000000,
+      "remediation_costs": 48000000000,
+      "labor_costs": 11700000000,
+      "franchise_risks": 32000000000,
+      "recycling_economics": 15500000000
+    },
+    "notes": "Amounts in cents (divide by 100 for dollars)"
+  },
+  "exposure_ranges": {
+    "p10_optimistic": 70600000000,
+    "p50_expected": 88100000000,
+    "p90_stress": 115200000000,
+    "methodology": "P10 = low + 10% of range; P50 = midpoint; P90 = high - 10% of range"
+  },
+  "escrow_recommendation": {
+    "recommended_amount": 40000000000,
+    "calculation_basis": "HIGH severity findings total × 1.2 buffer + largest single exposure coverage",
+    "coverage_ratio": 0.45,
+    "coverage_rating": "ADEQUATE",
+    "largest_exposure": 32000000000,
+    "largest_exposure_covered": true,
+    "time_horizon_status": "ALIGNED",
+    "recommended_release_schedule": "25% at 12mo (regulatory milestones), 30% at 24mo (labor settlements), 45% at 36-48mo (franchise renewals)",
+    "adequacy_flags": [
+      "Escrow covers largest single risk (Phoenix franchise $320M)",
+      "Covers 45% of probability-weighted exposure (standard range 40-60%)",
+      "Aligns with multi-year liability timelines (labor agreements, Superfund settlements)"
+    ]
+  },
+  "time_classification_summary": {
+    "one_time_exposures": {
+      "count": 8,
+      "total_nominal": 58000000000,
+      "total_present_value": 58000000000,
+      "description": "Single-event exposures: Superfund settlements, RCRA permit denials, strike costs"
+    },
+    "multi_year_exposures": {
+      "count": 5,
+      "total_nominal": 145000000000,
+      "total_present_value": 124800000000,
+      "dcf_rate": 0.08,
+      "description": "Phased programs with defined end: Labor wage increases (4yr), corrective action (10-15yr)"
+    },
+    "perpetual_exposures": {
+      "count": 2,
+      "total_annual": 180000000,
+      "total_npv": 225000000,
+      "description": "Recurring annual costs with no end: Customer attrition from strikes, ongoing compliance"
+    }
+  },
+  "high_severity_count": 5,
+  "critical_findings_count": 2,
+  "findings_by_domain": [
+    {
+      "domain": "Phoenix Franchise Renewal",
+      "specialist": "Municipal Franchise Analyst",
+      "finding_id": "CRITICAL-01",
+      "severity": "CRITICAL",
+      "exposure_nominal": 32000000000,
+      "exposure_present_value": 32000000000,
+      "time_profile": "ONE_TIME",
+      "probability": 0.40,
+      "weighted_exposure": 12800000000,
+      "finding_summary": "Phoenix franchise ($320M annual revenue, 35% of collection) expires Dec 2029. RFP Dec 2027. Retention probability 60-65% baseline, reduced to 35-50% if labor strike occurs or 20-25% labor cost disadvantage from pattern bargaining.",
+      "valuation_methodology": "First-year revenue loss at risk; franchise represents 35% of UESC collection revenue"
+    },
+    {
+      "domain": "Teamsters Pattern Bargaining",
+      "specialist": "Labor Relations Analyst",
+      "finding_id": "HIGH-01",
+      "severity": "HIGH",
+      "exposure_nominal": 11700000000,
+      "exposure_present_value": 10300000000,
+      "time_profile": "MULTI_YEAR",
+      "probability": 0.90,
+      "weighted_exposure": 9270000000,
+      "finding_summary": "Six Teamsters CBAs expire June 30, 2026 (5,400 employees). Pattern bargaining precedent: Phoenix Local 104 achieved 19% increase over 4 years (March 2024). Expected settlement: $117M over 4 years.",
+      "valuation_methodology": "DCF of annual wage increases at 8% discount rate over 4-year contract term"
+    },
+    {
+      "domain": "CERCLA Superfund Liability",
+      "specialist": "Environmental Compliance Analyst",
+      "finding_id": "HIGH-02",
+      "severity": "HIGH",
+      "exposure_nominal": 13045000000,
+      "exposure_present_value": 13045000000,
+      "time_profile": "ONE_TIME",
+      "probability": 0.70,
+      "weighted_exposure": 9131500000,
+      "finding_summary": "Three known Superfund sites: Tucson Airport ($27M-$35M settlement range, active § 107 litigation), Albuquerque South Valley ($18M-$51M if NPL-listed), Motorola 52nd Street ($2.75M-$3.45M de minimis settlement). Probability-weighted: $88.8M-$90.4M.",
+      "valuation_methodology": "Midpoint of settlement ranges; Tucson 70% settlement/30% litigation probability; Albuquerque 50% NPL listing probability"
+    },
+    {
+      "domain": "RCRA Sierra Vista Permit Renewal",
+      "specialist": "RCRA Compliance Analyst",
+      "finding_id": "HIGH-03",
+      "severity": "HIGH",
+      "exposure_nominal": 51000000000,
+      "exposure_present_value": 51000000000,
+      "time_profile": "ONE_TIME",
+      "probability": 0.45,
+      "weighted_exposure": 22950000000,
+      "finding_summary": "Sierra Vista TSDF ($85M revenue, 35% EBITDA margin) permit expires Dec 2025. EPA issued info deficiency letter Sept 2024. Scenarios: 55-60% approval without conditions ($0), 20-25% enhanced conditions ($3M-$36M), 10-15% delay ($181M-$363M discount), 5-10% denial ($425M-$510M).",
+      "valuation_methodology": "Probability-weighted across 4 scenarios; P50 expected value $75.6M"
+    },
+    {
+      "domain": "Landfill Airspace Depletion",
+      "specialist": "Environmental Compliance Analyst",
+      "finding_id": "HIGH-04",
+      "severity": "HIGH",
+      "exposure_nominal": 34000000000,
+      "exposure_present_value": 34000000000,
+      "time_profile": "ONE_TIME",
+      "probability": 0.45,
+      "weighted_exposure": 15300000000,
+      "finding_summary": "Desert View landfill expansion application (March 2025 hearing). Denial probability 40-50%. If denied: 1.6 years remaining airspace, $260M-$340M exposure (early closure + stranded assets + alternative disposal).",
+      "valuation_methodology": "Midpoint of denial cost range ($300M); accounts for early closure, stranded assets, and alternative disposal premium"
+    },
+    {
+      "domain": "Teamsters Strike Risk",
+      "specialist": "Labor Relations Analyst",
+      "finding_id": "MEDIUM-01",
+      "severity": "MEDIUM",
+      "exposure_nominal": 3000000000,
+      "exposure_present_value": 2925000000,
+      "time_profile": "MIXED",
+      "probability": 0.175,
+      "weighted_exposure": 511875000,
+      "finding_summary": "Strike probability 15-20% (June-Aug 2026). 8-10 week duration. One-time cost $24M-$30M + annual customer attrition $3M-$8M. Amplifies Phoenix franchise loss risk by 15 percentage points.",
+      "valuation_methodology": "One-time strike cost + NPV of 3-year customer attrition at 8% discount"
+    },
+    {
+      "domain": "Recycling Economics - MRF Losses",
+      "specialist": "Commercial Contracts Analyst",
+      "finding_id": "MEDIUM-02",
+      "severity": "MEDIUM",
+      "exposure_nominal": 15500000000,
+      "exposure_present_value": 14200000000,
+      "time_profile": "MULTI_YEAR",
+      "probability": 0.85,
+      "weighted_exposure": 12070000000,
+      "finding_summary": "Recycling segment: $240M revenue, -$29M EBITDA (-12% margin), 22% contamination rate. Technology investment required: $10M-$20M (4 MRFs). Status quo: -$145M cumulative 5-year loss. No EPR legislation in AZ/NV/NM.",
+      "valuation_methodology": "5-year cumulative EBITDA loss under status quo scenario; DCF at 8%"
+    },
+    {
+      "domain": "Davis-Bacon Violations",
+      "specialist": "Government Contracts Analyst",
+      "finding_id": "MEDIUM-03",
+      "severity": "MEDIUM",
+      "exposure_nominal": 850000000,
+      "exposure_present_value": 850000000,
+      "time_profile": "ONE_TIME",
+      "probability": 0.60,
+      "weighted_exposure": 510000000,
+      "finding_summary": "Fort Huachuca IDIQ ($350M, expires 2030): DOL investigation for prevailing wage violations. Back wages $2.8M-$8.5M + debarment risk. Hanford $120M contract also at risk if debarred.",
+      "valuation_methodology": "Midpoint of back wages range ($5.65M); excludes debarment impact (captured in contract value risk)"
+    },
+    {
+      "domain": "Interstate Commerce Clause",
+      "specialist": "Case Law Analyst",
+      "finding_id": "LOW-01",
+      "severity": "LOW",
+      "exposure_nominal": 1620000000,
+      "exposure_present_value": 1620000000,
+      "time_profile": "ONE_TIME",
+      "probability": 0.05,
+      "weighted_exposure": 81000000,
+      "finding_summary": "$14.4M annual benefit from interstate waste optimization (Las Vegas→CA $9M savings, CA backhaul $5.4M revenue). Hypothetical state restrictions <5% probability. 'Nevada AB 129' cited in materials does not exist.",
+      "valuation_methodology": "Worst-case loss of all interstate optimization if restrictions enacted and upheld (extremely low probability per 45 years Supreme Court precedent)"
+    },
+    {
+      "domain": "RCRA Corrective Action",
+      "specialist": "RCRA Compliance Analyst",
+      "finding_id": "MEDIUM-04",
+      "severity": "MEDIUM",
+      "exposure_nominal": 2500000000,
+      "exposure_present_value": 2100000000,
+      "time_profile": "MULTI_YEAR",
+      "probability": 0.75,
+      "weighted_exposure": 1575000000,
+      "finding_summary": "Sierra Vista: Ongoing groundwater treatment from 1998 release. Estimated remaining costs $15M-$25M over 10-15 years. Potential overruns $5M-$10M if remedy requires enhancement.",
+      "valuation_methodology": "Midpoint of cost range ($20M) + midpoint of potential overruns ($7.5M); DCF over 12-year average timeline at 8%"
+    }
+  ],
+  "top_10_exposures": [
+    {
+      "rank": 1,
+      "domain": "Phoenix Franchise Renewal",
+      "finding": "Franchise loss (35-40% probability baseline; 45-50% post-strike)",
+      "exposure_nominal": 32000000000,
+      "probability": 0.40,
+      "weighted": 12800000000,
+      "time_profile": "ONE_TIME",
+      "notes": "$320M annual revenue; RFP Dec 2027; expires Dec 2029"
+    },
+    {
+      "rank": 2,
+      "domain": "RCRA Permit Renewal",
+      "finding": "Sierra Vista TSDF permit denial/delay/enhanced conditions",
+      "exposure_nominal": 51000000000,
+      "probability": 0.45,
+      "weighted": 22950000000,
+      "time_profile": "ONE_TIME",
+      "notes": "$85M annual revenue facility; probability-weighted $75.6M across 4 scenarios"
+    },
+    {
+      "rank": 3,
+      "domain": "Landfill Airspace",
+      "finding": "Desert View expansion denial + early closure",
+      "exposure_nominal": 34000000000,
+      "probability": 0.45,
+      "weighted": 15300000000,
+      "time_profile": "ONE_TIME",
+      "notes": "1.6 years remaining airspace if expansion denied"
+    },
+    {
+      "rank": 4,
+      "domain": "Labor - Pattern Bargaining",
+      "finding": "Teamsters wage increases 19% over 4 years (8,200 employees)",
+      "exposure_nominal": 11700000000,
+      "probability": 0.90,
+      "weighted": 9270000000,
+      "time_profile": "MULTI_YEAR",
+      "notes": "Six CBAs expire June 30, 2026; Phoenix Local 104 precedent March 2024"
+    },
+    {
+      "rank": 5,
+      "domain": "CERCLA Superfund",
+      "finding": "Three known NPL sites (Tucson, Albuquerque, Motorola)",
+      "exposure_nominal": 13045000000,
+      "probability": 0.70,
+      "weighted": 9131500000,
+      "time_profile": "ONE_TIME",
+      "notes": "Tucson active § 107 litigation; settlement urgent to avoid orphan share"
+    },
+    {
+      "rank": 6,
+      "domain": "Recycling Economics",
+      "finding": "MRF segment losses (-$29M EBITDA) + technology investment",
+      "exposure_nominal": 15500000000,
+      "probability": 0.85,
+      "weighted": 12070000000,
+      "time_profile": "MULTI_YEAR",
+      "notes": "5-year cumulative loss $145M status quo; $10M-$20M capex required"
+    },
+    {
+      "rank": 7,
+      "domain": "RCRA Corrective Action",
+      "finding": "Sierra Vista groundwater treatment remaining costs",
+      "exposure_nominal": 2500000000,
+      "probability": 0.75,
+      "weighted": 1575000000,
+      "time_profile": "MULTI_YEAR",
+      "notes": "$15M-$25M over 10-15 years; potential overruns $5M-$10M"
+    },
+    {
+      "rank": 8,
+      "domain": "Labor - Strike",
+      "finding": "Teamsters strike June-Aug 2026 (8-10 weeks)",
+      "exposure_nominal": 3000000000,
+      "probability": 0.175,
+      "weighted": 511875000,
+      "time_profile": "MIXED",
+      "notes": "15-20% base probability; $24M-$30M one-time + $3M-$8M annual attrition"
+    },
+    {
+      "rank": 9,
+      "domain": "Government Contracts",
+      "finding": "Davis-Bacon back wages + debarment risk",
+      "exposure_nominal": 850000000,
+      "probability": 0.60,
+      "weighted": 510000000,
+      "time_profile": "ONE_TIME",
+      "notes": "Fort Huachuca $350M IDIQ + Hanford $120M; DOL investigation ongoing"
+    },
+    {
+      "rank": 10,
+      "domain": "Interstate Commerce",
+      "finding": "Hypothetical state waste flow restrictions",
+      "exposure_nominal": 1620000000,
+      "probability": 0.05,
+      "weighted": 81000000,
+      "time_profile": "ONE_TIME",
+      "notes": "$14.4M annual benefit at risk; <5% probability per Supreme Court precedent"
+    }
+  ],
+  "correlation_adjustments": {
+    "methodology": "Identified correlated risk pairs based on shared root causes; applied reduction for overlapping exposures",
+    "raw_total_before_adjustment": 94340000000,
+    "adjusted_total_after_correlation": 88100000000,
+    "total_adjustment": 6240000000,
+    "pairs_adjusted": [
+      {
+        "finding_a": "Phoenix Franchise Loss (labor cost disadvantage)",
+        "finding_b": "Teamsters Pattern Bargaining ($117M labor increase)",
+        "correlation": 0.85,
+        "overlap_percent": 0.60,
+        "reduction_applied": 3570000000,
+        "rationale": "Labor cost increase directly causes franchise competitiveness decline; not additive risks"
+      },
+      {
+        "finding_a": "Phoenix Franchise Loss (strike impact)",
+        "finding_b": "Teamsters Strike (customer attrition)",
+        "correlation": 0.90,
+        "overlap_percent": 0.50,
+        "reduction_applied": 2000000000,
+        "rationale": "Strike-driven franchise loss and strike-driven customer attrition are same event impact"
+      },
+      {
+        "finding_a": "RCRA Permit Denial (Sierra Vista)",
+        "finding_b": "RCRA Corrective Action Overruns (Sierra Vista)",
+        "correlation": 0.70,
+        "overlap_percent": 0.30,
+        "reduction_applied": 670000000,
+        "rationale": "Same facility; corrective action concerns drive permit denial scenario"
+      }
+    ],
+    "notes": "Correlation adjustment prevents double-counting of causally related risks. Phoenix franchise exposure is PRIMARY; labor costs and strike are CONTRIBUTORS to that exposure."
+  },
+  "quantification_methodology": {
+    "sources_scanned": 14,
+    "findings_extracted": 42,
+    "high_severity_findings": 5,
+    "critical_findings": 2,
+    "time_classification_approach": "Classified each exposure as ONE_TIME (face value), MULTI_YEAR (DCF at 8%), or PERPETUAL (NPV = annual/0.08)",
+    "probability_methodology": "Per-finding analyst estimates based on: regulatory precedent, settlement patterns, labor relations history, engineering likelihood, industry benchmarks",
+    "correlation_methodology": "Identified pairs with shared root causes; applied reduction = raw_total × (1 - correlation × overlap_percent)",
+    "currency_note": "All amounts in cents; divide by 100 for dollar values",
+    "ranges_methodology": {
+      "p10": "Low estimate + 10% of range (optimistic)",
+      "p50": "Midpoint of range (expected case, used for weighted calculations)",
+      "p90": "High estimate - 10% of range (stress case)"
+    },
+    "limitations": [
+      "Insurance coverage analysis incomplete (archaeology not conducted; potential $50M-$150M recovery not modeled)",
+      "Unknown Superfund sites from 14 acquisitions estimated at $10M-$25M contingency (requires manifest tracking)",
+      "Debt covenant breach scenarios not quantified (referred to securities specialist)",
+      "Tax implications of environmental settlements not assessed (referred to tax specialist)"
+    ]
+  },
+  "escrow_analysis": {
+    "recommended_amount": 40000000000,
+    "calculation_basis": "HIGH severity total ($130.5M) × 1.2 buffer = $156.6M; capped at $400M to cover largest exposure (Phoenix $320M at 40% probability = $128M weighted) + Superfund settlements ($90M) + RCRA permit risk ($75.6M weighted)",
+    "coverage_ratio": 0.45,
+    "coverage_rating": "ADEQUATE",
+    "coverage_ratio_interpretation": {
+      "below_0.40": "INADEQUATE - May not cover expected losses",
+      "0.40_to_0.60": "ADEQUATE - Standard coverage level",
+      "0.60_to_0.80": "CONSERVATIVE - Strong protection",
+      "above_0.80": "OVER_RESERVED - May exceed expected losses"
+    },
+    "largest_single_exposure": 32000000000,
+    "largest_exposure_covered": true,
+    "largest_coverage_test": "Escrow $400M > Largest exposure $320M = PASS",
+    "time_horizon_match": {
+      "status": "ALIGNED",
+      "escrow_duration": "36-48 months",
+      "liability_timeline": "Teamsters settlements 2026-2030 (4yr), Superfund settlements 2026-2028 (2-3yr), RCRA permit 2025-2026 (1yr)",
+      "mismatch_flags": []
+    },
+    "recommended_release_schedule": {
+      "12_months": {
+        "percent": 25,
+        "amount": 10000000000,
+        "milestone": "RCRA permit issued without material adverse conditions; Motorola Superfund settlement finalized"
+      },
+      "24_months": {
+        "percent": 30,
+        "amount": 12000000000,
+        "milestone": "Teamsters wage settlements finalized; Tucson Superfund settlement executed; no strike occurred"
+      },
+      "36_to_48_months": {
+        "percent": 45,
+        "amount": 18000000000,
+        "milestone": "Phoenix franchise RFP decision (Dec 2027); Albuquerque Superfund resolved; all labor agreements ratified"
+      }
+    },
+    "adequacy_flags": [
+      "PASS: Escrow covers largest single exposure (Phoenix franchise $320M at 40% probability = $128M)",
+      "PASS: Coverage ratio 45% within standard range (40-60%)",
+      "PASS: Multi-year liabilities aligned with 36-48 month escrow duration",
+      "CONSIDERATION: If Phoenix franchise lost (35-40% probability), escrow insufficient for full $320M first-year revenue loss - recommend R&W insurance sublimit for this tail risk"
+    ]
+  },
+  "purchase_price_adjustment_recommendation": {
+    "recommended_adjustment": 25000000000,
+    "rationale": "Probability-weighted high-severity exposures ($706M-$835M gross across 5 HIGH findings) warrant $250M immediate price reduction, separate from escrow mechanism",
+    "calculation": "HIGH findings gross exposure midpoint ($770M) × 33% immediate recognition = $250M; remainder covered via escrow + R&W insurance",
+    "allocation": {
+      "immediate_price_reduction": 25000000000,
+      "escrow_holdback": 40000000000,
+      "rw_insurance_coverage": 30000000000,
+      "seller_indemnity_cap": 100000000000,
+      "total_buyer_protection": 195000000000
+    }
+  },
+  "deal_impact_assessment": {
+    "transaction_value": 360000000000,
+    "total_quantified_exposure_gross": 347440000000,
+    "total_quantified_exposure_weighted": 94340000000,
+    "total_quantified_exposure_adjusted": 88100000000,
+    "exposure_as_percent_of_deal": 24.5,
+    "material_adverse_effect_threshold": 180000000000,
+    "mae_trigger_analysis": "Correlation-adjusted exposure ($881M) is 4.9× below typical 5% MAE threshold ($1.8B). However, individual tail risk scenarios (permit denial $425M-$510M, franchise loss $320M) could approach MAE individually if crystallized simultaneously.",
+    "deal_blocking_risks": [
+      {
+        "risk": "RCRA Permit Denial",
+        "probability": 0.075,
+        "impact": 51000000000,
+        "deal_status": "Recommend regulatory approval condition precedent; closing conditioned on permit issuance by Sept 30, 2025"
+      },
+      {
+        "risk": "Phoenix Franchise Loss Pre-Closing",
+        "probability": 0.05,
+        "impact": 32000000000,
+        "deal_status": "Low probability pre-closing (RFP Dec 2027); post-closing risk covered by escrow + valuation adjustment"
+      }
+    ],
+    "recommended_conditions_precedent": [
+      "RCRA Part B permit for Sierra Vista issued without Material Adverse Permit Conditions (defined as: throughput restrictions >5%, corrective action cost increases >$5M, financial assurance increases >$10M)",
+      "No EPA NPL listing of Albuquerque South Valley Landfill with UESC allocation >65%",
+      "Tucson Airport Superfund settlement not exceeding $40M"
+    ]
+  },
+  "insurance_mitigation": {
+    "rw_insurance_recommended": true,
+    "rw_policy_limit": 30000000000,
+    "rw_environmental_sublimit": 30000000000,
+    "rw_retention": 3600000000,
+    "rw_premium_estimated": 825000000,
+    "coverage_for": "Unknown Superfund sites, undisclosed environmental liabilities, RCRA permit breach of representations",
+    "insurance_archaeology_recommended": true,
+    "archaeology_cost": 20000000,
+    "archaeology_potential_recovery": 7500000000,
+    "archaeology_roi": "375:1 (potential $75M recovery for $200K cost)",
+    "current_eil_policy": {
+      "carrier": "AIG Environmental",
+      "limit": 30000000000,
+      "known_conditions_exclusion": true,
+      "excluded_sites": [
+        "Motorola 52nd Street",
+        "Tucson Airport",
+        "Albuquerque South Valley"
+      ],
+      "uninsured_exposure": 9000000000,
+      "notes": "$48M-$130M Superfund exposure uninsured due to known conditions exclusion"
+    }
+  },
+  "summary_narrative": "The $3.6B UESC acquisition presents $3.47B gross environmental and operational exposure, reduced to $943.4M probability-weighted and $881M after correlation adjustments. Five HIGH-severity findings dominate: Phoenix franchise renewal risk ($320M at 40% probability), RCRA permit uncertainty ($75.6M weighted), landfill airspace depletion ($300M at 45% probability), Teamsters pattern bargaining ($117M at 90% probability), and Superfund liability ($90M weighted across 3 sites). The correlation-adjusted exposure represents 24.5% of transaction value but only 4.9% on a weighted basis, below typical 5% MAE thresholds. However, tail risk scenarios (permit denial + franchise loss simultaneously) could approach deal-blocking levels. Recommended mitigation: $400M escrow (36-48 month duration), $250M purchase price reduction, $300M R&W insurance with full environmental sublimit, regulatory approval conditions precedent for RCRA permit and Albuquerque NPL listing. Critical immediate actions: (1) Initiate Tucson Superfund settlement negotiations to cap $340M joint-several exposure at $27M-$35M, (2) Finalize RCRA permit deficiency response to maximize Dec 2025 approval probability, (3) Proactive Teamsters bargaining April-May 2026 with competitive 18-19% offer to avoid strike (15-20% probability, $24M-$30M cost)."
+}

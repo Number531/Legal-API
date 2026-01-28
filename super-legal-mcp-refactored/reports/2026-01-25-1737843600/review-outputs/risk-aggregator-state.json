@@ -1,0 +1,103 @@
+{
+  "agent": "risk-aggregator",
+  "status": "COMPLETE",
+  "session_id": "2026-01-25-1737843600",
+  "timestamp": "2026-01-25T00:00:00Z",
+  "completion_time": "2026-01-25T00:00:00Z",
+
+  "compaction_summary": {
+    "task": "Aggregate and classify quantified risk exposures from 7 specialist reports",
+    "progress": "ALL PHASES COMPLETE",
+    "next_action": "None - aggregation complete",
+    "critical_context": [
+      "25 quantified exposures extracted and classified",
+      "Gross exposure: $85.8M (midpoint)",
+      "Probability-weighted: $51.2M",
+      "Correlation-adjusted: $47.9M",
+      "Escrow recommended: $28M",
+      "Purchase price adjustment: $15M"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_time_classification": true,
+    "phase_3_category_aggregation": true,
+    "phase_4_probability_weighting": true,
+    "phase_5_correlation_adjustment": true,
+    "phase_6_recommendations": true,
+    "phase_7_output_files": true,
+    "phase_8_return_status": true
+  },
+
+  "sources_analyzed": {
+    "cms-regulatory-compliance-report.md": "complete",
+    "fca-litigation-report.md": "complete",
+    "employment-labor-report.md": "complete",
+    "commercial-contracts-report.md": "complete",
+    "insurance-coverage-report.md": "complete",
+    "tax-structure-report.md": "complete",
+    "privacy-data-protection-report.md": "complete"
+  },
+
+  "exposures_classified": {
+    "total_count": 25,
+    "by_category": {
+      "regulatory_penalties": 6,
+      "litigation_exposure": 4,
+      "employment_labor": 5,
+      "commercial_operational": 4,
+      "insurance_gaps": 3,
+      "tax_benefits": 2,
+      "privacy_cyber": 4
+    },
+    "by_time_profile": {
+      "ONE_TIME": 16,
+      "MULTI_YEAR": 2,
+      "PERPETUAL": 3
+    },
+    "by_severity": {
+      "CRITICAL": 1,
+      "HIGH": 6,
+      "MEDIUM": 14,
+      "LOW": 4
+    }
+  },
+
+  "aggregations_complete": {
+    "gross_total": 85800000,
+    "probability_weighted": 51220000,
+    "correlation_adjusted": 47900000,
+    "escrow_recommended": 28000000,
+    "purchase_price_adjustment": 15000000,
+    "top_exposure": "Orange County SFF Termination ($24.6M, 35% probability)"
+  },
+
+  "correlation_adjustments_applied": {
+    "total_adjustment": 3320000,
+    "pairs_adjusted": 5,
+    "key_adjustments": [
+      "Orange County SFF + WARN Act: $823K reduction (same root cause)",
+      "Martinez FCA + Medical Director Kickback: $1.3M reduction (overlapping settlement)",
+      "Staff Retention + SB 525 Wages: $997K reduction (duplicative wage increases)"
+    ]
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "All phases complete. Read risk-summary.json for full aggregation results.",
+    "do_not_repeat": ["all_phases"],
+    "output_file": "risk-summary.json"
+  },
+
+  "metrics": {
+    "reports_analyzed": 7,
+    "exposures_extracted": 25,
+    "exposures_classified": 25,
+    "exposures_weighted": 25,
+    "gross_total": 85800000,
+    "probability_weighted": 51220000,
+    "correlation_adjusted": 47900000,
+    "last_checkpoint": "2026-01-25T00:00:00Z",
+    "completion_status": "SUCCESS"
+  }
+}

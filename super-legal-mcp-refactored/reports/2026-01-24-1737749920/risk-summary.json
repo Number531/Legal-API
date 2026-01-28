@@ -1,0 +1,2252 @@
+{
+  "metadata": {
+    "source_file": "reports/2026-01-24-1737749920/final-memorandum-v2.md",
+    "aggregation_timestamp": "2026-01-24T06:20:26.043699",
+    "script_version": "1.0.0"
+  },
+  "statistics": {
+    "total_findings": 87,
+    "tables_parsed": 31,
+    "incomplete_tables": 19,
+    "deal_blocking_risks": 26
+  },
+  "severity_distribution": {
+    "CRITICAL": 12,
+    "HIGH": 37,
+    "MEDIUM": 32,
+    "LOW": 6
+  },
+  "exposure_by_severity": {
+    "CRITICAL": 529720000.0,
+    "HIGH": 5242525006.1,
+    "MEDIUM": 873039014.0,
+    "LOW": 8100000.0
+  },
+  "aggregate_exposure": 6653384020.1,
+  "weighted_exposure": 4253882184.86,
+  "deal_blocking_risks": [
+    {
+      "id": "RISK-011",
+      "section": "IV.C",
+      "description": "**340B Drug Pricing Eligibility Loss**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "exposure": 120000000.0,
+      "exposure_formatted": "$120M"
+    },
+    {
+      "id": "RISK-012",
+      "section": "IV.C",
+      "description": "**Tax-Exempt Bond Redemption Required**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 428400000.0,
+      "exposure_formatted": "$428.4M"
+    },
+    {
+      "id": "RISK-013",
+      "section": "IV.C",
+      "description": "**Property Tax Recapture (4 years)**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 43200000.0,
+      "exposure_formatted": "$43.2M"
+    },
+    {
+      "id": "RISK-014",
+      "section": "IV.C",
+      "description": "**New Operating Taxes (Federal/State/Local)**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "exposure": 36430000.0,
+      "exposure_formatted": "$36.43M"
+    },
+    {
+      "id": "RISK-015",
+      "section": "IV.C",
+      "description": "STARK/Anti-Kickback ASC Violation",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 3500000.0,
+      "exposure_formatted": "$2M-$5M"
+    },
+    {
+      "id": "RISK-017",
+      "section": "IV.C",
+      "description": "HIPAA Ransomware Breach - OCR Penalties + CAP",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 4750000.0,
+      "exposure_formatted": "$3M-$6.5M"
+    },
+    {
+      "id": "RISK-018",
+      "section": "IV.C",
+      "description": "HIPAA Breach - Class Action Settlement",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 7000000.0,
+      "exposure_formatted": "$3.5M-$10.5M"
+    },
+    {
+      "id": "RISK-026",
+      "section": "IV.C",
+      "description": "Additional Bond Interest (6.5% vs. 4.25%)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 118100000.0,
+      "exposure_formatted": "$118.1M"
+    },
+    {
+      "id": "RISK-029",
+      "section": "IV.C",
+      "description": "**340B Drug Pricing Eligibility Loss**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "exposure": 120000000.0,
+      "exposure_formatted": "$120M"
+    },
+    {
+      "id": "RISK-030",
+      "section": "IV.C",
+      "description": "**Tax-Exempt Bond Redemption Required**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 428400000.0,
+      "exposure_formatted": "$428.4M"
+    },
+    {
+      "id": "RISK-031",
+      "section": "IV.C",
+      "description": "**Property Tax Recapture (4 years)**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 43200000.0,
+      "exposure_formatted": "$43.2M"
+    },
+    {
+      "id": "RISK-032",
+      "section": "IV.C",
+      "description": "**New Operating Taxes (Federal/State/Local)**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "exposure": 36430000.0,
+      "exposure_formatted": "$36.43M"
+    },
+    {
+      "id": "RISK-033",
+      "section": "IV.C",
+      "description": "STARK/Anti-Kickback ASC Violation",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 3500000.0,
+      "exposure_formatted": "$2M-$5M"
+    },
+    {
+      "id": "RISK-035",
+      "section": "IV.C",
+      "description": "HIPAA Ransomware Breach - OCR Penalties + CAP",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 4750000.0,
+      "exposure_formatted": "$3M-$6.5M"
+    },
+    {
+      "id": "RISK-036",
+      "section": "IV.C",
+      "description": "HIPAA Breach - Class Action Settlement",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 7000000.0,
+      "exposure_formatted": "$3.5M-$10.5M"
+    },
+    {
+      "id": "RISK-044",
+      "section": "IV.C",
+      "description": "Additional Bond Interest (6.5% vs. 4.25%)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 118100000.0,
+      "exposure_formatted": "$118.1M"
+    },
+    {
+      "id": "RISK-054",
+      "section": "IV.R",
+      "description": "STARK/AKS ASC Joint Venture Violation",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 2100000.0,
+      "exposure_formatted": "$1.2M-$3M"
+    },
+    {
+      "id": "RISK-063",
+      "section": "IV.R",
+      "description": "**340B Eligibility Loss (For-Profit Conversion)**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "exposure": 120000000.0,
+      "exposure_formatted": "$120M"
+    },
+    {
+      "id": "RISK-064",
+      "section": "IV.R",
+      "description": "Corrective Action Plan implementation (3-year OCR monitoring)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 3575000.0,
+      "exposure_formatted": "$2.4M-$4.75M"
+    },
+    {
+      "id": "RISK-065",
+      "section": "IV.R",
+      "description": "Class action settlement (negligence, breach of fiduciary duty)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 7000000.0,
+      "exposure_formatted": "$3.5M-$10.5M"
+    },
+    {
+      "id": "RISK-070",
+      "section": "IV.R",
+      "description": "Loss of \u00a7 501(c)(3) status (automatic)",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "exposure": 36430000.0,
+      "exposure_formatted": "$36.43M"
+    },
+    {
+      "id": "RISK-071",
+      "section": "IV.R",
+      "description": "Property tax recapture (4 years)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 43200000.0,
+      "exposure_formatted": "$43.2M"
+    },
+    {
+      "id": "RISK-075",
+      "section": "IV.R",
+      "description": "Tax-Exempt Bond Redemption Required (IRC \u00a7 141 private activity bond test failure)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 428400000.0,
+      "exposure_formatted": "$428.4M"
+    },
+    {
+      "id": "RISK-076",
+      "section": "IV.R",
+      "description": "Property Tax Recapture (4 years retroactive)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 43200000.0,
+      "exposure_formatted": "$43.2M"
+    },
+    {
+      "id": "RISK-077",
+      "section": "IV.R",
+      "description": "Additional Interest Expense (taxable refinancing 6.5% vs. tax-exempt 4.25%)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 118100000.0,
+      "exposure_formatted": "$118.1M"
+    },
+    {
+      "id": "RISK-078",
+      "section": "IV.R",
+      "description": "**WARN Act Mass Layoff** (failure to provide 60-day notice before 500-1,000 employee layoffs)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "exposure": 2300001.9,
+      "exposure_formatted": "$3.8-$4.6M"
+    }
+  ],
+  "incomplete_tables": [
+    {
+      "section": "IV.Q",
+      "line": 89,
+      "missing_columns": [
+        "exposure"
+      ],
+      "findings_affected": 10
+    },
+    {
+      "section": "IV.R",
+      "line": 327,
+      "missing_columns": [
+        "severity"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.R",
+      "line": 479,
+      "missing_columns": [
+        "severity"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.P",
+      "line": 923,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 6
+    },
+    {
+      "section": "IV.I",
+      "line": 1053,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 1
+    },
+    {
+      "section": "IV.E",
+      "line": 1754,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.S",
+      "line": 2151,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 2366,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 3051,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 3665,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 4550,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 5152,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 6265,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 7320,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 7907,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.A",
+      "line": 8408,
+      "missing_columns": [
+        "severity"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.E",
+      "line": 8585,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.M",
+      "line": 8714,
+      "missing_columns": [
+        "severity"
+      ],
+      "findings_affected": 0
+    },
+    {
+      "section": "IV.D",
+      "line": 8980,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ],
+      "findings_affected": 0
+    }
+  ],
+  "findings": [
+    {
+      "id": "RISK-011",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**340B Drug Pricing Eligibility Loss**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 120000000.0,
+      "exposure_raw": "$120M",
+      "line_number": 288,
+      "is_deal_blocking": true,
+      "mitigation": "**NONE AVAILABLE** - Statutory exclusion",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-029",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**340B Drug Pricing Eligibility Loss**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 120000000.0,
+      "exposure_raw": "$120M",
+      "line_number": 440,
+      "is_deal_blocking": true,
+      "mitigation": "**NONE AVAILABLE** - Statutory exclusion",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-063",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**340B Eligibility Loss (For-Profit Conversion)**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 120000000.0,
+      "exposure_raw": "$120M",
+      "line_number": 3438,
+      "is_deal_blocking": true,
+      "mitigation": "**NONE AVAILABLE** - Statutory exclusion of for-profit hospitals with no exceptions",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-007",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$36.43M/year new taxes",
+      "severity": "CRITICAL",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 36430000.0,
+      "exposure_raw": "$36.43M",
+      "line_number": 99,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-014",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**New Operating Taxes (Federal/State/Local)**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 36430000.0,
+      "exposure_raw": "$36.43M",
+      "line_number": 291,
+      "is_deal_blocking": true,
+      "mitigation": "Tax minimization (reduce to $16M-$28M/year)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-032",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**New Operating Taxes (Federal/State/Local)**",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 36430000.0,
+      "exposure_raw": "$36.43M",
+      "line_number": 443,
+      "is_deal_blocking": true,
+      "mitigation": "Tax minimization (reduce to $16M-$28M/year)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-070",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Loss of \u00a7 501(c)(3) status (automatic)",
+      "severity": "CRITICAL",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 36430000.0,
+      "exposure_raw": "$36.43M",
+      "line_number": 5939,
+      "is_deal_blocking": true,
+      "mitigation": "Tax minimization strategies (reduce to $16M-$31M/year)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-004",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$12M/year perpetual loss",
+      "severity": "CRITICAL",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 12000000.0,
+      "exposure_raw": "$12M",
+      "line_number": 95,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-053",
+      "section_id": "IV.I",
+      "domain": "",
+      "description": "CRITICAL: 100% certain eligibility loss causing $12M/year perpetual drug cost increase ($120M NPV); no mitigation available except GPO consolidation offsets",
+      "severity": "CRITICAL",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 12000000.0,
+      "exposure_raw": "$12M",
+      "line_number": 1058,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-001",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "Criminal prosecution, exclusion",
+      "severity": "CRITICAL",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 92,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-048",
+      "section_id": "IV.P",
+      "domain": "",
+      "description": "CRITICAL \u2014 Walk away if not resolved",
+      "severity": "CRITICAL",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 926,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-052",
+      "section_id": "IV.P",
+      "domain": "",
+      "description": "CRITICAL \u2014 Deal can fail at this stage",
+      "severity": "CRITICAL",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 930,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-047",
+      "section_id": "IV.P",
+      "domain": "",
+      "description": "HIGH \u2014 Seller may reject; negotiate seller note alternative",
+      "severity": "HIGH",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 2000000000.0,
+      "exposure_raw": "$1.9B-$2.1B",
+      "line_number": 925,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-008",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$428.4M + $9.45M/year",
+      "severity": "HIGH",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 428400000.0,
+      "exposure_raw": "$428.4M",
+      "line_number": 100,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-012",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**Tax-Exempt Bond Redemption Required**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 428400000.0,
+      "exposure_raw": "$428.4M",
+      "line_number": 289,
+      "is_deal_blocking": true,
+      "mitigation": "Finance from PE equity/taxable bonds",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-030",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**Tax-Exempt Bond Redemption Required**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 428400000.0,
+      "exposure_raw": "$428.4M",
+      "line_number": 441,
+      "is_deal_blocking": true,
+      "mitigation": "Finance from PE equity/taxable bonds at closing",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-075",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Tax-Exempt Bond Redemption Required (IRC \u00a7 141 private activity bond test failure)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 428400000.0,
+      "exposure_raw": "$428.4M",
+      "line_number": 6803,
+      "is_deal_blocking": true,
+      "mitigation": "None\u2014statutory requirement; finance from PE equity or taxable bond issuance at closing",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-073",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Net income reduction (valuation impact)",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 267500000.0,
+      "exposure_raw": "$229M-$306M",
+      "line_number": 5942,
+      "is_deal_blocking": false,
+      "mitigation": "Demonstrate tax minimization strategies reduce impact to 36-43% decline (vs. 64% base case)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-022",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Commercial Payer Rate Renegotiation",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.55,
+      "exposure": 229500000.0,
+      "exposure_raw": "$135M-$324M",
+      "line_number": 302,
+      "is_deal_blocking": false,
+      "mitigation": "PE bargaining power strategy",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-040",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Commercial Payer Rate Renegotiation",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.55,
+      "exposure": 229500000.0,
+      "exposure_raw": "$135M-$324M",
+      "line_number": 454,
+      "is_deal_blocking": false,
+      "mitigation": "PE bargaining power strategy; quality metrics",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-002",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$125M project blocked",
+      "severity": "HIGH",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 125000000.0,
+      "exposure_raw": "$125M",
+      "line_number": 93,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-026",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Additional Bond Interest (6.5% vs. 4.25%)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 118100000.0,
+      "exposure_raw": "$118.1M",
+      "line_number": 309,
+      "is_deal_blocking": true,
+      "mitigation": "Lock in 6.0-6.5% rate",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-044",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Additional Bond Interest (6.5% vs. 4.25%)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 118100000.0,
+      "exposure_raw": "$118.1M",
+      "line_number": 461,
+      "is_deal_blocking": true,
+      "mitigation": "Lock in 6.0-6.5% rate; interest rate hedge",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-077",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Additional Interest Expense (taxable refinancing 6.5% vs. tax-exempt 4.25%)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 118100000.0,
+      "exposure_raw": "$118.1M",
+      "line_number": 6805,
+      "is_deal_blocking": true,
+      "mitigation": "Lock in taxable bond rate at 6.0-6.5% before closing; negotiate rate cap or interest rate swap to hedge against rate increases",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-013",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**Property Tax Recapture (4 years)**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 43200000.0,
+      "exposure_raw": "$43.2M",
+      "line_number": 290,
+      "is_deal_blocking": true,
+      "mitigation": "Payment plan with county (12-24 months)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-031",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "**Property Tax Recapture (4 years)**",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 43200000.0,
+      "exposure_raw": "$43.2M",
+      "line_number": 442,
+      "is_deal_blocking": true,
+      "mitigation": "Payment plan with county (12-24 months)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-071",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Property tax recapture (4 years)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 43200000.0,
+      "exposure_raw": "$43.2M",
+      "line_number": 5940,
+      "is_deal_blocking": true,
+      "mitigation": "Plan for closing cost (include in purchase price)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-076",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Property Tax Recapture (4 years retroactive)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 43200000.0,
+      "exposure_raw": "$43.2M",
+      "line_number": 6804,
+      "is_deal_blocking": true,
+      "mitigation": "None\u2014Ohio Rev. Code \u00a7 5709.12 mandatory; negotiate payment plan with county auditor to spread over 12-24 months",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-060",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "CON 50-bed expansion denial",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 27500000.0,
+      "exposure_raw": "$15M-$40M",
+      "line_number": 2134,
+      "is_deal_blocking": false,
+      "mitigation": "Aggressive advocacy strategy: ODH staff briefings, legislative outreach (Franklin County delegation), independent healthcare economist report rebutting OhioHealth market analysis, grassroots community mobilization (100+ patient letters), Ohio Hospital Association engagement. Negotiate purchase price adjustment mechanism if CON denied.",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-072",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Private inurement (STARK/AKS violations)",
+      "severity": "HIGH",
+      "probability": "LOW",
+      "probability_pct": 0.125,
+      "exposure": 20000000.0,
+      "exposure_raw": "$20M",
+      "line_number": 5941,
+      "is_deal_blocking": false,
+      "mitigation": "Remediate STARK/AKS violations before closing (unwind ASC or OIG voluntary disclosure)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-086",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Commercial payer rate renegotiation (5-10% reduction)",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.55,
+      "exposure": 18350000.0,
+      "exposure_raw": "$10.8M-$25.9M",
+      "line_number": 8403,
+      "is_deal_blocking": false,
+      "mitigation": "Emphasize PE enhanced bargaining power (cite 11% rate increase research); provide quality metrics; negotiate 12-24 month grandfather periods",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-024",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Physician Change of Control Terminations",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 9500000.0,
+      "exposure_raw": "$8.4M-$10.6M",
+      "line_number": 306,
+      "is_deal_blocking": false,
+      "mitigation": "Retention bonuses $3M-$7.5M",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-042",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Physician Change of Control Terminations",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 9500000.0,
+      "exposure_raw": "$8.4M-$10.6M",
+      "line_number": 458,
+      "is_deal_blocking": false,
+      "mitigation": "Retention bonuses $3M-$7.5M; escrow $10.5M",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-018",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "HIPAA Breach - Class Action Settlement",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.7,
+      "exposure": 7000000.0,
+      "exposure_raw": "$3.5M-$10.5M",
+      "line_number": 297,
+      "is_deal_blocking": true,
+      "mitigation": "Escrow $10M; pursue cyber insurance",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-036",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "HIPAA Breach - Class Action Settlement",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.7,
+      "exposure": 7000000.0,
+      "exposure_raw": "$3.5M-$10.5M",
+      "line_number": 449,
+      "is_deal_blocking": true,
+      "mitigation": "Escrow $10M; pursue cyber insurance coverage",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-065",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Class action settlement (negligence, breach of fiduciary duty)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.7,
+      "exposure": 7000000.0,
+      "exposure_raw": "$3.5M-$10.5M",
+      "line_number": 4281,
+      "is_deal_blocking": true,
+      "mitigation": "Defend motion to dismiss on Ohio DPA claim; if negligence survives, negotiate settlement; pursue cyber insurance coverage ($7M-$18M likely available)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-027",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Private Inurement - IRS Retroactive Revocation",
+      "severity": "HIGH",
+      "probability": "LOW",
+      "probability_pct": 0.035,
+      "exposure": 5600000.0,
+      "exposure_raw": "$5.6M",
+      "line_number": 310,
+      "is_deal_blocking": false,
+      "mitigation": "**CRITICAL**: Remediate STARK before closing",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-045",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Private Inurement - IRS Retroactive Revocation",
+      "severity": "HIGH",
+      "probability": "LOW",
+      "probability_pct": 0.035,
+      "exposure": 5600000.0,
+      "exposure_raw": "$5.6M",
+      "line_number": 462,
+      "is_deal_blocking": false,
+      "mitigation": "**CRITICAL**: Remediate STARK before closing",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-079",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**Physician Change of Control Terminations** (20-50 physicians exercise good reason termination within 60-90 days of closing)",
+      "severity": "HIGH",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 5300004.2,
+      "exposure_raw": "$8.4-$10.6M",
+      "line_number": 7684,
+      "is_deal_blocking": false,
+      "mitigation": "Retention bonuses ($3-$7.5M), compensation guarantees (12-24 months), clinical autonomy assurances, selective non-compete waivers",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-017",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "HIPAA Ransomware Breach - OCR Penalties + CAP",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.95,
+      "exposure": 4750000.0,
+      "exposure_raw": "$3M-$6.5M",
+      "line_number": 296,
+      "is_deal_blocking": true,
+      "mitigation": "Escrow $6M released upon OCR settlement",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-035",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "HIPAA Ransomware Breach - OCR Penalties + CAP",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.95,
+      "exposure": 4750000.0,
+      "exposure_raw": "$3M-$6.5M",
+      "line_number": 448,
+      "is_deal_blocking": true,
+      "mitigation": "Escrow $6M released upon OCR settlement",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-064",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Corrective Action Plan implementation (3-year OCR monitoring)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.95,
+      "exposure": 3575000.0,
+      "exposure_raw": "$2.4M-$4.75M",
+      "line_number": 4280,
+      "is_deal_blocking": true,
+      "mitigation": "Budget for CAP costs, engage external consultants, phase implementation over 3 years",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-015",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "STARK/Anti-Kickback ASC Violation",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 3500000.0,
+      "exposure_raw": "$2M-$5M",
+      "line_number": 293,
+      "is_deal_blocking": true,
+      "mitigation": "**REQUIRED**: Unwind ASC before closing",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-033",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "STARK/Anti-Kickback ASC Violation",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 3500000.0,
+      "exposure_raw": "$2M-$5M",
+      "line_number": 445,
+      "is_deal_blocking": true,
+      "mitigation": "**REQUIRED**: Unwind ASC before closing",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-003",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$2.5M/year GME loss",
+      "severity": "HIGH",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 2500000.0,
+      "exposure_raw": "$2.5M",
+      "line_number": 94,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-078",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**WARN Act Mass Layoff** (failure to provide 60-day notice before 500-1,000 employee layoffs)",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 0.8,
+      "exposure": 2300001.9,
+      "exposure_raw": "$3.8-$4.6M",
+      "line_number": 7683,
+      "is_deal_blocking": true,
+      "mitigation": "**AVOIDABLE:** Provide 60-day notice to employees, Ohio DJFS, local government before layoffs; consult employment counsel; stagger layoffs >30 days if feasible",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-054",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "STARK/AKS ASC Joint Venture Violation",
+      "severity": "HIGH",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 2100000.0,
+      "exposure_raw": "$1.2M-$3M",
+      "line_number": 1567,
+      "is_deal_blocking": true,
+      "mitigation": "Unwind ASC ($1.5M-$2.5M buyout) + OIG disclosure",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-005",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$500K-$1.5M + class action",
+      "severity": "HIGH",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 1000000.0,
+      "exposure_raw": "$500K-$1.5M",
+      "line_number": 97,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-051",
+      "section_id": "IV.P",
+      "domain": "",
+      "description": "HIGH \u2014 Payers may refuse commitments",
+      "severity": "HIGH",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 929,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-074",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Ohio AG approval denial",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.075,
+      "exposure": 180000000.0,
+      "exposure_raw": "$120M-$240M",
+      "line_number": 5943,
+      "is_deal_blocking": false,
+      "mitigation": "FMV valuation, charitable asset dedication, community benefit commitments",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-021",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Medicaid MCO Rate Renegotiation",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 137500000.0,
+      "exposure_raw": "$75M-$200M",
+      "line_number": 301,
+      "is_deal_blocking": false,
+      "mitigation": "Emphasize DSH status",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-039",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Medicaid MCO Rate Renegotiation",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 137500000.0,
+      "exposure_raw": "$75M-$200M",
+      "line_number": 453,
+      "is_deal_blocking": false,
+      "mitigation": "Emphasize DSH status; Ohio Medicaid advocacy",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-020",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Medicare Advantage Termination (1-2 plans)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 112000000.0,
+      "exposure_raw": "$55M-$169M",
+      "line_number": 300,
+      "is_deal_blocking": false,
+      "mitigation": "Network adequacy documentation",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-038",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Medicare Advantage Termination (1-2 plans)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 112000000.0,
+      "exposure_raw": "$55M-$169M",
+      "line_number": 452,
+      "is_deal_blocking": false,
+      "mitigation": "Network adequacy documentation; escrow $45M-$67M",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-028",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Bond Covenant Breach (DSCR)",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.4,
+      "exposure": 50000000.0,
+      "exposure_raw": "$50M",
+      "line_number": 311,
+      "is_deal_blocking": false,
+      "mitigation": "Covenant-lite structure",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-046",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Bond Covenant Breach (DSCR)",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.4,
+      "exposure": 50000000.0,
+      "exposure_raw": "$50M",
+      "line_number": 463,
+      "is_deal_blocking": false,
+      "mitigation": "Covenant-lite structure; $30M-$50M liquidity reserve",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-010",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$22-$45M/year revenue loss",
+      "severity": "MEDIUM",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 22500011.0,
+      "exposure_raw": "$22-$45M",
+      "line_number": 102,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-023",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "HIPAA Breach BAA Payer Terminations",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 12500000.0,
+      "exposure_raw": "$8M-$17M",
+      "line_number": 303,
+      "is_deal_blocking": false,
+      "mitigation": "Demonstrate security remediation",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-041",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "HIPAA Breach BAA Payer Terminations",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 12500000.0,
+      "exposure_raw": "$8M-$17M",
+      "line_number": 455,
+      "is_deal_blocking": false,
+      "mitigation": "Demonstrate security remediation to payers",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-085",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Medicaid MCO rate renegotiation (1-2 of 5 plans, 5-10% reduction)",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 11000000.0,
+      "exposure_raw": "$6M-$16M",
+      "line_number": 8402,
+      "is_deal_blocking": false,
+      "mitigation": "Emphasize Mercy South DSH status; cite Ohio Medicaid network adequacy; commit to continued Medicaid access and charity care",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-084",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "MA contract termination (1-2 of 8 plans)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 8950000.0,
+      "exposure_raw": "$4.4M-$13.5M",
+      "line_number": 8401,
+      "is_deal_blocking": false,
+      "mitigation": "Emphasize network adequacy (Mercy South sole Lancaster hospital, Mercy Regional Level II trauma); provide 30-90 day notice; demonstrate quality metrics",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-025",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "401(k) Accelerated Vesting",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.5,
+      "exposure": 4250000.0,
+      "exposure_raw": "$4.25M",
+      "line_number": 307,
+      "is_deal_blocking": false,
+      "mitigation": "Continue Mercy 401(k) 12-24 months",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-043",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "401(k) Accelerated Vesting",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.5,
+      "exposure": 4250000.0,
+      "exposure_raw": "$4.25M",
+      "line_number": 459,
+      "is_deal_blocking": false,
+      "mitigation": "Continue Mercy 401(k) 12-24 months (avoidable)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-081",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**401(k) Accelerated Vesting** (plan termination triggers 100% vesting of unvested employer contributions)",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.5,
+      "exposure": 4250000.0,
+      "exposure_raw": "$4.25M",
+      "line_number": 7686,
+      "is_deal_blocking": false,
+      "mitigation": "**AVOIDABLE:** Continue Mercy 401(k) plan 12-24 months as subsidiary plan; delay termination until natural transition point",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-066",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Reputational harm and patient attrition",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.35,
+      "exposure": 3750000.0,
+      "exposure_raw": "$1.5M-$6M",
+      "line_number": 4283,
+      "is_deal_blocking": false,
+      "mitigation": "PR campaign emphasizing enhanced security, extended credit monitoring, transparent communication",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-087",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "HIPAA breach BAA termination (1-2 payers)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 3350000.0,
+      "exposure_raw": "$1.6M-$5.1M",
+      "line_number": 8404,
+      "is_deal_blocking": false,
+      "mitigation": "Demonstrate OCR compliance and post-breach remediation (security audits, offline backups, encryption); provide corrective action documentation to payers",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-009",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "$5.1-$5.4M liability",
+      "severity": "MEDIUM",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 2700002.55,
+      "exposure_raw": "$5.1-$5.4M",
+      "line_number": 101,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-069",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "March 2025 follow-up timing coincides with Q2 2025 transaction closing",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.175,
+      "exposure": 1250000.0,
+      "exposure_raw": "$500K-$2M",
+      "line_number": 4904,
+      "is_deal_blocking": false,
+      "mitigation": "Proactive buyer communication, escrow negotiation, contractual protection",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-067",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Cyber insurance coverage gap (OCR penalties excluded)",
+      "severity": "MEDIUM",
+      "probability": "MEDIUM",
+      "probability_pct": 0.5,
+      "exposure": 500000.0,
+      "exposure_raw": "$250K-$750K",
+      "line_number": 4285,
+      "is_deal_blocking": false,
+      "mitigation": "Review policy language, negotiate with insurer, argue penalties are compensatory not punitive",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-083",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**Ohio Job Creation Tax Credit Forfeiture** (layoffs violate retention commitment, see Tax Section IV.G)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.25,
+      "exposure": 450000.3,
+      "exposure_raw": "$0.6-$0.9M",
+      "line_number": 7688,
+      "is_deal_blocking": false,
+      "mitigation": "Structure layoffs after credit secured; exclude layoff positions from baseline; create offsetting new jobs (see cross-reference to Tax Section IV.G)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-068",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "October 2024 JC survey: Accreditation with Requirements for Improvement (8 deficiencies)",
+      "severity": "MEDIUM",
+      "probability": "HIGH",
+      "probability_pct": 0.775,
+      "exposure": 425000.0,
+      "exposure_raw": "$100K-$750K",
+      "line_number": 4903,
+      "is_deal_blocking": false,
+      "mitigation": "Sustained hand hygiene \u226590%, medication management audits, March 2025 follow-up preparation",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-080",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**Union Successorship Obligations** (if unions exist \u2013 pending data room verification)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.15,
+      "exposure": 350000.15,
+      "exposure_raw": "$0.3-$0.7M",
+      "line_number": 7685,
+      "is_deal_blocking": false,
+      "mitigation": "Verify union status via data room review; recognize unions as successors; bargain in good faith over layoff effects; maintain status quo during transition",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-061",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "ODH hospital license transfer delay (4 facilities)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.1,
+      "exposure": 320000.0,
+      "exposure_raw": "$160K-$480K",
+      "line_number": 2135,
+      "is_deal_blocking": false,
+      "mitigation": "Submit ODH license transfer applications 60 days pre-closing (vs. 30-day minimum), coordinate with CMS CHOW timeline, proactively address Joint Commission deficiencies before March 2025 follow-up survey to ensure accreditation restoration, provide enhanced financial viability documentation if CON denied.",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-062",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "CMS Medicare CHOW delay (4 CCNs)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.075,
+      "exposure": 240000.0,
+      "exposure_raw": "$120K-$360K",
+      "line_number": 2136,
+      "is_deal_blocking": false,
+      "mitigation": "Submit CMS Form 855A applications 45 days pre-closing, coordinate with ODH license transfer, ensure Joint Commission accreditation maintained (restore by March 2025 follow-up), disclose all PE ownership interests >5% to avoid CMS resubmission requests, request expedited processing.",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-016",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Graduate Medical Education - Surgery Probation",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.075,
+      "exposure": 187000.0,
+      "exposure_raw": "$187K",
+      "line_number": 295,
+      "is_deal_blocking": false,
+      "mitigation": "Escrow $2.5M-$5M for 18-24 months",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-034",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Graduate Medical Education (GME) - Surgery Program Probation",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.075,
+      "exposure": 187000.0,
+      "exposure_raw": "$187K",
+      "line_number": 447,
+      "is_deal_blocking": false,
+      "mitigation": "Escrow $2.5M-$5M for 18-24 months",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-019",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Joint Commission Follow-Up (March 2025)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.175,
+      "exposure": 65000.0,
+      "exposure_raw": "$43K-$87K",
+      "line_number": 298,
+      "is_deal_blocking": false,
+      "mitigation": "Achieve 90% hand hygiene by March 2025",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-037",
+      "section_id": "IV.C",
+      "domain": "",
+      "description": "Joint Commission Accreditation Follow-Up (March 2025)",
+      "severity": "MEDIUM",
+      "probability": "LOW",
+      "probability_pct": 0.175,
+      "exposure": 65000.0,
+      "exposure_raw": "$43K-$87K",
+      "line_number": 450,
+      "is_deal_blocking": false,
+      "mitigation": "Achieve 90% hand hygiene by March 2025",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-006",
+      "section_id": "IV.Q",
+      "domain": "",
+      "description": "Medicare participation",
+      "severity": "MEDIUM",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 98,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-049",
+      "section_id": "IV.P",
+      "domain": "",
+      "description": "MEDIUM \u2014 Application preparation standard",
+      "severity": "MEDIUM",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 927,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-050",
+      "section_id": "IV.P",
+      "domain": "",
+      "description": "MEDIUM \u2014 Tax strategies available",
+      "severity": "MEDIUM",
+      "probability": "UNKNOWN",
+      "probability_pct": null,
+      "exposure": 0.0,
+      "exposure_raw": "",
+      "line_number": 928,
+      "is_deal_blocking": false,
+      "mitigation": "",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-059",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Medicare Readmissions Penalty",
+      "severity": "LOW",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 6900000.0,
+      "exposure_raw": "$6.9M",
+      "line_number": 1572,
+      "is_deal_blocking": false,
+      "mitigation": "Quality improvement programs (30-50% reduction achievable)",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-082",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "**Accrued Vacation Payout** (Ohio law requires payment at termination)",
+      "severity": "LOW",
+      "probability": "HIGH",
+      "probability_pct": 1.0,
+      "exposure": 1200000.0,
+      "exposure_raw": "$1.2M",
+      "line_number": 7687,
+      "is_deal_blocking": false,
+      "mitigation": "None (Ohio statutory requirement); budget in severance cost calculations",
+      "table_complete": true
+    },
+    {
+      "id": "RISK-055",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "EMTALA Violation July 2023",
+      "severity": "LOW",
+      "probability": "LOW",
+      "probability_pct": 0.0,
+      "exposure": 0.0,
+      "exposure_raw": "$0 |",
+      "line_number": 1568,
+      "is_deal_blocking": false,
+      "mitigation": "Resolved (penalty paid, corrective action implemented)",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-056",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Physician Compensation FMV (Dr. Chen)",
+      "severity": "LOW",
+      "probability": "LOW",
+      "probability_pct": 0.05,
+      "exposure": 0.0,
+      "exposure_raw": "$0 |",
+      "line_number": 1569,
+      "is_deal_blocking": false,
+      "mitigation": "Compliant (Sullivan Cotter FMV opinion)",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-057",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "On-Call Arrangements",
+      "severity": "LOW",
+      "probability": "LOW",
+      "probability_pct": 0.1,
+      "exposure": 0.0,
+      "exposure_raw": "$0 |",
+      "line_number": 1570,
+      "is_deal_blocking": false,
+      "mitigation": "Compliant (AKS safe harbor satisfied)",
+      "table_complete": false
+    },
+    {
+      "id": "RISK-058",
+      "section_id": "IV.R",
+      "domain": "",
+      "description": "Medical Directorships",
+      "severity": "LOW",
+      "probability": "LOW",
+      "probability_pct": 0.15,
+      "exposure": 0.0,
+      "exposure_raw": "$0 |",
+      "line_number": 1571,
+      "is_deal_blocking": false,
+      "mitigation": "Data room verification of written agreements required",
+      "table_complete": false
+    }
+  ],
+  "tables": [
+    {
+      "section_id": "IV.Q",
+      "table_start_line": 89,
+      "table_end_line": 102,
+      "columns_detected": [
+        "severity",
+        "finding"
+      ],
+      "findings_count": 10,
+      "is_complete": false,
+      "missing_columns": [
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.C",
+      "table_start_line": 285,
+      "table_end_line": 311,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 18,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 327,
+      "table_end_line": 336,
+      "columns_detected": [
+        "exposure"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity"
+      ]
+    },
+    {
+      "section_id": "IV.C",
+      "table_start_line": 437,
+      "table_end_line": 463,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 18,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 479,
+      "table_end_line": 488,
+      "columns_detected": [
+        "exposure"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity"
+      ]
+    },
+    {
+      "section_id": "IV.P",
+      "table_start_line": 923,
+      "table_end_line": 930,
+      "columns_detected": [
+        "finding"
+      ],
+      "findings_count": 6,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.I",
+      "table_start_line": 1053,
+      "table_end_line": 1064,
+      "columns_detected": [
+        "finding"
+      ],
+      "findings_count": 1,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 1565,
+      "table_end_line": 1572,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 6,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 1754,
+      "table_end_line": 1759,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 2132,
+      "table_end_line": 2136,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 3,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.S",
+      "table_start_line": 2151,
+      "table_end_line": 2153,
+      "columns_detected": [
+        "finding"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 2366,
+      "table_end_line": 2371,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 2793,
+      "table_end_line": 2795,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 0,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 3051,
+      "table_end_line": 3055,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 3436,
+      "table_end_line": 3440,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 1,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 3665,
+      "table_end_line": 3670,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 4277,
+      "table_end_line": 4285,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 4,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 4550,
+      "table_end_line": 4557,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 4901,
+      "table_end_line": 4905,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 2,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 5152,
+      "table_end_line": 5157,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 5937,
+      "table_end_line": 5943,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 5,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 6265,
+      "table_end_line": 6270,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 6801,
+      "table_end_line": 6806,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 3,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 7320,
+      "table_end_line": 7325,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 7681,
+      "table_end_line": 7688,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 6,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 7907,
+      "table_end_line": 7912,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.R",
+      "table_start_line": 8399,
+      "table_end_line": 8404,
+      "columns_detected": [
+        "finding",
+        "severity",
+        "probability",
+        "exposure",
+        "mitigation"
+      ],
+      "findings_count": 4,
+      "is_complete": true,
+      "missing_columns": []
+    },
+    {
+      "section_id": "IV.A",
+      "table_start_line": 8408,
+      "table_end_line": 8414,
+      "columns_detected": [
+        "exposure"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity"
+      ]
+    },
+    {
+      "section_id": "IV.E",
+      "table_start_line": 8585,
+      "table_end_line": 8590,
+      "columns_detected": [
+        "probability"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    },
+    {
+      "section_id": "IV.M",
+      "table_start_line": 8714,
+      "table_end_line": 8718,
+      "columns_detected": [
+        "exposure"
+      ],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity"
+      ]
+    },
+    {
+      "section_id": "IV.D",
+      "table_start_line": 8980,
+      "table_end_line": 8990,
+      "columns_detected": [],
+      "findings_count": 0,
+      "is_complete": false,
+      "missing_columns": [
+        "severity",
+        "exposure"
+      ]
+    }
+  ],
+  "top_exposures": [
+    {
+      "id": "RISK-011",
+      "section": "IV.C",
+      "description": "**340B Drug Pricing Eligibility Loss**",
+      "severity": "CRITICAL",
+      "exposure": 120000000.0
+    },
+    {
+      "id": "RISK-029",
+      "section": "IV.C",
+      "description": "**340B Drug Pricing Eligibility Loss**",
+      "severity": "CRITICAL",
+      "exposure": 120000000.0
+    },
+    {
+      "id": "RISK-063",
+      "section": "IV.R",
+      "description": "**340B Eligibility Loss (For-Profit Conversion)**",
+      "severity": "CRITICAL",
+      "exposure": 120000000.0
+    },
+    {
+      "id": "RISK-007",
+      "section": "IV.Q",
+      "description": "$36.43M/year new taxes",
+      "severity": "CRITICAL",
+      "exposure": 36430000.0
+    },
+    {
+      "id": "RISK-014",
+      "section": "IV.C",
+      "description": "**New Operating Taxes (Federal/State/Local)**",
+      "severity": "CRITICAL",
+      "exposure": 36430000.0
+    },
+    {
+      "id": "RISK-032",
+      "section": "IV.C",
+      "description": "**New Operating Taxes (Federal/State/Local)**",
+      "severity": "CRITICAL",
+      "exposure": 36430000.0
+    },
+    {
+      "id": "RISK-070",
+      "section": "IV.R",
+      "description": "Loss of \u00a7 501(c)(3) status (automatic)",
+      "severity": "CRITICAL",
+      "exposure": 36430000.0
+    },
+    {
+      "id": "RISK-004",
+      "section": "IV.Q",
+      "description": "$12M/year perpetual loss",
+      "severity": "CRITICAL",
+      "exposure": 12000000.0
+    },
+    {
+      "id": "RISK-053",
+      "section": "IV.I",
+      "description": "CRITICAL: 100% certain eligibility loss causing $12M/year perpetual drug cost in",
+      "severity": "CRITICAL",
+      "exposure": 12000000.0
+    },
+    {
+      "id": "RISK-001",
+      "section": "IV.Q",
+      "description": "Criminal prosecution, exclusion",
+      "severity": "CRITICAL",
+      "exposure": 0.0
+    }
+  ]
+}

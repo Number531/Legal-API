@@ -1,0 +1,12 @@
+{
+  "summary": {
+    "total_high_critical_findings": 0,
+    "findings_with_provisions": 0,
+    "findings_missing_provisions": 0,
+    "coverage_percentage": 100.0
+  },
+  "covered_findings": [],
+  "missing_provisions": [],
+  "provision_templates": {},
+  "remediation_tasks": []
+}

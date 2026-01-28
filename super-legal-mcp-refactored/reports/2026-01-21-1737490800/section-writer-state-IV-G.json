@@ -1,0 +1,51 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "FINRA Arbitration Claims and Suitability Compliance",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV-G (FINRA Arbitrations) from specialist report",
+    "progress": "COMPLETE - All 6 subsections written",
+    "next_action": "N/A - Section complete",
+    "critical_context": ["section_id=G", "3 arbitrations analyzed", "Total exposure $866K weighted"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE. No recovery needed.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["finra-arbitrations-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 5850,
+    "findings_written": "4/4",
+    "footnotes_count": 109,
+    "last_checkpoint": "2026-01-21T10:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/finra-arbitrations-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "output_file": "section-reports/section-IV-G-finra-arbitrations.md"
+}

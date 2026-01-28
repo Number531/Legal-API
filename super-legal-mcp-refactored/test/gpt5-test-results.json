@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-08-15T19:39:12.814Z",
+  "model": "gpt-4o-2024-08-06",
+  "summary": {
+    "total": 6,
+    "passed": 1,
+    "failed": 5,
+    "partial": 0
+  },
+  "results": [
+    {
+      "test": "Basic Research",
+      "status": "failed",
+      "error": "400 Unsupported parameter: 'verbosity'. In the Responses API, this parameter has moved to 'text.verbosity'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create."
+    },
+    {
+      "test": "Streaming Research",
+      "status": "failed",
+      "error": "400 Unsupported parameter: 'verbosity'. In the Responses API, this parameter has moved to 'text.verbosity'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create."
+    },
+    {
+      "test": "Iterative Planner",
+      "status": "failed",
+      "error": "400 Unsupported parameter: 'verbosity'. In the Responses API, this parameter has moved to 'text.verbosity'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create."
+    },
+    {
+      "test": "Structured Output",
+      "status": "failed",
+      "error": "400 Unsupported parameter: 'verbosity'. In the Responses API, this parameter has moved to 'text.verbosity'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create."
+    },
+    {
+      "test": "Complex Workflow",
+      "status": "failed",
+      "error": "400 Unsupported parameter: 'verbosity'. In the Responses API, this parameter has moved to 'text.verbosity'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create."
+    },
+    {
+      "test": "Bridge Mode",
+      "status": "passed",
+      "duration": 13393,
+      "toolCalls": 0
+    }
+  ]
+}

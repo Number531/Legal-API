@@ -1,0 +1,314 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "pass": 2,
+  "assessment_type": "post_remediation",
+  "timestamp": "2026-01-23T12:00:00Z",
+
+  "qa_cycle": {
+    "current_cycle": 1,
+    "max_cycles": 2,
+    "cycle_history": [
+      {
+        "cycle": 0,
+        "pass": 1,
+        "score": 77.5,
+        "outcome": "REMEDIATE",
+        "issues_before": 49,
+        "issues_resolved": 0,
+        "issues_remaining": 49,
+        "timestamp": "2026-01-23T10:00:00Z"
+      },
+      {
+        "cycle": 1,
+        "pass": 2,
+        "score": 91.8,
+        "outcome": "CERTIFY_WITH_LIMITATIONS",
+        "issues_before": 49,
+        "issues_resolved": 42,
+        "issues_remaining": 7,
+        "timestamp": "2026-01-23T12:00:00Z"
+      }
+    ]
+  },
+
+  "scoring": {
+    "overall_score": 91.8,
+    "base_score": 95.9,
+    "red_flag_deductions": -4.1,
+    "quality_tier": "TIER_2_PLUS",
+    "quality_description": "Senior Associate / Junior Partner Quality",
+    "certification_tier": "CERTIFY_WITH_LIMITATIONS"
+  },
+
+  "dimension_scores": {
+    "dim_0_questions_presented": {
+      "raw_score": 95,
+      "weighted_score": 4.75,
+      "max_points": 5,
+      "pass_1_score": 90,
+      "delta": 5,
+      "status": "improved"
+    },
+    "dim_1_creac_structure": {
+      "raw_score": 90,
+      "weighted_score": 9.0,
+      "max_points": 10,
+      "pass_1_score": 30,
+      "delta": 60,
+      "status": "major_improvement"
+    },
+    "dim_2_objectivity": {
+      "raw_score": 100,
+      "weighted_score": 8.0,
+      "max_points": 8,
+      "pass_1_score": 82,
+      "delta": 18,
+      "status": "perfect"
+    },
+    "dim_3_brief_answers": {
+      "raw_score": 98,
+      "weighted_score": 4.9,
+      "max_points": 5,
+      "pass_1_score": 95,
+      "delta": 3,
+      "status": "improved"
+    },
+    "dim_4_exec_summary": {
+      "raw_score": 93,
+      "weighted_score": 6.5,
+      "max_points": 7,
+      "pass_1_score": 88,
+      "delta": 5,
+      "status": "improved"
+    },
+    "dim_5_citation_quality": {
+      "raw_score": 96,
+      "weighted_score": 11.5,
+      "max_points": 12,
+      "pass_1_score": 90,
+      "delta": 6,
+      "status": "improved"
+    },
+    "dim_6_quantification": {
+      "raw_score": 100,
+      "weighted_score": 10.0,
+      "max_points": 10,
+      "pass_1_score": 98,
+      "delta": 2,
+      "status": "perfect"
+    },
+    "dim_7_cross_references": {
+      "raw_score": 98,
+      "weighted_score": 7.8,
+      "max_points": 8,
+      "pass_1_score": 98,
+      "delta": 0,
+      "status": "maintained"
+    },
+    "dim_8_risk_tables": {
+      "raw_score": 95,
+      "weighted_score": 7.6,
+      "max_points": 8,
+      "pass_1_score": 95,
+      "delta": 0,
+      "status": "maintained"
+    },
+    "dim_9_draft_contracts": {
+      "raw_score": 88,
+      "weighted_score": 8.8,
+      "max_points": 10,
+      "pass_1_score": 40,
+      "delta": 48,
+      "status": "major_improvement"
+    },
+    "dim_10_formatting": {
+      "raw_score": 98,
+      "weighted_score": 6.9,
+      "max_points": 7,
+      "pass_1_score": 95,
+      "delta": 3,
+      "status": "improved"
+    },
+    "dim_11_completeness": {
+      "raw_score": 100,
+      "weighted_score": 10.0,
+      "max_points": 10,
+      "pass_1_score": 98,
+      "delta": 2,
+      "status": "perfect"
+    }
+  },
+
+  "issues_summary": {
+    "total_issues": 7,
+    "critical_issues": 0,
+    "high_issues": 0,
+    "medium_issues": 3,
+    "low_issues": 4,
+    "issues_resolved_from_pass_1": 42,
+    "resolution_rate": 85.7
+  },
+
+  "issues_remaining": [
+    {
+      "id": "MEDIUM-001",
+      "severity": "MEDIUM",
+      "dimension": 1,
+      "description": "CREAC structure 98% complete (49 of 50 headers)",
+      "blocking": false,
+      "recommendation": "Add Conclusion header to Section IV.K"
+    },
+    {
+      "id": "MEDIUM-002",
+      "severity": "MEDIUM",
+      "dimension": 9,
+      "description": "Missing draft provision for IV.H non-compete (garden leave)",
+      "blocking": false,
+      "recommendation": "Draft garden leave payment covenant"
+    },
+    {
+      "id": "MEDIUM-003",
+      "severity": "MEDIUM",
+      "dimension": 9,
+      "description": "Missing draft provision for IV.J change-of-control consents",
+      "blocking": false,
+      "recommendation": "Draft client consent campaign covenant"
+    },
+    {
+      "id": "LOW-001",
+      "severity": "LOW",
+      "dimension": 4,
+      "description": "Executive summary 180 words over 3,500-word ceiling",
+      "blocking": false,
+      "recommendation": "Optional compression"
+    },
+    {
+      "id": "LOW-002",
+      "severity": "LOW",
+      "dimension": 8,
+      "description": "Risk table format variance (cosmetic)",
+      "blocking": false,
+      "recommendation": "Standardize on 9-column format (optional)"
+    },
+    {
+      "id": "LOW-003",
+      "severity": "LOW",
+      "dimension": 5,
+      "description": "3 citations missing pincites",
+      "blocking": false,
+      "recommendation": "Add pincites to SEC no-action letters"
+    },
+    {
+      "id": "LOW-004",
+      "severity": "LOW",
+      "dimension": 10,
+      "description": "Minor formatting residual improvements",
+      "blocking": false,
+      "recommendation": "None required"
+    }
+  ],
+
+  "remediation_impact": {
+    "wave_1_research": {
+      "points_gained": 2.5,
+      "dimensions_addressed": ["dim_2_objectivity"]
+    },
+    "wave_2_content": {
+      "points_gained": 3.0,
+      "dimensions_addressed": ["dim_6_quantification", "dim_1_creac"]
+    },
+    "wave_3_structural": {
+      "points_gained": 60.0,
+      "dimensions_addressed": ["dim_1_creac", "dim_9_draft_contracts"],
+      "note": "Largest improvement via hybrid script + agent workflow"
+    },
+    "wave_4_language": {
+      "points_gained": 23.0,
+      "dimensions_addressed": ["dim_2_objectivity", "dim_4_exec_summary", "dim_0_questions"]
+    },
+    "wave_5_citations": {
+      "points_gained": 6.0,
+      "dimensions_addressed": ["dim_5_citation_quality"]
+    },
+    "wave_6_assembly": {
+      "points_gained": 5.5,
+      "dimensions_addressed": ["dim_10_formatting", "dim_11_completeness"]
+    },
+    "total_improvement": 14.3
+  },
+
+  "key_metrics": {
+    "creac_headers_added": 49,
+    "draft_provisions_added": 12,
+    "verification_tags_added": 1372,
+    "advocacy_language_removed": 6,
+    "executive_summary_compressed": 315,
+    "word_count_reduction": "7.9%"
+  },
+
+  "certification_decision": {
+    "recommendation": "CERTIFY_WITH_LIMITATIONS",
+    "rationale": "Score 91.8% exceeds 88% minimum for limited certification by 3.8 points. Zero CRITICAL or HIGH issues remain. 3 MEDIUM and 4 LOW issues acceptable for 88-92% tier.",
+    "limitations_count": 4,
+    "blocking_issues": 0,
+    "next_action": "invoke_memo_qa_certifier"
+  },
+
+  "limitations_to_disclose": [
+    {
+      "id": "LIM-001",
+      "description": "CREAC structure 98% complete (49 of 50 headers)",
+      "impact": "MINIMAL",
+      "recommendation": "Add Conclusion header to Section IV.K (10 min)"
+    },
+    {
+      "id": "LIM-002",
+      "description": "Draft contract language 86% complete (12 of 14 HIGH findings)",
+      "impact": "MODERATE",
+      "recommendation": "Draft 2 missing provisions (40 min)"
+    },
+    {
+      "id": "LIM-003",
+      "description": "Executive summary 180 words over 3,500-word ceiling (5% excess)",
+      "impact": "MINIMAL",
+      "recommendation": "Optional compression (15 min)"
+    },
+    {
+      "id": "LIM-004",
+      "description": "Counter-analysis adequate but could be strengthened in 2 sections",
+      "impact": "MINIMAL",
+      "recommendation": "Enhanced research for IV.E, IV.G (25 min)"
+    }
+  ],
+
+  "cycle_2_option": {
+    "recommended": false,
+    "rationale": "Time-sensitive transaction; 91.8% quality sufficient for Board delivery with disclosed limitations",
+    "estimated_time": 90,
+    "projected_score": "93.8-94.5%",
+    "tasks_required": [
+      "Add 1 CREAC header (10 min)",
+      "Draft 2 contract provisions (40 min)",
+      "Compress executive summary (15 min)",
+      "Enhance counter-analysis (25 min)"
+    ]
+  },
+
+  "output_files": {
+    "diagnostic_assessment": "qa-outputs/pass-2/diagnostic-assessment-pass-2.md",
+    "score_comparison": "qa-outputs/pass-2/score-comparison.md",
+    "certification_recommendation": "qa-outputs/pass-2/certification-recommendation.md",
+    "state_file": "qa-outputs/pass-2/qa-diagnostic-state-pass-2.json"
+  },
+
+  "next_agent": "memo-qa-certifier",
+  "next_agent_inputs": {
+    "pass_2_score": 91.8,
+    "certification_tier": "CERTIFY_WITH_LIMITATIONS",
+    "limitations_count": 4,
+    "blocking_issues": 0,
+    "diagnostic_path": "qa-outputs/pass-2/diagnostic-assessment-pass-2.md",
+    "recommendation_path": "qa-outputs/pass-2/certification-recommendation.md"
+  }
+}

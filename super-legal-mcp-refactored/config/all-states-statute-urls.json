@@ -1,0 +1,218 @@
+{
+  "states": {
+    "AL": {
+      "name": "Alabama",
+      "urls": ["https://legislature.state.al.us/", "https://alisondb.legislature.state.al.us/"]
+    },
+    "AK": {
+      "name": "Alaska", 
+      "urls": ["https://akleg.gov/", "https://www.akleg.gov/"]
+    },
+    "AZ": {
+      "name": "Arizona",
+      "urls": ["https://azleg.gov/", "https://www.azleg.gov/"]
+    },
+    "AR": {
+      "name": "Arkansas",
+      "urls": ["https://arkleg.state.ar.us/", "https://portal.arkansas.gov/"]
+    },
+    "CA": {
+      "name": "California",
+      "primary_domain": "leginfo.legislature.ca.gov",
+      "alternate_domains": ["codes.findlaw.com"],
+      "statute_base_urls": ["leginfo.legislature.ca.gov", "codes.findlaw.com"]
+    },
+    "CO": {
+      "name": "Colorado",
+      "urls": ["https://leg.colorado.gov/"]
+    },
+    "CT": {
+      "name": "Connecticut", 
+      "urls": ["https://cga.ct.gov/", "https://www.cga.ct.gov/"]
+    },
+    "DE": {
+      "name": "Delaware",
+      "urls": ["https://delcode.delaware.gov/"]
+    },
+    "FL": {
+      "name": "Florida",
+      "primary_domain": "leg.state.fl.us",
+      "alternate_domains": ["www.flsenate.gov"],
+      "statute_base_urls": ["leg.state.fl.us", "www.flsenate.gov"]
+    },
+    "GA": {
+      "name": "Georgia",
+      "urls": ["https://legis.ga.gov/", "https://www.legis.ga.gov/"]
+    },
+    "HI": {
+      "name": "Hawaii",
+      "urls": ["https://capitol.hawaii.gov/", "https://www.capitol.hawaii.gov/"]
+    },
+    "ID": {
+      "name": "Idaho",
+      "urls": ["https://legislature.idaho.gov/"]
+    },
+    "IL": {
+      "name": "Illinois",
+      "urls": ["https://ilga.gov/", "https://www.ilga.gov/"]
+    },
+    "IN": {
+      "name": "Indiana",
+      "urls": ["https://iga.in.gov/", "https://www.in.gov/"]
+    },
+    "IA": {
+      "name": "Iowa", 
+      "urls": ["https://legis.iowa.gov/", "https://www.legis.iowa.gov/"]
+    },
+    "KS": {
+      "name": "Kansas",
+      "urls": ["https://kslegislature.org/", "https://www.kslegislature.org/"]
+    },
+    "KY": {
+      "name": "Kentucky",
+      "urls": ["https://legislature.ky.gov/", "https://www.lrc.ky.gov/"]
+    },
+    "LA": {
+      "name": "Louisiana",
+      "urls": ["https://legis.la.gov/", "https://www.legis.la.gov/"]
+    },
+    "ME": {
+      "name": "Maine",
+      "urls": ["https://legislature.maine.gov/", "https://www.mainelegislature.org/"]
+    },
+    "MD": {
+      "name": "Maryland",
+      "urls": ["https://mgaleg.maryland.gov/", "https://mlis.state.md.us/"]
+    },
+    "MA": {
+      "name": "Massachusetts",
+      "urls": ["https://malegislature.gov/", "https://www.malegislature.gov/"]
+    },
+    "MI": {
+      "name": "Michigan",
+      "urls": ["https://legislature.mi.gov/", "https://www.legislature.mi.gov/"]
+    },
+    "MN": {
+      "name": "Minnesota",
+      "urls": ["https://revisor.mn.gov/", "https://www.revisor.mn.gov/"]
+    },
+    "MS": {
+      "name": "Mississippi",
+      "urls": ["https://billstatus.ls.state.ms.us/"]
+    },
+    "MO": {
+      "name": "Missouri", 
+      "urls": ["https://revisor.mo.gov/", "https://www.moga.mo.gov/"]
+    },
+    "MT": {
+      "name": "Montana",
+      "urls": ["https://leg.mt.gov/", "https://laws.leg.mt.gov/"]
+    },
+    "NE": {
+      "name": "Nebraska",
+      "urls": ["https://nebraskalegislature.gov/", "https://www.nebraskalegislature.gov/"]
+    },
+    "NV": {
+      "name": "Nevada",
+      "urls": ["https://leg.state.nv.us/", "https://www.leg.state.nv.us/"]
+    },
+    "NH": {
+      "name": "New Hampshire",
+      "urls": ["https://gencourt.state.nh.us/", "https://www.gencourt.state.nh.us/"]
+    },
+    "NJ": {
+      "name": "New Jersey",
+      "urls": ["https://njleg.state.nj.us/", "https://www.njleg.state.nj.us/"]
+    },
+    "NM": {
+      "name": "New Mexico",
+      "urls": ["https://nmlegis.gov/", "https://www.nmlegis.gov/"]
+    },
+    "NY": {
+      "name": "New York",
+      "primary_domain": "nysenate.gov",
+      "alternate_domains": ["assembly.state.ny.us"],
+      "statute_base_urls": ["nysenate.gov", "assembly.state.ny.us"]
+    },
+    "NC": {
+      "name": "North Carolina",
+      "urls": ["https://ncleg.gov/", "https://www.ncleg.gov/"]
+    },
+    "ND": {
+      "name": "North Dakota",
+      "urls": ["https://legis.nd.gov/", "https://www.legis.nd.gov/"]
+    },
+    "OH": {
+      "name": "Ohio",
+      "urls": ["https://legislature.ohio.gov/", "https://codes.ohio.gov/"]
+    },
+    "OK": {
+      "name": "Oklahoma",
+      "urls": ["https://oklegislature.gov/", "https://www.oklegislature.gov/"]
+    },
+    "OR": {
+      "name": "Oregon",
+      "urls": ["https://oregonlegislature.gov/", "https://www.oregonlegislature.gov/"]
+    },
+    "PA": {
+      "name": "Pennsylvania",
+      "primary_domain": "legis.state.pa.us",
+      "alternate_domains": ["www.legis.state.pa.us"],
+      "statute_base_urls": ["legis.state.pa.us", "www.legis.state.pa.us"]
+    },
+    "RI": {
+      "name": "Rhode Island",
+      "urls": ["https://webserver.rilin.state.ri.us/"]
+    },
+    "SC": {
+      "name": "South Carolina", 
+      "urls": ["https://scstatehouse.gov/", "https://www.scstatehouse.gov/"]
+    },
+    "SD": {
+      "name": "South Dakota",
+      "urls": ["https://sdlegislature.gov/", "https://legis.sd.gov/"]
+    },
+    "TN": {
+      "name": "Tennessee",
+      "urls": ["https://capitol.tn.gov/", "https://www.capitol.tn.gov/"]
+    },
+    "TX": {
+      "name": "Texas",
+      "primary_domain": "capitol.texas.gov",
+      "alternate_domains": ["statutes.capitol.texas.gov"],
+      "statute_base_urls": ["capitol.texas.gov", "statutes.capitol.texas.gov"]
+    },
+    "UT": {
+      "name": "Utah",
+      "urls": ["https://le.utah.gov/", "https://legislature.utah.gov/"]
+    },
+    "VT": {
+      "name": "Vermont", 
+      "urls": ["https://legislature.vermont.gov/"]
+    },
+    "VA": {
+      "name": "Virginia",
+      "urls": ["https://lis.virginia.gov/", "https://law.lis.virginia.gov/"]
+    },
+    "WA": {
+      "name": "Washington",
+      "urls": ["https://leg.wa.gov/", "https://app.leg.wa.gov/"]
+    },
+    "WV": {
+      "name": "West Virginia",
+      "urls": ["https://legis.state.wv.us/", "https://www.legis.state.wv.us/"]
+    },
+    "WI": {
+      "name": "Wisconsin",
+      "urls": ["https://docs.legis.wisconsin.gov/"]
+    },
+    "WY": {
+      "name": "Wyoming",
+      "urls": ["https://legisweb.state.wy.us/"]
+    },
+    "DC": {
+      "name": "District of Columbia",
+      "urls": ["https://dccouncil.us/", "https://code.dccouncil.us/"]
+    }
+  }
+}

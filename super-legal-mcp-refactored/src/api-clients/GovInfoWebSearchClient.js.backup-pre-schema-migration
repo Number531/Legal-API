@@ -1,0 +1,611 @@
+/**
+ * GovInfo Web Search Client
+ * Powered by Exa WebSearch API
+ * 
+ * Provides enhanced search capabilities for:
+ * - United States Code (USC) search by title, section, or keyword
+ * - Specific USC section retrieval with full text
+ * - USC title structure and organization
+ * - Complete USC title directory
+ * 
+ * Features:
+ * - Direct web content search via govinfo.gov and authoritative USC sources
+ * - Smart snippet extraction with legal/statutory patterns
+ * - Metadata extraction (USC citations, sections, amendments)
+ * - Real-time content via liveCrawl
+ * - Default limit of 5 for optimal token usage
+ */
+
+import { validateLimit } from '../utils/validation.js';
+import { BaseWebSearchClient } from './BaseWebSearchClient.js';
+
+export class GovInfoWebSearchClient extends BaseWebSearchClient {
+  constructor(rateLimiter, exaApiKey = process.env.EXA_API_KEY) {
+    super(rateLimiter, exaApiKey);
+
+    // GovInfo/USC-specific configuration
+    this.domains = [
+      'govinfo.gov',
+      'uscode.house.gov', 
+      'law.cornell.edu/uscode',
+      'congress.gov',
+      'constitution.congress.gov',
+      'gpo.gov'
+    ];
+    
+    // USC title mappings (1-54)
+    this.uscTitles = {
+      1: "General Provisions",
+      2: "The Congress",
+      3: "The President", 
+      4: "Flag and Seal, Seat of Government, and the States",
+      5: "Government Organization and Employees",
+      6: "Domestic Security",
+      7: "Agriculture",
+      8: "Aliens and Nationality",
+      9: "Arbitration",
+      10: "Armed Forces",
+      11: "Bankruptcy",
+      12: "Banks and Banking",
+      13: "Census",
+      14: "Coast Guard",
+      15: "Commerce and Trade",
+      16: "Conservation",
+      17: "Copyrights",
+      18: "Crimes and Criminal Procedure",
+      19: "Customs Duties",
+      20: "Education",
+      21: "Food and Drugs",
+      22: "Foreign Relations and Intercourse",
+      23: "Highways",
+      24: "Hospitals and Asylums",
+      25: "Indians",
+      26: "Internal Revenue Code",
+      27: "Intoxicating Liquors", 
+      28: "Judiciary and Judicial Procedure",
+      29: "Labor",
+      30: "Mineral Lands and Mining",
+      31: "Money and Finance",
+      32: "National Guard",
+      33: "Navigation and Navigable Waters",
+      34: "Crime Control and Law Enforcement",
+      35: "Patents",
+      36: "Patriotic and National Observances",
+      37: "Pay and Allowances of the Uniformed Services",
+      38: "Veterans' Benefits",
+      39: "Postal Service",
+      40: "Public Buildings, Property, and Works",
+      41: "Public Contracts",
+      42: "The Public Health and Welfare",
+      43: "Public Lands",
+      44: "Public Printing and Documents",
+      45: "Railroads",
+      46: "Shipping",
+      47: "Telecommunications",
+      48: "Territories and Insular Possessions",
+      49: "Transportation",
+      50: "War and National Defense",
+      51: "National and Commercial Space Programs",
+      52: "Voting and Elections",
+      53: "[Reserved]",
+      54: "National Park Service"
+    };
+    
+    // Legal/statutory terms for query enhancement
+    this.legalTerms = [
+      'section', 'subsection', 'chapter', 'title', 'USC', 'United States Code',
+      'statute', 'law', 'legal', 'regulation', 'provision', 'definition',
+      'requirement', 'prohibition', 'penalty', 'exception', 'effective',
+      'amendment', 'enacted', 'codified', 'CFR'
+    ];
+  }
+
+  /**
+   * Search United States Code by title, section, or keyword
+   */
+  async searchUSCodeWeb(args = {}) {
+    // Handle empty parameters gracefully (EPA pattern)
+    if (!args || typeof args !== 'object') args = {};
+    
+    const {
+      title_number,
+      section,
+      search_term,
+      year = 2023,
+      limit,
+      include_text = false,
+      include_snippet = false
+    } = args;
+
+    // Smart default limits - default to 5 for all types
+    let finalLimit = limit !== undefined ? limit : 5;
+    finalLimit = validateLimit(finalLimit, 100);
+
+    // No validation required - buildUSCQuery provides smart fallbacks with "United States Code" context
+
+    try {
+      // Build USC-specific search query
+      const query = this.buildUSCQuery({
+        search_term,
+        title_number,
+        section,
+        year
+      });
+
+      // Use inherited executeExaSearch with USC-specific options
+      const searchResults = await this.executeExaSearch(query, finalLimit, {
+        domain: 'legal_statute',
+        highlightQuery: 'USC United States Code section subsection statute law provision requirement',
+        numSentences: 5,
+        includeDomains: this.domains,
+        includeFullText: include_text,
+        fallbackToText: true
+      });
+
+      // Process and format results
+      const processedResults = await this.processUSCResults(searchResults, {
+        title_number,
+        section,
+        search_term,
+        include_text,
+        include_snippet
+      });
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            search_criteria: {
+              title_number,
+              section,
+              search_term,
+              year,
+              include_text,
+              include_snippet
+            },
+            count: processedResults.length,
+            results: processedResults
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('USC search error:', error);
+      throw new Error(`USC search failed: ${error.message}`);
+    }
+  }
+
+  /**
+   * Get specific section of United States Code
+   */
+  async getUSCSectionWeb(args = {}) {
+    // Handle empty parameters gracefully (EPA pattern)
+    if (!args || typeof args !== 'object') args = {};
+    
+    const {
+      title,
+      section,
+      year = 2023,
+      format = 'json',
+      include_text = true
+    } = args;
+
+    // Smart fallback for empty parameters - return popular USC sections
+    if (!title || !section) {
+      console.warn('[GovInfo WebSearch] Missing USC section parameters - using default Title 42 § 1983', {
+        receivedTitle: title,
+        receivedSection: section,
+        allArgs: Object.keys(args)
+      });
+      const defaultTitle = 42; // Public Health and Welfare - most commonly searched
+      const defaultSection = 1983; // Civil rights under color of law - highly relevant
+      return this.getUSCSectionWeb({
+        title: defaultTitle,
+        section: defaultSection,
+        year,
+        format,
+        include_text
+      });
+    }
+
+    if (title < 1 || title > 54) {
+      throw new Error('Invalid title number. Must be between 1 and 54');
+    }
+
+    try {
+      // Build precise section query
+      const titleName = this.uscTitles[title] || `Title ${title}`;
+      const query = this.buildUSCSectionQuery(title, section, titleName);
+
+      // Execute targeted search for the specific section using inherited method
+      const searchResults = await this.executeExaSearch(query, 5, {
+        domain: 'legal_statute',
+        highlightQuery: 'USC United States Code section subsection statute text definition requirement',
+        numSentences: 7,
+        includeDomains: this.domains,
+        includeFullText: include_text,
+        fallbackToText: true
+      });
+
+      // Process section-specific results
+      const sectionResult = await this.processSectionResults(searchResults, {
+        title,
+        section,
+        format,
+        year
+      });
+
+      return {
+        content: [{
+          type: "text", 
+          text: JSON.stringify(sectionResult, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('Get USC section error:', error);
+      throw new Error(`Failed to get USC section: ${error.message}`);
+    }
+  }
+
+  /**
+   * Get table of contents/structure for a USC title
+   */
+  async getUSCTitleStructureWeb(args = {}) {
+    // Handle empty parameters gracefully (EPA pattern)
+    if (!args || typeof args !== 'object') args = {};
+    
+    const {
+      title,
+      year = 2023,
+      include_chapters = true,
+      include_sections = false
+    } = args;
+
+    // Smart fallback for empty parameters - return Title 42 structure (most commonly searched)
+    if (!title) {
+      const defaultTitle = 42; // Public Health and Welfare - comprehensive and commonly referenced
+      return this.getUSCTitleStructureWeb({
+        title: defaultTitle,
+        year,
+        include_chapters,
+        include_sections
+      });
+    }
+
+    if (title < 1 || title > 54) {
+      throw new Error('Invalid title number. Must be between 1 and 54');
+    }
+
+    try {
+      const titleName = this.uscTitles[title] || `Title ${title}`;
+      
+      // Build structure query focusing on table of contents
+      const query = this.buildTitleStructureQuery(title, titleName);
+
+      // Execute search for structure information using inherited method
+      const searchResults = await this.executeExaSearch(query, 5, {
+        domain: 'legal_statute',
+        highlightQuery: 'table contents chapter structure organization USC title',
+        numSentences: 7,
+        includeDomains: this.domains,
+        includeFullText: true,
+        fallbackToText: true
+      });
+
+      // Process structure results
+      const structure = await this.processTitleStructureResults(searchResults, {
+        title,
+        titleName,
+        year,
+        include_chapters,
+        include_sections
+      });
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(structure, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('Get USC title structure error:', error);
+      throw new Error(`Failed to get USC title structure: ${error.message}`);
+    }
+  }
+
+  /**
+   * List all titles of the United States Code
+   */
+  async listUSCTitlesWeb(args = {}) {
+    const {
+      year = 2023,
+      include_enacted = false,
+      include_descriptions = true
+    } = args;
+
+    try {
+      // For title listing, we can use our static mapping combined with live verification
+      const titles = Object.entries(this.uscTitles).map(([number, name]) => {
+        const titleInfo = {
+          number: parseInt(number),
+          name: name,
+          package_id: `USCODE-${year}-title${number}`,
+          available: number !== "53" // Title 53 is reserved
+        };
+
+        if (include_enacted) {
+          // Static data about positive law enactment status
+          const enactedTitles = [1, 3, 4, 5, 9, 10, 11, 13, 14, 17, 18, 23, 26, 28, 31, 32, 34, 35, 36, 37, 38, 39, 40, 41, 44, 46, 49, 51, 54];
+          titleInfo.enacted_positive_law = enactedTitles.includes(parseInt(number));
+        }
+
+        if (include_descriptions && name !== "[Reserved]") {
+          titleInfo.description = `United States Code Title ${number}: ${name}`;
+        }
+
+        return titleInfo;
+      });
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            year: year,
+            total_titles: titles.length,
+            available_count: titles.filter(t => t.available).length,
+            include_enacted,
+            include_descriptions,
+            titles: titles
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('List USC titles error:', error);
+      throw new Error(`Failed to list USC titles: ${error.message}`);
+    }
+  }
+
+  // Helper Methods
+
+  /**
+   * Build USC-specific search query
+   */
+  buildUSCQuery({ search_term, title_number, section, year }) {
+    let queryParts = [];
+
+    // Base search text
+    if (search_term) {
+      queryParts.push(search_term);
+    }
+
+    // Add USC context - always include for scope
+    queryParts.push('United States Code');
+    
+    // Add specific title/section if provided
+    if (title_number) {
+      queryParts.push(`Title ${title_number}`);
+      const titleName = this.uscTitles[title_number];
+      if (titleName) {
+        queryParts.push(`"${titleName}"`);
+      }
+    }
+
+    if (section) {
+      queryParts.push(`section ${section}`);
+      queryParts.push(`§ ${section}`);
+    }
+
+    // Add USC citation format
+    if (title_number && section) {
+      queryParts.push(`${title_number} USC ${section}`);
+      queryParts.push(`${title_number} U.S.C. § ${section}`);
+    } else if (title_number) {
+      queryParts.push(`${title_number} USC`);
+      queryParts.push(`${title_number} U.S.C.`);
+    }
+
+    // Smart fallback for empty search - provide recent statutory activity
+    if (!search_term && !title_number) {
+      queryParts.push('statute law provision amendment updated');
+    }
+
+    return queryParts.join(' ');
+  }
+
+  /**
+   * Build precise USC section query
+   */
+  buildUSCSectionQuery(title, section, titleName) {
+    return [
+      `${title} USC ${section}`,
+      `${title} U.S.C. § ${section}`,
+      `Title ${title} section ${section}`,
+      `"${titleName}"`,
+      `United States Code`,
+      section
+    ].join(' ');
+  }
+
+  /**
+   * Build title structure query
+   */
+  buildTitleStructureQuery(title, titleName) {
+    return [
+      `Title ${title}`,
+      `"${titleName}"`,
+      'table of contents',
+      'chapter',
+      'structure',
+      'United States Code',
+      'USC'
+    ].join(' ');
+  }
+
+
+
+
+  /**
+   * Process USC search results
+   */
+  async processUSCResults(searchResults, criteria) {
+    if (!searchResults || !Array.isArray(searchResults)) return [];
+
+    return searchResults.map(result => {
+      const metadata = this.extractUSCMetadata(result);
+      
+      const processedResult = {
+        id: result.id,
+        title: result.title,
+        url: result.url,
+        published_date: result.publishedDate,
+        usc_citation: metadata.uscCitation,
+        title_number: metadata.titleNumber,
+        section_number: metadata.sectionNumber,
+        chapter: metadata.chapter,
+        score: result.score
+      };
+
+      if (criteria.include_snippet && result.snippet) {
+        processedResult.snippet = result.snippet;
+      }
+
+      if (criteria.include_text && result.text) {
+        processedResult.text = result.text;
+        processedResult.text_length = result.text.length;
+      }
+
+      return processedResult;
+    });
+  }
+
+  /**
+   * Process USC section results 
+   */
+  async processSectionResults(searchResults, criteria) {
+    const { title, section, format, year } = criteria;
+    
+    if (!searchResults || !Array.isArray(searchResults) || searchResults.length === 0) {
+      throw new Error(`Section ${section} not found in Title ${title}`);
+    }
+
+    // Find the best match for the specific section
+    const bestResult = searchResults[0];
+    const metadata = this.extractUSCMetadata(bestResult);
+
+    return {
+      title: title,
+      section: section,
+      year: year,
+      section_title: bestResult.title,
+      usc_citation: metadata.uscCitation || `${title} U.S.C. § ${section}`,
+      url: bestResult.url,
+      published_date: bestResult.publishedDate,
+      format: format,
+      text: bestResult.text || 'Full text not available',
+      metadata: metadata
+    };
+  }
+
+  /**
+   * Process title structure results
+   */
+  async processTitleStructureResults(searchResults, criteria) {
+    const { title, titleName, year, include_chapters, include_sections } = criteria;
+
+    const structure = {
+      title_number: title,
+      title_name: titleName,
+      year: year,
+      sources: [],
+      chapters: include_chapters ? {} : undefined,
+      sections: include_sections ? [] : undefined
+    };
+
+    if (searchResults && Array.isArray(searchResults)) {
+      searchResults.forEach(result => {
+        structure.sources.push({
+          title: result.title,
+          url: result.url,
+          published_date: result.publishedDate
+        });
+
+        // Extract chapter/section info from content if available
+        if (result.text && include_chapters) {
+          const chapters = this.extractChapterInfo(result.text);
+          Object.assign(structure.chapters, chapters);
+        }
+      });
+    }
+
+    return structure;
+  }
+
+  /**
+   * Extract USC metadata from search result
+   */
+  extractUSCMetadata(result) {
+    const title = result.title || '';
+    const text = result.text || '';
+    const url = result.url || '';
+    
+    const metadata = {
+      uscCitation: null,
+      titleNumber: null,
+      sectionNumber: null,
+      chapter: null,
+      effectiveDate: null
+    };
+
+    // Extract USC citation patterns
+    const citationPatterns = [
+      /(\d+)\s+U\.?S\.?C\.?\s*§?\s*(\d+[a-z]?)/gi,
+      /Title\s+(\d+)[,\s]+Section\s+(\d+[a-z]?)/gi,
+      /(\d+)\s+USC\s+(\d+[a-z]?)/gi
+    ];
+
+    for (const pattern of citationPatterns) {
+      const match = (title + ' ' + text).match(pattern);
+      if (match) {
+        const fullMatch = match[0];
+        const parts = fullMatch.match(/(\d+).*?(\d+[a-z]?)/i);
+        if (parts) {
+          metadata.titleNumber = parseInt(parts[1]);
+          metadata.sectionNumber = parts[2];
+          metadata.uscCitation = fullMatch;
+          break;
+        }
+      }
+    }
+
+    // Extract chapter information
+    const chapterMatch = (title + ' ' + text).match(/Chapter\s+(\d+)/i);
+    if (chapterMatch) {
+      metadata.chapter = parseInt(chapterMatch[1]);
+    }
+
+    return metadata;
+  }
+
+  /**
+   * Extract chapter information from content
+   */
+  extractChapterInfo(text) {
+    const chapters = {};
+    const chapterMatches = text.match(/Chapter\s+(\d+)[:\-\s]*(.*?)(?=Chapter|\n\n|$)/gi);
+    
+    if (chapterMatches) {
+      chapterMatches.forEach(match => {
+        const parts = match.match(/Chapter\s+(\d+)[:\-\s]*(.*)/i);
+        if (parts) {
+          const chapterNum = parseInt(parts[1]);
+          const chapterTitle = parts[2] ? parts[2].trim().split('\n')[0] : '';
+          chapters[chapterNum] = {
+            title: chapterTitle,
+            number: chapterNum
+          };
+        }
+      });
+    }
+
+    return chapters;
+  }
+}

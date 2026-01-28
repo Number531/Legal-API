@@ -1,0 +1,44 @@
+{
+  "section_id": "IV.E.2",
+  "section_info": {
+    "title": "Draft Contract Language",
+    "has_counter_analysis_header": false,
+    "detections": 3,
+    "to_move": 3
+  },
+  "locations": [
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 2,
+      "line_number": 10328,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Representation (Article V, Section 5.18\u2014Insurance):**\n```\n(a) Seller has maintained cyber liability insurance with [Beazley Insurance Company] providing\ncoverage limits of not less than [twenty-five...",
+      "full_paragraph": "**Representation (Article V, Section 5.18\u2014Insurance):**\n```\n(a) Seller has maintained cyber liability insurance with [Beazley Insurance Company] providing\ncoverage limits of not less than [twenty-five million dollars ($25,000,000)] per occurrence and\nin the aggregate, including:\n    (i) First-party coverage for business interruption, data restoration, forensic investigation,\n    and cyber extortion;\n    (ii) Third-party coverage for privacy liability, regulatory defense and penalties, and\n    network security liability;\n    (iii) A regulatory penalty sublimit of not less than [five million dollars ($5,000,000)].",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 14,
+      "line_number": 10396,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Indemnification (Article VIII, Section 8.5\u2014STARK/AKS Special Indemnity):**\n```\nSeller shall indemnify Buyer for Losses arising from or related to the STARK Law and AKS compliance\nmatter disclosed on...",
+      "full_paragraph": "**Indemnification (Article VIII, Section 8.5\u2014STARK/AKS Special Indemnity):**\n```\nSeller shall indemnify Buyer for Losses arising from or related to the STARK Law and AKS compliance\nmatter disclosed on Schedule 5.28, including without limitation:\n    (i) OIG settlement payments, civil monetary penalties, and exclusion defense costs;\n    (ii) Claims refunds to Medicare and Medicaid for services rendered pursuant to prohibited referrals;\n    (iii) Defense costs (whether or not covered by Directors and Officers liability insurance);\n    (iv) Corporate Integrity Agreement compliance costs for a period of three (3) years.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 18,
+      "line_number": 10427,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Buyer may draw on STARK/AKS Escrow for:\n- OIG settlement payments, civil monetary penalties, claims refunds\n- Defense costs exceeding D&O insurance coverage (if any)\n- Corporate Integrity Agreement co...",
+      "full_paragraph": "Buyer may draw on STARK/AKS Escrow for:\n- OIG settlement payments, civil monetary penalties, claims refunds\n- Defense costs exceeding D&O insurance coverage (if any)\n- Corporate Integrity Agreement compliance costs\n```",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

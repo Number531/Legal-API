@@ -1,0 +1,1484 @@
+/**
+ * State Court Rules Web Search Client (BaseWebSearchClient Integration)
+ * Comprehensive state court rules and formatting requirements module
+ * Follows established pattern from CourtListener/EPA/StateStatute WebSearch clients
+ *
+ * Phase 2 Implementation: Complete state-specific court rule coverage
+ * - Court rules and formatting requirements
+ * - Local rules and procedural variations
+ * - Document templates and compliance validation
+ * - Discovery, appellate, and emergency procedure rules
+ */
+
+import { validateLimit } from '../utils/validation.js';
+import { BaseWebSearchClient } from './BaseWebSearchClient.js';
+
+export class StateCourtRulesWebSearchClient extends BaseWebSearchClient {
+  constructor(rateLimiter = null, exaApiKey = null) {
+    super(rateLimiter, exaApiKey);
+
+    if (!this.exaApiKey) {
+      console.warn('EXA_API_KEY not configured. State court rules search will not be available.');
+    }
+
+    // Comprehensive 50-state court domain configuration
+    this.stateCourtDomains = {
+      'AL': { 
+        name: 'Alabama', 
+        domains: ['judicial.alabama.gov', 'acscourt.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'district']
+      },
+      'AK': { 
+        name: 'Alaska', 
+        domains: ['courts.alaska.gov'],
+        courtTypes: ['supreme', 'appeals', 'superior', 'district']
+      },
+      'AZ': { 
+        name: 'Arizona', 
+        domains: ['azcourts.gov', 'superiorcourt.maricopa.gov'],
+        courtTypes: ['supreme', 'appeals', 'superior', 'justice']
+      },
+      'AR': { 
+        name: 'Arkansas', 
+        domains: ['courts.arkansas.gov', 'arcourts.gov'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'district']
+      },
+      'CA': { 
+        name: 'California', 
+        domains: ['courts.ca.gov', 'smartrules.com', 'ceb.com', 'lacourt.org', 'occourts.org', 'sfsuperiorcourt.org', 'sdcourt.ca.gov'],
+        courtTypes: ['supreme', 'appeals', 'superior'],
+        specialFeatures: ['electronic_filing', 'local_rules', 'formatting_strict']
+      },
+      'CO': { 
+        name: 'Colorado', 
+        domains: ['courts.state.co.us', 'coloradojudicial.gov'],
+        courtTypes: ['supreme', 'appeals', 'district', 'county']
+      },
+      'CT': { 
+        name: 'Connecticut', 
+        domains: ['jud.ct.gov', 'ctbar.org', 'eservices.jud.ct.gov'],
+        courtTypes: ['supreme', 'appellate', 'superior']
+      },
+      'DE': { 
+        name: 'Delaware', 
+        domains: ['courts.delaware.gov', 'dsba.org'],
+        courtTypes: ['supreme', 'superior', 'common_pleas', 'justice']
+      },
+      'FL': { 
+        name: 'Florida', 
+        domains: ['flcourts.org', 'floridabar.org', 'myflcourtaccess.com'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'county'],
+        specialFeatures: ['new_rules_2025', 'cover_sheets_mandatory']
+      },
+      'GA': { 
+        name: 'Georgia', 
+        domains: ['georgiacourts.gov', 'gabar.org'],
+        courtTypes: ['supreme', 'appeals', 'superior', 'state', 'magistrate']
+      },
+      'HI': { 
+        name: 'Hawaii', 
+        domains: ['courts.state.hi.us', 'hsba.org'],
+        courtTypes: ['supreme', 'intermediate', 'circuit', 'district']
+      },
+      'ID': { 
+        name: 'Idaho', 
+        domains: ['isc.idaho.gov', 'isb.idaho.gov'],
+        courtTypes: ['supreme', 'appeals', 'district', 'magistrate']
+      },
+      'IL': { 
+        name: 'Illinois', 
+        domains: ['illinoiscourts.gov', 'isba.org', 'efile.illinoiscourts.gov'],
+        courtTypes: ['supreme', 'appellate', 'circuit'],
+        specialFeatures: ['cook_county_specific', 'efiling_mandatory']
+      },
+      'IN': { 
+        name: 'Indiana', 
+        domains: ['in.gov/courts', 'inbar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'superior']
+      },
+      'IA': { 
+        name: 'Iowa', 
+        domains: ['iowacourts.gov', 'iowabar.org'],
+        courtTypes: ['supreme', 'appeals', 'district']
+      },
+      'KS': { 
+        name: 'Kansas', 
+        domains: ['kscourts.org', 'ksbar.org'],
+        courtTypes: ['supreme', 'appeals', 'district', 'municipal']
+      },
+      'KY': { 
+        name: 'Kentucky', 
+        domains: ['kycourts.gov', 'kybar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'district']
+      },
+      'LA': { 
+        name: 'Louisiana', 
+        domains: ['lasc.org', 'lsba.org'],
+        courtTypes: ['supreme', 'appeals', 'district', 'parish']
+      },
+      'ME': { 
+        name: 'Maine', 
+        domains: ['courts.maine.gov', 'mainebar.org'],
+        courtTypes: ['supreme', 'superior', 'district']
+      },
+      'MD': { 
+        name: 'Maryland', 
+        domains: ['mdcourts.gov', 'msba.org', 'courts.state.md.us'],
+        courtTypes: ['appeals', 'special_appeals', 'circuit', 'district']
+      },
+      'MA': { 
+        name: 'Massachusetts', 
+        domains: ['mass.gov/courts', 'massbar.org'],
+        courtTypes: ['supreme', 'appeals', 'superior', 'district']
+      },
+      'MI': { 
+        name: 'Michigan', 
+        domains: ['courts.michigan.gov', 'michbar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'district']
+      },
+      'MN': { 
+        name: 'Minnesota', 
+        domains: ['mncourts.gov', 'mnbar.org'],
+        courtTypes: ['supreme', 'appeals', 'district']
+      },
+      'MS': { 
+        name: 'Mississippi', 
+        domains: ['courts.ms.gov', 'msbar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'chancery']
+      },
+      'MO': { 
+        name: 'Missouri', 
+        domains: ['courts.mo.gov', 'mobar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'municipal']
+      },
+      'MT': { 
+        name: 'Montana', 
+        domains: ['courts.mt.gov', 'montanabar.org'],
+        courtTypes: ['supreme', 'district', 'justice']
+      },
+      'NE': { 
+        name: 'Nebraska', 
+        domains: ['supremecourt.nebraska.gov', 'nebar.org'],
+        courtTypes: ['supreme', 'appeals', 'district', 'county']
+      },
+      'NV': { 
+        name: 'Nevada', 
+        domains: ['nvcourts.gov', 'nvbar.org'],
+        courtTypes: ['supreme', 'appeals', 'district', 'justice']
+      },
+      'NH': { 
+        name: 'New Hampshire', 
+        domains: ['courts.nh.gov', 'nhbar.org'],
+        courtTypes: ['supreme', 'superior', 'circuit']
+      },
+      'NJ': { 
+        name: 'New Jersey', 
+        domains: ['njcourts.gov', 'njsba.com', 'portal.njcourts.gov'],
+        courtTypes: ['supreme', 'appellate', 'superior', 'municipal']
+      },
+      'NM': { 
+        name: 'New Mexico', 
+        domains: ['nmcourts.gov', 'nmbar.org'],
+        courtTypes: ['supreme', 'appeals', 'district', 'magistrate']
+      },
+      'NY': { 
+        name: 'New York', 
+        domains: ['nycourts.gov', 'courts.state.ny.us', 'nysba.org', 'iapps.courts.state.ny.us'],
+        courtTypes: ['appeals', 'supreme', 'county', 'family'],
+        specialFeatures: ['commercial_division', 'nyscef_filing', 'cplr_compliance']
+      },
+      'NC': { 
+        name: 'North Carolina', 
+        domains: ['nccourts.gov', 'ncbar.org'],
+        courtTypes: ['supreme', 'appeals', 'superior', 'district']
+      },
+      'ND': { 
+        name: 'North Dakota', 
+        domains: ['ndcourts.gov', 'sband.org'],
+        courtTypes: ['supreme', 'district', 'municipal']
+      },
+      'OH': { 
+        name: 'Ohio', 
+        domains: ['supremecourt.ohio.gov', 'ohiobar.org'],
+        courtTypes: ['supreme', 'appeals', 'common_pleas', 'municipal']
+      },
+      'OK': { 
+        name: 'Oklahoma', 
+        domains: ['oscn.net', 'okbar.org'],
+        courtTypes: ['supreme', 'criminal_appeals', 'district', 'municipal']
+      },
+      'OR': { 
+        name: 'Oregon', 
+        domains: ['courts.oregon.gov', 'osbar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'justice']
+      },
+      'PA': { 
+        name: 'Pennsylvania', 
+        domains: ['pacourts.us', 'pabar.org', 'ujsportal.pacourts.us'],
+        courtTypes: ['supreme', 'superior', 'commonwealth', 'common_pleas']
+      },
+      'RI': { 
+        name: 'Rhode Island', 
+        domains: ['courts.ri.gov', 'ribar.com'],
+        courtTypes: ['supreme', 'superior', 'family', 'district']
+      },
+      'SC': { 
+        name: 'South Carolina', 
+        domains: ['sccourts.org', 'scbar.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'magistrate']
+      },
+      'SD': { 
+        name: 'South Dakota', 
+        domains: ['ujs.sd.gov', 'statebarofsouthdakota.com'],
+        courtTypes: ['supreme', 'circuit', 'magistrate']
+      },
+      'TN': { 
+        name: 'Tennessee', 
+        domains: ['tncourts.gov', 'tba.org'],
+        courtTypes: ['supreme', 'appeals', 'criminal_appeals', 'circuit']
+      },
+      'TX': { 
+        name: 'Texas', 
+        domains: ['txcourts.gov', 'texasbar.com', 'efile.txcourts.gov'],
+        courtTypes: ['supreme', 'criminal_appeals', 'appeals', 'district'],
+        specialFeatures: ['efiletexas_mandatory', 'double_spacing', 'no_pdf_security']
+      },
+      'UT': { 
+        name: 'Utah', 
+        domains: ['utcourts.gov', 'utahbar.org'],
+        courtTypes: ['supreme', 'appeals', 'district', 'justice']
+      },
+      'VT': { 
+        name: 'Vermont', 
+        domains: ['vermontjudiciary.org', 'vtbar.org'],
+        courtTypes: ['supreme', 'superior', 'district']
+      },
+      'VA': { 
+        name: 'Virginia', 
+        domains: ['vacourts.gov', 'vsb.org'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'district']
+      },
+      'WA': { 
+        name: 'Washington', 
+        domains: ['courts.wa.gov', 'wsba.org', 'efile.courts.wa.gov', 'ac.courts.wa.gov'],
+        courtTypes: ['supreme', 'appeals', 'superior', 'district']
+      },
+      'WV': { 
+        name: 'West Virginia', 
+        domains: ['courtswv.gov', 'wvbar.org'],
+        courtTypes: ['supreme', 'circuit', 'magistrate']
+      },
+      'WI': { 
+        name: 'Wisconsin', 
+        domains: ['wicourts.gov', 'wisbar.org', 'efiling.wicourts.gov'],
+        courtTypes: ['supreme', 'appeals', 'circuit', 'municipal']
+      },
+      'WY': { 
+        name: 'Wyoming', 
+        domains: ['courts.state.wy.us', 'wyomingbar.org'],
+        courtTypes: ['supreme', 'district', 'circuit']
+      }
+    };
+
+    // Rule categories for targeted searches
+    this.ruleCategories = {
+      formatting: ['font', 'margins', 'spacing', 'typography', 'page layout'],
+      electronic: ['e-filing', 'electronic filing', 'PDF requirements', 'file size'],
+      procedural: ['motion practice', 'deadlines', 'service', 'pleading requirements'],
+      local: ['local rules', 'county rules', 'district rules', 'local procedures'],
+      discovery: ['discovery rules', 'interrogatories', 'depositions', 'document production'],
+      appellate: ['appellate rules', 'brief requirements', 'record preparation'],
+      emergency: ['emergency procedures', 'TRO', 'preliminary injunction', 'ex parte']
+    };
+  }
+
+  // ===== PHASE 2.1: CORE COURT RULES & FORMATTING =====
+
+  /**
+   * Search general court rules for a specific state and rule type
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code (e.g., 'CA', 'NY')
+   * @param {string} args.rule_type - Type of rule (formatting, procedural, electronic, local)
+   * @param {string} [args.court_level] - Court level (superior, appellate, supreme)
+   * @param {string} [args.specific_rule] - Specific rule number or topic
+   * @param {number} [args.limit=10] - Maximum results (1-20)
+   * @param {boolean} [args.include_text=true] - Include rule text snippets
+   */
+  async searchCourtRules(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const {
+      state,
+      rule_type,
+      court_level,
+      specific_rule,
+      limit = 10,
+      include_text = true
+    } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}. Please provide a valid two-letter state code.`);
+    }
+
+    if (!rule_type || !this.ruleCategories[rule_type]) {
+      throw new Error(`Invalid rule_type: ${rule_type}. Valid types: ${Object.keys(this.ruleCategories).join(', ')}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 20);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    const ruleKeywords = this.ruleCategories[rule_type];
+
+    // Build targeted search query
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    const ruleQuery = ruleKeywords.join(' OR ');
+    let searchQuery = `(${domainQueries}) (${ruleQuery}) ${stateInfo.name} court rules`;
+    
+    if (court_level) searchQuery += ` ${court_level} court`;
+    if (specific_rule) searchQuery += ` "${specific_rule}"`;
+
+    try {
+      // Enhanced search with BaseWebSearchClient features
+      const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+        domain: 'state_law',
+        includeDomains: stateInfo.domains,
+        includeFullText: include_text,
+        numSentences: 7,
+        highlightsPerUrl: 3
+      });
+
+      const courtRuleResults = results
+        .filter(r => this.isCourtRuleResult(r, stateInfo, rule_type))
+        .map(r => this.mapCourtRuleResult(r, stateInfo, rule_type, include_text));
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            search_type: 'court_rules',
+            state: state.toUpperCase(),
+            state_name: stateInfo.name,
+            rule_type,
+            court_level,
+            total_results: courtRuleResults.length,
+            results: courtRuleResults
+          }, null, 2)
+        }]
+      };
+
+    } catch (error) {
+      console.warn(`Court rules search failed for ${state.toUpperCase()}, trying broader search:`, error.message);
+
+      const fallbackQuery = `"${stateInfo.name}" state court rules ${rule_type}`;
+      const fallbackResults = await super.executeExaSearch(fallbackQuery, validatedLimit, {
+        domain: 'state_law',
+        includeFullText: include_text,
+        fallbackToText: true
+      });
+
+      const mappedResults = fallbackResults
+        .filter(r => this.isCourtRuleResult(r, stateInfo, rule_type))
+        .map(r => this.mapCourtRuleResult(r, stateInfo, rule_type, include_text));
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            search_type: 'court_rules_fallback',
+            state: state.toUpperCase(),
+            state_name: stateInfo.name,
+            rule_type,
+            total_results: mappedResults.length,
+            results: mappedResults,
+            note: 'Results from broader search due to domain-specific limitations'
+          }, null, 2)
+        }]
+      };
+    }
+  }
+
+  /**
+   * Get specific formatting requirements for documents in a state
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.court_level] - Court level for specific requirements
+   * @param {string} [args.document_type] - Type of document (complaint, motion, brief)
+   * @param {number} [args.limit=5] - Maximum results
+   */
+  async getFormattingRequirements(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, court_level, document_type, limit = 5 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) formatting requirements font margins spacing`;
+    
+    if (court_level) searchQuery += ` ${court_level} court`;
+    if (document_type) searchQuery += ` ${document_type}`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 5,
+      highlightsPerUrl: 2
+    });
+
+    const formattingResults = results
+      .filter(r => this.isFormattingResult(r, stateInfo))
+      .map(r => this.mapFormattingResult(r, stateInfo));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'formatting_requirements',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          court_level,
+          document_type,
+          total_results: formattingResults.length,
+          results: formattingResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get electronic filing rules and technical requirements
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.court_level] - Court level
+   * @param {number} [args.limit=5] - Maximum results
+   */
+  async getElectronicFilingRules(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, court_level, limit = 5 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) electronic filing e-filing PDF requirements file size`;
+    
+    if (court_level) searchQuery += ` ${court_level} court`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const eFilingResults = results
+      .filter(r => this.isEFilingResult(r, stateInfo))
+      .map(r => this.mapEFilingResult(r, stateInfo));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'electronic_filing_rules',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          court_level,
+          total_results: eFilingResults.length,
+          results: eFilingResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  // ===== PHASE 2.2: LOCAL RULES & VARIATIONS =====
+
+  /**
+   * Search local rules for specific counties or districts
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.county] - County name for local rules
+   * @param {string} [args.rule_topic] - Specific rule topic
+   * @param {number} [args.limit=8] - Maximum results
+   */
+  async searchLocalRules(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, county, rule_topic, limit = 8 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) local rules`;
+    
+    if (county) searchQuery += ` "${county}" county`;
+    if (rule_topic) searchQuery += ` "${rule_topic}"`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const localRuleResults = results
+      .filter(r => this.isLocalRuleResult(r, stateInfo, county))
+      .map(r => this.mapLocalRuleResult(r, stateInfo, county));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'local_rules',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          county,
+          rule_topic,
+          total_results: localRuleResults.length,
+          results: localRuleResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get court-specific procedures and local variations
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.court_name] - Specific court name
+   * @param {string} [args.procedure_type] - Type of procedure (motion, discovery, etc.)
+   * @param {number} [args.limit=8] - Maximum results
+   */
+  async getCourtSpecificProcedures(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, court_name, procedure_type, limit = 8 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) procedures`;
+    
+    if (court_name) searchQuery += ` "${court_name}"`;
+    if (procedure_type) searchQuery += ` ${procedure_type}`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const procedureResults = results
+      .filter(r => this.isProcedureResult(r, stateInfo))
+      .map(r => this.mapProcedureResult(r, stateInfo));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'court_specific_procedures',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          court_name,
+          procedure_type,
+          total_results: procedureResults.length,
+          results: procedureResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Check for recent rule updates and effective dates
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.effective_after] - Date filter for recent changes (YYYY-MM-DD)
+   * @param {number} [args.limit=10] - Maximum results
+   */
+  async checkRuleUpdates(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, effective_after, limit = 10 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 20);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) rule changes updates amendments effective`;
+    
+    if (effective_after) {
+      const year = effective_after.split('-')[0];
+      searchQuery += ` ${year}`;
+    }
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const updateResults = results
+      .filter(r => this.isRuleUpdateResult(r, stateInfo))
+      .map(r => this.mapRuleUpdateResult(r, stateInfo, effective_after));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'rule_updates',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          effective_after,
+          total_results: updateResults.length,
+          results: updateResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  // ===== PHASE 2.3: TEMPLATES & DOCUMENT STANDARDS =====
+
+  /**
+   * Get state-specific document templates
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} args.document_type - Type of document (complaint, motion, brief)
+   * @param {string} [args.court_level] - Court level
+   * @param {number} [args.limit=5] - Maximum results
+   */
+  async getDocumentTemplates(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, document_type, court_level, limit = 5 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    if (!document_type) {
+      throw new Error('document_type is required (e.g., complaint, motion, brief)');
+    }
+
+    const validatedLimit = validateLimit(limit, 10);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) template form "${document_type}"`;
+    
+    if (court_level) searchQuery += ` ${court_level} court`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 5,
+      highlightsPerUrl: 2
+    });
+
+    const templateResults = results
+      .filter(r => this.isTemplateResult(r, stateInfo, document_type))
+      .map(r => this.mapTemplateResult(r, stateInfo, document_type));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'document_templates',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          document_type,
+          court_level,
+          total_results: templateResults.length,
+          results: templateResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Validate document compliance against current rules
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} args.document_type - Type of document
+   * @param {string} [args.compliance_area] - Specific area to check (formatting, content, procedural)
+   * @param {number} [args.limit=8] - Maximum results
+   */
+  async validateDocumentCompliance(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, document_type, compliance_area, limit = 8 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    if (!document_type) {
+      throw new Error('document_type is required');
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) requirements compliance "${document_type}"`;
+    
+    if (compliance_area) searchQuery += ` ${compliance_area}`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const complianceResults = results
+      .filter(r => this.isComplianceResult(r, stateInfo, document_type))
+      .map(r => this.mapComplianceResult(r, stateInfo, document_type));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'document_compliance',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          document_type,
+          compliance_area,
+          total_results: complianceResults.length,
+          results: complianceResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get state-specific citation requirements and formats
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.citation_type] - Type of citation (case, statute, regulation)
+   * @param {number} [args.limit=5] - Maximum results
+   */
+  async getCitationRequirements(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, citation_type, limit = 5 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 10);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) citation format requirements`;
+    
+    if (citation_type) searchQuery += ` ${citation_type}`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 5,
+      highlightsPerUrl: 2
+    });
+
+    const citationResults = results
+      .filter(r => this.isCitationResult(r, stateInfo))
+      .map(r => this.mapCitationResult(r, stateInfo, citation_type));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'citation_requirements',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          citation_type,
+          total_results: citationResults.length,
+          results: citationResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  // ===== PHASE 2.4: SPECIALIZED PRACTICE AREAS =====
+
+  /**
+   * Get discovery rules and motion requirements
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.discovery_type] - Type of discovery (interrogatories, deposition, production)
+   * @param {number} [args.limit=8] - Maximum results
+   */
+  async getDiscoveryRules(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, discovery_type, limit = 8 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) discovery rules`;
+    
+    if (discovery_type) searchQuery += ` ${discovery_type}`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const discoveryResults = results
+      .filter(r => this.isDiscoveryResult(r, stateInfo))
+      .map(r => this.mapDiscoveryResult(r, stateInfo, discovery_type));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'discovery_rules',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          discovery_type,
+          total_results: discoveryResults.length,
+          results: discoveryResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get appellate requirements and brief formatting standards
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.brief_type] - Type of brief (opening, response, reply)
+   * @param {number} [args.limit=8] - Maximum results
+   */
+  async getAppellateRequirements(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, brief_type, limit = 8 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) appellate rules brief requirements`;
+    
+    if (brief_type) searchQuery += ` "${brief_type}"`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 2
+    });
+
+    const appellateResults = results
+      .filter(r => this.isAppellateResult(r, stateInfo))
+      .map(r => this.mapAppellateResult(r, stateInfo, brief_type));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'appellate_requirements',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          brief_type,
+          total_results: appellateResults.length,
+          results: appellateResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get emergency procedures and TRO/injunction requirements
+   * @param {Object} args
+   * @param {string} args.state - Two-letter state code
+   * @param {string} [args.emergency_type] - Type of emergency relief (TRO, preliminary_injunction, ex_parte)
+   * @param {number} [args.limit=8] - Maximum results
+   */
+  async getEmergencyProcedures(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { state, emergency_type, limit = 8 } = args;
+
+    if (!state || !this.stateCourtDomains[state.toUpperCase()]) {
+      throw new Error(`Invalid or missing state code: ${state}`);
+    }
+
+    const validatedLimit = validateLimit(limit, 15);
+    const stateInfo = this.stateCourtDomains[state.toUpperCase()];
+    
+    const domainQueries = stateInfo.domains.map(domain => `site:${domain}`).join(' OR ');
+    let searchQuery = `(${domainQueries}) emergency procedures TRO "temporary restraining order"`;
+    
+    if (emergency_type) searchQuery += ` "${emergency_type.replace('_', ' ')}"`;
+
+    const results = await super.executeExaSearch(searchQuery, validatedLimit, {
+      domain: 'state_law',
+      includeDomains: stateInfo.domains,
+      includeFullText: true,
+      numSentences: 6,
+      highlightsPerUrl: 3
+    });
+
+    const emergencyResults = results
+      .filter(r => this.isEmergencyResult(r, stateInfo))
+      .map(r => this.mapEmergencyResult(r, stateInfo, emergency_type));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'emergency_procedures',
+          state: state.toUpperCase(),
+          state_name: stateInfo.name,
+          emergency_type,
+          total_results: emergencyResults.length,
+          results: emergencyResults
+        }, null, 2)
+      }]
+    };
+  }
+
+  // ===== ENHANCED SEARCH METHODS USING BASEWEBSEARCHCLIENT =====
+
+  // ===== RESULT VALIDATION METHODS =====
+
+  isCourtRuleResult(result, stateInfo, ruleType) {
+    const url = (result.url || '').toLowerCase();
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    // Check if result is from court domains
+    const fromCourtDomain = stateInfo.domains.some(domain => url.includes(domain.toLowerCase()));
+    
+    // Check for rule-related content
+    const hasRuleContent = 
+      title.includes('rule') || 
+      title.includes('procedure') ||
+      text.includes('rule') ||
+      text.includes('court rules') ||
+      this.ruleCategories[ruleType].some(keyword => 
+        title.includes(keyword) || text.includes(keyword)
+      );
+    
+    return fromCourtDomain && hasRuleContent;
+  }
+
+  isFormattingResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const formattingKeywords = ['format', 'font', 'margin', 'spacing', 'typography', 'page'];
+    return formattingKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isEFilingResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const eFilingKeywords = ['electronic', 'e-filing', 'pdf', 'file size', 'upload'];
+    return eFilingKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isLocalRuleResult(result, stateInfo, county) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const hasLocal = title.includes('local') || text.includes('local');
+    const hasCounty = !county || title.includes(county.toLowerCase()) || text.includes(county.toLowerCase());
+    
+    return hasLocal && hasCounty;
+  }
+
+  isProcedureResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const procedureKeywords = ['procedure', 'motion', 'filing', 'practice'];
+    return procedureKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isRuleUpdateResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const updateKeywords = ['update', 'amendment', 'change', 'effective', 'new rule'];
+    return updateKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isTemplateResult(result, stateInfo, documentType) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const hasTemplate = title.includes('template') || title.includes('form') || text.includes('template');
+    const hasDocType = title.includes(documentType.toLowerCase()) || text.includes(documentType.toLowerCase());
+    
+    return hasTemplate && hasDocType;
+  }
+
+  isComplianceResult(result, stateInfo, documentType) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const complianceKeywords = ['requirement', 'compliance', 'must', 'shall'];
+    const hasCompliance = complianceKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+    const hasDocType = title.includes(documentType.toLowerCase()) || text.includes(documentType.toLowerCase());
+    
+    return hasCompliance && hasDocType;
+  }
+
+  isCitationResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const citationKeywords = ['citation', 'cite', 'format', 'reference'];
+    return citationKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isDiscoveryResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const discoveryKeywords = ['discovery', 'interrogator', 'deposition', 'production', 'subpoena'];
+    return discoveryKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isAppellateResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const appellateKeywords = ['appellate', 'appeal', 'brief', 'record'];
+    return appellateKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  isEmergencyResult(result, stateInfo) {
+    const title = (result.title || '').toLowerCase();
+    const text = (result.text || '').toLowerCase();
+    
+    const emergencyKeywords = ['emergency', 'tro', 'temporary restraining', 'injunction', 'ex parte'];
+    return emergencyKeywords.some(keyword => title.includes(keyword) || text.includes(keyword));
+  }
+
+  // ===== RESULT MAPPING METHODS =====
+
+  mapCourtRuleResult(result, stateInfo, ruleType, includeText) {
+    return {
+      title: result.title || 'Court Rule Document',
+      url: result.url,
+      rule_type: ruleType,
+      state: stateInfo.name,
+      domain: this.extractDomain(result.url),
+      published_date: result.publishedDate || null,
+      ...(includeText && result.text ? { text_snippet: result.text.substring(0, 500) + '...' } : {}),
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      relevance_score: this.calculateRelevanceScore(result, ruleType),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapFormattingResult(result, stateInfo) {
+    return {
+      title: result.title || 'Formatting Requirements',
+      url: result.url,
+      state: stateInfo.name,
+      formatting_category: this.extractFormattingCategory(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      published_date: result.publishedDate || null,
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapEFilingResult(result, stateInfo) {
+    return {
+      title: result.title || 'Electronic Filing Requirements',
+      url: result.url,
+      state: stateInfo.name,
+      filing_system: this.extractFilingSystem(result),
+      technical_requirements: this.extractTechnicalRequirements(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapLocalRuleResult(result, stateInfo, county) {
+    return {
+      title: result.title || 'Local Rules',
+      url: result.url,
+      state: stateInfo.name,
+      county: county || this.extractCounty(result),
+      local_rule_type: this.extractLocalRuleType(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapProcedureResult(result, stateInfo) {
+    return {
+      title: result.title || 'Court Procedures',
+      url: result.url,
+      state: stateInfo.name,
+      procedure_category: this.extractProcedureCategory(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapRuleUpdateResult(result, stateInfo, effectiveAfter) {
+    return {
+      title: result.title || 'Rule Update',
+      url: result.url,
+      state: stateInfo.name,
+      update_type: this.extractUpdateType(result),
+      effective_date: this.extractEffectiveDate(result),
+      rule_affected: this.extractAffectedRule(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapTemplateResult(result, stateInfo, documentType) {
+    return {
+      title: result.title || 'Document Template',
+      url: result.url,
+      state: stateInfo.name,
+      document_type: documentType,
+      template_type: this.extractTemplateType(result),
+      court_level: this.extractCourtLevel(result),
+      text_snippet: result.text ? result.text.substring(0, 300) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapComplianceResult(result, stateInfo, documentType) {
+    return {
+      title: result.title || 'Compliance Requirements',
+      url: result.url,
+      state: stateInfo.name,
+      document_type: documentType,
+      compliance_areas: this.extractComplianceAreas(result),
+      requirements: this.extractRequirements(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapCitationResult(result, stateInfo, citationType) {
+    return {
+      title: result.title || 'Citation Requirements',
+      url: result.url,
+      state: stateInfo.name,
+      citation_type: citationType || this.extractCitationType(result),
+      format_standard: this.extractFormatStandard(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapDiscoveryResult(result, stateInfo, discoveryType) {
+    return {
+      title: result.title || 'Discovery Rules',
+      url: result.url,
+      state: stateInfo.name,
+      discovery_type: discoveryType || this.extractDiscoveryType(result),
+      scope_limitations: this.extractScopeLimitations(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapAppellateResult(result, stateInfo, briefType) {
+    return {
+      title: result.title || 'Appellate Requirements',
+      url: result.url,
+      state: stateInfo.name,
+      brief_type: briefType || this.extractBriefType(result),
+      formatting_requirements: this.extractAppellateFormatting(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  mapEmergencyResult(result, stateInfo, emergencyType) {
+    return {
+      title: result.title || 'Emergency Procedures',
+      url: result.url,
+      state: stateInfo.name,
+      emergency_type: emergencyType || this.extractEmergencyType(result),
+      procedural_requirements: this.extractEmergencyRequirements(result),
+      text_snippet: result.text ? result.text.substring(0, 400) + '...' : null,
+      ...(result.highlights ? { highlights: result.highlights } : {}),
+      ...(result._highlight_quality ? { quality_assessment: result._highlight_quality } : {})
+    };
+  }
+
+  // ===== CONTENT EXTRACTION HELPER METHODS =====
+
+  extractDomain(url) {
+    try {
+      return new URL(url).hostname;
+    } catch {
+      return 'unknown';
+    }
+  }
+
+  calculateRelevanceScore(result, ruleType) {
+    const text = (result.text || '').toLowerCase();
+    const title = (result.title || '').toLowerCase();
+    const keywords = this.ruleCategories[ruleType] || [];
+    
+    let score = 0;
+    keywords.forEach(keyword => {
+      if (title.includes(keyword)) score += 2;
+      if (text.includes(keyword)) score += 1;
+    });
+    
+    return Math.min(score, 10); // Cap at 10
+  }
+
+  extractFormattingCategory(result) {
+    const text = (result.text || '').toLowerCase();
+    const title = (result.title || '').toLowerCase();
+    
+    if (title.includes('font') || text.includes('font')) return 'font_requirements';
+    if (title.includes('margin') || text.includes('margin')) return 'margin_spacing';
+    if (title.includes('page') || text.includes('page')) return 'page_layout';
+    return 'general_formatting';
+  }
+
+  extractFilingSystem(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('efiletexas')) return 'eFileTexas';
+    if (text.includes('nyscef')) return 'NYSCEF';
+    if (text.includes('efileil')) return 'eFileIL';
+    return 'state_specific_system';
+  }
+
+  extractTechnicalRequirements(result) {
+    const text = (result.text || '').toLowerCase();
+    const requirements = [];
+    
+    if (text.includes('pdf')) requirements.push('PDF_format');
+    if (text.includes('searchable')) requirements.push('searchable_text');
+    if (text.includes('bookmark')) requirements.push('electronic_bookmarks');
+    if (text.includes('mb') || text.includes('megabyte')) requirements.push('file_size_limit');
+    
+    return requirements;
+  }
+
+  extractCounty(result) {
+    const text = (result.text || result.title || '').toLowerCase();
+    const countyMatch = text.match(/(\w+)\s+county/);
+    return countyMatch ? countyMatch[1] : null;
+  }
+
+  extractLocalRuleType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('motion')) return 'motion_practice';
+    if (text.includes('discovery')) return 'discovery_rules';
+    if (text.includes('scheduling')) return 'scheduling_orders';
+    return 'general_local_rules';
+  }
+
+  extractProcedureCategory(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('motion')) return 'motion_practice';
+    if (text.includes('discovery')) return 'discovery_procedures';
+    if (text.includes('trial')) return 'trial_procedures';
+    return 'general_procedures';
+  }
+
+  extractUpdateType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('amendment')) return 'rule_amendment';
+    if (text.includes('new rule')) return 'new_rule';
+    if (text.includes('effective')) return 'effective_date_change';
+    return 'general_update';
+  }
+
+  extractEffectiveDate(result) {
+    const text = result.text || result.title || '';
+    const dateMatch = text.match(/(\d{1,2}\/\d{1,2}\/\d{4}|\d{4}-\d{2}-\d{2}|January|February|March|April|May|June|July|August|September|October|November|December)/i);
+    return dateMatch ? dateMatch[1] : null;
+  }
+
+  extractAffectedRule(result) {
+    const text = result.text || result.title || '';
+    const ruleMatch = text.match(/rule\s+(\d+(?:\.\d+)?)/i);
+    return ruleMatch ? ruleMatch[1] : null;
+  }
+
+  extractTemplateType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('fillable')) return 'fillable_form';
+    if (text.includes('sample')) return 'sample_document';
+    if (text.includes('official')) return 'official_form';
+    return 'general_template';
+  }
+
+  extractCourtLevel(result) {
+    const text = (result.text || result.title || '').toLowerCase();
+    
+    if (text.includes('supreme')) return 'supreme_court';
+    if (text.includes('appellate') || text.includes('appeals')) return 'appellate_court';
+    if (text.includes('superior') || text.includes('circuit')) return 'trial_court';
+    return 'general_court';
+  }
+
+  extractComplianceAreas(result) {
+    const text = (result.text || '').toLowerCase();
+    const areas = [];
+    
+    if (text.includes('format')) areas.push('formatting');
+    if (text.includes('content')) areas.push('content_requirements');
+    if (text.includes('filing')) areas.push('filing_procedures');
+    if (text.includes('service')) areas.push('service_requirements');
+    
+    return areas;
+  }
+
+  extractRequirements(result) {
+    const text = result.text || '';
+    const requirements = [];
+    
+    // Extract sentences containing "must", "shall", "required"
+    const sentences = text.split(/[.!?]+/);
+    sentences.forEach(sentence => {
+      if (/\b(must|shall|required|mandatory)\b/i.test(sentence)) {
+        requirements.push(sentence.trim().substring(0, 200));
+      }
+    });
+    
+    return requirements.slice(0, 5); // Limit to 5 requirements
+  }
+
+  extractFormatStandard(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('bluebook')) return 'Bluebook';
+    if (text.includes('alwd')) return 'ALWD';
+    if (text.includes('state manual')) return 'State_Manual';
+    return 'standard_format';
+  }
+
+  extractCitationType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('case')) return 'case_citation';
+    if (text.includes('statute')) return 'statute_citation';
+    if (text.includes('regulation')) return 'regulation_citation';
+    return 'general_citation';
+  }
+
+  extractDiscoveryType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('interrogator')) return 'interrogatories';
+    if (text.includes('deposition')) return 'depositions';
+    if (text.includes('production')) return 'document_production';
+    if (text.includes('admission')) return 'requests_for_admission';
+    return 'general_discovery';
+  }
+
+  extractScopeLimitations(result) {
+    const text = result.text || '';
+    const limitations = [];
+    
+    if (text.includes('30 days')) limitations.push('30_day_limit');
+    if (text.includes('proportional')) limitations.push('proportionality_required');
+    if (text.includes('good cause')) limitations.push('good_cause_required');
+    
+    return limitations;
+  }
+
+  extractBriefType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('opening')) return 'opening_brief';
+    if (text.includes('response') || text.includes('answering')) return 'response_brief';
+    if (text.includes('reply')) return 'reply_brief';
+    return 'general_brief';
+  }
+
+  extractAppellateFormatting(result) {
+    const text = result.text || '';
+    const formatting = [];
+    
+    if (text.includes('page limit')) formatting.push('page_limitations');
+    if (text.includes('table of contents')) formatting.push('table_of_contents_required');
+    if (text.includes('table of authorities')) formatting.push('table_of_authorities_required');
+    
+    return formatting;
+  }
+
+  extractEmergencyType(result) {
+    const text = (result.text || '').toLowerCase();
+    
+    if (text.includes('tro') || text.includes('temporary restraining')) return 'temporary_restraining_order';
+    if (text.includes('preliminary injunction')) return 'preliminary_injunction';
+    if (text.includes('ex parte')) return 'ex_parte_application';
+    return 'general_emergency';
+  }
+
+  extractEmergencyRequirements(result) {
+    const text = result.text || '';
+    const requirements = [];
+    
+    if (text.includes('irreparable harm')) requirements.push('irreparable_harm_showing');
+    if (text.includes('likelihood of success')) requirements.push('likelihood_of_success');
+    if (text.includes('notice')) requirements.push('notice_requirements');
+    if (text.includes('security') || text.includes('bond')) requirements.push('security_bond');
+    
+    return requirements;
+  }
+}

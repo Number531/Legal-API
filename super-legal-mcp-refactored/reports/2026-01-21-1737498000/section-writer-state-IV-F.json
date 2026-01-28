@@ -1,0 +1,59 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "F",
+  "section_name": "Financial Risk, Capital Structure, and Purchase Price Adjustments",
+  "status": "in_progress",
+
+  "compaction_summary": {
+    "task": "Write Section IV-F (Financial Risk, Capital Structure) from financial-impact-analysis + T1 RBC + T7 tax reports",
+    "progress": "Phase 1 complete: Read input files",
+    "next_action": "Begin writing Section IV-F structure",
+    "critical_context": [
+      "section_id=F",
+      "Total exposure: $1.745B gross, $280.7M weighted",
+      "Holding company constraint: $880M commitments vs $280M net worth (3.1x leverage)",
+      "Vermont captive: $730M exposure at 10-15% probability",
+      "RBC ratio: 188% → 204% with $150M injection"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": false,
+    "phase_3_structure": false,
+    "phase_4_analysis": false,
+    "phase_5_quality": false,
+    "phase_6_finalize": false
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "pending",
+    "B_application": "pending",
+    "C_risk_assessment": "pending",
+    "D_cross_domain": "pending",
+    "E_recommendations": "pending",
+    "F_footnotes": "pending"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Read section-writer-state-IV-F.json FIRST. Resume from first 'pending' subsection.",
+    "do_not_repeat": [],
+    "do_not_reread_reports": [
+      "financial-impact-analysis.md",
+      "tax-structure-analyst-report.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 0,
+    "findings_written": "0/5",
+    "footnotes_count": 0,
+    "last_checkpoint": "2026-01-22T00:00:00Z"
+  },
+
+  "input_files_read": [
+    "financial-impact-analysis.md",
+    "specialist-reports/regulatory-rulemaking-rbc-capital-report.md",
+    "specialist-reports/tax-structure-analyst-report.md"
+  ]
+}

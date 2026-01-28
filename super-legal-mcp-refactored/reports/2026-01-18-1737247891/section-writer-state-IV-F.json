@@ -1,0 +1,62 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "IV.F",
+  "section_name": "Tax Structure & Efficiency",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.F from tax structure analysis report",
+    "progress": "Phase 6: Complete - all subsections written",
+    "next_action": "Section complete, ready for review",
+    "critical_context": ["3 HIGH findings with full CREAC analysis", "All draft contract provisions included", "56 footnotes with verification tags"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["tax-structure-analysis-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6420,
+    "findings_written": "6/6",
+    "footnotes_count": 56,
+    "last_checkpoint": "2026-01-18T23:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/tax-structure-analysis-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/coverage-gaps.md",
+    "research-plan.md"
+  ],
+
+  "quality_verification": {
+    "word_count_minimum": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

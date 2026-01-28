@@ -1,0 +1,49 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "1",
+  "section_name": "Transaction Structure & Overview",
+  "status": "in_progress",
+
+  "compaction_summary": {
+    "task": "Write Section 1 (Transaction Structure & Overview) from financial aggregation report",
+    "progress": "Phase 1, reading source documents",
+    "next_action": "Write subsection A: Transaction Overview",
+    "critical_context": ["section_id=1", "$2.9B deal", "$913M P50 net exposure (31.5% of deal)"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": false,
+    "phase_3_structure": false,
+    "phase_4_analysis": false,
+    "phase_5_quality": false,
+    "phase_6_finalize": false
+  },
+
+  "subsections_status": {
+    "A_transaction_overview": "pending",
+    "B_target_profile": "pending",
+    "C_deal_structure": "pending",
+    "D_aggregate_risk": "pending",
+    "E_recommendation": "pending",
+    "F_footnotes": "pending"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Read section-writer-state-IV-1.json FIRST. Resume from first 'pending' subsection.",
+    "do_not_repeat": [],
+    "do_not_reread_reports": []
+  },
+
+  "metrics": {
+    "word_count": 0,
+    "findings_written": "0/0",
+    "footnotes_count": 0,
+    "last_checkpoint": "2026-01-19T20:05:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/financial-impact-aggregation-report.md",
+    "orchestrator-state.md"
+  ]
+}

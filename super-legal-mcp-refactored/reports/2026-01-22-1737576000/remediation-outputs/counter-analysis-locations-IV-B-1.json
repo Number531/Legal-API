@@ -1,0 +1,99 @@
+{
+  "section_id": "IV.B.1",
+  "section_info": {
+    "title": "Cyber Insurance Gap \u2014 No Coverage in Force (CRITICAL)",
+    "has_counter_analysis_header": false,
+    "detections": 8,
+    "to_move": 7
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 0,
+      "line_number": 12769,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Conclusion:** Pinnacle Investment Management currently maintains **zero cyber liability insurance coverage**, creating a **CRITICAL** uninsured exposure of $21.6 million to $56.5 million for data br...",
+      "full_paragraph": "**Conclusion:** Pinnacle Investment Management currently maintains **zero cyber liability insurance coverage**, creating a **CRITICAL** uninsured exposure of $21.6 million to $56.5 million for data breach scenarios involving 10,192 individual records. **Severity: CRITICAL.** **Exposure: $1.65 million immediate unfunded response costs; $21.6 million-$56.5 million gross breach exposure.** The absence of cyber insurance violates custodial agreements with Fidelity and Schwab, which mandate minimum $250,000 cyber coverage. **Confidence: HIGH** [BASIS: Insurance-coverage-analyst confirmed zero cyber coverage; cybersecurity-compliance-analyst quantified breach exposure].",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 2,
+      "line_number": 12774,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Rule:** Custodians require RIA clients to maintain cyber liability insurance as a condition of custodial services. Fidelity Institutional mandates cyber coverage for all RIA clients effective 2023.\u00b3...",
+      "full_paragraph": "**Rule:** Custodians require RIA clients to maintain cyber liability insurance as a condition of custodial services. Fidelity Institutional mandates cyber coverage for all RIA clients effective 2023.\u00b3\u00b9 Schwab Advisor Services similarly requires E&O and cyber liability insurance.\u00b3\u00b2 Regulation S-P, 17 C.F.R. \u00a7 248.30, requires RIAs to adopt incident response programs and notify affected individuals within 30 days of a data breach affecting 500 or more individuals.\u00b3\u00b3 While Regulation S-P does not mandate insurance, the notification and remediation costs create substantial financial exposure that industry standards recommend insuring.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 3,
+      "line_number": 12776,
+      "pattern_matched": "While\\s+(?:it\\s+is\\s+true|some\\s+courts|there\\s+(?:are|is)|the)",
+      "pattern_type": "rebuttal",
+      "content_excerpt": "**Explanation:** Courts have not directly addressed whether an RIA's failure to maintain cyber insurance constitutes breach of fiduciary duty. However, the custodian requirements from Fidelity and Sch...",
+      "full_paragraph": "**Explanation:** Courts have not directly addressed whether an RIA's failure to maintain cyber insurance constitutes breach of fiduciary duty. However, the custodian requirements from Fidelity and Schwab create contractual obligations. In *Robinhood Financial LLC*, FINRA fined the broker-dealer $1.25 million for cybersecurity failures, including failure to maintain adequate cyber controls.\u00b3\u2074 The SEC has similarly brought enforcement actions against RIAs for failure to implement reasonable cybersecurity policies.\u00b3\u2075 While these cases do not mandate insurance, they establish that advisers must have adequate resources to respond to cyber incidents. Insurance is the industry-standard mechanism for ensuring such resources.",
+      "confidence": 0.63,
+      "should_move": false
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 4,
+      "line_number": 12778,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Industry data demonstrates the magnitude of data breach costs. The IBM Cost of a Data Breach Report 2024 estimates average breach costs for financial services firms at $5.9 million per incident.\u00b3\u2076 For...",
+      "full_paragraph": "Industry data demonstrates the magnitude of data breach costs. The IBM Cost of a Data Breach Report 2024 estimates average breach costs for financial services firms at $5.9 million per incident.\u00b3\u2076 For breaches involving 10,000-25,000 records (Pinnacle has 10,192 PII records at risk per fact-registry.md), costs escalate to $15 million-$40 million when including notification, credit monitoring, legal defense, regulatory fines, class action settlements, and reputational harm.\u00b3\u2077 Ransomware attacks, which have increased 600% in the financial services sector from 2021-2023, carry even higher costs: $20 million-$75 million for a mid-size RIA.\u00b3\u2078",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 5,
+      "line_number": 12780,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Application:** Pinnacle's cybersecurity-compliance-analyst (T6) identified multiple critical gaps: no documented incident response program, no penetration testing, no multi-factor authentication for...",
+      "full_paragraph": "**Application:** Pinnacle's cybersecurity-compliance-analyst (T6) identified multiple critical gaps: no documented incident response program, no penetration testing, no multi-factor authentication for remote access, and zero cyber insurance.\u00b3\u2079 The analyst estimated breach probabilities over a three-year period: 15-25% for ransomware attacks ($22.9 million-$75.6 million cost) and 5-10% for insider threats ($1 million-$2.3 million cost).\u2074\u2070 The probability-weighted expected value of cyber exposure over three years is $12.4 million.\u2074\u00b9",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 7,
+      "line_number": 12784,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "The lack of cyber insurance creates immediate liquidity risk if a breach occurs post-closing. Without insurance, Pinnacle must fund breach response costs from operating cash flow or parent company cap...",
+      "full_paragraph": "The lack of cyber insurance creates immediate liquidity risk if a breach occurs post-closing. Without insurance, Pinnacle must fund breach response costs from operating cash flow or parent company capital. Breach notification to 10,192 individuals costs $10-$15 per individual ($102,000-$153,000).\u2074\u00b3 Credit monitoring for 18-24 months costs an additional $150,000-$250,000.\u2074\u2074 Forensic investigation and incident response (mandatory under Regulation S-P) costs $200,000-$500,000.\u2074\u2075 Legal defense for class action litigation (filed in 60-70% of financial services breaches) costs $500,000-$2 million.\u2074\u2076 **Total immediate response costs: $1 million-$2.3 million**, all unfunded without insurance.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 8,
+      "line_number": 12786,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Liability Valuation:**\n- **Classification:** Contingent (one-time breach event)\n- **Methodology:** Expected Value\n- **Calculation:**\n  - Immediate response costs (certain if breach): $1M-$2.3M\n  - R...",
+      "full_paragraph": "**Liability Valuation:**\n- **Classification:** Contingent (one-time breach event)\n- **Methodology:** Expected Value\n- **Calculation:**\n  - Immediate response costs (certain if breach): $1M-$2.3M\n  - Ransomware scenario: 20% probability \u00d7 $49.25M midpoint = $9.85M\n  - Insider threat scenario: 7.5% probability \u00d7 $38.35M midpoint = $2.88M\n  - **Weighted 3-year exposure: $12.4M** (per risk-summary.json)\n- **Uninsured Amount:** 100% ($12.4M fully uninsured)\n- **Immediate Funding Gap:** $1M-$2.3M (breach response costs if incident occurs within 90 days post-closing)\n- **Discount Rate Basis:** N/A (one-time contingent event, use expected value not NPV)",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 11,
+      "line_number": 12803,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Supporting Authority:**\n- Regulation S-P, 17 C.F.R. \u00a7 248.30 (incident response program and breach notification requirements) [VERIFIED: https://www.ecfr.gov/current/title-17/chapter-II/part-248]\n- ...",
+      "full_paragraph": "**Supporting Authority:**\n- Regulation S-P, 17 C.F.R. \u00a7 248.30 (incident response program and breach notification requirements) [VERIFIED: https://www.ecfr.gov/current/title-17/chapter-II/part-248]\n- Fidelity Institutional cyber insurance requirement policy [VERIFIED: https://www.riaintel.com/article/2aucs5959u81bazgt86io/wealth-management/fidelity-institutional-requires-rias-to-get-liability-and-cyber-insurance-coverage]\n- IBM Cost of a Data Breach Report 2024 [VERIFIED: Public report, financial services average $5.9M]\n- Verizon 2024 Data Breach Investigations Report [VERIFIED: Financial services sector breach statistics]",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

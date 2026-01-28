@@ -1,0 +1,68 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "D",
+  "section_name": "IUL Class Action Litigation",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.D (IUL Class Action) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "Section complete, ready for orchestrator review",
+    "critical_context": [
+      "section_id=D",
+      "5,847 words written",
+      "3 HIGH findings with CREAC analysis",
+      "2 draft contract provisions (settlement escrow + E&O assignment)",
+      "40 footnotes with verification tags"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete, no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["iul-class-action-litigation-report.md", "market-conduct-examination-report.md", "product-profitability-pbr-reserve-adequacy-report.md"]
+  },
+
+  "metrics": {
+    "word_count": 5847,
+    "findings_written": "3/3",
+    "footnotes_count": 40,
+    "last_checkpoint": "2026-01-19T21:00:00Z"
+  },
+
+  "quality_checks": {
+    "word_count_sufficient": true,
+    "all_subsections_present": true,
+    "creac_structure_followed": true,
+    "draft_contract_language_included": true,
+    "counter_analysis_present": true,
+    "no_placeholders": true,
+    "verification_tags_complete": true,
+    "cross_references_native": true
+  },
+
+  "input_files_read": [
+    "specialist-reports/iul-class-action-litigation-report.md",
+    "orchestrator-state.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-19-1737337200/section-reports/section-IV-D-iul-class-action.md"
+}

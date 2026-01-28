@@ -1,0 +1,44 @@
+{
+  "section_id": "IV.B.5",
+  "section_info": {
+    "title": "Absence of Penetration Testing (SEC Examination Expectation Unmet)",
+    "has_counter_analysis_header": false,
+    "detections": 3,
+    "to_move": 3
+  },
+  "locations": [
+    {
+      "section_id": "IV.B.5",
+      "paragraph_index": 6,
+      "line_number": 11481,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Black-box testing:** Tester has no prior knowledge of the target environment, simulating external attacker perspective; identifies vulnerabilities in perimeter defenses (firewalls, VPNs, web applica...",
+      "full_paragraph": "**Black-box testing:** Tester has no prior knowledge of the target environment, simulating external attacker perspective; identifies vulnerabilities in perimeter defenses (firewalls, VPNs, web applications exposed to internet)183",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.5",
+      "paragraph_index": 22,
+      "line_number": 11523,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Reputational Risk in Client Due Diligence:** Institutional clients conducting operational due diligence on investment managers routinely request evidence of annual penetration testing.213 Pinnacle's...",
+      "full_paragraph": "**Reputational Risk in Client Due Diligence:** Institutional clients conducting operational due diligence on investment managers routinely request evidence of annual penetration testing.213 Pinnacle's inability to provide penetration test reports or remediation documentation creates negative perception during client onboarding or retention reviews.214 Large pension plans, endowments, and corporate defined benefit plans (representing $23.4B of Pinnacle's $42.5B AUM) maintain cybersecurity questionnaires requiring attestation that the manager \"conducts annual third-party penetration testing\" and \"remediates Critical and High vulnerabilities within 30-60 days.\"215 Negative responses trigger enhanced scrutiny, delayed onboarding, or contract termination in extreme cases.216",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.5",
+      "paragraph_index": 27,
+      "line_number": 11544,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Second, the absence of breach history does not indicate absence of vulnerabilities. The median time to detect breaches is 200+ days per industry data, meaning Pinnacle could have undetected compromise...",
+      "full_paragraph": "Second, the absence of breach history does not indicate absence of vulnerabilities. The median time to detect breaches is 200+ days per industry data, meaning Pinnacle could have undetected compromises or dormant vulnerabilities.218 Penetration testing provides proactive discovery rather than reactive response post-breach.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

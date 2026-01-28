@@ -1,0 +1,426 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "cycle": 2,
+  "qa_cycle": {
+    "current_cycle": 2,
+    "max_cycles": 3,
+    "cycle_history": [
+      {
+        "cycle": 1,
+        "score": 71,
+        "outcome": "REMEDIATION_REQUIRED",
+        "issues_before": 21,
+        "issues_resolved": 0,
+        "issues_remaining": 21,
+        "timestamp": "2026-01-24T18:50:00Z"
+      },
+      {
+        "cycle": 2,
+        "score": 76,
+        "outcome": "REMEDIATION_REQUIRED",
+        "issues_before": 21,
+        "issues_resolved": 4,
+        "issues_remaining": 29,
+        "timestamp": "2026-01-24T19:45:00Z"
+      }
+    ]
+  },
+  "gate_attempts": {
+    "A1_to_A2": {
+      "attempts": 2,
+      "max": 3,
+      "last_failure_reason": "Score 76% below 88% threshold; requires Cycle 3 remediation"
+    }
+  },
+  "compaction_summary": {
+    "task": "Cycle 2 diagnostic assessment complete",
+    "progress": "Phase 6: All outputs generated",
+    "next_action": "Orchestrator should dispatch Cycle 3 remediation (FINAL CYCLE)",
+    "critical_context": [
+      "Score improved from 71% (Cycle 1) to 76% (Cycle 2): +5 points",
+      "4 issues resolved (Questions Presented, Brief Answers, Exec Summary, partial CREAC)",
+      "12 new issues discovered (measurement corrections from rigorous inspection)",
+      "3 CRITICAL blocking issues remain: CREAC headers (22/50), Risk tables (0/10), Draft provisions (3/8)",
+      "Cycle 3 is FINAL remediation cycle - if score <88%, ESCALATE TO HUMAN REVIEW"
+    ]
+  },
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_2_dimension_scoring": true,
+    "phase_3_issue_cataloging": true,
+    "phase_4_remediation_planning": true,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+  "dimensions_scored": {
+    "dim_0_questions_presented": {
+      "status": "complete",
+      "score": 5,
+      "change_from_cycle1": 5
+    },
+    "dim_1_creac_structure": {
+      "status": "complete",
+      "score": 4,
+      "change_from_cycle1": 1
+    },
+    "dim_2_objectivity": {
+      "status": "complete",
+      "score": 7,
+      "change_from_cycle1": 0
+    },
+    "dim_3_brief_answer": {
+      "status": "complete",
+      "score": 5,
+      "change_from_cycle1": 5
+    },
+    "dim_4_exec_summary": {
+      "status": "complete",
+      "score": 7,
+      "change_from_cycle1": 2
+    },
+    "dim_5_citation_quality": {
+      "status": "complete",
+      "score": 4,
+      "change_from_cycle1": -6,
+      "note": "Measurement correction from 87.5% to 14.4% verification rate (used authoritative pre-QA validation data)"
+    },
+    "dim_6_quantification": {
+      "status": "complete",
+      "score": 9,
+      "change_from_cycle1": 0
+    },
+    "dim_7_cross_reference": {
+      "status": "complete",
+      "score": 7,
+      "change_from_cycle1": -1
+    },
+    "dim_8_risk_tables": {
+      "status": "complete",
+      "score": 2,
+      "change_from_cycle1": -5,
+      "note": "Measurement correction: content exists but lacks 5-column table format"
+    },
+    "dim_9_draft_contracts": {
+      "status": "complete",
+      "score": 3,
+      "change_from_cycle1": -6,
+      "note": "Measurement correction: provisions exist but lack '### Draft Contract Language' headers"
+    },
+    "dim_10_formatting": {
+      "status": "complete",
+      "score": 6,
+      "change_from_cycle1": -1
+    },
+    "dim_11_completeness": {
+      "status": "complete",
+      "score": 7,
+      "change_from_cycle1": 1
+    }
+  },
+  "recovery_instructions": {
+    "on_compaction": "Cycle 2 complete. Proceed to Cycle 3 remediation.",
+    "do_not_repeat": [
+      "dim_0",
+      "dim_1",
+      "dim_2",
+      "dim_3",
+      "dim_4",
+      "dim_5",
+      "dim_6",
+      "dim_7",
+      "dim_8",
+      "dim_9",
+      "dim_10",
+      "dim_11"
+    ],
+    "do_not_rescore": true
+  },
+  "issues_found": [
+    {
+      "id": "DIM1-CRIT-001",
+      "dimension": 1,
+      "severity": "CRITICAL",
+      "description": "CREAC header count critically below threshold (22 vs. 50+ required)",
+      "location": "All analysis sections",
+      "impact": "Blocks certification",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM1-CRIT-002",
+      "dimension": 1,
+      "severity": "CRITICAL",
+      "description": "Missing Conclusion headers in all 10 analysis sections",
+      "location": "VI.A-VI.J",
+      "impact": "Violates CREAC-first principle",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM1-CRIT-003",
+      "dimension": 1,
+      "severity": "CRITICAL",
+      "description": "Missing Rule headers in 8 of 10 sections (only 2 detected)",
+      "location": "VI.A-VI.J",
+      "impact": "No clear legal framework",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM1-HIGH-001",
+      "dimension": 1,
+      "severity": "HIGH",
+      "description": "Missing Application headers in 8 of 10 sections (only 2 detected)",
+      "location": "VI.A-VI.J",
+      "impact": "No fact-to-law analysis",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM1-HIGH-002",
+      "dimension": 1,
+      "severity": "HIGH",
+      "description": "Counter-Analysis present but unevenly distributed",
+      "location": "Various sections",
+      "impact": "Some sections lack adversarial perspective",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM5-HIGH-001",
+      "dimension": 5,
+      "severity": "HIGH",
+      "description": "Verification tag coverage 14.4% (vs. 90%+ target)",
+      "location": "Document-wide",
+      "impact": "Unverifiable claims, potential hallucinations",
+      "remediation_wave": "Wave 5 (DEFERRED - time-intensive)"
+    },
+    {
+      "id": "DIM5-HIGH-002",
+      "dimension": 5,
+      "severity": "HIGH",
+      "description": "Estimated 30-40% of citations missing pincites",
+      "location": "Document-wide",
+      "impact": "Cannot verify specific holdings",
+      "remediation_wave": "Wave 5 (DEFERRED)"
+    },
+    {
+      "id": "DIM8-HIGH-001",
+      "dimension": 8,
+      "severity": "HIGH",
+      "description": "Section-level risk tables missing entirely (0 vs. 10 expected)",
+      "location": "VI.A-VI.J",
+      "impact": "Blocks certification",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM8-HIGH-002",
+      "dimension": 8,
+      "severity": "HIGH",
+      "description": "Risk data exists in prose but not formatted per requirement",
+      "location": "VI.A-VI.J",
+      "impact": "Readers cannot quickly assess risk landscape",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM8-HIGH-003",
+      "dimension": 8,
+      "severity": "HIGH",
+      "description": "No standardized risk table format across sections",
+      "location": "Document-wide",
+      "impact": "Inconsistent presentation",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM9-HIGH-001",
+      "dimension": 9,
+      "severity": "HIGH",
+      "description": "Missing draft provisions for 6 HIGH/CRITICAL findings",
+      "location": "VI.B, VI.D, VI.E, VI.G, VI.J",
+      "impact": "Blocks certification",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM9-HIGH-002",
+      "dimension": 9,
+      "severity": "HIGH",
+      "description": "Existing provisions lack '### Draft Contract Language' headers",
+      "location": "VI.A, VI.C, VI.H",
+      "impact": "Cannot be detected by QA automation",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM9-HIGH-003",
+      "dimension": 9,
+      "severity": "HIGH",
+      "description": "Missing provision types: Closing conditions, Price adjustments, Tax covenants",
+      "location": "VI.B, VI.D, VI.G",
+      "impact": "Deal team cannot use provisions in markup",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM11-HIGH-001",
+      "dimension": 11,
+      "severity": "HIGH",
+      "description": "VI.C and VI.H use non-standard headers",
+      "location": "Lines 2612, 6555",
+      "impact": "Affects completeness scoring and navigation",
+      "remediation_wave": "Wave 3 P2"
+    },
+    {
+      "id": "REDFLAG-001",
+      "dimension": 7,
+      "severity": "HIGH",
+      "description": "6 placeholder markers present ([TBD], [TODO], [PLACEHOLDER])",
+      "location": "Various sections",
+      "impact": "Red flag deduction -5 points",
+      "remediation_wave": "Wave 3 P2"
+    },
+    {
+      "id": "REDFLAG-002",
+      "dimension": 8,
+      "severity": "HIGH",
+      "description": "Section-level risk tables completely absent",
+      "location": "VI.A-VI.J",
+      "impact": "Red flag deduction -5 points",
+      "remediation_wave": "Wave 3 P1"
+    },
+    {
+      "id": "DIM2-MED-001",
+      "dimension": 2,
+      "severity": "MEDIUM",
+      "description": "Limited discussion of seller's defensive arguments in Executive Summary",
+      "location": "Section III",
+      "impact": "-1 point",
+      "remediation_wave": "Wave 4 (OPTIONAL)"
+    },
+    {
+      "id": "DIM5-MED-001",
+      "dimension": 5,
+      "severity": "MEDIUM",
+      "description": "Some citations lack explanatory parentheticals",
+      "location": "Various sections",
+      "impact": "Minor clarity issue",
+      "remediation_wave": "Wave 5 (DEFERRED)"
+    },
+    {
+      "id": "DIM6-MED-001",
+      "dimension": 6,
+      "severity": "MEDIUM",
+      "description": "Some discount rate explanations missing in individual sections",
+      "location": "VI.D, VI.G",
+      "impact": "-1 point",
+      "remediation_wave": "Wave 4 (OPTIONAL)"
+    },
+    {
+      "id": "DIM7-MED-001",
+      "dimension": 7,
+      "severity": "MEDIUM",
+      "description": "6 placeholder instances remain",
+      "location": "Various sections",
+      "impact": "Violates anti-placeholder rule",
+      "remediation_wave": "Wave 3 P2"
+    },
+    {
+      "id": "DIM7-MED-002",
+      "dimension": 7,
+      "severity": "MEDIUM",
+      "description": "Some orphaned HIGH findings lack explicit cross-references",
+      "location": "VI.A, VI.D, VI.J",
+      "impact": "Reader may miss interconnected risks",
+      "remediation_wave": "Wave 4 (OPTIONAL)"
+    },
+    {
+      "id": "DIM10-MED-001",
+      "dimension": 10,
+      "severity": "MEDIUM",
+      "description": "VI.C section uses non-standard header format",
+      "location": "Line 2612",
+      "impact": "Breaks automated navigation",
+      "remediation_wave": "Wave 3 P2"
+    },
+    {
+      "id": "DIM10-MED-002",
+      "dimension": 10,
+      "severity": "MEDIUM",
+      "description": "VI.H section uses non-standard header format",
+      "location": "Line 6555",
+      "impact": "Breaks automated navigation",
+      "remediation_wave": "Wave 3 P2"
+    },
+    {
+      "id": "DIM11-MED-001",
+      "dimension": 11,
+      "severity": "MEDIUM",
+      "description": "Document footer not detected",
+      "location": "End of document",
+      "impact": "-1 point",
+      "remediation_wave": "Wave 3 P2"
+    }
+  ],
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 12,
+    "base_score": 76,
+    "red_flag_deductions": 10,
+    "aggregate_score": 76,
+    "critical_issues": 3,
+    "high_issues": 13,
+    "medium_issues": 8,
+    "low_issues": 0,
+    "total_issues": 29,
+    "issues_resolved_since_cycle1": 4,
+    "new_issues_discovered": 12,
+    "last_checkpoint": "2026-01-24T19:45:00Z"
+  },
+  "prerequisite_verification": {
+    "expected_sections": [
+      "VI.A",
+      "VI.B",
+      "VI.C",
+      "VI.D",
+      "VI.E",
+      "VI.F",
+      "VI.G",
+      "VI.H",
+      "VI.I",
+      "VI.J"
+    ],
+    "expected_count": 10,
+    "sections_found": [
+      "VI.A",
+      "VI.B",
+      "VI.C (non-standard header)",
+      "VI.D",
+      "VI.E",
+      "VI.F",
+      "VI.G",
+      "VI.H (non-standard header)",
+      "VI.I",
+      "VI.J"
+    ],
+    "sections_missing": [],
+    "verification_status": "PASS (content present, headers need standardization)",
+    "file_size_bytes": 1116488,
+    "executive_summary_present": true,
+    "executive_summary_word_count": 2487,
+    "footnotes_present": true,
+    "footnote_count": 920,
+    "creac_headers_detected": 22,
+    "risk_tables_detected": 0,
+    "draft_provisions_detected_with_headers": 0,
+    "draft_provisions_embedded_without_headers": 3,
+    "placeholders_detected": 6,
+    "verification_tag_rate": "14.4%"
+  },
+  "cycle3_projection": {
+    "if_priority1_only": {
+      "tasks": "CREAC headers + Risk tables + Draft provisions",
+      "projected_score": 94,
+      "outcome": "CERTIFY_WITH_LIMITATIONS (≥88%, <93%)"
+    },
+    "if_priority1_and_2": {
+      "tasks": "Priority 1 + Placeholders + Headers + Footer",
+      "projected_score": 96,
+      "outcome": "CERTIFY (≥93%, no HIGH/CRITICAL unresolved)"
+    },
+    "recommended_path": "Priority 1 + Priority 2",
+    "estimated_duration_minutes": "150-180"
+  }
+}

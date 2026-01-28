@@ -1,0 +1,62 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Privacy & Data Protection",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.G (Privacy & Data Protection) from specialist reports",
+    "progress": "Complete - all 6 subsections written",
+    "next_action": "None - section finalized",
+    "critical_context": ["section_id=G", "4 HIGH/MEDIUM findings with full CREAC", "All draft contract provisions included"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["privacy-data-protection-report.md", "fact-registry.md", "risk-summary.json", "coverage-gaps.md"]
+  },
+
+  "metrics": {
+    "word_count": 7850,
+    "findings_written": "4/4",
+    "footnotes_count": 100,
+    "last_checkpoint": "2026-01-25T12:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/privacy-data-protection-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "quality_verification": {
+    "word_count_check": "PASS (7,850 words ≥ 4,000 minimum)",
+    "subsections_complete": "PASS (all 6 subsections A-F present)",
+    "draft_provisions": "PASS (4 HIGH findings have structured contract language)",
+    "verification_tags": "PASS (100 footnotes with verification tags)",
+    "no_placeholders": "PASS (zero [TBD], [continue...], or similar)",
+    "creac_compliance": "PASS (all 4 findings follow CREAC: Conclusion → Rule → Explanation → Application → Counter-Analysis)",
+    "counter_analysis": "PASS (all material findings include counter-analysis)",
+    "advocacy_language": "PASS (no 'clearly', 'obviously' language detected)"
+  }
+}

@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Legal Research – Conversation Playground</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #11161d;
+      --muted: #2b3440;
+      --text: #e6edf3;
+      --subtle: #9aa7b2;
+      --accent: #67b3ff;
+      --accent-2: #7ae0a5;
+      --danger: #ff6b6b;
+      --warning: #ffd166;
+      --ok: #7bd88f;
+      --link: #86c8ff;
+      --code: #0c1116;
+      --chip: #1b2230;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { color-scheme: dark; }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #060a0f 0%, #0b0f14 100%);
+      color: var(--text);
+      font: 15px/1.7 'Times New Roman', Times, Georgia, 'Playfair Display', serif;
+      overflow: hidden;
+    }
+    a { color: var(--link); text-decoration: none; }
+    header {
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--muted);
+      background: rgba(12,17,22,0.8);
+      backdrop-filter: blur(8px);
+    }
+    header .brand { display:flex; align-items:center; gap:10px; font-weight:600; }
+    header .brand .dot { width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 18px var(--accent); }
+    header .actions { display:flex; gap:10px; align-items:center; }
+    .btn {
+      background: #111927;
+      color: var(--text);
+      border: 1px solid #1b2533;
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: transform .06s ease, background .15s ease, border .15s ease;
+    }
+    .btn:hover { background: #0f1621; border-color: #273548; }
+    .btn:active { transform: translateY(1px) scale(0.99); }
+    .btn.primary { background: linear-gradient(180deg, #1a6bd1 0%, #0e58b6 100%); border: 0; }
+    .btn.accent { background: linear-gradient(180deg, #1da36f 0%, #128557 100%); border: 0; }
+    .btn.warn { background: linear-gradient(180deg, #c28a0a 0%, #966f14 100%); border: 0; }
+    .btn.ghost { background: transparent; border-color: #273548; }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .container { height: calc(100% - 60px); display: grid; grid-template-columns: 320px 1fr 380px; gap: 16px; padding: 16px; }
+    .panel {
+      background: radial-gradient(120% 120% at 0% 0%, #0b1118 0%, #0b0f14 55%, #0b0f14 100%);
+      border: 1px solid var(--muted);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .panel h3 { margin: 0; padding: 14px 16px; border-bottom: 1px solid var(--muted); font-size: 13px; letter-spacing: .6px; text-transform: uppercase; color: var(--subtle); }
+    .controls { padding: 14px; display: grid; gap: 12px; }
+    .row { display: grid; gap: 8px; }
+    label { color: var(--subtle); font-size: 12px; }
+    input[type="text"], input[type="url"], textarea {
+      width: 100%;
+      background: #0c131c;
+      color: var(--text);
+      border: 1px solid #1b2533;
+      border-radius: 10px;
+      padding: 10px 12px;
+      outline: none;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .seg { display:flex; gap:8px; }
+    .chips { display:flex; flex-wrap: wrap; gap: 6px; }
+    .chip { background: var(--chip); border: 1px solid #263142; color: var(--subtle); border-radius: 100px; padding: 4px 8px; font-size: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .scroll { overflow: auto; }
+    .feed { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+    .bubble { background: #0e141c; border: 1px solid #1b2533; border-radius: 10px; padding: 12px; }
+    .bubble.user { border-color: #273548; background: #0d1521; }
+    .bubble.assistant { border-color: #203147; }
+    .bubble.system { border-color: #2a394f; background: #0c131b; color: #c9d6e1; }
+    .bubble h4 { margin: 0 0 6px 0; font-size: 13px; color: var(--subtle); }
+    .thinking { white-space: pre-wrap; color: #a7c0d8; }
+    .delta { white-space: pre-wrap; }
+    /* Enhanced Markdown styling for legal memoranda */
+    .md h1, .md h2, .md h3, .md h4 { margin: 24px 0 12px; line-height: 1.3; color: #e8f0f7; font-weight: 600; }
+    .md h1 { font-size: 22px; text-align: center; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #2a3a4f; padding-bottom: 12px; }
+    .md h2 { font-size: 19px; border-bottom: 1px solid #1b2533; padding-bottom: 8px; margin-top: 32px; }
+    .md h3 { font-size: 17px; color: #d4e2f0; margin-top: 28px; }
+    .md h4 { font-size: 16px; color: #c7d6e2; margin-top: 20px; }
+    .md h5 { font-size: 15px; color: #b8c9d9; margin-top: 16px; font-weight: 600; }
+    .md p { margin: 14px 0; color: #e2ebf4; line-height: 1.8; text-align: justify; }
+    .md strong { color: #f0f7ff; font-weight: 600; }
+    .md em { color: #d8e6f2; font-style: italic; }
+    .md ul, .md ol { margin: 14px 0 14px 24px; }
+    .md li { margin: 8px 0; line-height: 1.6; }
+    .md blockquote { margin: 16px 0; padding: 12px 16px; border-left: 4px solid #3a4a5f; background: #0c131b; color: #d0dce8; font-style: italic; }
+    .md hr { border: none; border-top: 2px solid #263142; margin: 24px 0; }
+
+    /* Legal Citation Formatting */
+    .md .case-citation { font-style: italic; color: #a8c4e0; }
+    .md .statute-citation { font-family: 'Courier New', monospace; color: #b8d4f0; background: rgba(184, 212, 240, 0.1); padding: 1px 4px; border-radius: 3px; }
+    .md .court-citation { color: #9bb8d4; font-size: 14px; }
+    .md .legal-emphasis { text-decoration: underline; color: #f0f7ff; }
+
+    /* Legal Document Structure */
+    .md .section-number { font-weight: 700; color: #c8d8e8; margin-right: 8px; }
+    .md .subsection { margin-left: 20px; }
+    .md .subsubsection { margin-left: 40px; }
+    .md .legal-outline { counter-reset: section subsection subsubsection; }
+    .md .legal-outline h2:before { counter-increment: section; content: counter(section, upper-roman) ". "; }
+    .md .legal-outline h3:before { counter-increment: subsection; content: counter(section, upper-alpha) ". "; }
+    .md .legal-outline h4:before { counter-increment: subsubsection; content: counter(subsubsection, decimal) ". "; }
+
+    /* Tables for Legal Analysis */
+    .md table, .md .legal-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: rgba(12, 19, 27, 0.5); }
+    .md th, .md td { padding: 12px 16px; border: 1px solid #2a3a4f; text-align: left; vertical-align: top; }
+    .md th { background: #1a2633; color: #e0ecf7; font-weight: 600; text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.5px; }
+    .md td { color: #d4e2f0; }
+    .md thead { border-bottom: 2px solid #3a5a7f; }
+    .md tbody tr:nth-child(even) { background: rgba(20, 30, 45, 0.3); }
+    .md tbody tr:hover { background: rgba(40, 60, 90, 0.3); }
+
+    /* Legal Precedent Blocks */
+    .md .precedent { background: rgba(58, 74, 95, 0.2); border-left: 4px solid #5a8fc7; padding: 16px; margin: 16px 0; }
+    .md .precedent .case-name { font-style: italic; font-weight: 600; color: #a8c4e0; margin-bottom: 8px; }
+    .md .precedent .holding { color: #e0ecf7; }
+
+    /* Statute/Regulation Blocks */
+    .md .statute-block { background: rgba(74, 95, 58, 0.2); border-left: 4px solid #7fc75a; padding: 16px; margin: 16px 0; font-family: 'Georgia', serif; }
+    .md .statute-block .statute-title { font-weight: 600; color: #c4e0a8; margin-bottom: 8px; }
+
+    /* Legal Analysis Sections */
+    .md .analysis-section { background: rgba(95, 74, 58, 0.1); border: 1px solid #4a3a2f; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .md .analysis-section .section-title { font-weight: 700; color: #f0e0c4; margin-bottom: 12px; border-bottom: 1px solid #5a4a3f; padding-bottom: 6px; }
+    /* Enhanced Footnotes for Legal Citations */
+    .md sup.fn { cursor: help; color: #7ae0a5; font-weight: 600; font-size: 12px; }
+    .md sup.fn:hover { color: #9ef5c1; text-decoration: underline; }
+    .footnotes { margin-top: 24px; padding-top: 16px; border-top: 2px solid #263142; background: rgba(12, 19, 27, 0.3); border-radius: 8px; padding: 16px; }
+    .footnotes summary { cursor: pointer; color: #a8c4e0; font-weight: 600; font-size: 15px; }
+    .footnotes summary:hover { color: #c4d8f0; }
+    .footnotes ol { margin: 12px 0 0 24px; counter-reset: footnote; }
+    .footnotes li { margin: 8px 0; color: #d4e2f0; line-height: 1.6; counter-increment: footnote; }
+    .footnotes li .case-name { font-style: italic; color: #a8c4e0; }
+    .footnotes li .statute-ref { font-family: 'Courier New', monospace; color: #b8d4f0; }
+    .footnotes li .court-info { color: #9bb8d4; font-size: 14px; }
+    .timeline { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+    .event { background: #0c131b; border: 1px solid #1b2533; border-radius: 10px; padding: 10px; display:grid; gap:6px; }
+    .event .meta { display:flex; align-items:center; gap:8px; color: var(--subtle); font-size: 12px; }
+    .tag { font-size: 11px; padding: 2px 6px; border-radius: 100px; border: 1px solid #2a3a4f; background: #0f1520; color: #b7c7d6; }
+    .tag.ok { border-color: #234332; color: #9ee3b7; background: #0f1b15; }
+    .tag.warn { border-color: #5a4a21; color: #ffd966; background: #17130b; }
+    .tag.err { border-color: #55303a; color: #ff9aa8; background: #1c0f13; }
+    .json { background: #0a0f14; border: 1px dashed #233042; border-radius: 8px; padding: 8px; overflow: auto; max-height: 160px; }
+    /* Smart key-value renderer */
+    .kv { background: #0a0f14; border: 1px dashed #233042; border-radius: 10px; overflow: hidden; }
+    .kv-row { display: grid; grid-template-columns: 180px 1fr; gap: 10px; padding: 8px 10px; border-top: 1px solid #16202b; }
+    .kv-row:first-child { border-top: 0; }
+    .kv-key { color: #9fb3c8; font-weight: 600; word-break: break-word; }
+    .kv-type { color: #7ae0a5; font-size: 11px; margin-left: 6px; opacity: .9; }
+    .kv-value { color: #dbe7f3; word-break: break-word; }
+    .kv-array, .kv-value-block { position: relative; }
+    .kv-more { color: var(--link); cursor: pointer; font-size: 12px; user-select: none; display: inline-block; margin-top: 6px; }
+    .kv-list { display: grid; gap: 6px; }
+    .kv-item { background: #0c131b; border: 1px solid #1b2533; border-radius: 8px; padding: 6px 8px; }
+    .short, .full { white-space: pre-wrap; }
+    .full { display: none; }
+    [data-expanded="1"] > .short { display: none; }
+    [data-expanded="1"] > .full { display: block; }
+    .kv .kv { margin: 6px 0; border-color: #2a3a4f; }
+    /* Result cards */
+    .cards { display: grid; gap: 10px; }
+    .card { background: #0c131b; border: 1px solid #1b2533; border-radius: 10px; padding: 10px; }
+    .card-title { font-weight: 600; color: #e6eef7; margin-bottom: 4px; }
+    .card-meta { color: #9fb1c3; font-size: 12px; display:flex; gap:8px; align-items:center; }
+    .card a { color: var(--link); }
+    .footer { padding: 10px 14px; border-top: 1px solid var(--muted); display:flex; justify-content: space-between; color: var(--subtle); font-size: 12px; }
+    .footer.composer { gap: 10px; align-items: center; }
+    .footer.composer textarea { flex: 1; min-height: 44px; max-height: 160px; resize: vertical; }
+    .right-pane { display: grid; grid-template-rows: auto 1fr auto; }
+    .section-title { padding: 10px 14px; color: var(--subtle); font-size: 12px; text-transform: uppercase; letter-spacing: .6px; }
+    .hl { color: var(--accent-2); }
+    .kbd { padding: 2px 6px; border: 1px solid #293649; border-radius: 6px; background: #0b1118; font-size: 12px; color: #c5d4e0; }
+    details summary { cursor: pointer; color: var(--subtle); }
+
+    /* Print Styles for Legal Documents */
+    @media print {
+      body { background: white !important; color: black !important; font-family: 'Times New Roman', Times, serif; }
+      .header, .container .panel:not(#center), .footer { display: none !important; }
+      #center { background: white !important; border: none !important; box-shadow: none !important; }
+      .md h1, .md h2, .md h3, .md h4 { color: black !important; page-break-after: avoid; }
+      .md h1 { border-bottom: 2px solid black; text-align: center; }
+      .md h2 { border-bottom: 1px solid black; margin-top: 1.5in; }
+      .md p { color: black !important; text-align: justify; orphans: 3; widows: 3; }
+      .footnotes { border-top: 1px solid black; background: white !important; }
+      .footnotes summary { color: black !important; }
+      .footnotes li { color: black !important; }
+      .case-citation, .statute-citation, .court-citation { color: black !important; }
+      .legal-emphasis { color: black !important; text-decoration: underline; }
+      .md sup.fn { color: black !important; }
+      .precedent, .statute-block, .analysis-section { background: #f5f5f5 !important; border-color: #ccc !important; }
+      @page { margin: 1in; size: letter; }
+      .page-break { page-break-before: always; }
+    }
+
+    /* Accessibility Improvements */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      :root {
+        --text: #ffffff;
+        --bg: #000000;
+        --border: #ffffff;
+        --accent: #00ff00;
+        --accent-2: #ffff00;
+      }
+    }
+
+    /* Live Document Panel */
+    #liveDocPanel {
+      position: fixed;
+      right: 16px;
+      top: 76px;
+      width: 480px;
+      max-height: calc(100vh - 92px);
+      z-index: 50;
+      background: radial-gradient(120% 120% at 0% 0%, #0b1118 0%, #0b0f14 55%, #0b0f14 100%);
+      border: 1px solid var(--muted);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      animation: liveDocSlideIn 0.2s ease;
+    }
+    #liveDocPanel h3 {
+      margin: 0;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--muted);
+      font-size: 13px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--subtle);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #liveDocPanel .scroll {
+      flex: 1;
+      overflow: auto;
+      padding: 14px;
+      max-height: calc(100vh - 200px);
+    }
+    #liveDocPanel .footer {
+      padding: 10px 14px;
+      border-top: 1px solid var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--subtle);
+      font-size: 12px;
+    }
+    .live-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 12px var(--accent-2);
+      animation: livePulse 1.5s infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes liveDocSlideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Reports Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: modalFadeIn 0.2s ease;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: radial-gradient(120% 120% at 0% 0%, #0b1118 0%, #0b0f14 55%, #0b0f14 100%);
+      border: 1px solid var(--muted);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: modalSlideIn 0.2s ease;
+    }
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-content h3 {
+      margin: 0 0 16px 0;
+      font-size: 15px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--subtle);
+    }
+    .modal-content .scroll {
+      flex: 1;
+      overflow: auto;
+      margin-bottom: 16px;
+    }
+    .modal-content .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Active Subagent Indicator */
+    .subagent-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--chip);
+      border: 1px solid var(--accent-2);
+      color: var(--accent-2);
+      border-radius: 100px;
+      padding: 3px 10px;
+      font-size: 11px;
+      margin-left: auto;
+      animation: subagentPulse 2s infinite;
+    }
+    @keyframes subagentPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(122, 224, 165, 0.4); }
+      50% { box-shadow: 0 0 0 4px rgba(122, 224, 165, 0); }
+    }
+
+    /* Enhanced Code Block Styling */
+    .md pre {
+      background: #0a0e13;
+      border: 1px solid var(--muted);
+      border-radius: 10px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    .md pre code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e6edf3;
+      background: transparent;
+      padding: 0;
+    }
+    .md code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      background: rgba(110, 118, 129, 0.2);
+      color: #e6edf3;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .md a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .md a:hover {
+      text-decoration: underline;
+    }
+    .md img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+    /* Override Prism theme to match our dark theme */
+    .md pre[class*="language-"],
+    .md code[class*="language-"] {
+      background: #0a0e13;
+      text-shadow: none;
+    }
+    .md .token.comment { color: #6e7681; }
+    .md .token.keyword { color: #ff7b72; }
+    .md .token.string { color: #a5d6ff; }
+    .md .token.number { color: #79c0ff; }
+    .md .token.function { color: #d2a8ff; }
+    .md .token.operator { color: #79c0ff; }
+    .md .token.class-name { color: #ffa657; }
+    .md .token.property { color: #79c0ff; }
+  </style>
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0b0f14" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0f14' stroke='%2367b3ff' stroke-width='4'/%3E%3Ccircle cx='48' cy='48' r='8' fill='%2367b3ff'/%3E%3C/svg%3E" />
+
+  <!-- Markdown rendering with marked.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Syntax highlighting with Prism.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="dot"></span>
+      <div>Claude Legal Research – Conversation Playground</div>
+    </div>
+    <div class="actions">
+      <button class="btn ghost" id="btnExport" title="Export Legal Memorandum">Export</button>
+      <button class="btn ghost" id="btnExportDebug" title="Export Thinking & Tools">Debug</button>
+      <button class="btn ghost" id="btnReports" title="View Saved Reports">Reports</button>
+      <button class="btn ghost" id="btnHealth">Health</button>
+      <a class="btn ghost" href="https://anthropic.com" target="_blank" rel="noopener">Docs</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="panel" id="left">
+      <h3>Controls</h3>
+      <div class="controls">
+        <div class="row">
+          <label for="serverUrl">Server URL</label>
+          <input type="url" id="serverUrl" placeholder="http://localhost:8090" />
+        </div>
+        <div class="row">
+          <label for="query">Query</label>
+          <textarea id="query" placeholder="Ask a comprehensive legal research question..."></textarea>
+        </div>
+        <div class="seg">
+          <button class="btn primary" id="btnStream">Stream</button>
+          <button class="btn warn" id="btnStop" disabled>Stop</button>
+        </div>
+        <div class="seg">
+          <button class="btn" id="btnNonStream">Non-Streaming</button>
+          <button class="btn ghost" id="btnClear">Clear</button>
+        </div>
+
+        <div class="row">
+          <label>Session</label>
+          <div class="seg">
+            <button class="btn accent" id="btnCreateSession">Create</button>
+            <button class="btn ghost" id="btnGetSession">Get</button>
+            <button class="btn ghost" id="btnDeleteSession">Delete</button>
+          </div>
+          <input type="text" id="sessionId" placeholder="session id (optional)" />
+          <div class="chips" id="sessionInfo"></div>
+        </div>
+
+        <div class="row">
+          <label>Quick Tips</label>
+          <div class="chips">
+            <span class="chip">Interleaved thinking</span>
+            <span class="chip">Fine-grained tool streaming</span>
+            <span class="chip">Parallel tool execution</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <label>Available Specialists <span id="subagentCount" class="chip" style="margin-left:6px;"></span></label>
+          <div class="chips" id="subagentsList">
+            <span class="chip" style="color:var(--subtle);">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>SSE stream visualizes thinking, tools, and content.</div>
+      </div>
+    </div>
+
+    <div class="panel" id="center">
+      <h3>Transcript</h3>
+      <div class="scroll">
+        <div class="feed" id="feed"></div>
+      </div>
+      <div class="footer composer">
+        <textarea id="composer" placeholder="Type a message and press Enter to Stream, or use Send buttons…"></textarea>
+        <button class="btn primary" id="composerSendStream">Send (Stream)</button>
+        <button class="btn" id="composerSendNonStream">Send (Non-Stream)</button>
+      </div>
+      <div class="footer">
+        <div>Raw events in the right pane.</div>
+        <div class="kbd">Esc</div>
+      </div>
+    </div>
+
+    <div class="panel right-pane" id="right">
+      <div>
+        <div class="section-title">
+          Thinking & Tools
+          <span id="activeSubagent" class="subagent-indicator" style="display:none;"></span>
+        </div>
+      </div>
+      <div class="scroll">
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <div class="footer">
+        <details id="rawToggle">
+          <summary>Show raw events</summary>
+          <div class="json mono" id="raw"></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reports Modal -->
+  <div id="reportsModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>Saved Research Reports</h3>
+      <div class="scroll">
+        <div class="cards" id="reportsList">
+          <div class="card" style="color:var(--subtle);">Loading reports...</div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button class="btn ghost" id="btnRefreshReports">Refresh</button>
+        <button class="btn" id="btnCloseReports">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Document Panel -->
+  <div id="liveDocPanel" style="display:none;">
+    <h3>
+      <span class="live-indicator"></span>
+      Live Document
+      <span id="liveDocPath" class="chip"></span>
+    </h3>
+    <div class="scroll">
+      <div class="md" id="liveDocContent"></div>
+    </div>
+    <div class="footer">
+      <span id="liveDocTimestamp"></span>
+      <button class="btn ghost" id="btnCloseLiveDoc">Close</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const $ = (sel) => document.querySelector(sel);
+      const feed = $('#feed');
+      const timeline = $('#timeline');
+      const raw = $('#raw');
+      const query = $('#query');
+      const serverUrl = $('#serverUrl');
+      const sessionIdInput = $('#sessionId');
+      const sessionInfo = $('#sessionInfo');
+      const btnStream = $('#btnStream');
+      const btnStop = $('#btnStop');
+      const btnNonStream = $('#btnNonStream');
+      const btnClear = $('#btnClear');
+      const btnHealth = $('#btnHealth');
+      const btnExport = $('#btnExport');
+      const btnExportDebug = $('#btnExportDebug');
+      const btnCreateSession = $('#btnCreateSession');
+      const btnGetSession = $('#btnGetSession');
+      const btnDeleteSession = $('#btnDeleteSession');
+      const composer = $('#composer');
+      const composerSendStream = $('#composerSendStream');
+      const composerSendNonStream = $('#composerSendNonStream');
+
+      // New UI elements
+      const btnReports = $('#btnReports');
+      const reportsModal = $('#reportsModal');
+      const reportsList = $('#reportsList');
+      const btnCloseReports = $('#btnCloseReports');
+      const btnRefreshReports = $('#btnRefreshReports');
+      const liveDocPanel = $('#liveDocPanel');
+      const liveDocPath = $('#liveDocPath');
+      const liveDocContent = $('#liveDocContent');
+      const liveDocTimestamp = $('#liveDocTimestamp');
+      const btnCloseLiveDoc = $('#btnCloseLiveDoc');
+      const subagentsList = $('#subagentsList');
+      const subagentCount = $('#subagentCount');
+      const activeSubagent = $('#activeSubagent');
+
+      const FIXED_SERVER = 'http://localhost:3001';
+
+      // Live document tracking
+      const liveDocuments = new Map(); // path -> content
+
+      function isAtBottom(scroller, threshold = 8) {
+        try { return (scroller.scrollTop + scroller.clientHeight) >= (scroller.scrollHeight - threshold); } catch { return true; }
+      }
+
+      function maybeScroll(scroller, should) {
+        try { if (should) scroller.scrollTop = scroller.scrollHeight; } catch {}
+      }
+
+      let es = null;
+      let currentAssistantBubble = null;
+      let currentThinkingBlock = null;
+      let started = false;
+      let assistantTextBuffer = '';
+
+      // Parallel event storage for debug export
+      let eventLog = [];          // Stores all events for export
+      let sessionMetadata = {};   // Stores session-level metadata
+
+      const ls = {
+        get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+        set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+      };
+
+      // Initialize defaults (fixed server URL)
+      serverUrl.value = FIXED_SERVER;
+      serverUrl.placeholder = FIXED_SERVER + ' (fixed)';
+      serverUrl.disabled = true;
+      // DO NOT auto-load sessionId from localStorage - each page load should start fresh
+      // sessionIdInput.value = ls.get('sessionId', '');
+      // Only use sessionId for explicit continuation within the same page session
+      sessionIdInput.value = '';
+      if (!query.value) {
+        query.value = 'Please research manufacturing companies in western Pennsylvania which have previously filed for bankruptcy. What were the similarities in their structured bankruptcy filings? Were EPA violations present; if so, what is the remediation process required based on the bankruptcy filing? How does IP retention function. If restructuring can the company offset the EPA obligations?';
+      }
+
+      function setStreamingState(s) {
+        started = s;
+        btnStream.disabled = s;
+        btnStop.disabled = !s;
+        btnNonStream.disabled = s;
+        btnClear.disabled = s;
+        composer.disabled = s;
+        composerSendStream.disabled = s;
+        composerSendNonStream.disabled = s;
+      }
+
+      function addUserBubble(text) {
+        const b = document.createElement('div');
+        b.className = 'bubble user';
+        b.innerHTML = `<h4>User</h4><div class="mono">${escapeHtml(text)}</div>`;
+        const sc = feed.parentElement; const pin = isAtBottom(sc);
+        feed.appendChild(b);
+        maybeScroll(sc, pin);
+      }
+
+      function startAssistantBubble() {
+        const b = document.createElement('div');
+        b.className = 'bubble assistant';
+        b.innerHTML = `<h4>Assistant</h4><div class="delta md" id="assistantDelta"></div>`;
+        feed.appendChild(b);
+        currentAssistantBubble = b.querySelector('#assistantDelta');
+        assistantTextBuffer = '';
+      }
+
+      function appendAssistantText(text) {
+        if (!currentAssistantBubble) startAssistantBubble();
+        const sc = feed.parentElement; const pin = isAtBottom(sc);
+        assistantTextBuffer += decodeEntitiesDeep(text);
+        const rendered = renderMarkdown(assistantTextBuffer);
+        currentAssistantBubble.innerHTML = (rendered && rendered.trim()) ? rendered : escapeHtml(assistantTextBuffer);
+        enhanceAssistantContent(currentAssistantBubble, assistantTextBuffer);
+        maybeScroll(sc, pin);
+      }
+
+      // Enhanced Markdown renderer using marked.js with legal citation formatting
+      // Configure marked.js
+      (function initMarked() {
+        if (typeof marked !== 'undefined') {
+          marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: false,
+            mangle: false,
+            highlight: function(code, lang) {
+              if (typeof Prism !== 'undefined' && lang && Prism.languages[lang]) {
+                try {
+                  return Prism.highlight(code, Prism.languages[lang], lang);
+                } catch (e) {
+                  console.warn('Prism highlight error:', e);
+                }
+              }
+              return code;
+            }
+          });
+        }
+      })();
+
+      // Legal citation enhancement (applied after marked parsing)
+      function enhanceLegalCitations(html) {
+        if (!html) return html;
+        let s = html;
+
+        // U.S.C. citations
+        s = s.replace(/(\d+\s+U\.S\.C\.\s*§\s*[\d\w.-]+)/g, '<span class="statute-citation">$1</span>');
+
+        // C.F.R. citations
+        s = s.replace(/(\d+\s+C\.F\.R\.\s*§\s*[\d.-]+)/g, '<span class="statute-citation">$1</span>');
+
+        // State statute citations
+        s = s.replace(/(\d+\s+[A-Z][a-zA-Z]*\.\s*§\s*[\d\w.-]+)/g, '<span class="statute-citation">$1</span>');
+
+        // Federal Rules citations
+        s = s.replace(/(Fed\.\s*R\.\s*[A-Za-z]*\.\s*P\.\s*\d+)/g, '<span class="statute-citation">$1</span>');
+        s = s.replace(/(Rule\s+\d+[a-z]*)/g, '<span class="statute-citation">$1</span>');
+
+        // Case citations (v. pattern in italics/em tags)
+        s = s.replace(/<em>([^<]+v\.\s+[^<]+)<\/em>/g, '<span class="case-citation">$1</span>');
+
+        // Circuit court citations
+        s = s.replace(/\((\d+(?:st|nd|rd|th)\s+Cir\.\s+\d{4})\)/g, '<span class="court-citation">($1)</span>');
+
+        // District court citations
+        s = s.replace(/\((S\.D\.|N\.D\.|E\.D\.|W\.D\.|C\.D\.|D\.)\s*([A-Z][a-z.]*)\s+(\d{4})\)/g,
+          '<span class="court-citation">($1 $2 $3)</span>');
+
+        // Supreme Court citations
+        s = s.replace(/(\d+\s+U\.S\.\s+\d+)/g, '<span class="court-citation">$1</span>');
+        s = s.replace(/(\d+\s+S\.\s*Ct\.\s+\d+)/g, '<span class="court-citation">$1</span>');
+
+        // Legal emphasis keywords
+        s = s.replace(/\b(held|holding|established|mandated|required|prohibited)\b/gi,
+          '<span class="legal-emphasis">$1</span>');
+
+        return s;
+      }
+
+      function renderMarkdown(src) {
+        if (!src) return '';
+
+        // Use marked.js if available, fallback to basic rendering
+        if (typeof marked !== 'undefined') {
+          try {
+            let html = marked.parse(src);
+            // Apply legal citation enhancements
+            html = enhanceLegalCitations(html);
+            // Trigger Prism highlighting for any code blocks
+            setTimeout(() => {
+              if (typeof Prism !== 'undefined') {
+                Prism.highlightAll();
+              }
+            }, 0);
+            return html;
+          } catch (e) {
+            console.warn('Marked.js error, falling back:', e);
+          }
+        }
+
+        // Fallback: basic markdown rendering
+        let s = src;
+        s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        s = s.replace(/^####\s+(.*)$/gm, '<h4>$1</h4>');
+        s = s.replace(/^###\s+(.*)$/gm, '<h3>$1</h3>');
+        s = s.replace(/^##\s+(.*)$/gm, '<h2>$1</h2>');
+        s = s.replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+        s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+        s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+        s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+        s = s.replace(/^-\s+(.+)$/gm, '<li>$1</li>');
+        s = s.replace(/^>\s+(.*)$/gm, '<blockquote class="precedent">$1</blockquote>');
+        s = enhanceLegalCitations(s);
+        return s;
+      }
+
+      function addSystemBubble(obj) {
+        const b = document.createElement('div');
+        b.className = 'bubble system';
+        const info = [obj.message, obj.model, obj.model_info && obj.model_info.current].filter(Boolean).join(' — ');
+        const feat = obj.features || obj.capabilities;
+        b.innerHTML = `<h4>System</h4><div>${escapeHtml(info || '')}</div>${feat ? `<div class="chips">${feat.map(x => `<span class=chip>${escapeHtml(x)}</span>`).join('')}</div>` : ''}`;
+        const sc = feed.parentElement; const pin = isAtBottom(sc);
+        feed.appendChild(b);
+        maybeScroll(sc, pin);
+      }
+
+      function addTimelineEvent({ kind, title, subtitle, tags = [], body = null }) {
+        const el = document.createElement('div');
+        el.className = 'event';
+        el.innerHTML = `
+          <div class="meta">
+            <span class="tag">${escapeHtml(kind)}</span>
+            <strong>${escapeHtml(title || '')}</strong>
+            <span style="flex:1"></span>
+            ${tags.map(t => `<span class="tag ${t.style || ''}">${escapeHtml(t.text)}</span>`).join('')}
+          </div>
+          ${subtitle ? `<div class="subtle">${escapeHtml(subtitle)}</div>` : ''}
+          ${body ? `<div>${body}</div>` : ''}
+        `;
+        const sc = timeline.parentElement; const pin = isAtBottom(sc);
+        timeline.appendChild(el);
+        maybeScroll(sc, pin);
+      }
+
+      function addRaw(obj) {
+        try {
+          raw.textContent += JSON.stringify(obj, null, 2) + "\n";
+          raw.scrollTop = raw.scrollHeight;
+        } catch {}
+      }
+
+      function escapeHtml(s) {
+        return String(s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+      }
+
+      function decodeOnce(s) {
+        const ta = document.createElement('textarea');
+        ta.innerHTML = s;
+        return ta.value;
+      }
+
+      function decodeEntitiesDeep(s, max = 3) {
+        let prev = String(s || '');
+        for (let i = 0; i < max; i++) {
+          const next = decodeOnce(prev);
+          if (next === prev) break;
+          prev = next;
+        }
+        return prev;
+      }
+
+      // --- Footnotes handling and superscript enhancement ---
+      const SUP_DIGITS = { '⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9' };
+      function supersToNum(s) {
+        return Array.from(String(s || '')).map(c => SUP_DIGITS[c] ?? '').join('');
+      }
+
+      function parseSuperscriptFootnotesFromText(text) {
+        const map = {};
+        const lines = String(text || '').split(/\n/);
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const m = line.match(/^\s*([⁰¹²³⁴⁵⁶⁷⁸⁹]+)\s+(.+)$/);
+          if (m) {
+            const n = supersToNum(m[1]);
+            if (n) {
+              map[n] = (map[n] ? map[n] + ' ' : '') + m[2].trim();
+            }
+          }
+        }
+        return map;
+      }
+
+      function enhanceAssistantContent(root, rawText) {
+        if (!root) return;
+        // 1) Annotate superscript numerals in text nodes
+        annotateSuperscripts(root);
+        // 2) Build/update footnotes section at the bottom
+        const notes = parseSuperscriptFootnotesFromText(rawText);
+        renderFootnotesSection(root, notes);
+        // 3) Attach simple hover/click tooltips using title and scroll to footnote
+        root.querySelectorAll('sup.fn').forEach((el) => {
+          const n = el.getAttribute('data-fn');
+          const txt = notes[n] || `Footnote ${n}`;
+          el.setAttribute('title', txt);
+          el.addEventListener('click', () => {
+            const sec = root.querySelector('.footnotes');
+            if (sec && typeof sec.open !== 'undefined') {
+              sec.open = true;
+              const target = root.querySelector(`#fn-${n}`);
+              try { target && target.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch {}
+            }
+          });
+        });
+      }
+
+      function annotateSuperscripts(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+        const toProcess = [];
+        while (true) {
+          const node = walker.nextNode();
+          if (!node) break;
+          const text = node.nodeValue;
+          if (!text) continue;
+          if (/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/.test(text)) {
+            toProcess.push(node);
+          }
+        }
+        toProcess.forEach((textNode) => {
+          const parent = textNode.parentNode;
+          if (!parent) return;
+          const parts = [];
+          const re = /[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g;
+          let lastIndex = 0; let m;
+          const t = textNode.nodeValue;
+          while ((m = re.exec(t))) {
+            const before = t.slice(lastIndex, m.index);
+            if (before) parts.push(document.createTextNode(before));
+            const sup = document.createElement('sup');
+            sup.className = 'fn';
+            sup.setAttribute('data-fn', supersToNum(m[0]) || '');
+            sup.textContent = m[0];
+            parts.push(sup);
+            lastIndex = re.lastIndex;
+          }
+          const after = t.slice(lastIndex);
+          if (after) parts.push(document.createTextNode(after));
+          parts.forEach(n => parent.insertBefore(n, textNode));
+          parent.removeChild(textNode);
+        });
+      }
+
+      function renderFootnotesSection(root, map) {
+        try {
+          if (!map || Object.keys(map).length === 0) {
+            const existing = root.querySelector('.footnotes');
+            if (existing) existing.parentElement.removeChild(existing);
+            return;
+          }
+          let sec = root.querySelector('.footnotes');
+          if (!sec) {
+            sec = document.createElement('details');
+            sec.className = 'footnotes';
+            sec.open = Object.keys(map).length <= 10; // Auto-open for smaller footnote sets
+            root.appendChild(sec);
+          }
+
+          // Enhanced footnote formatting with legal citation detection
+          const items = Object.keys(map).sort((a,b)=>Number(a)-Number(b)).map(n => {
+            let footnoteText = map[n];
+
+            // Format legal citations within footnotes
+            footnoteText = footnoteText.replace(/\*([^*]+v\.\s+[^*]+)\*/g, '<span class="case-name">$1</span>');
+            footnoteText = footnoteText.replace(/(\d+\s+U\.S\.C\.\s*§\s*[\d\w.-]+)/g, '<span class="statute-ref">$1</span>');
+            footnoteText = footnoteText.replace(/(\d+\s+C\.F\.R\.\s*§\s*[\d.-]+)/g, '<span class="statute-ref">$1</span>');
+            footnoteText = footnoteText.replace(/\(([^)]*\d{4})\)/g, '<span class="court-info">($1)</span>');
+            footnoteText = footnoteText.replace(/\b(holding that|establishing|requiring|prohibiting)\b/gi, '<strong>$1</strong>');
+
+            return `<li id="fn-${n}"><span class="mono" style="color: #7ae0a5; font-weight: 600;">${escapeHtml(n)}.</span> ${footnoteText}</li>`;
+          }).join('');
+
+          sec.innerHTML = `<summary>Legal Citations & Footnotes (${Object.keys(map).length})</summary><ol>${items}</ol>`;
+        } catch {}
+      }
+
+      function exportLegalDocument() {
+        try {
+          // Get all assistant responses
+          const assistantBubbles = feed.querySelectorAll('.bubble.assistant');
+          if (assistantBubbles.length === 0) {
+            alert('No legal document to export. Please generate a legal analysis first.');
+            return;
+          }
+
+          // Combine all assistant content
+          let documentContent = '';
+          assistantBubbles.forEach((bubble, index) => {
+            const content = bubble.querySelector('.delta.md');
+            if (content) {
+              if (index > 0) documentContent += '\n\n---\n\n';
+              documentContent += content.innerHTML;
+            }
+          });
+
+          // Create clean HTML document for export
+          const exportHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Memorandum - ${new Date().toLocaleDateString()}</title>
+  <style>
+    body { font-family: 'Times New Roman', Times, serif; line-height: 1.8; color: #000; margin: 1in; }
+    h1 { text-align: center; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 12px; }
+    h2 { border-bottom: 1px solid #000; margin-top: 2em; }
+    h3, h4 { margin-top: 1.5em; }
+    p { text-align: justify; margin: 1em 0; }
+    .case-citation { font-style: italic; }
+    .statute-citation { font-family: 'Courier New', monospace; }
+    .court-citation { font-size: 0.9em; }
+    .legal-emphasis { text-decoration: underline; font-weight: bold; }
+    .footnotes { border-top: 2px solid #000; margin-top: 2em; padding-top: 1em; }
+    .footnotes summary { font-weight: bold; margin-bottom: 0.5em; }
+    .footnotes ol { margin-left: 2em; }
+    .footnotes li { margin: 0.5em 0; }
+    sup.fn { font-weight: bold; }
+    @page { margin: 1in; }
+  </style>
+</head>
+<body>
+  ${documentContent}
+</body>
+</html>`;
+
+          // Create downloadable file
+          const blob = new Blob([exportHTML], { type: 'text/html' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Legal-Memorandum-${new Date().toISOString().split('T')[0]}.html`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          addTimelineEvent({
+            kind: 'export',
+            title: 'Legal Document Exported',
+            tags: [{ text: 'success', style: 'ok' }],
+            subtitle: 'HTML format with embedded legal citation formatting'
+          });
+        } catch (e) {
+          addTimelineEvent({
+            kind: 'export',
+            title: 'Export Error',
+            tags: [{ text: 'error', style: 'err' }],
+            subtitle: e.message
+          });
+        }
+      }
+
+      // Helper function to safely parse JSON
+      function tryParseJSON(str) {
+        try { return JSON.parse(str); } catch { return str; }
+      }
+
+      // Build transcript summary for debug export
+      function buildTranscript() {
+        const transcript = [];
+
+        // Add user query
+        if (sessionMetadata.query) {
+          transcript.push({
+            role: 'user',
+            content: sessionMetadata.query,
+            timestamp: sessionMetadata.startTime
+          });
+        }
+
+        // Build assistant response with thinking summary
+        const thinkingEvents = eventLog.filter(e =>
+          e.type === 'thinking' || e.type === 'thinking_delta' || e.type === 'thinking_start'
+        );
+        const thinking = thinkingEvents.map(e => e.text || e.thinking || '').join('');
+
+        const toolEvents = eventLog.filter(e => e.type === 'tool_call');
+        const toolsUsed = [...new Set(toolEvents.map(e => e.tool?.name).filter(Boolean))];
+
+        // Get final assistant content
+        const assistantContent = assistantTextBuffer || '';
+
+        if (assistantContent || thinking) {
+          transcript.push({
+            role: 'assistant',
+            content: assistantContent,
+            thinking_length: thinking.length,
+            thinking_preview: thinking.substring(0, 500) + (thinking.length > 500 ? '...' : ''),
+            tools_used: toolsUsed,
+            timestamp: eventLog[eventLog.length - 1]?.timestamp
+          });
+        }
+
+        return transcript;
+      }
+
+      // Build structured timeline for debug export
+      function buildTimeline() {
+        return eventLog.map(e => {
+          const base = {
+            type: e.type,
+            timestamp: e.timestamp
+          };
+
+          switch (e.type) {
+            case 'thinking':
+            case 'thinking_delta':
+            case 'thinking_start':
+              return { ...base, data: { content: e.text || e.thinking || '' } };
+
+            case 'thinking_complete':
+              return { ...base, data: { summary: e.summary } };
+
+            case 'thinking_signature':
+              return { ...base, data: { signature: e.signature } };
+
+            case 'tool_call':
+              return {
+                ...base,
+                data: {
+                  phase: e.phase,
+                  name: e.tool?.name,
+                  id: e.tool?.id,
+                  input: e.tool?.input,
+                  legal_domain: e.legal_domain,
+                  success: e.success,
+                  preview: e.preview ? tryParseJSON(e.preview) : undefined
+                }
+              };
+
+            case 'delta':
+            case 'content_delta':
+              return { ...base, data: { text_length: (e.text || e.delta?.text || '').length } };
+
+            case 'error':
+              return { ...base, data: { message: e.message || e.error } };
+
+            case 'final':
+              return { ...base, data: { sessionId: e.sessionId, model: e.model } };
+
+            default:
+              return { ...base, data: e };
+          }
+        });
+      }
+
+      // Export debug data (Thinking & Tools)
+      function exportDebugData() {
+        try {
+          if (eventLog.length === 0) {
+            alert('No debug data to export. Please run a research query first.');
+            return;
+          }
+
+          // Build structured export
+          const exportData = {
+            export_version: "2.0",
+            exported_at: new Date().toISOString(),
+            metadata: {
+              ...sessionMetadata,
+              endTime: Date.now(),
+              duration_ms: sessionMetadata.startTime ? Date.now() - sessionMetadata.startTime : null,
+              event_count: eventLog.length
+            },
+            transcript: buildTranscript(),
+            timeline: buildTimeline(),
+            raw_events: eventLog
+          };
+
+          // Download as JSON
+          const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Claude-Debug-${new Date().toISOString().split('T')[0]}-${Date.now()}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          addTimelineEvent({
+            kind: 'export',
+            title: 'Debug Data Exported',
+            tags: [{ text: 'success', style: 'ok' }],
+            subtitle: `${eventLog.length} events captured`
+          });
+        } catch (e) {
+          addTimelineEvent({
+            kind: 'export',
+            title: 'Debug Export Error',
+            tags: [{ text: 'error', style: 'err' }],
+            subtitle: e.message
+          });
+        }
+      }
+
+      async function callHealth() {
+        try {
+          const url = new URL('/health', FIXED_SERVER).toString();
+          const res = await fetch(url);
+          const j = await res.json();
+          addTimelineEvent({
+            kind: 'health',
+            title: 'Server Health',
+            tags: [{ text: j.ok ? 'ok' : 'not ok', style: j.ok ? 'ok' : 'warn' }],
+            body: renderKV(j)
+          });
+        } catch (e) {
+          addTimelineEvent({ kind: 'health', title: 'Health Error', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      // Load subagents from server
+      async function loadSubagents() {
+        try {
+          const res = await fetch(new URL('/api/subagents', FIXED_SERVER).toString());
+          const data = await res.json();
+          if (data.subagents && data.subagents.length > 0) {
+            subagentCount.textContent = data.count || data.subagents.length;
+            subagentsList.innerHTML = data.subagents.map(s => {
+              const desc = (s.description || '').split('\n')[0].slice(0, 60);
+              return `<span class="chip" title="${escapeHtml(s.description || s.name)}">
+                ${escapeHtml(s.name)} <span class="tag">${s.model || 'sonnet'}</span>
+              </span>`;
+            }).join('');
+          } else {
+            subagentsList.innerHTML = '<span class="chip" style="color:var(--subtle);">No subagents configured</span>';
+          }
+        } catch (e) {
+          console.warn('Failed to load subagents:', e);
+          subagentsList.innerHTML = '<span class="chip" style="color:var(--danger);">Failed to load</span>';
+        }
+      }
+
+      // Reports modal functions
+      async function loadReports() {
+        try {
+          reportsList.innerHTML = '<div class="card" style="color:var(--subtle);">Loading reports...</div>';
+          const res = await fetch(new URL('/api/reports', FIXED_SERVER).toString());
+          const data = await res.json();
+          if (data.reports && data.reports.length > 0) {
+            reportsList.innerHTML = data.reports.map(r => `
+              <div class="card">
+                <div class="card-title">${escapeHtml(r.name)}</div>
+                <div class="card-meta">
+                  ${new Date(r.modified).toLocaleString()} • ${(r.size / 1024).toFixed(1)}KB
+                </div>
+                <a href="${FIXED_SERVER}${r.url}" target="_blank" class="btn ghost" style="margin-top:8px;">View Report</a>
+              </div>
+            `).join('');
+          } else {
+            reportsList.innerHTML = '<div class="card" style="color:var(--subtle);">No reports saved yet. Run a research query to generate reports.</div>';
+          }
+        } catch (e) {
+          reportsList.innerHTML = `<div class="card" style="color:var(--danger);">Error loading reports: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      function openReportsModal() {
+        reportsModal.style.display = 'flex';
+        loadReports();
+      }
+
+      function closeReportsModal() {
+        reportsModal.style.display = 'none';
+      }
+
+      // Live document panel functions
+      function handleDocumentWrite(toolEvent) {
+        const tool = toolEvent.tool || {};
+        const input = tool.input || {};
+
+        // Only track writes to reports directory
+        if (tool.name !== 'Write' && tool.name !== 'Edit') return;
+        if (!input.file_path) return;
+
+        // Check if writing to reports or session directories
+        const isReportFile = input.file_path.includes('/reports/') ||
+                            input.file_path.includes('/sessions/') ||
+                            input.file_path.endsWith('.md');
+        if (!isReportFile) return;
+
+        const path = input.file_path;
+        let content = '';
+
+        if (tool.name === 'Write') {
+          content = input.content || '';
+        } else if (tool.name === 'Edit') {
+          // For Edit, apply the change to existing content
+          const existing = liveDocuments.get(path) || '';
+          if (input.old_string && input.new_string !== undefined) {
+            content = existing.replace(input.old_string, input.new_string);
+          } else {
+            content = existing;
+          }
+        }
+
+        liveDocuments.set(path, content);
+        updateLiveDocPanel(path, content);
+      }
+
+      function updateLiveDocPanel(path, content) {
+        // Show panel
+        liveDocPanel.style.display = 'flex';
+
+        // Update path
+        const filename = path.split('/').pop();
+        liveDocPath.textContent = filename;
+        liveDocPath.title = path;
+
+        // Render markdown content
+        liveDocContent.innerHTML = renderMarkdown(content);
+
+        // Enhance with footnotes
+        enhanceAssistantContent(liveDocContent, content);
+
+        // Update timestamp
+        liveDocTimestamp.textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+
+        // Auto-scroll to bottom
+        const scrollContainer = liveDocContent.parentElement;
+        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      }
+
+      function closeLiveDocPanel() {
+        liveDocPanel.style.display = 'none';
+      }
+
+      // Update active subagent indicator
+      function updateActiveSubagent(domain) {
+        const subagentMap = {
+          'Securities': 'securities-researcher',
+          'Case Law': 'case-law-analyst',
+          'FDA': 'pharma-regulatory',
+          'EPA': 'environmental',
+          'Patent': 'patent-analyst',
+          'Financial': 'financial-analyst',
+          'Bankruptcy': 'bankruptcy-analyst',
+          'PTAB': 'patent-analyst',
+          'CPSC': 'cpsc-analyst',
+          'NHTSA': 'nhtsa-analyst',
+          'FTC': 'ftc-analyst',
+          'General': 'general'
+        };
+        const subagent = subagentMap[domain] || domain;
+        activeSubagent.textContent = subagent;
+        activeSubagent.style.display = 'inline-flex';
+      }
+
+      function clearActiveSubagent() {
+        activeSubagent.style.display = 'none';
+      }
+
+      // AbortController for fetch POST streaming (large prompts)
+      let streamController = null;
+
+      async function openSSE() {
+        // Reset event log for new query
+        eventLog = [];
+        sessionMetadata = {
+          query: query.value.trim(),
+          serverUrl: FIXED_SERVER,
+          startTime: Date.now()
+        };
+
+        const base = FIXED_SERVER.replace(/\/$/, '');
+        const queryText = query.value.trim();
+        const sid = sessionIdInput.value.trim();
+
+        addUserBubble(queryText);
+        startAssistantBubble();
+        raw.textContent = '';
+
+        // Use fetch POST for large prompts (>4KB), EventSource for small
+        const useFetchPost = queryText.length > 4000;
+
+        if (useFetchPost) {
+          // Fetch POST for large prompts - no URL length limit
+          const url = `${base}/api/stream`;
+          addTimelineEvent({ kind: 'stream', title: 'Stream opened (POST)', subtitle: `${url} • ${queryText.length} chars`, tags: [{ text: 'SSE' }] });
+
+          streamController = new AbortController();
+
+          try {
+            console.log('[Stream] Starting POST fetch to:', url);
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ query: queryText, sessionId: sid || undefined }),
+              signal: streamController.signal
+            });
+
+            console.log('[Stream] Response received:', response.status, response.statusText);
+            console.log('[Stream] Response headers:', [...response.headers.entries()]);
+            console.log('[Stream] Response body exists:', !!response.body);
+            console.log('[Stream] Response body locked:', response.bodyUsed);
+
+            if (!response.ok) {
+              const errText = await response.text();
+              addTimelineEvent({ kind: 'error', title: 'Stream error', tags: [{ text: 'error', style: 'err' }], subtitle: `HTTP ${response.status}: ${errText}` });
+              setStreamingState(false);
+              return;
+            }
+
+            console.log('[Stream] Getting reader from response body...');
+            const reader = response.body.getReader();
+            console.log('[Stream] Reader obtained, starting read loop');
+            const decoder = new TextDecoder();
+            let buffer = '';
+
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                console.log('[Stream] Reader done, exiting loop');
+                break;
+              }
+
+              const chunk = decoder.decode(value, { stream: true });
+              buffer += chunk;
+              console.log('[Stream] Chunk received:', chunk.length, 'chars, buffer:', buffer.length, 'chars');
+
+              // SSE events are delimited by double newlines
+              const events = buffer.split('\n\n');
+              buffer = events.pop() || ''; // Keep incomplete event
+              console.log('[Stream] Found', events.length, 'complete events, buffer remaining:', buffer.length);
+
+              for (const event of events) {
+                if (!event.trim()) continue; // Skip empty
+
+                // Each event may have multiple lines (data:, event:, id:)
+                const lines = event.split('\n');
+                for (const line of lines) {
+                  if (line.startsWith('data: ')) {
+                    const jsonStr = line.slice(6);
+                    if (jsonStr.trim()) {
+                      try {
+                        const data = JSON.parse(jsonStr);
+                        console.log('[Stream] Parsed event:', data.type || data.kind || 'unknown');
+                        handleEvent(data);
+                      } catch (e) {
+                        console.warn('[Stream] Parse error:', e.message, 'JSON:', jsonStr.slice(0, 100));
+                      }
+                    }
+                  }
+                  // Ignore other SSE fields (event:, id:, retry:) and comments (:)
+                }
+              }
+            }
+
+            // Process remaining buffer
+            if (buffer.trim()) {
+              const lines = buffer.split('\n');
+              for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                  try {
+                    const data = JSON.parse(line.slice(6));
+                    handleEvent(data);
+                  } catch {}
+                }
+              }
+            }
+
+            // Stream completed successfully
+            streamController = null;
+            addTimelineEvent({ kind: 'stream', title: 'Stream complete', tags: [{ text: 'done' }] });
+            setStreamingState(false);
+
+          } catch (err) {
+            if (err.name === 'AbortError') {
+              addTimelineEvent({ kind: 'stream', title: 'Stream aborted', tags: [{ text: 'cancelled' }] });
+            } else {
+              addTimelineEvent({ kind: 'error', title: 'SSE error', tags: [{ text: 'error', style: 'err' }], subtitle: err.message || 'Check server logs' });
+            }
+            setStreamingState(false);
+          }
+
+        } else {
+          // EventSource for small prompts (original working implementation)
+          const q = encodeURIComponent(queryText);
+          const qs = sid ? `?query=${q}&sessionId=${encodeURIComponent(sid)}` : `?query=${q}`;
+          const url = `${base}/api/stream${qs}`;
+          addTimelineEvent({ kind: 'stream', title: 'Stream opened', subtitle: url, tags: [{ text: 'SSE' }] });
+
+          es = new EventSource(url);
+
+          es.onmessage = (evt) => {
+            let data = null;
+            try { data = JSON.parse(evt.data); } catch { return; }
+            handleEvent(data);
+          };
+
+          es.onerror = (err) => {
+            addTimelineEvent({ kind: 'error', title: 'SSE error', tags: [{ text: 'error', style: 'err' }], subtitle: 'Check server logs' });
+            setStreamingState(false);
+            try { es && es.close(); } catch {}
+          };
+        }
+      }
+
+      function closeSSE(reason) {
+        // Abort fetch stream if active
+        if (streamController) {
+          try { streamController.abort(); } catch {}
+          streamController = null;
+          addTimelineEvent({ kind: 'stream', title: 'Stream closed', subtitle: reason || '', tags: [{ text: 'closed' }] });
+        }
+        // Close EventSource if active
+        if (es) {
+          try { es.close(); } catch {}
+          es = null;
+          if (!streamController) { // Only add event if not already added by streamController
+            addTimelineEvent({ kind: 'stream', title: 'Stream closed', subtitle: reason || '', tags: [{ text: 'closed' }] });
+          }
+        }
+      }
+
+      function handleEvent(e) {
+        // Store event for debug export (with timestamp)
+        eventLog.push({
+          timestamp: Date.now(),
+          ...e
+        });
+
+        // Capture metadata from specific events
+        if (e.type === 'system_info') {
+          sessionMetadata.model = e.model;
+          sessionMetadata.features = e.features || e.capabilities;
+        }
+        if (e.type === 'final' && (e.session_id || e.sessionId)) {
+          sessionMetadata.sessionId = e.session_id || e.sessionId;
+        }
+        if (e.type === 'system_init' && (e.session_id || e.sessionId)) {
+          sessionMetadata.sessionId = e.session_id || e.sessionId;
+        }
+
+        addRaw(e);
+
+        // Robust type handling for both variants in server
+        const t = e.type;
+
+        // System info
+        if (t === 'system_info') {
+          addSystemBubble(e);
+          return;
+        }
+
+        // System init (Agent SDK) - capture session_id early
+        if (t === 'system_init') {
+          const sid = e.session_id || e.sessionId;
+          if (sid) {
+            sessionIdInput.value = sid;
+            ls.set('sessionId', sid);
+            console.log('[Session] Captured session_id from system_init:', sid);
+          }
+          addTimelineEvent({ kind: 'system', title: 'Session initialized', subtitle: `model=${e.model || ''} tools=${e.tools || 0}`, tags: [{ text: 'init' }] });
+          return;
+        }
+
+        // Thinking: may come as thinking_start/thinking_delta or wrapped
+        if (t === 'thinking' || t === 'thinking_start' || t === 'thinking_delta' || t === 'thinking_signature' || t === 'thinking_complete') {
+          const kind = t === 'thinking' && e.text ? 'thinking_delta' : t;
+          if (kind === 'thinking_start') {
+            currentThinkingBlock = document.createElement('div');
+            currentThinkingBlock.className = 'event';
+            currentThinkingBlock.innerHTML = `
+              <div class="meta"><span class="tag">thinking</span><strong>Strategy</strong><span style="flex:1"></span><span class="tag">start</span></div>
+              <div class="thinking mono" id="thinkBody"></div>
+            `;
+            timeline.appendChild(currentThinkingBlock);
+          } else if (kind === 'thinking_delta') {
+            if (!currentThinkingBlock) {
+              currentThinkingBlock = document.createElement('div');
+              currentThinkingBlock.className = 'event';
+              currentThinkingBlock.innerHTML = `
+                <div class="meta"><span class="tag">thinking</span><strong>Strategy</strong><span style="flex:1"></span><span class="tag">live</span></div>
+                <div class="thinking mono" id="thinkBody"></div>
+              `;
+              timeline.appendChild(currentThinkingBlock);
+            }
+            const body = currentThinkingBlock.querySelector('#thinkBody');
+            body.textContent += (e.text || e.thinking || '');
+          } else if (kind === 'thinking_signature') {
+            addTimelineEvent({ kind: 'thinking', title: 'Signature', subtitle: e.signature ? e.signature.slice(0, 18) + '…' : '', tags: [{ text: 'sig' }] });
+          } else if (kind === 'thinking_complete') {
+            addTimelineEvent({ kind: 'thinking', title: 'Thinking complete', tags: [{ text: 'done', style: 'ok' }], subtitle: (e.summary || '').toString() });
+          }
+          return;
+        }
+
+        // Tool calls: server emits { type: 'tool_call', phase: 'tool_start'|'tool_update'|'tool_execute'|'tool_result', ... }
+        if (t === 'tool_call') {
+          const phase = e.phase || 'update';
+          // Support both nested (e.tool.name) and legacy flat format (e.name)
+          const tool = e.tool || { name: e.name, id: e.id, input: e.input };
+
+          // Track live document writes (Write/Edit to reports or .md files)
+          if (phase === 'tool_start' || phase === 'tool_use') {
+            handleDocumentWrite(e);
+          }
+
+          if (phase === 'tool_start') {
+            const domain = e.legal_domain || 'General';
+
+            // Update active subagent indicator
+            if (domain && domain !== 'General') {
+              updateActiveSubagent(domain);
+            }
+
+            let bodyHtml = tool.input ? renderKV(tool.input) : '';
+            // Isolate compact start card only for search_courtlistener_opinions_web
+            if ((tool.name || '') === 'search_courtlistener_opinions_web') {
+              const q = tool.input && (tool.input.query || tool.input.original_query || '');
+              const lim = tool.input && (tool.input.limit != null ? String(tool.input.limit) : '');
+              bodyHtml = `<div class="mono">${escapeHtml(q)}${lim ? ` • limit=${escapeHtml(lim)}` : ''}</div>`;
+            }
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'} started`,
+              subtitle: `id=${tool.id || ''} • domain=${domain}`,
+              tags: [{ text: 'start' }],
+              body: bodyHtml
+            });
+          } else if (phase === 'tool_update') {
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'} arguments`,
+              tags: [{ text: 'args' }],
+              body: renderKV(tool.input || {})
+            });
+          } else if (phase === 'tool_execute') {
+            addTimelineEvent({ kind: 'tool', title: `${tool.name || 'tool'} executing`, tags: [{ text: 'execute', style: 'warn' }] });
+          } else if (phase === 'tool_result') {
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'} result`,
+              tags: [{ text: e.success ? 'ok' : 'error', style: e.success ? 'ok' : 'err' }],
+              body: renderPreview(e.preview)
+            });
+          } else if (phase === 'tool_use') {
+            // Complete tool call with full input - display the query/input
+            addTimelineEvent({
+              kind: 'tool',
+              title: `${tool.name || 'tool'}`,
+              subtitle: `id=${tool.id || ''}`,
+              tags: [{ text: 'tool_use' }],
+              body: tool.input ? renderKV(tool.input) : ''
+            });
+          } else if (phase === 'tool_input_streaming') {
+            // Streaming input delta - skip to avoid noise (full input comes in tool_use)
+            return;
+          } else {
+            addTimelineEvent({ kind: 'tool', title: `${tool.name || 'tool'} ${phase}`, tags: [{ text: phase }] });
+          }
+          return;
+        }
+
+        // Content deltas
+        if (t === 'delta' || t === 'content_delta') {
+          const txt = (e && (e.text ?? (e.delta && e.delta.text) ?? e.content ?? (e.delta && e.delta.content))) || '';
+          appendAssistantText(String(txt));
+          return;
+        }
+
+        // Progress events (may be wrapped or raw)
+        if (t === 'progress' || t === 'research_start' || t === 'research_complete' || t === 'usage_update' || t === 'heartbeat') {
+          const label = (t === 'progress' ? (e.type || 'progress') : t).replace(/_/g, ' ');
+          addTimelineEvent({ kind: 'progress', title: label, tags: [{ text: (e.model || e.tools_executed != null ? 'info' : 'tick') }], body: renderKV(e) });
+          return;
+        }
+
+        // Errors
+        if (t === 'error') {
+          addTimelineEvent({ kind: 'error', title: e.message || e.error || 'Error', tags: [{ text: 'error', style: 'err' }] });
+          return;
+        }
+
+        // Final
+        if (t === 'final') {
+          const sid = e.session_id || e.sessionId;
+          if (sid) {
+            sessionIdInput.value = sid;
+            ls.set('sessionId', sid);
+            console.log('[Session] Session ready for resumption:', sid);
+          }
+          addTimelineEvent({ kind: 'final', title: 'Completed', subtitle: e.model || e.enhanced_by || '', tags: [{ text: 'done', style: 'ok' }] });
+          setStreamingState(false);
+          closeSSE('final');
+          clearActiveSubagent(); // Clear the active subagent indicator
+          return;
+        }
+
+        // Unknown
+        addTimelineEvent({ kind: 'event', title: `Unknown: ${escapeHtml(String(t))}`, body: renderKV(e) });
+      }
+
+      // Pretty JSON key-value renderer with expand/collapse
+      function renderKV(obj) {
+        try {
+          if (obj == null) return '';
+          if (typeof obj !== 'object') {
+            return `<div class="kv"><div class="kv-row"><div class="kv-key">value<span class=kv-type>${typeof obj}</span></div><div class="kv-value">${escapeHtml(String(obj))}</div></div></div>`;
+          }
+          const rows = Object.entries(obj).map(([k, v]) => {
+            const t = Array.isArray(v) ? 'array' : typeof v;
+            if (Array.isArray(v)) {
+              const rendered = v.slice(0, 5).map((it) => {
+                if (typeof it === 'object' && it !== null) {
+                  return `<div class="kv-item">${renderKV(it)}</div>`;
+                }
+                return `<div class="kv-item">${escapeHtml(previewValue(it))}</div>`;
+              }).join('');
+              const more = v.length > 5 ? `<div class="kv-more">… +${v.length - 5} more</div>` : '';
+              return `<div class="kv-row"><div class="kv-key">${escapeHtml(k)}<span class=kv-type>${t}[${v.length}]</span></div><div class="kv-array"><div class="kv-list">${rendered}${more}</div></div></div>`;
+            }
+            if (t === 'object' && v !== null) {
+              const id = 'kv' + Math.random().toString(36).slice(2);
+              const inner = renderKV(v);
+              return `<div class="kv-row"><div class="kv-key">${escapeHtml(k)}<span class=kv-type>${t}</span></div><div class="kv-value-block" id="${id}" data-expanded="0"><div class="short mono">${escapeHtml(JSON.stringify(v, replacerShort, 2))}</div><div class="full">${inner}</div><span class="kv-more" onclick="(function(){ const n=document.getElementById('${id}'); n.setAttribute('data-expanded', n.getAttribute('data-expanded')==='1'?'0':'1'); })()">Toggle details</span></div></div>`;
+            }
+            return `<div class="kv-row"><div class="kv-key">${escapeHtml(k)}<span class=kv-type>${t}</span></div><div class="kv-value">${escapeHtml(previewValue(v))}</div></div>`;
+          }).join('');
+          return `<div class="kv">${rows}</div>`;
+        } catch {
+          return `<div class="json mono">${escapeHtml(JSON.stringify(obj, null, 2))}</div>`;
+        }
+      }
+
+      function replacerShort(key, value) {
+        if (typeof value === 'string' && value.length > 160) return value.slice(0, 157) + '…';
+        if (Array.isArray(value) && value.length > 5) return value.slice(0, 5).concat(['… +' + (value.length - 5) + ' more']);
+        return value;
+      }
+
+      function previewValue(v) {
+        if (v == null) return String(v);
+        if (typeof v === 'string') return v.length > 120 ? v.slice(0, 117) + '…' : v;
+        if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+        if (Array.isArray(v)) return `[${v.length} items]`;
+        if (typeof v === 'object') return JSON.stringify(v, replacerShort);
+        return String(v);
+      }
+
+      function renderPreview(preview) {
+        if (!preview) return '';
+        try {
+          const maybe = JSON.parse(preview);
+          // If this looks like a search results payload, render as cards
+          const cards = tryRenderSearchCards(maybe);
+          if (cards) return cards;
+          return renderKV(maybe);
+        } catch {
+          return `<div class="json mono">${escapeHtml(String(preview))}</div>`;
+        }
+      }
+
+      function tryRenderSearchCards(obj) {
+        try {
+          // Heuristics: array of result-like objects or object with results array
+          const results = Array.isArray(obj) ? obj : (Array.isArray(obj.results) ? obj.results : null);
+          if (!results || results.length === 0) return null;
+          // Check if items look like case results
+          const looksLikeCase = (r) => typeof r === 'object' && (r.case_name || r.title || r.name) && (r.absolute_url || r.url || r.link);
+          const subset = results.filter(looksLikeCase).slice(0, 10);
+          if (subset.length === 0) return null;
+          const html = subset.map((r) => {
+            const title = r.case_name || r.title || r.name || 'Case';
+            const url = r.absolute_url || r.url || r.link || '';
+            const id = r.id != null ? `#${r.id}` : '';
+            const court = r.court || r.jurisdiction || '';
+            const date = r.date_filed || r.date || '';
+            return `<div class="card">
+              <div class="card-title">${escapeHtml(title)}</div>
+              <div class="card-meta">${escapeHtml([id, court, date].filter(Boolean).join(' • '))}</div>
+              ${url ? `<div><a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open</a></div>` : ''}
+            </div>`;
+          }).join('');
+          return `<div class="cards">${html}</div>`;
+        } catch {
+          return null;
+        }
+      }
+
+      async function nonStreaming() {
+        try {
+          addUserBubble(query.value.trim());
+          addTimelineEvent({ kind: 'request', title: 'POST /api/research' });
+          const res = await fetch(new URL('/api/research', FIXED_SERVER).toString(), {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: query.value.trim(), sessionId: sessionIdInput.value.trim() || undefined })
+          });
+          const j = await res.json();
+          startAssistantBubble();
+          appendAssistantText(j.text || '');
+          addTimelineEvent({ kind: 'response', title: 'Non-streaming complete', tags: [{ text: 'ok', style: 'ok' }], body: renderKV(j) });
+          if (j.sessionId) { sessionIdInput.value = j.sessionId; ls.set('sessionId', j.sessionId); }
+        } catch (e) {
+          addTimelineEvent({ kind: 'error', title: 'Non-streaming error', tags: [{ text: 'error', style: 'err' }], subtitle: e.message });
+        }
+      }
+
+      async function createSession() {
+        // Session management not available in SDK mode (requires Supabase)
+        addTimelineEvent({ kind: 'session', title: 'Session management unavailable', subtitle: 'SDK server does not support sessions', tags: [{ text: 'info', style: 'warn' }] });
+      }
+
+      async function getSession() {
+        // Session management not available in SDK mode (requires Supabase)
+        addTimelineEvent({ kind: 'session', title: 'Session management unavailable', subtitle: 'SDK server does not support sessions', tags: [{ text: 'info', style: 'warn' }] });
+      }
+
+      async function deleteSession() {
+        // Session management not available in SDK mode (requires Supabase)
+        addTimelineEvent({ kind: 'session', title: 'Session management unavailable', subtitle: 'SDK server does not support sessions', tags: [{ text: 'info', style: 'warn' }] });
+      }
+
+      // Wire up controls
+      btnStream.addEventListener('click', () => {
+        if (!query.value.trim()) return;
+        setStreamingState(true);
+        openSSE();
+      });
+      btnStop.addEventListener('click', () => { setStreamingState(false); closeSSE('manual'); });
+      btnNonStream.addEventListener('click', nonStreaming);
+      composerSendStream.addEventListener('click', () => {
+        const text = composer.value.trim();
+        if (!text) return;
+        query.value = text;
+        btnStream.click();
+      });
+      composerSendNonStream.addEventListener('click', () => {
+        const text = composer.value.trim();
+        if (!text) return;
+        query.value = text;
+        btnNonStream.click();
+      });
+      composer.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          const text = composer.value.trim();
+          if (!text) return;
+          query.value = text;
+          btnStream.click();
+        }
+      });
+      btnClear.addEventListener('click', () => { feed.innerHTML = ''; timeline.innerHTML = ''; raw.textContent = ''; currentAssistantBubble = null; currentThinkingBlock = null; assistantTextBuffer = ''; eventLog = []; sessionMetadata = {}; sessionIdInput.value = ''; ls.remove('sessionId'); liveDocuments.clear(); closeLiveDocPanel(); clearActiveSubagent(); });
+      btnHealth.addEventListener('click', callHealth);
+      btnExport.addEventListener('click', exportLegalDocument);
+      btnExportDebug.addEventListener('click', exportDebugData);
+      btnCreateSession.addEventListener('click', createSession);
+      btnGetSession.addEventListener('click', getSession);
+      btnDeleteSession.addEventListener('click', deleteSession);
+
+      // New button handlers
+      btnReports.addEventListener('click', openReportsModal);
+      btnCloseReports.addEventListener('click', closeReportsModal);
+      btnRefreshReports.addEventListener('click', loadReports);
+      btnCloseLiveDoc.addEventListener('click', closeLiveDocPanel);
+
+      // Close modal on backdrop click
+      reportsModal.addEventListener('click', (e) => {
+        if (e.target === reportsModal) closeReportsModal();
+      });
+
+      // Load subagents on page load
+      loadSubagents();
+
+      // Keyboard: Esc to stop
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && started) { btnStop.click(); } });
+    })();
+  </script>
+</body>
+</html>
+
+
+
+ <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Legal Research – Streamlined Chat</title>
+  <style>
+    :root {
+      --bg-primary: #0f1419;
+      --bg-secondary: #1a1f26;
+      --surface: #222831;
+      --surface-hover: #2a303a;
+      --border: #363c48;
+      --border-light: #4a5568;
+      
+      --text-primary: #f7fafc;
+      --text-secondary: #e2e8f0;
+      --text-muted: #cbd5e1;
+      --text-subtle: #94a3b8;
+      
+      --user: #3b82f6;
+      --assistant: #10b981;
+      --thinking: #8b5cf6;
+      --tool: #f59e0b;
+      --system: #64748b;
+      
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      
+      --radius: 12px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    
+    body {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      height: 60px;
+      background: rgba(34, 40, 49, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      background: var(--surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-light);
+      color: var(--text-secondary);
+    }
+
+    /* Main Chat Container */
+    .chat-container {
+      height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      margin-bottom: 24px;
+      animation: messageSlide 0.3s ease-out;
+    }
+
+    @keyframes messageSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .avatar.user { background: linear-gradient(135deg, var(--user) 0%, #2563eb 100%); }
+    .avatar.assistant { background: linear-gradient(135deg, var(--assistant) 0%, #059669 100%); }
+    .avatar.thinking { background: linear-gradient(135deg, var(--thinking) 0%, #7c3aed 100%); }
+    .avatar.tool { background: linear-gradient(135deg, var(--tool) 0%, #d97706 100%); }
+    .avatar.system { background: linear-gradient(135deg, var(--system) 0%, #475569 100%); }
+
+    .message-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .message-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .message-time {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .message-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message.user .message-content {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .message.assistant .message-content {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .message.thinking .message-content {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+      border-color: rgba(139, 92, 246, 0.2);
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.tool .message-content {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    .message.system .message-content {
+      background: linear-gradient(135deg, rgba(100, 116, 139, 0.1) 0%, rgba(71, 85, 105, 0.05) 100%);
+      border-color: rgba(100, 116, 139, 0.2);
+      font-size: 14px;
+    }
+
+    /* Thinking Content */
+    .thinking-text {
+      white-space: pre-wrap;
+      color: var(--text-secondary);
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    /* Tool Content */
+    .tool-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tool-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--tool);
+    }
+
+    .tool-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-indicator.executing {
+      background: var(--warning);
+      animation: pulse 1s infinite;
+    }
+
+    .status-indicator.success {
+      background: var(--success);
+    }
+
+    .status-indicator.error {
+      background: var(--error);
+    }
+
+    .tool-details {
+      margin-top: 16px;
+    }
+
+    .tool-section {
+      margin-bottom: 16px;
+    }
+
+    .tool-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tool-params {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      color: var(--text-secondary);
+      overflow-x: auto;
+    }
+
+    .tool-result {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-height: 200px;
+      overflow-y: auto;
+      line-height: 1.4;
+    }
+
+    /* Collapsible Process Summary */
+    .process-summary {
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .process-header {
+      background: var(--surface-hover);
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s ease;
+    }
+
+    .process-header:hover {
+      background: var(--surface);
+    }
+
+    .process-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .process-toggle {
+      font-size: 12px;
+      color: var(--text-subtle);
+      transition: transform 0.2s ease;
+    }
+
+    .process-toggle.expanded {
+      transform: rotate(180deg);
+    }
+
+    .process-content {
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .process-content.expanded {
+      display: block;
+    }
+
+    .process-step {
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      font-size: 13px;
+      border-left: 3px solid var(--text-subtle);
+    }
+
+    .process-step.thinking {
+      border-left-color: var(--thinking);
+    }
+
+    .process-step.tool {
+      border-left-color: var(--tool);
+    }
+
+    /* Assistant Response */
+    .response-content {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .response-content h1,
+    .response-content h2,
+    .response-content h3,
+    .response-content h4 {
+      margin: 20px 0 12px 0;
+      line-height: 1.3;
+      color: var(--text-primary);
+    }
+
+    .response-content h2 {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .response-content p {
+      margin: 12px 0;
+    }
+
+    .response-content strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .response-content ul,
+    .response-content ol {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .response-content li {
+      margin: 6px 0;
+    }
+
+    /* Input Area */
+    .input-area {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      bottom: 0;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .input-field {
+      flex: 1;
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-family: inherit;
+      line-height: 1.4;
+      min-height: 48px;
+      max-height: 120px;
+      resize: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--user);
+    }
+
+    .input-field::placeholder {
+      color: var(--text-subtle);
+    }
+
+    .send-btn {
+      background: linear-gradient(135deg, var(--user) 0%, #2563eb 100%);
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: 12px 24px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 100px;
+      justify-content: center;
+    }
+
+    .send-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px -8px var(--user);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-light);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-subtle);
+    }
+
+    /* Settings Panel (Hidden by default) */
+    .settings-panel {
+      position: fixed;
+      top: 60px;
+      right: -400px;
+      width: 380px;
+      height: calc(100vh - 60px);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      transition: right 0.3s ease;
+      z-index: 90;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .settings-panel.open {
+      right: 0;
+    }
+
+    .settings-section {
+      margin-bottom: 24px;
+    }
+
+    .settings-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--user);
+    }
+
+    .form-textarea {
+      min-height: 80px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    .empty-text {
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .chat-container {
+        max-width: none;
+      }
+      
+      .messages-area {
+        padding: 16px;
+      }
+      
+      .input-area {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="status-dot"></div>
+      <span>Claude Legal Research</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn" id="toggleSettings">Settings</button>
+      <button class="btn" id="btnHealth">Health</button>
+    </div>
+  </header>
+
+  <div class="chat-container">
+    <div class="messages-area" id="messagesArea">
+      <div class="empty-state">
+        <div class="empty-icon">⚖️</div>
+        <h2 class="empty-title">Legal Research Assistant</h2>
+        <p class="empty-text">
+          Ask comprehensive legal questions and watch Claude's research process unfold in real-time. 
+          All thinking, tool execution, and analysis will be shown transparently.
+        </p>
+      </div>
+    </div>
+    
+    <div class="input-area">
+      <div class="input-container">
+        <textarea 
+          class="input-field" 
+          id="messageInput" 
+          placeholder="Ask a legal research question..."
+          rows="1"
+        ></textarea>
+        <button class="send-btn" id="sendButton">
+          <span id="sendText">Research</span>
+          <div class="spinner" id="sendSpinner" style="display: none;"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+

@@ -1,0 +1,545 @@
+/**
+ * BaseWebSearchClient - Standardized Exa Configuration & Highlights Processing
+ * Provides unified configuration and quality assessment for all WebSearchClients
+ */
+
+import { SearchQualityMixin } from './SearchQualityMixin.js';
+
+export class BaseWebSearchClient extends SearchQualityMixin {
+  constructor(rateLimiter, exaApiKey) {
+    super();
+    this.rateLimiter = rateLimiter;
+    this.exaApiKey = exaApiKey || process.env.EXA_API_KEY;
+    
+    if (!this.exaApiKey) {
+      console.warn('EXA_API_KEY not configured. Web search functionality will be limited.');
+    }
+
+    // Domain-specific highlight queries - Enhanced with comprehensive legal terms
+    this.highlightQueries = {
+      // Core legal domains with expanded context terms
+      case_law: 'holding precedent citation court judge opinion dissent concurrence reversed affirmed decision ruling ' +
+                'remanded vacated en banc certiorari jurisdiction standing summary judgment motion dismiss preliminary injunction ' +
+                'class action damages relief remedy',
+
+      securities: 'revenue net income earnings assets liabilities cash flow EBITDA fiscal year quarterly annual ' +
+                  'financial results 10-K 10-Q 8-K proxy statement material adverse change going concern audit opinion ' +
+                  'restatement insider trading disclosure',
+
+      patent: 'patent claims prior art inventor examiner filing date priority invalidity obviousness PTAB proceeding ' +
+              'continuation prosecution history doctrine equivalents infringement willful treble damages licensing royalty',
+
+      // Additional legal domains for cross-cutting searches
+      bankruptcy: 'chapter 7 chapter 11 chapter 13 liquidation reorganization debtor creditor automatic stay discharge ' +
+                  'plan confirmation priority claim secured unsecured administrative expense trustee DIP financing cram down',
+
+      employment: 'discrimination harassment retaliation EEOC Title VII ADA FLSA overtime exempt non-exempt wrongful ' +
+                  'termination hostile work environment reasonable accommodation collective bargaining NLRB',
+
+      intellectual_property: 'copyright trademark trade secret fair use dilution likelihood confusion distinctiveness ' +
+                            'secondary meaning first sale doctrine DMCA takedown',
+
+      // Procedural and transactional domains
+      procedural: 'statute limitations discovery deposition interrogatory subpoena motion limine ' +
+                  'voir dire expert witness Daubert Frye admissible hearsay privilege work product ' +
+                  'protective order summary judgment default judgment appeal brief oral argument amicus curiae',
+
+      transactional: 'merger acquisition due diligence earnout escrow indemnification representations warranties ' +
+                     'material adverse effect closing conditions regulatory approval HSR covenant breach cure period ' +
+                     'definitive agreement LOI term sheet',
+
+      // Existing domains (unchanged)
+      environmental: 'compliance status violations penalties enforcement noncompliance quarters facility emissions permit NPDES',
+      pharmaceutical_safety: 'adverse events warnings contraindications recall death serious hospitalization drug device safety risk black box FDA approval',
+      antitrust: 'antitrust merger enforcement FTC complaint consent decree Hart Scott Rodino competition',
+      automotive: 'recall defect NHTSA safety investigation campaign remedy',
+      product_safety: 'recall hazard injury CPSC safety defect consumer product',
+      regulatory: 'federal register rule regulation CFR USC agency enforcement guidance',
+      state_law: 'statute code section amendment legislative session governor signed'
+    };
+  }
+
+  /**
+   * Standardized Exa search execution with highlights optimization
+   * @param {string} query - Search query
+   * @param {number} limit - Result limit
+   * @param {Object} options - Search options
+   * @returns {Promise<Array>} Processed search results
+   */
+  async executeExaSearch(query, limit, options = {}) {
+    if (!this.exaApiKey) {
+      // DEFENSIVE ERROR HANDLING - Returns empty array for graceful degradation
+      // To disable for debugging: Change the next 2 lines to: throw new Error('Exa API key not configured. Set EXA_API_KEY environment variable.');
+      console.error('Exa API key not configured. Set EXA_API_KEY environment variable.');
+      return []; // Return empty results for graceful degradation
+    }
+
+    if (this.rateLimiter && typeof this.rateLimiter.enforce === 'function') {
+      await this.rateLimiter.enforce();
+    }
+
+    const {
+      domain,
+      highlightQuery,
+      numSentences = 7,
+      highlightsPerUrl = 2,
+      includeDomains,
+      includeFullText = false,
+      fallbackToText = true
+    } = options;
+
+    // Generate optimized highlight query
+    const optimizedHighlightQuery = this.generateHighlightQuery(
+      highlightQuery, 
+      query, 
+      domain
+    );
+
+    // Configure content extraction
+    let contents;
+    if (includeFullText) {
+      contents = { text: true };
+    } else {
+      contents = {
+        highlights: {
+          query: optimizedHighlightQuery,
+          numSentences: numSentences,
+          highlightsPerUrl: highlightsPerUrl
+        }
+      };
+    }
+
+    const requestBody = {
+      query,
+      numResults: limit,
+      type: 'auto',
+      livecrawl: 'always',
+      contents
+    };
+
+    if (includeDomains) {
+      requestBody.includeDomains = includeDomains;
+    }
+
+    try {
+      const response = await fetch('https://api.exa.ai/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'x-api-key': this.exaApiKey
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Exa API error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      const results = data.results || [];
+
+      // Assess highlight quality and potentially fallback
+      const qualityAssessment = await this.assessHighlightQuality(
+        results, 
+        query, 
+        optimizedHighlightQuery
+      );
+
+      // If highlights are insufficient and fallback is enabled, retry with full text
+      if (qualityAssessment.needsFallback && fallbackToText && !includeFullText) {
+        console.log(`🔄 Highlight quality insufficient (${qualityAssessment.confidence}), falling back to full text`);
+        
+        return this.executeExaSearch(query, limit, {
+          ...options,
+          includeFullText: true,
+          fallbackToText: false // Prevent infinite recursion
+        });
+      }
+
+      // Add quality metadata to results
+      return results.map(result => ({
+        ...result,
+        _highlight_quality: {
+          confidence: qualityAssessment.confidence,
+          coverage: qualityAssessment.coverage,
+          relevance: qualityAssessment.relevance,
+          extraction_method: includeFullText ? 'full_text' : 'highlights'
+        }
+      }));
+
+    } catch (error) {
+      console.error('Exa API request failed:', error);
+      // DEFENSIVE ERROR HANDLING - Returns empty array for graceful degradation
+      // To disable for debugging: Change the next line to: throw error;
+      return []; // Return empty results for graceful degradation
+    }
+  }
+
+  /**
+   * Generate optimized highlight query based on domain and context
+   * @param {string} customQuery - Custom highlight query
+   * @param {string} originalQuery - Original search query  
+   * @param {string} domain - Domain type
+   * @returns {string} Optimized highlight query
+   */
+  generateHighlightQuery(customQuery, originalQuery, domain) {
+    if (customQuery) {
+      return customQuery;
+    }
+
+    // Use domain-specific query if available
+    if (domain && this.highlightQueries[domain]) {
+      return this.highlightQueries[domain];
+    }
+
+    // Extract key terms from original query for dynamic highlighting
+    const queryTerms = originalQuery
+      .toLowerCase()
+      .replace(/[^\w\s]/g, ' ')
+      .split(/\s+/)
+      .filter(term => term.length > 3)
+      .slice(0, 10)
+      .join(' ');
+
+    return queryTerms || originalQuery;
+  }
+
+  /**
+   * Assess the quality of highlight results
+   * @param {Array} results - Exa search results
+   * @param {string} originalQuery - Original search query
+   * @param {string} highlightQuery - Highlight query used
+   * @returns {Object} Quality assessment
+   */
+  async assessHighlightQuality(results, originalQuery, highlightQuery) {
+    if (!results || results.length === 0) {
+      return {
+        confidence: 0,
+        coverage: 'none',
+        relevance: 'low',
+        needsFallback: true,
+        issues: ['No results returned']
+      };
+    }
+
+    const issues = [];
+    let totalHighlights = 0;
+    let significantHighlights = 0;
+    let relevantResults = 0;
+
+    for (const result of results) {
+      const highlights = result.highlights;
+      
+      if (!highlights || highlights.length === 0) {
+        issues.push('Missing highlights in some results');
+        continue;
+      }
+
+      totalHighlights += highlights.length;
+
+      // Check for substantial content in highlights
+      const substantialHighlights = highlights.filter(h => 
+        h && h.length > 50 && this.containsRelevantTerms(h, originalQuery)
+      );
+      
+      significantHighlights += substantialHighlights.length;
+      
+      if (substantialHighlights.length > 0) {
+        relevantResults++;
+      }
+    }
+
+    // Calculate metrics
+    const avgHighlightsPerResult = totalHighlights / results.length;
+    const relevanceRatio = relevantResults / results.length;
+    const qualityRatio = significantHighlights / Math.max(totalHighlights, 1);
+
+    // Determine confidence score
+    let confidence = 0;
+    if (avgHighlightsPerResult >= 1) confidence += 0.3;
+    if (relevanceRatio >= 0.6) confidence += 0.4;
+    if (qualityRatio >= 0.5) confidence += 0.3;
+
+    // Determine coverage
+    let coverage = 'minimal';
+    if (relevanceRatio >= 0.8) coverage = 'complete';
+    else if (relevanceRatio >= 0.6) coverage = 'substantial';
+    else if (relevanceRatio >= 0.3) coverage = 'partial';
+
+    // Determine relevance
+    let relevance = 'low';
+    if (qualityRatio >= 0.7) relevance = 'high';
+    else if (qualityRatio >= 0.4) relevance = 'medium';
+
+    const needsFallback = confidence < 0.5 || relevanceRatio < 0.3;
+
+    return {
+      confidence: Math.round(confidence * 100) / 100,
+      coverage,
+      relevance,
+      needsFallback,
+      metrics: {
+        totalResults: results.length,
+        relevantResults,
+        avgHighlightsPerResult: Math.round(avgHighlightsPerResult * 10) / 10,
+        relevanceRatio: Math.round(relevanceRatio * 100) / 100,
+        qualityRatio: Math.round(qualityRatio * 100) / 100
+      },
+      issues: issues.length > 0 ? issues : null
+    };
+  }
+
+  /**
+   * Check if text contains relevant terms from the query
+   * @param {string} text - Text to analyze
+   * @param {string} query - Original query
+   * @returns {boolean} Whether text is relevant
+   */
+  containsRelevantTerms(text, query) {
+    if (!text || !query) return false;
+
+    const queryTerms = query
+      .toLowerCase()
+      .replace(/[^\w\s]/g, ' ')
+      .split(/\s+/)
+      .filter(term => term.length > 3);
+
+    const textLower = text.toLowerCase();
+    
+    // Check if at least 30% of significant query terms appear in text
+    const matchingTerms = queryTerms.filter(term => textLower.includes(term));
+    return matchingTerms.length >= Math.max(1, queryTerms.length * 0.3);
+  }
+
+  /**
+   * Extract structured data from highlights using AI understanding
+   * @param {Array} results - Results with highlights
+   * @param {string} dataType - Type of data to extract
+   * @param {Object} options - Extraction options
+   * @returns {Array} Extracted structured data
+   */
+  extractStructuredDataFromHighlights(results, dataType, options = {}) {
+    const extractedData = [];
+
+    for (const result of results) {
+      const highlights = result.highlights || [];
+      const url = result.url;
+
+      for (const highlight of highlights) {
+        if (!highlight || highlight.length < 20) continue;
+
+        const structuredItem = this.extractDataFromText(
+          highlight, 
+          dataType, 
+          { ...options, sourceUrl: url }
+        );
+
+        if (structuredItem) {
+          extractedData.push(structuredItem);
+        }
+      }
+    }
+
+    return extractedData;
+  }
+
+  /**
+   * Extract specific data types from text using context clues
+   * @param {string} text - Text to extract from
+   * @param {string} dataType - Type of data
+   * @param {Object} options - Options
+   * @returns {Object|null} Extracted data
+   */
+  extractDataFromText(text, dataType, options = {}) {
+    // This method should be overridden by specific clients
+    // but provides basic extraction capabilities
+    
+    const baseData = {
+      source_text: text,
+      source_url: options.sourceUrl,
+      extraction_confidence: this.calculateExtractionConfidence(text, dataType)
+    };
+
+    switch (dataType) {
+      case 'monetary_value':
+        return this.extractMonetaryValue(text, baseData);
+      case 'date':
+        return this.extractDate(text, baseData);
+      case 'citation':
+        return this.extractCitation(text, baseData);
+      default:
+        return { ...baseData, value: text.slice(0, 500) };
+    }
+  }
+
+  /**
+   * Calculate confidence in data extraction
+   * @param {string} text - Source text
+   * @param {string} dataType - Data type
+   * @returns {number} Confidence score
+   */
+  calculateExtractionConfidence(text, dataType) {
+    let confidence = 0.5; // Base confidence
+
+    // Increase confidence for longer, more specific text
+    if (text.length > 100) confidence += 0.1;
+    if (text.length > 200) confidence += 0.1;
+
+    // Increase confidence for structured-looking content
+    if (/\d{4}-\d{2}-\d{2}/.test(text)) confidence += 0.1; // Dates
+    if (/\$[\d,]+/.test(text)) confidence += 0.1; // Money
+    if (/\b\d+\s+[A-Z][\w.]+\s+\d+\b/.test(text)) confidence += 0.1; // Citations
+
+    return Math.min(confidence, 1.0);
+  }
+
+  /**
+   * Smart snippet extraction prioritizing relevant content
+   * @param {Array} results - Search results with highlights
+   * @param {number} maxLength - Maximum snippet length
+   * @returns {string} Extracted snippet
+   */
+  extractSmartSnippetFromHighlights(results, maxLength = 800) {
+    const relevantHighlights = [];
+
+    for (const result of results) {
+      const highlights = result.highlights || [];
+      
+      for (const highlight of highlights) {
+        if (highlight && highlight.length > 30) {
+          relevantHighlights.push({
+            text: highlight,
+            relevanceScore: this.calculateRelevanceScore(highlight),
+            source: result.url
+          });
+        }
+      }
+    }
+
+    // Sort by relevance and combine top highlights
+    relevantHighlights.sort((a, b) => b.relevanceScore - a.relevanceScore);
+    
+    let snippet = '';
+    let remainingLength = maxLength;
+
+    for (const highlight of relevantHighlights) {
+      if (remainingLength <= 0) break;
+
+      const textToAdd = highlight.text.length <= remainingLength 
+        ? highlight.text 
+        : highlight.text.substring(0, remainingLength - 3) + '...';
+
+      snippet += (snippet ? ' ... ' : '') + textToAdd;
+      remainingLength -= textToAdd.length + 5; // Account for separator
+    }
+
+    return snippet;
+  }
+
+  /**
+   * Calculate relevance score for a highlight
+   * @param {string} text - Highlight text
+   * @returns {number} Relevance score
+   */
+  calculateRelevanceScore(text) {
+    let score = 0;
+
+    // Length score (longer is generally better, but diminishing returns)
+    score += Math.min(text.length / 100, 5);
+
+    // Information density (numbers, specific terms)
+    const numbers = (text.match(/\d+/g) || []).length;
+    score += numbers * 0.5;
+
+    const capitalizedWords = (text.match(/\b[A-Z][a-z]+\b/g) || []).length;
+    score += capitalizedWords * 0.2;
+
+    // Penalize very generic text
+    if (/^(the|this|that|and|or|but|in|on|at|to|for|of|with|by)\s+/i.test(text)) {
+      score -= 2;
+    }
+
+    return Math.max(score, 0);
+  }
+
+  // Basic extraction methods that can be overridden by specific clients
+  extractMonetaryValue(text, baseData) {
+    // First try standard monetary formats
+    const moneyMatch = text.match(/\$?([\d,]+(?:\.\d{2})?)\s*(million|billion|thousand|M|B|K)?/i);
+    if (moneyMatch) {
+      let value = parseFloat(moneyMatch[1].replace(/,/g, ''));
+      const unit = moneyMatch[2];
+
+      if (unit && /million|M/i.test(unit)) value *= 1000000;
+      if (unit && /billion|B/i.test(unit)) value *= 1000000000;
+      if (unit && /thousand|K/i.test(unit)) value *= 1000;
+
+      // Check for malformed concatenated values and fix them
+      if (value > 1e15) {
+        // Likely concatenated data, try to extract first valid number
+        const valueStr = value.toString();
+        const match = valueStr.match(/^(\d{1,12})/);
+        if (match) {
+          value = parseFloat(match[1]);
+        }
+      }
+
+      return {
+        ...baseData,
+        value: value,
+        formatted_value: moneyMatch[0],
+        currency: 'USD'
+      };
+    }
+
+    // Try to extract large numbers that might be financial values
+    const largeNumberMatch = text.match(/(\d{1,15})/);
+    if (largeNumberMatch) {
+      let value = parseFloat(largeNumberMatch[1]);
+
+      // Check for malformed concatenated values
+      if (value > 1e15) {
+        const valueStr = value.toString();
+        const match = valueStr.match(/^(\d{1,12})/);
+        if (match) {
+          value = parseFloat(match[1]);
+        }
+      }
+
+      return {
+        ...baseData,
+        value: value,
+        formatted_value: largeNumberMatch[0],
+        currency: 'USD'
+      };
+    }
+
+    return null;
+  }
+
+  extractDate(text, baseData) {
+    const dateMatch = text.match(/(\d{4}-\d{2}-\d{2}|\d{1,2}\/\d{1,2}\/\d{4}|[A-Za-z]+ \d{1,2}, \d{4})/);
+    if (dateMatch) {
+      return {
+        ...baseData,
+        value: dateMatch[1],
+        parsed_date: new Date(dateMatch[1]).toISOString().split('T')[0]
+      };
+    }
+    return null;
+  }
+
+  extractCitation(text, baseData) {
+    const citationMatch = text.match(/(\d+\s+[A-Z][\w.]+\s+\d+)/);
+    if (citationMatch) {
+      return {
+        ...baseData,
+        value: citationMatch[1],
+        citation_type: 'case_law'
+      };
+    }
+    return null;
+  }
+}

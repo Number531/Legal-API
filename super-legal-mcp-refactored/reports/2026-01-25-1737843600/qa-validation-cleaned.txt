@@ -1,0 +1,25 @@
+
+============================================================
+PRE-QA VALIDATION RESULTS
+============================================================
+File: final-memorandum-v2-cleaned.md
+------------------------------------------------------------
+❌ CREAC Headers: 23 (threshold: >= 50)
+   Fix: Run apply-creac-headers.py for initial headers, then agent validates and enhances to complete CREAC structure
+✅ Provision Coverage: 100.0% (threshold: >= 100.0%)
+✅ Exec Summary Words: 721 (threshold: <= 3500)
+❌ Placeholders: 1 (threshold: <= 0)
+   Fix: Remove 1 placeholder(s): $[TBD - typical range $500,000 - $1,000,000 if included, or $0 if excluded - to be confirmed in data room]
+   Examples: ['$[TBD - typical range $500,000 - $1,000,000 if included, or $0 if excluded - to be confirmed in data room]']
+⚠️ Citation Tag Coverage: 6.5% (threshold: >= 90.0%)
+   Fix: Agent validates script output and enhances with verification tags [VERIFIED:/INFERRED:/ASSUMED:/METHODOLOGY:]
+✅ HIGH Severity Verified: 0 unverified (threshold: 0 unverified)
+⚠️ Fact Conflicts: 24 (threshold: <= 0)
+   Details: 24 fact conflict(s) detected
+   Fix: See fact-registry.json for conflict resolution
+⚠️ Risk Table Completeness: 53.3% (threshold: >= 100.0%)
+   Details: 12 deal-blocking risk(s) identified
+   Fix: See risk-summary.json for incomplete tables
+------------------------------------------------------------
+❌ 2 BLOCKING ISSUE(S) - Remediation required before QA
+============================================================

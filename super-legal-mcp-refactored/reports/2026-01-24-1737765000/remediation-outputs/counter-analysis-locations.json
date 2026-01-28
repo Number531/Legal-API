@@ -1,0 +1,504 @@
+{
+  "metadata": {
+    "input_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-24-1737765000/remediation-outputs/W3-001-VALIDATE-creac-review.md",
+    "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-24-1737765000/remediation-outputs/counter-analysis-locations.json",
+    "total_sections": 32,
+    "total_detections": 11,
+    "sections_with_ca_headers": 0,
+    "locations_to_move": 10
+  },
+  "sections_summary": {
+    "IV.T": {
+      "title": "ransaction Structure Assumptions",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.I": {
+      "title": "nformation Sources",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.A": {
+      "title": "I-Generated Content Disclaimer",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.B": {
+      "title": "Critical Assumptions",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.C": {
+      "title": "Data Quality and Verification",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.D": {
+      "title": "Methodological Limitations",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.E": {
+      "title": "Document Limitations and Disclaimers",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.F": {
+      "title": "act Registry Conflicts Resolved",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.G": {
+      "title": "lobal Footnote 374 (Section IV.D, Original #87)",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.H": {
+      "title": "ard Gate Checks",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.S": {
+      "title": "TARK Law / Anti-Kickback Statute",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.P": {
+      "title": "robability Assessments",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.R": {
+      "title": "egulatory and Market Flux",
+      "has_counter_analysis_header": false,
+      "detections": 1,
+      "to_move": 0
+    },
+    "IV.B.1": {
+      "title": "Cyber Insurance Limits Inadequacy for HIPAA Ransomware Breach",
+      "has_counter_analysis_header": false,
+      "detections": 1,
+      "to_move": 1
+    },
+    "IV.B.2": {
+      "title": "D&O Fines/Penalties Exclusion\u2014STARK/AKS Settlement Uninsured",
+      "has_counter_analysis_header": false,
+      "detections": 2,
+      "to_move": 2
+    },
+    "IV.B.3": {
+      "title": "Medical Professional Liability Tail Coverage Requirement\u2014$4.5M-$15M Seller Obligation",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.E.1": {
+      "title": "Immediate Actions Required",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.E.2": {
+      "title": "Draft Contract Language",
+      "has_counter_analysis_header": false,
+      "detections": 3,
+      "to_move": 3
+    },
+    "IV.E.3": {
+      "title": "Pre-Closing Conditions",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.E.4": {
+      "title": "Counter-Party Response Anticipation (TIER 3 ENHANCEMENT)",
+      "has_counter_analysis_header": false,
+      "detections": 3,
+      "to_move": 3
+    },
+    "IV.B.4": {
+      "title": "Employment Practices Liability Coverage Gaps\u2014WARN Act and Physician Turnover Claims",
+      "has_counter_analysis_header": false,
+      "detections": 1,
+      "to_move": 1
+    },
+    "IV.A.1": {
+      "title": "Ohio Certificate of Need Statute \u2014 Scope of Application",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.A.2": {
+      "title": "Actual Regulatory Requirements for Hospital Bed Expansions in Ohio",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.A.3": {
+      "title": "Federal Preemption \u2014 Antitrust Considerations",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.B.5": {
+      "title": "Employment Litigation Portfolio",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.J": {
+      "title": ": Medical Staff Credentialing & Retention",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.K": {
+      "title": ": Commercial Contracts & Payer Relations",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.L": {
+      "title": "egal Doctrine Application",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.M": {
+      "title": "ETADATA",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.V": {
+      "title": "erification Methodology",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.Q": {
+      "title": "UALITY CONTROL SUMMARY",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    },
+    "IV.O": {
+      "title": "ut-of-Scope Topics Requiring Separate Analysis",
+      "has_counter_analysis_header": false,
+      "detections": 0,
+      "to_move": 0
+    }
+  },
+  "locations_by_section": {
+    "IV.R": [
+      {
+        "section_id": "IV.R",
+        "paragraph_index": 13,
+        "line_number": 11445,
+        "pattern_matched": "While\\s+(?:it\\s+is\\s+true|some\\s+courts|there\\s+(?:are|is)|the)",
+        "pattern_type": "rebuttal",
+        "content_excerpt": "4. **Verification Required:** All findings, citations, and recommendations must be independently verified by qualified legal counsel before reliance. While the research platform employs verification p...",
+        "full_paragraph": "4. **Verification Required:** All findings, citations, and recommendations must be independently verified by qualified legal counsel before reliance. While the research platform employs verification protocols (98.6% of citations marked [VERIFIED]), AI-generated content may contain errors requiring human attorney review.",
+        "confidence": 0.63,
+        "should_move": false
+      }
+    ],
+    "IV.B.1": [
+      {
+        "section_id": "IV.B.1",
+        "paragraph_index": 1,
+        "line_number": 9932,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "**Rule:** Cyber liability insurance policies provide first-party coverage for business interruption losses, data breach response costs, and forensic investigation expenses when a \"security failure\" ca...",
+        "full_paragraph": "**Rule:** Cyber liability insurance policies provide first-party coverage for business interruption losses, data breach response costs, and forensic investigation expenses when a \"security failure\" causes \"suspension of computer operations\" or \"unauthorized disclosure of confidential information.\" *See* Universal Am. Corp. v. Nat'l Union Fire Ins. Co. of Pittsburgh, 2015 WL 1311599, at *4 (S.D. Fla. Mar. 23, 2015) [VERIFIED:Westlaw-2015-WL-1311599] (cyber policy's first-party business interruption coverage applies when ransomware attack causes network shutdown). Third-party coverage encompasses regulatory defense costs and penalties arising from privacy breaches, subject to sublimits. Standard cyber policies impose waiting periods (8-24 hours) before business interruption coverage attaches, but outages exceeding 12 days clearly satisfy coverage thresholds. *See* Retail Ventures, Inc. v. Nat'l Union Fire Ins. Co., 691 F.3d 821, 825 (6th Cir. 2012) [VERIFIED:Westlaw-2012-WL-3135746] (analyzing business interruption coverage for computer system failures under cyber policy).",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      }
+    ],
+    "IV.B.2": [
+      {
+        "section_id": "IV.B.2",
+        "paragraph_index": 0,
+        "line_number": 9991,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "**Conclusion:** Mercy Regional's Directors and Officers liability insurance will **not** cover the OIG settlement payment for the Mercy Endoscopy Center LLC STARK/AKS violations. The D&O policy will c...",
+        "full_paragraph": "**Conclusion:** Mercy Regional's Directors and Officers liability insurance will **not** cover the OIG settlement payment for the Mercy Endoscopy Center LLC STARK/AKS violations. The D&O policy will cover defense costs ($500K-$1.5M) but exclude the settlement amount ($2M-$5M) due to standard fines/penalties exclusions. **Severity: HIGH**. **Uninsured Exposure: $2M-$5M** (settlement payment only; defense costs likely covered). **Confidence: HIGH** [BASIS: Standard D&O fines/penalties exclusion language; Seventh Circuit precedent in *Level 3 Communications*].",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      },
+      {
+        "section_id": "IV.B.2",
+        "paragraph_index": 3,
+        "line_number": 9997,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "D&O policies provide a separate coverage grant for \"Defense Costs,\" defined as \"reasonable and necessary fees, costs and expenses incurred in defending or investigating a Claim.\" Defense cost coverage...",
+        "full_paragraph": "D&O policies provide a separate coverage grant for \"Defense Costs,\" defined as \"reasonable and necessary fees, costs and expenses incurred in defending or investigating a Claim.\" Defense cost coverage applies even when the underlying Loss is excluded. *See* Caterpillar Inc. v. Great Am. Ins. Co., 62 F.3d 955, 960 (7th Cir. 1995) [VERIFIED:Westlaw-1995-WL-443095] (defense costs covered even where settlement payment excluded under regulatory exclusion).",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      }
+    ],
+    "IV.E.2": [
+      {
+        "section_id": "IV.E.2",
+        "paragraph_index": 2,
+        "line_number": 10328,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "**Representation (Article V, Section 5.18\u2014Insurance):**\n```\n(a) Seller has maintained cyber liability insurance with [Beazley Insurance Company] providing\ncoverage limits of not less than [twenty-five...",
+        "full_paragraph": "**Representation (Article V, Section 5.18\u2014Insurance):**\n```\n(a) Seller has maintained cyber liability insurance with [Beazley Insurance Company] providing\ncoverage limits of not less than [twenty-five million dollars ($25,000,000)] per occurrence and\nin the aggregate, including:\n    (i) First-party coverage for business interruption, data restoration, forensic investigation,\n    and cyber extortion;\n    (ii) Third-party coverage for privacy liability, regulatory defense and penalties, and\n    network security liability;\n    (iii) A regulatory penalty sublimit of not less than [five million dollars ($5,000,000)].",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      },
+      {
+        "section_id": "IV.E.2",
+        "paragraph_index": 14,
+        "line_number": 10396,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "**Indemnification (Article VIII, Section 8.5\u2014STARK/AKS Special Indemnity):**\n```\nSeller shall indemnify Buyer for Losses arising from or related to the STARK Law and AKS compliance\nmatter disclosed on...",
+        "full_paragraph": "**Indemnification (Article VIII, Section 8.5\u2014STARK/AKS Special Indemnity):**\n```\nSeller shall indemnify Buyer for Losses arising from or related to the STARK Law and AKS compliance\nmatter disclosed on Schedule 5.28, including without limitation:\n    (i) OIG settlement payments, civil monetary penalties, and exclusion defense costs;\n    (ii) Claims refunds to Medicare and Medicaid for services rendered pursuant to prohibited referrals;\n    (iii) Defense costs (whether or not covered by Directors and Officers liability insurance);\n    (iv) Corporate Integrity Agreement compliance costs for a period of three (3) years.",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      },
+      {
+        "section_id": "IV.E.2",
+        "paragraph_index": 18,
+        "line_number": 10427,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "Buyer may draw on STARK/AKS Escrow for:\n- OIG settlement payments, civil monetary penalties, claims refunds\n- Defense costs exceeding D&O insurance coverage (if any)\n- Corporate Integrity Agreement co...",
+        "full_paragraph": "Buyer may draw on STARK/AKS Escrow for:\n- OIG settlement payments, civil monetary penalties, claims refunds\n- Defense costs exceeding D&O insurance coverage (if any)\n- Corporate Integrity Agreement compliance costs\n```",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      }
+    ],
+    "IV.E.4": [
+      {
+        "section_id": "IV.E.4",
+        "paragraph_index": 0,
+        "line_number": 10554,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+        "full_paragraph": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+        "confidence": 0.8,
+        "should_move": true
+      },
+      {
+        "section_id": "IV.E.4",
+        "paragraph_index": 1,
+        "line_number": 10556,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry be...",
+        "full_paragraph": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry benchmarks\" | HIGH | Industry benchmarks show only 40% of $1.8B revenue healthcare organizations maintain $20M+ limits; March 2024 breach severity (850K records, 12-day shutdown) exceeds underwriting assumptions for median policies | Marsh 2024 Healthcare Cyber Market Report; Anthem $16M OCR penalty precedent |\n| \"D&O should cover STARK/AKS settlement because it's a negotiated resolution, not a penalty\" | MEDIUM | *Level 3 Communications* economic function test: settlement serves punitive/deterrent purpose, not compensatory; OIG settlements expressly invoke civil monetary penalty authority 42 U.S.C. \u00a7 1320a-7a | *Level 3*, 272 F.3d at 910-911; OIG settlement agreement standard language |\n| \"Tail coverage costs should be shared 50/50 reflecting mutual benefit\" | HIGH | Market practice allocates tail to seller in 85-90% of healthcare transactions; seller controlled operations during period of insurable events; buyer willing to negotiate nose coverage as cost-saving alternative | ABA M&A survey data; HCA/Mission precedent (seller purchased $25M tail) |\n| \"WARN Act escrow is unnecessary because we don't plan restructuring\" | MEDIUM | PE healthcare acquisitions show 40% implement workforce reductions within 12 months; operational plans change post-closing; escrow protects both parties and releases if no WARN claims filed within 18 months | KKR/Envision precedent ($15M employment escrow for PE healthcare acquisition) |\n| \"IBNR reserve adequacy is a post-closing issue; buyer assumes all liabilities in stock purchase\" | MEDIUM | Stock purchase assumes liabilities at fair value; if reserves are understated by $5M-$20M, seller has overstated net equity; purchase price adjustment corrects for actuarial shortfall | GAAP requires adequate reserves; actuarial certification is market-standard closing condition |",
+        "confidence": 0.8,
+        "should_move": true
+      },
+      {
+        "section_id": "IV.E.4",
+        "paragraph_index": 3,
+        "line_number": 10570,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escr...",
+        "full_paragraph": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escrow is mandatory\n- If seller proposes tail cost-sharing: Counter with nose coverage alternative (buyer negotiates with new carrier at potentially 1/3 the cost); seller saves money but buyer assumes prior acts risk\n- If seller refuses WARN escrow: Condition closing on buyer's written confirmation of no restructuring plans (Section 7.2(n)); if buyer cannot provide confirmation, escrow is required or deal does not close\n- If IBNR reserves are inadequate: Escrow is immediate solution ($5M-$20M held for 5 years); alternative is purchase price reduction, but escrow allows for true-up based on actual claims development",
+        "confidence": 0.8,
+        "should_move": true
+      }
+    ],
+    "IV.B.4": [
+      {
+        "section_id": "IV.B.4",
+        "paragraph_index": 12,
+        "line_number": 10165,
+        "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+        "pattern_type": "defense",
+        "content_excerpt": "**EPL Coverage Analysis:** EPL policies exclude \"wages, overtime, salary, or other compensation\" from the definition of covered \"Loss.\" WARN Act back pay constitutes \"wages\" under *Reboans* and *Tech ...",
+        "full_paragraph": "**EPL Coverage Analysis:** EPL policies exclude \"wages, overtime, salary, or other compensation\" from the definition of covered \"Loss.\" WARN Act back pay constitutes \"wages\" under *Reboans* and *Tech Flex*. Accordingly, the $5M-$7M WARN Act exposure is **uninsured**. EPL defense costs (legal fees to defend WARN Act claims) may be covered under the separate \"Defense Costs\" coverage grant, but the back pay and penalties are excluded.",
+        "confidence": 0.7200000000000001,
+        "should_move": true
+      }
+    ]
+  },
+  "all_locations": [
+    {
+      "section_id": "IV.R",
+      "paragraph_index": 13,
+      "line_number": 11445,
+      "pattern_matched": "While\\s+(?:it\\s+is\\s+true|some\\s+courts|there\\s+(?:are|is)|the)",
+      "pattern_type": "rebuttal",
+      "content_excerpt": "4. **Verification Required:** All findings, citations, and recommendations must be independently verified by qualified legal counsel before reliance. While the research platform employs verification p...",
+      "full_paragraph": "4. **Verification Required:** All findings, citations, and recommendations must be independently verified by qualified legal counsel before reliance. While the research platform employs verification protocols (98.6% of citations marked [VERIFIED]), AI-generated content may contain errors requiring human attorney review.",
+      "confidence": 0.63,
+      "should_move": false
+    },
+    {
+      "section_id": "IV.B.1",
+      "paragraph_index": 1,
+      "line_number": 9932,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Rule:** Cyber liability insurance policies provide first-party coverage for business interruption losses, data breach response costs, and forensic investigation expenses when a \"security failure\" ca...",
+      "full_paragraph": "**Rule:** Cyber liability insurance policies provide first-party coverage for business interruption losses, data breach response costs, and forensic investigation expenses when a \"security failure\" causes \"suspension of computer operations\" or \"unauthorized disclosure of confidential information.\" *See* Universal Am. Corp. v. Nat'l Union Fire Ins. Co. of Pittsburgh, 2015 WL 1311599, at *4 (S.D. Fla. Mar. 23, 2015) [VERIFIED:Westlaw-2015-WL-1311599] (cyber policy's first-party business interruption coverage applies when ransomware attack causes network shutdown). Third-party coverage encompasses regulatory defense costs and penalties arising from privacy breaches, subject to sublimits. Standard cyber policies impose waiting periods (8-24 hours) before business interruption coverage attaches, but outages exceeding 12 days clearly satisfy coverage thresholds. *See* Retail Ventures, Inc. v. Nat'l Union Fire Ins. Co., 691 F.3d 821, 825 (6th Cir. 2012) [VERIFIED:Westlaw-2012-WL-3135746] (analyzing business interruption coverage for computer system failures under cyber policy).",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 0,
+      "line_number": 9991,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Conclusion:** Mercy Regional's Directors and Officers liability insurance will **not** cover the OIG settlement payment for the Mercy Endoscopy Center LLC STARK/AKS violations. The D&O policy will c...",
+      "full_paragraph": "**Conclusion:** Mercy Regional's Directors and Officers liability insurance will **not** cover the OIG settlement payment for the Mercy Endoscopy Center LLC STARK/AKS violations. The D&O policy will cover defense costs ($500K-$1.5M) but exclude the settlement amount ($2M-$5M) due to standard fines/penalties exclusions. **Severity: HIGH**. **Uninsured Exposure: $2M-$5M** (settlement payment only; defense costs likely covered). **Confidence: HIGH** [BASIS: Standard D&O fines/penalties exclusion language; Seventh Circuit precedent in *Level 3 Communications*].",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.2",
+      "paragraph_index": 3,
+      "line_number": 9997,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "D&O policies provide a separate coverage grant for \"Defense Costs,\" defined as \"reasonable and necessary fees, costs and expenses incurred in defending or investigating a Claim.\" Defense cost coverage...",
+      "full_paragraph": "D&O policies provide a separate coverage grant for \"Defense Costs,\" defined as \"reasonable and necessary fees, costs and expenses incurred in defending or investigating a Claim.\" Defense cost coverage applies even when the underlying Loss is excluded. *See* Caterpillar Inc. v. Great Am. Ins. Co., 62 F.3d 955, 960 (7th Cir. 1995) [VERIFIED:Westlaw-1995-WL-443095] (defense costs covered even where settlement payment excluded under regulatory exclusion).",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 2,
+      "line_number": 10328,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Representation (Article V, Section 5.18\u2014Insurance):**\n```\n(a) Seller has maintained cyber liability insurance with [Beazley Insurance Company] providing\ncoverage limits of not less than [twenty-five...",
+      "full_paragraph": "**Representation (Article V, Section 5.18\u2014Insurance):**\n```\n(a) Seller has maintained cyber liability insurance with [Beazley Insurance Company] providing\ncoverage limits of not less than [twenty-five million dollars ($25,000,000)] per occurrence and\nin the aggregate, including:\n    (i) First-party coverage for business interruption, data restoration, forensic investigation,\n    and cyber extortion;\n    (ii) Third-party coverage for privacy liability, regulatory defense and penalties, and\n    network security liability;\n    (iii) A regulatory penalty sublimit of not less than [five million dollars ($5,000,000)].",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 14,
+      "line_number": 10396,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Indemnification (Article VIII, Section 8.5\u2014STARK/AKS Special Indemnity):**\n```\nSeller shall indemnify Buyer for Losses arising from or related to the STARK Law and AKS compliance\nmatter disclosed on...",
+      "full_paragraph": "**Indemnification (Article VIII, Section 8.5\u2014STARK/AKS Special Indemnity):**\n```\nSeller shall indemnify Buyer for Losses arising from or related to the STARK Law and AKS compliance\nmatter disclosed on Schedule 5.28, including without limitation:\n    (i) OIG settlement payments, civil monetary penalties, and exclusion defense costs;\n    (ii) Claims refunds to Medicare and Medicaid for services rendered pursuant to prohibited referrals;\n    (iii) Defense costs (whether or not covered by Directors and Officers liability insurance);\n    (iv) Corporate Integrity Agreement compliance costs for a period of three (3) years.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 18,
+      "line_number": 10427,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Buyer may draw on STARK/AKS Escrow for:\n- OIG settlement payments, civil monetary penalties, claims refunds\n- Defense costs exceeding D&O insurance coverage (if any)\n- Corporate Integrity Agreement co...",
+      "full_paragraph": "Buyer may draw on STARK/AKS Escrow for:\n- OIG settlement payments, civil monetary penalties, claims refunds\n- Defense costs exceeding D&O insurance coverage (if any)\n- Corporate Integrity Agreement compliance costs\n```",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 0,
+      "line_number": 10554,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+      "full_paragraph": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 1,
+      "line_number": 10556,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry be...",
+      "full_paragraph": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry benchmarks\" | HIGH | Industry benchmarks show only 40% of $1.8B revenue healthcare organizations maintain $20M+ limits; March 2024 breach severity (850K records, 12-day shutdown) exceeds underwriting assumptions for median policies | Marsh 2024 Healthcare Cyber Market Report; Anthem $16M OCR penalty precedent |\n| \"D&O should cover STARK/AKS settlement because it's a negotiated resolution, not a penalty\" | MEDIUM | *Level 3 Communications* economic function test: settlement serves punitive/deterrent purpose, not compensatory; OIG settlements expressly invoke civil monetary penalty authority 42 U.S.C. \u00a7 1320a-7a | *Level 3*, 272 F.3d at 910-911; OIG settlement agreement standard language |\n| \"Tail coverage costs should be shared 50/50 reflecting mutual benefit\" | HIGH | Market practice allocates tail to seller in 85-90% of healthcare transactions; seller controlled operations during period of insurable events; buyer willing to negotiate nose coverage as cost-saving alternative | ABA M&A survey data; HCA/Mission precedent (seller purchased $25M tail) |\n| \"WARN Act escrow is unnecessary because we don't plan restructuring\" | MEDIUM | PE healthcare acquisitions show 40% implement workforce reductions within 12 months; operational plans change post-closing; escrow protects both parties and releases if no WARN claims filed within 18 months | KKR/Envision precedent ($15M employment escrow for PE healthcare acquisition) |\n| \"IBNR reserve adequacy is a post-closing issue; buyer assumes all liabilities in stock purchase\" | MEDIUM | Stock purchase assumes liabilities at fair value; if reserves are understated by $5M-$20M, seller has overstated net equity; purchase price adjustment corrects for actuarial shortfall | GAAP requires adequate reserves; actuarial certification is market-standard closing condition |",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 3,
+      "line_number": 10570,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escr...",
+      "full_paragraph": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escrow is mandatory\n- If seller proposes tail cost-sharing: Counter with nose coverage alternative (buyer negotiates with new carrier at potentially 1/3 the cost); seller saves money but buyer assumes prior acts risk\n- If seller refuses WARN escrow: Condition closing on buyer's written confirmation of no restructuring plans (Section 7.2(n)); if buyer cannot provide confirmation, escrow is required or deal does not close\n- If IBNR reserves are inadequate: Escrow is immediate solution ($5M-$20M held for 5 years); alternative is purchase price reduction, but escrow allows for true-up based on actual claims development",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.B.4",
+      "paragraph_index": 12,
+      "line_number": 10165,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**EPL Coverage Analysis:** EPL policies exclude \"wages, overtime, salary, or other compensation\" from the definition of covered \"Loss.\" WARN Act back pay constitutes \"wages\" under *Reboans* and *Tech ...",
+      "full_paragraph": "**EPL Coverage Analysis:** EPL policies exclude \"wages, overtime, salary, or other compensation\" from the definition of covered \"Loss.\" WARN Act back pay constitutes \"wages\" under *Reboans* and *Tech Flex*. Accordingly, the $5M-$7M WARN Act exposure is **uninsured**. EPL defense costs (legal fees to defend WARN Act claims) may be covered under the separate \"Defense Costs\" coverage grant, but the back pay and penalties are excluded.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ],
+  "high_confidence_locations": [
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 0,
+      "line_number": 10554,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+      "full_paragraph": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 1,
+      "line_number": 10556,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry be...",
+      "full_paragraph": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry benchmarks\" | HIGH | Industry benchmarks show only 40% of $1.8B revenue healthcare organizations maintain $20M+ limits; March 2024 breach severity (850K records, 12-day shutdown) exceeds underwriting assumptions for median policies | Marsh 2024 Healthcare Cyber Market Report; Anthem $16M OCR penalty precedent |\n| \"D&O should cover STARK/AKS settlement because it's a negotiated resolution, not a penalty\" | MEDIUM | *Level 3 Communications* economic function test: settlement serves punitive/deterrent purpose, not compensatory; OIG settlements expressly invoke civil monetary penalty authority 42 U.S.C. \u00a7 1320a-7a | *Level 3*, 272 F.3d at 910-911; OIG settlement agreement standard language |\n| \"Tail coverage costs should be shared 50/50 reflecting mutual benefit\" | HIGH | Market practice allocates tail to seller in 85-90% of healthcare transactions; seller controlled operations during period of insurable events; buyer willing to negotiate nose coverage as cost-saving alternative | ABA M&A survey data; HCA/Mission precedent (seller purchased $25M tail) |\n| \"WARN Act escrow is unnecessary because we don't plan restructuring\" | MEDIUM | PE healthcare acquisitions show 40% implement workforce reductions within 12 months; operational plans change post-closing; escrow protects both parties and releases if no WARN claims filed within 18 months | KKR/Envision precedent ($15M employment escrow for PE healthcare acquisition) |\n| \"IBNR reserve adequacy is a post-closing issue; buyer assumes all liabilities in stock purchase\" | MEDIUM | Stock purchase assumes liabilities at fair value; if reserves are understated by $5M-$20M, seller has overstated net equity; purchase price adjustment corrects for actuarial shortfall | GAAP requires adequate reserves; actuarial certification is market-standard closing condition |",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 3,
+      "line_number": 10570,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escr...",
+      "full_paragraph": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escrow is mandatory\n- If seller proposes tail cost-sharing: Counter with nose coverage alternative (buyer negotiates with new carrier at potentially 1/3 the cost); seller saves money but buyer assumes prior acts risk\n- If seller refuses WARN escrow: Condition closing on buyer's written confirmation of no restructuring plans (Section 7.2(n)); if buyer cannot provide confirmation, escrow is required or deal does not close\n- If IBNR reserves are inadequate: Escrow is immediate solution ($5M-$20M held for 5 years); alternative is purchase price reduction, but escrow allows for true-up based on actual claims development",
+      "confidence": 0.8,
+      "should_move": true
+    }
+  ],
+  "patterns_detected": {
+    "adversarial": 0,
+    "bluebook_signal": 0,
+    "rebuttal": 1,
+    "defense": 10,
+    "uncertainty": 0
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "I",
+  "section_name": "Guaranteed Minimum Withdrawal Benefit Tail Risk Quantification",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-I (GMWB Tail Risk) from specialist reports",
+    "progress": "Complete - all subsections written",
+    "next_action": "N/A - section complete",
+    "critical_context": ["section_id=I", "3 findings (MEDIUM/HIGH/CRITICAL)", "Combined capital scenario is deal-blocking"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["gmwb-tail-risk-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 5850,
+    "findings_written": "3/3",
+    "footnotes_count": 94,
+    "last_checkpoint": "2026-01-21T15:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/gmwb-tail-risk-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "quality_validation": {
+    "word_count_sufficient": true,
+    "all_subsections_present": true,
+    "high_findings_have_draft_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "section_id": "IV.E.2",
+  "section_info": {
+    "title": "Draft Contract Language",
+    "has_counter_analysis_header": false,
+    "detections": 6,
+    "to_move": 6
+  },
+  "locations": [
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 7,
+      "line_number": 13089,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "(a) Breach notification costs (individuals, regulators, credit bureaus, media);\n(b) Credit monitoring and identity theft protection services for affected individuals;\n(c) Forensic investigation and in...",
+      "full_paragraph": "(a) Breach notification costs (individuals, regulators, credit bureaus, media);\n(b) Credit monitoring and identity theft protection services for affected individuals;\n(c) Forensic investigation and incident response costs;\n(d) Legal defense costs for regulatory proceedings (SEC, FTC, state attorneys general)\nand class action litigation;\n(e) Regulatory fines, penalties, and settlement amounts;\n(f) Damages, judgments, and settlement amounts for third-party claims;\n(g) Business interruption losses and data restoration costs.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 11,
+      "line_number": 13114,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "(k) Cyber Liability Insurance. The Company shall have bound a cyber liability insurance\npolicy with:\n    (i) Coverage limits of not less than $10,000,000 per occurrence and $10,000,000\n    aggregate;\n...",
+      "full_paragraph": "(k) Cyber Liability Insurance. The Company shall have bound a cyber liability insurance\npolicy with:\n    (i) Coverage limits of not less than $10,000,000 per occurrence and $10,000,000\n    aggregate;\n    (ii) Coverage for first-party costs (breach notification, credit monitoring, forensics,\n    incident response, business interruption) and third-party liability (regulatory fines,\n    class action defense, damages);\n    (iii) Retroactive date no later than January 1, 2020 (covering acts occurring 5+ years\n    prior to Closing to capture latent incidents);\n    (iv) A self-insured retention or deductible not exceeding $250,000;\n    (v) Policy term of not less than 3 years or annual renewable with guaranteed renewal\n    rates (no material premium increase >25% year-over-year);\n    (vi) Certificate of insurance naming Buyer as additional insured and loss payee delivered\n    to Buyer not less than 3 business days prior to Closing.",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 17,
+      "line_number": 13148,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "the Company's systems, networks, or data (whether occurring before or after Closing) that:\n  (i) Triggers notification obligations under Regulation S-P, state breach notification laws,\n  or contractua...",
+      "full_paragraph": "the Company's systems, networks, or data (whether occurring before or after Closing) that:\n  (i) Triggers notification obligations under Regulation S-P, state breach notification laws,\n  or contractual notification obligations to clients/custodians; OR\n  (ii) Results in losses exceeding $500,000 (including breach response costs, regulatory fines,\n  litigation defense/settlement, business interruption).",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 18,
+      "line_number": 13154,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "If a Cyber Incident is reported during the escrow period, the full $5,000,000 shall remain in\nescrow until the incident is fully resolved (all breach response costs incurred, all litigation\nsettled or...",
+      "full_paragraph": "If a Cyber Incident is reported during the escrow period, the full $5,000,000 shall remain in\nescrow until the incident is fully resolved (all breach response costs incurred, all litigation\nsettled or adjudicated, all regulatory proceedings concluded), at which time any remaining funds\n(after satisfaction of Buyer's indemnification claims under Section 8.7) shall be released to\nSeller.\n```",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 22,
+      "line_number": 13167,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Representation (Article III, Section 3.14(b) \u2014 Adequate Insurance):**\n```\nSeller represents and warrants that:\n(b) The errors and omissions professional liability insurance maintained by the Company...",
+      "full_paragraph": "**Representation (Article III, Section 3.14(b) \u2014 Adequate Insurance):**\n```\nSeller represents and warrants that:\n(b) The errors and omissions professional liability insurance maintained by the Company has\nlimits of not less than $30 million per claim and $60 million aggregate, and such limits are\nadequate and customary for registered investment advisers managing $42.5 billion in assets\nunder management. Schedule 3.14(b) sets forth:\n    (i) A list of all claims made against the E&O policy in the past 10 years, including\n    claim amounts, settlement amounts, and reserves established by the insurer;\n    (ii) A list of all circumstances known to the Company that could reasonably be expected\n    to result in an E&O claim exceeding $5 million;\n    (iii) Confirmation that the E&O policy includes coverage for SEC/FINRA/state securities\n    regulator defense costs, and such coverage is \"defense outside limits\" (defense costs do\n    not erode policy limits).",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.2",
+      "paragraph_index": 45,
+      "line_number": 13318,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Buyer shall provide Seller with prompt notice (within 10 business days) of any DOL or IRS inquiry,\nexamination notice, or proposed assessment related to prohibited transactions. Seller shall have\nthe ...",
+      "full_paragraph": "Buyer shall provide Seller with prompt notice (within 10 business days) of any DOL or IRS inquiry,\nexamination notice, or proposed assessment related to prohibited transactions. Seller shall have\nthe right (but not the obligation) to control the defense of any such matter, provided Seller\nacknowledges in writing its indemnification obligation under this Section 8.10.\n```",
+      "confidence": 0.7200000000000001,
+      "should_move": true
+    }
+  ]
+}

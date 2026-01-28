@@ -1,0 +1,3414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Sonnet-4 Legal Research Interface - Enhanced Features</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --primary-dark: #1a252f;
+            --primary-light: #34495e;
+            --secondary: #EC4899;
+            --accent: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #ecf0f1;
+            --text-muted: #95a5a6;
+            --bg-main: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F3F4F6;
+            --border: #E5E7EB;
+            --thinking-bg: #FEF3C7;
+            --tool-bg: #DBEAFE;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-bar {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-white);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Main Container */
+        .container {
+            flex: 1;
+            display: flex;
+            height: calc(100vh - 120px); /* Account for header height */
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            gap: 0;
+        }
+        
+        /* Chat Section */
+        .chat-section {
+            flex: 1;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0; /* Allow flex shrinking */
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .chat-header h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+        
+        /* Messages Area */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 400px;
+            max-height: 600px;
+            scroll-behavior: smooth;
+            will-change: scroll-position;
+        }
+        
+        .message {
+            display: flex;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message.user {
+            justify-content: flex-end;
+        }
+        
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .message.assistant .message-avatar {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .message.user .message-avatar {
+            background: var(--secondary);
+            color: white;
+            order: 1;
+        }
+        
+        .message-content {
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            word-wrap: break-word;
+        }
+        
+        .message.assistant .message-content {
+            background: var(--bg-gray);
+            color: var(--text-primary);
+        }
+        
+        /* Markdown content styling */
+        .text-content {
+            line-height: 1.6;
+        }
+        
+        .text-content h1, .text-content h2, .text-content h3, 
+        .text-content h4, .text-content h5, .text-content h6 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .text-content h1 { font-size: 1.5rem; color: var(--primary-dark); }
+        .text-content h2 { font-size: 1.25rem; color: var(--primary); }
+        .text-content h3 { font-size: 1.1rem; color: var(--text-primary); }
+        
+        .text-content ul, .text-content ol {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .text-content li {
+            margin: 0.25rem 0;
+        }
+        
+        .text-content strong {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .text-content code {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875em;
+        }
+        
+        .text-content pre {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+        
+        .text-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        .text-content p {
+            margin: 0.5rem 0;
+        }
+        
+        /* Response Section */
+        .response-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+        
+        .response-label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .message.user .message-content {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Enhanced Thinking Section */
+        .thinking-section {
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background: rgba(254, 243, 199, 0.3);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.1);
+        }
+        
+        .thinking-section:hover {
+            background: rgba(254, 243, 199, 0.4);
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 4px 8px rgba(245, 158, 11, 0.15);
+        }
+        
+        .thinking-section.thinking-active {
+            border-color: rgba(245, 158, 11, 0.5);
+            box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+        }
+        
+        .thinking-header {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .thinking-header:hover {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(251, 191, 36, 0.15) 100%);
+        }
+        
+        .thinking-section.collapsed .thinking-block {
+            display: none;
+        }
+        
+        .section-toggle {
+            background: transparent;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .thinking-section.collapsed .section-toggle,
+        .tools-section.collapsed .section-toggle {
+            transform: rotate(180deg);
+        }
+        
+        /* Thinking Block */
+        .thinking-block {
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .thinking-block::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .thinking-block::-webkit-scrollbar-track {
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 3px;
+        }
+        
+        .thinking-block::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.3);
+            border-radius: 3px;
+        }
+        
+        .thinking-block::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.5);
+        }
+
+        /* Thinking Block Containers */
+        .thinking-block-container {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+            padding-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .thinking-block-container:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .thinking-block-active {
+            border-left: 3px solid var(--warning);
+            padding-left: 0.75rem;
+            background: rgba(245, 158, 11, 0.05);
+            border-radius: 0.5rem;
+            margin-left: -0.75rem;
+            animation: thinkingPulse 2s infinite;
+        }
+
+        .thinking-block-completed {
+            opacity: 0.9;
+            border-left: 3px solid var(--success);
+            padding-left: 0.75rem;
+            margin-left: -0.75rem;
+        }
+
+        .thinking-block-completed:hover {
+            opacity: 1;
+            background: rgba(34, 197, 94, 0.05);
+            border-radius: 0.5rem;
+        }
+        
+        .thinking-content {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            color: #92400E;
+            opacity: 0.9;
+            line-height: 1.6;
+            position: relative;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 0.375rem;
+            border: 1px solid rgba(245, 158, 11, 0.1);
+        }
+        
+        .thinking-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #F59E0B, #D97706);
+            border-radius: 0 0.375rem 0.375rem 0;
+        }
+        
+        .thinking-content.thinking-active {
+            animation: thinkingPulse 2s infinite;
+        }
+        
+        @keyframes thinkingPulse {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
+        }
+        
+        /* Enhanced Tool Execution Section */
+        .tools-section {
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background: rgba(219, 234, 254, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .tools-header {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .tools-container {
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .tools-section.collapsed .tools-container {
+            display: none;
+        }
+        
+        /* Tool Call Block */
+        .tool-call-block {
+            background: var(--tool-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: #0369A1;
+        }
+        
+        .tool-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .tool-status.pending {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .tool-status.updating {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .tool-status.executing {
+            background: #8b5cf6;
+            color: white;
+        }
+        
+        .tool-status.complete {
+            background: var(--success);
+            color: white;
+        }
+        
+        .tool-status.error {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .tool-params {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            overflow-x: auto;
+        }
+        
+        .tool-progress {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .tool-progress-bar {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        /* Input Area */
+        .input-section {
+            border-top: 1px solid var(--border);
+            padding: 1.5rem;
+            background: var(--bg-gray);
+        }
+        
+        .input-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .control-group {
+            flex: 1;
+        }
+        
+        .control-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        
+        .control-select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: white;
+            font-size: 0.875rem;
+        }
+        
+        .input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.875rem;
+            max-height: 120px;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+        
+        .send-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .send-button:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Collapsible Tool Sidebar */
+        .tools-sidebar {
+            width: 450px;
+            background: var(--primary);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border);
+            position: relative;
+            transition: width 0.3s ease, transform 0.3s ease;
+        }
+
+        .tools-sidebar.collapsed {
+            width: 0;
+            transform: translateX(100%);
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            padding: 12px 8px;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--primary-dark);
+            left: -42px;
+        }
+
+        .sidebar-tabs {
+            display: flex;
+            background: var(--primary-dark);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .sidebar-tab {
+            flex: 1;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .sidebar-tab:hover {
+            background: var(--primary-light);
+        }
+
+        .sidebar-tab.active {
+            background: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .sidebar-tab-icon {
+            font-size: 16px;
+        }
+
+        .sidebar-tab-label {
+            font-size: 10px;
+            opacity: 0.9;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .sidebar-content.active {
+            display: block;
+        }
+
+        /* Tool Usage Indicator */
+        .tool-indicator {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--warning);
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .tool-indicator.active {
+            background: var(--success);
+        }
+
+        /* Sidebar Panels */
+        .sidebar-panel {
+            padding: 1rem;
+            background: var(--primary-light);
+            margin: 0.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .sidebar-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .sidebar-panel-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-panel-toggle {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-panel.collapsed .sidebar-panel-toggle {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-panel.collapsed .sidebar-panel-content {
+            display: none;
+        }
+
+        /* Real-time Activity Feed */
+        .activity-feed {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--primary-dark);
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .activity-icon {
+            font-size: 0.875rem;
+            margin-top: 0.125rem;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-timestamp {
+            font-size: 0.625rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* Research Timeline */
+        .research-timeline {
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .research-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.375rem;
+            top: 0.25rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: var(--success);
+            border: 2px solid var(--primary);
+        }
+
+        .timeline-item.active::before {
+            background: var(--warning);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-item.pending::before {
+            background: var(--text-secondary);
+        }
+
+        .timeline-item.completed::before {
+            background: var(--success);
+        }
+
+        .timeline-item.error::before {
+            background: var(--danger);
+        }
+
+        /* Thinking Process Display */
+        .thinking-display {
+            background: var(--thinking-bg);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #92400E;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Stream Smoothing Animations */
+        .word-fade-in {
+            animation: wordFadeIn 0.3s ease-in;
+            opacity: 1;
+            will-change: opacity, transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        @keyframes wordFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(3px) translateZ(0);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) translateZ(0);
+            }
+        }
+
+        .char-fade-in {
+            animation: charFadeIn 0.15s ease-in;
+            opacity: 1;
+            will-change: opacity, transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        @keyframes charFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateZ(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateZ(0);
+            }
+        }
+
+        .code-block-smooth {
+            animation: codeSlideIn 0.5s ease-out;
+        }
+
+        @keyframes codeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Stream Speed Controls */
+        .stream-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-gray);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .speed-button {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.65rem;
+            transition: all 0.2s;
+        }
+
+        .speed-button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .speed-button:hover {
+            background: var(--bg-white);
+            border-color: var(--primary);
+        }
+
+        .thinking-phase {
+            display: inline-block;
+            background: var(--warning);
+            color: white;
+            padding: 0.125rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.625rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .tools-sidebar {
+                width: 380px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .tools-sidebar {
+                width: 100%;
+                height: 300px;
+                order: 2;
+            }
+            
+            .sidebar-toggle {
+                display: none;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        /* Features Panel */
+        .features-panel {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .feature-toggle:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-info {
+            flex: 1;
+        }
+        
+        .feature-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .feature-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #CBD5E1;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background: var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+        
+        /* Metrics Panel */
+        .metrics-panel {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+        
+        .metric-label {
+            color: var(--text-secondary);
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Test Queries Panel */
+        .test-queries {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .test-query {
+            padding: 0.75rem;
+            background: var(--bg-gray);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+        
+        .test-query:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: translateX(4px);
+        }
+        
+        /* Loading Animation */
+        .typing-indicator {
+            display: flex;
+            gap: 0.25rem;
+            padding: 1rem;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* System Message */
+        .system-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+        
+        /* Progress Indicator */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        
+        .progress-indicator.active {
+            animation: progress 2s ease-in-out infinite;
+        }
+        
+        @keyframes progress {
+            0% { transform: scaleX(0); }
+            50% { transform: scaleX(0.5); }
+            100% { transform: scaleX(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator" id="progressBar"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>🧠 Claude Legal Research</h1>
+                <span class="badge">Sonnet-4 Enhanced</span>
+                <span class="badge" style="background: var(--secondary)">Aug 2025</span>
+            </div>
+            <div class="status-bar">
+                <div class="status-indicator">
+                    <span class="status-dot" id="connectionStatus"></span>
+                    <span id="connectionText">Disconnected</span>
+                </div>
+                <div class="status-indicator">
+                    <span>Model:</span>
+                    <strong id="modelName">claude-sonnet-4-5-20250929</strong>
+                </div>
+                <div class="status-indicator">
+                    <span>Tools:</span>
+                    <strong id="toolCount">0</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Chat Section -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <h2>Legal Research Assistant</h2>
+                <p>Enhanced with thinking transparency, interleaved reasoning, and 60+ legal tools</p>
+                <div id="activityIndicator" style="display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(255,255,255,0.1); border-radius: 0.375rem; font-size: 0.75rem;">
+                    <span id="activityText">🔧 Using tools...</span>
+                </div>
+            </div>
+            
+            <div class="messages-container" id="messagesContainer">
+                <!-- Welcome Message -->
+                <div class="system-message">
+                    <strong>🎯 Welcome to Claude Enhanced Legal Research</strong><br>
+                    This interface showcases Claude's advanced capabilities including native thinking transparency, 
+                    interleaved reasoning between tool calls, fine-grained parameter streaming, and parallel tool execution.
+                    Try one of the test queries or ask your own legal research question!
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-controls">
+                    <div class="control-group">
+                        <label class="control-label">Endpoint</label>
+                        <select class="control-select" id="endpointSelect">
+                            <option value="stream">Streaming (with thinking)</option>
+                            <option value="research">Non-streaming</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Max Tokens</label>
+                        <select class="control-select" id="maxTokens">
+                            <option value="4000">4,000</option>
+                            <option value="8000" selected>8,000</option>
+                            <option value="16000">16,000</option>
+                            <option value="32000">32,000 (with thinking)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <textarea 
+                        class="message-input" 
+                        id="messageInput" 
+                        placeholder="Ask about bankruptcy, securities, patents, regulations..."
+                        rows="2"
+                    ></textarea>
+                    <button class="send-button" id="sendButton">Send</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Tool Sidebar -->
+        <div class="tools-sidebar" id="toolsSidebar">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <span>◀</span>
+            </button>
+            <div class="sidebar-tabs">
+                <div class="sidebar-tab active" onclick="switchTab('thinking')">
+                    <span class="sidebar-tab-icon">🧠</span>
+                    <span class="sidebar-tab-label">Thinking</span>
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tools')">
+                    <span class="sidebar-tab-icon">🔧</span>
+                    <span class="sidebar-tab-label">Tools</span>
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('timeline')">
+                    <span class="sidebar-tab-icon">📋</span>
+                    <span class="sidebar-tab-label">Timeline</span>
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('settings')">
+                    <span class="sidebar-tab-icon">⚙️</span>
+                    <span class="sidebar-tab-label">Settings</span>
+                </div>
+            </div>
+            
+            <!-- Thinking Tab Content -->
+            <div class="sidebar-content active" id="thinking-content">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this.parentElement)">
+                        <span class="sidebar-panel-title">Legal Analysis Process</span>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div id="thinkingDisplay" class="thinking-display"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools Tab Content -->
+            <div class="sidebar-content" id="tools-content">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this.parentElement)">
+                        <span class="sidebar-panel-title">Active Tools</span>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div id="toolActivity" class="activity-feed"></div>
+                    </div>
+                </div>
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this.parentElement)">
+                        <span class="sidebar-panel-title">Metrics</span>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <div class="metric-value" id="sidebarToolsUsed">0</div>
+                                <div class="metric-label">Tools Used</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value" id="sidebarThinkingBlocks">0</div>
+                                <div class="metric-label">Thinking</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value" id="sidebarResponseTime">0s</div>
+                                <div class="metric-label">Time</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value" id="sidebarTokens">0</div>
+                                <div class="metric-label">Tokens</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timeline Tab Content -->
+            <div class="sidebar-content" id="timeline-content">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this.parentElement)">
+                        <span class="sidebar-panel-title">Research Workflow</span>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div id="researchTimeline" class="timeline-container"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab Content -->
+            <div class="sidebar-content" id="settings-content">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this.parentElement)">
+                        <span class="sidebar-panel-title">Display Options</span>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sidebarThinkingToggle" checked>
+                            <span class="toggle-slider"></span>
+                            <span>Show Thinking Process</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sidebarToolToggle" checked>
+                            <span class="toggle-slider"></span>
+                            <span>Show Tool Execution</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        
+            <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+                ◀
+            </button>
+            
+            <div class="sidebar-tabs">
+                <div class="sidebar-tab active" onclick="switchTab('thinking')">
+                    <div class="sidebar-tab-icon">🧠</div>
+                    <div class="sidebar-tab-label">Thinking</div>
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('tools')">
+                    <div class="sidebar-tab-icon">🔧</div>
+                    <div class="sidebar-tab-label">Tools</div>
+                    <div class="tool-indicator" id="toolIndicator" style="display: none;">0</div>
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('timeline')">
+                    <div class="sidebar-tab-icon">📋</div>
+                    <div class="sidebar-tab-label">Timeline</div>
+                </div>
+                <div class="sidebar-tab" onclick="switchTab('settings')">
+                    <div class="sidebar-tab-icon">⚙️</div>
+                    <div class="sidebar-tab-label">Settings</div>
+                </div>
+            </div>
+            
+            <!-- Thinking Tab -->
+            <div class="sidebar-content active" id="thinkingContent">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this)">
+                        <div class="sidebar-panel-title">
+                            <span>🧠</span>
+                            <span>Reasoning Process</span>
+                        </div>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div class="thinking-display" id="thinkingOutput">
+                            <div style="text-align: center; color: var(--text-muted); padding: 20px; font-family: inherit;">
+                                Waiting for query...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools Tab -->
+            <div class="sidebar-content" id="toolsContent">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this)">
+                        <div class="sidebar-panel-title">
+                            <span>⚡</span>
+                            <span>Active Tools</span>
+                        </div>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div class="activity-feed" id="toolActivity">
+                            <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                No tools executed yet
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this)">
+                        <div class="sidebar-panel-title">
+                            <span>📊</span>
+                            <span>Metrics</span>
+                        </div>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div style="text-align: center; padding: 0.5rem; background: var(--primary-dark); border-radius: 0.375rem;">
+                                <div style="font-size: 1.5rem; font-weight: 600; color: var(--accent);" id="toolsExecuted">0</div>
+                                <div style="font-size: 0.625rem; color: var(--text-muted);">Tools Used</div>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem; background: var(--primary-dark); border-radius: 0.375rem;">
+                                <div style="font-size: 1.5rem; font-weight: 600; color: var(--success);" id="thinkingBlocks">0</div>
+                                <div style="font-size: 0.625rem; color: var(--text-muted);">Thinking</div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <div style="text-align: center; padding: 0.5rem; background: var(--primary-dark); border-radius: 0.375rem;">
+                                <div style="font-size: 1.5rem; font-weight: 600; color: var(--warning);" id="responseTime">0s</div>
+                                <div style="font-size: 0.625rem; color: var(--text-muted);">Response</div>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem; background: var(--primary-dark); border-radius: 0.375rem;">
+                                <div style="font-size: 1.5rem; font-weight: 600; color: var(--text-light);" id="tokensUsed">0</div>
+                                <div style="font-size: 0.625rem; color: var(--text-muted);">Tokens</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timeline Tab -->
+            <div class="sidebar-content" id="timelineContent">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this)">
+                        <div class="sidebar-panel-title">
+                            <span>📋</span>
+                            <span>Research Timeline</span>
+                        </div>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div class="research-timeline" id="researchTimeline">
+                            <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                No active research
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div class="sidebar-content" id="settingsContent">
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this)">
+                        <div class="sidebar-panel-title">
+                            <span>⚡</span>
+                            <span>Features</span>
+                        </div>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div class="feature-toggle">
+                            <div class="feature-info">
+                                <div class="feature-name">Thinking Transparency</div>
+                                <div class="feature-desc">Show reasoning process</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="thinkingToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="feature-toggle">
+                            <div class="feature-info">
+                                <div class="feature-name">Tool Details</div>
+                                <div class="feature-desc">Show parameters & results</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toolDetailsToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="feature-toggle">
+                            <div class="feature-info">
+                                <div class="feature-name">Stream Smoothing</div>
+                                <div class="feature-desc">Smooth text rendering</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="streamSmoothingToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="stream-controls" id="streamControls">
+                            <span>Speed:</span>
+                            <button class="speed-button" data-speed="slow">Slow</button>
+                            <button class="speed-button active" data-speed="normal">Normal</button>
+                            <button class="speed-button" data-speed="fast">Fast</button>
+                            <button class="speed-button" data-speed="instant">Instant</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-panel">
+                    <div class="sidebar-panel-header" onclick="togglePanel(this)">
+                        <div class="sidebar-panel-title">
+                            <span>🔬</span>
+                            <span>Test Queries</span>
+                        </div>
+                        <button class="sidebar-panel-toggle">▼</button>
+                    </div>
+                    <div class="sidebar-panel-content">
+                        <div class="test-query" onclick="sendTestQuery('Find recent bankruptcy cases for chemical companies with environmental liabilities')">
+                            Bankruptcy + Environmental
+                        </div>
+                        <div class="test-query" onclick="sendTestQuery('Search for SEC insider trading filings and enforcement actions for tech companies in 2024')">
+                            SEC Insider Trading
+                        </div>
+                        <div class="test-query" onclick="sendTestQuery('Analyze patent litigation trends for pharmaceutical companies in PTAB proceedings')">
+                            Patent PTAB Analysis
+                        </div>
+                        <div class="test-query" onclick="sendTestQuery('Find federal register rules on AI regulation and related public comments')">
+                            AI Regulatory Framework
+                        </div>
+                        <div class="test-query" onclick="sendTestQuery('Comprehensive legal entity analysis for a major tech company facing antitrust scrutiny')">
+                            Entity Deep Dive
+                        </div>
+                        <div class="test-query" onclick="testStreamSmoothingDemo()" style="background: rgba(99, 102, 241, 0.1); border-left: 3px solid #6366F1; color: #4338CA;">
+                            🎭 Demo Stream Smoothing
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add marked.js for markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Configure marked for safe HTML rendering
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: false,
+            mangle: false
+        });
+        
+        // State Management
+        let isProcessing = false;
+        let eventSource = null;
+        let currentMessageDiv = null;
+        let sidebarCollapsed = false;
+        let currentTab = 'thinking';
+        let toolCallCount = 0;
+        let metrics = {
+            toolsExecuted: 0,
+            thinkingBlocks: 0,
+            startTime: null,
+            tokensUsed: 0
+        };
+
+        // Stream Smoothing System
+        class StreamSmoother {
+            constructor() {
+                this.wordBuffer = [];
+                this.currentWord = '';
+                this.isRendering = false;
+                this.renderQueue = [];
+                this.config = this.loadConfig();
+                this.targetElement = null;
+                this.pauseRendering = false;
+                
+                // Debounced scrolling system
+                this.scrollTimeout = null;
+                this.lastScrollTime = 0;
+                this.scrollThrottle = 250; // Max one scroll per 250ms
+                this.messagesContainer = null;
+            }
+
+            loadConfig() {
+                const saved = localStorage.getItem('streamSmoothingConfig');
+                return saved ? JSON.parse(saved) : {
+                    enabled: true,
+                    speed: 'normal',
+                    renderMode: 'word',
+                    enableFadeIn: true,
+                    adaptiveSpeed: true
+                };
+            }
+
+            saveConfig() {
+                localStorage.setItem('streamSmoothingConfig', JSON.stringify(this.config));
+            }
+
+            setSpeed(speed) {
+                this.config.speed = speed;
+                this.saveConfig();
+            }
+
+            getSpeedSettings(contentType = 'normal') {
+                const baseSpeed = {
+                    instant: { delay: 0, charsPerChunk: 1000 },
+                    fast: { delay: 5, charsPerChunk: 20 },
+                    normal: { delay: 15, charsPerChunk: 10 },
+                    slow: { delay: 35, charsPerChunk: 5 }
+                }[this.config.speed];
+
+                if (!this.config.adaptiveSpeed) return baseSpeed;
+
+                // Adaptive speed based on content type
+                const multipliers = {
+                    code: 2.5,
+                    thinking: 1.8,
+                    citations: 0.7,
+                    normal: 1,
+                    tools: 0.8
+                };
+
+                const multiplier = multipliers[contentType] || 1;
+                return {
+                    delay: Math.round(baseSpeed.delay * multiplier),
+                    charsPerChunk: Math.max(1, Math.round(baseSpeed.charsPerChunk / multiplier))
+                };
+            }
+
+            detectContentType(text) {
+                if (text.includes('```')) return 'code';
+                if (text.includes('reasoning:') || text.includes('analysis:')) return 'thinking';
+                if (text.includes('citation:') || text.includes('[') && text.includes(']')) return 'citations';
+                if (text.includes('tool_use') || text.includes('🔧')) return 'tools';
+                return 'normal';
+            }
+
+            addChunk(text, targetElement, contentType = null) {
+                if (!this.config.enabled) {
+                    targetElement.textContent += text;
+                    return;
+                }
+
+                const detectedType = contentType || this.detectContentType(text);
+                
+                this.renderQueue.push({
+                    text: text,
+                    element: targetElement,
+                    contentType: detectedType,
+                    timestamp: Date.now()
+                });
+
+                if (!this.isRendering) {
+                    this.startRendering();
+                }
+            }
+
+            async startRendering() {
+                if (this.isRendering) return;
+                this.isRendering = true;
+
+                while (this.renderQueue.length > 0 && !this.pauseRendering) {
+                    const item = this.renderQueue.shift();
+                    await this.renderItem(item);
+                }
+
+                this.isRendering = false;
+            }
+
+            async renderItem(item) {
+                const { text, element, contentType } = item;
+                const settings = this.getSpeedSettings(contentType);
+
+                if (this.config.speed === 'instant') {
+                    element.textContent += text;
+                    return;
+                }
+
+                if (this.config.renderMode === 'word') {
+                    await this.renderByWords(text, element, settings);
+                } else {
+                    await this.renderByChars(text, element, settings);
+                }
+            }
+
+            async renderByWords(text, element, settings) {
+                const words = text.split(/\s+/).filter(w => w.length > 0);
+                
+                for (const word of words) {
+                    if (this.pauseRendering) break;
+                    
+                    if (this.config.enableFadeIn) {
+                        const span = document.createElement('span');
+                        span.textContent = word + ' ';
+                        span.className = 'word-fade-in';
+                        element.appendChild(span);
+                    } else {
+                        element.textContent += word + ' ';
+                    }
+                    
+                    // Only scroll occasionally during word rendering to prevent flashing
+                    if (this.renderQueue.length === 0) {
+                        this.scheduleScroll();
+                    }
+                    
+                    await this.sleep(settings.delay);
+                }
+            }
+
+            async renderByChars(text, element, settings) {
+                for (let i = 0; i < text.length; i += settings.charsPerChunk) {
+                    if (this.pauseRendering) break;
+                    
+                    const chunk = text.slice(i, i + settings.charsPerChunk);
+                    
+                    if (this.config.enableFadeIn && settings.charsPerChunk === 1) {
+                        const span = document.createElement('span');
+                        span.textContent = chunk;
+                        span.className = 'char-fade-in';
+                        element.appendChild(span);
+                    } else {
+                        element.textContent += chunk;
+                    }
+                    
+                    await this.sleep(settings.delay);
+                }
+            }
+
+            // Smart scrolling methods
+            initScrollContainer() {
+                if (!this.messagesContainer) {
+                    this.messagesContainer = document.getElementById('messagesContainer');
+                }
+            }
+
+            shouldAutoScroll() {
+                this.initScrollContainer();
+                if (!this.messagesContainer) return false;
+                
+                const threshold = 100; // px from bottom
+                const distanceFromBottom = this.messagesContainer.scrollHeight - 
+                    (this.messagesContainer.scrollTop + this.messagesContainer.clientHeight);
+                    
+                return distanceFromBottom <= threshold;
+            }
+
+            scheduleScroll() {
+                if (!this.shouldAutoScroll()) return;
+                
+                const now = Date.now();
+                if (now - this.lastScrollTime < this.scrollThrottle) {
+                    // Debounce the scroll
+                    if (this.scrollTimeout) {
+                        clearTimeout(this.scrollTimeout);
+                    }
+                    
+                    this.scrollTimeout = setTimeout(() => {
+                        this.performScroll();
+                    }, this.scrollThrottle);
+                    return;
+                }
+                
+                this.performScroll();
+            }
+
+            performScroll() {
+                this.initScrollContainer();
+                if (!this.messagesContainer) return;
+                
+                requestAnimationFrame(() => {
+                    this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+                    this.lastScrollTime = Date.now();
+                });
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            pause() {
+                this.pauseRendering = true;
+            }
+
+            resume() {
+                this.pauseRendering = false;
+                if (!this.isRendering && this.renderQueue.length > 0) {
+                    this.startRendering();
+                }
+            }
+
+            clear() {
+                this.renderQueue = [];
+                this.wordBuffer = [];
+                this.currentWord = '';
+                this.pauseRendering = false;
+            }
+
+            toggle() {
+                this.config.enabled = !this.config.enabled;
+                this.saveConfig();
+                return this.config.enabled;
+            }
+        }
+
+        // Initialize stream smoother
+        const streamSmoother = new StreamSmoother();
+        
+        // Stream control functions
+        function initializeStreamControls() {
+            // Stream smoothing toggle
+            const smoothingToggle = document.getElementById('streamSmoothingToggle');
+            if (smoothingToggle) {
+                smoothingToggle.checked = streamSmoother.config.enabled;
+                smoothingToggle.addEventListener('change', (e) => {
+                    streamSmoother.config.enabled = e.target.checked;
+                    streamSmoother.saveConfig();
+                    
+                    // Show/hide speed controls
+                    const controls = document.getElementById('streamControls');
+                    if (controls) {
+                        controls.style.display = e.target.checked ? 'flex' : 'none';
+                    }
+                });
+            }
+            
+            // Speed control buttons
+            const speedButtons = document.querySelectorAll('.speed-button');
+            speedButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    // Update active state
+                    speedButtons.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    // Update stream smoother speed
+                    const speed = e.target.dataset.speed;
+                    streamSmoother.setSpeed(speed);
+                    
+                    // Visual feedback
+                    e.target.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        e.target.style.transform = '';
+                    }, 100);
+                });
+            });
+            
+            // Set initial active button
+            const currentSpeed = streamSmoother.config.speed;
+            const activeButton = document.querySelector(`[data-speed="${currentSpeed}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+            
+            // Show/hide controls based on initial state
+            const controls = document.getElementById('streamControls');
+            if (controls) {
+                controls.style.display = streamSmoother.config.enabled ? 'flex' : 'none';
+            }
+        }
+        
+        function pauseStreamRendering() {
+            streamSmoother.pause();
+            
+            // Visual indicator
+            const controls = document.getElementById('streamControls');
+            if (controls) {
+                controls.style.opacity = '0.5';
+            }
+        }
+        
+        function resumeStreamRendering() {
+            streamSmoother.resume();
+            
+            // Remove visual indicator
+            const controls = document.getElementById('streamControls');
+            if (controls) {
+                controls.style.opacity = '1';
+            }
+        }
+        
+        // Thinking State Management
+        let currentThinking = {
+            content: '',
+            signature: '',
+            blockIndex: 0,
+            isActive: false,
+            phase: '',
+            startTime: null
+        };
+        let thinkingBlocks = [];
+        let cumulativeThinking = '';
+        
+        // DOM Elements
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const connectionText = document.getElementById('connectionText');
+        const toolCount = document.getElementById('toolCount');
+        const progressBar = document.getElementById('progressBar');
+        
+        // Initialize
+        checkServerHealth();
+        initializeStreamControls();
+        
+        // Sidebar Functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('toolsSidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            
+            sidebarCollapsed = !sidebarCollapsed;
+            sidebar.classList.toggle('collapsed', sidebarCollapsed);
+            toggle.textContent = sidebarCollapsed ? '▶' : '◀';
+        }
+        
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.sidebar-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.closest('.sidebar-tab').classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.sidebar-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + 'Content').classList.add('active');
+            
+            currentTab = tabName;
+        }
+        
+        function togglePanel(header) {
+            const panel = header.parentElement;
+            panel.classList.toggle('collapsed');
+        }
+        
+        function addActivityItem(icon, text, type = 'info') {
+            const activityFeed = document.getElementById('toolActivity');
+            
+            // Clear initial message if needed
+            if (activityFeed.innerHTML.includes('No tools executed')) {
+                activityFeed.innerHTML = '';
+            }
+            
+            const item = document.createElement('div');
+            item.className = 'activity-item';
+            item.innerHTML = `
+                <div class="activity-icon">${icon}</div>
+                <div class="activity-content">
+                    <div>${text}</div>
+                    <div class="activity-timestamp">${new Date().toLocaleTimeString()}</div>
+                </div>
+            `;
+            
+            activityFeed.insertBefore(item, activityFeed.firstChild);
+            
+            // Update tool indicator
+            const indicator = document.getElementById('toolIndicator');
+            indicator.style.display = 'flex';
+            indicator.textContent = ++toolCallCount;
+            
+            // Show main activity indicator
+            const activityIndicator = document.getElementById('activityIndicator');
+            const activityText = document.getElementById('activityText');
+            if (type === 'tool') {
+                activityIndicator.style.display = 'block';
+                activityText.textContent = `🔧 ${text}`;
+            } else if (type === 'success') {
+                activityText.textContent = `✅ ${text}`;
+                setTimeout(() => {
+                    activityIndicator.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Auto-switch to tools tab if tools are being used
+            if (currentTab !== 'tools' && !sidebarCollapsed && type === 'tool') {
+                // Visual indication without switching
+                const toolTab = document.querySelector('.sidebar-tab:nth-child(2)');
+                toolTab.style.animation = 'pulse 2s infinite';
+                setTimeout(() => {
+                    toolTab.style.animation = '';
+                }, 4000);
+            }
+        }
+        
+        function addTimelineItem(title, status = 'active', details = '') {
+            const timeline = document.getElementById('researchTimeline');
+            
+            // Clear initial message if needed
+            if (timeline.innerHTML.includes('No active research')) {
+                timeline.innerHTML = '';
+            }
+            
+            const item = document.createElement('div');
+            item.className = `timeline-item ${status}`;
+            item.innerHTML = `
+                <div style="font-weight: 600; color: var(--text-light); margin-bottom: 0.25rem;">
+                    ${title}
+                </div>
+                ${details ? `<div style="font-size: 0.75rem; color: var(--text-muted);">${details}</div>` : ''}
+                <div class="activity-timestamp">${new Date().toLocaleTimeString()}</div>
+            `;
+            
+            timeline.appendChild(item);
+        }
+        
+        // Enhanced thinking display with progressive phases and analytics
+        function updateThinkingDisplay(content, phase = '', blockIndex = 0) {
+            const thinkingOutput = document.getElementById('thinkingOutput');
+            
+            // Analyze thinking content for enhanced metrics
+            const analysis = analyzeThinkingContent(content);
+            
+            // Update phase if provided
+            // Update the current thinking content and refresh the entire display
+            if (currentThinking) {
+                currentThinking.content = content;
+                currentThinking.phase = phase || currentThinking.phase;
+            }
+            
+            // Use the new accumulative display system
+            displayAllThinkingBlocks();
+            
+            // Auto-scroll thinking panel (debounced)
+            if (streamSmoother) {
+                streamSmoother.scheduleScroll();
+            }
+            
+            // Update thinking status in main section if exists
+            const thinkingSection = document.querySelector('.thinking-section');
+            if (thinkingSection) {
+                const statusDiv = thinkingSection.querySelector('.thinking-status');
+                if (statusDiv && currentThinking.isActive) {
+                    statusDiv.textContent = 'THINKING';
+                    statusDiv.style.background = 'rgba(245, 158, 11, 0.2)';
+                } else if (statusDiv) {
+                    statusDiv.textContent = 'COMPLETE';
+                    statusDiv.style.background = 'rgba(34, 197, 94, 0.2)';
+                    statusDiv.style.color = '#166534';
+                }
+                
+                // Update phase indicator
+                const phaseIndicator = thinkingSection.querySelector('.thinking-phase-indicator');
+                if (phaseIndicator && phase) {
+                    phaseIndicator.style.display = 'block';
+                    phaseIndicator.querySelector('.phase-icon').textContent = getPhaseIcon(phase);
+                    phaseIndicator.querySelector('.phase-text').textContent = `${phase} Phase`;
+                }
+                
+                // Show signature if available
+                if (currentThinking.signature) {
+                    const signatureDiv = thinkingSection.querySelector('.thinking-signature');
+                    if (signatureDiv) {
+                        signatureDiv.style.display = 'block';
+                        signatureDiv.querySelector('.signature-hash').textContent = currentThinking.signature;
+                    }
+                }
+            }
+        }
+
+        // Render individual thinking block
+        function renderThinkingBlock(block, index, isActive = false) {
+            const phase = block.phase || 'Analysis';
+            const phaseIcon = getPhaseIcon(phase);
+            const analysis = analyzeThinkingContent(block.content || '');
+            const progressInfo = getThinkingProgress(block.content || '', phase);
+            
+            const statusClass = isActive ? 'thinking-block-active' : 'thinking-block-completed';
+            const statusText = isActive ? 'THINKING' : 'COMPLETE';
+            const statusColor = isActive ? 'rgba(245, 158, 11, 0.2)' : 'rgba(34, 197, 94, 0.2)';
+            const statusTextColor = isActive ? '#92400E' : '#166534';
+            
+            const duration = block.duration ? `${Math.round(block.duration / 1000)}s` : (isActive ? 'ongoing' : '');
+            const signature = block.signature ? `<div style="font-size: 0.6rem; color: var(--text-muted); margin-top: 0.5rem; word-break: break-all;">Signature: ${block.signature}</div>` : '';
+            
+            const enhancedContent = highlightLegalContent(block.content || '');
+            
+            return `
+                <div class="thinking-block-container ${statusClass}" style="border-bottom: 1px solid rgba(245, 158, 11, 0.2); margin-bottom: 1rem; padding-bottom: 1rem;">
+                    <div class="thinking-phase" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; padding: 0.5rem; background: ${progressInfo.color}; border-radius: 0.375rem; font-size: 0.75rem; color: ${progressInfo.textColor}; font-weight: 500; position: relative;">
+                        <span>${phaseIcon}</span>
+                        <span>${phase}</span>
+                        <div style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; opacity: 0.8;">
+                            <div style="background: ${statusColor}; color: ${statusTextColor}; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.625rem; font-weight: 500;">${statusText}</div>
+                            <span>Block ${index + 1}</span>
+                            ${duration ? `<span>• ${duration}</span>` : ''}
+                            <span>• ${analysis.complexityScore}/10</span>
+                            <span>• ${analysis.legalEntities.length} entities</span>
+                        </div>
+                        ${isActive ? `<div class="thinking-progress-bar" style="position: absolute; bottom: 0; left: 0; height: 2px; background: ${progressInfo.textColor}; width: ${progressInfo.progress}%; transition: width 0.3s ease;"></div>` : ''}
+                    </div>
+                    <div class="enhanced-thinking-content" style="white-space: pre-wrap; line-height: 1.6; font-family: 'Courier New', monospace; color: #92400E;">${enhancedContent}</div>
+                    ${signature}
+                </div>
+            `;
+        }
+
+        // Display all thinking blocks in the sidebar
+        function displayAllThinkingBlocks() {
+            const thinkingOutput = document.getElementById('thinkingOutput');
+            let html = '';
+            
+            // Display all completed blocks
+            thinkingBlocks.forEach((block, index) => {
+                html += renderThinkingBlock(block, index, false);
+            });
+            
+            // Display current active block if exists
+            if (currentThinking && currentThinking.isActive && currentThinking.content) {
+                html += renderThinkingBlock(currentThinking, currentThinking.blockIndex, true);
+            }
+            
+            if (html) {
+                const totalBlocks = thinkingBlocks.length + (currentThinking && currentThinking.isActive && currentThinking.content ? 1 : 0);
+                const headerHtml = `<div style="background: var(--primary); color: white; padding: 0.5rem; margin-bottom: 1rem; border-radius: 0.375rem; text-align: center; font-size: 0.75rem; font-weight: 600;">
+                    🧠 Chain of Thought Analysis (${totalBlocks} block${totalBlocks !== 1 ? 's' : ''})
+                </div>`;
+                thinkingOutput.innerHTML = headerHtml + html;
+            } else {
+                thinkingOutput.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px; font-family: inherit;">No thinking blocks yet...</div>';
+            }
+        }
+        
+        function getPhaseIcon(phase) {
+            const icons = {
+                'Analysis': '🔍',
+                'Research': '📚',
+                'Planning': '📋',
+                'Synthesis': '🔬',
+                'Evaluation': '⚖️',
+                'Strategy': '🎯',
+                'Legal Analysis': '⚖️',
+                'Case Review': '📖',
+                'Regulatory': '📜',
+                'Tool Selection': '🔧'
+            };
+            return icons[phase] || '🧠';
+        }
+
+        // Analyze thinking content for metrics and insights
+        function analyzeThinkingContent(content) {
+            const words = content.split(/\s+/).filter(w => w.length > 0);
+            const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            
+            // Extract legal entities
+            const legalEntities = extractLegalEntities(content);
+            
+            // Calculate complexity score based on various factors
+            const complexityScore = Math.min(10, Math.floor(
+                (words.length / 50) * 2 +  // Length factor
+                (sentences.length / 10) * 2 + // Sentence complexity
+                legalEntities.length * 0.5 + // Legal entity density
+                (content.match(/\b(analyze|consider|examine|evaluate|determine|assess)\b/gi) || []).length * 0.3 // Analysis words
+            ));
+            
+            return {
+                wordCount: words.length,
+                sentenceCount: sentences.length,
+                legalEntities: legalEntities,
+                complexityScore: complexityScore,
+                confidenceIndicators: extractConfidenceIndicators(content)
+            };
+        }
+
+        // Extract legal entities from thinking content
+        function extractLegalEntities(content) {
+            const patterns = {
+                cases: /\b[A-Z][a-z]+ v\.?\s+[A-Z][a-z]+/g,
+                statutes: /\b\d+\s+U\.?S\.?C\.?\s+§?\s*\d+/g,
+                courts: /\b(Supreme Court|Circuit|District Court|Court of Appeals)/gi,
+                regulations: /\b\d+\s+C\.?F\.?R\.?\s+§?\s*\d+/g,
+                citations: /\b\d+\s+F\.\d+\s+\d+/g
+            };
+            
+            const entities = [];
+            for (const [type, pattern] of Object.entries(patterns)) {
+                const matches = content.match(pattern) || [];
+                matches.forEach(match => entities.push({ type, text: match }));
+            }
+            
+            return entities;
+        }
+
+        // Extract confidence indicators from thinking
+        function extractConfidenceIndicators(content) {
+            const highConfidence = (content.match(/\b(clearly|definitely|certainly|obviously|undoubtedly)\b/gi) || []).length;
+            const lowConfidence = (content.match(/\b(might|maybe|possibly|perhaps|uncertain|unclear)\b/gi) || []).length;
+            const questions = (content.match(/\?/g) || []).length;
+            
+            return {
+                high: highConfidence,
+                low: lowConfidence,
+                questions: questions,
+                score: Math.max(1, Math.min(10, 5 + highConfidence - lowConfidence - questions * 0.5))
+            };
+        }
+
+        // Get thinking progress based on phase and content
+        function getThinkingProgress(content, phase) {
+            const phaseColors = {
+                'Strategy': { color: 'rgba(99, 102, 241, 0.1)', textColor: '#3730A3', progress: 20 },
+                'Research': { color: 'rgba(59, 130, 246, 0.1)', textColor: '#1E40AF', progress: 40 },
+                'Analysis': { color: 'rgba(245, 158, 11, 0.1)', textColor: '#92400E', progress: 60 },
+                'Synthesis': { color: 'rgba(16, 185, 129, 0.1)', textColor: '#065F46', progress: 80 },
+                'Conclusion': { color: 'rgba(139, 92, 246, 0.1)', textColor: '#5B21B6', progress: 100 }
+            };
+            
+            return phaseColors[phase] || { color: 'rgba(245, 158, 11, 0.1)', textColor: '#92400E', progress: 50 };
+        }
+
+        // Highlight legal content in thinking and responses
+        function highlightLegalContent(content) {
+            let highlighted = content;
+            
+            // Highlight case names
+            highlighted = highlighted.replace(
+                /\b([A-Z][a-z]+\s+v\.?\s+[A-Z][a-z]+)/g,
+                '<span style="font-style: italic; color: #1D4ED8; font-weight: 500;" title="Case Name">$1</span>'
+            );
+            
+            // Highlight statutes
+            highlighted = highlighted.replace(
+                /\b(\d+\s+U\.?S\.?C\.?\s+§?\s*\d+[\w\-]*)/g,
+                '<span style="background: rgba(59, 130, 246, 0.1); padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-weight: 500;" title="U.S. Code">$1</span>'
+            );
+            
+            // Highlight regulations
+            highlighted = highlighted.replace(
+                /\b(\d+\s+C\.?F\.?R\.?\s+§?\s*\d+[\w\-]*)/g,
+                '<span style="background: rgba(16, 185, 129, 0.1); padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-weight: 500;" title="Code of Federal Regulations">$1</span>'
+            );
+            
+            // Highlight legal reasoning keywords
+            highlighted = highlighted.replace(
+                /\b(analyze|consider|examine|evaluate|determine|assess|conclude|find|hold|rule)\b/gi,
+                '<span style="color: #7C2D12; font-weight: 600;">$1</span>'
+            );
+            
+            return highlighted;
+        }
+
+        // Enhanced legal formatting for stream text
+        function enhanceLegalFormatting(text) {
+            let enhanced = text;
+            
+            // Format case citations with proper styling
+            enhanced = enhanced.replace(
+                /\b([A-Z][a-z]+\s+v\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*),?\s+(\d+\s+[A-Z][a-z]*\.?\s*(?:\d+d?)?\s+\d+(?:,\s+\d+)?)\s+\((\d{4})\)/g,
+                '***$1***, $2 ($3)'
+            );
+            
+            // Format statutes with enhanced styling
+            enhanced = enhanced.replace(
+                /\b(\d+\s+U\.?S\.?C\.?\s+§\s*\d+[\w\-]*)/g,
+                '**$1**'
+            );
+            
+            // Format regulations
+            enhanced = enhanced.replace(
+                /\b(\d+\s+C\.?F\.?R\.?\s+§\s*\d+[\w\-]*)/g,
+                '**$1**'
+            );
+            
+            // Format legal conclusions and holdings
+            enhanced = enhanced.replace(
+                /\b(HELD|HOLDING|CONCLUSION|ANALYSIS|RECOMMENDATION):\s*/gi,
+                '\n\n**$1:**\n\n'
+            );
+            
+            // Format section headers
+            enhanced = enhanced.replace(
+                /^(I{1,3}\.?\s+[A-Z][A-Za-z\s]+)$/gm,
+                '\n## $1\n'
+            );
+            
+            // Format numbered legal points
+            enhanced = enhanced.replace(
+                /^(\d+\.\s+)/gm,
+                '\n$1'
+            );
+            
+            // Format legal reasoning transitions
+            enhanced = enhanced.replace(
+                /\b(Therefore|Accordingly|However|Nevertheless|Furthermore|Moreover|In contrast|Similarly)\b/g,
+                '*$1*'
+            );
+            
+            return enhanced;
+        }
+
+        // Interactive legal content enhancement
+        function addInteractiveLegalFeatures(element) {
+            // Add tooltips to legal citations
+            const caseNames = element.querySelectorAll('[title="Case Name"]');
+            caseNames.forEach(caseElement => {
+                caseElement.addEventListener('mouseenter', (e) => {
+                    showLegalTooltip(e.target, 'case', e.target.textContent);
+                });
+            });
+            
+            // Add tooltips to statutes
+            const statutes = element.querySelectorAll('[title="U.S. Code"]');
+            statutes.forEach(statuteElement => {
+                statuteElement.addEventListener('mouseenter', (e) => {
+                    showLegalTooltip(e.target, 'statute', e.target.textContent);
+                });
+            });
+        }
+        
+        // Show legal tooltips with contextual information
+        function showLegalTooltip(element, type, text) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'legal-tooltip';
+            tooltip.innerHTML = getLegalTooltipContent(type, text);
+            
+            tooltip.style.cssText = `
+                position: absolute;
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 0.5rem;
+                border-radius: 0.375rem;
+                font-size: 0.75rem;
+                z-index: 1000;
+                max-width: 250px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                pointer-events: none;
+            `;
+            
+            document.body.appendChild(tooltip);
+            
+            const rect = element.getBoundingClientRect();
+            tooltip.style.left = rect.left + 'px';
+            tooltip.style.top = (rect.bottom + 5) + 'px';
+            
+            // Auto-remove tooltip after 3 seconds or on mouse leave
+            setTimeout(() => tooltip.remove(), 3000);
+            element.addEventListener('mouseleave', () => tooltip.remove(), { once: true });
+        }
+        
+        // Get contextual tooltip content for legal elements
+        function getLegalTooltipContent(type, text) {
+            switch (type) {
+                case 'case':
+                    return `<strong>Case Citation:</strong><br>${text}<br><em>Click to search for full text</em>`;
+                case 'statute':
+                    return `<strong>U.S. Code Section:</strong><br>${text}<br><em>Federal statute reference</em>`;
+                case 'regulation':
+                    return `<strong>Federal Regulation:</strong><br>${text}<br><em>Code of Federal Regulations</em>`;
+                default:
+                    return `<strong>Legal Reference:</strong><br>${text}`;
+            }
+        }
+        
+        // Event Listeners
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // Auto-resize textarea
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+        
+        // Check server health
+        async function checkServerHealth() {
+            try {
+                const response = await fetch('http://localhost:8090/health');
+                const data = await response.json();
+                
+                if (data.ok) {
+                    connectionStatus.style.background = '#10B981';
+                    connectionText.textContent = 'Connected';
+                    
+                    // Update model info
+                    document.getElementById('modelName').textContent = data.models?.current || 'claude-sonnet-4-5-20250929';
+                    
+                    // Update tool count
+                    const tools = data.legal_coverage?.tools || '60+';
+                    toolCount.textContent = tools;
+                }
+            } catch (error) {
+                connectionStatus.style.background = '#EF4444';
+                connectionText.textContent = 'Disconnected';
+                console.error('Health check failed:', error);
+            }
+        }
+        
+        // Send message
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message || isProcessing) return;
+            
+            // Reset metrics and sidebar state
+            metrics = {
+                toolsExecuted: 0,
+                thinkingBlocks: 0,
+                startTime: Date.now(),
+                tokensUsed: 0
+            };
+            toolCallCount = 0;
+            updateMetrics();
+            
+            // Reset thinking state
+            currentThinking = {
+                content: '',
+                signature: '',
+                blockIndex: 0,
+                isActive: false,
+                phase: '',
+                startTime: null
+            };
+            thinkingBlocks = [];
+            cumulativeThinking = '';
+            
+            // Reset sidebar displays
+            document.getElementById('thinkingOutput').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px; font-family: inherit;">Processing query...</div>';
+            document.getElementById('toolActivity').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Waiting for tool execution...</div>';
+            document.getElementById('researchTimeline').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Initializing research...</div>';
+            document.getElementById('toolIndicator').style.display = 'none';
+            
+            // Add user message
+            addMessage(message, 'user');
+            
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            
+            // Set processing state
+            setProcessing(true);
+            
+            // Get settings
+            const endpoint = document.getElementById('endpointSelect').value;
+            const maxTokens = document.getElementById('maxTokens').value;
+            
+            if (endpoint === 'stream') {
+                streamResponse(message, maxTokens);
+            } else {
+                sendResearchRequest(message, maxTokens);
+            }
+        }
+        
+        // Stream response
+        function streamResponse(query, maxTokens) {
+            const url = `http://localhost:8090/api/claude/stream?query=${encodeURIComponent(query)}`;
+            
+            // Close existing connection
+            if (eventSource) {
+                eventSource.close();
+            }
+            
+            // Create assistant message container
+            currentMessageDiv = addMessage('', 'assistant');
+            const contentDiv = currentMessageDiv.querySelector('.message-content');
+            let currentContent = '';
+            
+            eventSource = new EventSource(url);
+            
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    handleStreamEvent(data, contentDiv, currentContent);
+                    
+                    if (data.type === 'delta' && data.text) {
+                        currentContent += data.text;
+                        
+                        // Update the accumulated content for non-smoothed rendering fallback
+                        if (!streamSmoother.config.enabled) {
+                            const responseSection = contentDiv.querySelector('.response-section');
+                            if (responseSection) {
+                                const textDiv = responseSection.querySelector('.text-content');
+                                if (textDiv) {
+                                    const enhancedText = enhanceLegalFormatting(currentContent);
+                                    textDiv.innerHTML = marked.parse(enhancedText);
+                                }
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error parsing event:', error);
+                }
+            };
+            
+            eventSource.onerror = (error) => {
+                console.error('EventSource error:', error);
+                setProcessing(false);
+                eventSource.close();
+            };
+        }
+        
+        // Handle stream events
+        function handleStreamEvent(data, contentDiv, currentContent) {
+            const showThinking = document.getElementById('thinkingToggle').checked;
+            const showToolDetails = document.getElementById('toolDetailsToggle').checked;
+            
+            // Special handling for thinking content with stream smoothing
+            if (data.type === 'thinking_delta' || data.type === 'thinking') {
+                const thinkingText = data.text || data.thinking || '';
+                if (showThinking && currentThinking.isActive && thinkingText) {
+                    const thinkingSection = contentDiv.querySelector('.thinking-section');
+                    if (thinkingSection) {
+                        const thinkingContent = thinkingSection.querySelector('.thinking-content');
+                        if (thinkingContent && streamSmoother.config.enabled) {
+                            // Use slower speed for thinking content
+                            streamSmoother.addChunk(thinkingText, thinkingContent, 'thinking');
+                        }
+                    }
+                }
+            }
+            
+            switch(data.type) {
+                case 'system_info':
+                    console.log('System info:', data);
+                    break;
+                    
+                // Handle thinking events according to API spec
+                case 'thinking_start':
+                    if (showThinking) {
+                        currentThinking = {
+                            content: '',
+                            signature: '',
+                            blockIndex: thinkingBlocks.length,
+                            isActive: true,
+                            phase: data.phase || 'Analysis',
+                            startTime: Date.now()
+                        };
+                        
+                        // Create thinking section if not exists
+                        let thinkingSection = contentDiv.querySelector('.thinking-section');
+                        if (!thinkingSection) {
+                            thinkingSection = createThinkingSection('');
+                            contentDiv.appendChild(thinkingSection);
+                        }
+                        
+                        metrics.thinkingBlocks++;
+                        addTimelineItem('Starting Analysis', 'active', 'Claude is thinking through the problem...');
+                        updateThinkingDisplay('Initializing analysis...', currentThinking.phase);
+                    }
+                    break;
+                    
+                case 'thinking_delta':
+                case 'thinking':
+                    if (showThinking && currentThinking.isActive) {
+                        const thinkingText = data.text || data.thinking || '';
+                        currentThinking.content += thinkingText;
+                        cumulativeThinking += thinkingText;
+                        
+                        // Update main thinking section
+                        const thinkingSection = contentDiv.querySelector('.thinking-section');
+                        if (thinkingSection) {
+                            const thinkingContent = thinkingSection.querySelector('.thinking-content');
+                            if (thinkingContent) {
+                                thinkingContent.textContent = currentThinking.content;
+                                // Auto-scroll to bottom (debounced)
+                                if (streamSmoother) {
+                                    streamSmoother.scheduleScroll();
+                                }
+                            }
+                        }
+                        
+                        // Update sidebar thinking display
+                        updateThinkingDisplay(currentThinking.content, currentThinking.phase);
+                        
+                        // Update timeline with current thinking phase
+                        if (data.analysis?.research_phase && data.analysis.research_phase !== currentThinking.phase) {
+                            currentThinking.phase = data.analysis.research_phase;
+                            addTimelineItem(`${currentThinking.phase} Phase`, 'active', 'Deep analysis in progress...');
+                        }
+                    }
+                    break;
+                    
+                case 'thinking_stop':
+                    if (showThinking && currentThinking.isActive) {
+                        currentThinking.isActive = false;
+                        currentThinking.signature = data.signature || '';
+                        currentThinking.duration = Date.now() - currentThinking.startTime;
+                        
+                        // Store completed thinking block
+                        thinkingBlocks.push({...currentThinking});
+                        
+                        // Reset current thinking after storing
+                        currentThinking = null;
+                        
+                        // Update the display to show all blocks
+                        displayAllThinkingBlocks();
+                        
+                        // Update timeline
+                        const timelineItems = document.querySelectorAll('.timeline-item.active');
+                        const lastThinkingItem = Array.from(timelineItems).find(item => 
+                            item.textContent.includes('Analysis') || item.textContent.includes('Phase')
+                        );
+                        if (lastThinkingItem) {
+                            lastThinkingItem.classList.remove('active');
+                            lastThinkingItem.classList.add('completed');
+                        }
+                        
+                        // Add completion marker with detailed stats
+                        const duration = currentThinking.duration;
+                        const wordCount = currentThinking.content.split(/\s+/).length;
+                        addTimelineItem('Analysis Complete', 'completed', 
+                            `${Math.round(duration/1000)}s • ${wordCount} words • ${currentThinking.phase}`);
+                        
+                        // Add activity item to sidebar
+                        addActivityItem('🧠', 
+                            `Thinking block completed: ${currentThinking.content.substring(0, 50)}...`, 
+                            'success');
+                        
+                        // Update thinking display to show completion
+                        updateThinkingDisplay(currentThinking.content, currentThinking.phase, currentThinking.blockIndex);
+                        
+                        // Remove active animation classes
+                        const thinkingSection = contentDiv.querySelector('.thinking-section');
+                        if (thinkingSection) {
+                            thinkingSection.classList.remove('thinking-active');
+                            const thinkingContent = thinkingSection.querySelector('.thinking-content');
+                            if (thinkingContent) {
+                                thinkingContent.classList.remove('thinking-active');
+                            }
+                        }
+                        
+                        // Show completion notification in activity indicator
+                        const activityIndicator = document.getElementById('activityIndicator');
+                        const activityText = document.getElementById('activityText');
+                        if (activityIndicator && activityText) {
+                            activityText.textContent = `✅ Analysis complete (${Math.round(duration/1000)}s)`;
+                            setTimeout(() => {
+                                activityIndicator.style.display = 'none';
+                            }, 3000);
+                        }
+                        
+                        // Update metrics
+                        updateMetrics();
+                    }
+                    break;
+                    
+                // Handle legacy thinking events for backwards compatibility
+                case 'enhanced_thinking':
+                    if (showThinking && data.text) {
+                        // Treat as thinking_delta for backwards compatibility
+                        currentThinking.content += data.text;
+                        cumulativeThinking += data.text;
+                        
+                        let thinkingSection = contentDiv.querySelector('.thinking-section');
+                        if (!thinkingSection) {
+                            thinkingSection = createThinkingSection('');
+                            contentDiv.appendChild(thinkingSection);
+                            metrics.thinkingBlocks++;
+                        }
+                        
+                        const thinkingContent = thinkingSection.querySelector('.thinking-content');
+                        if (thinkingContent) {
+                            thinkingContent.textContent = currentThinking.content;
+                        }
+                        
+                        const phase = data.analysis?.research_phase || 'Analysis';
+                        updateThinkingDisplay(currentThinking.content, phase);
+                        
+                        if (data.analysis?.research_phase) {
+                            addTimelineItem(`${data.analysis.research_phase} Phase`, 'active', 'Processing legal reasoning...');
+                        }
+                    }
+                    break;
+                    
+                // Handle both v1 and v2 tool call events
+                case 'enhanced_tool_call':
+                case 'tool_call':
+                    if (showToolDetails) {
+                        const { phase, tool } = data;
+                        
+                        // Add tools section if not exists
+                        let toolsSection = contentDiv.querySelector('.tools-section');
+                        if (!toolsSection) {
+                            toolsSection = createToolsSection();
+                            contentDiv.appendChild(toolsSection);
+                        }
+                        
+                        const toolsContainer = toolsSection.querySelector('.tools-container');
+                        
+                        switch(phase) {
+                            case 'tool_start':
+                            case undefined: // backward compatibility
+                                // Create new tool block
+                                const toolData = tool || {
+                                    name: data.name,
+                                    id: data.id,
+                                    input: data.arguments || data.input || {}
+                                };
+                                const toolBlock = createToolBlock(toolData);
+                                toolsContainer.appendChild(toolBlock);
+                                metrics.toolsExecuted++;
+                                break;
+                                
+                            case 'tool_update':
+                                // Update existing tool arguments
+                                const existingBlock = toolsContainer.querySelector(`[data-tool-id="${tool.id}"]`);
+                                if (existingBlock) {
+                                    const codeElement = existingBlock.querySelector('.tool-input code');
+                                    if (codeElement) {
+                                        codeElement.textContent = JSON.stringify(tool.input || {}, null, 2);
+                                    }
+                                    const statusElement = existingBlock.querySelector('.tool-status');
+                                    if (statusElement) {
+                                        statusElement.textContent = 'Arguments streaming...';
+                                        statusElement.className = 'tool-status updating';
+                                    }
+                                }
+                                break;
+                                
+                            case 'tool_execute':
+                                // Update status to executing
+                                const executingBlock = toolsContainer.querySelector(`[data-tool-id="${tool.id}"]`);
+                                if (executingBlock) {
+                                    const statusElement = executingBlock.querySelector('.tool-status');
+                                    if (statusElement) {
+                                        statusElement.textContent = 'Executing...';
+                                        statusElement.className = 'tool-status executing';
+                                    }
+                                }
+                                break;
+                                
+                            case 'tool_result':
+                                // Update status to complete with result preview
+                                const completedBlock = toolsContainer.querySelector(`[data-tool-id="${tool.id}"]`);
+                                if (completedBlock) {
+                                    const statusElement = completedBlock.querySelector('.tool-status');
+                                    if (statusElement) {
+                                        statusElement.textContent = data.success ? '✓ Complete' : '✗ Error';
+                                        statusElement.className = `tool-status ${data.success ? 'completed' : 'error'}`;
+                                    }
+                                    
+                                    // Add result preview if available
+                                    if (data.preview) {
+                                        let resultElement = completedBlock.querySelector('.tool-result');
+                                        if (!resultElement) {
+                                            resultElement = document.createElement('div');
+                                            resultElement.className = 'tool-result';
+                                            completedBlock.appendChild(resultElement);
+                                        }
+                                        resultElement.innerHTML = `<div class="tool-result-header">Result Preview:</div><pre><code>${escapeHtml(data.preview)}</code></pre>`;
+                                    }
+                                }
+                                break;
+                        }
+                        
+                        // Optional: Update sidebar if functions exist
+                        if (typeof addActivityItem === 'function') {
+                            addActivityItem('🔧', `Executing ${tool.name}`, 'tool');
+                        }
+                        if (typeof addTimelineItem === 'function') {
+                            addTimelineItem(`Tool: ${tool.name}`, 'active', `Processing with parameters: ${Object.keys(tool.arguments || {}).join(', ')}`);
+                        }
+                    }
+                    break;
+                    
+                case 'enhanced_tool_complete':
+                case 'tool_complete':
+                    if (showToolDetails) {
+                        updateToolStatus(data.tool_result || data);
+                        
+                        // Optional: Update sidebar if functions exist
+                        if (typeof addActivityItem === 'function') {
+                            const toolName = data.tool_result?.name || data.name || 'Unknown Tool';
+                            const success = data.tool_result?.success !== false;
+                            addActivityItem(success ? '✅' : '❌', `${toolName} ${success ? 'completed' : 'failed'}`, success ? 'success' : 'error');
+                            
+                            // Update timeline item to completed
+                            const timelineItems = document.querySelectorAll('.timeline-item.active');
+                            const lastItem = timelineItems[timelineItems.length - 1];
+                            if (lastItem && lastItem.textContent.includes(toolName)) {
+                                lastItem.classList.remove('active');
+                                lastItem.classList.add(success ? 'completed' : 'error');
+                            }
+                        }
+                    }
+                    break;
+                    
+                case 'delta':
+                    if (data.text) {
+                        // Auto-collapse thinking and tools sections when response starts
+                        const thinkingSection = contentDiv.querySelector('.thinking-section');
+                        if (thinkingSection && !thinkingSection.classList.contains('collapsed')) {
+                            thinkingSection.classList.add('collapsed');
+                        }
+                        
+                        const toolsSection = contentDiv.querySelector('.tools-section');
+                        if (toolsSection && !toolsSection.classList.contains('collapsed')) {
+                            toolsSection.classList.add('collapsed');
+                        }
+                        
+                        // Add response section if not exists
+                        let responseSection = contentDiv.querySelector('.response-section');
+                        if (!responseSection) {
+                            responseSection = createResponseSection();
+                            contentDiv.appendChild(responseSection);
+                            // Add timeline item for response generation
+                            addTimelineItem('Generating Response', 'active', 'Synthesizing research results...');
+                        }
+                        
+                        let textDiv = responseSection.querySelector('.text-content');
+                        
+                        // Use stream smoother if enabled
+                        if (streamSmoother.config.enabled) {
+                            // Detect content type for adaptive speed
+                            const contentType = streamSmoother.detectContentType(data.text);
+                            
+                            // Special handling for markdown content
+                            if (data.text.includes('```') || data.text.includes('*') || data.text.includes('#')) {
+                                // For markdown/code, render immediately but with smooth appearance
+                                const tempDiv = document.createElement('div');
+                                tempDiv.style.opacity = '0';
+                                tempDiv.style.transform = 'translateY(5px)';
+                                tempDiv.style.transition = 'all 0.3s ease';
+                                
+                                const fullText = currentContent + data.text;
+                                const enhancedText = enhanceLegalFormatting(fullText);
+                                tempDiv.innerHTML = marked.parse(enhancedText);
+                                
+                                textDiv.innerHTML = '';
+                                textDiv.appendChild(tempDiv);
+                                
+                                // Trigger animation
+                                setTimeout(() => {
+                                    tempDiv.style.opacity = '1';
+                                    tempDiv.style.transform = 'translateY(0)';
+                                }, 50);
+                            } else {
+                                // For regular text, use character-by-character smoothing
+                                streamSmoother.addChunk(data.text, textDiv, contentType);
+                            }
+                        } else {
+                            // Direct rendering (original behavior)
+                            const fullText = currentContent + data.text;
+                            const enhancedText = enhanceLegalFormatting(fullText);
+                            textDiv.innerHTML = marked.parse(enhancedText);
+                        }
+                    }
+                    break;
+                    
+                // Handle both v1 and v2 progress events
+                case 'progress_update':
+                case 'progress':
+                    if (data.usage) {
+                        metrics.tokensUsed = data.usage.total_tokens || 0;
+                    }
+                    // Handle v2 progress types
+                    if (data.type === 'research_start') {
+                        console.log('Research started:', data);
+                    } else if (data.type === 'research_complete') {
+                        console.log('Research complete:', data);
+                        metrics.toolsExecuted = data.tools_executed || metrics.toolsExecuted;
+                    } else if (data.type === 'heartbeat') {
+                        console.log('Heartbeat received');
+                    }
+                    updateMetrics();
+                    break;
+                    
+                case 'final':
+                    setProcessing(false);
+                    if (eventSource) {
+                        eventSource.close();
+                        eventSource = null;
+                    }
+                    updateMetrics();
+                    
+                    // Mark all active timeline items as completed
+                    document.querySelectorAll('.timeline-item.active').forEach(item => {
+                        item.classList.remove('active');
+                        item.classList.add('completed');
+                    });
+                    
+                    // Add final completion item
+                    addTimelineItem('Research Complete', 'completed', 'All processes finished successfully');
+                    addActivityItem('🎉', 'Research session completed', 'success');
+                    break;
+                    
+                case 'error':
+                    console.error('Stream error:', data.error);
+                    contentDiv.innerHTML += `<div style="color: red;">Error: ${data.error}</div>`;
+                    setProcessing(false);
+                    break;
+            }
+        }
+        
+        // Send non-streaming research request
+        async function sendResearchRequest(query, maxTokens) {
+            try {
+                const response = await fetch('http://localhost:8090/api/claude/research', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query,
+                        maxTokens: parseInt(maxTokens)
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.text) {
+                    addMessage(data.text, 'assistant');
+                }
+                
+                if (data.usage) {
+                    metrics.tokensUsed = data.usage.total_tokens || 0;
+                }
+                
+                updateMetrics();
+                
+            } catch (error) {
+                console.error('Research request error:', error);
+                addMessage(`Error: ${error.message}`, 'assistant');
+            } finally {
+                setProcessing(false);
+            }
+        }
+        
+        // Create enhanced thinking block with signature support
+        function createThinkingSection(text = '') {
+            const section = document.createElement('div');
+            section.className = 'thinking-section';
+            section.innerHTML = `
+                <div class="thinking-header" onclick="toggleSection(this.parentElement)">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;">🧠</span>
+                        <span style="font-weight: 600; color: var(--warning); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">Chain of Thought Analysis</span>
+                        <div class="thinking-status" style="background: rgba(245, 158, 11, 0.2); color: #92400E; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.625rem; font-weight: 500;">THINKING</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div class="thinking-metrics" style="font-size: 0.625rem; color: var(--text-muted); display: flex; gap: 0.75rem;">
+                            <span id="thinkingBlockCount">Block 1</span>
+                            <span id="thinkingDuration">0s</span>
+                        </div>
+                        <button class="section-toggle">▼</button>
+                    </div>
+                </div>
+                <div class="thinking-block">
+                    <div class="thinking-phase-indicator" style="display: none; background: rgba(59, 130, 246, 0.1); padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 0.375rem; font-size: 0.75rem; color: #1E40AF; font-weight: 500;">
+                        <span class="phase-icon">🔍</span>
+                        <span class="phase-text">Analysis Phase</span>
+                    </div>
+                    <div class="thinking-content" style="position: relative;">${text}</div>
+                    <div class="thinking-signature" style="display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 0.375rem; font-size: 0.625rem; color: #166534; font-family: monospace;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                            <span>✅</span>
+                            <span style="font-weight: 500;">Verified Thinking Block</span>
+                        </div>
+                        <div class="signature-hash" style="opacity: 0.7; word-break: break-all;"></div>
+                    </div>
+                </div>
+            `;
+            return section;
+        }
+        
+        function createToolsSection() {
+            const section = document.createElement('div');
+            section.className = 'tools-section';
+            section.innerHTML = `
+                <div class="tools-header" onclick="toggleSection(this.parentElement)">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;">🔧</span>
+                        <span style="font-weight: 600; color: var(--accent); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">Tool Execution</span>
+                    </div>
+                    <button class="section-toggle">▼</button>
+                </div>
+                <div class="tools-container"></div>
+            `;
+            return section;
+        }
+        
+        function createResponseSection() {
+            const section = document.createElement('div');
+            section.className = 'response-section';
+            section.innerHTML = `
+                <div class="response-label">
+                    <span>📋</span>
+                    <span>Final Response</span>
+                    <div style="margin-left: auto; display: flex; gap: 0.5rem;">
+                        <button onclick="exportResponse(this.closest('.response-section'))" style="background: rgba(59, 130, 246, 0.1); border: none; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; cursor: pointer;">Export</button>
+                        <button onclick="toggleResponseFeatures(this.closest('.response-section'))" style="background: rgba(16, 185, 129, 0.1); border: none; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; cursor: pointer;">Analyze</button>
+                    </div>
+                </div>
+                <div class="text-content"></div>
+            `;
+            
+            // Add interactive features after creation
+            setTimeout(() => {
+                addInteractiveLegalFeatures(section);
+            }, 100);
+            
+            return section;
+        }
+        
+        function toggleSection(section) {
+            section.classList.toggle('collapsed');
+        }
+
+        // Export response as formatted legal document
+        function exportResponse(responseSection) {
+            const textContent = responseSection.querySelector('.text-content').textContent;
+            const timestamp = new Date().toISOString().split('T')[0];
+            
+            // Create legal document format
+            const legalDoc = `
+LEGAL RESEARCH MEMORANDUM
+Generated: ${timestamp}
+Research System: Claude Sonnet-4 Legal Research
+
+${'-'.repeat(50)}
+
+${textContent}
+
+${'-'.repeat(50)}
+
+This document was generated by Claude Legal Research System.
+Thinking blocks: ${thinkingBlocks.length}
+Tools executed: ${metrics.toolsExecuted}
+Research time: ${Math.round((Date.now() - metrics.startTime) / 1000)}s
+            `.trim();
+            
+            // Create and download file
+            const blob = new Blob([legalDoc], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `legal-research-${timestamp}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Show success notification
+            showNotification('Document exported successfully', 'success');
+        }
+
+        // Toggle enhanced response analysis features
+        function toggleResponseFeatures(responseSection) {
+            const textContent = responseSection.querySelector('.text-content');
+            const analysis = analyzeResponseContent(textContent.textContent);
+            
+            // Create or toggle analysis panel
+            let analysisPanel = responseSection.querySelector('.response-analysis');
+            if (analysisPanel) {
+                analysisPanel.style.display = analysisPanel.style.display === 'none' ? 'block' : 'none';
+                return;
+            }
+            
+            analysisPanel = document.createElement('div');
+            analysisPanel.className = 'response-analysis';
+            analysisPanel.style.cssText = `
+                background: rgba(249, 250, 251, 0.8);
+                border: 1px solid rgba(209, 213, 219, 0.5);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                margin-top: 0.5rem;
+                font-size: 0.875rem;
+            `;
+            
+            analysisPanel.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 0.5rem; color: #374151;">📊 Response Analysis</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <div style="font-weight: 500; color: #6B7280;">Content Metrics</div>
+                        <div>Words: ${analysis.wordCount}</div>
+                        <div>Citations: ${analysis.citations}</div>
+                        <div>Legal Entities: ${analysis.legalEntities}</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500; color: #6B7280;">Quality Indicators</div>
+                        <div>Authority Score: ${analysis.authorityScore}/10</div>
+                        <div>Depth Score: ${analysis.depthScore}/10</div>
+                        <div>Coverage: ${analysis.coverage}%</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500; color: #6B7280;">Structure</div>
+                        <div>Sections: ${analysis.sections}</div>
+                        <div>Arguments: ${analysis.arguments}</div>
+                        <div>Conclusions: ${analysis.conclusions}</div>
+                    </div>
+                </div>
+            `;
+            
+            responseSection.appendChild(analysisPanel);
+        }
+
+        // Analyze response content quality and structure
+        function analyzeResponseContent(text) {
+            const words = text.split(/\s+/).filter(w => w.length > 0);
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            
+            const citations = (text.match(/\b\d+\s+[A-Z][a-z]*\.?\s*(?:\d+d?)?\s+\d+/g) || []).length;
+            const legalEntities = (text.match(/\b[A-Z][a-z]+\s+v\.?\s+[A-Z][a-z]+/g) || []).length;
+            const sections = (text.match(/^#+\s+/gm) || []).length;
+            const arguments = (text.match(/\b(argue|contend|assert|maintain|claim)\b/gi) || []).length;
+            const conclusions = (text.match(/\b(conclude|therefore|thus|accordingly|in conclusion)\b/gi) || []).length;
+            
+            const authorityScore = Math.min(10, citations * 2 + legalEntities);
+            const depthScore = Math.min(10, Math.floor(words.length / 100) + sections + arguments);
+            const coverage = Math.min(100, Math.floor((citations + legalEntities + sections) / 3 * 20));
+            
+            return {
+                wordCount: words.length,
+                citations,
+                legalEntities,
+                sections,
+                arguments,
+                conclusions,
+                authorityScore,
+                depthScore,
+                coverage
+            };
+        }
+
+        // Show notification to user
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10B981' : '#3B82F6'};
+                color: white;
+                padding: 0.75rem 1rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                font-size: 0.875rem;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Create tool block
+        function createToolBlock(tool) {
+            const block = document.createElement('div');
+            block.className = 'tool-call-block';
+            block.id = `tool-${tool.id || tool.name}`;
+            block.setAttribute('data-tool-id', tool.id || tool.name);
+            block.innerHTML = `
+                <div class="tool-header">
+                    <span class="tool-name">🔧 ${escapeHtml(tool.name || 'Unknown Tool')}</span>
+                    <span class="tool-status pending">Starting...</span>
+                </div>
+                <div class="tool-input">
+                    <div class="tool-input-header">Arguments:</div>
+                    <pre><code>${escapeHtml(JSON.stringify(tool.input || tool.arguments || {}, null, 2))}</code></pre>
+                </div>
+                <div class="tool-progress">
+                    <div class="tool-progress-bar" style="width: 10%"></div>
+                </div>
+            `;
+            return block;
+        }
+        
+        // Update tool status
+        function updateToolStatus(result) {
+            const block = document.getElementById(`tool-${result.id || result.name}`);
+            if (block) {
+                const status = block.querySelector('.tool-status');
+                const progressBar = block.querySelector('.tool-progress-bar');
+                
+                if (result.success) {
+                    status.textContent = 'Complete';
+                    status.className = 'tool-status complete';
+                    progressBar.style.width = '100%';
+                } else {
+                    status.textContent = 'Error';
+                    status.className = 'tool-status error';
+                }
+            }
+        }
+        
+        // Add message to chat
+        function addMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = type === 'user' ? 'U' : 'C';
+            
+            const content = document.createElement('div');
+            content.className = 'message-content';
+            if (text) {
+                content.textContent = text;
+            }
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(content);
+            
+            messagesContainer.appendChild(messageDiv);
+            // Use debounced scrolling for new messages
+            if (streamSmoother) {
+                streamSmoother.scheduleScroll();
+            }
+            
+            return messageDiv;
+        }
+        
+        // Set processing state
+        function setProcessing(processing) {
+            isProcessing = processing;
+            sendButton.disabled = processing;
+            progressBar.classList.toggle('active', processing);
+            
+            if (processing) {
+                sendButton.textContent = 'Processing...';
+            } else {
+                sendButton.textContent = 'Send';
+            }
+        }
+        
+        // Update metrics including thinking-specific metrics
+        function updateMetrics() {
+            document.getElementById('toolsExecuted').textContent = metrics.toolsExecuted;
+            document.getElementById('thinkingBlocks').textContent = thinkingBlocks.length;
+            document.getElementById('tokensUsed').textContent = metrics.tokensUsed;
+            
+            if (metrics.startTime) {
+                const elapsed = Math.round((Date.now() - metrics.startTime) / 1000);
+                document.getElementById('responseTime').textContent = `${elapsed}s`;
+            }
+            
+            // Update thinking-specific metrics in the main section
+            const thinkingSection = document.querySelector('.thinking-section');
+            if (thinkingSection) {
+                const blockCount = thinkingSection.querySelector('#thinkingBlockCount');
+                const duration = thinkingSection.querySelector('#thinkingDuration');
+                
+                if (blockCount) {
+                    blockCount.textContent = `Block ${thinkingBlocks.length || 1}`;
+                }
+                
+                if (duration && currentThinking.startTime) {
+                    const thinkingElapsed = Math.round((Date.now() - currentThinking.startTime) / 1000);
+                    duration.textContent = `${thinkingElapsed}s`;
+                } else if (duration && thinkingBlocks.length > 0) {
+                    // Calculate total thinking time from completed blocks
+                    const totalThinkingTime = thinkingBlocks.reduce((total, block) => {
+                        return total + (block.duration || 0);
+                    }, 0);
+                    duration.textContent = `${Math.round(totalThinkingTime/1000)}s`;
+                }
+            }
+            
+            // Update sidebar metrics with thinking details
+            const sidebarThinkingBlocks = document.getElementById('sidebarThinkingBlocks');
+            const sidebarToolsUsed = document.getElementById('sidebarToolsUsed');
+            const sidebarResponseTime = document.getElementById('sidebarResponseTime');
+            const sidebarTokens = document.getElementById('sidebarTokens');
+            
+            if (sidebarThinkingBlocks) sidebarThinkingBlocks.textContent = thinkingBlocks.length;
+            if (sidebarToolsUsed) sidebarToolsUsed.textContent = metrics.toolsExecuted;
+            if (sidebarResponseTime && metrics.startTime) {
+                const elapsed = Math.round((Date.now() - metrics.startTime) / 1000);
+                sidebarResponseTime.textContent = `${elapsed}s`;
+            }
+            if (sidebarTokens) sidebarTokens.textContent = metrics.tokensUsed;
+        }
+        
+        // Send test query
+        function sendTestQuery(query) {
+            if (isProcessing) return;
+            messageInput.value = query;
+            sendMessage();
+        }
+        
+        // Test stream smoothing with different content types
+        function testStreamSmoothingDemo() {
+            if (isProcessing) return;
+            
+            const testContent = [
+                { type: 'normal', text: 'This is a demonstration of stream smoothing for legal research. Notice how different content types render at different speeds. ' },
+                { type: 'thinking', text: 'Analysis: This case presents several complex legal issues that require careful consideration of precedent and statutory interpretation... ' },
+                { type: 'code', text: '```javascript\n// Legal data processing\nfunction analyzeCaseData(caseData) {\n    return processLegalPrecedents(caseData);\n}\n```\n' },
+                { type: 'citations', text: 'See Brown v. Board of Education [1], 347 U.S. 483 (1954), and Marbury v. Madison [2], 5 U.S. 137 (1803). ' },
+                { type: 'normal', text: 'This demonstration shows the adaptive speed control system in action for different content types in legal research scenarios.' }
+            ];
+            
+            // Create demo message container
+            const demoMessage = addMessage('Stream Smoothing Demo - Various Content Types', 'assistant');
+            const contentDiv = demoMessage.querySelector('.message-content');
+            const responseSection = createResponseSection();
+            contentDiv.appendChild(responseSection);
+            const textDiv = responseSection.querySelector('.text-content');
+            
+            // Add header explaining the demo
+            textDiv.innerHTML = '<p style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;"><strong>Stream Smoothing Demo:</strong> Watch how different content types render at optimal speeds - normal text (150 chars/sec), thinking content (slower), code blocks (much slower), and citations (faster).</p>';
+            
+            // Test different content types with delays
+            let delay = 0;
+            testContent.forEach((content, index) => {
+                setTimeout(() => {
+                    console.log(`Testing ${content.type} content:`, content.text);
+                    
+                    // Add content type indicator
+                    const indicator = document.createElement('div');
+                    indicator.style.cssText = 'background: rgba(59, 130, 246, 0.1); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 500; margin: 0.5rem 0; display: inline-block;';
+                    indicator.textContent = `Content Type: ${content.type}`;
+                    textDiv.appendChild(indicator);
+                    
+                    const contentContainer = document.createElement('div');
+                    textDiv.appendChild(contentContainer);
+                    
+                    if (streamSmoother.config.enabled) {
+                        streamSmoother.addChunk(content.text, contentContainer, content.type);
+                    } else {
+                        contentContainer.textContent = content.text;
+                    }
+                    
+                    // Add spacing
+                    textDiv.appendChild(document.createElement('br'));
+                    
+                }, delay);
+                delay += 3000; // 3 second delay between each type
+            });
+            
+            // Add final message
+            setTimeout(() => {
+                const finalNote = document.createElement('div');
+                finalNote.style.cssText = 'background: rgba(34, 197, 94, 0.1); padding: 1rem; border-radius: 0.5rem; margin-top: 1rem; font-style: italic;';
+                finalNote.innerHTML = '<strong>Demo Complete!</strong> You can toggle stream smoothing on/off and adjust speeds using the controls in the Features panel.';
+                textDiv.appendChild(finalNote);
+            }, delay + 1000);
+        }
+        
+        // Periodic health check
+        setInterval(checkServerHealth, 30000);
+    </script>
+</body>
+</html>

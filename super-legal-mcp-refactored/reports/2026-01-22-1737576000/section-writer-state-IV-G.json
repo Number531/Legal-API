@@ -1,0 +1,62 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Valuation Methodologies and NAV Markdown Risk",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-G (Valuation Methodologies) covering $360M illiquid portfolio",
+    "progress": "Phase 6 complete — All subsections A-F written, quality checks passed",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": ["section_id=G", "$360M illiquid portfolio analyzed", "$114.4M gross exposure quantified", "3 HIGH findings with draft contract language", "168 footnotes with verification tags"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE. Do not restart. File saved to section-reports/section-IV-G-valuation.md",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["financial-analyst-report.md", "financial-impact-analysis.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 5850,
+    "findings_written": "3/3",
+    "footnotes_count": 168,
+    "last_checkpoint": "2026-01-23T00:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/financial-analyst-report.md (via Grep extraction)",
+    "financial-impact-analysis.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/risk-summary.json"
+  ],
+
+  "quality_verification": {
+    "word_count_met": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

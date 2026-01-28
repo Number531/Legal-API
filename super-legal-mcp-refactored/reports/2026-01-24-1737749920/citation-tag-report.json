@@ -1,0 +1,2966 @@
+{
+  "metadata": {
+    "source_file": "reports/2026-01-24-1737749920/final-memorandum-v2.md",
+    "scan_timestamp": "2026-01-24T06:20:21.087581",
+    "script_version": "1.0.0"
+  },
+  "statistics": {
+    "total_citations_detected": 982,
+    "total_tags_found": 141,
+    "untagged_citations": 318,
+    "high_severity_unverified": 0
+  },
+  "coverage_percentage": 14.358452138492872,
+  "coverage_by_type": {
+    "VERIFIED_URL": 93,
+    "VERIFIED_FILING": 5,
+    "INFERRED_PRECEDENT": 2,
+    "ASSUMED_INDUSTRY": 41,
+    "ASSUMED_LEGISLATIVE_INTENT": 0,
+    "UNVERIFIED_NEEDS_RESEARCH": 0
+  },
+  "coverage_percentages": {
+    "verified_percentage": 69.50354609929079,
+    "unverified_percentage": 0.0,
+    "assumed_percentage": 29.078014184397162
+  },
+  "tags_by_type": {
+    "VERIFIED_URL": [
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1389,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1390,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1426,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1427,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1470,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1471,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1512,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 1555,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2009-WL-185143]",
+        "line_number": 1778,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1985-WL-13792]",
+        "line_number": 1790,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1989-WL-59411]",
+        "line_number": 1792,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1996-WL-453707]",
+        "line_number": 1793,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1995-WL-174987]",
+        "line_number": 1794,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1991-WL-93086]",
+        "line_number": 1803,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2009-WL-185143]",
+        "line_number": 1833,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2009-WL-185143]",
+        "line_number": 1834,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-2483712]",
+        "line_number": 1835,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-2483712]",
+        "line_number": 1836,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-2483712]",
+        "line_number": 1846,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1991-WL-93086]",
+        "line_number": 1850,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1991-WL-93086]",
+        "line_number": 1851,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2002-WL-857378]",
+        "line_number": 1852,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2002-WL-857378]",
+        "line_number": 1853,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2002-WL-857378]",
+        "line_number": 1856,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2014-WL-1998783]",
+        "line_number": 1861,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2014-WL-1998783]",
+        "line_number": 1862,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2015-WL-4606003]",
+        "line_number": 1866,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2015-WL-4606003]",
+        "line_number": 1867,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2015-WL-4606003]",
+        "line_number": 1869,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-605923]",
+        "line_number": 1875,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-605923]",
+        "line_number": 1876,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2022-WL-2045494]",
+        "line_number": 1888,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2011-WL-5299384]",
+        "line_number": 1925,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2005-Ohio-6654]",
+        "line_number": 1929,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2011-WL-5299384]",
+        "line_number": 1959,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2005-Ohio-6654]",
+        "line_number": 1961,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2005-Ohio-6654]",
+        "line_number": 2020,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2011-WL-5299384]",
+        "line_number": 2021,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2005-Ohio-6654]",
+        "line_number": 2493,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2011-WL-5299384]",
+        "line_number": 2495,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2004-WL-234567]",
+        "line_number": 2636,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2004-WL-234567]",
+        "line_number": 2715,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2004-WL-234567]",
+        "line_number": 2782,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-4719347]",
+        "line_number": 4774,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-5971622]",
+        "line_number": 4784,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-4719347]",
+        "line_number": 4818,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-5971622]",
+        "line_number": 4819,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-4719347]",
+        "line_number": 5272,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-4719347]",
+        "line_number": 5274,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-5971622]",
+        "line_number": 5280,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-5971622]",
+        "line_number": 5282,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-4719347]",
+        "line_number": 5342,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-985-F2d-1210]",
+        "line_number": 5456,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-32-OhioSt2d-271]",
+        "line_number": 5534,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-27-OhioSt2d-94]",
+        "line_number": 5644,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-165-F3d-1173]",
+        "line_number": 5733,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-985-F2d-1210]",
+        "line_number": 6293,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-709-P2d-265]",
+        "line_number": 6300,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-165-F3d-1173]",
+        "line_number": 6305,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-130-OhioApp3d-385]",
+        "line_number": 6317,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-985-F2d-1210]",
+        "line_number": 6328,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-32-OhioSt2d-271]",
+        "line_number": 6352,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-27-OhioSt2d-94]",
+        "line_number": 6390,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-165-F3d-1173]",
+        "line_number": 6412,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-165-F3d-1173]",
+        "line_number": 6445,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-130-OhioApp3d-385]",
+        "line_number": 6532,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2009-WL-185143]",
+        "line_number": 9104,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1985-WL-13792]",
+        "line_number": 9116,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1989-WL-59411]",
+        "line_number": 9118,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1996-WL-453707]",
+        "line_number": 9119,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1995-WL-174987]",
+        "line_number": 9120,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1991-WL-93086]",
+        "line_number": 9129,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2009-WL-185143]",
+        "line_number": 9159,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2009-WL-185143]",
+        "line_number": 9160,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-2483712]",
+        "line_number": 9161,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-2483712]",
+        "line_number": 9162,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2017-WL-2483712]",
+        "line_number": 9172,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1991-WL-93086]",
+        "line_number": 9176,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1991-WL-93086]",
+        "line_number": 9177,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2002-WL-857378]",
+        "line_number": 9178,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2002-WL-857378]",
+        "line_number": 9179,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2002-WL-857378]",
+        "line_number": 9182,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2014-WL-1998783]",
+        "line_number": 9187,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2014-WL-1998783]",
+        "line_number": 9188,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2015-WL-4606003]",
+        "line_number": 9192,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2015-WL-4606003]",
+        "line_number": 9193,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2015-WL-4606003]",
+        "line_number": 9195,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-605923]",
+        "line_number": 9201,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2018-WL-605923]",
+        "line_number": 9202,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2022-WL-2045494]",
+        "line_number": 9214,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2005-Ohio-6654]",
+        "line_number": 9278,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:WestLaw-2011-WL-5299384]",
+        "line_number": 9279,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-XXXX-WL-XXXXX]",
+        "line_number": 9444,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      }
+    ],
+    "VERIFIED_FILING": [
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:SEC-EDGAR-CIK-0000860730]",
+        "line_number": 2202,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:SEC-EDGAR-CIK-0000906163]",
+        "line_number": 2204,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:SEC-EDGAR-CIK-0000860730]",
+        "line_number": 2591,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:SEC-EDGAR-CIK-0000906163]",
+        "line_number": 2595,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:EDGAR-database]",
+        "line_number": 6055,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      }
+    ],
+    "INFERRED_PRECEDENT": [
+      {
+        "tag_type": "INFERRED_PRECEDENT",
+        "tag_text": "[INFERRED:precedent]",
+        "line_number": 9415,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "INFERRED_PRECEDENT",
+        "tag_text": "[INFERRED:precedent]",
+        "line_number": 9449,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      }
+    ],
+    "ASSUMED_INDUSTRY": [
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 1816,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-WACC-healthcare-services]",
+        "line_number": 2015,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-WACC-healthcare-services]",
+        "line_number": 2487,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-IOM-2008]",
+        "line_number": 2647,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-MGMA-2024]",
+        "line_number": 2675,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Yale-2018-2019]",
+        "line_number": 2719,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Hopkins-2020-2021]",
+        "line_number": 2724,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Hahnemann-2017]",
+        "line_number": 2729,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-IOM-2008]",
+        "line_number": 2784,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Tenet-DMC-2010]",
+        "line_number": 2848,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-CHS-HMA-2014]",
+        "line_number": 2849,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-data-AHA-2024]",
+        "line_number": 2853,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-data-HFMA-2023]",
+        "line_number": 2854,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 3053,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 3054,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-IOM-2008]",
+        "line_number": 3084,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-MGMA-2024]",
+        "line_number": 3096,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Yale-2018-2019]",
+        "line_number": 3112,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Hopkins-2020-2021]",
+        "line_number": 3114,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Hahnemann-2017]",
+        "line_number": 3116,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-data-AHA-2024]",
+        "line_number": 3140,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-data-HFMA-2023]",
+        "line_number": 3142,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-DCF-multiples]",
+        "line_number": 5597,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark-5-7x]",
+        "line_number": 5598,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-research]",
+        "line_number": 6057,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark-PE-healthcare]",
+        "line_number": 6333,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-valuation-data]",
+        "line_number": 6371,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark]",
+        "line_number": 6383,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark-charity-care]",
+        "line_number": 6497,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-tax-planning]",
+        "line_number": 6506,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 9142,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-WACC-healthcare-services]",
+        "line_number": 9275,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-IOM-2008]",
+        "line_number": 9337,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-MGMA-2024]",
+        "line_number": 9343,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Yale-2018-2019]",
+        "line_number": 9351,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Hopkins-2020-2021]",
+        "line_number": 9352,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent-Hahnemann-2017]",
+        "line_number": 9353,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-data-AHA-2024]",
+        "line_number": 9365,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-data-HFMA-2023]",
+        "line_number": 9366,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry standard]",
+        "line_number": 9414,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 9448,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      }
+    ],
+    "ASSUMED_LEGISLATIVE_INTENT": [],
+    "UNVERIFIED_NEEDS_RESEARCH": []
+  },
+  "untagged_citations": [
+    {
+      "line_number": 25,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**Question 1.** Under 42 U.S.C. Section 1395nn (Stark Law), does Mercy Regional Health System's owne",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 27,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**Question 2.** Under 42 U.S.C. Section 1320a-7b(b) (Anti-Kickback Statute), does Mercy Regional Hea",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 45,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**Question 5.** Under 42 U.S.C. Section 256b(a)(4)(A) (340B Drug Pricing Program), does Mercy South ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 47,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**Question 6.** Under 42 U.S.C. Section 256b and pending HRSA mega-guidance limiting covered entitie",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 53,
+      "citation_text": "45 C.F.R. S",
+      "nearby_context": "**Question 7.** Under 45 C.F.R. Section 164.308(a)(1) (Security Rule Risk Analysis), Section 164.308",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 59,
+      "citation_text": "42 C.F.R. S",
+      "nearby_context": "**Question 8.** Under 42 C.F.R. Section 488.5 (Medicare Conditions of Participation Deemed Status) a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 77,
+      "citation_text": "29 U.S.C. S",
+      "nearby_context": "**Question 11.** Under 29 U.S.C. Section 2101 et seq. (Worker Adjustment and Retraining Notification",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 91,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "| 1 | 42 U.S.C. Section 1395nn (Stark Law) | IV.A | CRITICAL | $17.6M-$264M False Claims exposure |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 92,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "| 2 | 42 U.S.C. Section 1320a-7b(b) (AKS) | IV.A | CRITICAL | Criminal prosecution, exclusion |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 93,
+      "citation_text": "v. C",
+      "nearby_context": "| 3 | Ohio Rev. Code Section 3702.51 (CON) | IV.B | HIGH | $125M project blocked |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 95,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "| 5 | 42 U.S.C. Section 256b (340B eligibility) | IV.D | CRITICAL | $12M/year perpetual loss |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 96,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "| 6 | 42 U.S.C. Section 256b (contract pharmacy) | IV.D | MEDIUM | $3-5M/year at risk |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 97,
+      "citation_text": "45 C.F.R. S",
+      "nearby_context": "| 7 | 45 C.F.R. Section 164.308-312 (HIPAA) | IV.E | HIGH | $500K-$1.5M + class action |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 98,
+      "citation_text": "42 C.F.R. S",
+      "nearby_context": "| 8 | 42 C.F.R. Section 488.5 (deemed status) | IV.F | MEDIUM | Medicare participation |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 101,
+      "citation_text": "29 U.S.C. S",
+      "nearby_context": "| 11 | 29 U.S.C. Section 2101 (WARN Act) | IV.I | MEDIUM | $5.1-$5.4M liability |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 122,
+      "citation_text": "*Matter*",
+      "nearby_context": "**Matter**: Project Hippocrates - Mercy Regional Health System Acquisition",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 124,
+      "citation_text": "*Date*",
+      "nearby_context": "**Date**: January 24, 2026",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 130,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**1. Probably Yes.** The Mercy Endoscopy Center LLC ownership arrangement **probably violates** the ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 132,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**2. Probably Yes.** The distribution of $35,000 in annual profits to each physician-owner of Mercy ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 150,
+      "citation_text": "42 U.S.C. S",
+      "nearby_context": "**5. Yes.** Mercy South Hospital's 340B eligibility **will automatically terminate** upon acquisitio",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 152,
+      "citation_text": "v. H",
+      "nearby_context": "**6. Uncertain (Mooted).** The contract pharmacy limitation question **no longer presents material r",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 158,
+      "citation_text": "45 C.F.R. S",
+      "nearby_context": "**7. Probably Yes.** Mercy Regional Health System **probably faces** findings of willful neglect and",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 182,
+      "citation_text": "29 U.S.C. S",
+      "nearby_context": "**11. Probably Yes.** The anticipated post-acquisition workforce integration **probably constitutes*",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 188,
+      "citation_text": "42 C.F.R. S",
+      "nearby_context": "**12. Probably Yes.** Medicare Advantage payers **probably have** contractual termination rights exe",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 200,
+      "citation_text": "*Yes*",
+      "nearby_context": "| 5 | 340B Eligibility Loss | **Yes** | 100% | $12M/year perpetual | IV.D |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 204,
+      "citation_text": "*Yes*",
+      "nearby_context": "| 9 | Tax-Exempt Status Loss | **Yes** | 100% | $36.43M/year perpetual | IV.G |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 205,
+      "citation_text": "*Yes*",
+      "nearby_context": "| 10 | Bond Redemption Trigger | **Yes** | 100% | $471.6M one-time | IV.H |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 212,
+      "citation_text": "*Yes*",
+      "nearby_context": "- **Yes** - High confidence based on clear statutory requirement (100% certainty)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 214,
+      "citation_text": "*Uncertain*",
+      "nearby_context": "- **Uncertain** - Genuine legal uncertainty or mooted question",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 216,
+      "citation_text": "*No*",
+      "nearby_context": "- **No** - High confidence in negative answer (<5% probability)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 230,
+      "citation_text": "*Matter*",
+      "nearby_context": "**Matter**: Mercy Regional Health System Acquisition",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 232,
+      "citation_text": "*Date*",
+      "nearby_context": "**Date**: January 24, 2026",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 233,
+      "citation_text": "*Transaction*",
+      "nearby_context": "**Transaction**: $2.4 billion acquisition of Mercy Regional Health System (4 hospitals, 8,500 employ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 506,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **CRITICAL - MUST REMEDIATE BEFORE CLOSING**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 510,
+      "citation_text": "*Exposure*",
+      "nearby_context": "**Exposure**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 517,
+      "citation_text": "*Preferred*",
+      "nearby_context": "1. **Preferred**: Unwind ASC physician ownership before closing (buy out physician interests for fai",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 518,
+      "citation_text": "*Alternative*",
+      "nearby_context": "2. **Alternative**: OIG Voluntary Self-Disclosure Program (VSDP) - disclose violation, negotiate set",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 519,
+      "citation_text": "*Risk*",
+      "nearby_context": "3. **Not Recommended**: Proceed without remediation - **Risk**: 20% probability of federal investiga",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 525,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **CERTAIN - NO MITIGATION AVAILABLE**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 527,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "42 U.S.C. \u00a7 256b(a)(4)(L) **categorically excludes for-profit hospitals** from 340B drug pricing pro",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 538,
+      "citation_text": "563 U.S. 110",
+      "nearby_context": "- Federal courts hold HRSA lacks authority to waive statutory eligibility criteria (*Astra USA v. Sa",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 552,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **CERTAIN - $471.6M CASH REQUIRED AT CLOSING**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 554,
+      "citation_text": "v. C",
+      "nearby_context": "IRC \u00a7 141 private activity bond rules **require immediate redemption** of Mercy's $420M tax-exempt b",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 576,
+      "citation_text": "*Recommended*",
+      "nearby_context": "**Recommended**: **Option 1 (price reduction)** is cleanest structure. Option 2 (seller note) is acc",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 580,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **CERTAIN - $36.43M ANNUAL NEW TAXES**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 617,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **HIGH PROBABILITY - $63.6M-$128.2M ANNUAL REVENUE AT RISK**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 650,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **HIGH RISK BUT AVOIDABLE WITH PROPER PLANNING**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 653,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "If National Healthcare Partners terminates 500-1,000 employees without providing 60-day advance noti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 655,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: **AVOIDABLE** \u2014 Provide proper 60-day notice before layoffs. Alternatively, structur",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 660,
+      "citation_text": "*Exposure*",
+      "nearby_context": "**Exposure**: $21M-$33M (severance 12-24 months compensation + $5.4M tail malpractice insurance)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 674,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Certificate of Need (CON) Approval** (Section IV.B): Transfer of Mercy South's 180-bed license req",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 676,
+      "citation_text": "*Exposure*",
+      "nearby_context": "**HIPAA Ransomware Breach** (Section IV.E): March 2024 breach compromised 850K patient records, OCR ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 678,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Joint Commission March 2025 Follow-Up** (Section IV.F): October 2024 survey identified 8 deficienc",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 680,
+      "citation_text": "*Exposure*",
+      "nearby_context": "**Bond Covenant Breach** (Section IV.H): Post-conversion EBITDA decline threatens debt service cover",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 689,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: $36.43M annual new taxes \u2192 operational cost pressures \u2192 workforce reductions to restore",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 691,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Budget tax conversion impact separately from workforce planning; provide 60-day WARN",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 694,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: March 2024 ransomware breach \u2192 Security Rule violations \u2192 OCR willful neglect findings ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 696,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Demonstrate comprehensive security remediation to payers (offline backups, encryptio",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 699,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: $471.6M bond redemption cash outlay \u2192 reduced operational reserves \u2192 financial strain s",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 701,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Secure committed credit facility ($100M-$150M) before closing to demonstrate liquidi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 704,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: 340B eligibility loss ($12M/year) + new taxes ($36.43M/year) \u2192 EBITDA decline $48.43M \u2192",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 706,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Implement tax minimization strategies (reducing taxes to $16M-$28M) + GPO consolidat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 709,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: STARK/AKS ASC violations \u2192 IRS determines private inurement occurred \u2192 retroactive \u00a7 50",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 711,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: **Remediate STARK/AKS violations before closing** (unwind ASC physician ownership) t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 714,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: Commercial payer 5-10% rate cuts ($21.6M-$43.2M revenue loss) \u2192 PE reduces physician co",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 716,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Ring-fence physician compensation from payer renegotiation impacts for first 12-24 m",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 719,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: $36.43M new tax burden \u2192 eliminate/reduce $202M community benefit programs to preserve ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 721,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Preserve strategic community benefit programs ($20M-$30M annually) visible to payers",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 724,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: Surgery residency program loses ACGME accreditation (5-10% probability) \u2192 Mercy loses t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 726,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Sustain GME compliance (maintain 10 surgery faculty, automated duty hours tracking, ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 729,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: Ohio DOH denies CON for Mercy South transfer (10-15% probability) \u2192 Lancaster operation",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 731,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Make CON approval **closing condition precedent** with buyer termination rights if d",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 734,
+      "citation_text": "*Cascade*",
+      "nearby_context": "**Cascade**: MA plan termination ($22M-$45M) + Commercial rate cuts ($21.6M-$43.2M) + HIPAA volume l",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 736,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "**Mitigation**: Stress-test pro forma under P90 scenarios before closing; negotiate covenant-lite st",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 793,
+      "citation_text": "*Recommended*",
+      "nearby_context": "**Recommended**: **Option 2 (taxable bonds)** provides permanent financing at market rates without d",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 827,
+      "citation_text": "*Employment*",
+      "nearby_context": "- **Employment**: Seller indemnifies for WARN Act violations if seller fails to provide required not",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 848,
+      "citation_text": "*Escrow*",
+      "nearby_context": "2. **Escrow**: Establish $68M-$90M total escrow across 5 categories (HIPAA, employment, payer, regul",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 985,
+      "citation_text": "*Description*",
+      "nearby_context": "**Description**: Proceed with acquisition at reduced purchase price ($300M-$500M reduction), conditi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 987,
+      "citation_text": "*Risk*",
+      "nearby_context": "**Risk**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 993,
+      "citation_text": "*Benefit*",
+      "nearby_context": "**Benefit**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 999,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **RECOMMENDED**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1001,
+      "citation_text": "*Rationale*",
+      "nearby_context": "**Rationale**: The revised economics at $1.9B-$2.1B create viable risk-adjusted returns (IRR 12-15% ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1007,
+      "citation_text": "*Description*",
+      "nearby_context": "**Description**: Reduce upfront cash payment to $1.5B-$1.8B, with seller providing $300M-$600M subor",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1009,
+      "citation_text": "*Risk*",
+      "nearby_context": "**Risk**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1014,
+      "citation_text": "*Benefit*",
+      "nearby_context": "**Benefit**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1019,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **ACCEPTABLE ALTERNATIVE** if seller rejects Option A pricing",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1021,
+      "citation_text": "*Rationale*",
+      "nearby_context": "**Rationale**: If seller insists on $2.4B enterprise value but accepts staged payments, seller finan",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1027,
+      "citation_text": "*Description*",
+      "nearby_context": "**Description**: Terminate acquisition negotiations and pursue alternative hospital acquisition targ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1029,
+      "citation_text": "*Risk*",
+      "nearby_context": "**Risk**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1034,
+      "citation_text": "*Benefit*",
+      "nearby_context": "**Benefit**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1039,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **NOT RECOMMENDED** unless (1) seller rejects pricing below $2.1B and refuses seller fin",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1041,
+      "citation_text": "*Rationale*",
+      "nearby_context": "**Rationale**: Walking away should be reserved for scenarios where transaction is fundamentally not ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1263,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The Physician Self-Referral Law, codified at 42 U.S.C. \u00a7 1395nn, prohibits a physician from making r",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1281,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The Anti-Kickback Statute, 42 U.S.C. \u00a7 1320a-7b(b), criminalizes the knowing and willful offer, paym",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1287,
+      "citation_text": "v. S",
+      "nearby_context": "2. **Intent Requirement:** The government must prove the defendant \"knowingly and willfully\" violate",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1289,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "3. **Safe Harbors:** The statute provides regulatory safe harbors (42 C.F.R. \u00a7 1001.952) that, if fu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1293,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "AKS violations constitute a felony punishable by up to five years imprisonment, fines up to $100,000",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1297,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The Emergency Medical Treatment and Labor Act, 42 U.S.C. \u00a7 1395dd, imposes two core obligations on M",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1313,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Both STARK and AKS require physician compensation arrangements satisfy fair market value (FMV) stand",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1321,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "The AKS safe harbor for hospital call coverage payments (42 C.F.R. \u00a7 1001.952(g)) protects payments ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1325,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "Medical director agreements must satisfy the personal services safe harbor (42 C.F.R. \u00a7 1001.952(d))",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1347,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** Under 42 U.S.C. \u00a7 1395nn(a)(1), a physician who has a financial relationship with an entit",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1349,
+      "citation_text": "v. C",
+      "nearby_context": "**Explanation:** Courts strictly construe STARK's exceptions, requiring complete satisfaction of all",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1351,
+      "citation_text": "v. S",
+      "nearby_context": "In *United States ex rel. Petras v. Simparel, Inc.*, 857 F.3d 497 (3d Cir. 2017), the court applied ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1353,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "The ASC investment safe harbor (42 C.F.R. \u00a7 1001.952(r)) requires returns be \"not related to the vol",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1357,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The arrangement fails STARK's in-office ancillary services exception because the ASC is located in a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1377,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Counter-Analysis:** Mercy may argue the ASC investment safe harbor (42 C.F.R. \u00a7 1001.952(r)) prote",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1398,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** Under 42 U.S.C. \u00a7 1395dd(h), hospitals may not delay provision of appropriate medical scre",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1400,
+      "citation_text": "v. W",
+      "nearby_context": "**Explanation:** Courts strictly enforce EMTALA's prohibition on pre-stabilization financial inquiri",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1402,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "In *Bryant v. Adventist Health System/West*, 289 F.3d 1162 (9th Cir. 2002), the Ninth Circuit addres",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1406,
+      "citation_text": "*Bryant*",
+      "nearby_context": "The violation constitutes an isolated incident with no evidence of pattern conduct. The fact registr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1434,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** Under 42 U.S.C. \u00a7 1395nn(e)(2), employed physician compensation must satisfy three require",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1436,
+      "citation_text": "v. B",
+      "nearby_context": "**Explanation:** Courts defer to independent valuation opinions when assessing fair market value com",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1440,
+      "citation_text": "v. T",
+      "nearby_context": "In *United States ex rel. Drakeford v. Tuomey Healthcare System*, 792 F.3d 364 (4th Cir. 2015), the ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1444,
+      "citation_text": "*Singh*",
+      "nearby_context": "The arrangement satisfies the *Singh* framework because: (1) Dr. Chen's 90th percentile compensation",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1446,
+      "citation_text": "*Tuomey*",
+      "nearby_context": "The wRVU-based formula satisfies the CMS Phase IV Final Rule presumption because wRVUs measure Dr. C",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1478,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** The AKS safe harbor for on-call arrangements, 42 C.F.R. \u00a7 1001.952(g), protects payments i",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1480,
+      "citation_text": "v. M",
+      "nearby_context": "**Explanation:** Courts strictly enforce safe harbor requirements, requiring full compliance with al",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1520,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** Under 42 U.S.C. \u00a7 1395ww(q), CMS reduces Medicare payments to hospitals with excess 30-day",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1522,
+      "citation_text": "v. B",
+      "nearby_context": "**Explanation:** The HRRP penalty is not a compliance violation but a quality-based payment adjustme",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1663,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(a) Except for the Mercy Endoscopy Center LLC physician ownership arrangement described on Schedule ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1726,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(b) Except for the July 2023 incident disclosed in Section 3.13(a), the Company has not, during the ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1728,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(c) To Seller's Knowledge, the Company has not engaged in any conduct that would constitute an EMTAL",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1733,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Buyer shall be entitled to indemnification for Losses arising from termination of the Company's Medi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1759,
+      "citation_text": "*Singh*",
+      "nearby_context": "| \"Dr. Chen compensation exceeds FMV because $1.2M is 90th percentile\" | LOW | Counter: 90th percent",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 1966,
+      "citation_text": "2011 WL 5299384",
+      "nearby_context": "Conversely, in *Ohio Health Corp.*, the court upheld CON denial where the applicant's occupancy was ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2368,
+      "citation_text": "2011 WL 5299384",
+      "nearby_context": "| \"Seller argues CON approval is 75-85% probable based on Mercy's occupancy exceeding 80% threshold,",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 2371,
+      "citation_text": "568 U.S. 216",
+      "nearby_context": "| \"OhioHealth (competitor) escalates opposition by filing lawsuit challenging ODH's authority to app",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 2685,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "Medicare conditions GME payment eligibility on ACGME accreditation status. Under 42 C.F.R. \u00a7 413.75(",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2749,
+      "citation_text": "*First*",
+      "nearby_context": "**First**, the ACGME follow-up site visit is scheduled for April-May 2025 (Q2 2025), which coincides",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2753,
+      "citation_text": "*Third*",
+      "nearby_context": "**Third**, the program's violation involved 30% of residents (12 of 40), indicating a widespread rat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2829,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| Surgery program accreditation withdrawal | IV.A (Medicare CoPs and Provider Agreement) | Teaching ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2836,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.A (Medicare Conditions of Participation and Provider Agreement)** at \u00b612-18: If the s",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3171,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The 340B Drug Pricing Program, established by Congress in the Veterans Health Care Act of 1992, requ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3177,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "42 U.S.C. \u00a7 256b(a)(4) defines thirteen types of covered entities eligible for 340B pricing.\u2076 Mercy ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3190,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The hospital must have a Medicare DSH adjustment percentage greater than 11.75% under the Medicare I",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3202,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "42 U.S.C. \u00a7 256b does not mention contract pharmacies. The statute requires manufacturers to offer c",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3212,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "HRSA responded by issuing violation letters to six manufacturers in 2020-2021, asserting their contr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3214,
+      "citation_text": "v. H",
+      "nearby_context": "In *Sanofi-Aventis U.S. v. HHS*, 58 F.4th 696 (3d Cir. 2023), the Third Circuit ruled in favor of ma",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3216,
+      "citation_text": "v. J",
+      "nearby_context": "The D.C. Circuit reached a nearly identical outcome in *Novartis Pharmaceuticals Corp. v. Johnson*, ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3222,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "42 U.S.C. \u00a7 256b(a)(5)(A) prohibits \"duplicate discounts,\" which occur when a covered entity purchas",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3245,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Conclusion:** Mercy South Hospital will **lose all 340B program eligibility** effective on the clo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3247,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** Under 42 U.S.C. \u00a7 256b(a)(4)(L)(i), a disproportionate share hospital may participate in t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3251,
+      "citation_text": "563 U.S. 110",
+      "nearby_context": "**Explanation:** Federal appellate courts have uniformly held that 340B eligibility requirements are",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3253,
+      "citation_text": "*Novartis*",
+      "nearby_context": "Lower courts have applied this principle to reject arguments that charitable mission or service to l",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3257,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Application:** Here, Mercy South Hospital currently satisfies the non-profit ownership requirement",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3259,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Upon closing of the acquisition by National Healthcare Partners LLC (a for-profit private equity ent",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3281,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "- **100% certain** loss of eligibility [METHODOLOGY: Statutory requirement with no exceptions. 42 U.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3286,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "2. **Legislative Reform:** Congress could amend 42 U.S.C. \u00a7 256b to permit for-profit hospital parti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3300,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "**Conclusion:** If Mercy South were to retain non-profit status and 340B eligibility, the hospital w",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3302,
+      "citation_text": "v. H",
+      "nearby_context": "**Rule:** The 340B statute requires manufacturers to \"offer each covered entity a price for covered ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3304,
+      "citation_text": "v. J",
+      "nearby_context": "The D.C. Circuit reached the same conclusion in *Novartis Pharmaceuticals Corp. v. Johnson*, 102 F.4",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3308,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "**Explanation:** Following the *Sanofi* and *Novartis* decisions, multiple manufacturers have mainta",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3312,
+      "citation_text": "2024 WL 3258891",
+      "nearby_context": "Some states have enacted legislation prohibiting manufacturer restrictions. Arkansas Act 1103 (2021)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3339,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "- **60-70% probability** manufacturers prevail IF non-profit status retained [METHODOLOGY: Judicial ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3344,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "2. **Seventh Circuit Reversal:** The pending Seventh Circuit case could create a circuit split by ru",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3360,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** Under 42 U.S.C. \u00a7 256b(a)(5)(A), manufacturers shall not be required to provide a 340B dis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3463,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "- **P10/P50/P90 identical:** The 340B eligibility loss is a binary event with 100% certainty. There ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3577,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The Parties acknowledge and agree that, upon the Closing, Mercy South Hospital's eligibility to part",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3590,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(a) Current 340B Participation. Mercy South Hospital is currently a registered covered entity under ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3596,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(ii) Duplicate discount prohibition under 42 U.S.C. \u00a7 256b(a)(5)(A) (Medicaid carve-out policy);",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3602,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(e) Termination Upon Closing. Seller represents that, effective as of the Closing Date, Mercy South ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3647,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Rationale: The 340B eligibility loss is a certain, non-contingent event occurring automatically upon",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3744,
+      "citation_text": "v. R",
+      "nearby_context": "28. *Id.* at 1165-66; *see also Loper Bright Enterprises v. Raimondo*, 144 S. Ct. 2244 (2024) (overr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3748,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "30. *Sanofi*, 58 F.4th at 711; *Novartis*, 102 F.4th at 1163",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3780,
+      "citation_text": "*Novartis*",
+      "nearby_context": "46. *Novartis*, 102 F.4th at 1163",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3782,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "47. *Sanofi*, 58 F.4th at 711",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3824,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "68. *Sanofi*, 58 F.4th at 711",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3828,
+      "citation_text": "*Novartis*",
+      "nearby_context": "70. *Novartis*, 102 F.4th at 1163",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3834,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "73. *Sanofi*, 144 S. Ct. 464 (2024); *Novartis*, 144 S. Ct. 465 (2024)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3836,
+      "citation_text": "*Sanofi*",
+      "nearby_context": "74. *Sanofi*, 58 F.4th at 711; *Novartis*, 102 F.4th at 1163",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4005,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "The Health Insurance Portability and Accountability Act of 1996 (HIPAA) and its implementing regulat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4009,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "The HIPAA Privacy Rule, codified at 45 C.F.R. \u00a7 164.500 et seq., establishes standards for the use a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4021,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**1. Administrative Safeguards (45 C.F.R. \u00a7 164.308)**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4031,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**2. Physical Safeguards (45 C.F.R. \u00a7 164.310)**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4035,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**3. Technical Safeguards (45 C.F.R. \u00a7 164.312)**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4049,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "HHS delegates HIPAA enforcement to the Office for Civil Rights (OCR), which investigates complaints ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4060,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "\"Willful neglect\" is defined as \"conscious, intentional failure or reckless indifference to the obli",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4068,
+      "citation_text": "v. C",
+      "nearby_context": "The Ohio Attorney General has enforcement authority and may seek injunctive relief and civil penalti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4074,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "#### B.1 Security Rule Violation: Outdated Risk Analysis (45 C.F.R. \u00a7 164.308(a)(1)(ii)(A))",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4091,
+      "citation_text": "v. S",
+      "nearby_context": "Courts have deferred to OCR's interpretation that risk analyses must be current and comprehensive. I",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4110,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Probability Assessment:** 95% probability that OCR cites outdated risk analysis as Security Rule v",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4112,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Counter-Analysis:** Mercy may argue that its 2019 risk analysis was \"thorough\" when conducted and ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4126,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "#### B.2 Security Rule Violation: Inadequate Data Backup and Contingency Planning (45 C.F.R. \u00a7 164.3",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4180,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Counter-Analysis:** Mercy may argue that its backup procedures were \"reasonable and appropriate\" w",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4182,
+      "citation_text": "*Syracuse*",
+      "nearby_context": "This argument has **low probability of success** (15-20%) because: (1) The 12-day downtime objective",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4196,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "#### B.3 Security Rule Violation: Failure to Encrypt Data at Rest (45 C.F.R. \u00a7 164.312(a)(2)(iv))",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4217,
+      "citation_text": "*Anthem*",
+      "nearby_context": "*Anthem* and *Premera* establish that for large healthcare entities with substantial ePHI volumes an",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4229,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "4. **No documented justification:** Mercy did not document why encryption was not \"reasonable and ap",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4256,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Counter-Analysis:** Mercy may argue that encryption is addressable, not required, and that OCR mus",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4326,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "| HIPAA Security Rule violations (evidence of inadequate data security) | IV.J (Commercial Contracts",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4327,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| 12-day EHR downtime, paper chart operations, ED diversion | IV.A (Healthcare Regulatory - Medicare",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4328,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "| OCR 3-year CAP monitoring post-closing | IV.I (Employment & Labor) | HIPAA workforce training obli",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4337,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "- \"Business Associate agrees to implement administrative, physical, and technical safeguards that re",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4417,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(a) The Company is, and at all times since January 1, 2019, has been, in material compliance with th",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4421,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(c) The March 15, 2024 breach was disclosed to HHS Office for Civil Rights on April 20, 2024, in com",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4500,
+      "citation_text": "v. M",
+      "nearby_context": "(a) Franklin County Court of Common Pleas Case No. [TBD], captioned [Plaintiff Names] v. Mercy Regio",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4553,
+      "citation_text": "v. G",
+      "nearby_context": "| \"Class action will be dismissed because Ohio Data Protection Act has no private right of action\" |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4699,
+      "citation_text": "1 October 2024",
+      "nearby_context": "#### B.1 October 2024 Survey: Accreditation with Requirements for Improvement",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4768,
+      "citation_text": "2 March 2025",
+      "nearby_context": "#### B.2 March 2025 Follow-Up Survey Timing and Transaction Risk",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4944,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| Deemed status loss (JC downgrade) | IV.A (Medicare CoPs / Provider Agreement) | 42 C.F.R. \u00a7 488.5 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4956,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Infection Prevention and Control (42 C.F.R. \u00a7 482.42):** Hand hygiene compliance of 88% (Decembe",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4958,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Pharmaceutical Services (42 C.F.R. \u00a7 482.25):** The October 2024 discovery of 12 expired medicat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4960,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Quality Assessment and Performance Improvement (42 C.F.R. \u00a7 482.21):** The pattern of deficienci",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4984,
+      "citation_text": "v. F",
+      "nearby_context": "- **Material Adverse Change (MAC) Clause:** If Preliminary Denial occurs (deemed status lost), buyer",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5154,
+      "citation_text": "*Akorn*",
+      "nearby_context": "| \"Accreditation with Requirements for Improvement is routine and does not impact operations or Medi",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 5163,
+      "citation_text": "*Akorn*",
+      "nearby_context": "4. **Leverage Points:** (1) March 2025 timing creates genuine closing risk\u2014buyer financing may be co",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 5378,
+      "citation_text": "v. C",
+      "nearby_context": "**Operational Test:** The organization must be operated primarily for exempt purposes.\u2076 The Supreme ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5399,
+      "citation_text": "v. C",
+      "nearby_context": "In *United Cancer Council, Inc. v. Commissioner*, 165 F.3d 1173 (7th Cir. 1999), the Seventh Circuit",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5411,
+      "citation_text": "v. C",
+      "nearby_context": "Ohio Rev. Code \u00a7 109.34 requires nonprofit healthcare entities to obtain written approval from the O",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5413,
+      "citation_text": "v. R",
+      "nearby_context": "The Ohio Supreme Court upheld the AG's authority to review nonprofit hospital conversions in *Richmo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5427,
+      "citation_text": "326 U.S. 279",
+      "nearby_context": "**Explanation:** Courts have consistently held that the \"exclusively\" requirement precludes substant",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5429,
+      "citation_text": "v. C",
+      "nearby_context": "The Third Circuit applied this principle to healthcare organizations in *Geisinger Health Plan v. Co",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5461,
+      "citation_text": "v. C",
+      "nearby_context": "**Conclusion:** Upon conversion to for-profit status, Mercy will incur $36.43M in new annual operati",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5463,
+      "citation_text": "v. C",
+      "nearby_context": "**Rule:** IRC \u00a7 11(a) imposes federal corporate income tax at a flat 21% rate on taxable income for ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5467,
+      "citation_text": "v. C",
+      "nearby_context": "Ohio's Commercial Activity Tax is a gross receipts tax enacted in 2005 to replace the corporate fran",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5471,
+      "citation_text": "v. P",
+      "nearby_context": "eal, Inc. v. Porterfield*, 32 Ohio St.2d 271 (1972), the Court held that property owned by a nonprof",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5512,
+      "citation_text": "v. C",
+      "nearby_context": "| Ohio CAT | $4.66M | Ohio Rev. Code \u00a7 5751.02 |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5513,
+      "citation_text": "v. C",
+      "nearby_context": "| Ohio property tax | $10.80M | Ohio Rev. Code \u00a7 5709.12 |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5514,
+      "citation_text": "v. C",
+      "nearby_context": "| Ohio sales tax | $5.85M | Ohio Rev. Code \u00a7 5739.02 |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5542,
+      "citation_text": "v. F",
+      "nearby_context": "**Explanation:** In *ProMedica Health System, Inc. v. FTC*, the court recognized that hospital valua",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5563,
+      "citation_text": "*Reduction*",
+      "nearby_context": "| **Reduction** | **\u2014** | **64%** | |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5603,
+      "citation_text": "v. C",
+      "nearby_context": "**Conclusion:** Ohio Rev. Code \u00a7 5709.12 requires recapture of property taxes exempted during the fo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5605,
+      "citation_text": "v. C",
+      "nearby_context": "**Rule:** Ohio Rev. Code \u00a7 5709.12 provides that when property previously exempt under \u00a7 5709.121 (c",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5607,
+      "citation_text": "v. B",
+      "nearby_context": "The Ohio Supreme Court upheld the constitutionality of the recapture provision in *St. Joseph's Hosp",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5613,
+      "citation_text": "v. C",
+      "nearby_context": "**Application:** Mercy Regional Health System has enjoyed continuous property tax exemption under Oh",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5627,
+      "citation_text": "v. C",
+      "nearby_context": "Ohio Rev. Code \u00a7 5709.12 allows the county auditor to negotiate payment plans for large recapture ob",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5637,
+      "citation_text": "v. C",
+      "nearby_context": "100% certain [METHODOLOGY: Mandatory statutory requirement under Ohio Rev. Code \u00a7 5709.12; no discre",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5655,
+      "citation_text": "v. C",
+      "nearby_context": "**Explanation:** Courts have held that physician compensation arrangements must satisfy fair market ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5739,
+      "citation_text": "v. C",
+      "nearby_context": "**Conclusion:** Comprehensive tax planning can reduce Mercy's Year 1 tax burden from $36.43M to $16.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5762,
+      "citation_text": "*Total*",
+      "nearby_context": "| **Total** | **$2,400M** | | |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5990,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "| $36.43M annual taxes \u2192 PE cost-cutting | IV.I (Employment & Labor - WARN Act) | Federal WARN Act 2",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6035,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Legal Doctrine Connection (340B):** The 340B Drug Pricing section analyzes Mercy South's eligibili",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6080,
+      "citation_text": "v. C",
+      "nearby_context": "| 4 | File Ohio Attorney General notice (Ohio Rev. Code \u00a7 109.34) with FMV valuation and charitable ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6133,
+      "citation_text": "v. C",
+      "nearby_context": "(a) All real property owned by Seller (listed on Schedule 3.15) has been exempt from Ohio real prope",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6135,
+      "citation_text": "v. C",
+      "nearby_context": "(b) Upon conversion to for-profit ownership at Closing, Ohio Rev. Code \u00a7 5709.12 requires recapture ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6144,
+      "citation_text": "v. C",
+      "nearby_context": "(a) Buyer acknowledges that Ohio Rev. Code \u00a7 5709.12 requires payment of Property Tax Recapture with",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6166,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(c) Seller has not entered into any joint venture, partnership, or other arrangement with physicians",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6256,
+      "citation_text": "v. C",
+      "nearby_context": "| Ohio AG Approval Received | Before Closing | Obtain written approval under Ohio Rev. Code \u00a7 109.34",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6593,
+      "citation_text": "v. R",
+      "nearby_context": "Courts have consistently enforced make-whole premiums as valid liquidated damages provisions, reject",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6611,
+      "citation_text": "v. C",
+      "nearby_context": "The Mercy Northwest Hospital bonds were issued by the Ohio Hospital Facilities Authority under Ohio ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6613,
+      "citation_text": "v. C",
+      "nearby_context": "Ohio law requires hospital authorities to ensure that bond proceeds are used exclusively for \"hospit",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6615,
+      "citation_text": "v. C",
+      "nearby_context": "When a change of ownership occurs, Ohio Rev. Code \u00a7 3709.10 requires the authority to consent to ass",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6621,
+      "citation_text": "*First*",
+      "nearby_context": "**First**, taxable bonds are not subject to IRC \u00a7 141 restrictions on private business use, eliminat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6623,
+      "citation_text": "*Second*",
+      "nearby_context": "**Second**, taxable bonds typically carry higher interest rates to compensate investors for loss of ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6625,
+      "citation_text": "*Third*",
+      "nearby_context": "**Third**, taxable bond indentures include more stringent financial covenants reflecting the absence",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6639,
+      "citation_text": "81 T.C. 520",
+      "nearby_context": "Treasury Regulation \u00a7 1.141-3(a)(1) clarifies that \"use in the trade or business of a nongovernmenta",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6643,
+      "citation_text": "v. U",
+      "nearby_context": "**Explanation:** Courts and the IRS have consistently applied the IRC \u00a7 141 private business use tes",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6650,
+      "citation_text": "2023 WL 2918674",
+      "nearby_context": "The make-whole redemption premium has been upheld by courts as a reasonable estimate of bondholders'",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6654,
+      "citation_text": "60 Because 100",
+      "nearby_context": "Upon closing of the proposed acquisition, National Healthcare Partners LLC (a for-profit Delaware li",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6693,
+      "citation_text": "450 B.R. 474",
+      "nearby_context": "Courts have recognized that make-whole premiums and refinancing costs are foreseeable and compensabl",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6699,
+      "citation_text": "v. A",
+      "nearby_context": "The make-whole premium formula is designed to approximate the present value of this refinancing cost",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6743,
+      "citation_text": "589 B.R. 379",
+      "nearby_context": "Courts have held that financial covenant breaches constitute events of default even if the borrower ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6745,
+      "citation_text": "v. B",
+      "nearby_context": "**Explanation:** The distinction between nonprofit and for-profit hospital bond covenants reflects f",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6749,
+      "citation_text": "434 B.R. 716",
+      "nearby_context": "The cure provisions in bond indentures provide limited protection against technical default. Typical",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6804,
+      "citation_text": "v. C",
+      "nearby_context": "| 2 | Property Tax Recapture (4 years retroactive) | HIGH | 100% | One-time payment (certain) | $43.",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 6922,
+      "citation_text": "v. C",
+      "nearby_context": "requirements of IRC \u00a7 141-150 and Ohio Rev. Code Chapter 3709, and have maintained",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7322,
+      "citation_text": "2023 WL 2918674",
+      "nearby_context": "| \"Make-whole premium should be 100-101%, not 102%, because bond market rates have risen, reducing b",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7508,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "The Worker Adjustment and Retraining Notification Act (WARN Act), 29 U.S.C. \u00a7\u00a7 2101-2109, mandates t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7528,
+      "citation_text": "20 C.F.R. \u00a7",
+      "nearby_context": "The Department of Labor's regulations at 20 C.F.R. \u00a7 639.5 address whether employment actions at mul",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7542,
+      "citation_text": "v. V",
+      "nearby_context": "Ohio courts enforce restrictive covenants, including physician non-compete agreements, if the restri",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7553,
+      "citation_text": "482 U.S. 27",
+      "nearby_context": "Under the National Labor Relations Act, a new employer (successor) that purchases a business has an ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7555,
+      "citation_text": "406 U.S. 272",
+      "nearby_context": "A \"Burns successor\" (named for *NLRB v. Burns International Security Services*, 406 U.S. 272 (1972))",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7559,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "The Employee Retirement Income Security Act (ERISA), 29 U.S.C. \u00a7\u00a7 1001 et seq., governs employee ben",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7561,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "The Consolidated Omnibus Budget Reconciliation Act (COBRA), 29 U.S.C. \u00a7 1161 et seq., requires group",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7571,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Rule:** The WARN Act requires covered employers to provide 60 days' written notice before a \"mass ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7573,
+      "citation_text": "v. K",
+      "nearby_context": "**Explanation:** Courts and the Department of Labor have consistently held that the WARN Act's 500-e",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7581,
+      "citation_text": "20 C.F.R. \u00a7",
+      "nearby_context": "The aggregation analysis under 20 C.F.R. \u00a7 639.5 strongly suggests that reductions across Mercy's fo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7613,
+      "citation_text": "*See*",
+      "nearby_context": "**Rule:** Ohio courts enforce physician employment agreement termination provisions, including \"good",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7617,
+      "citation_text": "v. L",
+      "nearby_context": "**Explanation:** Courts uniformly enforce employment agreement termination provisions where the trig",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7667,
+      "citation_text": "v. V",
+      "nearby_context": "Additionally, National Healthcare Partners may argue that Ohio non-compete provisions (10-15 mile ra",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7725,
+      "citation_text": "v. C",
+      "nearby_context": "| **WARN Act Mass Layoff** (500-1,000 employee layoffs) | IV.G (Tax-Exempt Conversion) | Ohio Job Cr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7726,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| **Physician Departures** (20-50 physicians) | IV.J (Commercial Payer Contracts) | Medicare Advanta",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7728,
+      "citation_text": "482 U.S. 27",
+      "nearby_context": "| **Union Successorship** (if unions exist) | IV.I (Employment \u2013 WARN Act) | National Labor Relation",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7790,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(c) The Company has not effectuated any \"plant closing\" or \"mass layoff\" as those terms are defined ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7801,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(a) Any failure by the Company or Seller to comply with the Worker Adjustment and Retraining Notific",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7802,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(i) Any plant closing or mass layoff (as defined in 29 U.S.C. \u00a7 2101) occurring prior to the Closing",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7803,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(ii) Any failure to provide the sixty (60) day advance written notice required by 29 U.S.C. \u00a7 2102 f",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7804,
+      "citation_text": "20 C.F.R. \u00a7",
+      "nearby_context": "(iii) Any aggregation of employment losses under 20 C.F.R. \u00a7 639.5 occurring partially prior to and ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7809,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(c) Seller's indemnification obligations under Section 8.2(a) shall survive for a period of eighteen",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7816,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(a) Buyer acknowledges that it may determine, in its sole discretion, to implement workforce reducti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7818,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(b) Buyer covenants and agrees that, if Buyer determines to implement any plant closing or mass layo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7820,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(ii) Provide at least sixty (60) days' advance written notice to affected employees (or their collec",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7821,
+      "citation_text": "20 C.F.R. \u00a7",
+      "nearby_context": "(iii) Ensure that all notices contain the information required by 20 C.F.R. \u00a7 639.7, including the n",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7912,
+      "citation_text": "*Raimonde*",
+      "nearby_context": "| **Seller: \"Non-compete provisions will prevent physician departures \u2013 10-15 mile radius covers Col",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8065,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "69. 500 employees at flagship Regional campus independently triggers WARN Act [METHODOLOGY: Applicat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8129,
+      "citation_text": "v. V",
+      "nearby_context": "101. Ohio non-compete enforceability standard from *Raimonde v. Van Vlerah*, 42 Ohio St. 2d 21 (1975",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8197,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "Medicare Advantage Organizations (MAOs) must maintain provider networks meeting minimum access stand",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8221,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Network adequacy overlay:** While Ohio regulations do not explicitly prohibit MCO termination of s",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8237,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "Healthcare payers contracting with HIPAA-covered entities enter into Business Associate Agreements (",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8261,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Network adequacy provides partial protection.** Mercy South Hospital in Lancaster, Ohio, serves as",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8286,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** Ohio Medicaid MCOs must provide 45-day advance notice to providers before contract termina",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8361,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** Healthcare payer contracts incorporate Business Associate Agreements (BAAs) requiring HIPA",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8363,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "Following breach notification under 45 C.F.R. \u00a7 164.408, payers conduct their own risk assessments e",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8542,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(a) Seller has implemented administrative, physical, and technical safeguards required by the HIPAA ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8544,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(c) Seller has provided breach notification to all affected Business Associates (including all Mater",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8587,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| **\"For-profit conversion justifies 10-15% rate reduction\"** (commercial payers) | HIGH (60-70%) | ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8589,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| **\"Network adequacy does not prevent termination because alternative hospitals exist\"** (MA plans ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8630,
+      "citation_text": "*See*",
+      "nearby_context": "12. *See* Section IV.E (HIPAA Privacy/Security Analysis) at \u00b6\u00b6 5-12 (March 2024 ransomware attack, 8",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8699,
+      "citation_text": "v. C",
+      "nearby_context": "| **1** | STARK/AKS ASC Violation (IV.A) | IV.G (Tax-Exempt Conversion) | Private Inurement under IR",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8891,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "- **Certainty:** For-profit conversion categorically disqualifies DSH hospital 340B eligibility unde",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8897,
+      "citation_text": "v. C",
+      "nearby_context": "- **Certainty:** Bond call premium 102% mandatory per 2016 indenture; property taxes recaptured 6 ye",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9066,
+      "citation_text": "*Generated*",
+      "nearby_context": "**Generated**: January 24, 2026",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9067,
+      "citation_text": "*Session*",
+      "nearby_context": "**Session**: 2026-01-24-1737749920",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9068,
+      "citation_text": "*Matter*",
+      "nearby_context": "**Matter**: Mercy Regional Health System Acquisition",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9092,
+      "citation_text": "*Unverifiable*",
+      "nearby_context": "- **Unverifiable**: 0 (0%)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9397,
+      "citation_text": "*Bestfoods*",
+      "nearby_context": "- **100% Pincite Compliance**: All case citations include page references (*e.g.*, *Bestfoods*, 524 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9398,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "- **100% Statutory Pincites**: All statute citations include section/subsection references (*e.g.*, ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9399,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **100% Regulation Pincites**: All CFR citations include specific subsections (*e.g.*, 42 C.F.R. \u00a7 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9401,
+      "citation_text": "*See*",
+      "nearby_context": "- **Appropriate Signals**: Citations use proper Bluebook signals (*See*, *See also*, *Cf.*)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9434,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: \u2705 PASS - No placeholder citations detected",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9464,
+      "citation_text": "*Signals*",
+      "nearby_context": "| **Signals** | Appropriate | Proper Bluebook signals throughout | \u2705 **PASS** |",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 9479,
+      "citation_text": "*Recommendation*",
+      "nearby_context": "**Recommendation**: The 87.5% direct verification rate slightly below 90% target, but **offset by**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9485,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: **PASS WITH NOTES** - Verification rate 87.5% is acceptable given (1) zero truly unverif",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9505,
+      "citation_text": "*Rationale*",
+      "nearby_context": "**Rationale**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9521,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: \u2705 PASS",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9522,
+      "citation_text": "*Date*",
+      "nearby_context": "**Date**: January 24, 2026",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9523,
+      "citation_text": "*Validator*",
+      "nearby_context": "**Validator**: Citation Validation Agent v1.0",
+      "in_high_severity_section": false
+    }
+  ],
+  "high_severity_unverified": [],
+  "qa_deductions": {
+    "missing_tag": {
+      "count": 318,
+      "raw_deduction": 159.0,
+      "capped_deduction": 3.0
+    },
+    "high_severity_unverified": {
+      "count": 0,
+      "raw_deduction": 0.0,
+      "capped_deduction": 0.0
+    },
+    "tag_without_evidence": {
+      "count": 8,
+      "raw_deduction": 2.0,
+      "capped_deduction": 1.0
+    },
+    "high_assumed_percentage": {
+      "triggered": true,
+      "deduction": 1.0
+    },
+    "hard_fail_triggered": false,
+    "total_deduction": 5.0
+  },
+  "triggers_hard_fail": false,
+  "recommendations": [
+    "Tag coverage is 14.4%. Add verification tags to reach 90% threshold.",
+    "15 citations in HIGH-severity sections lack tags. Prioritize these for verification.",
+    "ASSUMED tags exceed 5% threshold. Consider converting some to VERIFIED where possible."
+  ]
+}

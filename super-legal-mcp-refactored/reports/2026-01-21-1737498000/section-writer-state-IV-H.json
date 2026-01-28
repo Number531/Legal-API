@@ -1,0 +1,65 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "H",
+  "section_name": "Reinsurance Treaties and Counterparty Risk",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.H (Reinsurance Treaties) from specialist reports T8 and T2",
+    "progress": "Phase 6 complete - all subsections written and quality checks passed",
+    "next_action": "Section complete - return status to orchestrator",
+    "critical_context": ["section_id=H", "3 HIGH/CRITICAL findings", "Vermont captive deal-blocking risk mitigated by $400M LOC", "Global Re consent 85% approval probability"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["commercial-contracts-analyst-report.md", "regulatory-rulemaking-captive-reinsurance-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6450,
+    "findings_written": "3/3",
+    "high_severity": 2,
+    "critical_severity": 1,
+    "footnotes_count": 76,
+    "last_checkpoint": "2026-01-22T00:15:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/commercial-contracts-analyst-report.md",
+    "specialist-reports/regulatory-rulemaking-captive-reinsurance-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "quality_checks": {
+    "word_count_4000_minimum": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  },
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/section-reports/section-IV-H-reinsurance-treaties.md"
+}

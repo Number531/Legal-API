@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Legal Research Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 80%;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message.user {
+            align-self: flex-end;
+        }
+        
+        .message.assistant {
+            align-self: flex-start;
+        }
+        
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        
+        .message.user .message-content {
+            background: #007bff;
+            color: white;
+        }
+        
+        .message.assistant .message-content {
+            background: #f1f3f5;
+            color: #333;
+            white-space: pre-wrap;
+        }
+        
+        .tool-call {
+            background: #e8f4fd;
+            border-left: 3px solid #2196F3;
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: #1565C0;
+            margin-bottom: 4px;
+        }
+        
+        .tool-args {
+            color: #666;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 12px 16px;
+            background: #f1f3f5;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .typing-indicator.active {
+            display: block;
+        }
+        
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .input-area {
+            border-top: 1px solid #e0e0e0;
+            padding: 20px;
+            background: white;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+            font-family: inherit;
+            line-height: 1.4;
+            max-height: 120px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
+        }
+        
+        .send-button {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .send-button:hover:not(:disabled) {
+            background: #0056b3;
+        }
+        
+        .send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .suggestions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .suggestion {
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .suggestion:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .status-bar {
+            padding: 8px 20px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+        }
+        
+        .status-dot.offline {
+            background: #dc3545;
+        }
+        
+        .clear-button {
+            padding: 4px 12px;
+            background: transparent;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .clear-button:hover {
+            background: #f8f9fa;
+        }
+        
+        .context-note {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 13px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚖️ Pennsylvania Chemical Bankruptcy Legal Research Assistant</h1>
+    </div>
+    
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <div class="message assistant">
+                <div class="message-content">
+                    <strong>Welcome to the Interactive Legal Research Assistant!</strong>
+                    
+I can help you research Pennsylvania chemical manufacturing bankruptcies, including:
+• Intellectual property retention strategies
+• Debtor in possession (DIP) financing
+• Case law and precedents
+• Environmental liability considerations
+
+Based on your initial query, I found several relevant cases. <strong>Please provide clarification on:</strong>
+
+1. <strong>Timeframe:</strong> Focus on recent cases (2010-present) or include older precedents (2000-2010)?
+2. <strong>Venue:</strong> Strictly PA bankruptcy courts or include Third Circuit (D. Del.) for PA-headquartered companies?
+3. <strong>Scope:</strong> Include adjacent industries (specialty materials, refractories, petrochemical)?
+4. <strong>Detail level:</strong> Summary analysis or pull actual DIP orders and sale documents?
+
+You can respond naturally, and I'll continue the research based on your preferences.
+                </div>
+            </div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="input-area">
+            <div class="suggestions">
+                <div class="suggestion" onclick="sendMessage('Focus on recent cases (2015-present) in PA bankruptcy courts only. Include specialty chemicals and materials. Provide detailed analysis of DIP financing structures.')">
+                    Recent PA cases with DIP details
+                </div>
+                <div class="suggestion" onclick="sendMessage('Include all Third Circuit venues for PA-headquartered companies from 2000-present. Focus on IP retention strategies.')">
+                    Broad Third Circuit + IP focus
+                </div>
+                <div class="suggestion" onclick="sendMessage('Pull the actual DIP orders for Harbison-Walker and Penn Specialty Chemicals cases.')">
+                    Get specific DIP orders
+                </div>
+                <div class="suggestion" onclick="sendMessage('What were the IP collateral provisions in the Foamex and Horsehead cases?')">
+                    IP collateral analysis
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Type your response or follow-up question..."
+                        rows="2"
+                        onkeypress="handleKeyPress(event)"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                </div>
+                <button class="send-button" id="sendButton" onclick="sendMessage()">
+                    Send
+                </button>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            <div class="connection-status">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Connected to Legal Research System</span>
+            </div>
+            <button class="clear-button" onclick="clearChat()">Clear Chat</button>
+        </div>
+    </div>
+    
+    <script>
+        let eventSource = null;
+        let conversationHistory = [];
+        let isProcessing = false;
+        
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+        
+        function sendMessage(text) {
+            const input = document.getElementById('messageInput');
+            const message = text || input.value.trim();
+            
+            if (!message || isProcessing) return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            conversationHistory.push({ role: 'user', content: message });
+            
+            // Clear input
+            if (!text) {
+                input.value = '';
+                input.style.height = 'auto';
+            }
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Disable input
+            setProcessing(true);
+            
+            // Send to server
+            streamResponse(message);
+        }
+        
+        function addMessage(content, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            if (sender === 'assistant' && typeof content === 'object') {
+                // Handle tool calls
+                if (content.type === 'tool') {
+                    const toolDiv = document.createElement('div');
+                    toolDiv.className = 'tool-call';
+                    toolDiv.innerHTML = `
+                        <div class="tool-name">🔧 ${content.name}</div>
+                        <div class="tool-args">${JSON.stringify(content.args, null, 2)}</div>
+                    `;
+                    contentDiv.appendChild(toolDiv);
+                }
+            } else {
+                contentDiv.innerHTML = content;
+            }
+            
+            messageDiv.appendChild(contentDiv);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function showTyping() {
+            document.getElementById('typingIndicator').classList.add('active');
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideTyping() {
+            document.getElementById('typingIndicator').classList.remove('active');
+        }
+        
+        function setProcessing(processing) {
+            isProcessing = processing;
+            const sendButton = document.getElementById('sendButton');
+            const input = document.getElementById('messageInput');
+            
+            sendButton.disabled = processing;
+            input.disabled = processing;
+            
+            if (!processing) {
+                input.focus();
+            }
+        }
+        
+        function streamResponse(query) {
+            // Build context from conversation history
+            const context = conversationHistory.slice(-4).map(msg => 
+                `${msg.role}: ${msg.content}`
+            ).join('\n');
+            
+            const fullQuery = conversationHistory.length > 1 
+                ? `Previous context:\n${context}\n\nCurrent query: ${query}`
+                : query;
+            
+            const url = `http://localhost:8089/api/gpt5/stream?mode=chat&query=${encodeURIComponent(fullQuery)}`;
+            
+            eventSource = new EventSource(url);
+            let currentResponse = '';
+            let messageDiv = null;
+            
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    
+                    if (data.type === 'tool') {
+                        // Show tool call inline
+                        if (!messageDiv) {
+                            hideTyping();
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        const toolDiv = document.createElement('div');
+                        toolDiv.className = 'tool-call';
+                        toolDiv.innerHTML = `
+                            <div class="tool-name">🔧 Searching: ${data.tool.name || data.tool.tool}</div>
+                            <div class="tool-args">${JSON.stringify(data.tool.arguments || {}, null, 2).substring(0, 200)}...</div>
+                        `;
+                        messageDiv.querySelector('.message-content').appendChild(toolDiv);
+                        
+                    } else if (data.type === 'delta') {
+                        hideTyping();
+                        
+                        if (!messageDiv) {
+                            messageDiv = document.createElement('div');
+                            messageDiv.className = 'message assistant';
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'message-content';
+                            messageDiv.appendChild(contentDiv);
+                            document.getElementById('messages').appendChild(messageDiv);
+                        }
+                        
+                        currentResponse += data.text;
+                        // Update the last text node or create new one
+                        const contentDiv = messageDiv.querySelector('.message-content');
+                        const textNodes = Array.from(contentDiv.childNodes).filter(n => n.nodeType === 3);
+                        
+                        if (textNodes.length > 0) {
+                            textNodes[textNodes.length - 1].textContent = currentResponse;
+                        } else {
+                            contentDiv.appendChild(document.createTextNode(currentResponse));
+                        }
+                        
+                        // Auto-scroll
+                        const messagesDiv = document.getElementById('messages');
+                        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        
+                    } else if (data.type === 'final') {
+                        conversationHistory.push({ role: 'assistant', content: currentResponse });
+                        setProcessing(false);
+                        closeStream();
+                    } else if (data.type === 'error') {
+                        hideTyping();
+                        addMessage(`Error: ${data.error}`, 'assistant');
+                        setProcessing(false);
+                        closeStream();
+                    }
+                } catch (e) {
+                    console.error('Parse error:', e);
+                }
+            };
+            
+            eventSource.onerror = (error) => {
+                console.error('SSE Error:', error);
+                hideTyping();
+                
+                if (!currentResponse) {
+                    addMessage('Connection lost. Please check if the server is running.', 'assistant');
+                }
+                
+                setProcessing(false);
+                closeStream();
+                updateConnectionStatus(false);
+            };
+        }
+        
+        function closeStream() {
+            if (eventSource) {
+                eventSource.close();
+                eventSource = null;
+            }
+        }
+        
+        function clearChat() {
+            if (confirm('Clear all messages?')) {
+                document.getElementById('messages').innerHTML = '';
+                conversationHistory = [];
+                addInitialMessage();
+            }
+        }
+        
+        function updateConnectionStatus(connected) {
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            
+            if (connected) {
+                dot.classList.remove('offline');
+                text.textContent = 'Connected to Legal Research System';
+            } else {
+                dot.classList.add('offline');
+                text.textContent = 'Disconnected - Check server';
+            }
+        }
+        
+        function addInitialMessage() {
+            const initialMessage = `<strong>Welcome to the Interactive Legal Research Assistant!</strong>
+                    
+I can help you research Pennsylvania chemical manufacturing bankruptcies, including:
+• Intellectual property retention strategies
+• Debtor in possession (DIP) financing
+• Case law and precedents
+• Environmental liability considerations
+
+Based on your initial query, I found several relevant cases. <strong>Please provide clarification on:</strong>
+
+1. <strong>Timeframe:</strong> Focus on recent cases (2010-present) or include older precedents (2000-2010)?
+2. <strong>Venue:</strong> Strictly PA bankruptcy courts or include Third Circuit (D. Del.) for PA-headquartered companies?
+3. <strong>Scope:</strong> Include adjacent industries (specialty materials, refractories, petrochemical)?
+4. <strong>Detail level:</strong> Summary analysis or pull actual DIP orders and sale documents?
+
+You can respond naturally, and I'll continue the research based on your preferences.`;
+            
+            addMessage(initialMessage, 'assistant');
+        }
+        
+        // Check server connection on load
+        fetch('http://localhost:8089/health')
+            .then(r => r.json())
+            .then(() => updateConnectionStatus(true))
+            .catch(() => updateConnectionStatus(false));
+    </script>
+</body>
+</html>

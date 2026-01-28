@@ -1,0 +1,80 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "A",
+  "section_name": "State Insurance Regulation and Risk-Based Capital Compliance",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-A (State Insurance Regulation) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "None - section fully complete",
+    "critical_context": ["section_id=A", "3 HIGH/CRITICAL findings", "All subsections A-F complete", "89 footnotes with verification tags"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section IV.A is COMPLETE. No further work required.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["regulatory-rulemaking-rbc-capital-report.md", "regulatory-rulemaking-captive-reinsurance-report.md", "financial-impact-analysis.md"]
+  },
+
+  "metrics": {
+    "word_count": 11200,
+    "findings_written": "3/3",
+    "high_severity_findings": 3,
+    "footnotes_count": 89,
+    "verification_tags_count": 132,
+    "draft_provisions_count": 4,
+    "cross_references_count": 8,
+    "last_checkpoint": "2026-01-22T00:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/regulatory-rulemaking-rbc-capital-report.md",
+    "specialist-reports/regulatory-rulemaking-captive-reinsurance-report.md",
+    "specialist-reports/financial-impact-analysis.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/section-reports/section-IV-A-state-insurance-regulation.md",
+
+  "quality_validation": {
+    "word_count_minimum_met": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholder_text": true,
+    "citations_have_verification_tags": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true,
+    "creac_structure_followed": true
+  },
+
+  "exposure_summary": {
+    "gross_exposure": "$2.225B",
+    "probability_weighted": "$322.1M",
+    "post_mitigation": "$157.4M",
+    "recommended_escrow": "$400M",
+    "valuation_methods": {
+      "npv": 2,
+      "expected_value": 5,
+      "dcf": 1
+    }
+  }
+}

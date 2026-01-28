@@ -1,0 +1,61 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "IV.C",
+  "section_name": "Variable Products & Securities Compliance",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.C from specialist reports T3 (Variable Products) and T10 (Investment Portfolio Risk)",
+    "progress": "All phases complete - section delivered",
+    "next_action": "None - section complete",
+    "critical_context": ["4 findings analyzed with CREAC structure", "GMWB tail risk $45M-$75M; combined scenario -$482M", "All HIGH findings have draft contract provisions"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["variable-products-securities-report.md", "investment-portfolio-risk-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6850,
+    "findings_written": "4/4",
+    "footnotes_count": 30,
+    "last_checkpoint": "2026-01-18T23:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/variable-products-securities-report.md",
+    "specialist-reports/investment-portfolio-risk-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "quality_verification": {
+    "word_count_adequate": true,
+    "all_subsections_present": true,
+    "high_findings_have_provisions": true,
+    "no_placeholders": true,
+    "citations_have_tags": true,
+    "counter_analysis_present": true,
+    "creac_structure_followed": true,
+    "no_advocacy_language": true
+  }
+}

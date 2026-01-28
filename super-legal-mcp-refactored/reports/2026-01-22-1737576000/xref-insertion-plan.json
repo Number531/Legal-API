@@ -1,0 +1,315 @@
+[
+  {
+    "section_id": "IV.B.1",
+    "title": "SEC October 2023 Examination Deficiencies - Remediation and Fine Exposure",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.F",
+    "title": "Rule 22e-4 Liquidity Risk Management Program",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.S",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.B",
+        "reason": "Related topics: securities",
+        "type": "topic"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: company, SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "Cross-Trading Prohibited Transaction Exposure",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.2",
+    "title": "Side Letter Most Favored Nation Provisions \u2014 $98 Million NPV Ongoing Exposure",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.3",
+    "title": "Key Person Provisions \u2014 $3.0 Billion Redemption Risk, $60-$120 Million Fire-Sale Exposure",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.S",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "Testimonial Conflicts \u2014 Undisclosed Fee Reductions",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.2",
+    "title": "Performance Composite Survivorship Bias",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "Opportunity Fund \u2014 Stale Mark Overstatement ($37M-$59M)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.3",
+    "title": "Performance Fee Clawback Risk ($6M-$13M)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.S",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.E.4",
+    "title": "Counter-Party Response Anticipation (TIER 3 ENHANCEMENT)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.F",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.S",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.B",
+        "reason": "Related topics: securities",
+        "type": "topic"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "Client Concentration: State Pension Plan A Termination Risk ($41M Annual Revenue, 11% Total Revenue)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "IRC \u00a7 1061 Carried Interest \u2014 Three-Year Holding Period Recharacterization",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.3",
+    "title": "Earnout Recharacterization Risk \u2014 Purchase Price vs. Compensation",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.S",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "Regulation S-P Incident Response Program Deficiency",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.2",
+    "title": "Data Breach Exposure from Inadequate Safeguards (10,192 PII Records at Risk)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.3",
+    "title": "Absence of Cyber Insurance Coverage (Unfunded $1M-$2.3M Immediate Response Costs)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.S",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.4",
+    "title": "Service Provider Oversight Program Deficiency",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.C",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.1",
+    "title": "Cyber Insurance Gap \u2014 No Coverage in Force (CRITICAL)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.E",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  },
+  {
+    "section_id": "IV.B.2",
+    "title": "Errors & Omissions Coverage Below Industry Benchmark (HIGH)",
+    "severity": "HIGH",
+    "connections": [
+      {
+        "section": "IV.R",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      },
+      {
+        "section": "IV.A",
+        "reason": "Shared entities: SEC",
+        "type": "entity"
+      }
+    ]
+  }
+]

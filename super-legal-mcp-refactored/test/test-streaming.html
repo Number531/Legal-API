@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Claude Streaming Test</title>
+</head>
+<body>
+    <h1>Claude Streaming Test</h1>
+    <button onclick="testStreaming()">Test Streaming</button>
+    <div id="output" style="white-space: pre-wrap; padding: 20px; background: #f0f0f0; margin: 20px 0;"></div>
+    
+    <script>
+        function testStreaming() {
+            const output = document.getElementById('output');
+            output.innerHTML = 'Starting stream test...\n\n';
+            
+            const eventSource = new EventSource('http://localhost:8090/api/claude/stream?query=test');
+            
+            eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    output.innerHTML += `Event: ${data.type}\n`;
+                    
+                    if (data.type === 'delta' && data.text) {
+                        output.innerHTML += `Text: ${data.text}\n`;
+                    } else if (data.type === 'enhanced_thinking') {
+                        output.innerHTML += `Thinking: ${data.text}\n`;
+                    } else if (data.type === 'enhanced_tool_call') {
+                        output.innerHTML += `Tool: ${data.tool.name}\n`;
+                    } else if (data.type === 'final') {
+                        output.innerHTML += '\nStream completed!\n';
+                        eventSource.close();
+                    } else if (data.type === 'error') {
+                        output.innerHTML += `Error: ${data.error}\n`;
+                        eventSource.close();
+                    }
+                } catch (e) {
+                    output.innerHTML += `Parse error: ${e.message}\n`;
+                }
+            };
+            
+            eventSource.onerror = (error) => {
+                output.innerHTML += `Connection error!\n`;
+                eventSource.close();
+            };
+        }
+    </script>
+</body>
+</html>

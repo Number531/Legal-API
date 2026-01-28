@@ -1,0 +1,3344 @@
+{
+  "metadata": {
+    "source_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-25-1737843600/final-memorandum-CERTIFIED.md",
+    "scan_timestamp": "2026-01-25T07:44:19.801003",
+    "script_version": "1.0.0"
+  },
+  "statistics": {
+    "total_citations_detected": 1285,
+    "total_tags_found": 82,
+    "untagged_citations": 450,
+    "high_severity_unverified": 0
+  },
+  "coverage_percentage": 6.381322957198443,
+  "coverage_by_type": {
+    "VERIFIED_URL": 30,
+    "VERIFIED_FILING": 2,
+    "INFERRED_PRECEDENT": 0,
+    "ASSUMED_INDUSTRY": 50,
+    "ASSUMED_LEGISLATIVE_INTENT": 0,
+    "UNVERIFIED_NEEDS_RESEARCH": 0
+  },
+  "coverage_percentages": {
+    "verified_percentage": 39.02439024390244,
+    "unverified_percentage": 0.0,
+    "assumed_percentage": 60.97560975609756
+  },
+  "tags_by_type": {
+    "VERIFIED_URL": [
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:PACER]",
+        "line_number": 3008,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1990-WL-32156]",
+        "line_number": 3322,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2004-WL-213156]",
+        "line_number": 3323,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1999-WL-178942]",
+        "line_number": 3860,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:PACER-Northern-District-Texas-4:24-cv-00432]",
+        "line_number": 3944,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:PACER-Northern-District-Iowa-4:24-cv-00157]",
+        "line_number": 3944,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:PACER]",
+        "line_number": 3952,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Greber-1985]",
+        "line_number": 4419,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-3d-Cir-1985]",
+        "line_number": 4521,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw]",
+        "line_number": 4596,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Cal-Supreme-1985]",
+        "line_number": 4850,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-3d-Cir-1985]",
+        "line_number": 5367,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-SCOTUS-2016]",
+        "line_number": 5370,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Cal-Supreme-1985]",
+        "line_number": 5374,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Cal-Supreme-1985]",
+        "line_number": 5397,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Second-Circuit-FCA-successor-liability]",
+        "line_number": 7029,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Second-Circuit]",
+        "line_number": 7084,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Second-Circuit]",
+        "line_number": 7412,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2016-WL-2766368]",
+        "line_number": 8590,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1985-WL-14066]",
+        "line_number": 8594,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:PACER]",
+        "line_number": 8611,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-1990-WL-32156]",
+        "line_number": 8637,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-2004-WL-213156]",
+        "line_number": 8639,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-3d-Cir-1985]",
+        "line_number": 8680,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-SCOTUS-2016]",
+        "line_number": 8686,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Cal-Supreme-1985]",
+        "line_number": 8694,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Cal-Supreme-1985]",
+        "line_number": 8740,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-Second-Circuit]",
+        "line_number": 8854,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:url/source]",
+        "line_number": 9091,
+        "has_evidence": false,
+        "evidence_quality": "none"
+      },
+      {
+        "tag_type": "VERIFIED_URL",
+        "tag_text": "[VERIFIED:Westlaw-citation]",
+        "line_number": 9707,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      }
+    ],
+    "VERIFIED_FILING": [
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:EDGAR-filings]",
+        "line_number": 5055,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      },
+      {
+        "tag_type": "VERIFIED_FILING",
+        "tag_text": "[VERIFIED:EDGAR-filing]",
+        "line_number": 9712,
+        "has_evidence": true,
+        "evidence_quality": "partial"
+      }
+    ],
+    "INFERRED_PRECEDENT": [],
+    "ASSUMED_INDUSTRY": [
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:INDUSTRY-BEST-PRACTICE]",
+        "line_number": 539,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:INDUSTRY-SNF-DATABASE]",
+        "line_number": 862,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:INDUSTRY-SNF-DATABASE]",
+        "line_number": 1334,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 3232,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 3233,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark]",
+        "line_number": 3454,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark]",
+        "line_number": 3455,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 3560,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 3908,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 3948,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 3950,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 3990,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 4030,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 4038,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 4058,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 4068,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark]",
+        "line_number": 4078,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 4218,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 4302,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 4304,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-precedent]",
+        "line_number": 4306,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 4450,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 4451,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-survey-data]",
+        "line_number": 4478,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-practice]",
+        "line_number": 4758,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 4852,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-publication]",
+        "line_number": 5056,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-based-on-commercial-contracts-specialist-research]",
+        "line_number": 5372,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-based-on-healthcare-M&A-precedent]",
+        "line_number": 5373,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-survey-benchmarks]",
+        "line_number": 5378,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-contract-provision]",
+        "line_number": 5392,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-M&A-advisory-publication]",
+        "line_number": 6970,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-M&A-advisory-source]",
+        "line_number": 7015,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-M&A-advisory-publication]",
+        "line_number": 7420,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 7866,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 8379,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:INDUSTRY-SNF-DATABASE]",
+        "line_number": 8573,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 8629,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 8631,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark]",
+        "line_number": 8653,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-benchmark]",
+        "line_number": 8655,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-study]",
+        "line_number": 8667,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-based-on-commercial-contracts-specialist-research]",
+        "line_number": 8690,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-based-on-healthcare-M&A-precedent]",
+        "line_number": 8692,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-survey-benchmarks]",
+        "line_number": 8702,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard-contract-provision]",
+        "line_number": 8730,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-M&A-advisory-publication]",
+        "line_number": 8862,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry]",
+        "line_number": 9093,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-*]",
+        "line_number": 9292,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      },
+      {
+        "tag_type": "ASSUMED_INDUSTRY",
+        "tag_text": "[ASSUMED:industry-standard]",
+        "line_number": 9728,
+        "has_evidence": true,
+        "evidence_quality": "full"
+      }
+    ],
+    "ASSUMED_LEGISLATIVE_INTENT": [],
+    "UNVERIFIED_NEEDS_RESEARCH": []
+  },
+  "untagged_citations": [
+    {
+      "line_number": 65,
+      "citation_text": "*Matter*",
+      "nearby_context": "**Matter**: Project Asclepius - Acquisition of Sunset Senior Living Group, LLC",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 67,
+      "citation_text": "*Date*",
+      "nearby_context": "**Date**: January 25, 2026",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 107,
+      "citation_text": "*Yes*",
+      "nearby_context": "| 3 | Under IRC Section 338(h)(10), can buyer obtain stepped-up basis while maintaining seller tax n",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 110,
+      "citation_text": "*Uncertain*",
+      "nearby_context": "| 6 | Under applicable insurance policies, is FCA settlement covered? | **Uncertain** | D&O fraud ex",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 418,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "2. **False Claims Act Settlement Exposure**: Under 31 U.S.C. \u00a7 3729 (False Claims Act treble damages",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 422,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "4. **Employment Staff Retention Investment**: Under 42 C.F.R. \u00a7 483.35 (CMS staffing minimums repeal",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 426,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "6. **WARN Act Termination Penalties**: Under 29 U.S.C. \u00a7 2101 (Worker Adjustment and Retraining Noti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 428,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "7. **Anti-Kickback Statute - Medical Director Compensation**: Under 42 U.S.C. \u00a7 1320a-7b(b) (Anti-Ki",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 436,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "11. **HIPAA Breach Notification Exposure**: Under 45 C.F.R. \u00a7 164.404 (HIPAA Breach Notification Rul",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 451,
+      "citation_text": "*Yes*",
+      "nearby_context": "4. **Staff Retention Investment Required**: **Yes**. The December 2025 CMS staffing minimums repeal ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 455,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "6. **WARN Act Orange County Termination**: **Probably Yes**. Orange County Medicare termination foll",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 457,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "7. **Dr. Johnson Medical Director FMV Violation**: **Probably Yes**. Dr. Johnson's $180,000 annual c",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 459,
+      "citation_text": "*Yes*",
+      "nearby_context": "8. **Section 338(h)(10) Tax Neutrality**: **Yes**. Treasury Regulation Section 1.338(h)(10)-1(e) pro",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 463,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "10. **Therapy Assignment Fees and Termination**: **Probably Yes, Manageable**. Sunset's therapy cont",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 465,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "11. **HIPAA Breach Notification Exposure**: **Moderate Risk, Mitigable**. Sunset's current cybersecu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 561,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Exposure Basis**: 42 C.F.R. \u00a7 488.404(e) mandates automatic termination for facilities failing to ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 611,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "Sunset faces 60% probability of third DPNA imposition at Orange County or Desert Sun within 24 month",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 640,
+      "citation_text": "000 Year 2",
+      "nearby_context": "**Desert Sun (Moderate Risk):** 15-20% probability of pressure ulcer recurrence within 18 months. [M",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 670,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "Sunset faces $1.8M-$2.4M civil monetary penalty (CMP) exposure over the 24-month post-closing period",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 711,
+      "citation_text": "2019 WL 2359285",
+      "nearby_context": "**Counter-Analysis:** Orange County may argue that CMPs are punitive and excessive given that both p",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 727,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "The April 2025 Congressional Review Act (CRA) repeal of CMS's minimum staffing standards (42 C.F.R. ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 888,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(A) infection control under 42 C.F.R. \u00a7\u00a7 483.80 (F-880 through F-888), or",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 889,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(B) medication administration under 42 C.F.R. \u00a7 483.45 (F-755 through F-760); and",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 893,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "For purposes of this Section 7.2(d), \"standard survey\" means a comprehensive survey conducted pursua",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 907,
+      "citation_text": "10 Form 483",
+      "nearby_context": "Comparable condition precedent structure used in *Fresenius Kabi AG acquisition of Akorn, Inc.* (201",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 922,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(ii) root cause analysis for any deficiencies in infection control (42 C.F.R. \u00a7 483.80) or medicatio",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 988,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(C) is not subject to Denial of Payment for New Admissions (DPNA) under 42 C.F.R. \u00a7 488.417 or \u00a7 488",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 997,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(B) Orange County Care Center has not been designated a full Special Focus Facility under 42 C.F.R. ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1007,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(A) Orange County Care Center's Medicare provider agreement (CCN 05-5123) is terminated by CMS pursu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1209,
+      "citation_text": "*Woodstock*",
+      "nearby_context": "| \"Orange County's immediate jeopardy events were corrected timely; SFF candidate status is temporar",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 1389,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "The False Claims Act, 31 U.S.C. \u00a7 3729 et seq., imposes civil liability on any person who \"knowingly",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 1412,
+      "citation_text": "v. E",
+      "nearby_context": "#### 2. Implied Certification Theory Under Universal Health Services v. Escobar",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1414,
+      "citation_text": "579 U.S. 176",
+      "nearby_context": "The Supreme Court's decision in *Universal Health Services, Inc. v. United States ex rel. Escobar*, ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1429,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "In the skilled nursing facility context, *Escobar* materiality is typically established by showing t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1435,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The Anti-Kickback Statute (AKS), 42 U.S.C. \u00a7 1320a-7b(b), criminalizes the knowing and willful offer",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1439,
+      "citation_text": "v. G",
+      "nearby_context": "Under Third Circuit precedent in *United States v. Greber*, 760 F.2d 68 (3d Cir. 1985), adopted by m",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1443,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "The AKS regulations provide \"safe harbors\" that protect certain payment arrangements from prosecutio",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1498,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "When the Department of Justice settles an FCA case involving a healthcare provider, the Department o",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1539,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: The Martinez qui tam case presents **HIGH** risk. The acquirer will likely face sett",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1541,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: MEDIUM [BASIS: Settlement range derived from comparable SNF FCA settlements 2020-202",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1543,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "**Rule**: Under 31 U.S.C. \u00a7 3729(a)(1)(A), a person violates the FCA by \"knowingly present[ing], or ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1545,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: In *United States ex rel. Hendow v. University of Phoenix*, 461 F.3d 1166 (9th Cir.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1550,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "**False Claims Act Liability Framework**: The FCA imposes liability for \"knowingly\" presenting false",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1552,
+      "citation_text": "579 U.S. 176",
+      "nearby_context": "**Materiality Standard**: *Universal Health Services v. United States ex rel. Escobar*, 579 U.S. 176",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1554,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Therapy Upcoding Precedent**: CMS's Patient-Driven Payment Model (PDPM) replaced RUG-IV in October",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1560,
+      "citation_text": "v. S",
+      "nearby_context": "Similarly, in *United States ex rel. Mikes v. Straus*, 274 F.3d 687 (2d Cir. 2001), the Second Circu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1562,
+      "citation_text": "v. B",
+      "nearby_context": "In the therapy billing context, courts have consistently found FCA liability for upcoding schemes. I",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1564,
+      "citation_text": "v. T",
+      "nearby_context": "For PDPM gaming specifically, the government has pursued cases involving inflated MDS assessments. I",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1571,
+      "citation_text": "*See*",
+      "nearby_context": "**OIG-HHS Corporate Integrity Agreement Framework**: CIAs are settlement agreements between healthca",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1573,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Breach Consequences**: CIA breach triggers mandatory exclusion under 42 U.S.C. \u00a7 1320a-7(b)(7) (pe",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1581,
+      "citation_text": "*Escobar*",
+      "nearby_context": "However, defendants have successfully argued that clinical judgment inherent in MDS assessments prec",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1583,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Here, Martinez alleges three distinct theories of FCA liability: (1) pre-PDPM RUG-I",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1609,
+      "citation_text": "*Greber*",
+      "nearby_context": "Dr. Robert Johnson's compensation of $180,000 annually for allegedly minimal duties (1 hour/month pe",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1611,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "If Martinez's allegation of 1 hour/month (12 hours/year) is proven, the implied hourly rate of $15,0",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1652,
+      "citation_text": "*Escobar*",
+      "nearby_context": "DOJ intervention probability: **55-65%** [METHODOLOGY: Expert judgment based on (1) damages exceedin",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1662,
+      "citation_text": "*Escobar*",
+      "nearby_context": "These arguments have substantial merit. *Escobar* requires materiality, meaning the government must ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1664,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "However, the medical director kickback theory substantially strengthens the government's position. U",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1666,
+      "citation_text": "*Greber*",
+      "nearby_context": "There is **40-50% probability** that Sunset successfully defends or substantially reduces exposure o",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1682,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "If DOJ intervenes in Martinez and prevails (25% probability) or imposes CIA as settlement condition ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1684,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: If DOJ intervenes and settles the Martinez case, HHS-OIG will almost certainly requi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1686,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: HIGH [BASIS: Standard OIG practice for healthcare FCA settlements >$10M; cost estima",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1688,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule**: When settling FCA cases involving healthcare providers, HHS-OIG routinely requires CIAs as",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1692,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: In recent healthcare FCA settlements, OIG has consistently imposed CIAs on defendan",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1700,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Here, if DOJ intervenes and Sunset settles for $12M-$18M (within the >$10M threshol",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1768,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Dr. Robert Johnson's $280,000 annual medical director compensation for 12 hours/week services ($449/",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1770,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Conclusion**: The medical director compensation arrangement with Dr. Robert Johnson creates **HIGH",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1772,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: MEDIUM-HIGH [BASIS: FMV benchmarks from Sullivan Cotter 2023 survey; *Greber* \"one p",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1774,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Rule**: The Anti-Kickback Statute, 42 U.S.C. \u00a7 1320a-7b(b)(2), makes it a criminal felony to knowi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1776,
+      "citation_text": "v. G",
+      "nearby_context": "Under *United States v. Greber*, 760 F.2d 68 (3d Cir. 1985), adopted by most circuits, the AKS is vi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1778,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: In *United States ex rel. Baklid-Kunz v. Halifax Hospital Medical Center*, 826 F.3d",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1783,
+      "citation_text": "v. P",
+      "nearby_context": "Similarly, in *United States v. Patel*, 778 F.3d 607 (7th Cir. 2015), a cardiologist was convicted o",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1794,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Here, Dr. Robert Johnson receives $180,000 annually ($15,000/month) as medical dire",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1809,
+      "citation_text": "*Defensible*",
+      "nearby_context": "- **If 240 hours/year (20 hours/month):** $180,000 \u00f7 240 = **$750/hour** \u2192 **Defensible** (high-end ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1810,
+      "citation_text": "*Defensible*",
+      "nearby_context": "- **If 300 hours/year (25 hours/month):** $180,000 \u00f7 300 = **$600/hour** \u2192 **Defensible** (within FM",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1818,
+      "citation_text": "*Greber*",
+      "nearby_context": "This referral pattern, combined with excess compensation, creates strong circumstantial evidence tha",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1825,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Under 42 U.S.C. \u00a7 1320a-7b(g), enacted as part of the Affordable Care Act, \"a claim that includes it",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1848,
+      "citation_text": "*Greber*",
+      "nearby_context": "Probability of proving AKS violation (Dr. Johnson): **60-70%** [METHODOLOGY: Based on (1) strong FMV",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1864,
+      "citation_text": "v. P",
+      "nearby_context": "- Actual vs. nominal duties: Contract language alone is insufficient; *United States v. Parekh* (D.N",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1883,
+      "citation_text": "v. C",
+      "nearby_context": "Silver Oak's stock purchase structure creates automatic FCA successor liability for all pre-closing ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1885,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: The structure of the acquisition\u2014asset purchase vs. stock purchase\u2014affects whether S",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1887,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: MEDIUM [BASIS: Federal common law successor liability standards; state law varies; t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1889,
+      "citation_text": "*Rule*",
+      "nearby_context": "**Rule**: Under federal common law, a purchaser of assets generally does not assume the seller's lia",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1891,
+      "citation_text": "2016 WL 4417946",
+      "nearby_context": "In *United States ex rel. Leveski v. ITT Educational Services, Inc.*, 2016 WL 4417946 (S.D. Ind. Aug",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1896,
+      "citation_text": "v. C",
+      "nearby_context": "Conversely, in *United States ex rel. Folliard v. CDW Government, Inc.*, 722 F. Supp. 2d 20 (D.D.C. ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1910,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: Courts have applied successor liability analysis to healthcare acquisitions with va",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1912,
+      "citation_text": "v. M",
+      "nearby_context": "In contrast, in *United States v. Mexico Money Transfer*, 803 F.3d 1178 (11th Cir. 2015), the Eleven",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1914,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Here, Silver Oak has three acquisition structure options:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1930,
+      "citation_text": "*Leveski*",
+      "nearby_context": "- **FCA Successor Liability:** Likely avoided under *Leveski* if asset purchase agreement expressly ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1938,
+      "citation_text": "*Leveski*",
+      "nearby_context": "- **FCA Successor Liability:** Strong defense under *Leveski* (no continuation of seller's operation",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1969,
+      "citation_text": "*Leveski*",
+      "nearby_context": "Probability of successor FCA liability if asset purchase with same operations: **30-40%** [METHODOLO",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 1984,
+      "citation_text": "*Leveski*",
+      "nearby_context": "- **Express Disclaimer:** The asset purchase agreement expressly states that Silver Oak does not ass",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2069,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.A (CMS Regulatory Compliance)** at \u00b626: CIA mandatory self-disclosure obligations (60",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2078,
+      "citation_text": "*Comparable*",
+      "nearby_context": "| **Covenant Care California** | June 2023 | Post-acute care billing fraud, therapy medical necessit",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2108,
+      "citation_text": "v. S",
+      "nearby_context": "The qui tam action captioned *United States ex rel. Sarah Martinez v. Sunset Senior Living Group, LL",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2112,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "(ii) Civil penalties assessed under 31 U.S.C. \u00a7 3729, whether per-claim penalties or per-instance pe",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2116,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "(iv) Government investigative costs recoverable under 31 U.S.C. \u00a7 3729(a)(3);",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2118,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "(v) Relator's share of any recovery under 31 U.S.C. \u00a7 3730(d); and",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2158,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Claims under the Anti-Kickback Statute (42 U.S.C. \u00a7 1320a-7b) related to pre-Closing arrangements wi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2180,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "The FCA Survival Period reflects: (A) the False Claims Act statute of limitations under 31 U.S.C. \u00a7 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2261,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "- **5-year survival** period aligns with FCA statute of limitations (31 U.S.C. \u00a7 3731(b): 6 years fr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2301,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(e) No notice from the Department of Health and Human Services Office of Inspector General of intent",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2397,
+      "citation_text": "v. R",
+      "nearby_context": "- Escrow interest income is taxable to the party ultimately entitled to the escrowed funds. Rev. Rul",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2442,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "(a) Neither the Company nor any of its Subsidiaries, nor any of their respective officers, directors",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2446,
+      "citation_text": "v. S",
+      "nearby_context": "(c) Schedule 3.14 sets forth complete and accurate information regarding the qui tam action styled U",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2448,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(d) All Medical Director Agreements listed on Schedule 3.14(d) have been reviewed by third-party com",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2453,
+      "citation_text": "v. S",
+      "nearby_context": "Exception: United States ex rel. Sarah Martinez v. Sunset Senior Living Group, LLC (D. Ariz., Case N",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2469,
+      "citation_text": "v. S",
+      "nearby_context": "(i) The qui tam action styled United States ex rel. Sarah Martinez v. Sunset Senior Living Group, LL",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2475,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(iv) Any violation of the Anti-Kickback Statute (42 U.S.C. \u00a7 1320a-7b) arising from Medical Director",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2586,
+      "citation_text": "*Greber*",
+      "nearby_context": "| \"Medical director compensation is defensible FMV; Dr. Johnson provides comprehensive services\" | M",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 2588,
+      "citation_text": "*Escobar*",
+      "nearby_context": "| \"CIA costs should be Buyer's responsibility post-closing operational expense, not Seller indemnity",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 2721,
+      "citation_text": "*Greber*",
+      "nearby_context": "95. [METHODOLOGY: Expert judgment based on strength of FMV benchmark evidence, *Greber* \"one purpose",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2894,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Worker Adjustment and Retraining Notification Act (WARN Act), 29 U.S.C. \u00a7\u00a7 2101-2109**",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 2898,
+      "citation_text": "v. E",
+      "nearby_context": "The WARN Act imposes strict liability for non-compliance. Employers who fail to provide the required",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2900,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**National Labor Relations Act (NLRA), 29 U.S.C. \u00a7 151 et seq.**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2904,
+      "citation_text": "v. K",
+      "nearby_context": "Section 8(a)(5) requires employers to bargain in good faith with the certified union representative ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2906,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Fair Labor Standards Act (FLSA), 29 U.S.C. \u00a7 201 et seq.**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2910,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Employee Retirement Income Security Act (ERISA), 29 U.S.C. \u00a7 1001 et seq.**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2924,
+      "citation_text": "v. S",
+      "nearby_context": "California Labor Code \u00a7 226.7 requires employers to provide a paid 10-minute rest break for every fo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2944,
+      "citation_text": "v. B",
+      "nearby_context": "Under federal common law, an acquiring entity may inherit certain employment-related liabilities of ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2946,
+      "citation_text": "v. T",
+      "nearby_context": "In *Teed v. Thomas & Betts Power Solutions, L.L.C.*, the Second Circuit applied a four-factor test t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2956,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "The April 2025 Congressional Review Act (CRA) repeal of CMS minimum staffing standards (42 C.F.R. \u00a7 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2958,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: The December 2025 repeal of the federal CMS minimum staffing rule represents a **HIG",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2960,
+      "citation_text": "89 FR 40876",
+      "nearby_context": "**Confidence**: HIGH [BASIS: Federal Register 89 FR 40876 (May 10, 2024) establishing rule; December",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2962,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Rule**: On May 10, 2024, the Centers for Medicare & Medicaid Services (CMS) published a final rule",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2966,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: Prior to the repeal, skilled nursing facilities nationwide faced substantial compli",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2968,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Courts invalidating the rule emphasized CMS's failure to consider alternatives and the lack of statu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2970,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Sunset Senior Living Group operates 12 skilled nursing facilities with 1,650 licens",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 2988,
+      "citation_text": "*Beds*",
+      "nearby_context": "- **Beds**: 145 licensed beds \u00d7 88% occupancy = 127 residents",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3002,
+      "citation_text": "127 AB 1502",
+      "nearby_context": "[METHODOLOGY: Statutory certainty under Cal. Health & Safety Code \u00a7 1276.5; CDPH issued 127 AB 1502 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3020,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: Sunset's California facilities are **NON-COMPLIANT** with California Health & Safety",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3022,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: HIGH [BASIS: Cal. Health & Safety Code \u00a7 1182.9 statutory text; CDPH enforcement gui",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3046,
+      "citation_text": "*Rule*",
+      "nearby_context": "**Rule**: California Health & Safety Code \u00a7 1182.9, enacted as Senate Bill 525 and effective June 1,",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3056,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: California courts construe minimum wage statutes strictly against employers and lib",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3058,
+      "citation_text": "v. S",
+      "nearby_context": "Class action certification is routinely granted in minimum wage cases where the employer maintained ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3060,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Sunset operates three skilled nursing facilities in California:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3119,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: Sunset's nursing staff turnover rates are critically elevated compared to national b",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3121,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: HIGH [BASIS: Turnover rates verified from employment-labor-report.md \u00a7 I.3; recruitm",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3123,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Rule**: There is no federal statute mandating specific employee retention programs or turnover red",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3129,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: Healthcare economists have documented strong correlations between nursing turnover ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3133,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Sunset's employment-labor-report.md documents the following turnover profile:\u2079\u2078",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3223,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "[METHODOLOGY: Operational necessity \u2014 without retention investment, turnover trajectory projects to ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3241,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "Planned closure of Orange County facility (contingent on SFF termination, 35% probability) triggers ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3243,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Conclusion**: If the Orange County facility's provider agreement is terminated by CMS due to SFF d",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3245,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Confidence**: HIGH [BASIS: Federal WARN Act statutory text 29 U.S.C. \u00a7 2101; California Labor Code",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3247,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Rule**: The federal Worker Adjustment and Retraining Notification (WARN) Act, 29 U.S.C. \u00a7\u00a7 2101-21",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3260,
+      "citation_text": "*Exceptions*",
+      "nearby_context": "**Exceptions**: The WARN Act provides two narrow exceptions that may reduce or eliminate the 60-day ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3264,
+      "citation_text": "v. G",
+      "nearby_context": "Courts construe these exceptions very narrowly. In *United Food & Commercial Workers Union v. Gold S",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3272,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: Courts have uniformly held that WARN Act liability cannot be avoided through contra",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3274,
+      "citation_text": "v. G",
+      "nearby_context": "The Supreme Court in *United Mine Workers v. Gibbs* established that remedial statutes protecting wo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3276,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: The Orange County facility employs 290 workers (estimated: 48 CNAs, 26 LPNs, 15 RNs",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3310,
+      "citation_text": "v. C",
+      "nearby_context": "**Counter-Analysis**: Silver Oak may invoke the \"unforeseeable business circumstances\" exception, ar",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3334,
+      "citation_text": "*Conclusion*",
+      "nearby_context": "**Conclusion**: Sunset's workforce exhibits **MODERATE-HIGH** vulnerability to union organizing by t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3336,
+      "citation_text": "503 Oregon 2024",
+      "nearby_context": "**Confidence**: MEDIUM [BASIS: Wage gap and turnover data verified from employment-labor-report.md \u00a7",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3338,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "**Rule**: The National Labor Relations Act (NLRA), 29 U.S.C. \u00a7 151 et seq., protects employees' righ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3343,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "3. **Election Campaign (4-6 weeks)**: The employer and union conduct campaigns to persuade employees",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3355,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: Healthcare sector unionization has grown significantly since 2018, driven by pandem",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3374,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Sunset employs 980 nursing staff (480 CNAs, 320 LPNs, 180 RNs) across 12 facilities",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3380,
+      "citation_text": "503 Oregon 2024",
+      "nearby_context": "**Wage Premium (Based on SEIU Local 503 Oregon 2024-2027 CBA and SEIU-UHW California Kaiser 2024-202",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3406,
+      "citation_text": "*Cost*",
+      "nearby_context": "- **Cost**: 143 FTEs \u00d7 $43,000 average (blended union wage) = **$6,149,000 annually**\u00b2\u2070\u00b9",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3445,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "3. **Lawful employer speech** under 29 U.S.C. \u00a7 158(c) \u2014 communicating factual information about uni",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3465,
+      "citation_text": "5 AB 1502",
+      "nearby_context": "**Conclusion**: Sunset's understaffing at California facilities (3.45 HPRD vs. 3.5 AB 1502 minimum, ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3467,
+      "citation_text": "*Confidence*",
+      "nearby_context": "**Confidence**: MEDIUM [BASIS: California Labor Code \u00a7\u00a7 512, 226.7 statutory text verified; understa",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3469,
+      "citation_text": "*Rule*",
+      "nearby_context": "**Rule**: California Labor Code \u00a7 512(a) requires employers to provide employees working more than f",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3473,
+      "citation_text": "v. S",
+      "nearby_context": "Critically, California employers bear the burden of proving that compliant meal and rest breaks were",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3478,
+      "citation_text": "*Explanation*",
+      "nearby_context": "**Explanation**: California meal and rest break class actions against healthcare employers have resu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3483,
+      "citation_text": "v. A",
+      "nearby_context": "Courts have consistently rejected employer arguments that healthcare \"exigencies\" (patient needs, em",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3487,
+      "citation_text": "*Application*",
+      "nearby_context": "**Application**: Sunset operates three California facilities employing approximately **144 CNAs** (e",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3501,
+      "citation_text": "v. P",
+      "nearby_context": "**Class action damages calculation (3-year statute of limitations, Cal. Code Civ. Proc. \u00a7 338):**",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3548,
+      "citation_text": "*Brinker*",
+      "nearby_context": "**Counter-Analysis**: Sunset may argue that CNAs voluntarily chose to skip breaks to leave work earl",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3550,
+      "citation_text": "v. O",
+      "nearby_context": "Sunset may also contend that providing meal and rest breaks is infeasible in a healthcare setting wh",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3631,
+      "citation_text": "5 AB 1502",
+      "nearby_context": "- **Section IV.A (CMS Regulatory Compliance)** at \u00b645: SEIU-UHW contracts typically include staffing",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3760,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "For purposes of this Section 8.5, \"organizing activities that commenced prior to Closing\" includes d",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3773,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(a) Target has not effectuated any \"plant closing\" or \"mass layoff\" (as such terms are defined in 29",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3784,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "(i) Violations of the federal WARN Act (29 U.S.C. \u00a7\u00a7 2101-2109) or California WARN Act (Cal. Labor C",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3812,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "Drawdown Rights: Buyer may draw on WARN Escrow to satisfy any indemnification claims under Section 8",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 3832,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "| **\"WARN Act exposure is remote \u2014 Orange County will not close\"** | MEDIUM | Orange County SFF term",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 3833,
+      "citation_text": "53 Cal. 4",
+      "nearby_context": "| **\"Meal/rest break violations are overstated \u2014 employees voluntarily skip breaks\"** | HIGH | Calif",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 3843,
+      "citation_text": "*Require*",
+      "nearby_context": "- **If Seller proposes**: Reduced escrow ($5M instead of $10M) \u2192 **Require**: Extended survival peri",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 3844,
+      "citation_text": "*Consider*",
+      "nearby_context": "- **If Seller refuses**: WARN Act indemnification \u2192 **Consider**: Alternative structure where Seller",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 4424,
+      "citation_text": "26 U.S.C. \u00a7",
+      "nearby_context": "1. The employee has the same meaning as 26 U.S.C. \u00a7 3121(d)(2) (IRS tax code employee definition)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4515,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Dr. Robert Johnson's $280,000 annual medical director compensation for 12 hours/week services ($449/",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4528,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Stark Law Compensation Arrangement Exception**: 42 U.S.C. \u00a7 1395nn(e)(3) provides an exception to ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4530,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Fair Market Value Definition**: CMS defines FMV as \"the value in arm's-length transactions, consis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4536,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Anti-Kickback Statute \"One Purpose\" Test**: AKS prohibits remuneration provided with \"one purpose\"",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4538,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "**Stark Law Civil Penalties**: Violations trigger civil monetary penalties of $24,388-$48,775 per ci",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4559,
+      "citation_text": "*However*",
+      "nearby_context": "**However**, the Martinez qui tam complaint alleges Dr. Johnson's involvement was minimal: **1 hour ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4589,
+      "citation_text": "*Greber*",
+      "nearby_context": "However, this defense faces significant challenges: (1) The burden of proof shifts to Sunset once th",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4591,
+      "citation_text": "*Greber*",
+      "nearby_context": "There is a 35-40% probability that Sunset successfully demonstrates FMV compliance, reducing the con",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4748,
+      "citation_text": "*However*",
+      "nearby_context": "**However**, these arguments face practical limitations:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 4972,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.A (CMS Regulatory Compliance)** at \u00b68: Deferred HVAC maintenance violates 42 C.F.R. \u00a7",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5036,
+      "citation_text": "v. G",
+      "nearby_context": "- **Section IV.B (FCA Litigation Analysis)** at \u00b612: The medical director kickback allegations stren",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5044,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.A (CMS Regulatory Compliance)** at \u00b68: Under triple-net lease obligations, Sunset bea",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5072,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "\"Seller shall, within fifteen (15) days following execution of this Agreement, renegotiate the medic",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5117,
+      "citation_text": "*Timeline*",
+      "nearby_context": "**Timeline**: Seller shall deliver status reports on consent solicitation every seven (7) days follo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5175,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "(a) All medical director agreements, physician consulting agreements, and nonphysician practitioner ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5296,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "(c) To Seller's Knowledge, no leased facility requires capital expenditures in excess of $250,000 in",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5348,
+      "citation_text": "v. E",
+      "nearby_context": "| \"Landlord rent increase demands are excessive and unreasonable\" | MEDIUM (35%) | Negotiate cap at ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5466,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "The **Delaware Supreme Court** (2023) held that D&O fraud exclusions requiring \"final adjudication\" ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5475,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- CMS Civil Monetary Penalties (CMPs) imposed under 42 C.F.R. \u00a7 488.430 for survey deficiencies",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5477,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "- WARN Act statutory penalties under 29 U.S.C. \u00a7 2104(a)(1)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5495,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "The wrongful termination and retaliation coverage is particularly relevant where employees assert wh",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5501,
+      "citation_text": "*Duration*",
+      "nearby_context": "- **Duration**: 6-year ERP for both D&O and professional liability (matching or exceeding statute of",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5502,
+      "citation_text": "*Premium*",
+      "nearby_context": "- **Premium**: 150-250% of annual premium (D&O tail typically 200-250%, professional liability 150-2",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5503,
+      "citation_text": "*Limits*",
+      "nearby_context": "- **Limits**: Tail policy limits must match the expiring policy limits",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5504,
+      "citation_text": "*Allocation*",
+      "nearby_context": "- **Allocation**: Seller typically pays tail premium as part of representations and warranties regar",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5536,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "The insurer's counter-argument will focus on the **kickback allegations**: paying a physician $15K/m",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5622,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "1. **Civil Monetary Penalties (CMPs)**: Monetary penalties imposed by CMS under 42 C.F.R. \u00a7 488.430 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5693,
+      "citation_text": "*Injuries*",
+      "nearby_context": "- **Injuries**: 2 residents hospitalized with pneumonia complications",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5696,
+      "citation_text": "*Coverage*",
+      "nearby_context": "- **Coverage**: Fully covered under professional liability (subject to $25K-$50K deductible per occu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5701,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Potential claims**: Families may sue for negligence (failure to prevent pressure ulcers, breach ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5703,
+      "citation_text": "*Coverage*",
+      "nearby_context": "- **Coverage**: Fully covered under professional liability",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5759,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "Sarah Martinez (FCA qui tam relator, former compliance officer employed 2019-2022) was allegedly ter",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5765,
+      "citation_text": "*Deductible*",
+      "nearby_context": "- **Deductible**: $50K-$100K",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5836,
+      "citation_text": "*Deductible*",
+      "nearby_context": "- **Deductible**: $25K-$50K",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5879,
+      "citation_text": "*Duration*",
+      "nearby_context": "- **Duration**: 6 years (matching or exceeding statutes of limitations for underlying claims)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5880,
+      "citation_text": "*Premium*",
+      "nearby_context": "- **Premium**: 150-250% of annual premium",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5883,
+      "citation_text": "*Limits*",
+      "nearby_context": "- **Limits**: Tail policy limits must match expiring policy limits",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5884,
+      "citation_text": "*Allocation*",
+      "nearby_context": "- **Allocation**: Seller pays as part of representations and warranties regarding adequate insurance",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 5895,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "- FCA: 6 years, 31 U.S.C. \u00a7 3731(b)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6022,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "- **Section IV.D (Employment/Labor)** at \u00b624-28: If Orange County facility closure is contemplated i",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6029,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.C (CMS Regulatory Compliance)** at \u00b630: HIPAA Security Rule compliance (45 C.F.R. \u00a7\u00a7 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6078,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "- 6-year tail period matches FCA statute of limitations (31 U.S.C. \u00a7 3731: 6 years from violation or",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6086,
+      "citation_text": "*Rationale*",
+      "nearby_context": "**Rationale**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6136,
+      "citation_text": "*Accountability*",
+      "nearby_context": "**Accountability**: Buyer shall provide Seller with quarterly reports during the 24-month retention ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6147,
+      "citation_text": "*Rationale*",
+      "nearby_context": "**Rationale**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6211,
+      "citation_text": "v. S",
+      "nearby_context": "including the matter styled United States ex rel. Sarah Martinez v. Sunset Senior Living Group,",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6281,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "expiring (6-year statute under 31 U.S.C. \u00a7 3731(b) runs from latest alleged wrongful act",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6392,
+      "citation_text": "29 U.S.C. \u00a7",
+      "nearby_context": "Notification Act, 29 U.S.C. \u00a7\u00a7 2101-2109 (the \"WARN Act\");",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6531,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "HHS Office for Civil Rights under 45 C.F.R. \u00a7 164.408, except as disclosed on Schedule 3.18(f).",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6623,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "- **If seller proposes reduced tail coverage duration (3-year instead of 6-year)**: Require FCA stat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 6909,
+      "citation_text": "1 Section 338",
+      "nearby_context": "#### B.1 Section 338(h)(10) Election Delivers Optimal Tax Treatment for Both Parties",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7021,
+      "citation_text": "v. C",
+      "nearby_context": "Hybrid structure combining stock purchase with Section 338(h)(10) election plus seller FCA indemnifi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7055,
+      "citation_text": "v. S",
+      "nearby_context": "- Purchase Agreement \u00a7 8.3: \"Seller shall indemnify Buyer for all Losses arising from (a) settlement",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7244,
+      "citation_text": "v. S",
+      "nearby_context": "(c) Schedule 3.22 discloses the complaint filed by Sarah Martinez in *United States ex rel. Martinez",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7253,
+      "citation_text": "v. S",
+      "nearby_context": "(i) Any settlement, judgment, or award in *United States ex rel. Martinez v. Sunset Senior Living Gr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7331,
+      "citation_text": "2024 Form 1065",
+      "nearby_context": "| Verify Sunset Entity Classification | Data room opening | Review 2024 Form 1065 or 1120-S tax retu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7342,
+      "citation_text": "*Akorn*",
+      "nearby_context": "| \"Stock purchase with FCA liability is unacceptable; require asset purchase\" | MEDIUM | Counter wit",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7351,
+      "citation_text": "*Akorn*",
+      "nearby_context": "4. **Leverage Points**: (1) Tax-structure-report.md demonstrates seller-neutrality of 338(h)(10), re",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 7473,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "The Health Insurance Portability and Accountability Act of 1996, as implemented through the Privacy ",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 7475,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "Skilled nursing facilities qualify as covered entities under 45 C.F.R. \u00a7 160.103 because they provid",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 7477,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Right of Access:** The Privacy Rule guarantees individuals the right to access their protected hea",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 7479,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Breach Notification:** A \"breach\" is defined as the acquisition, access, use, or disclosure of PHI",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7481,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Security Rule:** The Security Rule requires covered entities to implement administrative, physical",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7483,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Enforcement:** HHS Office for Civil Rights (OCR) enforces HIPAA through civil monetary penalties a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7487,
+      "citation_text": "v. C",
+      "nearby_context": "The California Privacy Rights Act (Cal. Civ. Code \u00a7\u00a7 1798.100-1798.199.100), effective January 1, 20",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7489,
+      "citation_text": "v. C",
+      "nearby_context": "**Critical Limitation - HIPAA Exemption Is Not Entity-Level:** The CPRA's exemption for protected he",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7499,
+      "citation_text": "v. C",
+      "nearby_context": "**Sensitive Personal Information:** The CPRA defines \"sensitive personal information\" to include hea",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7501,
+      "citation_text": "v. C",
+      "nearby_context": "**Consumer Rights Effective January 1, 2023:** The CPRA grants California consumers: (1) right to kn",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7503,
+      "citation_text": "v. C",
+      "nearby_context": "**Private Right of Action:** The CPRA provides a private right of action for data breaches, permitti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7505,
+      "citation_text": "v. C",
+      "nearby_context": "**Administrative Enforcement:** The CPPA may impose administrative fines of $2,500 per violation (no",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7509,
+      "citation_text": "v. S",
+      "nearby_context": "Arizona requires any person or entity that conducts business in Arizona and owns or licenses unencry",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7511,
+      "citation_text": "v. S",
+      "nearby_context": "**Notification Deadline:** Arizona requires notification \"in the most expedient time possible and wi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7513,
+      "citation_text": "v. S",
+      "nearby_context": "**Attorney General Notification:** If the breach affects more than 1,000 Arizona residents, the enti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7515,
+      "citation_text": "v. S",
+      "nearby_context": "**Civil Penalties:** Violations may result in civil penalties up to the lesser of: (1) $10,000 per a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7519,
+      "citation_text": "v. R",
+      "nearby_context": "Nevada law requires data collectors to implement and maintain reasonable security measures to protec",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7521,
+      "citation_text": "v. R",
+      "nearby_context": "**Medical Records:** Nevada law specifically governs medical records privacy for healthcare faciliti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7523,
+      "citation_text": "v. R",
+      "nearby_context": "Nevada SB 220 (effective October 1, 2019) expanded consumer privacy rights to require data collector",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7527,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "The Omnibus Budget Reconciliation Act of 1987 (OBRA) mandates that nursing facilities managing resid",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7539,
+      "citation_text": "42 U.S.C. \u00a7",
+      "nearby_context": "Sunset faces 25% annual probability of successful ransomware attack (vs. 12% national SNF median per",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7543,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** Healthcare organizations have no general federal cybersecurity regulatory requirement outs",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7589,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Conclusion:** Sunset's multi-state operations create **HIGH** severity breach notification complex",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7591,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** When a covered entity operates in multiple states, it must comply with the **most stringen",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7597,
+      "citation_text": "v. R",
+      "nearby_context": "California's CPRA creates a unique private right of action unavailable under HIPAA. In *Rodriguez v.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7604,
+      "citation_text": "*Arizona*",
+      "nearby_context": "| **Arizona** | 5 | ~435 | **45 days** | AZ AG + DHS (if >1,000) | $435K - $500K (capped) |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7606,
+      "citation_text": "*Nevada*",
+      "nearby_context": "| **Nevada** | 4 | ~600 | Expedient | NV AG (if applicable) | $100K - $300K (estimated) |",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7610,
+      "citation_text": "v. C",
+      "nearby_context": "Sunset's dual compliance burden under CPRA warrants specific attention. While resident PHI is exempt",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7621,
+      "citation_text": "v. S",
+      "nearby_context": "- **Arizona statutory cap:** $435K - $500K (435 AZ residents, capped at $500K per breach under Ariz.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7645,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** The Privacy Rule grants individuals the right to inspect and obtain copies of their protec",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7647,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "HHS OCR has emphasized that the Right of Access is \"critical to patient engagement\" and that covered",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7651,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "1. **Essex Residential Care/Hackensack Meridian (April 2024):** A New Jersey SNF failed to provide t",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7663,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Second, confusion regarding personal representative authority.** SNF residents frequently experien",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7706,
+      "citation_text": "v. P",
+      "nearby_context": "Silver Oak assumes successor liability for undisclosed pre-closing HIPAA breaches discovered post-cl",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7708,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Conclusion:** Silver Oak faces **MEDIUM** severity successor liability risk for undisclosed or imp",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7710,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Rule:** HHS must impose civil monetary penalties for HIPAA violations within six years of the date",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7716,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Breaches affecting <500 individuals:** HIPAA requires covered entities to report breaches affectin",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7718,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Improper harm assessments concluding \"no breach\":** HIPAA defines a \"breach\" as impermissible use ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7727,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Unknown security incidents never analyzed:** The HIPAA Security Rule defines a \"security incident\"",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7748,
+      "citation_text": "000 Tier 2",
+      "nearby_context": "- **Scenario A - Unreported breaches (5 incidents \u00d7 100 individuals avg):** 500 affected individuals",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7749,
+      "citation_text": "000 Tier 2",
+      "nearby_context": "- **Scenario B - Improper breach determinations (10 incidents):** 10 incidents \u00d7 $50,000-$100,000 Ti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7828,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.A (CMS Regulatory Compliance)** at \u00b6 TBD: Ransomware encrypting EHR systems prevents ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7830,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "**Legal Doctrine:** Emergency preparedness requirements (42 C.F.R. \u00a7 483.73) mandate SNFs maintain e",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7836,
+      "citation_text": "v. H",
+      "nearby_context": "**Legal Doctrine:** Insurance policies are contracts of adhesion interpreted against the insurer, bu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7841,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "- **Section IV.C (Employment & Labor)** at \u00b6 TBD: The 85% CNA turnover rate (408 annual departures a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7843,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Legal Doctrine:** OCR has held that workforce training is a mandatory implementation specification",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7897,
+      "citation_text": "*Budget*",
+      "nearby_context": "**Budget**: Buyer shall allocate Five Hundred Thousand Dollars ($500,000) for Year 1 cybersecurity e",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7903,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "**Indemnification for Pre-Closing Breaches**: Seller shall indemnify Buyer for HIPAA breach notifica",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7940,
+      "citation_text": "v. C",
+      "nearby_context": "(a) Privacy and Security Compliance. The Company and its Subsidiaries have complied in all material ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7942,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(b) Breach Notification. All breaches of unsecured protected health information, as defined in 45 C.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7944,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(c) Breach Risk Assessments. For all security incidents or impermissible uses or disclosures of prot",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 7948,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(e) Business Associate Agreements. Schedule 3.18(e) lists all Business Associate Agreements (as defi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8014,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(a) Security Safeguards. The Company has implemented administrative, physical, and technical safegua",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8015,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(i) Risk analysis and risk management procedures (45 C.F.R. \u00a7 164.308(a)(1));",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8016,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(ii) Workforce training and security awareness programs (45 C.F.R. \u00a7 164.308(a)(5));",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8017,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(iii) Access controls limiting ePHI access to authorized users (45 C.F.R. \u00a7 164.312(a));",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8018,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(iv) Audit controls to record and examine ePHI system activity (45 C.F.R. \u00a7 164.312(b));",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8019,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(v) Encryption of ePHI at rest and in transit where appropriate and reasonable (45 C.F.R. \u00a7 164.312(",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8067,
+      "citation_text": "v. C",
+      "nearby_context": "(a) CPRA Compliance. With respect to the three (3) California Facilities (Orange County, San Diego, ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8068,
+      "citation_text": "v. C",
+      "nearby_context": "(i) Provision of CPRA-compliant privacy notices to employees, website visitors, and residents (for n",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8074,
+      "citation_text": "v. C",
+      "nearby_context": "(ii) Third parties with whom such non-PHI data has been shared or sold (as \"sale\" is defined in Cal.",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8075,
+      "citation_text": "v. C",
+      "nearby_context": "(iii) Sensitive personal information (as defined in Cal. Civ. Code \u00a7 1798.140(ae)) collected from Ca",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8079,
+      "citation_text": "v. C",
+      "nearby_context": "(d) No Private Right of Action Claims. There are no pending or, to Seller's Knowledge, threatened pr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8088,
+      "citation_text": "v. C",
+      "nearby_context": "(i) Private right of action claims under Cal. Civ. Code \u00a7 1798.150 for data breaches affecting Calif",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8114,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(i) The Company has provided individuals and personal representatives with access to protected healt",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8120,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(iv) To Seller's Knowledge, no facility has improperly denied medical record access requests except ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8134,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(i) Proper identification of personal representatives under 45 C.F.R. \u00a7 164.502(g) (healthcare power",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8135,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(ii) Limited grounds for denial under 45 C.F.R. \u00a7 164.524(a)(2)-(3);",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8136,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "(iii) Fee limitations under 45 C.F.R. \u00a7 164.524(c)(4) (reasonable, cost-based fees for copying; no c",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8159,
+      "citation_text": "v. C",
+      "nearby_context": "| \"CPRA does not apply to healthcare providers; PHI is exempt\" | MEDIUM | CPRA PHI exemption is data",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 8419,
+      "citation_text": "20 C.F.R. \u00a7",
+      "nearby_context": "| 1 | IV.A (Orange County SFF) \u2192 IV.C (WARN Act) | Medicare termination triggers plant closing | Ora",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 8420,
+      "citation_text": "v. E",
+      "nearby_context": "| 2 | IV.B (Martinez FCA) \u2192 IV.D (Medical Director AKS) | Implied certification theory under *Univer",
+      "in_high_severity_section": true
+    },
+    {
+      "line_number": 8427,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "| 9 | IV.G (Ransomware Risk) \u2192 IV.E (Cyber Insurance Requirement) | HIPAA breach under 45 C.F.R. \u00a7 1",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8430,
+      "citation_text": "42 C.F.R. \u00a7",
+      "nearby_context": "| 12 | IV.D (Deferred Maintenance - Leased Facilities) \u2192 IV.A (Life Safety Code Violations) | Triple",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8433,
+      "citation_text": "31 U.S.C. \u00a7",
+      "nearby_context": "| 15 | IV.E (Tail Coverage 6-Year ERP) \u2192 IV.B (FCA Statute of Limitations) | Extended reporting peri",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8436,
+      "citation_text": "v. C",
+      "nearby_context": "| 18 | IV.G (CMIA Penalties - California) \u2192 IV.B (FCA Multiplier Effect) | State privacy violations ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 8584,
+      "citation_text": "579 U.S. 176",
+      "nearby_context": "*[Note: Due to document length, Section IV.B contains 217 footnotes (48-264). All footnotes from thi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9132,
+      "citation_text": "v. B",
+      "nearby_context": "1. Footnote 68 (renumbered): \"United States v. Big Spring Med. Ctr. Ass'n\" - settlement reference wi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9165,
+      "citation_text": "*Statutes*",
+      "nearby_context": "- **Statutes**: U.S.C., state code citations verified via official legislative databases",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9167,
+      "citation_text": "*Reliability*",
+      "nearby_context": "**Reliability**: Highest. These citations can be independently verified by accessing the specified s",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9174,
+      "citation_text": "*Reliability*",
+      "nearby_context": "**Reliability**: High. These citations derive from analysis of publicly available documents but invo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9182,
+      "citation_text": "*Reliability*",
+      "nearby_context": "**Reliability**: Medium to High depending on source. These citations rely on authoritative secondary",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9190,
+      "citation_text": "*Reliability*",
+      "nearby_context": "**Reliability**: Medium. These citations explain analytical approach for derived values. Reliability",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9200,
+      "citation_text": "*Methodology*",
+      "nearby_context": "**Methodology**: Case citations verified through legal digests, treatises, judicial opinions, and se",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9207,
+      "citation_text": "*Subcategories*",
+      "nearby_context": "**Subcategories**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9210,
+      "citation_text": "v. H",
+      "nearby_context": "- *Beverly Enters. v. Herman* (D.D.C. 2000) through *Fid. Fed. Sav. & Loan v. de la Cuesta* (U.S. 19",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9211,
+      "citation_text": "*Context*",
+      "nearby_context": "- **Context**: Section IV.B analysis of CMS staffing rule deference under *Chevron*",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9212,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Holdings verified through subsequent circuit opinions citing these precedents fo",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9213,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Direct Westlaw/CourtListener access unavailable; holdings cross-referenced against",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9216,
+      "citation_text": "v. N",
+      "nearby_context": "- *Pacific First Bank v. New Morgan Park* (Or. 1994): \"Sole discretion\" consent clauses",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9217,
+      "citation_text": "v. K",
+      "nearby_context": "- *Sommer v. Kridel* (N.J. 1977): Landlord consent reasonableness standards",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9218,
+      "citation_text": "*Context*",
+      "nearby_context": "- **Context**: Section IV.J analysis of therapy contract, landlord lease assignment consent",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9219,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Holdings verified through subsequent Oregon/New Jersey decisions applying these ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9220,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Oregon Reports and New Jersey Reports not independently accessed; holdings verifie",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9229,
+      "citation_text": "*Recommendation*",
+      "nearby_context": "- **Recommendation**: Before final filing, verify case citations via Westlaw/Lexis to obtain paralle",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9237,
+      "citation_text": "*Methodology*",
+      "nearby_context": "**Methodology**: Transaction details inferred from SEC registration statements, Form 8-K current rep",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9239,
+      "citation_text": "*Instances*",
+      "nearby_context": "**Instances**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9242,
+      "citation_text": "*Citation*",
+      "nearby_context": "- **Citation**: S-4 Registration Statement, SEC CIK 0001108425 (2020)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9243,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Industry M&A database (SNF acquisition tracking), legal analysis of healthcare transac",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9244,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: CIK 0001108425 verified as Genesis HealthCare entity; S-4 filing type appropriat",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9246,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Complete file number required for direct citation; S-4 existence inferred from tra",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9249,
+      "citation_text": "*Citation*",
+      "nearby_context": "- **Citation**: Current Report on Form 8-K, SEC File No. 001-[\u25cf] (2019)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9250,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Industry M&A database, SNF transaction precedent analysis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9251,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Form 8-K appropriate for material definitive agreement disclosure; 001-[\u25cf] indic",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9253,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Exact ticker symbol or complete file number unavailable in secondary sources",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9258,
+      "citation_text": "*Recommendation*",
+      "nearby_context": "- **Recommendation**: EDGAR search by company name and filing year to obtain complete SEC citation w",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9268,
+      "citation_text": "*Context*",
+      "nearby_context": "- **Context**: Client provided December 2025 repeal date as engagement parameter for regulatory anal",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9269,
+      "citation_text": "*Impact*",
+      "nearby_context": "- **Impact**: Affects Section IV.B staffing compliance obligations, cost avoidance projections for A",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9271,
+      "citation_text": "*Treatment*",
+      "nearby_context": "- **Treatment**: Analyzed as stipulated fact per client engagement scope",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9279,
+      "citation_text": "5 U.S.C. \u00a7",
+      "nearby_context": "3. **Congressional Record**: Search House/Senate votes on CRA resolution (5 U.S.C. \u00a7 801-808 procedu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9296,
+      "citation_text": "*Methodology*",
+      "nearby_context": "**Methodology**: Healthcare industry benchmarks derived from trade association reports, professional",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9298,
+      "citation_text": "*Subcategories*",
+      "nearby_context": "**Subcategories**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9303,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: CNA turnover 65% national median, staffing benchmarks, retention program effectiveness",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9304,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: American Health Care Association/National Center for Assisted Living annual survey",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9306,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Published summary report available to AHCA members; aggregated statistics cited ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9307,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Facility-level data, regional breakdowns, detailed methodology proprietary to AHCA",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9310,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: ROI of retention investments documented in 30-facility randomized controlled trial",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9311,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Paraprofessional Healthcare Institute (PHI) research study",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9312,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: RCT across 30 nursing homes, 5 states, testing retention program interventions",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9313,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Peer-reviewed publication, publicly available executive summary",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9314,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Facility identities, raw retention data, complete statistical analysis proprietary",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9317,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: 72% of CNAs report missing meal breaks due to understaffing (survey of 850 CNAs at CA nu",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9318,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Academic research study, publicly available report",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9319,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Published report with disclosed methodology (survey instrument, sample demograph",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9320,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Survey respondent identities confidential; facility-specific breakdown unavailable",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9325,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: Medical director compensation percentiles ($72K median, $120K-$140K 75th percentile, $16",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9326,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Medical Group Management Association annual physician compensation survey",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9328,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Published summary statistics in MGMA Compensation Report (available for purchase",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9329,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Raw survey data, participant identities, detailed regional/specialty breakdowns pr",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9332,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: Similar percentile ranges, specialty adjustments, rural/underserved area premiums",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9333,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Sullivan, Cotter and Associates physician compensation consulting firm",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9334,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Published survey summaries cited in OIG advisory opinions, FCA settlement negoti",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9335,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Complete survey database requires client engagement with Sullivan Cotter",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9342,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: Consent success rates (60-70% therapy contracts, 85-95% vendor/landlord), assignment fee",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9343,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Healthcare M&A databases (Kaufman Hall, VMG Health, proprietary SNF platforms)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9344,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Aggregated transaction statistics published in quarterly M&A reports",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9345,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Specific transaction terms (buyer/seller identities, exact prices, contract provis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9348,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: Typical assignment fees (0.5%-2% of remaining contract value for therapy contracts, $5K-",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9349,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: Healthcare M&A practitioner surveys, transaction documentation review",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9350,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: No single authoritative source; estimated based on pattern across multiple transac",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9355,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: 127 deficiency citations issued statewide; facilities with 0.05-0.15 HPRD deficiencies r",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9356,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: California Department of Public Health enforcement database or provider newsletter",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9357,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: CDPH.ca.gov public enforcement data (if published) or FOIA request to CDPH Licen",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9358,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Detailed citation-level data (facility names, specific deficiency types) may requi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9361,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: Facilities with CNA turnover >80% and wages bottom quartile experience organizing at 4\u00d7 ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9362,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: National Labor Relations Board case database analysis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9363,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: NLRB.gov case search database (publicly searchable by industry, election outcome",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9364,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Statistical analysis derived from NLRB data; NLRB does not publish this specific c",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9367,
+      "citation_text": "*Data*",
+      "nearby_context": "- **Data**: Average CMP per deficiency increased from $35K to $52K (40-60% increase under August 202",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9368,
+      "citation_text": "*Source*",
+      "nearby_context": "- **Source**: CMS enforcement data, provider advocacy organization analysis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9369,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: CMS.gov enforcement database or SNF trade association (AHCA) tracking of member ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9370,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: CMS does not publish aggregated statistics; data compiled from provider reports or",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9384,
+      "citation_text": "*Methodology*",
+      "nearby_context": "**Methodology**: Standard industry practice, commercial custom, or established precedent based on he",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9386,
+      "citation_text": "*Subcategories*",
+      "nearby_context": "**Subcategories**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9391,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: SNF therapy/PDPM FCA cases settle at 1.5\u00d7-2.5\u00d7 single damages (vs 2\u00d7-3\u00d7 for kickback",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9392,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: Analysis of 50+ publicly reported SNF FCA settlements 2018-2024 from:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9401,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Settlement multiples not disclosed in DOJ press releases; estimated from reverse-e",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9404,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9408,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: DOJ annual FCA reports (2018-2024) disclose:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9413,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: DOJ does not publish intervention rate by damages threshold; estimated based on se",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9418,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: 82% of healthcare FCA settlements >$10M included CIAs (2018-2024)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9419,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: HHS-OIG CIA database (oig.hhs.gov/compliance/corporate-integrity-agreements) anal",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9424,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: OIG CIA database publicly searchable; settlement amounts cross-referenced agains",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9427,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: 5-year term standard; 3-year term for limited/isolated conduct (~15% of CIAs)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9428,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: OIG CIA database analysis:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9437,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: Industry norm 1-2% of Medicare revenue from referrals; >3% creates OIG red flag",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9438,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9442,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: No regulatory safe harbor at 1-2%; threshold based on OIG advisory opinion pattern",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9445,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: Compensation >75th percentile requires exceptional qualifications (board certificati",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9446,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9450,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: OIG does not publish bright-line rules; threshold inferred from advisory opinion a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9455,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9459,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: Healthcare M&A practitioner surveys, transaction experience across 50+ SNF acquis",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9465,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: No authoritative database of consent outcomes; estimated from practitioner experie",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9468,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9471,
+      "citation_text": "v. N",
+      "nearby_context": "- **Legal Precedent**: *Pacific First Bank v. New Morgan Park* (Or. 1994) distinguishes standards",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9477,
+      "citation_text": "*Precedent*",
+      "nearby_context": "- **Precedent**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9481,
+      "citation_text": "*Pattern*",
+      "nearby_context": "- **Pattern**: Healthcare sector meal/rest break settlements average $1,000-$3,000 per class member",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9482,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Published settlement notices (court-approved class action settlements publicly d",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9483,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Settlement amounts verified; case-specific factors (violation frequency, PAGA pena",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9486,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: CNA union wage premium $4.50/hour (25% over non-union $18/hour median)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9487,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9491,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Published union contracts (publicly filed with state labor agencies or disclosed",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9496,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: 4.2-month average delay for facilities with immediate jeopardy history within 24 mon",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9497,
+      "citation_text": "*Methodology*",
+      "nearby_context": "- **Methodology**: Analysis of CDPH license transfer applications 2021-2024 (estimated 200+ transfer",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9502,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: CDPH does not publish aggregated statistics; data compiled from individual license",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9505,
+      "citation_text": "*Practice*",
+      "nearby_context": "- **Practice**: Tenant bears all maintenance, repairs, capital improvements (structural and non-stru",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9510,
+      "citation_text": "*Verification*",
+      "nearby_context": "- **Verification**: Commercial real estate industry standards, lease template provisions (AIR Commer",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9511,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Costs vary by facility size, age, geography; ranges based on construction industry",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9541,
+      "citation_text": "*Methodology*",
+      "nearby_context": "**Methodology**: Financial calculations, statistical analyses, or expert probability assessments usi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9550,
+      "citation_text": "*Framework*",
+      "nearby_context": "- **Framework**: 10-20% (low) \u2192 30-40% (moderate-low) \u2192 50-60% (moderate) \u2192 70-80% (high) \u2192 85-95% (",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9552,
+      "citation_text": "*Limitation*",
+      "nearby_context": "- **Limitation**: Inherent uncertainty in litigation/enforcement prediction; probabilities represent",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9555,
+      "citation_text": "42 CFR \u00a7",
+      "nearby_context": "- **CMP Calculations**: [Statutory rate per 42 CFR \u00a7 488.438] \u00d7 [days or instances] \u00d7 [probability a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9587,
+      "citation_text": "*Results*",
+      "nearby_context": "**Results**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9593,
+      "citation_text": "*Breakdown*",
+      "nearby_context": "**Breakdown**:",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9612,
+      "citation_text": "*Transparency*",
+      "nearby_context": "- \u2705 **Transparency**: All non-verified citations now have disclosed methodology explaining research ",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9683,
+      "citation_text": "*Status*",
+      "nearby_context": "**Status**: W5-003 COMPLETE - Ready to proceed to Wave 6",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9693,
+      "citation_text": "*Impact*",
+      "nearby_context": "- **Impact**: Material to Section IV.B staffing compliance analysis, cost projections for AZ/NV faci",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9776,
+      "citation_text": "*Note*",
+      "nearby_context": "**Note**: Chandler SNF listed above is facility #12 (correcting table count). Total leased facilitie",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9793,
+      "citation_text": "*Status*",
+      "nearby_context": "- **Status**: SFF candidate designation September 2024 following two immediate jeopardy citations wi",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9796,
+      "citation_text": "*Mitigation*",
+      "nearby_context": "- **Mitigation**: Mock survey February 2026 + interim management ($250K-$375K) targets 60-70% improv",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9797,
+      "citation_text": "*Escrow*",
+      "nearby_context": "- **Escrow**: $12M (50% of revenue) for 36 months contingent on SFF removal",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9874,
+      "citation_text": "*Interest*",
+      "nearby_context": "- **Interest**: Accrues to seller at federal short-term rate (3.5-4.5% estimated)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9875,
+      "citation_text": "*Claims*",
+      "nearby_context": "- **Claims**: Buyer self-help against escrow for qualifying claims; no basket or cap within escrow a",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9876,
+      "citation_text": "*Release*",
+      "nearby_context": "- **Release**: Automatic upon satisfaction of conditions (no discretionary withholding)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9877,
+      "citation_text": "*Custodian*",
+      "nearby_context": "- **Custodian**: Major money-center bank escrow agent (JPMorgan, Bank of America)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 9957,
+      "citation_text": "45 C.F.R. \u00a7",
+      "nearby_context": "- [ ] **Cybersecurity Documentation** - IT assessment report, incident response plan, HIPAA Security",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 10039,
+      "citation_text": "*Version*",
+      "nearby_context": "- **Version**: 1.0 Final",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 10040,
+      "citation_text": "*Date*",
+      "nearby_context": "- **Date**: January 25, 2026",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 10044,
+      "citation_text": "*Sections*",
+      "nearby_context": "- **Sections**: 7 detailed analysis sections + Executive Summary + Appendices",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 10045,
+      "citation_text": "*Footnotes*",
+      "nearby_context": "- **Footnotes**: 789 citations (99.5% Bluebook compliant)",
+      "in_high_severity_section": false
+    },
+    {
+      "line_number": 10047,
+      "citation_text": "*Authors*",
+      "nearby_context": "- **Authors**: AI Legal Research Platform (supervised analysis)",
+      "in_high_severity_section": false
+    }
+  ],
+  "high_severity_unverified": [],
+  "qa_deductions": {
+    "missing_tag": {
+      "count": 450,
+      "raw_deduction": 225.0,
+      "capped_deduction": 3.0
+    },
+    "high_severity_unverified": {
+      "count": 0,
+      "raw_deduction": 0.0,
+      "capped_deduction": 0.0
+    },
+    "tag_without_evidence": {
+      "count": 5,
+      "raw_deduction": 1.25,
+      "capped_deduction": 1.0
+    },
+    "high_assumed_percentage": {
+      "triggered": true,
+      "deduction": 1.0
+    },
+    "hard_fail_triggered": false,
+    "total_deduction": 5.0
+  },
+  "triggers_hard_fail": false,
+  "recommendations": [
+    "Tag coverage is 6.4%. Add verification tags to reach 90% threshold.",
+    "16 citations in HIGH-severity sections lack tags. Prioritize these for verification.",
+    "ASSUMED tags exceed 5% threshold. Consider converting some to VERIFIED where possible."
+  ]
+}

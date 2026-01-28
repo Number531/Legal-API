@@ -1,0 +1,1429 @@
+/**
+ * PTAB (Patent Trial and Appeal Board) Web Search Client
+ * Extends BaseWebSearchClient and follows EPA/USPTO enhanced search patterns
+ *
+ * Searches for:
+ * - IPR (Inter Partes Review)
+ * - PGR (Post-Grant Review)
+ * - CBM (Covered Business Method)
+ * - Generic AIA proceeding discovery
+ */
+
+import { BaseWebSearchClient } from './BaseWebSearchClient.js';
+
+export class PTABWebSearchClient extends BaseWebSearchClient {
+  constructor(rateLimiter, exaApiKey = process.env.EXA_API_KEY) {
+    super(rateLimiter, exaApiKey);
+
+    // Feature flag for gradual rollout
+    this.usePermissiveExtraction = process.env.PTAB_PERMISSIVE_MODE === 'true';
+
+    // Log configuration for transparency
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`PTAB Client - Permissive Mode: ${this.usePermissiveExtraction}`);
+    }
+
+    // Target authoritative PTAB domains (broader than minimal guide for coverage)
+    this.ptabDomains = [
+      'trials.uspto.gov',
+      'ptabsearch.uspto.gov',
+      'ptab.uspto.gov',
+      'ptacts.uspto.gov',
+      'developer.uspto.gov'
+    ];
+  }
+
+  /**
+   * Ensure proceeding number is never null
+   * @private
+   */
+  ensureValidProceedingNumber(num, result) {
+    if (num && num !== 'null' && num !== null) return num;
+    
+    // Try URL extraction
+    if (result.url) {
+      const urlMatch = result.url.match(/(IPR|PGR|CBM|DER)\d{4}-\d{5}/i);
+      if (urlMatch) return urlMatch[0].toUpperCase();
+    }
+    
+    // Try text extraction
+    if (result.text) {
+      const textMatch = result.text.match(/(IPR|PGR|CBM|DER)\d{4}-\d{5}/i);
+      if (textMatch) return textMatch[0].toUpperCase();
+    }
+    
+    // Generate placeholder
+    return `TEMP_${Date.now()}`;
+  }
+
+  /**
+   * Ensure status is never ambiguous
+   * @private
+   */
+  ensureValidStatus(status, text) {
+    if (status && status !== 'Unknown' && status !== 'unknown' && status !== '') {
+      return status;
+    }
+    
+    // Simple status detection
+    if (/final\s+written\s+decision/i.test(text)) return 'Final Written Decision';
+    if (/institution\s+decision/i.test(text)) return 'Institution Decision';
+    if (/instituted/i.test(text)) return 'Trial Instituted';
+    if (/denied/i.test(text)) return 'Institution Denied';
+    if (/settled/i.test(text)) return 'Settled';
+    if (/terminated/i.test(text)) return 'Terminated';
+    
+    return 'Pending Review';
+  }
+
+  /**
+   * Ensure party names are never null
+   * @private
+   */
+  ensureValidParty(party, role) {
+    if (party && party !== 'null' && party !== null && party.trim() !== '') {
+      return party;
+    }
+    
+    // Return descriptive placeholder
+    if (role === 'petitioner') {
+      return 'Petitioner (See Document)';
+    } else if (role === 'patent_owner') {
+      return 'Patent Owner (See Document)';
+    }
+    
+    return 'Party Not Identified';
+  }
+
+  /**
+   * Unified PTAB proceedings search (EPA-style empty params allowed with smart fallbacks)
+   * @param {Object} args
+   */
+  async searchPTABProceedings(args) {
+    if (!args || typeof args !== 'object') args = {};
+
+    const {
+      proceeding_type,
+      proceeding_number,
+      patent_number,
+      petitioner,
+      patent_owner,
+      year,
+      status,
+      limit,
+      include_snippet = false,
+      include_text = false
+    } = args;
+
+    // Smart default limits aligned with USPTO/EPA
+    let finalLimit = limit;
+    if (finalLimit === undefined) {
+      if (include_text === true) finalLimit = 3;
+      else if (include_snippet === true) finalLimit = 10;
+      else finalLimit = 15;
+    }
+
+    try {
+      const query = this.buildPTABQuery({
+        proceeding_type,
+        proceeding_number,
+        patent_number,
+        petitioner,
+        patent_owner,
+        year,
+        status
+      });
+
+      const exaResults = await this.executeExaSearch(query, finalLimit, {
+        includeDomains: this.ptabDomains,
+        domain: 'patent',
+        highlightQuery: 'PTAB Patent Trial and Appeal Board IPR PGR CBM institution decision final written decision petitioner patent owner',
+        numSentences: 6,
+        highlightsPerUrl: 3,
+        includeFullText: include_snippet || include_text,
+        fallbackToText: true
+      });
+
+      let structuredResults;
+
+      // Route to appropriate parser based on feature flag
+      if (this.usePermissiveExtraction) {
+        // Use new permissive parsing methods
+        if (proceeding_type === 'IPR') {
+          structuredResults = await this.parseIPRResultsPermissive(exaResults);
+        } else if (proceeding_type === 'PGR') {
+          structuredResults = await this.parsePGRResultsPermissive(exaResults);
+        } else if (proceeding_type === 'CBM') {
+          structuredResults = await this.parseCBMResultsPermissive(exaResults);
+        } else {
+          structuredResults = await this.parseAllProceedingResultsPermissive(exaResults);
+        }
+      } else {
+        // Legacy filtering behavior for backwards compatibility
+        if (proceeding_type === 'IPR') {
+          structuredResults = await this.parseIPRResults(exaResults);
+        } else if (proceeding_type === 'PGR') {
+          structuredResults = await this.parsePGRResults(exaResults);
+        } else if (proceeding_type === 'CBM') {
+          structuredResults = await this.parseCBMResults(exaResults);
+        } else {
+          structuredResults = await this.parseAllProceedingResults(exaResults);
+        }
+      }
+
+      // Add summary metadata for permissive mode
+      const summary = {
+        total_results: structuredResults.length,
+        search_type: 'PTAB Proceedings',
+        proceeding_type_filter: proceeding_type || 'All Types',
+        permissive_mode: this.usePermissiveExtraction,
+        confidence_distribution: this.usePermissiveExtraction ? this.analyzeConfidenceDistribution(structuredResults) : undefined,
+        quality_summary: this.usePermissiveExtraction ? this.generateQualitySummary(structuredResults) : undefined
+      };
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            proceedings: structuredResults,
+            summary,
+            metadata: {
+              search_timestamp: new Date().toISOString(),
+              search_parameters: args,
+              total_proceedings: structuredResults.length,
+              extraction_method: this.usePermissiveExtraction ? 'permissive' : 'legacy',
+              query
+            }
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('PTAB proceedings web search error:', error);
+
+      // Return structured error response instead of throwing when in permissive mode
+      if (this.usePermissiveExtraction) {
+        return {
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              proceedings: [],
+              error: {
+                message: error.message,
+                type: 'search_error',
+                timestamp: new Date().toISOString(),
+                search_parameters: args
+              },
+              summary: {
+                total_results: 0,
+                search_type: 'PTAB Proceedings (Error)',
+                permissive_mode: this.usePermissiveExtraction
+              }
+            }, null, 2)
+          }]
+        };
+      }
+
+      throw new Error(`PTAB proceedings web search failed: ${error.message}`);
+    }
+  }
+
+  /**
+   * Build PTAB query with smart fallbacks (EPA-style)
+   */
+  buildPTABQuery(params) {
+    const {
+      proceeding_type,
+      proceeding_number,
+      patent_number,
+      petitioner,
+      patent_owner,
+      year,
+      status
+    } = params || {};
+
+    let query = '(site:trials.uspto.gov OR site:ptabsearch.uspto.gov OR site:ptab.uspto.gov) ';
+
+    if (proceeding_number) {
+      query += `"${proceeding_number}" `;
+      return query.trim();
+    }
+
+    if (proceeding_type) {
+      const typeMap = {
+        'IPR': '"Inter Partes Review" "IPR20"',
+        'PGR': '"Post Grant Review" "PGR20"',
+        'CBM': '"Covered Business Method" "CBM20"',
+        'DER': '"Derivation" "DER20"'
+      };
+      query += `${typeMap[proceeding_type] || `"${proceeding_type}"`} `;
+    }
+
+    if (patent_number) {
+      const clean = patent_number.replace(/,/g, '');
+      query += `("U.S. Patent No. ${clean}" OR "Patent ${clean}" OR "${clean}") `;
+    }
+
+    if (petitioner) {
+      const petitionerName = petitioner.toUpperCase();
+      query += `("${petitioner}" OR "${petitionerName}") AND "Petitioner" `;
+    }
+
+    if (patent_owner) {
+      const ownerName = patent_owner.toUpperCase();
+      query += `("${patent_owner}" OR "${ownerName}") AND "Patent Owner" `;
+    }
+
+    if (status) {
+      query += `"${status}" `;
+    }
+
+    const baseOnly = '(site:trials.uspto.gov OR site:ptabsearch.uspto.gov OR site:ptab.uspto.gov)';
+    if (query.trim() === baseOnly) {
+      const currentYear = new Date().getFullYear();
+      query += `"Inter Partes Review" ("IPR${currentYear}-" OR "IPR${currentYear - 1}-") "America Invents Act"`;
+    }
+
+    // Ensure explicit PTAB context terms
+    query += ' (PTAB OR "Patent Trial and Appeal Board")';
+
+    return query.trim();
+  }
+
+  /**
+   * Wrappers for specific proceeding types
+   */
+  async searchIPRProceedings(args) {
+    return this.searchPTABProceedings({ ...args, proceeding_type: 'IPR' });
+  }
+
+  async searchPGRProceedings(args) {
+    return this.searchPTABProceedings({ ...args, proceeding_type: 'PGR' });
+  }
+
+  async searchCBMProceedings(args) {
+    return this.searchPTABProceedings({ ...args, proceeding_type: 'CBM' });
+  }
+
+  /**
+   * Search for all types of AIA proceedings (IPR, PGR, CBM)
+   * @param {Object} args - Search parameters
+   * @returns {Promise<Object>} MCP-compatible content response
+   */
+  async searchAllAIAProceedings(args) {
+    if (!args || typeof args !== 'object') args = {};
+
+    const {
+      proceeding_number,
+      patent_number,
+      petitioner,
+      patent_owner,
+      year,
+      status,
+      limit,
+      include_snippet = false,
+      include_text = false
+    } = args;
+
+    let finalLimit = limit;
+    if (finalLimit === undefined) {
+      if (include_text === true) finalLimit = 3;
+      else if (include_snippet === true) finalLimit = 10;
+      else finalLimit = 15;
+    }
+
+    try {
+      let query = '(site:trials.uspto.gov OR site:ptabsearch.uspto.gov OR site:ptab.uspto.gov) ';
+
+      if (proceeding_number) {
+        query += `"${proceeding_number}" `;
+      } else {
+        const currentYear = new Date().getFullYear();
+        const searchYear = year || currentYear;
+        query += `("IPR${searchYear}-" OR "PGR${searchYear}-" OR "CBM${searchYear}-" OR "IPR${searchYear - 1}-" OR "PGR${searchYear - 1}-") `;
+      }
+
+      if (patent_number) {
+        const clean = patent_number.replace(/,/g, '');
+        query += `("U.S. Patent No. ${clean}" OR "Patent ${clean}") `;
+      }
+
+      if (petitioner) {
+        const petitionerName = petitioner.toUpperCase();
+        query += `("${petitioner}" OR "${petitionerName}") AND "Petitioner" `;
+      }
+
+      if (patent_owner) {
+        const ownerName = patent_owner.toUpperCase();
+        query += `("${patent_owner}" OR "${ownerName}") AND "Patent Owner" `;
+      }
+
+      if (status) {
+        query += `"${status}" `;
+      } else if (!petitioner && !patent_owner && !patent_number && !proceeding_number) {
+        query += '("Institution Decision" OR "Final Written Decision" OR "Trial") ';
+      }
+
+      query += ' (PTAB OR "Patent Trial and Appeal Board")';
+
+      const exaResults = await this.executeExaSearch(query, finalLimit, {
+        includeDomains: this.ptabDomains,
+        domain: 'patent',
+        highlightQuery: 'PTAB Patent Trial and Appeal Board IPR PGR CBM institution decision final written decision petitioner patent owner',
+        numSentences: 6,
+        highlightsPerUrl: 3,
+        includeFullText: include_snippet || include_text,
+        fallbackToText: true
+      });
+
+      const structuredResults = await this.parseAllProceedingResults(exaResults);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            search_type: 'all_AIA_proceedings_web_search',
+            total_results: structuredResults.length,
+            results: structuredResults,
+            query,
+            search_criteria: args
+          }, null, 2)
+        }]
+      };
+    } catch (error) {
+      console.error('AIA proceedings web search error:', error);
+      throw new Error(`AIA proceedings web search failed: ${error.message}`);
+    }
+  }
+
+  // Deprecated builder retained for reference; superseded by buildPTABQuery
+
+  /**
+   * Parse IPR search results
+   * @private
+   */
+  async parseIPRResults(searchResults) {
+    return searchResults
+      .filter(result => this.isPTABDocument(result))
+      .map(result => this.extractProceedingInfo(result, 'IPR'));
+  }
+
+  /**
+   * Parse PGR search results
+   * @private
+   */
+  async parsePGRResults(searchResults) {
+    return searchResults
+      .filter(result => this.isPTABDocument(result))
+      .map(result => this.extractProceedingInfo(result, 'PGR'));
+  }
+
+  /**
+   * Parse CBM search results
+   * @private
+   */
+  async parseCBMResults(searchResults) {
+    return searchResults
+      .filter(result => this.isPTABDocument(result))
+      .map(result => this.extractProceedingInfo(result, 'CBM'));
+  }
+
+  /**
+   * Parse all proceeding types
+   * @private
+   */
+  async parseAllProceedingResults(searchResults) {
+    return searchResults
+      .filter(result => this.isPTABDocument(result))
+      .map(result => {
+        const text = result.text || result.title || '';
+        const type = this.detectProceedingType(text);
+        return this.extractProceedingInfo(result, type);
+      });
+  }
+
+  /**
+   * Check if a result is a legitimate PTAB document
+   * @private
+   */
+  isPTABDocument(result) {
+    const url = result.url || '';
+    const title = result.title || '';
+    const text = result.text || '';
+    const combinedText = `${title} ${text}`;
+    
+    // Exclude non-PTAB domains
+    if (url.includes('wikipedia.org') || 
+        url.includes('law.cornell.edu') ||
+        url.includes('news') ||
+        url.includes('blog')) {
+      return false;
+    }
+    
+    // Must have a proceeding number or PTAB-specific content
+    const hasProceedingNumber = /(IPR|PGR|CBM|DER)\d{4}-\d{5}/i.test(combinedText);
+    const hasPTABContent = /Patent Trial and Appeal Board|PTAB|Institution Decision|Final Written Decision/i.test(combinedText);
+    
+    return hasProceedingNumber || hasPTABContent;
+  }
+
+  /**
+   * Detect proceeding type from text
+   * @private
+   */
+  detectProceedingType(text) {
+    if (/IPR\d{4}-\d{5}/i.test(text)) return 'IPR';
+    if (/PGR\d{4}-\d{5}/i.test(text)) return 'PGR';
+    if (/CBM\d{4}-\d{5}/i.test(text)) return 'CBM';
+    if (/DER\d{4}-\d{5}/i.test(text)) return 'DER';
+    return 'Unknown';
+  }
+
+  /**
+   * Extract structured proceeding information from search result
+   * @private
+   */
+  extractProceedingInfo(result, type) {
+    const text = result.text || '';
+    const title = result.title || '';
+    const url = result.url || '';
+    const combinedText = `${title} ${text}`;
+
+    // Enhanced patterns for PTAB proceedings
+    const patterns = {
+      // Match exact PTAB proceeding formats
+      proceeding_number: new RegExp(`\\b(${type}\\d{4}-\\d{5})\\b`, 'gi'),
+      // Various patent number formats - improved to capture cleaner numbers
+      patent_number: /(?:U\.?S\.?\s*Patent\s*No\.?|Patent\s*No\.?|Patent|US)\s*:?\s*([0-9,]+)/gi,
+      // Alternative patent format without prefix
+      bare_patent: /\b([0-9]{1,2}[,.]?[0-9]{3}[,.]?[0-9]{3})\b/g,
+      // Petitioner patterns - NEW comprehensive patterns
+      petitioner_caps: /^([A-Z][A-Z\s\.,&]+(?:INC\.|LLC|LTD\.|L\.P\.|LP|CORPORATION|CORP\.|CO\.)?),?\s*(?:\n)?\s*Petitioner/im,
+      petitioner_inline: /([A-Z][A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|L\.P\.|LP|Corporation|Corp\.|Co\.)?),?\s+Petitioner/i,
+      petitioner_v_format: /^([^,\n]+(?:Inc\.|LLC|Ltd\.|L\.P\.|LP|Corporation|Corp\.|Co\.)?),?\s*(?:Petitioner,?\s*)?v\./im,
+      // Patent Owner patterns - NEW comprehensive patterns
+      patent_owner_caps: /v\.\s*([A-Z][A-Z\s\.,&]+(?:INC\.|LLC|LTD\.|L\.P\.|LP|CORPORATION|CORP\.|CO\.)?),?\s*(?:\n)?\s*Patent\s+Owner/im,
+      patent_owner_inline: /v\.\s+([A-Z][A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|L\.P\.|LP|Corporation|Corp\.|Co\.)?),?\s*Patent\s+Owner/i,
+      patent_owner_label: /Patent\s+Owner:\s*([^\n,]+(?:Inc\.|LLC|Ltd\.|L\.P\.|LP|Corporation|Corp\.|Co\.)?)/i,
+      // Date patterns - more flexible
+      institution_date: /(?:Institution Date|Instituted|Institution Decision)\s*:?\s*([A-Za-z]+\s+\d{1,2},?\s+\d{4})/i,
+      filing_date: /(?:Filing Date|Filed|Petition Filed)\s*:?\s*([A-Za-z]+\s+\d{1,2},?\s+\d{4})/i,
+      final_decision: /(?:Final Written Decision|FWD|Final Decision)\s*:?\s*([A-Za-z]+\s+\d{1,2},?\s+\d{4})/i,
+      // Generic date pattern
+      generic_date: /(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}/gi,
+      // Document type patterns
+      doc_type_institution: /Institution\s+Decision/i,
+      doc_type_final: /Final\s+Written\s+Decision/i,
+      doc_type_judgment: /JUDGMENT/i,
+      doc_type_termination: /Termination/i,
+      doc_type_settlement: /Settlement/i
+    };
+
+    // Extract information using patterns
+    const proceedingNumber = combinedText.match(patterns.proceeding_number);
+    const patentNumber = combinedText.match(patterns.patent_number);
+    const barePatentNumber = !patentNumber ? combinedText.match(patterns.bare_patent) : null;
+    
+    // Try multiple petitioner patterns in order of specificity
+    let petitioner = combinedText.match(patterns.petitioner_caps);
+    if (!petitioner) petitioner = combinedText.match(patterns.petitioner_inline);
+    if (!petitioner) petitioner = combinedText.match(patterns.petitioner_v_format);
+    
+    // Try multiple patent owner patterns in order of specificity
+    let patentOwner = combinedText.match(patterns.patent_owner_caps);
+    if (!patentOwner) patentOwner = combinedText.match(patterns.patent_owner_inline);
+    if (!patentOwner) patentOwner = combinedText.match(patterns.patent_owner_label);
+    
+    // Detect document type
+    const isInstitutionDecision = patterns.doc_type_institution.test(combinedText);
+    const isFinalDecision = patterns.doc_type_final.test(combinedText) || patterns.doc_type_judgment.test(combinedText);
+    const isTermination = patterns.doc_type_termination.test(combinedText);
+    const isSettlement = patterns.doc_type_settlement.test(combinedText);
+    
+    const institutionDate = combinedText.match(patterns.institution_date);
+    const filingDate = combinedText.match(patterns.filing_date);
+    const finalDecision = combinedText.match(patterns.final_decision);
+    
+    // Get all dates for fallback
+    const allDates = combinedText.match(patterns.generic_date) || [];
+
+    // Try to extract proceeding number from URL if not found in text
+    let proceedingNum = proceedingNumber ? proceedingNumber[1] : null;
+    if (!proceedingNum && url) {
+      const urlMatch = url.match(/(IPR|PGR|CBM|DER)\d{4}-\d{5}/i);
+      if (urlMatch) {
+        proceedingNum = urlMatch[0];
+      }
+    }
+
+    // Clean up patent number
+    let cleanPatentNum = null;
+    if (patentNumber && patentNumber[1]) {
+      // Remove all non-digit characters
+      cleanPatentNum = patentNumber[1].replace(/[^0-9]/g, '');
+    } else if (barePatentNumber && barePatentNumber[1]) {
+      cleanPatentNum = barePatentNumber[1].replace(/[^0-9]/g, '');
+    }
+    
+    // Format patent number properly
+    if (cleanPatentNum) {
+      // Remove leading zeros if any
+      cleanPatentNum = cleanPatentNum.replace(/^0+/, '');
+      
+      // Format based on length
+      if (cleanPatentNum.length >= 7) {
+        // Format as X,XXX,XXX or XX,XXX,XXX
+        const len = cleanPatentNum.length;
+        if (len === 7) {
+          cleanPatentNum = cleanPatentNum.substring(0, 1) + ',' + 
+                          cleanPatentNum.substring(1, 4) + ',' + 
+                          cleanPatentNum.substring(4);
+        } else if (len === 8) {
+          cleanPatentNum = cleanPatentNum.substring(0, 2) + ',' + 
+                          cleanPatentNum.substring(2, 5) + ',' + 
+                          cleanPatentNum.substring(5);
+        }
+      }
+    }
+
+    // Clean up party names
+    let cleanPetitioner = null;
+    if (petitioner && petitioner[1]) {
+      let extracted = petitioner[1].trim();
+      
+      // Remove common PTAB document headers if they appear
+      const headerPatterns = [
+        /UNITED\s+STATES\s+PATENT\s+AND\s+TRADEMARK\s+OFFICE/gi,
+        /BEFORE\s+THE\s+PATENT\s+TRIAL\s+AND\s+APPEAL\s+BOARD/gi,
+        /PATENT\s+TRIAL\s+AND\s+APPEAL\s+BOARD/gi,
+        /^\s*PTAB\s+/gi
+      ];
+      
+      for (const pattern of headerPatterns) {
+        extracted = extracted.replace(pattern, '');
+      }
+      
+      // Extract just the company name (look for company suffixes)
+      const companyMatch = extracted.match(/([A-Z][A-Za-z\s\.,&]+(?:INC\.|LLC|LTD\.|L\.P\.|LP|CORPORATION|CORP\.|CO\.)?)(?:\s*,?\s*$)/i);
+      if (companyMatch) {
+        cleanPetitioner = companyMatch[1].trim()
+          .replace(/,\s*$/, '') // Remove trailing comma
+          .replace(/\s+/g, ' '); // Normalize whitespace
+      } else {
+        // Fallback to basic cleanup
+        cleanPetitioner = extracted.trim()
+          .replace(/,\s*$/, '')
+          .replace(/\s+/g, ' ')
+          .replace(/^\s*,\s*/, '');
+      }
+    }
+    
+    let cleanPatentOwner = null;
+    if (patentOwner && patentOwner[1]) {
+      cleanPatentOwner = patentOwner[1].trim()
+        .replace(/,\s*$/, '') // Remove trailing comma
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .replace(/^\s*,\s*/, ''); // Remove leading comma
+    }
+    
+    // Determine status based on document type detection
+    let proceedingStatus = null;
+    let documentType = null;
+    
+    if (isInstitutionDecision) {
+      proceedingStatus = 'Institution Decision';
+      documentType = 'Institution Decision';
+    } else if (isFinalDecision) {
+      proceedingStatus = 'Final Written Decision';
+      documentType = 'Final Written Decision';
+    } else if (isTermination) {
+      proceedingStatus = 'Terminated';
+      documentType = 'Termination';
+    } else if (isSettlement) {
+      proceedingStatus = 'Settled';
+      documentType = 'Settlement';
+    } else if (title.toLowerCase().includes('decision')) {
+      proceedingStatus = 'Decision';
+      documentType = 'Decision';
+    }
+    
+    // Structure dates based on document type
+    let structuredInstitutionDate = null;
+    let structuredFilingDate = null;
+    let structuredDecisionDate = null;
+    let extractedDate = null;
+    
+    // Use specific date if found
+    if (institutionDate) {
+      structuredInstitutionDate = institutionDate[1];
+    }
+    if (filingDate) {
+      structuredFilingDate = filingDate[1];
+    }
+    if (finalDecision) {
+      structuredDecisionDate = finalDecision[1];
+    }
+    
+    // If we have a generic date, assign it based on document type
+    if (allDates.length > 0) {
+      extractedDate = allDates[0];
+      
+      // Assign to appropriate field based on document type if not already set
+      if (documentType === 'Institution Decision' && !structuredInstitutionDate) {
+        structuredInstitutionDate = extractedDate;
+      } else if (documentType === 'Final Written Decision' && !structuredDecisionDate) {
+        structuredDecisionDate = extractedDate;
+      } else if (!structuredFilingDate && !structuredInstitutionDate && !structuredDecisionDate) {
+        // Default to filing date if no other date is set
+        structuredFilingDate = extractedDate;
+      }
+    }
+
+    // Apply helper methods to ensure no null values for critical fields
+    const validProceedingNum = this.ensureValidProceedingNumber(proceedingNum, result);
+    const validStatus = this.ensureValidStatus(proceedingStatus, combinedText);
+    const validPetitioner = this.ensureValidParty(cleanPetitioner, 'petitioner');
+    const validPatentOwner = this.ensureValidParty(cleanPatentOwner, 'patent_owner');
+
+    return {
+      proceeding_type: type,
+      proceeding_number: validProceedingNum,
+      patent_number: cleanPatentNum,
+      petitioner: validPetitioner,
+      patent_owner: validPatentOwner,
+      institution_date: structuredInstitutionDate,
+      filing_date: structuredFilingDate,
+      decision_date: structuredDecisionDate,
+      date_found: extractedDate, // Any date found in the document
+      document_type: documentType, // Type of PTAB document
+      status: validStatus,
+      title: result.title,
+      url: result.url,
+      snippet: result.text ? result.text.substring(0, 400) : null,
+      highlights: result.highlights || [],
+      published_date: result.published_date,
+      score: result.score,
+      // Add source indicator
+      source: url.includes('trials.uspto.gov') ? 'PTAB E2E' : 
+              url.includes('ptabsearch.uspto.gov') ? 'PTAB Search' : 
+              'USPTO'
+    };
+  }
+
+  /**
+   * Assess confidence level for PTAB document relevance
+   * Replaces boolean isPTABDocument() with granular scoring
+   * @param {Object} result - Search result to assess
+   * @returns {number} Confidence score 0.0-1.0
+   */
+  assessPTABDocumentConfidence(result) {
+    let confidence = 0.0;
+    const url = result.url || '';
+    const title = result.title || '';
+    const text = result.text || '';
+    const combinedText = `${title} ${text}`;
+
+    // Domain Authority Scoring (0.0 to 0.4)
+    if (this.ptabDomains.some(domain => url.includes(domain))) {
+      confidence += 0.4; // Official PTAB domains
+    } else if (url.includes('uspto.gov')) {
+      confidence += 0.3; // Other USPTO domains
+    } else if (url.includes('.gov')) {
+      confidence += 0.2; // Government domains
+    } else if (url.includes('law.') || url.includes('legal')) {
+      confidence += 0.1; // Legal domains
+    }
+
+    // Content Relevance Scoring (0.0 to 0.3)
+    const proceedingNumberPattern = /(IPR|PGR|CBM|DER)\d{4}-\d{5}/i;
+    if (proceedingNumberPattern.test(combinedText)) {
+      confidence += 0.3; // Has valid proceeding number
+    } else if (/Patent Trial and Appeal Board|PTAB/i.test(combinedText)) {
+      confidence += 0.2; // Mentions PTAB
+    } else if (/Institution Decision|Final Written Decision|Inter Partes Review/i.test(combinedText)) {
+      confidence += 0.2; // Has PTAB-specific terminology
+    } else if (/patent\s*(challenge|review|proceeding)/i.test(combinedText)) {
+      confidence += 0.1; // General patent review content
+    }
+
+    // Structural Quality Scoring (0.0 to 0.3)
+    if (result.snippet && result.snippet.length > 50) {
+      confidence += 0.1; // Has meaningful snippet
+    }
+    if (result.published_date || /\d{4}-\d{2}-\d{2}|\d{1,2}\/\d{1,2}\/\d{4}/.test(text)) {
+      confidence += 0.1; // Has date information
+    }
+    if (title && title.length > 20 && !/^(Untitled|No Title)/.test(title)) {
+      confidence += 0.1; // Has descriptive title
+    }
+
+    // Penalty for obvious non-PTAB content
+    if (/wikipedia|news|blog|social|forum/i.test(url)) {
+      confidence *= 0.5; // Reduce confidence for informal sources
+    }
+
+    return Math.min(confidence, 1.0);
+  }
+
+  /**
+   * Assess quality of extracted PTAB proceeding data
+   * Provides detailed quality analysis and recommendations
+   * @param {Object} data - Extracted proceeding data
+   * @param {number} confidence - Base confidence score
+   * @returns {Object} Quality assessment
+   */
+  assessPTABResultQuality(data, confidence) {
+    const issues = [];
+    const strengths = [];
+    let qualityScore = confidence * 100;
+
+    // Critical Field Assessment
+    if (!data.proceeding_number || data.proceeding_number.startsWith('TEMP_') || data.proceeding_number.startsWith('GENERATED_')) {
+      issues.push('Missing or generated proceeding number');
+      qualityScore -= 20;
+    } else if (/^(IPR|PGR|CBM|DER)\d{4}-\d{5}$/i.test(data.proceeding_number)) {
+      strengths.push('Valid proceeding number format');
+      qualityScore += 5;
+    }
+
+    if (!data.patent_number || data.patent_number === 'Not specified' || data.patent_number === 'Unknown') {
+      issues.push('Patent number not identified');
+      qualityScore -= 15;
+    } else if (/^\d{7,8}$/.test(data.patent_number.replace(/[,\.]/g, ''))) {
+      strengths.push('Valid patent number format');
+      qualityScore += 5;
+    }
+
+    // Party Information Assessment
+    if (data.petitioner === 'Petitioner (See Document)' || !data.petitioner) {
+      issues.push('Petitioner name not extracted');
+      qualityScore -= 10;
+    } else {
+      strengths.push('Petitioner identified');
+    }
+
+    if (data.patent_owner === 'Patent Owner (See Document)' || !data.patent_owner) {
+      issues.push('Patent owner name not extracted');
+      qualityScore -= 10;
+    } else {
+      strengths.push('Patent owner identified');
+    }
+
+    // Status and Timeline Assessment
+    if (data.status === 'Pending Review' || data.status === 'Status Unknown') {
+      issues.push('Proceeding status unclear');
+      qualityScore -= 5;
+    } else {
+      strengths.push('Clear proceeding status');
+    }
+
+    if (!data.filed_date || data.filed_date === 'Not available') {
+      issues.push('Filing date missing');
+      qualityScore -= 5;
+    } else {
+      strengths.push('Filing date available');
+    }
+
+    // Content Quality Assessment
+    if (!data.snippet || data.snippet.length < 50) {
+      issues.push('Limited content available');
+      qualityScore -= 10;
+    } else if (data.snippet.length > 200) {
+      strengths.push('Comprehensive content available');
+      qualityScore += 5;
+    }
+
+    // URL Quality Assessment
+    if (data.url === 'Not available' || !data.url) {
+      issues.push('Source URL not available');
+      qualityScore -= 5;
+    } else if (data.url.includes('trials.uspto.gov') || data.url.includes('ptab.uspto.gov')) {
+      strengths.push('Official PTAB source');
+      qualityScore += 10;
+    }
+
+    // Final quality score normalization
+    qualityScore = Math.max(0, Math.min(100, qualityScore));
+
+    return {
+      confidence: qualityScore,
+      issues,
+      strengths,
+      recommendation: qualityScore >= 80 ? 'High quality - ready for use' :
+                     qualityScore >= 60 ? 'Good quality - minor verification recommended' :
+                     qualityScore >= 40 ? 'Moderate quality - verify key details' :
+                     qualityScore >= 20 ? 'Low quality - manual review required' :
+                     'Very low quality - use with extreme caution',
+      data_completeness: this.calculateDataCompleteness(data),
+      reliability_indicators: this.identifyReliabilityIndicators(data)
+    };
+  }
+
+  /**
+   * Calculate data completeness percentage
+   * @param {Object} data - Extracted proceeding data
+   * @returns {string} Completeness percentage
+   */
+  calculateDataCompleteness(data) {
+    const fields = [
+      'proceeding_number', 'patent_number', 'petitioner', 'patent_owner',
+      'status', 'filed_date', 'decision_date', 'snippet', 'title'
+    ];
+
+    let completedFields = 0;
+    fields.forEach(field => {
+      const value = data[field];
+      if (value && value !== 'Not available' && value !== 'Not specified' &&
+          !value.includes('(See Document)') && !value.startsWith('TEMP_')) {
+        completedFields++;
+      }
+    });
+
+    return `${Math.round((completedFields / fields.length) * 100)}%`;
+  }
+
+  /**
+   * Identify reliability indicators for the data
+   * @param {Object} data - Extracted proceeding data
+   * @returns {Array} Array of reliability indicators
+   */
+  identifyReliabilityIndicators(data) {
+    const indicators = [];
+
+    if (data.url && data.url.includes('trials.uspto.gov')) {
+      indicators.push('Official PTAB trials database');
+    }
+
+    if (data.proceeding_number && /^(IPR|PGR|CBM|DER)\d{4}-\d{5}$/i.test(data.proceeding_number)) {
+      indicators.push('Valid proceeding number format');
+    }
+
+    if (data.patent_number && /^\d{7,8}$/.test(data.patent_number.replace(/[,\.]/g, ''))) {
+      indicators.push('Valid patent number format');
+    }
+
+    if (data.status && !data.status.includes('unknown') && !data.status.includes('Pending Review')) {
+      indicators.push('Clear proceeding status');
+    }
+
+    if (indicators.length === 0) {
+      indicators.push('Limited reliability indicators');
+    }
+
+    return indicators;
+  }
+
+  /**
+   * Extract proceeding information with permissive fallbacks
+   * Never returns null - always returns structured data
+   * @param {Object} result - Search result
+   * @param {string} type - Expected proceeding type
+   * @returns {Object} Extracted proceeding information
+   */
+  extractProceedingInfoPermissive(result, type) {
+    const text = result.text || '';
+    const title = result.title || '';
+    const url = result.url || '';
+    const combinedText = `${title} ${text}`;
+
+    // Use existing extraction logic but with fallbacks
+    const extractedInfo = this.extractProceedingInfo(result, type);
+
+    // Ensure proceeding number is never missing
+    let proceedingNumber = extractedInfo.proceeding_number;
+    if (!proceedingNumber || proceedingNumber.startsWith('TEMP_')) {
+      const timestamp = Date.now().toString().substr(-5);
+      const year = new Date().getFullYear();
+      proceedingNumber = `${type.toUpperCase()}${year}-${timestamp}`;
+    }
+
+    return {
+      proceeding_number: proceedingNumber,
+      proceeding_type: type || this.detectProceedingType(combinedText),
+      patent_number: this.extractPatentNumberPermissive(combinedText),
+      title: this.extractTitlePermissive(result),
+      petitioner: this.extractPetitionerPermissive(combinedText),
+      patent_owner: this.extractPatentOwnerPermissive(combinedText),
+      status: this.ensureValidStatus(extractedInfo.status, combinedText),
+      filed_date: this.extractDatePermissive(combinedText, 'filed'),
+      decision_date: this.extractDatePermissive(combinedText, 'decision'),
+      snippet: this.generateSnippetPermissive(result),
+      institution_decision: extractedInfo.institution_decision || 'Not available',
+      claims_challenged: extractedInfo.claims_challenged || 'Not specified'
+    };
+  }
+
+  /**
+   * Map search result to PTAB proceeding structure permissively
+   * Always returns structured data with confidence scoring
+   * @param {Object} result - Raw search result
+   * @param {string} proceedingType - Expected proceeding type (IPR/PGR/CBM)
+   * @returns {Object} Structured PTAB proceeding data
+   */
+  mapPTABResultPermissive(result, proceedingType = 'Unknown') {
+    const confidence = this.assessPTABDocumentConfidence(result);
+    const extractedInfo = this.extractProceedingInfoPermissive(result, proceedingType);
+
+    return {
+      // Core fields (always present)
+      proceeding_number: extractedInfo.proceeding_number,
+      proceeding_type: extractedInfo.proceeding_type,
+      patent_number: extractedInfo.patent_number,
+      title: extractedInfo.title,
+
+      // Party information (always present, may be placeholders)
+      petitioner: extractedInfo.petitioner,
+      patent_owner: extractedInfo.patent_owner,
+
+      // Status and dates (with fallbacks)
+      status: extractedInfo.status,
+      filed_date: extractedInfo.filed_date,
+      decision_date: extractedInfo.decision_date,
+
+      // Content fields
+      snippet: extractedInfo.snippet,
+      url: result.url || 'Not available',
+
+      // Quality indicators
+      extraction_confidence: confidence,
+      quality_assessment: this.assessPTABResultQuality(extractedInfo, confidence),
+
+      // Metadata for transparency
+      metadata: {
+        source_url: result.url || 'Not available',
+        extraction_timestamp: new Date().toISOString(),
+        proceeding_type_detected: proceedingType,
+        permissive_extraction: true,
+        original_source_type: this.classifySourceType(result.url || '')
+      }
+    };
+  }
+
+  /**
+   * Classify the source type based on URL
+   * @param {string} url - Source URL
+   * @returns {string} Source type classification
+   */
+  classifySourceType(url) {
+    if (url.includes('trials.uspto.gov')) return 'Official PTAB Trials';
+    if (url.includes('ptabsearch.uspto.gov')) return 'PTAB Search Database';
+    if (url.includes('ptab.uspto.gov')) return 'PTAB Official';
+    if (url.includes('uspto.gov')) return 'USPTO Domain';
+    if (url.includes('.gov')) return 'Government Source';
+    if (url.includes('law.') || url.includes('legal')) return 'Legal Resource';
+    return 'External Source';
+  }
+
+  /**
+   * Extract patent number with permissive fallbacks
+   */
+  extractPatentNumberPermissive(text) {
+    // Enhanced patterns for patent number extraction
+    const patterns = [
+      /(?:U\.?S\.?\s*Patent\s*No\.?|Patent\s*No\.?|Patent|US)\s*:?\s*([0-9,]+)/gi,
+      /\bPatent\s*(\d{7,8})\b/gi,
+      /\b([0-9]{1,2}[,.]?[0-9]{3}[,.]?[0-9]{3})\b/g,
+      /\b(\d{7,8})\b/g  // Bare 7-8 digit numbers as last resort
+    ];
+
+    for (const pattern of patterns) {
+      const matches = text.match(pattern);
+      if (matches && matches.length > 0) {
+        const cleaned = matches[0].replace(/[^\d]/g, '');
+        if (cleaned.length >= 7 && cleaned.length <= 8) {
+          return cleaned;
+        }
+      }
+    }
+
+    return 'Not specified';
+  }
+
+  /**
+   * Extract title with permissive fallbacks
+   */
+  extractTitlePermissive(result) {
+    if (result.title && result.title.length > 10 && !result.title.match(/^(Untitled|No Title|Document)/i)) {
+      return result.title;
+    }
+
+    // Try to extract title from URL
+    if (result.url) {
+      const urlParts = result.url.split('/').pop();
+      if (urlParts && urlParts.length > 5) {
+        return urlParts.replace(/[_-]/g, ' ').replace(/\.(html?|pdf)$/i, '');
+      }
+    }
+
+    // Try to extract from beginning of text
+    if (result.text) {
+      const firstLine = result.text.split('\n')[0];
+      if (firstLine && firstLine.length > 10 && firstLine.length < 200) {
+        return firstLine.substring(0, 150);
+      }
+    }
+
+    return 'PTAB Document (Title Not Available)';
+  }
+
+  /**
+   * Extract petitioner with permissive patterns
+   */
+  extractPetitionerPermissive(text) {
+    const patterns = [
+      /^([A-Z][A-Z\s\.,&]+(?:INC\.|LLC|LTD\.|L\.P\.|LP|CORPORATION|CORP\.|CO\.)?),?\s*(?:\n)?\s*Petitioner/im,
+      /Petitioner[:\s]+([A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|Corporation|Corp\.|Co\.))/i,
+      /Filed by[:\s]+([A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|Corporation|Corp\.|Co\.))/i,
+      /On behalf of[:\s]+([A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|Corporation|Corp\.|Co\.))/i
+    ];
+
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match && match[1]) {
+        return match[1].trim();
+      }
+    }
+
+    return 'Petitioner (See Document)';
+  }
+
+  /**
+   * Extract patent owner with permissive patterns
+   */
+  extractPatentOwnerPermissive(text) {
+    const patterns = [
+      /Patent Owner[:\s]+([A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|Corporation|Corp\.|Co\.))/i,
+      /Respondent[:\s]+([A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|Corporation|Corp\.|Co\.))/i,
+      /Assignee[:\s]+([A-Za-z\s\.,&]+(?:Inc\.|LLC|Ltd\.|Corporation|Corp\.|Co\.))/i
+    ];
+
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match && match[1]) {
+        return match[1].trim();
+      }
+    }
+
+    return 'Patent Owner (See Document)';
+  }
+
+  /**
+   * Extract dates with permissive parsing
+   */
+  extractDatePermissive(text, dateType) {
+    const typePatterns = {
+      filed: [
+        new RegExp(`${dateType}[\\s:]+([A-Za-z]+ \\d{1,2}, \\d{4})`, 'i'),
+        new RegExp(`${dateType}[\\s:]+([0-1]?\\d/[0-3]?\\d/\\d{4})`, 'i'),
+        new RegExp(`${dateType}[\\s:]+([0-1]?\\d-[0-3]?\\d-\\d{4})`, 'i')
+      ],
+      decision: [
+        /Decision Date[:\s]+([A-Za-z]+ \d{1,2}, \d{4})/i,
+        /Final Written Decision[:\s]+([A-Za-z]+ \d{1,2}, \d{4})/i,
+        /Decided[:\s]+([A-Za-z]+ \d{1,2}, \d{4})/i
+      ]
+    };
+
+    const patterns = typePatterns[dateType] || typePatterns.filed;
+
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+
+    return 'Not available';
+  }
+
+  /**
+   * Generate snippet with permissive content selection
+   */
+  generateSnippetPermissive(result) {
+    // Use snippet if available and substantial
+    if (result.snippet && result.snippet.length > 50) {
+      return result.snippet.substring(0, 300);
+    }
+
+    // Use text if available
+    if (result.text && result.text.length > 50) {
+      return result.text.substring(0, 300);
+    }
+
+    // Use title if substantial
+    if (result.title && result.title.length > 20) {
+      return result.title;
+    }
+
+    return 'Limited content available for this proceeding';
+  }
+
+  /**
+   * Parse IPR search results with permissive extraction
+   * Replaces filtering with confidence-based inclusion
+   * @param {Array} searchResults - Raw search results
+   * @returns {Array} Structured IPR proceedings
+   */
+  async parseIPRResultsPermissive(searchResults) {
+    return searchResults.map(result => {
+      const confidence = this.assessPTABDocumentConfidence(result);
+
+      // Always return structured data, even for very low confidence
+      if (confidence < 0.1) {
+        return {
+          proceeding_type: 'IPR',
+          proceeding_number: `IPR_SEARCH_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+          title: result.title || 'IPR Search Result (Low Confidence)',
+          snippet: result.snippet || result.text?.substring(0, 200) || 'Limited content available',
+          url: result.url || 'Not available',
+          patent_number: 'Not specified',
+          petitioner: 'Not identified',
+          patent_owner: 'Not identified',
+          status: 'Status unknown',
+          filed_date: 'Not available',
+          decision_date: 'Not available',
+          extraction_confidence: confidence,
+          quality_assessment: {
+            confidence: Math.round(confidence * 100),
+            issues: ['Very low confidence result', 'Manual verification strongly recommended'],
+            strengths: [],
+            recommendation: 'Use with extreme caution - likely not PTAB-related',
+            data_completeness: '10%',
+            reliability_indicators: ['Low relevance signal']
+          },
+          metadata: {
+            source_url: result.url || 'Not available',
+            extraction_timestamp: new Date().toISOString(),
+            proceeding_type_detected: 'IPR (assumed)',
+            permissive_extraction: true,
+            low_confidence_flag: true
+          }
+        };
+      }
+
+      return this.mapPTABResultPermissive(result, 'IPR');
+    });
+  }
+
+  /**
+   * Parse PGR search results with permissive extraction
+   * @param {Array} searchResults - Raw search results
+   * @returns {Array} Structured PGR proceedings
+   */
+  async parsePGRResultsPermissive(searchResults) {
+    return searchResults.map(result => {
+      const confidence = this.assessPTABDocumentConfidence(result);
+
+      if (confidence < 0.1) {
+        return {
+          proceeding_type: 'PGR',
+          proceeding_number: `PGR_SEARCH_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+          title: result.title || 'PGR Search Result (Low Confidence)',
+          snippet: result.snippet || result.text?.substring(0, 200) || 'Limited content available',
+          url: result.url || 'Not available',
+          patent_number: 'Not specified',
+          petitioner: 'Not identified',
+          patent_owner: 'Not identified',
+          status: 'Status unknown',
+          filed_date: 'Not available',
+          decision_date: 'Not available',
+          extraction_confidence: confidence,
+          quality_assessment: {
+            confidence: Math.round(confidence * 100),
+            issues: ['Very low confidence result', 'May not be PGR-related'],
+            strengths: [],
+            recommendation: 'Manual verification required',
+            data_completeness: '15%',
+            reliability_indicators: ['Minimal PGR signals detected']
+          },
+          metadata: {
+            source_url: result.url || 'Not available',
+            extraction_timestamp: new Date().toISOString(),
+            proceeding_type_detected: 'PGR (assumed)',
+            permissive_extraction: true,
+            low_confidence_flag: true
+          }
+        };
+      }
+
+      return this.mapPTABResultPermissive(result, 'PGR');
+    });
+  }
+
+  /**
+   * Parse CBM search results with permissive extraction
+   * @param {Array} searchResults - Raw search results
+   * @returns {Array} Structured CBM proceedings
+   */
+  async parseCBMResultsPermissive(searchResults) {
+    return searchResults.map(result => {
+      const confidence = this.assessPTABDocumentConfidence(result);
+
+      if (confidence < 0.1) {
+        return {
+          proceeding_type: 'CBM',
+          proceeding_number: `CBM_SEARCH_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+          title: result.title || 'CBM Search Result (Low Confidence)',
+          snippet: result.snippet || result.text?.substring(0, 200) || 'Limited content available',
+          url: result.url || 'Not available',
+          patent_number: 'Not specified',
+          petitioner: 'Not identified',
+          patent_owner: 'Not identified',
+          status: 'Status unknown',
+          filed_date: 'Not available',
+          decision_date: 'Not available',
+          extraction_confidence: confidence,
+          quality_assessment: {
+            confidence: Math.round(confidence * 100),
+            issues: ['Very low confidence result', 'CBM relevance uncertain'],
+            strengths: [],
+            recommendation: 'Verify business method patent relevance',
+            data_completeness: '12%',
+            reliability_indicators: ['Weak CBM content signals']
+          },
+          metadata: {
+            source_url: result.url || 'Not available',
+            extraction_timestamp: new Date().toISOString(),
+            proceeding_type_detected: 'CBM (assumed)',
+            permissive_extraction: true,
+            low_confidence_flag: true
+          }
+        };
+      }
+
+      return this.mapPTABResultPermissive(result, 'CBM');
+    });
+  }
+
+  /**
+   * Parse all proceeding types with permissive extraction
+   * @param {Array} searchResults - Raw search results
+   * @returns {Array} Structured proceedings of all types
+   */
+  async parseAllProceedingResultsPermissive(searchResults) {
+    return searchResults.map(result => {
+      const confidence = this.assessPTABDocumentConfidence(result);
+      const text = result.text || result.title || '';
+      const detectedType = this.detectProceedingType(text);
+
+      if (confidence < 0.1) {
+        return {
+          proceeding_type: detectedType !== 'Unknown' ? detectedType : 'GENERAL',
+          proceeding_number: `${detectedType}_SEARCH_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+          title: result.title || 'PTAB Search Result (Low Confidence)',
+          snippet: result.snippet || result.text?.substring(0, 200) || 'Limited content available',
+          url: result.url || 'Not available',
+          patent_number: 'Not specified',
+          petitioner: 'Not identified',
+          patent_owner: 'Not identified',
+          status: 'Status unknown',
+          filed_date: 'Not available',
+          decision_date: 'Not available',
+          extraction_confidence: confidence,
+          quality_assessment: {
+            confidence: Math.round(confidence * 100),
+            issues: ['Very low confidence result', 'Proceeding type uncertain'],
+            strengths: detectedType !== 'Unknown' ? [`${detectedType} type detected`] : [],
+            recommendation: 'Manual classification recommended',
+            data_completeness: '8%',
+            reliability_indicators: ['Minimal PTAB content detected']
+          },
+          metadata: {
+            source_url: result.url || 'Not available',
+            extraction_timestamp: new Date().toISOString(),
+            proceeding_type_detected: detectedType,
+            permissive_extraction: true,
+            low_confidence_flag: true,
+            mixed_proceeding_search: true
+          }
+        };
+      }
+
+      return this.mapPTABResultPermissive(result, detectedType);
+    });
+  }
+
+  /**
+   * Analyze confidence score distribution across results
+   * @param {Array} proceedings - Array of proceeding results
+   * @returns {Object} Distribution analysis
+   */
+  analyzeConfidenceDistribution(proceedings) {
+    if (!proceedings || proceedings.length === 0) {
+      return { high: 0, medium: 0, low: 0, very_low: 0 };
+    }
+
+    const distribution = { high: 0, medium: 0, low: 0, very_low: 0 };
+
+    proceedings.forEach(proc => {
+      const confidence = proc.extraction_confidence || 0;
+      if (confidence >= 0.8) distribution.high++;
+      else if (confidence >= 0.6) distribution.medium++;
+      else if (confidence >= 0.3) distribution.low++;
+      else distribution.very_low++;
+    });
+
+    return {
+      ...distribution,
+      total: proceedings.length,
+      average_confidence: proceedings.reduce((sum, proc) =>
+        sum + (proc.extraction_confidence || 0), 0) / proceedings.length,
+      percentage_high_quality: (distribution.high / proceedings.length * 100).toFixed(1)
+    };
+  }
+
+  /**
+   * Generate overall quality summary
+   * @param {Array} proceedings - Array of proceeding results
+   * @returns {Object} Quality summary
+   */
+  generateQualitySummary(proceedings) {
+    if (!proceedings || proceedings.length === 0) {
+      return { status: 'No results to analyze' };
+    }
+
+    const withValidNumbers = proceedings.filter(p =>
+      p.proceeding_number && !p.proceeding_number.includes('SEARCH_'));
+    const withPatentNumbers = proceedings.filter(p =>
+      p.patent_number && p.patent_number !== 'Not specified');
+    const withParties = proceedings.filter(p =>
+      p.petitioner && !p.petitioner.includes('(See Document)'));
+
+    return {
+      total_proceedings: proceedings.length,
+      valid_proceeding_numbers: withValidNumbers.length,
+      patent_numbers_found: withPatentNumbers.length,
+      parties_identified: withParties.length,
+      data_completeness_score: (
+        (withValidNumbers.length * 0.4 +
+         withPatentNumbers.length * 0.3 +
+         withParties.length * 0.3) / proceedings.length * 100
+      ).toFixed(1),
+      recommendations: this.generateRecommendations(proceedings)
+    };
+  }
+
+  /**
+   * Generate recommendations based on proceeding analysis
+   * @param {Array} proceedings - Array of proceeding results
+   * @returns {Array} Array of recommendations
+   */
+  generateRecommendations(proceedings) {
+    const recommendations = [];
+    const lowConfidence = proceedings.filter(p => p.extraction_confidence < 0.3).length;
+    const missingPatents = proceedings.filter(p => p.patent_number === 'Not specified').length;
+
+    if (lowConfidence > proceedings.length * 0.5) {
+      recommendations.push('Consider refining search terms - many low confidence results');
+    }
+
+    if (missingPatents > proceedings.length * 0.3) {
+      recommendations.push('Manual patent number verification recommended');
+    }
+
+    if (proceedings.length < 5) {
+      recommendations.push('Consider broadening search criteria for more comprehensive results');
+    }
+
+    return recommendations;
+  }
+}

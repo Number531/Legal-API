@@ -1,0 +1,60 @@
+{
+  "status": "COMPLETE",
+  "saved_to": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-26-1737900000/specialist-reports/tax-structure-analysis-report.md",
+  "checklist": {
+    "SAVE_1_file_created": true,
+    "SAVE_2_content_written": true,
+    "SAVE_3_exec_summary": true,
+    "SAVE_3_verification_tags": true,
+    "SAVE_3_no_placeholders": true,
+    "section_ii_scope_complete": true,
+    "section_iii_background_complete": true,
+    "metadata_updated": true
+  },
+  "metrics": {
+    "word_count": 32500,
+    "file_size_kb": 129,
+    "line_count": 1702,
+    "high_severity_findings": 3,
+    "medium_severity_findings": 4,
+    "low_severity_findings": 2,
+    "total_exposure_gross": "$56.5M",
+    "total_exposure_weighted": "$34.93M net benefit",
+    "deal_blockers": 0
+  },
+  "completed_sections": {
+    "executive_summary": "4,500 words with comprehensive findings digest",
+    "scope_of_research": "Complete with 4 research phases, databases consulted, methodology",
+    "factual_background": "Complete with transaction overview, target profile, liabilities, ownership structure",
+    "section_iv_a": "Asset vs. Stock Purchase analysis ($50.77M NPV benefit)",
+    "section_iv_b": "FCA Settlement tax deductibility ($2.77M tax savings)",
+    "section_iv_c": "State and local tax analysis ($1.22M mitigated to $609K)",
+    "section_iv_d": "Purchase price allocation (IRC § 1060 framework)",
+    "section_v": "Risk factors with three-tier severity assessment",
+    "section_vi": "Conclusions with 6-step implementation plan"
+  },
+  "cross_domain_flags": [
+    "SECURITIES_DISCLOSURE: FCA settlement $11.5M requires Item 303 MD&A disclosure (securities-researcher)",
+    "CFIUS_REVIEW: Healthcare data handling may trigger national security review (cfius-analyst)",
+    "REGULATORY_TIMING: CHOW license transfers (90-180 days) critical path item (regulatory-analyst)",
+    "LITIGATION_EXPOSURE: Texas Lone Star ($1.2M-$3.5M) + Oregon Smith ($1.85M-$3.85M) pending (litigation-analyst)",
+    "ENVIRONMENTAL_LIABILITY: EPA RCRA violations ($125K-$250K remediation) (environmental-analyst)"
+  ],
+  "assumption_changes": [],
+  "recommendations": [
+    "Structure as asset purchase with IRC § 338(h)(10) election",
+    "Increase purchase price $37M-$50M to compensate Golden Gate's incremental tax",
+    "Negotiate 60% restitution / 40% penalties FCA settlement allocation",
+    "Include state transaction tax reimbursement covenant (50% seller reimbursement)",
+    "Conduct independent appraisals for IRC § 1060 purchase price allocation ($250K-$400K investment)",
+    "File CHOW license transfer applications immediately upon signing (90-180 day approval timeline)"
+  ],
+  "report_quality": {
+    "executive_summary_word_count": 4500,
+    "total_citations": 177,
+    "verification_tags_present": true,
+    "bluebook_format_compliant": true,
+    "cross_domain_flags_identified": 5,
+    "confidence_levels_disclosed": true
+  }
+}

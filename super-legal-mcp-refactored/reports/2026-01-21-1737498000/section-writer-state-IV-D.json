@@ -1,0 +1,123 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "D",
+  "section_name": "Pending and Threatened Litigation",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write Section IV.D (Litigation Analysis) from case-law-analyst T4 and insurance-coverage T10 reports",
+    "progress": "ALL PHASES COMPLETE",
+    "next_action": "Section delivered to orchestrator",
+    "critical_context": [
+      "section_id=D",
+      "4 findings analyzed: Thompson IUL class action (HIGH), Nebraska punitive prohibition (POSITIVE), 3 individual bad faith (MEDIUM)",
+      "Nebraska punitive damages prohibition = CRITICAL POSITIVE finding ($170M-$250M eliminated)",
+      "All canonical values from fact-registry used with [FACT-REG: #XXX] tags",
+      "130 footnotes with verification tags",
+      "6,850 words"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE. No recovery needed. Read section-IV-D-litigation.md for full analysis.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "specialist-reports/case-law-analyst-report.md",
+      "specialist-reports/insurance-coverage-analyst-report.md",
+      "review-outputs/fact-registry.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 6850,
+    "findings_written": "4/4",
+    "footnotes_count": 130,
+    "last_checkpoint": "2026-01-22T00:15:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/case-law-analyst-report.md (via Grep—file too large)",
+    "specialist-reports/insurance-coverage-analyst-report.md (via Grep—file too large)",
+    "review-outputs/fact-registry.md (CATEGORY 5: LITIGATION + CATEGORY 7: INSURANCE COVERAGE)"
+  ],
+
+  "findings_completed": [
+    {
+      "id": "FINDING-1",
+      "title": "Thompson v. Liberty Life IUL Class Action",
+      "severity": "HIGH",
+      "exposure_gross": "$85M-$125M compensatory",
+      "exposure_net": "$6M-$7M after E&O insurance",
+      "facts_used": ["#027", "#028", "#029", "#030", "#032", "#039", "#040"],
+      "creac_complete": true,
+      "draft_contract_language": true,
+      "counter_analysis": true
+    },
+    {
+      "id": "FINDING-POS-1",
+      "title": "Nebraska Punitive Damages Prohibition (POSITIVE)",
+      "severity": "POSITIVE",
+      "exposure_eliminated": "$170M-$250M",
+      "facts_used": ["#029"],
+      "creac_complete": true,
+      "draft_contract_language": true,
+      "counter_analysis": true
+    },
+    {
+      "id": "FINDING-2A",
+      "title": "Martinez v. LLIC (Disability Bad Faith)",
+      "severity": "MEDIUM",
+      "exposure": "$2.2M claimed, $1.0M settlement estimate",
+      "facts_used": ["#033 (market conduct correlation)"],
+      "creac_complete": true
+    },
+    {
+      "id": "FINDING-2B",
+      "title": "Johnson v. LLIC (Life Claim Delay Bad Faith)",
+      "severity": "MEDIUM",
+      "exposure": "$1.8M claimed, $900K settlement estimate",
+      "facts_used": ["#033 (market conduct correlation)"],
+      "creac_complete": true
+    },
+    {
+      "id": "FINDING-2C",
+      "title": "Chen v. LLIC (Accidental Death Exclusion)",
+      "severity": "LOW-MEDIUM",
+      "exposure": "$750K claimed, $250K nuisance value",
+      "facts_used": ["#033 (market conduct correlation)"],
+      "creac_complete": true
+    }
+  ],
+
+  "quality_checks": {
+    "word_count_sufficient": true,
+    "all_high_findings_have_contract_provisions": true,
+    "all_citations_have_verification_tags": true,
+    "no_placeholder_text": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true,
+    "creac_structure_followed": true,
+    "risk_table_complete": true,
+    "cross_references_complete": true
+  },
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737498000/section-reports/section-IV-D-litigation.md"
+}

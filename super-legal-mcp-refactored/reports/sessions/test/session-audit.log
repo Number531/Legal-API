@@ -1,0 +1,3 @@
+{"timestamp":"2026-01-19T22:34:50.342Z","event":"permission_request","tool":"Write","session_id":"test","tool_use_id":"test-id","decision":"auto_allow","reason":"Trusted reports directory"}
+{"timestamp":"2026-01-19T22:34:50.342Z","event":"permission_request","tool":"mcp__exa__web_search_exa","session_id":"test","tool_use_id":"test-id","decision":"auto_allow","reason":"Trusted MCP server"}
+{"timestamp":"2026-01-19T22:34:50.342Z","event":"permission_request","tool":"Bash","session_id":"test","tool_use_id":"test-id","decision":"defer_to_sdk"}

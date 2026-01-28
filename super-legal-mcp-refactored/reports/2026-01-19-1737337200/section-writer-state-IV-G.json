@@ -1,0 +1,70 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Investment Portfolio & Duration Risk",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.G (Investment Portfolio & Duration Risk) from specialist reports T7, T1, T11",
+    "progress": "Phase 6 complete - all subsections written",
+    "next_action": "Return COMPLETE status to orchestrator",
+    "critical_context": [
+      "section_id=G",
+      "3 findings complete: duration gap (HIGH), credit migration (HIGH), dual-use hedge (MEDIUM)",
+      "All draft contract provisions generated",
+      "97 footnotes with verification tags"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "investment-portfolio-compliance-duration-risk-report.md",
+      "state-insurance-regulation-rbc-report.md",
+      "variable-annuity-gmwb-tail-risk-report.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 6850,
+    "findings_written": "3/3",
+    "footnotes_count": 97,
+    "last_checkpoint": "2026-01-19T00:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/investment-portfolio-compliance-duration-risk-report.md",
+    "specialist-reports/state-insurance-regulation-rbc-report.md",
+    "specialist-reports/variable-annuity-gmwb-tail-risk-report.md"
+  ],
+
+  "quality_validation": {
+    "word_count_target_met": true,
+    "all_subsections_present": true,
+    "draft_provisions_for_high_findings": true,
+    "no_placeholders": true,
+    "verification_tags_present": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "A",
+  "section_name": "CMS Regulatory Compliance & Quality Ratings",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-A (CMS Regulatory Compliance) from specialist report",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "Section delivered to orchestrator",
+    "critical_context": ["section_id=A", "5 HIGH findings addressed", "All subsections A-F complete", "CMS staffing corrected to $580K with footnote"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section COMPLETE. Read output file for full content.",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["cms-regulatory-compliance-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 8150,
+    "findings_written": "5/5",
+    "footnotes_count": 81,
+    "last_checkpoint": "2026-01-26T11:00:00Z"
+  },
+
+  "quality_verification": {
+    "word_count_minimum": true,
+    "all_subsections_present": true,
+    "high_findings_have_draft_language": true,
+    "no_placeholders": true,
+    "footnotes_verified": true,
+    "creac_structure": true,
+    "counter_analysis": true,
+    "no_advocacy_language": true
+  },
+
+  "input_files_read": [
+    "specialist-reports/cms-regulatory-compliance-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "output_file": "section-reports/section-IV-A-cms-regulatory-compliance.md"
+}

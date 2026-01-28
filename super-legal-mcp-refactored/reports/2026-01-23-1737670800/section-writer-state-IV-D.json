@@ -1,0 +1,64 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "D",
+  "section_name": "Marketing Rule Compliance (Rule 206(4)-1)",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV.D (Marketing Rule Compliance) from regulatory-marketing-rule-compliance-report.md",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "None - section complete",
+    "critical_context": [
+      "section_id=D",
+      "2 HIGH findings completed with CREAC structure",
+      "Testimonial violations: $10.08M undisclosed fee reductions, $75K-$125K exposure",
+      "Performance survivorship bias: +25 bps overstatement, $30K-$60K exposure",
+      "Total weighted exposure: $88K-$173K",
+      "Draft contract provisions: escrow $150K, GIPS verification covenant"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "regulatory-marketing-rule-compliance-report.md",
+      "fact-registry.md",
+      "research-review-report.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 5200,
+    "findings_written": "2/2",
+    "footnotes_count": 89,
+    "last_checkpoint": "2026-01-23T23:45:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/regulatory-marketing-rule-compliance-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-23-1737670800/section-reports/section-IV-D-marketing-rule.md"
+}

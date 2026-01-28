@@ -1,0 +1,537 @@
+{
+  "status": "COMPLETE",
+  "summary": {
+    "total_gross_one_time": "$471,600,000-$743,200,000",
+    "total_gross_annual": "$92,500,000-$155,800,000",
+    "total_weighted_one_time": "$487,900,000-$535,400,000",
+    "total_weighted_annual": "$56,800,000-$101,400,000",
+    "total_weighted_annual_after_savings": "$43,300,000-$87,400,000",
+    "highest_severity_count": 15,
+    "deal_blocking_count": 0
+  },
+  "aggregate_exposure": {
+    "gross_total": 74320000000,
+    "gross_total_one_time": 74320000000,
+    "gross_total_annual": 15580000000,
+    "probability_weighted": 53540000000,
+    "probability_weighted_one_time": 53540000000,
+    "probability_weighted_annual": 10140000000,
+    "probability_weighted_annual_after_savings": 8740000000,
+    "by_category": {
+      "regulatory_compliance": {
+        "one_time": 500000000,
+        "annual": 480000000,
+        "weighted_one_time": 500000000,
+        "weighted_annual": 290000000
+      },
+      "tax_finance": {
+        "one_time": 47160000000,
+        "annual": 4588000000,
+        "weighted_one_time": 47160000000,
+        "weighted_annual": 4588000000
+      },
+      "privacy_security": {
+        "one_time": 2050000000,
+        "annual": 0,
+        "weighted_one_time": 1420000000,
+        "weighted_annual": 0
+      },
+      "employment_labor": {
+        "one_time": 3840000000,
+        "annual": 420000000,
+        "weighted_one_time": 1200000000,
+        "weighted_annual": 420000000
+      },
+      "commercial_contracts_revenue": {
+        "one_time": 0,
+        "annual": 6660000000,
+        "weighted_one_time": 0,
+        "weighted_annual": 3530000000
+      },
+      "commercial_contracts_cost": {
+        "one_time": 0,
+        "annual": 2300000000,
+        "weighted_one_time": 0,
+        "weighted_annual": 1900000000
+      },
+      "commercial_contracts_savings": {
+        "one_time": 0,
+        "annual": -4000000000,
+        "weighted_one_time": 0,
+        "weighted_annual": -3400000000
+      }
+    }
+  },
+  "exposure_ranges": {
+    "p10_optimistic": 49400000000,
+    "p50_expected": 67000000000,
+    "p90_stress": 84600000000
+  },
+  "escrow_recommendation": 68000000,
+  "high_severity_count": 15,
+  "critical_findings_count": 1,
+  "findings_by_domain": [
+    {
+      "domain": "Healthcare Regulatory - STARK/AKS",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 500000000,
+      "exposure_range": "2,000,000-5,000,000",
+      "probability": 1.0,
+      "weighted_exposure": 500000000,
+      "severity": "CRITICAL",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "ASC joint venture with employed physicians violates STARK/AKS - remediation via buyout or OIG voluntary disclosure required",
+      "mitigation": "Unwind ASC (buy out physician 50% for $1.5M-$2M) OR OIG SDP (voluntary disclosure settle $2M-$5M + CIA 3-5 years)"
+    },
+    {
+      "domain": "Tax/Finance - Operating Taxes",
+      "specialist": "tax-structure-analyst",
+      "exposure": 3643000000,
+      "exposure_range": "36,430,000/year perpetual",
+      "probability": 1.0,
+      "weighted_exposure": 3643000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "Tax-exempt conversion triggers $36.43M annual taxes (federal $15.12M + state $4.66M + property $10.80M + sales $5.85M)",
+      "mitigation": "Tax minimization: §338(h)(10) election, bonus depreciation, JCTC, REIT lease-back, charitable contributions - reduces to $16M-$31M/year",
+      "npv_calculation": "Annual $36.43M at 8% perpetual = $455.4M NPV"
+    },
+    {
+      "domain": "Tax/Finance - Bond Redemption",
+      "specialist": "tax-structure-analyst",
+      "exposure": 42840000000,
+      "exposure_range": "428,400,000 one-time",
+      "probability": 1.0,
+      "weighted_exposure": 42840000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "IRC §141 private activity test violated upon conversion - bond redemption required at 102% = $428.4M",
+      "mitigation": "Finance from PE equity or refinance with taxable bonds at closing; structure into purchase price and debt financing plan"
+    },
+    {
+      "domain": "Tax/Finance - Property Tax Recapture",
+      "specialist": "tax-structure-analyst",
+      "exposure": 4320000000,
+      "exposure_range": "43,200,000 one-time",
+      "probability": 1.0,
+      "weighted_exposure": 4320000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Ohio Rev. Code §5709.12 requires recapture 4 years retroactive tax savings = $43.2M",
+      "mitigation": "Plan for one-time payment at closing or within 12 months; negotiate with county auditor for payment plan"
+    },
+    {
+      "domain": "Tax/Finance - Bond Interest Differential",
+      "specialist": "tax-structure-analyst",
+      "exposure": 945000000,
+      "exposure_range": "9,450,000/year perpetual",
+      "probability": 1.0,
+      "weighted_exposure": 945000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "Refinancing taxable bonds at 6.5% vs. 4.25% tax-exempt = $9.45M/year additional interest",
+      "mitigation": "Negotiate favorable taxable bond terms; structure into purchase price impact",
+      "npv_calculation": "Annual $9.45M at 8% perpetual = $118.1M NPV"
+    },
+    {
+      "domain": "Privacy/Security - OCR Investigation",
+      "specialist": "privacy-data-protection-analyst",
+      "exposure": 650000000,
+      "exposure_range": "2,400,000-5,200,000",
+      "probability": 0.85,
+      "weighted_exposure": 442000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "HIPAA Security Rule violations (outdated risk analysis, inadequate backups, no encryption) - OCR penalty $500K-$1.5M + CAP $2.5M-$5M",
+      "mitigation": "Implement corrective actions before OCR findings: annual risk analysis, offline/immutable backups, encrypt data at rest"
+    },
+    {
+      "domain": "Privacy/Security - Class Action",
+      "specialist": "privacy-data-protection-analyst",
+      "exposure": 1500000000,
+      "exposure_range": "5,000,000-15,000,000",
+      "probability": 0.65,
+      "weighted_exposure": 975000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "HIPAA ransomware breach class action - 850K patients, settlement likely $5M-$15M",
+      "mitigation": "Negotiate settlement, insurance coverage (cyber liability third-party coverage standard)"
+    },
+    {
+      "domain": "Employment/Labor - WARN Act",
+      "specialist": "employment-labor-analyst",
+      "exposure": 540000000,
+      "exposure_range": "5,100,000-5,400,000",
+      "probability": 0.65,
+      "weighted_exposure": 351000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "PE integration layoffs 500-1,000 employees without 60-day notice = $5.1M-$5.4M back pay + benefits",
+      "mitigation": "AVOIDABLE: Provide 60-day notice to employees, Ohio DJFS, local government before layoffs"
+    },
+    {
+      "domain": "Employment/Labor - Physician Terminations",
+      "specialist": "employment-labor-analyst",
+      "exposure": 3300000000,
+      "exposure_range": "21,000,000-33,000,000",
+      "probability": 0.35,
+      "weighted_exposure": 945000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Physician change of control terminations (20-50 physicians) - severance + tail insurance $21M-$33M",
+      "mitigation": "Offer retention bonuses $50K-$150K per physician, maintain compensation guarantees 12-24 months"
+    },
+    {
+      "domain": "Commercial Contracts - Medicare Advantage",
+      "specialist": "commercial-contracts-analyst",
+      "exposure": 4500000000,
+      "exposure_range": "22,000,000-45,000,000/year",
+      "probability": 0.25,
+      "weighted_exposure": 1010000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "MA contract termination (1-2 of 8 plans) upon change of control = $22M-$45M annual revenue loss",
+      "mitigation": "Early engagement with MA plans, emphasize quality metrics/Star Ratings contribution",
+      "npv_calculation": "Annual $33.5M at 8% perpetual = $418.8M NPV"
+    },
+    {
+      "domain": "Commercial Contracts - Commercial Payers",
+      "specialist": "commercial-contracts-analyst",
+      "exposure": 4320000000,
+      "exposure_range": "21,600,000-43,200,000/year",
+      "probability": 0.55,
+      "weighted_exposure": 2300000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "Commercial payer rate renegotiation upon for-profit conversion = $21.6M-$43.2M annual revenue loss",
+      "mitigation": "Early engagement with commercial payers, emphasize quality/cost efficiency",
+      "npv_calculation": "Annual $32.4M at 8% perpetual = $405M NPV"
+    },
+    {
+      "domain": "Pharma Regulatory - 340B",
+      "specialist": "pharma-regulatory-analyst",
+      "exposure": 500000000,
+      "exposure_range": "3,000,000-5,000,000/year",
+      "probability": 0.45,
+      "weighted_exposure": 210000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "340B manufacturer restrictions (if PhRMA litigation adverse) = $3M-$5M/year savings loss",
+      "mitigation": "Monitor PhRMA litigation, prepare alternative drug procurement strategies",
+      "npv_calculation": "Annual $4M at 8% perpetual = $50M NPV"
+    },
+    {
+      "domain": "Commercial Contracts - Medicaid MCOs",
+      "specialist": "commercial-contracts-analyst",
+      "exposure": 4000000000,
+      "exposure_range": "20,000,000-40,000,000/year",
+      "probability": 0.35,
+      "weighted_exposure": 480000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "Medicaid MCO rate renegotiation = $20M-$40M annual revenue loss",
+      "mitigation": "Emphasize Mercy South DSH status and safety-net function",
+      "npv_calculation": "Annual $30M at 8% perpetual = $375M NPV"
+    },
+    {
+      "domain": "Healthcare Regulatory - CON",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 12500000000,
+      "exposure_range": "15,000,000-20,000,000",
+      "probability": 0.35,
+      "weighted_exposure": 1750000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "CON 50-bed expansion denial (30-40% probability) - $125M project blocked, NPV of lost capacity $15M-$20M",
+      "mitigation": "Advocacy strategy: emphasize need (occupancy 88% exceeds 80% threshold), pro forma feasibility"
+    },
+    {
+      "domain": "Healthcare Regulatory - GME",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 250000000,
+      "exposure_range": "480,000-2,900,000/year",
+      "probability": 0.175,
+      "weighted_exposure": 48000000,
+      "severity": "HIGH",
+      "time_profile": "PERPETUAL",
+      "finding_summary": "GME surgery program accreditation withdrawal (15-20% probability) - $2.5M/year GME payments at risk",
+      "mitigation": "Monitor corrective action effectiveness, ensure work hours compliance sustained",
+      "npv_calculation": "Annual $2.5M at 8% perpetual = $31.25M NPV"
+    },
+    {
+      "domain": "Healthcare Regulatory - Joint Commission",
+      "specialist": "regulatory-rulemaking-analyst",
+      "exposure": 17300000000,
+      "exposure_range": "8,600,000-17,300,000",
+      "probability": 0.075,
+      "weighted_exposure": 860000000,
+      "severity": "HIGH",
+      "time_profile": "ONE_TIME",
+      "finding_summary": "Joint Commission deemed status downgrade (5-10% probability) - 0.5-1% Medicare revenue loss if CMS surveys find CoPs deficiencies",
+      "mitigation": "Immediate correction of 8 deficiencies (medication management, hand hygiene >90%, fire door, credentialing)"
+    }
+  ],
+  "top_10_exposures": [
+    {
+      "rank": 1,
+      "domain": "Tax/Finance - Bond Redemption",
+      "finding": "IRC §141 bond redemption at 102% make-whole",
+      "exposure": 42840000000,
+      "probability": 1.0,
+      "weighted": 42840000000,
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "rank": 2,
+      "domain": "Tax/Finance - Operating Taxes",
+      "finding": "Annual operating taxes (federal + state + property + sales)",
+      "exposure": 3643000000,
+      "probability": 1.0,
+      "weighted": 3643000000,
+      "time_profile": "PERPETUAL",
+      "npv": 45537500000
+    },
+    {
+      "rank": 3,
+      "domain": "Tax/Finance - Property Tax Recapture",
+      "finding": "4-year retroactive property tax recapture",
+      "exposure": 4320000000,
+      "probability": 1.0,
+      "weighted": 4320000000,
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "rank": 4,
+      "domain": "Commercial Contracts - Commercial Payers",
+      "finding": "Commercial payer rate renegotiation (5-10% reduction)",
+      "exposure": 4320000000,
+      "probability": 0.55,
+      "weighted": 2300000000,
+      "time_profile": "PERPETUAL",
+      "npv": 28750000000
+    },
+    {
+      "rank": 5,
+      "domain": "Commercial Contracts - Medicare Advantage",
+      "finding": "MA contract termination (1-2 of 8 plans)",
+      "exposure": 4500000000,
+      "probability": 0.25,
+      "weighted": 1010000000,
+      "time_profile": "PERPETUAL",
+      "npv": 12625000000
+    },
+    {
+      "rank": 6,
+      "domain": "Tax/Finance - Bond Interest Differential",
+      "finding": "Additional taxable bond interest (6.5% vs. 4.25%)",
+      "exposure": 945000000,
+      "probability": 1.0,
+      "weighted": 945000000,
+      "time_profile": "PERPETUAL",
+      "npv": 11812500000
+    },
+    {
+      "rank": 7,
+      "domain": "Privacy/Security - Class Action",
+      "finding": "HIPAA ransomware class action settlement",
+      "exposure": 1500000000,
+      "probability": 0.65,
+      "weighted": 975000000,
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "rank": 8,
+      "domain": "Employment/Labor - Physician Terminations",
+      "finding": "Physician change of control severance + tail insurance",
+      "exposure": 3300000000,
+      "probability": 0.35,
+      "weighted": 945000000,
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "rank": 9,
+      "domain": "Commercial Contracts - Medicaid MCOs",
+      "finding": "Medicaid MCO rate renegotiation (5-10% reduction)",
+      "exposure": 4000000000,
+      "probability": 0.35,
+      "weighted": 480000000,
+      "time_profile": "PERPETUAL",
+      "npv": 6000000000
+    },
+    {
+      "rank": 10,
+      "domain": "Privacy/Security - OCR Investigation",
+      "finding": "OCR penalty + corrective action plan (3 years)",
+      "exposure": 650000000,
+      "probability": 0.85,
+      "weighted": 442000000,
+      "time_profile": "ONE_TIME"
+    }
+  ],
+  "escrow_analysis": {
+    "recommended_amount": 68000000,
+    "calculation_basis": "HIGH_severity_total × 1.2 + categorical buckets",
+    "coverage_ratio": 0.67,
+    "coverage_rating": "ADEQUATE",
+    "largest_exposure": 42840000000,
+    "largest_exposure_covered": false,
+    "largest_non_structural_exposure": 1750000000,
+    "time_horizon_status": "ALIGNED",
+    "recommended_release_schedule": "Staged: STARK 90d, HIPAA 6-12mo, Physician 90d, Payer 12mo, General 18mo",
+    "adequacy_flags": [
+      "Bond redemption $428.4M structural cost excluded from escrow (financed separately)",
+      "Property tax recapture $43.2M structural cost excluded from escrow",
+      "Escrow covers contingent risks only (STARK, HIPAA, physician, payers)"
+    ],
+    "buckets": [
+      {
+        "name": "STARK/AKS Remediation",
+        "amount": 5000000,
+        "release_trigger": "ASC unwound OR OIG voluntary disclosure completed with settlement agreement executed",
+        "release_timeline": "90 days post-closing"
+      },
+      {
+        "name": "HIPAA OCR Investigation",
+        "amount": 6000000,
+        "release_trigger": "OCR findings received, penalty paid, corrective action plan executed",
+        "release_timeline": "Q1 2025 OCR findings + 90 days CAP execution"
+      },
+      {
+        "name": "HIPAA Class Action Settlement",
+        "amount": 10000000,
+        "release_trigger": "Class action motion to dismiss decided, settlement executed OR insurance coverage confirmed",
+        "release_timeline": "6-12 months (settlement finalized)"
+      },
+      {
+        "name": "Physician Change of Control Terminations",
+        "amount": 12000000,
+        "release_trigger": "90-day change of control window expires with <10% physician termination rate",
+        "release_timeline": "90 days post-closing + 60-day notice period = 150 days"
+      },
+      {
+        "name": "Commercial Payer Contract Review",
+        "amount": 25000000,
+        "release_trigger": "First 12 months post-closing passes with <$15M annualized revenue loss from payer terminations/renegotiations",
+        "release_timeline": "12 months post-closing"
+      },
+      {
+        "name": "General Indemnity Escrow",
+        "amount": 10000000,
+        "release_trigger": "18-month time release",
+        "release_timeline": "18 months post-closing"
+      }
+    ]
+  },
+  "purchase_price_impact": {
+    "current_ebitda": 72000000,
+    "post_conversion_ebitda_low": 26000000,
+    "post_conversion_ebitda_high": 40000000,
+    "post_conversion_ebitda_expected": 35000000,
+    "ebitda_multiple": 11,
+    "valuation_impact_low": 35200000000,
+    "valuation_impact_high": 46200000000,
+    "valuation_impact_expected": 40700000000,
+    "recommended_adjustment": "$300M-$500M reduction",
+    "rationale": "64% EBITDA decline from $72M to $26M-$40M post-conversion justifies $300M-$500M valuation adjustment based on after-tax cash flows"
+  },
+  "correlation_adjustments": {
+    "methodology": "Identified 3 correlated pairs with same root cause or domain overlap",
+    "pairs_adjusted": [
+      {
+        "finding_a": "HIPAA OCR Investigation",
+        "finding_b": "HIPAA Class Action Settlement",
+        "correlation": 0.7,
+        "explanation": "Both stem from same March 2024 ransomware breach - high correlation",
+        "overlap": 0.5,
+        "raw_total": 217500000,
+        "adjusted_total": 141875000,
+        "reduction": 75625000
+      },
+      {
+        "finding_a": "STARK/AKS ASC Violation",
+        "finding_b": "Tax-Exempt Private Inurement Risk",
+        "correlation": 0.8,
+        "explanation": "STARK violations constitute private inurement - if discovered, IRS may pursue retroactive revocation",
+        "overlap": 0.3,
+        "raw_total": 500000000,
+        "adjusted_total": 380000000,
+        "reduction": 120000000,
+        "note": "Private inurement risk not separately quantified but referenced in tax report cross-domain analysis"
+      },
+      {
+        "finding_a": "MA Contract Termination",
+        "finding_b": "HIPAA Breach BAA Termination",
+        "correlation": 0.6,
+        "explanation": "Security Rule violations may trigger MA BAA termination provisions - overlapping risks",
+        "overlap": 0.4,
+        "raw_total": 122500000,
+        "adjusted_total": 93100000,
+        "reduction": 29400000
+      }
+    ],
+    "raw_total": 53540000000,
+    "correlation_reduction": 225025000,
+    "adjusted_total": 53314975000
+  },
+  "quantification_methodology": {
+    "sources_scanned": 6,
+    "findings_extracted": 15,
+    "probability_methodology": "Per-finding analyst estimates from specialist reports, based on statutory requirements, regulatory precedent, industry benchmarks, and transaction-specific factors",
+    "time_profile_classification": "ONE_TIME (8 findings), PERPETUAL (7 findings) - DCF/NPV applied to perpetual exposures at 8% discount rate",
+    "currency": "USD",
+    "as_of_date": "2026-01-24",
+    "valuation_methods": {
+      "expected_value": "Used for contingent one-time exposures (OCR penalty, class action, WARN Act, physician terminations, CON denial)",
+      "npv_perpetual": "Used for recurring annual exposures with no end date (taxes, payer rate reductions, 340B loss, GME payments) at 8% discount rate",
+      "face_value": "Used for structural one-time payments with 100% certainty (bond redemption, property tax recapture)"
+    }
+  },
+  "scenario_analysis": {
+    "base_case": {
+      "description": "Expected outcome with normal mitigation",
+      "one_time_total": 48790000000,
+      "annual_total": 5680000000,
+      "annual_npv": 71000000000,
+      "total_exposure": 119790000000,
+      "key_assumptions": [
+        "Bond redemption $428.4M financed from PE equity/debt",
+        "Tax minimization strategies reduce annual taxes to $25M-$30M",
+        "HIPAA settlements within insurance coverage limits",
+        "WARN Act avoided with proper 60-day notice",
+        "Physician retention bonuses reduce terminations to 10-15 physicians",
+        "Payer engagement limits MA/commercial terminations to 1-2 plans"
+      ]
+    },
+    "downside_case": {
+      "description": "Adverse outcomes on 2-3 major risks",
+      "one_time_total": 52000000000,
+      "annual_total": 8500000000,
+      "annual_npv": 106250000000,
+      "total_exposure": 158250000000,
+      "key_assumptions": [
+        "Bond redemption $428.4M + property tax $43.2M paid at closing",
+        "Tax minimization limited success - annual taxes $30M-$35M",
+        "HIPAA class action settles high end $15M",
+        "WARN Act triggered - $5.4M penalty",
+        "Physician terminations reach 30-40 physicians - $25M severance/tail",
+        "MA terminations 2 plans + commercial rate reductions 7-8% = $40M annual loss"
+      ]
+    },
+    "severe_downside_case": {
+      "description": "Multiple adverse outcomes + government enforcement",
+      "one_time_total": 56000000000,
+      "annual_total": 10500000000,
+      "annual_npv": 131250000000,
+      "total_exposure": 187250000000,
+      "key_assumptions": [
+        "Bond redemption $428.4M + property tax $43.2M paid at closing",
+        "Tax minimization fails - full $36.43M annual taxes",
+        "STARK/AKS government-initiated prosecution $10M-$20M (instead of $2M-$5M OIG SDP)",
+        "HIPAA OCR penalty Tier 4 maximum $1.5M + class action $15M",
+        "WARN Act triggered + physician terminations 50 physicians = $38M combined",
+        "MA terminations 3 plans + commercial renegotiations 10% = $60M+ annual loss",
+        "CON denial + GME accreditation loss = $20M additional exposure"
+      ]
+    }
+  }
+}

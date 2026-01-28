@@ -1,0 +1,44 @@
+{
+  "section_id": "IV.E.4",
+  "section_info": {
+    "title": "Counter-Party Response Anticipation (TIER 3 ENHANCEMENT)",
+    "has_counter_analysis_header": false,
+    "detections": 3,
+    "to_move": 3
+  },
+  "locations": [
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 0,
+      "line_number": 10554,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+      "full_paragraph": "Anticipate seller/opposing party responses and prepare counter-arguments:",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 1,
+      "line_number": 10556,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry be...",
+      "full_paragraph": "| Anticipated Position | Likelihood | Our Response | Supporting Evidence |\n|---------------------|------------|--------------|---------------------|\n| \"Cyber insurance is adequate based on industry benchmarks\" | HIGH | Industry benchmarks show only 40% of $1.8B revenue healthcare organizations maintain $20M+ limits; March 2024 breach severity (850K records, 12-day shutdown) exceeds underwriting assumptions for median policies | Marsh 2024 Healthcare Cyber Market Report; Anthem $16M OCR penalty precedent |\n| \"D&O should cover STARK/AKS settlement because it's a negotiated resolution, not a penalty\" | MEDIUM | *Level 3 Communications* economic function test: settlement serves punitive/deterrent purpose, not compensatory; OIG settlements expressly invoke civil monetary penalty authority 42 U.S.C. \u00a7 1320a-7a | *Level 3*, 272 F.3d at 910-911; OIG settlement agreement standard language |\n| \"Tail coverage costs should be shared 50/50 reflecting mutual benefit\" | HIGH | Market practice allocates tail to seller in 85-90% of healthcare transactions; seller controlled operations during period of insurable events; buyer willing to negotiate nose coverage as cost-saving alternative | ABA M&A survey data; HCA/Mission precedent (seller purchased $25M tail) |\n| \"WARN Act escrow is unnecessary because we don't plan restructuring\" | MEDIUM | PE healthcare acquisitions show 40% implement workforce reductions within 12 months; operational plans change post-closing; escrow protects both parties and releases if no WARN claims filed within 18 months | KKR/Envision precedent ($15M employment escrow for PE healthcare acquisition) |\n| \"IBNR reserve adequacy is a post-closing issue; buyer assumes all liabilities in stock purchase\" | MEDIUM | Stock purchase assumes liabilities at fair value; if reserves are understated by $5M-$20M, seller has overstated net equity; purchase price adjustment corrects for actuarial shortfall | GAAP requires adequate reserves; actuarial certification is market-standard closing condition |",
+      "confidence": 0.8,
+      "should_move": true
+    },
+    {
+      "section_id": "IV.E.4",
+      "paragraph_index": 3,
+      "line_number": 10570,
+      "pattern_matched": "(?:In\\s+)?(?:defense|response|rebuttal)",
+      "pattern_type": "defense",
+      "content_excerpt": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escr...",
+      "full_paragraph": "**Response Playbook:**\n- If seller argues cyber insurance is adequate: Counter with requirement to verify actual policy (obtain declarations page within 7 days); if limits <$20M or sublimit <$1M, escrow is mandatory\n- If seller proposes tail cost-sharing: Counter with nose coverage alternative (buyer negotiates with new carrier at potentially 1/3 the cost); seller saves money but buyer assumes prior acts risk\n- If seller refuses WARN escrow: Condition closing on buyer's written confirmation of no restructuring plans (Section 7.2(n)); if buyer cannot provide confirmation, escrow is required or deal does not close\n- If IBNR reserves are inadequate: Escrow is immediate solution ($5M-$20M held for 5 years); alternative is purchase price reduction, but escrow allows for true-up based on actual claims development",
+      "confidence": 0.8,
+      "should_move": true
+    }
+  ]
+}

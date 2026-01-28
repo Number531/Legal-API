@@ -1,0 +1,989 @@
+/**
+ * CourtListener Web Search Client (Enhanced Highlights)
+ * Uses Exa to search CourtListener content with enhanced highlights configuration.
+ * This avoids CourtListener rate limits while returning structured links and metadata.
+ */
+
+import { validateDate, validateLimit } from '../utils/validation.js';
+import { BaseWebSearchClient } from './BaseWebSearchClient.js';
+import { CourtListenerSchemas } from './schemas/CourtListenerSchemas.js';
+
+export class CourtListenerWebSearchClient extends BaseWebSearchClient {
+  constructor(rateLimiter, exaApiKey = process.env.EXA_API_KEY) {
+    super(rateLimiter, exaApiKey);
+    this.domain = 'case_law';
+
+    // Register CourtListener schemas for structured data extraction
+    if (this.contentStrategy) {
+      Object.entries(CourtListenerSchemas).forEach(([dataType, schema]) => {
+        this.contentStrategy.registerSchema(dataType, schema);
+      });
+    }
+  }
+
+  /**
+   * Search CourtListener opinions via Exa (domain-restricted)
+   * @param {Object} args
+   * @param {string} args.query - free-text query
+   * @param {string} [args.case_name] - optional exact case name phrase
+   * @param {string} [args.citation] - optional citation to target
+   * @param {string} [args.date_after] - YYYY-MM-DD filter (applies post-fetch)
+   * @param {string} [args.date_before] - YYYY-MM-DD filter (applies post-fetch)
+   * @param {number} [args.limit=3] - max results (1-20)
+   * @param {boolean} [args.include_snippet=true] - include smart snippet from Exa highlights
+   * @param {boolean} [args.include_full_text=false] - include full text content from Exa
+   * @param {boolean} [args.include_text] - DEPRECATED: use include_snippet
+   * @returns {Promise<{content: Array}>}
+   */
+  async searchOpinionsWeb(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+
+    const {
+      query,
+      case_name,
+      citation,
+      date_after,
+      date_before,
+      limit,
+      include_snippet = args.include_text ?? true,  // Backward compatibility
+      include_full_text = false,
+      include_text  // Capture for backward compatibility
+    } = args;
+
+    // Smart limit based on content type
+    let smartLimit = 5;  // Default for metadata/snippets
+    if (include_full_text === true) {
+      smartLimit = 2;  // Reduce when full text requested
+    }
+    const finalLimit = limit || smartLimit;
+
+    if (!query || typeof query !== 'string' || query.trim().length === 0) {
+      throw new Error('Query is required for CourtListener web search.');
+    }
+
+    if (date_after) validateDate(date_after, 'date_after');
+    if (date_before) validateDate(date_before, 'date_before');
+    const validatedLimit = validateLimit(finalLimit, 20);
+
+    // Build targeted web query restricted to CourtListener opinions
+    let q = 'site:courtlistener.com/opinion ' + query.trim();
+    if (case_name) q += ` "${case_name}"`;
+    if (citation) q += ` "${citation}"`;
+
+    // Execute Exa search with schema-based structured extraction
+    const results = await this.executeExaSearch(q, validatedLimit, {
+      dataType: 'court_opinion',
+      domain: this.domain,
+      summaryQuery: 'holding precedent citation court judge opinion dissent concurrence reversed affirmed decision ruling',
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: include_full_text
+    });
+
+    // Filter to opinion pages and apply optional date window
+    const filtered = results
+      .filter(r => (r.url || '').includes('/opinion/'))
+      .filter(r => this.filterByDateWindow(r.publishedDate, date_after, date_before));
+
+    const mapped = filtered.map(r => this.mapOpinionFromHighlights(r, include_snippet, include_full_text));
+
+    // Calculate quality metadata for query-result alignment
+    const qualityMetadata = this.assessCaseLawQueryRelevance(query || '', results, mapped, args);
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'courtlistener_opinions_web',
+          query: q,
+          original_query: query,
+          total_results: mapped.length,
+          results: mapped,
+          ...qualityMetadata
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Lookup a citation via Exa against CourtListener domain only
+   * @param {Object} args
+   * @param {string} args.citation - citation string (e.g., '410 U.S. 113')
+   * @param {number} [args.limit=3] - max results (1-10)
+   * @param {boolean} [args.include_snippet=true] - include smart snippet from Exa highlights
+   * @param {boolean} [args.include_full_text=false] - include full text content from Exa
+   * @param {boolean} [args.include_text] - DEPRECATED: use include_snippet
+   */
+  async lookupCitationWeb(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+    const {
+      citation,
+      limit,
+      include_snippet = args.include_text ?? true,
+      include_full_text = false,
+      include_text
+    } = args;
+
+    // Smart limit based on content type
+    let smartLimit = 5;  // Default for metadata/snippets
+    if (include_full_text === true) {
+      smartLimit = 2;  // Reduce when full text requested
+    }
+    const finalLimit = limit || smartLimit;
+    if (!citation || typeof citation !== 'string' || citation.trim().length === 0) {
+      throw new Error('citation is required for lookupCitationWeb');
+    }
+
+    const q = `site:courtlistener.com/opinion "${citation.trim()}"`;
+    
+    const results = await this.executeExaSearch(q, validateLimit(finalLimit, 10), {
+      dataType: 'court_opinion',
+      domain: this.domain,
+      summaryQuery: `"${citation.trim()}" holding precedent court decision`,
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: include_full_text
+    });
+
+    const filtered = results.filter(r => (r.url || '').includes('/opinion/'));
+    const mapped = filtered.map(r => this.mapOpinionFromHighlights(r, include_snippet, include_full_text));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          search_type: 'courtlistener_citation_web',
+          citation: citation,
+          total_results: mapped.length,
+          results: mapped
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Get opinion with citing/cited cases via web search (Exa-only)
+   * Attempts to parse the opinion page sections "Cited by" and "Cites to"
+   * @param {Object} args
+   * @param {number} args.opinion_id - CourtListener opinion ID
+   * @param {boolean} [args.include_citing_cases=true]
+   * @param {boolean} [args.include_cited_cases=true]
+   * @param {number} [args.citation_depth=1] - Only depth=1 supported for web parsing
+   */
+  async getOpinionWithCitationsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const {
+      opinion_id,
+      include_citing_cases = true,
+      include_cited_cases = true,
+      citation_depth = 1
+    } = args;
+
+    if (!Number.isInteger(opinion_id) || opinion_id < 1) {
+      throw new Error('Invalid opinion_id. Must be a positive integer.');
+    }
+    if (citation_depth < 1 || citation_depth > 3) {
+      throw new Error('Citation depth must be between 1 and 3.');
+    }
+
+    // Fetch the opinion page via Exa
+    const q = `site:courtlistener.com/opinion/${opinion_id}/`;
+    
+    const results = await this.executeExaSearch(q, 1, {
+      dataType: 'court_opinion',
+      domain: this.domain,
+      summaryQuery: 'cited by cites to citations references precedent',
+      numSentences: 10,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: true
+    });
+
+    if (!results.length) {
+      return { content: [{ type: 'text', text: JSON.stringify({ error: 'Opinion page not found', opinion_id }, null, 2) }] };
+    }
+
+    const page = results[0];
+    const text = page.text || '';
+    const caseName = this.cleanCaseTitle(page.title || '') || null;
+
+    const output = {
+      opinion: {
+        id: opinion_id,
+        case_name: caseName,
+        absolute_url: page.url || null
+      },
+      citations: {}
+    };
+
+    // Parse citing cases (Cited by)
+    if (include_citing_cases) {
+      const citedBySection = this.extractSection(text, /Cited\s*by/i);
+      const citedByIds = this.findOpinionIdsInText(citedBySection);
+      output.citations.citing_this_opinion = citedByIds.map(id => ({ opinion_id: id, relationship: 'cites' }));
+    }
+
+    // Parse cited cases (Cites to / Citations)
+    if (include_cited_cases) {
+      const citesToSection = this.extractSection(text, /(Cites\s*to|Citations?)/i);
+      const citedIds = this.findOpinionIdsInText(citesToSection);
+      output.citations.cited_by_this_opinion = citedIds.map(id => ({ opinion_id: id, relationship: 'cited' }));
+    }
+
+    // Note: For web parsing, only depth=1 is supported to avoid heavy crawling
+    if (citation_depth > 1) {
+      output.note = 'Only citation depth 1 supported in web mode.';
+    }
+
+    return { content: [{ type: 'text', text: JSON.stringify(output, null, 2) }] };
+  }
+
+  // ===== Dockets =====
+  async searchDocketsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { case_name, party_name, docket_number, court, date_filed_after, date_filed_before, limit = 5 } = args;
+    const validated = validateLimit(limit, 20);
+
+    let q = 'site:courtlistener.com/docket ';
+    if (case_name) q += `"${case_name}" `;
+    if (party_name) q += `"${party_name}" `;
+    if (docket_number) q += `"${docket_number}" `;
+    if (court) q += `"${court}" `;
+
+    const results = await this.executeExaSearch(q.trim(), validated, {
+      dataType: 'docket',
+      domain: this.domain,
+      summaryQuery: 'docket number case name court filed party plaintiff defendant',
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: false
+    });
+
+    const filtered = results.filter(r => (r.url || '').includes('/docket/'));
+    const mapped = filtered.map(r => {
+      const url = r.url || '';
+      const highlights = r.highlights || [];
+      const highlightText = highlights.join(' ');
+      const text = highlightText || r.text || '';
+      const id = this.extractIdFromUrl(url, 'docket');
+      return {
+        id,
+        docket_number: this.extractFirst(/Docket\s*Number\s*:?\s*([^\n]+)/i, text) || docket_number || null,
+        case_name: this.cleanCaseTitle(r.title || '') || null,
+        court: this.extractFirst(/Court\s*:?\s*([^\n]+)/i, text) || court || null,
+        date_filed: this.extractFirst(/Filed\s*:?\s*([A-Za-z]+\s+\d{1,2},\s*\d{4}|\d{4}-\d{2}-\d{2})/i, text) || null,
+        absolute_url: url
+      };
+    }).filter(d => this.filterByDateWindow(d.date_filed, date_filed_after, date_filed_before));
+
+    return { content: [{ type: 'text', text: JSON.stringify({ count: mapped.length, dockets: mapped }, null, 2) }] };
+  }
+
+  // ===== Audio =====
+  async searchAudioWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { query, judge_name, court, date_argued_after, date_argued_before, min_duration, has_transcript, limit = 5 } = args;
+    const validated = validateLimit(limit, 20);
+
+    let q = 'site:courtlistener.com/audio ';
+    if (query) q += `${query} `;
+    if (judge_name) q += `"${judge_name}" `;
+    if (court) q += `"${court}" `;
+    if (has_transcript) q += 'transcript ';
+
+    const results = await this.executeExaSearch(q.trim(), validated, {
+      dataType: 'oral_argument_audio',
+      domain: this.domain,
+      summaryQuery: 'oral argument audio transcript duration case name court judge argued',
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: false
+    });
+
+    const filtered = results.filter(r => (r.url || '').includes('/audio/'));
+    const mapped = filtered
+      .map(r => this.mapAudioFromHighlights(r, min_duration))
+      .filter(a => a && this.filterByDateWindow(a.date_argued, date_argued_after, date_argued_before));
+
+    return { content: [{ type: 'text', text: JSON.stringify({ count: mapped.length, audio_files: mapped }, null, 2) }] };
+  }
+
+  async getAudioDetailsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { audio_id } = args;
+    if (!Number.isInteger(audio_id) || audio_id < 1) throw new Error('Invalid audio_id. Must be a positive integer.');
+
+    const q = `site:courtlistener.com/audio/${audio_id}/`;
+    
+    const results = await this.executeExaSearch(q, 1, {
+      dataType: 'oral_argument_audio',
+      domain: this.domain,
+      summaryQuery: 'audio duration transcript case name court date argued',
+      numSentences: 10,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: true
+    });
+
+    if (!results.length) return { content: [{ type: 'text', text: JSON.stringify({ error: 'Audio page not found', audio_id }, null, 2) }] };
+    const audio = this.mapAudioFromHighlights(results[0]);
+    return { content: [{ type: 'text', text: JSON.stringify(audio, null, 2) }] };
+  }
+
+  // ===== Judges =====
+  async searchJudgesWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { name, court, appointer, selection_method, political_affiliation, limit = 5 } = args;
+    const validated = validateLimit(limit, 20);
+    let q = 'site:courtlistener.com/person ';
+    if (name) q += `"${name}" `;
+    if (court) q += `"${court}" `;
+    if (appointer) q += `"${appointer}" `;
+    if (selection_method) q += `"${selection_method}" `;
+    if (political_affiliation) q += `"${political_affiliation}" `;
+
+    const results = await this.executeExaSearch(q.trim(), validated, {
+      dataType: 'judge',
+      domain: this.domain,
+      summaryQuery: 'judge name court position appointment political affiliation',
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: false
+    });
+
+    const filtered = results.filter(r => (r.url || '').includes('/person/'));
+    const mapped = filtered.map(r => {
+      const url = r.url || '';
+      const highlights = r.highlights || [];
+      const highlightText = highlights.join(' ');
+      const text = highlightText || r.text || '';
+      const id = this.extractIdFromUrl(url, 'person');
+      const fullName = this.cleanCaseTitle(r.title || '') || this.extractFirst(/Name\s*:?\s*([^\n]+)/i, text) || null;
+      return {
+        id,
+        name: fullName,
+        name_full: fullName,
+        positions_count: (text.match(/Position/gi) || []).length,
+        absolute_url: url
+      };
+    });
+    return { content: [{ type: 'text', text: JSON.stringify({ count: mapped.length, judges: mapped }, null, 2) }] };
+  }
+
+  async getJudgeDetailsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { judge_id } = args;
+    if (!Number.isInteger(judge_id) || judge_id < 1) throw new Error('Invalid judge_id. Must be a positive integer.');
+    
+    const q = `site:courtlistener.com/person/${judge_id}/`;
+    
+    const results = await this.executeExaSearch(q, 1, {
+      dataType: 'judge',
+      domain: this.domain,
+      summaryQuery: 'judge name born died position court appointment',
+      numSentences: 10,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: true
+    });
+
+    if (!results.length) return { content: [{ type: 'text', text: JSON.stringify({ error: 'Judge page not found', judge_id }, null, 2) }] };
+    const r = results[0];
+    const text = r.text || '';
+    const nameFull = this.cleanCaseTitle(r.title || '') || this.extractFirst(/Name\s*:?\s*([^\n]+)/i, text) || null;
+    const details = {
+      id: judge_id,
+      name: nameFull,
+      name_full: nameFull,
+      date_birth: this.extractFirst(/Born\s*:?\s*([^\n]+)/i, text) || null,
+      date_death: this.extractFirst(/Died\s*:?\s*([^\n]+)/i, text) || null,
+      absolute_url: r.url || null
+    };
+    return { content: [{ type: 'text', text: JSON.stringify(details, null, 2) }] };
+  }
+
+  // ===== Courts =====
+  async getCourtInfoWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { court_id } = args;
+    if (!court_id) throw new Error('court_id is required');
+    
+    const q = `site:courtlistener.com/court ${court_id}`;
+    
+    const results = await this.executeExaSearch(q, 3, {
+      dataType: 'court_info',
+      domain: this.domain,
+      summaryQuery: 'court name jurisdiction short name full name',
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: false
+    });
+
+    const r = results.find(x => (x.url || '').includes('/court/')) || results[0];
+    if (!r) return { content: [{ type: 'text', text: JSON.stringify({ error: 'Court page not found', court_id }, null, 2) }] };
+    
+    const highlights = r.highlights || [];
+    const highlightText = highlights.join(' ');
+    const text = highlightText || r.text || '';
+    
+    const info = {
+      id: court_id,
+      short_name: this.extractFirst(/Short\s*Name\s*:?\s*([^\n]+)/i, text) || null,
+      full_name: this.extractFirst(/Full\s*Name\s*:?\s*([^\n]+)/i, text) || (r.title || null),
+      jurisdiction: this.extractFirst(/Jurisdiction\s*:?\s*([^\n]+)/i, text) || null,
+      absolute_url: r.url || null
+    };
+    return { content: [{ type: 'text', text: JSON.stringify(info, null, 2) }] };
+  }
+
+  async listCourtsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { jurisdiction, limit = 5 } = args;
+    const validated = validateLimit(limit, 50);
+    let q = 'site:courtlistener.com/court ';
+    if (jurisdiction) q += `"${jurisdiction}" `;
+    
+    const results = await this.executeExaSearch(q.trim(), validated, {
+      dataType: 'court_info',
+      domain: this.domain,
+      summaryQuery: 'court jurisdiction federal state district circuit supreme',
+      numSentences: 5,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: false
+    });
+
+    const filtered = results.filter(r => (r.url || '').includes('/court/'));
+    const courts = filtered.map(r => ({
+      id: (r.url || '').match(/\/court\/([^\/]+)\//)?.[1] || null,
+      short_name: null,
+      full_name: r.title || null,
+      jurisdiction: null,
+      absolute_url: r.url || null
+    }));
+    return { content: [{ type: 'text', text: JSON.stringify({ count: courts.length, courts }, null, 2) }] };
+  }
+
+  // ===== Case details (best-effort via opinion page) =====
+  async getCaseDetailsWeb(args) {
+    if (!args || typeof args !== 'object') args = {};
+    const { case_id } = args;
+    if (!Number.isInteger(case_id) || case_id < 1) throw new Error('Invalid case_id. Must be a positive integer.');
+    
+    const q = `site:courtlistener.com/opinion/${case_id}/`;
+    
+    const results = await this.executeExaSearch(q, 1, {
+      dataType: 'court_opinion',
+      domain: this.domain,
+      summaryQuery: 'case name court filed date decision',
+      numSentences: 7,
+      includeDomains: ['courtlistener.com', 'www.courtlistener.com'],
+      includeFullText: false
+    });
+
+    if (!results.length) return { content: [{ type: 'text', text: JSON.stringify({ error: 'Case page not found', case_id }, null, 2) }] };
+    
+    const r = results[0];
+    const highlights = r.highlights || [];
+    const highlightText = highlights.join(' ');
+    const text = highlightText || r.text || '';
+    
+    const details = {
+      id: case_id,
+      case_name: this.cleanCaseTitle(r.title || '') || null,
+      court: this.extractCourt(text),
+      date_filed: this.extractFirst(/Filed\s*:?\s*([A-Za-z]+\s+\d{1,2},\s*\d{4}|\d{4}-\d{2}-\d{2})/i, text) || null,
+      absolute_url: r.url || null
+    };
+    return { content: [{ type: 'text', text: JSON.stringify(details, null, 2) }] };
+  }
+
+  // ============ Helper methods ============
+
+  extractSection(text, headerRegex) {
+    if (!text) return '';
+    const idx = text.search(headerRegex);
+    if (idx === -1) return '';
+    const after = text.slice(idx);
+    // Stop at the next major header or end
+    const stopIdx = after.search(/\n\s*(Cited\s*by|Cites\s*to|Citations?|References|Also\s+known\s+as)\b/i);
+    if (stopIdx > 0) {
+      // The first match is the current header; find the second match to bound the section
+      const rest = after.slice(headerRegex.source.length);
+      const second = rest.search(/\n\s*(Cited\s*by|Cites\s*to|Citations?|References|Also\s+known\s+as)\b/i);
+      if (second > 0) {
+        return after.slice(0, second + (headerRegex.source.length || 0));
+      }
+    }
+    return after;
+  }
+
+  findOpinionIdsInText(sectionText) {
+    if (!sectionText) return [];
+    const matches = sectionText.match(/\/opinion\/(\d+)\//g) || [];
+    const ids = matches.map(m => {
+      const n = m.match(/\/(\d+)\//);
+      return n ? Number(n[1]) : null;
+    }).filter(Boolean);
+    // Deduplicate
+    return Array.from(new Set(ids));
+  }
+
+  extractIdFromUrl(url, segment) {
+    const m = url.match(new RegExp(`/${segment}/(\\d+)/`));
+    return m ? Number(m[1]) : null;
+  }
+
+  extractFirst(re, text, groupIndex = 1) {
+    if (!text) return null;
+    const m = text.match(re);
+    return m ? (m[groupIndex] || '').trim() : null;
+  }
+
+  mapAudioFromHighlights(result, minDuration) {
+    const url = result.url || '';
+    const highlights = result.highlights || [];
+    const highlightText = highlights.join(' ');
+    const text = highlightText || result.text || '';
+    const id = this.extractIdFromUrl(url, 'audio');
+    const caseName = this.cleanCaseTitle(result.title || '') || this.extractFirst(/Case\s*Name\s*:?\s*([^\n]+)/i, text) || null;
+    const court = this.extractFirst(/Court\s*:?\s*([^\n]+)/i, text) || null;
+    const dateArgued = this.extractFirst(/(Date\s*Argued|Argued)\s*:?\s*([A-Za-z]+\s+\d{1,2},\s*\d{4}|\d{4}-\d{2}-\d{2})/i, text, 2) || null;
+    const durationStr = this.extractFirst(/Duration\s*:?\s*([0-9:]+|\d+\s*(minutes|min|seconds|sec))/i, text) || null;
+    const durationSeconds = this.parseDurationToSeconds(durationStr);
+    if (minDuration && durationSeconds && durationSeconds < minDuration * 60) return null;
+    const hasTranscript = /Transcript/i.test(text);
+    return {
+      id,
+      case_name: caseName,
+      court,
+      date_argued: dateArgued,
+      duration_seconds: durationSeconds || null,
+      duration_minutes: durationSeconds ? Math.round(durationSeconds / 60) : null,
+      has_transcript: hasTranscript,
+      absolute_url: url
+    };
+  }
+
+  parseDurationToSeconds(s) {
+    if (!s) return null;
+    const hms = s.match(/^(\d+):(\d{2})(?::(\d{2}))?$/);
+    if (hms) {
+      const h = parseInt(hms[1] || '0', 10);
+      const m = parseInt(hms[2] || '0', 10);
+      const sec = parseInt(hms[3] || '0', 10);
+      return h * 3600 + m * 60 + sec;
+    }
+    const min = s.match(/(\d+)\s*(minutes|min)/i);
+    if (min) return parseInt(min[1], 10) * 60;
+    const sec = s.match(/(\d+)\s*(seconds|sec)/i);
+    if (sec) return parseInt(sec[1], 10);
+    return null;
+  }
+
+  filterByDateWindow(publishedDate, start, end) {
+    if (!start && !end) return true;
+    if (!publishedDate) return true; // keep when date unknown
+    try {
+      const d = new Date(publishedDate);
+      if (start && d < new Date(start)) return false;
+      if (end && d > new Date(end)) return false;
+      return true;
+    } catch {
+      return true;
+    }
+  }
+
+  mapOpinionFromHighlights(result, includeSnippet = true, includeFullText = false) {
+    const url = result.url || '';
+    const title = result.title || '';
+    
+    // Handle different response formats from Exa
+    let fullText = '';
+    let snippet = '';
+    
+    if (includeFullText && result.text) {
+      // Full text mode
+      fullText = result.text;
+      snippet = fullText.substring(0, 500) + (fullText.length > 500 ? '...' : '');
+    } else if (includeSnippet && result.highlights) {
+      // Enhanced highlights mode - join highlights with quality assessment
+      const highlights = Array.isArray(result.highlights) ? result.highlights : [];
+      snippet = highlights.join(' ... ');
+      // Limit to 800 chars for better context
+      if (snippet.length > 800) {
+        snippet = snippet.substring(0, 800) + '...';
+      }
+    } else if (includeSnippet && result.text) {
+      // Fallback if highlights not available but text is
+      snippet = result.text.substring(0, 500) + (result.text.length > 500 ? '...' : '');
+    }
+    
+    // Use snippet for extraction if no full text available
+    const textForExtraction = fullText || snippet || title;
+
+    const opinionId = this.extractOpinionId(url);
+    const citations = this.extractCitations(`${title} ${textForExtraction}`);
+    const decidedDate = this.extractDecidedDate(`${title} ${textForExtraction}`);
+    const court = this.extractCourt(`${title} ${textForExtraction}`);
+
+    const mappedResult = {
+      opinion_id: opinionId,
+      case_name: this.cleanCaseTitle(title),
+      citations,
+      court,
+      decided_date: decidedDate,
+      absolute_url: url,
+      published_date: result.publishedDate,
+      score: result.score
+    };
+
+    // Add quality metadata if available
+    if (result._highlight_quality) {
+      mappedResult._highlight_quality = result._highlight_quality;
+    }
+
+    // Add snippet if available
+    if (snippet) {
+      mappedResult.snippet = snippet;
+    }
+
+    // Add full text ONLY if explicitly requested
+    if (includeFullText && fullText) {
+      mappedResult.full_text = fullText;
+    }
+
+    return mappedResult;
+  }
+
+  extractOpinionId(url) {
+    const m = url.match(/courtlistener\.com\/opinion\/(\d+)\//);
+    return m ? Number(m[1]) : null;
+  }
+
+  cleanCaseTitle(title) {
+    if (!title) return null;
+    // Remove trailing "- CourtListener" if present
+    return title.replace(/\s*-\s*CourtListener\s*$/i, '').trim();
+  }
+
+  extractCitations(text) {
+    if (!text) return [];
+    const patterns = [
+      /\b\d+\s+U\.?S\.?\s+\d+\b/g,          // e.g., 410 U.S. 113
+      /\b\d+\s+S\.?Ct\.?\s+\d+\b/g,         // e.g., 93 S.Ct. 705
+      /\b\d+\s+L\.?Ed\.?\s?\d*d?\.?\s+\d+\b/g, // e.g., 35 L.Ed.2d 147
+      /\b\d+\s+F\.?\s?\d*d\.?\s+\d+\b/g,   // e.g., 123 F.3d 456
+      /\b\d+\s+F\.?\s?Supp\.?\s?\d*d?\.?\s+\d+\b/g // e.g., 456 F.Supp. 789
+    ];
+    const all = new Set();
+    for (const re of patterns) {
+      const matches = text.match(re) || [];
+      matches.forEach(m => all.add(m));
+    }
+    return Array.from(all);
+  }
+
+  extractDecidedDate(text) {
+    if (!text) return null;
+    const m = text.match(/Decided\s*:\s*([A-Za-z]+\s+\d{1,2},\s*\d{4})/i) ||
+              text.match(/Filed\s*:\s*([A-Za-z]+\s+\d{1,2},\s*\d{4})/i);
+    return m ? m[1] : null;
+  }
+
+  extractCourt(text) {
+    if (!text) return null;
+    const candidates = [
+      /Supreme\s+Court\s+of\s+the\s+United\s+States/i,
+      /United\s+States\s+Court\s+of\s+Appeals\s+for\s+the\s+[^\n]+/i,
+      /United\s+States\s+District\s+Court\s+for\s+the\s+[^\n]+/i,
+      /Court\s+of\s+Appeals\s+of\s+[^\n]+/i
+    ];
+    for (const re of candidates) {
+      const m = text.match(re);
+      if (m) return m[0];
+    }
+    return null;
+  }
+
+  /**
+   * Assess query relevance specific to case law searches
+   * @param {string} userQuery - Original user query
+   * @param {Array} rawResults - Raw Exa results
+   * @param {Array} mappedResults - Processed CourtListener results
+   * @param {Object} toolArgs - Tool arguments
+   * @returns {Object} Case law specific quality metadata
+   */
+  assessCaseLawQueryRelevance(userQuery, rawResults, mappedResults, toolArgs) {
+    const baseAssessment = this.assessQueryRelevance(userQuery, mappedResults, toolArgs);
+    
+    // Case law specific enhancements
+    const caseLawMetadata = {
+      precedent_analysis: this.analyzePrecedentCoverage(userQuery, mappedResults),
+      jurisdiction_coverage: this.analyzeJurisdictionCoverage(userQuery, mappedResults),
+      citation_density: this.calculateCitationDensity(mappedResults),
+      court_levels: this.identifyCourtLevels(mappedResults),
+      temporal_distribution: this.analyzeTemporalDistribution(mappedResults)
+    };
+    
+    // Override suggestions with case law specific ones
+    baseAssessment._search_quality.query_suggestions = this.generateCaseLawSuggestions(
+      userQuery, mappedResults, toolArgs
+    );
+    
+    // Add case law metadata
+    baseAssessment._search_quality.legal_metadata = caseLawMetadata;
+    
+    return baseAssessment;
+  }
+
+  /**
+   * Analyze precedent coverage in results
+   */
+  analyzePrecedentCoverage(query, results) {
+    const queryLower = query.toLowerCase();
+    const seeksPrecedent = /precedent|binding|mandatory|controlling/.test(queryLower);
+    
+    if (!seeksPrecedent) return { applicable: false };
+    
+    const highCourtResults = results.filter(r => {
+      const court = (r.court || '').toLowerCase();
+      return court.includes('supreme') || court.includes('circuit') || court.includes('appeals');
+    });
+    
+    return {
+      applicable: true,
+      high_court_results: highCourtResults.length,
+      coverage_ratio: results.length > 0 ? highCourtResults.length / results.length : 0,
+      binding_potential: highCourtResults.length > 0 ? 'high' : 'low'
+    };
+  }
+
+  /**
+   * Analyze jurisdiction coverage
+   */
+  analyzeJurisdictionCoverage(query, results) {
+    const jurisdictions = [...new Set(results.map(r => r.court).filter(Boolean))];
+    const circuits = jurisdictions.filter(j => j.toLowerCase().includes('circuit'));
+    const districts = jurisdictions.filter(j => j.toLowerCase().includes('district'));
+    const state = jurisdictions.filter(j => j.toLowerCase().includes('state'));
+    
+    return {
+      total_jurisdictions: jurisdictions.length,
+      circuit_courts: circuits.length,
+      district_courts: districts.length,
+      state_courts: state.length,
+      jurisdictions: jurisdictions
+    };
+  }
+
+  /**
+   * Calculate citation density (how well cited the cases are)
+   */
+  calculateCitationDensity(results) {
+    if (!results.length) return 0;
+    
+    const citationScore = results.reduce((score, result) => {
+      // Cases with formal citations are typically more authoritative
+      if (result.citation) score += 2;
+      if (result.url?.includes('/opinion/')) score += 1;
+      return score;
+    }, 0);
+    
+    return citationScore / (results.length * 3); // Normalize to 0-1
+  }
+
+  /**
+   * Identify court levels represented in results
+   */
+  identifyCourtLevels(results) {
+    const levels = {
+      supreme: 0,
+      appellate: 0,
+      district: 0,
+      state: 0,
+      other: 0
+    };
+    
+    results.forEach(result => {
+      const court = (result.court || '').toLowerCase();
+      if (court.includes('supreme')) levels.supreme++;
+      else if (court.includes('circuit') || court.includes('appeals')) levels.appellate++;
+      else if (court.includes('district')) levels.district++;
+      else if (court.includes('state')) levels.state++;
+      else levels.other++;
+    });
+    
+    return levels;
+  }
+
+  /**
+   * Analyze temporal distribution of results
+   */
+  analyzeTemporalDistribution(results) {
+    const dates = results
+      .map(r => r.date_filed || r.publishedDate)
+      .filter(Boolean)
+      .map(d => new Date(d))
+      .filter(d => !isNaN(d.getTime()));
+    
+    if (dates.length === 0) return { no_dates: true };
+    
+    const now = new Date();
+    const oneYear = 365 * 24 * 60 * 60 * 1000;
+    const fiveYears = 5 * oneYear;
+    
+    const recent = dates.filter(d => (now - d) < oneYear).length;
+    const modern = dates.filter(d => (now - d) < fiveYears).length;
+    
+    return {
+      total_with_dates: dates.length,
+      recent_cases: recent,
+      modern_cases: modern,
+      oldest_case: Math.min(...dates.map(d => d.getTime())),
+      newest_case: Math.max(...dates.map(d => d.getTime())),
+      recency_score: recent / dates.length
+    };
+  }
+
+  /**
+   * Generate case law specific suggestions
+   */
+  generateCaseLawSuggestions(query, results, args) {
+    const suggestions = [];
+    const queryLower = query.toLowerCase();
+    
+    // Citation lookup suggestion
+    if (/\d+\s+\w+\.\s*\d+/.test(query)) {
+      suggestions.push("Use lookup_citation for direct citation retrieval");
+    }
+    
+    // Court filtering suggestions
+    if (!args.court && results.length > 0) {
+      const courts = [...new Set(results.map(r => r.court))].filter(Boolean);
+      if (courts.length > 3) {
+        suggestions.push(`Filter by specific court (found ${courts.length} courts)`);
+      }
+    }
+    
+    // Date range suggestions
+    if (!args.date_after && !args.date_before) {
+      const temporal = this.analyzeTemporalDistribution(results);
+      if (temporal.recency_score < 0.3) {
+        suggestions.push("Add date_after for recent precedents");
+      }
+    }
+    
+    // Precedent analysis suggestions
+    if (/precedent|binding/.test(queryLower)) {
+      const precedent = this.analyzePrecedentCoverage(query, results);
+      if (precedent.binding_potential === 'low') {
+        suggestions.push("Search higher courts (Supreme Court, Circuit Courts) for binding precedent");
+      }
+    }
+    
+    // Jurisdiction suggestions
+    if (/circuit|jurisdiction/.test(queryLower)) {
+      const jurisdiction = this.analyzeJurisdictionCoverage(query, results);
+      if (jurisdiction.circuit_courts === 0) {
+        suggestions.push("Include circuit court cases for broader jurisdictional coverage");
+      }
+    }
+    
+    // Coverage suggestions
+    if (results.length < 5 && !args.limit) {
+      suggestions.push("Increase limit for more comprehensive case coverage");
+    }
+    
+    return suggestions.length > 0 ? suggestions.join('; ') : '';
+  }
+
+  // Override parent methods for case law specificity
+  isExactDocumentMatch(query, result) {
+    const queryLower = query.toLowerCase();
+    const titleLower = (result.case_name || result.title || '').toLowerCase();
+    
+    // Check for case name patterns (e.g., "Smith v. Jones")
+    if (/\bv\.\s/.test(query) && /\bv\.\s/.test(titleLower)) {
+      return titleLower.includes(queryLower.replace(/\s+/g, ' ')) || 
+             queryLower.includes(titleLower.replace(/\s+/g, ' '));
+    }
+    
+    // Check for citation patterns
+    if (/\d+\s+\w+\.\s*\d+/.test(query) && result.citation) {
+      return result.citation.toLowerCase().includes(queryLower);
+    }
+    
+    return super.isExactDocumentMatch(query, result);
+  }
+
+  checkJurisdictionAlignment(query, results) {
+    const queryLower = query.toLowerCase();
+    
+    // Specific circuit matching
+    const circuitMatch = query.match(/\b(\d+)(st|nd|rd|th)?\s+circuit\b/i);
+    if (circuitMatch) {
+      const circuitNum = circuitMatch[1];
+      return results.some(r => 
+        (r.court || '').toLowerCase().includes(circuitNum + 'th circuit') ||
+        (r.court || '').toLowerCase().includes(circuitNum + 'st circuit') ||
+        (r.court || '').toLowerCase().includes(circuitNum + 'nd circuit') ||
+        (r.court || '').toLowerCase().includes(circuitNum + 'rd circuit')
+      );
+    }
+    
+    // Federal vs state
+    if (queryLower.includes('federal')) {
+      return results.some(r => {
+        const court = (r.court || '').toLowerCase();
+        return court.includes('circuit') || court.includes('district') || court.includes('supreme');
+      });
+    }
+    
+    if (queryLower.includes('state')) {
+      return results.some(r => (r.court || '').toLowerCase().includes('state'));
+    }
+    
+    return super.checkJurisdictionAlignment(query, results);
+  }
+
+  identifyMissingJurisdictions(query, results) {
+    const missing = [];
+    const queryLower = query.toLowerCase();
+    
+    // Check for specific circuit requirements
+    const circuitMatch = query.match(/\b(\d+)(st|nd|rd|th)?\s+circuit\b/i);
+    if (circuitMatch) {
+      const circuitNum = circuitMatch[1];
+      const hasCircuit = results.some(r => 
+        (r.court || '').toLowerCase().includes(circuitNum)
+      );
+      if (!hasCircuit) {
+        missing.push(`${circuitNum}${circuitMatch[2] || 'th'} Circuit`);
+      }
+    }
+    
+    // Federal court coverage
+    if (queryLower.includes('federal') || queryLower.includes('circuit')) {
+      const hasFederalCourts = results.some(r => {
+        const court = (r.court || '').toLowerCase();
+        return court.includes('circuit') || court.includes('supreme');
+      });
+      if (!hasFederalCourts) {
+        missing.push('federal appellate courts');
+      }
+    }
+    
+    // State court coverage
+    if (queryLower.includes('state')) {
+      const hasStateCourts = results.some(r => 
+        (r.court || '').toLowerCase().includes('state')
+      );
+      if (!hasStateCourts) {
+        missing.push('state courts');
+      }
+    }
+    
+    return missing;
+  }
+}

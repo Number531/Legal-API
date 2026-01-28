@@ -1,0 +1,63 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "K",
+  "section_name": "Insurance Coverage Analysis and Gap Identification",
+  "status": "COMPLETE",
+
+  "compaction_summary": {
+    "task": "Write section IV.K (Insurance Coverage) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "Section complete - ready for orchestrator review",
+    "critical_context": [
+      "section_id=K",
+      "4 HIGH findings: E&O inadequate ($4M-$8M), D&O inadequate ($1.5M-$2.4M), Cyber ABSENT ($3M-$5M), Tail coverage required ($1.7M-$2.5M)",
+      "Net uninsured exposure: $11.7M-$21.4M weighted",
+      "All subsections A-F complete with draft contract provisions"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": [
+      "specialist-reports/insurance-coverage-analysis-report.md",
+      "review-outputs/fact-registry.md",
+      "review-outputs/research-review-report.md",
+      "review-outputs/coverage-gaps.md"
+    ]
+  },
+
+  "metrics": {
+    "word_count": 5247,
+    "findings_written": "4/4",
+    "footnotes_count": 43,
+    "last_checkpoint": "2026-01-23T12:30:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/insurance-coverage-analysis-report.md",
+    "review-outputs/fact-registry.md",
+    "review-outputs/research-review-report.md",
+    "review-outputs/coverage-gaps.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-23-1737670800/section-reports/section-IV-K-insurance-coverage.md"
+}

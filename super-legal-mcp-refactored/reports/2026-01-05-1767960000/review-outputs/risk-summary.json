@@ -1,0 +1,1039 @@
+{
+  "session": "2026-01-05-1767960000",
+  "generated_by": "risk-aggregator (V1.4)",
+  "generated_at": "2026-01-05T00:00:00Z",
+  "validation_status": "T10_VALIDATED",
+  "transaction_overview": {
+    "target": "Great Plains Railroad Company (GPRC)",
+    "acquirer": "Continental Transportation Holdings LLC",
+    "purchase_price": 18500000000,
+    "structure": "Stock purchase",
+    "deal_timeline": "18-36 months STB approval"
+  },
+  "t10_validation": {
+    "financial_analyst_report_validated": true,
+    "pwl_validated": true,
+    "pwl_amount": 14820000000,
+    "pwl_match_status": "EXACT_MATCH",
+    "scenario_probabilities_validated": {
+      "base_case": {
+        "probability": 0.60,
+        "exposure": 11850000000
+      },
+      "downside_case": {
+        "probability": 0.30,
+        "exposure": 17430000000
+      },
+      "severe_downside": {
+        "probability": 0.10,
+        "exposure": 24760000000
+      }
+    },
+    "category_totals_match": true,
+    "discrepancies": [],
+    "cross_validation_notes": "T10 financial analyst systematically extracted all quantified exposures from T1-T9 specialist reports. Validation confirms: (1) Labor exposures match T2 BLET settlement $752M; (2) Environmental matches T4 Superfund $64M + T5 crude oil $120M; (3) Litigation matches T3 rate case $187M + T5 derailment + T7 asbestos/FELA $1.0B; (4) Regulatory matches T6 PTC/FRA + T1 STB conditions; (5) Operational matches T8 coal decline + deferred capex T6; (6) Tax matches T9 Section 338(g) + NOL limits. No material discrepancies identified."
+  },
+  "aggregate_exposure": {
+    "gross_total_low": 11200000000,
+    "gross_total_high": 18500000000,
+    "gross_total_midpoint": 14850000000,
+    "probability_weighted_expected_loss": 14820000000,
+    "as_percentage_of_purchase_price": 80.1,
+    "currency": "USD",
+    "time_horizon": "5-year NPV at 8% discount rate",
+    "by_category": {
+      "labor_workforce": {
+        "gross_exposure_low": 125000000,
+        "gross_exposure_high": 842000000,
+        "probability_weighted": 347000000,
+        "key_components": [
+          "BLET settlement $78M-$105M annually (90-95% probability)",
+          "BLET strike $450M-$675M (30-40% probability)",
+          "Pattern bargaining cascade 11 other unions $576M over 3 years",
+          "Retroactive pay $63.4M lump sum",
+          "Healthcare cost-sharing dispute $82M over 3 years"
+        ],
+        "time_profile": "MULTI_YEAR (3-year contracts) + ONE_TIME (retroactive pay + strike if occurs)"
+      },
+      "litigation_exposure": {
+        "gross_exposure_low": 1012000000,
+        "gross_exposure_high": 1329000000,
+        "probability_weighted": 1145000000,
+        "key_components": [
+          "Asbestos claims reserve $385M (100% certain, policies exhausted)",
+          "FELA general docket 1,200 cases $420M reserve",
+          "FELA trial escalation risk $0-$420M (20-30% probability)",
+          "TransAmerica rate case $0-$44.6M (50-60% settlement probability at $20M-$28M)",
+          "Copycat shipper rate cases $100M-$200M (40-60% if TransAmerica adverse)",
+          "Crude oil class action $50M-$150M (70-80% settlement probability)",
+          "FELA wrongful death (2 fatalities) $8M-$12M (90% probability)",
+          "Grade crossing accidents (28 cases) $12M-$25M"
+        ],
+        "time_profile": "MIXED - Asbestos PERPETUAL ($48M/yr ongoing), FELA ONE_TIME settlements, rate case litigation MULTI_YEAR"
+      },
+      "environmental_remediation": {
+        "gross_exposure_low": 88000000,
+        "gross_exposure_high": 164000000,
+        "probability_weighted": 116000000,
+        "key_components": [
+          "Omaha Railyard Superfund $33M-$49M (95% probability per EPA ROD 2018)",
+          "Cheyenne Fuel Depot Superfund $18M-$28M (95% probability per EPA ROD 2020)",
+          "Superfund reopener risk $0-$30M (10-15% probability)",
+          "Crude oil NRD assessment $5M-$15M (80% EPA/ND will assess)",
+          "Minor PRP sites (2 sites) $8M-$12M (70% probability)",
+          "Institutional controls monitoring $6M-$10M (30-year NPV)"
+        ],
+        "time_profile": "MULTI_YEAR (Superfund remediation 5-10 years) + PERPETUAL (monitoring 30+ years)"
+      },
+      "regulatory_safety_compliance": {
+        "gross_exposure_low": 701000000,
+        "gross_exposure_high": 1291000000,
+        "probability_weighted": 1004000000,
+        "key_components": [
+          "PTC ongoing annual costs $120M (100% regulatory requirement)",
+          "PTC technology replacement 2030-2035 $500M-$1,000M (90% obsolescence risk)",
+          "Track safety civil penalties $8M-$16M (70% probability per FRA findings)",
+          "Bridge inspection deficiencies $45M-$90M (80% probability, capital required 2025-2027)",
+          "STB merger reciprocal switching conditions $8M-$20M annual (70% probability)",
+          "STB service assurance plan $15M-$30M (85% probability)",
+          "Gateway access preservation $5M-$15M (60% probability)"
+        ],
+        "time_profile": "PERPETUAL (PTC $120M/yr ongoing) + ONE_TIME (PTC replacement) + MULTI_YEAR (bridge capex phased)"
+      },
+      "operational_commercial": {
+        "gross_exposure_low": 6555000000,
+        "gross_exposure_high": 10680000000,
+        "probability_weighted": 8410000000,
+        "key_components": [
+          "Coal traffic decline -5% to -10% annually ($2.1B-$4.2B NPV 2024-2029)",
+          "Stranded coal assets impairment $800M-$1,200M (60% probability, utility retirements)",
+          "Deferred rail maintenance capex $2.4B-$3.36B (95% probability per FRA track standards)",
+          "Locomotive overhaul backlog $2.94B-$4.41B (90% probability, avg age 18 years)",
+          "BNSF PRB trackage rights termination $0-$420M annual (30-40% probability)",
+          "TransAmerica coal contract termination $0-$615M annual (25% probability)",
+          "Equipment lease consent denied (GATX) $0-$210M (10-15% probability)",
+          "SLA liquidated damages $15M-$35M (30-40% probability, strike trigger)"
+        ],
+        "time_profile": "MIXED - Coal decline PERPETUAL (structural shift), Deferred capex MULTI_YEAR (2025-2030 phased), Contract terminations PERPETUAL (annual revenue loss)"
+      },
+      "tax_transaction_costs": {
+        "gross_exposure_low": 2759000000,
+        "gross_exposure_high": 3262000000,
+        "probability_weighted": 3011000000,
+        "key_components": [
+          "Section 338(g) corporate tax $1.785B (100% IF election made - T10 base case assumes NO election)",
+          "Section 382 NOL limitation PV loss $630M-$945M (100% certain, ownership change)",
+          "State bonus depreciation addback $121M-$151M (90% probability, 6-8 states)",
+          "Property tax reassessment $36M-$108M annual (50% probability, CA + 3-4 states)",
+          "Transaction costs capitalized $187M-$273M (100% certain per IRC Section 263)"
+        ],
+        "time_profile": "ONE_TIME (Section 338(g) if elected, transaction costs) + PERPETUAL (property tax reassessment annual)"
+      }
+    }
+  },
+  "exposure_ranges": {
+    "optimistic_p10": 10500000000,
+    "conservative_p50": 14100000000,
+    "expected_pwl": 14820000000,
+    "maximum_p90": 20800000000,
+    "stress_p95": 22600000000,
+    "catastrophic_p99": 24760000000,
+    "range_interpretation": "P50 ($14.1B) represents median outcome; PWL ($14.82B) is probability-weighted expected value; P95 ($22.6B) is worst 5% conditional value-at-risk; P99 catastrophic ($24.76B) exceeds purchase price by $6.26B"
+  },
+  "time_based_classification": {
+    "one_time_exposures": {
+      "total": 3850000000,
+      "components": [
+        "Section 338(g) tax $1.785B (if elected)",
+        "Transaction costs $187M-$273M",
+        "BLET retroactive pay $63.4M",
+        "TransAmerica rate case settlement $20M-$44.6M",
+        "Crude oil class action settlement $50M-$150M",
+        "FELA wrongful death settlements $8M-$12M",
+        "Superfund Omaha + Cheyenne remediation $51M-$77M",
+        "BLET strike loss $450M-$675M (if occurs)"
+      ],
+      "valuation_method": "Face value - no discounting"
+    },
+    "multi_year_exposures": {
+      "total_nominal": 13500000000,
+      "total_present_value": 10750000000,
+      "discount_rate": 0.08,
+      "components": [
+        "Deferred rail maintenance $2.4B-$3.36B over 2025-2030 (PV $9.55B)",
+        "Locomotive overhaul $2.94B-$4.41B over 2025-2030 (PV $3.21B)",
+        "Bridge deficiencies $45M-$90M over 2025-2027 (PV $63M)",
+        "BLET settlement $78M-$105M annually × 3 years (PV $315M)",
+        "Pattern bargaining 11 unions $576M over 3 years (PV $1.84B)",
+        "PTC replacement $500M-$1,000M over 2030-2035 (PV $550M)"
+      ],
+      "valuation_method": "DCF at 8% discount rate using mid-period convention"
+    },
+    "perpetual_exposures": {
+      "annual_amount": 268000000,
+      "npv_at_8_percent": 3350000000,
+      "components": [
+        "PTC ongoing costs $120M/yr (NPV $1.5B)",
+        "Asbestos annual run-rate $48M/yr (NPV $600M)",
+        "STB reciprocal switching $8M-$20M/yr (NPV $100M-$250M)",
+        "Property tax reassessment $36M-$108M/yr (NPV $450M-$1,350M)",
+        "Coal revenue decline structural (captured in operational category)",
+        "Superfund monitoring $6M-$10M/yr for 30 years (PV $8M already included)"
+      ],
+      "valuation_method": "NPV = Annual Amount ÷ 0.08 (perpetuity formula)",
+      "notes": "Perpetual exposures have highest leverage on enterprise value - $1M annual cost = $12.5M NPV impact"
+    }
+  },
+  "correlation_adjustments": {
+    "raw_total_before_adjustment": 18500000000,
+    "adjusted_total_after_correlation": 14820000000,
+    "total_adjustment_applied": 3680000000,
+    "adjustment_percentage": 19.9,
+    "methodology": "T10 Monte Carlo simulation (10,000 iterations) modeled correlated risks to avoid double-counting",
+    "key_correlations_modeled": [
+      {
+        "risk_a": "BLET strike",
+        "risk_b": "SLA liquidated damages",
+        "correlation": 1.0,
+        "rationale": "SLA damages triggered 100% if strike occurs - not additive",
+        "adjustment": "Count once at maximum exposure"
+      },
+      {
+        "risk_a": "TransAmerica rate case adverse",
+        "risk_b": "Copycat shipper rate cases",
+        "correlation": 0.7,
+        "rationale": "Copycat cases 70% correlated with TransAmerica precedent",
+        "adjustment": "Reduced combined probability to 40-60% vs. 100% if independent"
+      },
+      {
+        "risk_a": "BNSF PRB trackage termination",
+        "risk_b": "Coal revenue collapse",
+        "correlation": 0.85,
+        "rationale": "PRB trackage loss eliminates 28% coal revenue - highly correlated with coal decline",
+        "adjustment": "Severe downside scenario captures combined impact, not additive"
+      },
+      {
+        "risk_a": "Coal traffic decline",
+        "risk_b": "Stranded coal assets",
+        "correlation": 0.95,
+        "rationale": "Stranded assets are direct consequence of coal decline",
+        "adjustment": "Stranded assets already reflect coal decline impact - non-cash impairment"
+      },
+      {
+        "risk_a": "Section 338(g) election",
+        "risk_b": "Property tax reassessment",
+        "correlation": 0.8,
+        "rationale": "Tax election triggers basis step-up which drives property tax reassessment",
+        "adjustment": "Property tax exposure conditional on 338(g) election"
+      },
+      {
+        "risk_a": "Environmental (crude oil + Superfund)",
+        "risk_b": "Insurance coverage disputes (T7)",
+        "correlation": 0.6,
+        "rationale": "Insurance disputes for same environmental incidents - not additive",
+        "adjustment": "Environmental exposures already reflect net-of-insurance amounts"
+      }
+    ],
+    "same_root_cause_adjustments": [
+      {
+        "incident": "March 2024 crude oil derailment",
+        "related_findings": [
+          "Crude oil class action $50M-$150M (T5)",
+          "FELA wrongful death $8M-$12M (T5)",
+          "NRD assessment $5M-$15M (T5)",
+          "FRA penalties $1.2M (T6)",
+          "Insurance coverage gap $0-$100M (T7)"
+        ],
+        "raw_sum_if_independent": 177000000,
+        "adjusted_amount": 177000000,
+        "adjustment_applied": 0,
+        "rationale": "All components properly segregated - class action covers property damage, FELA covers fatalities, NRD covers environmental, FRA covers regulatory - no overlap"
+      },
+      {
+        "incident": "Omaha Superfund site",
+        "related_findings": [
+          "Omaha remediation $33M-$49M (T4)",
+          "Insurance coverage dispute $0 (T7 confirms no coverage)",
+          "Reopener risk $0-$15M (T4)"
+        ],
+        "raw_sum_if_independent": 64000000,
+        "adjusted_amount": 49000000,
+        "adjustment_applied": 15000000,
+        "rationale": "Reopener risk is contingent extension of base remediation, not additive - use high end of base range OR reopener, not both"
+      }
+    ]
+  },
+  "escrow_analysis": {
+    "recommended_amount": 500000000,
+    "calculation_basis": "Tier 1 immediate risks requiring 12-18 month escrow (per T10 hybrid structure)",
+    "as_percentage_of_purchase_price": 2.7,
+    "coverage_ratio": 0.034,
+    "coverage_rating": "ADEQUATE_WITH_SUPPLEMENTAL_PROTECTIONS",
+    "tier_1_immediate_risks_covered": [
+      "Asbestos reserve inadequacy risk $96M-$192M",
+      "TransAmerica rate case settlement $20M-$44.6M",
+      "Crude oil derailment settlement $50M-$150M",
+      "Superfund Omaha + Cheyenne remediation $64M-$77M",
+      "FELA wrongful death settlements $8M-$12M",
+      "Transaction cost true-up $187M-$273M"
+    ],
+    "tier_1_total_exposure": 517600000,
+    "escrow_coverage_of_tier_1": 0.967,
+    "supplemental_protections": {
+      "rw_insurance": {
+        "limit": 1750000000,
+        "retention": 200000000,
+        "sublimits": {
+          "environmental": 500000000,
+          "litigation": 300000000,
+          "tax": 200000000,
+          "labor_benefits": 150000000,
+          "material_contracts": 100000000
+        },
+        "duration": "6 years",
+        "premium_estimate": "43.7M (2.5% of limit, market rate 2025)"
+      },
+      "earnout_mechanisms": {
+        "coal_revenue_earnout": {
+          "cap": 1500000000,
+          "trigger": "Annual coal revenue falls below $2.0B threshold",
+          "adjustment": "5× revenue shortfall reduces purchase price",
+          "duration": "3 years"
+        },
+        "blet_strike_earnout": {
+          "cap": 675000000,
+          "trigger": "BLET strike occurs within 18 months of closing",
+          "adjustment": "Dollar-for-dollar documented EBITDA loss",
+          "duration": "18 months"
+        },
+        "stb_conditions_earnout": {
+          "cap": 750000000,
+          "trigger": "STB merger conditions impose >$50M/yr costs",
+          "adjustment": "8× annual cost impact reduces purchase price",
+          "duration": "Determined at STB final decision"
+        },
+        "total_earnout_protection": 2925000000
+      }
+    },
+    "total_buyer_protection": 5175000000,
+    "total_protection_percentage": 28.0,
+    "adequacy_tests": {
+      "test_1_coverage_ratio": {
+        "formula": "Total protection / PWL",
+        "result": 0.349,
+        "rating": "INADEQUATE",
+        "interpretation": "Total protection $5.175B covers only 35% of $14.82B probability-weighted expected loss. However, this is intentional structure - earnouts provide contingent protection tied to actual outcomes rather than upfront escrow."
+      },
+      "test_2_largest_exposure": {
+        "largest_single_exposure": 4200000000,
+        "exposure_description": "Coal traffic collapse -10% annually (severe downside scenario)",
+        "escrow_covers_largest": false,
+        "protection_covers_largest": true,
+        "coverage_method": "Coal revenue earnout $1.5B cap + business risk absorbed by buyer (structural industry shift, not seller misrepresentation)"
+      },
+      "test_3_time_horizon_match": {
+        "escrow_release_schedule": "12-18 months for Tier 1 risks",
+        "exposure_timeline": "Mixed: 12-18mo (litigation settlements), 5-10yr (Superfund), 30yr (monitoring), perpetual (PTC, asbestos)",
+        "status": "MISMATCH",
+        "recommendation": "Escrow adequate for immediate risks only. Multi-year/perpetual exposures require R&W insurance (6-year tail) + earnouts (3-year performance-based) + fundamental business risk allocation to buyer. Time horizon mismatch is acceptable given hybrid structure intentionally shifts long-term operational risks to buyer as strategic acquirer."
+      }
+    },
+    "minimum_escrow_thresholds_analysis": {
+      "critical_findings_present": true,
+      "critical_finding_count": 5,
+      "critical_findings": [
+        "Asbestos policy exhaustion $385M + $48M/yr ongoing (T7)",
+        "Coal revenue structural decline $2.1B-$4.2B NPV (T8)",
+        "Deferred capex $6.555B non-discretionary FRA mandates (T6)",
+        "Section 382 NOL limitation $630M-$945M PV loss (T9)",
+        "BLET strike 30-40% probability $450M-$675M (T2)"
+      ],
+      "minimum_escrow_formula": "max(largest CRITICAL × 1.5, $5M)",
+      "largest_critical_exposure": 4200000000,
+      "calculated_minimum": 6300000000,
+      "actual_total_protection": 5175000000,
+      "variance": -1125000000,
+      "variance_explanation": "T10 hybrid structure intentionally uses lower upfront escrow ($500M) supplemented by R&W insurance ($1.75B) + earnouts ($2.925B) = $5.175B total. This provides seller immediate liquidity while protecting buyer through insurance (unknown risks) + earnouts (performance-based adjustments). Structure is $1.125B below calculated minimum but justified by: (1) coal decline is business risk not escrow-able, (2) deferred capex is disclosed and buyer-assumed, (3) earnouts provide contingent protection up to actual losses."
+    },
+    "escrow_release_schedule": {
+      "month_12": {
+        "amount_released": 100000000,
+        "percentage": 20,
+        "conditions": "TransAmerica rate case resolved (settlement or judgment), no undisclosed environmental sites >$50M discovered, BLET contract ratified or mediation timeline on track"
+      },
+      "month_18": {
+        "amount_released": 150000000,
+        "percentage": 30,
+        "conditions": "Crude oil derailment settlement executed and paid, asbestos claims stable (no >20% increase in claim volume), Superfund Omaha/Cheyenne remediation Phase 1 complete"
+      },
+      "month_24": {
+        "amount_released": 250000000,
+        "percentage": 50,
+        "conditions": "All Tier 1 litigation settled, no material adverse environmental findings, no covenant breaches, STB merger approval obtained"
+      },
+      "total_released": 500000000,
+      "percentage_total": 100
+    }
+  },
+  "high_severity_count": 31,
+  "critical_findings_count": 5,
+  "findings_by_domain": [
+    {
+      "domain": "Labor & Employment",
+      "specialist": "employment-labor-analyst (T2)",
+      "high_findings": 5,
+      "critical_findings": 1,
+      "exposure_low": 125000000,
+      "exposure_high": 842000000,
+      "probability": 0.75,
+      "weighted_exposure": 347000000,
+      "severity_distribution": {
+        "CRITICAL": 1,
+        "HIGH": 4,
+        "MEDIUM": 2,
+        "LOW": 1
+      },
+      "key_findings": [
+        {
+          "severity": "CRITICAL",
+          "finding": "BLET strike risk 30-40% probability",
+          "exposure": 675000000,
+          "probability": 0.35,
+          "weighted": 236250000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "BLET settlement 15% over 3 years",
+          "exposure": 176400000,
+          "probability": 0.90,
+          "weighted": 158760000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Pattern bargaining cascade 11 unions",
+          "exposure": 575900000,
+          "probability": 0.85,
+          "weighted": 489515000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Retroactive pay lump sum",
+          "exposure": 63400000,
+          "probability": 0.95,
+          "weighted": 60230000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Operating ratio deterioration to 70.5%",
+          "exposure": 250800000,
+          "probability": 0.90,
+          "weighted": 225720000
+        }
+      ]
+    },
+    {
+      "domain": "Litigation",
+      "specialist": "rate-litigation-analyst (T3), crude-oil-analyst (T5), insurance-analyst (T7)",
+      "high_findings": 8,
+      "critical_findings": 1,
+      "exposure_low": 1012000000,
+      "exposure_high": 1329000000,
+      "probability": 0.75,
+      "weighted_exposure": 1145000000,
+      "severity_distribution": {
+        "CRITICAL": 1,
+        "HIGH": 7,
+        "MEDIUM": 3,
+        "LOW": 2
+      },
+      "key_findings": [
+        {
+          "severity": "CRITICAL",
+          "finding": "Asbestos policy exhaustion - $385M reserve + $48M/yr ongoing",
+          "exposure": 385000000,
+          "probability": 1.0,
+          "weighted": 385000000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "FELA general docket 1,200 cases - $420M reserve adequacy",
+          "exposure": 420000000,
+          "probability": 1.0,
+          "weighted": 420000000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "FELA trial escalation if settlement strategy fails",
+          "exposure": 420000000,
+          "probability": 0.25,
+          "weighted": 105000000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "TransAmerica rate case - settlement recommended $20M-$28M",
+          "exposure": 44600000,
+          "probability": 0.55,
+          "weighted": 24530000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Copycat shipper rate cases if TransAmerica adverse precedent",
+          "exposure": 200000000,
+          "probability": 0.50,
+          "weighted": 100000000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Crude oil derailment class action settlement",
+          "exposure": 150000000,
+          "probability": 0.75,
+          "weighted": 112500000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "FELA wrongful death (2 fatalities from derailment)",
+          "exposure": 12000000,
+          "probability": 0.90,
+          "weighted": 10800000
+        },
+        {
+          "severity": "MEDIUM",
+          "finding": "Grade crossing accidents (28 pending cases)",
+          "exposure": 25000000,
+          "probability": 0.90,
+          "weighted": 22500000
+        }
+      ]
+    },
+    {
+      "domain": "Environmental",
+      "specialist": "environmental-analyst (T4), crude-oil-analyst (T5)",
+      "high_findings": 4,
+      "critical_findings": 1,
+      "exposure_low": 88000000,
+      "exposure_high": 164000000,
+      "probability": 0.90,
+      "weighted_exposure": 116000000,
+      "severity_distribution": {
+        "CRITICAL": 1,
+        "HIGH": 3,
+        "MEDIUM": 2,
+        "LOW": 1
+      },
+      "key_findings": [
+        {
+          "severity": "CRITICAL",
+          "finding": "Successor liability attachment - stock purchase structure unavoidable",
+          "exposure": 96000000,
+          "probability": 0.90,
+          "weighted": 86400000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Omaha Railyard Superfund - EPA ROD 2018",
+          "exposure": 49000000,
+          "probability": 0.95,
+          "weighted": 46550000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Cheyenne Fuel Depot Superfund - EPA ROD 2020",
+          "exposure": 28000000,
+          "probability": 0.95,
+          "weighted": 26600000
+        },
+        {
+          "severity": "MEDIUM-HIGH",
+          "finding": "Superfund reopener clause risk (matters not addressed)",
+          "exposure": 24000000,
+          "probability": 0.35,
+          "weighted": 8400000
+        }
+      ]
+    },
+    {
+      "domain": "Regulatory & Safety",
+      "specialist": "fra-safety-analyst (T6), stb-merger-analyst (T1)",
+      "high_findings": 6,
+      "critical_findings": 0,
+      "exposure_low": 701000000,
+      "exposure_high": 1291000000,
+      "probability": 0.80,
+      "weighted_exposure": 1004000000,
+      "severity_distribution": {
+        "CRITICAL": 0,
+        "HIGH": 6,
+        "MEDIUM": 3,
+        "LOW": 2
+      },
+      "key_findings": [
+        {
+          "severity": "HIGH",
+          "finding": "PTC ongoing annual costs $120M/yr (regulatory requirement)",
+          "exposure": 1500000000,
+          "probability": 1.0,
+          "weighted": 1500000000,
+          "time_profile": "PERPETUAL - NPV = $120M ÷ 0.08 = $1.5B"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "PTC technology replacement 2030-2035 obsolescence risk",
+          "exposure": 1000000000,
+          "probability": 0.90,
+          "weighted": 900000000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Track safety deficiencies - deferred maintenance violations",
+          "exposure": 16000000,
+          "probability": 0.70,
+          "weighted": 11200000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Bridge inspection deficiencies - capital required 2025-2027",
+          "exposure": 90000000,
+          "probability": 0.80,
+          "weighted": 72000000
+        },
+        {
+          "severity": "HIGH",
+          "finding": "STB merger reciprocal switching conditions expanded",
+          "exposure": 20000000,
+          "probability": 0.70,
+          "weighted": 14000000,
+          "time_profile": "PERPETUAL - $20M/yr annual revenue loss"
+        },
+        {
+          "severity": "MEDIUM",
+          "finding": "STB service assurance plan compliance costs",
+          "exposure": 30000000,
+          "probability": 0.85,
+          "weighted": 25500000
+        }
+      ]
+    },
+    {
+      "domain": "Operational & Commercial",
+      "specialist": "commercial-contracts-analyst (T8), fra-safety-analyst (T6)",
+      "high_findings": 7,
+      "critical_findings": 2,
+      "exposure_low": 6555000000,
+      "exposure_high": 10680000000,
+      "probability": 0.85,
+      "weighted_exposure": 8410000000,
+      "severity_distribution": {
+        "CRITICAL": 2,
+        "HIGH": 5,
+        "MEDIUM": 4,
+        "LOW": 2
+      },
+      "key_findings": [
+        {
+          "severity": "CRITICAL",
+          "finding": "Coal traffic structural decline -5% to -10% annually (utility retirements)",
+          "exposure": 4200000000,
+          "probability": 0.85,
+          "weighted": 3570000000,
+          "time_profile": "PERPETUAL - structural industry shift"
+        },
+        {
+          "severity": "CRITICAL",
+          "finding": "Deferred rail maintenance capex $2.4B-$3.36B (FRA mandates)",
+          "exposure": 3360000000,
+          "probability": 0.95,
+          "weighted": 3192000000,
+          "time_profile": "MULTI_YEAR - phased 2025-2030"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Locomotive overhaul backlog (avg age 18 years)",
+          "exposure": 4410000000,
+          "probability": 0.90,
+          "weighted": 3969000000,
+          "time_profile": "MULTI_YEAR - phased 2025-2030"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Stranded coal assets impairment",
+          "exposure": 1200000000,
+          "probability": 0.60,
+          "weighted": 720000000,
+          "time_profile": "ONE_TIME - non-cash accounting charge"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "BNSF PRB trackage rights termination risk (28% of coal revenue)",
+          "exposure": 420000000,
+          "probability": 0.35,
+          "weighted": 147000000,
+          "time_profile": "PERPETUAL - annual payment + revenue loss"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "TransAmerica coal contract termination (leverages rate case)",
+          "exposure": 615000000,
+          "probability": 0.25,
+          "weighted": 153750000,
+          "time_profile": "PERPETUAL - annual revenue loss"
+        },
+        {
+          "severity": "MEDIUM",
+          "finding": "Equipment lease consent denied (GATX 350 locomotives)",
+          "exposure": 210000000,
+          "probability": 0.12,
+          "weighted": 25200000
+        }
+      ]
+    },
+    {
+      "domain": "Tax & Transaction Structure",
+      "specialist": "tax-structure-analyst (T9)",
+      "high_findings": 3,
+      "critical_findings": 1,
+      "exposure_low": 2759000000,
+      "exposure_high": 3262000000,
+      "probability": 0.95,
+      "weighted_exposure": 3011000000,
+      "severity_distribution": {
+        "CRITICAL": 1,
+        "HIGH": 2,
+        "MEDIUM": 2,
+        "LOW": 1
+      },
+      "key_findings": [
+        {
+          "severity": "CRITICAL",
+          "finding": "Section 382 NOL limitation - PV loss from ownership change (100% certain)",
+          "exposure": 945000000,
+          "probability": 1.0,
+          "weighted": 945000000,
+          "time_profile": "PERPETUAL - annual NOL utilization limited $649M/yr × PV factor"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "Section 338(g) election decision - $1.785B corporate tax if elected",
+          "exposure": 1785000000,
+          "probability": 0.35,
+          "weighted": 624750000,
+          "time_profile": "ONE_TIME - T10 base case assumes NO election to avoid tax",
+          "note": "Downside scenario assumes election made"
+        },
+        {
+          "severity": "HIGH",
+          "finding": "State bonus depreciation addback (6-8 states decoupling)",
+          "exposure": 151000000,
+          "probability": 0.90,
+          "weighted": 135900000,
+          "time_profile": "ONE_TIME - Year 1 impact"
+        }
+      ]
+    }
+  ],
+  "top_10_exposures": [
+    {
+      "rank": 1,
+      "domain": "Operational & Commercial",
+      "finding": "Coal traffic structural decline -5% to -10% annually due to utility coal plant retirements",
+      "exposure": 4200000000,
+      "probability": 0.85,
+      "weighted": 3570000000,
+      "severity": "CRITICAL",
+      "source": "T8 commercial-contracts-report.md",
+      "time_profile": "PERPETUAL"
+    },
+    {
+      "rank": 2,
+      "domain": "Operational & Commercial",
+      "finding": "Locomotive overhaul backlog - fleet avg age 18 years requiring $2.94B-$4.41B phased replacement",
+      "exposure": 4410000000,
+      "probability": 0.90,
+      "weighted": 3969000000,
+      "severity": "HIGH",
+      "source": "T6 fra-safety-ptc-report.md",
+      "time_profile": "MULTI_YEAR"
+    },
+    {
+      "rank": 3,
+      "domain": "Operational & Commercial",
+      "finding": "Deferred rail maintenance capex $2.4B-$3.36B to meet FRA track safety standards",
+      "exposure": 3360000000,
+      "probability": 0.95,
+      "weighted": 3192000000,
+      "severity": "CRITICAL",
+      "source": "T6 fra-safety-ptc-report.md",
+      "time_profile": "MULTI_YEAR"
+    },
+    {
+      "rank": 4,
+      "domain": "Tax & Transaction",
+      "finding": "Section 338(g) corporate tax election - $1.785B immediate tax if buyer elects basis step-up",
+      "exposure": 1785000000,
+      "probability": 0.35,
+      "weighted": 624750000,
+      "severity": "HIGH",
+      "source": "T9 tax-structure-report.md",
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "rank": 5,
+      "domain": "Regulatory & Safety",
+      "finding": "PTC ongoing annual costs $120M/yr regulatory requirement (perpetual)",
+      "exposure": 1500000000,
+      "probability": 1.0,
+      "weighted": 1500000000,
+      "severity": "HIGH",
+      "source": "T6 fra-safety-ptc-report.md",
+      "time_profile": "PERPETUAL - NPV calculation"
+    },
+    {
+      "rank": 6,
+      "domain": "Operational & Commercial",
+      "finding": "Stranded coal assets impairment $800M-$1.2B as utilities retire coal plants",
+      "exposure": 1200000000,
+      "probability": 0.60,
+      "weighted": 720000000,
+      "severity": "HIGH",
+      "source": "T8 commercial-contracts-report.md",
+      "time_profile": "ONE_TIME - non-cash"
+    },
+    {
+      "rank": 7,
+      "domain": "Regulatory & Safety",
+      "finding": "PTC technology replacement 2030-2035 - obsolescence of current Wabtec I-ETMS system",
+      "exposure": 1000000000,
+      "probability": 0.90,
+      "weighted": 900000000,
+      "severity": "HIGH",
+      "source": "T6 fra-safety-ptc-report.md",
+      "time_profile": "ONE_TIME - replacement cycle"
+    },
+    {
+      "rank": 8,
+      "domain": "Tax & Transaction",
+      "finding": "Section 382 NOL limitation - annual $649M NOL usage limited, PV loss $630M-$945M",
+      "exposure": 945000000,
+      "probability": 1.0,
+      "weighted": 945000000,
+      "severity": "CRITICAL",
+      "source": "T9 tax-structure-report.md",
+      "time_profile": "PERPETUAL"
+    },
+    {
+      "rank": 9,
+      "domain": "Labor & Workforce",
+      "finding": "BLET strike economic loss 14-45 days if mediation fails (30-40% probability)",
+      "exposure": 675000000,
+      "probability": 0.35,
+      "weighted": 236250000,
+      "severity": "CRITICAL",
+      "source": "T2 railway-labor-act-report.md",
+      "time_profile": "ONE_TIME"
+    },
+    {
+      "rank": 10,
+      "domain": "Labor & Workforce",
+      "finding": "Pattern bargaining cascade - 11 other unions demand matching BLET settlement terms",
+      "exposure": 575900000,
+      "probability": 0.85,
+      "weighted": 489515000,
+      "severity": "HIGH",
+      "source": "T2 railway-labor-act-report.md",
+      "time_profile": "MULTI_YEAR"
+    }
+  ],
+  "risk_adjusted_valuation": {
+    "purchase_price": 18500000000,
+    "less_pwl": -14820000000,
+    "risk_adjusted_enterprise_value": 3680000000,
+    "implied_discount": 0.801,
+    "risk_adjusted_ev_ebitda": 0.78,
+    "interpretation": "Risk-adjusted EV of $3.68B represents deeply distressed valuation (0.78× EBITDA) vs. Class I peer range 9.92×-11.09×. This suggests $18.5B purchase price does not adequately reflect quantified risks unless: (1) Continental has materially different risk assessment, (2) strategic synergies justify premium, or (3) transaction protections substantially mitigate downside.",
+    "probability_weighted_irr": {
+      "base_case": 0.284,
+      "downside_case": 0.158,
+      "severe_downside": -1.0,
+      "weighted_irr": 0.117,
+      "hurdle_rate": 0.20,
+      "shortfall": -0.083,
+      "recommendation": "IRR of 11.7% is 8.3 percentage points below 20% hurdle rate - transaction not economically justified at $18.5B price without substantial protections or price reduction"
+    },
+    "fair_value_purchase_price_range": {
+      "low": 16600000000,
+      "high": 17800000000,
+      "midpoint": 17200000000,
+      "implied_reduction_from_current": -1300000000,
+      "methodology": "Reverse DCF to achieve 18-20% IRR accounting for PWL $14.82B"
+    }
+  },
+  "debt_covenant_risk": {
+    "assumed_debt_structure": {
+      "acquisition_debt": 12950000000,
+      "leverage_ratio": 0.70,
+      "weighted_avg_interest_rate": 0.065,
+      "annual_debt_service": 972000000
+    },
+    "covenant_compliance_scenarios": {
+      "base_case": {
+        "ebitda": 4270000000,
+        "debt_to_ebitda": 3.03,
+        "interest_coverage": 5.07,
+        "fixed_charge_coverage": 4.18,
+        "compliance_status": "PASS",
+        "cushion": "Healthy - 1.97 turns below typical 5.0× covenant"
+      },
+      "downside_case": {
+        "ebitda": 3480000000,
+        "debt_to_ebitda": 3.72,
+        "interest_coverage": 4.13,
+        "fixed_charge_coverage": 3.22,
+        "compliance_status": "MARGINAL",
+        "cushion": "Limited - approaching covenant thresholds"
+      },
+      "severe_downside": {
+        "ebitda": 1720000000,
+        "debt_to_ebitda": 7.53,
+        "interest_coverage": 2.04,
+        "fixed_charge_coverage": 1.15,
+        "compliance_status": "VIOLATION",
+        "cushion": "Exceeds 5.0× debt/EBITDA, below 3.0× interest coverage"
+      }
+    },
+    "probability_weighted_breach_risk": 0.14,
+    "interpretation": "14% covenant breach probability is elevated for investment-grade railroad financing. Lenders likely to require: (1) lower advance rate 60-65% vs. 70%, (2) higher pricing SOFR+325-375bps vs. SOFR+250bps, (3) tighter covenants 4.0× debt/EBITDA vs. 5.0×, (4) equity cure rights $500M"
+  },
+  "transaction_recommendations": {
+    "primary_recommendation": "PROCEED with acquisition ONLY IF Continental achieves EITHER Option A (purchase price reduction) OR Option B (enhanced protections)",
+    "option_a_preferred": {
+      "strategy": "Purchase price reduction",
+      "target_price_range": "17.0B-17.5B",
+      "reduction_amount": "1.0B-1.5B",
+      "rationale": "PWL $14.82B equals 80% of current $18.5B price; achieves 18.5-20.5% IRR meeting 20% hurdle rate",
+      "seller_impact": "Certain liquidity vs. earnout contingencies",
+      "negotiation_leverage": [
+        "Coal decline structural (not cyclical) - 28% of revenue at risk",
+        "BLET strike risk 30-40% eliminates labor cost certainty",
+        "Deferred capex $6.555B non-discretionary per FRA mandates",
+        "Asbestos $385M + $48M/yr perpetual with no insurance coverage",
+        "Section 382 NOL limitation $945M certain PV loss"
+      ]
+    },
+    "option_b_alternative": {
+      "strategy": "Current price + enhanced protections",
+      "purchase_price": 18500000000,
+      "required_protections": {
+        "escrow": "750M-1.0B (Tiers 1-2)",
+        "rw_insurance": "1.75B-2.0B with expanded sublimits",
+        "earnouts": "3.0B-3.5B cap including contract terminations",
+        "total": "5.5B-6.5B (30-35% of purchase price)"
+      },
+      "expected_irr": "16.8-18.2%",
+      "seller_cash_at_closing": "17.5B-17.75B subject to earnout adjustments"
+    },
+    "walk_away_threshold": {
+      "max_acceptable_price": 19800000000,
+      "irr_threshold": 0.12,
+      "margin_of_safety": 1300000000,
+      "walk_away_triggers": [
+        "Purchase price exceeds $19.8B (12% IRR threshold - below cost of capital)",
+        "BLET strike occurs pre-closing without resolution path",
+        "Undisclosed environmental liabilities >$500M discovered",
+        "STB imposes conditions costing >$150M annually",
+        "Probability of downside scenarios increases by >15 percentage points"
+      ]
+    },
+    "pre_closing_covenants_required": [
+      {
+        "covenant": "BLET settlement mandate",
+        "requirement": "Seller must achieve ratification before closing OR auto price reduction $365M OR buyer termination right if strike occurs",
+        "rationale": "Eliminates 30-40% strike risk exposure"
+      },
+      {
+        "covenant": "Critical contract consents",
+        "requirement": "BNSF PRB, UP Kansas City, CPKC Twin Cities, GATX/Trinity equipment leases OR price reduction $125M per missing consent",
+        "rationale": "43% of network on trackage rights - mission-critical"
+      },
+      {
+        "covenant": "Environmental assurance",
+        "requirement": "No additional Superfund/RCRA sites beyond Omaha/Cheyenne; breach triggers $1-for-$1 indemnification OR termination if >$200M",
+        "rationale": "Prevent undisclosed environmental liability discovery"
+      },
+      {
+        "covenant": "Capital expenditure minimum",
+        "requirement": "Seller maintain ≥$800M annual capex pre-closing; violation triggers dollar-for-dollar price reduction",
+        "rationale": "Prevent asset deterioration during 18-36 month STB approval period"
+      }
+    ]
+  },
+  "quantification_methodology": {
+    "data_sources": "10 specialist reports (T1-T9 + T10 financial aggregation)",
+    "specialist_reports_analyzed": [
+      "T1: STB Merger Approval Report",
+      "T2: Railway Labor Act Report",
+      "T3: Rate Litigation Report",
+      "T4: Superfund Environmental Report",
+      "T5: Crude Oil Derailment Report",
+      "T6: FRA Safety/PTC Report",
+      "T7: Insurance Coverage Report",
+      "T8: Commercial Contracts Report",
+      "T9: Tax Structure Report",
+      "T10: Financial Analyst Report (aggregation + scenario modeling)"
+    ],
+    "findings_extracted": 87,
+    "high_severity_findings": 31,
+    "critical_findings": 5,
+    "probability_methodology": "Per-finding analyst estimates based on: (1) statutory/regulatory certainty, (2) industry precedent/settlement rates, (3) expert judgment for novel risks, (4) Monte Carlo correlation modeling for portfolio effects",
+    "probability_defaults_applied": {
+      "CRITICAL_no_stated_probability": 0.85,
+      "HIGH_no_stated_probability": 0.65,
+      "MEDIUM_no_stated_probability": 0.40,
+      "LOW_no_stated_probability": 0.15,
+      "note": "Rarely needed - T1-T9 specialists provided explicit probability estimates for 94% of quantified findings"
+    },
+    "discount_rate": 0.08,
+    "discount_rate_rationale": "8% WACC per T10 financial analyst based on: (1) PE-backed acquisition with 70% debt/30% equity assumed capital structure, (2) debt cost 6.5% (SOFR+325bps), (3) equity cost 12-15% for Class I railroad, (4) blended WACC ~8%",
+    "time_horizon": "5-year NPV for discrete events; perpetuity valuation for ongoing costs using 8% discount rate",
+    "currency": "USD",
+    "as_of_date": "2026-01-05",
+    "scenario_modeling": "T10 Monte Carlo simulation 10,000 iterations with correlation matrix for: (1) Base Case 60%, (2) Downside 30%, (3) Severe Downside 10%",
+    "range_handling": "For exposure ranges (e.g., $45M-$89M), used: (1) P10 = low + 10% of range, (2) P50 = midpoint, (3) P90 = low + 90% of range for distribution modeling",
+    "double_counting_prevention": "Correlation adjustments applied per T10 Monte Carlo modeling - see correlation_adjustments section for detailed methodology"
+  },
+  "coverage_gaps_for_g1_attention": [
+    {
+      "gap": "Single carrier determination risk",
+      "description": "T2 labor report notes due diligence gap - transaction materials do not confirm whether Continental owns other railroads. If Continental owns other Class I/II/III railroads, NMB may determine single transportation system requiring labor integration/seniority unification.",
+      "potential_exposure": "UNKNOWN - could require full seniority roster integration, work rule harmonization, additional labor arbitration",
+      "recommendation": "G1.2 executive summary should flag as critical due diligence gap requiring immediate Continental disclosure"
+    },
+    {
+      "gap": "R&W insurance market capacity",
+      "description": "T10 recommends $1.75B R&W insurance policy, but given $14.82B PWL exposure, underwriting capacity and pricing may be challenged",
+      "potential_exposure": "Insurance premium could exceed $43.7M estimate (2.5% rate) if underwriters view as high-risk",
+      "recommendation": "Validate with R&W insurance brokers that $1.75B limit available at reasonable pricing"
+    },
+    {
+      "gap": "Coal customer alternative transportation options",
+      "description": "T3 rate litigation notes impact of barge competition on TransAmerica settlement value, but no systematic analysis of coal customer transportation alternatives",
+      "potential_exposure": "If coal customers have strong alternatives (barge, competing railroads), revenue decline could accelerate beyond -5% to -10% base case",
+      "recommendation": "Phase 2 commercial due diligence should map all coal origin-destination pairs against competitive alternatives"
+    },
+    {
+      "gap": "Equipment trust default acceleration mechanics",
+      "description": "T8 commercial contracts references $1.2B equipment trust debt with change-of-control provisions, but acceleration mechanics and consent requirements unclear",
+      "potential_exposure": "If equipment trust accelerates and Continental must refinance at +200bps, annual cost increases $24M",
+      "recommendation": "Obtain and review full equipment trust indenture for consent/waiver process"
+    }
+  ],
+  "executive_summary_key_messages": {
+    "overall_assessment": "HIGH-RISK, MODERATE-RETURN transaction requiring substantial purchase price reduction OR comprehensive transaction protections to achieve acceptable risk-adjusted returns",
+    "critical_stat_1": "Probability-weighted expected loss $14.82B equals 80.1% of $18.5B purchase price",
+    "critical_stat_2": "Risk-adjusted IRR 11.7% falls 8.3 percentage points below Continental's 20% hurdle rate",
+    "critical_stat_3": "Severe downside scenario (10% probability) exposure $24.76B exceeds purchase price by $6.26B - potential negative enterprise value",
+    "critical_stat_4": "Coal revenue structural decline -5% to -10% annually ($2.1B-$4.2B NPV) driven by utility retirements - not cyclical downturn",
+    "critical_stat_5": "Deferred capex $6.555B non-discretionary per FRA mandates - not optional maintenance deferral",
+    "board_recommendation": "CONDITIONAL APPROVAL - Proceed ONLY IF: (1) purchase price reduced to $17.0B-$17.5B OR (2) transaction protections increased to $5.5B-$6.5B (30-35% of price) AND (3) pre-closing covenants secure BLET settlement + critical contract consents",
+    "walk_away_price": "$19.8B - above this price, transaction becomes value-destructive (IRR <12% cost of capital)",
+    "optimal_structure": "Hybrid: $500M escrow (Tier 1 risks) + $1.75B R&W insurance (6-year tail) + $2.925B earnouts (coal revenue, BLET strike, STB conditions) = $5.175B total protection (28% of price)"
+  }
+}

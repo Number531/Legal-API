@@ -1,0 +1,146 @@
+/**
+ * FTC Data Client
+ * Note: FTC does not expose a single consolidated public API for HSR early terminations
+ * and enforcement actions. These notices are reliably published in the Federal Register.
+ * This client leverages the existing Federal Register API integration to deliver
+ * FTC-specific datasets (HSR early termination notices and enforcement/consent orders).
+ */
+
+import { makeApiRequest, buildFederalRegisterParams } from '../utils/apiHelpers.js';
+
+export class FTCClient {
+  constructor(rateLimiter) {
+    // We pass the Federal Register rate limiter from the server
+    this.rateLimiter = rateLimiter;
+  }
+
+  /**
+   * Search Hart-Scott-Rodino (HSR) early termination notices via Federal Register
+   * @param {Object} args
+   */
+  async searchHSRTerminations(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+
+    const {
+      date_after,
+      date_before,
+      limit = 50
+    } = args;
+
+    // Construct a query that targets FTC early termination notices
+    const termQuery = [
+      'Hart-Scott-Rodino',
+      'early termination',
+      'premerger notification'
+    ].join(' ');
+
+    // Build Federal Register query params
+    const params = buildFederalRegisterParams({
+      query: termQuery,
+      agency: 'federal-trade-commission',
+      document_type: 'NOTICE',
+      significant_only: false,
+      date_range: (date_after || date_before) ? `${date_after || ''}..${date_before || ''}` : undefined,
+      limit: Math.min(Number(limit) || 50, 100)
+    });
+
+    const response = await makeApiRequest(
+      `/documents.json?${params.toString()}`,
+      {},
+      { apiType: 'federal_register', rateLimiter: this.rateLimiter }
+    );
+
+    const results = (response.results || []).map((doc) => ({
+      title: doc.title,
+      publication_date: doc.publication_date,
+      type: doc.type,
+      agencies: doc.agencies?.map((a) => a.name) || [],
+      abstract: doc.abstract,
+      url: doc.html_url
+    }));
+
+    // Heuristic filter to emphasize HSR early termination
+    const filtered = results.filter(r => /early termination|Hart-Scott-Rodino|premerger/i.test(`${r.title} ${r.abstract || ''}`));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          source: 'federal_register',
+          dataset: 'hsr_early_termination_notices',
+          count: filtered.length,
+          results: filtered
+        }, null, 2)
+      }]
+    };
+  }
+
+  /**
+   * Search FTC enforcement actions and consent orders (via Federal Register publications)
+   * @param {Object} args
+   */
+  async searchEnforcementActions(args) {
+    if (!args || typeof args !== 'object') {
+      args = {};
+    }
+
+    const {
+      defendant_name,
+      date_filed_after,
+      date_filed_before,
+      include_consent_orders = true,
+      limit = 25
+    } = args;
+
+    // Build a robust search term
+    const terms = ['enforcement'];
+    if (include_consent_orders) terms.push('consent order');
+    if (defendant_name) terms.push(defendant_name);
+    const query = terms.join(' ');
+
+    const params = buildFederalRegisterParams({
+      query,
+      agency: 'federal-trade-commission',
+      document_type: 'NOTICE',
+      significant_only: false,
+      date_range: (date_filed_after || date_filed_before) ? `${date_filed_after || ''}..${date_filed_before || ''}` : undefined,
+      limit: Math.min(Number(limit) || 25, 100)
+    });
+
+    const response = await makeApiRequest(
+      `/documents.json?${params.toString()}`,
+      {},
+      { apiType: 'federal_register', rateLimiter: this.rateLimiter }
+    );
+
+    const results = (response.results || []).map((doc) => ({
+      title: doc.title,
+      publication_date: doc.publication_date,
+      type: doc.type,
+      agencies: doc.agencies?.map((a) => a.name) || [],
+      abstract: doc.abstract,
+      url: doc.html_url
+    }));
+
+    // Optional consent order emphasis
+    const filtered = include_consent_orders
+      ? results.filter(r => /consent order|agreement.*consent/i.test(`${r.title} ${r.abstract || ''}`) || /enforcement/i.test(`${r.title} ${r.abstract || ''}`))
+      : results.filter(r => /enforcement/i.test(`${r.title} ${r.abstract || ''}`));
+
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          source: 'federal_register',
+          dataset: 'ftc_enforcement_actions',
+          count: filtered.length,
+          results: filtered
+        }, null, 2)
+      }]
+    };
+  }
+}
+
+

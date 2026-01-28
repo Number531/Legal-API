@@ -1,0 +1,66 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "G",
+  "section_name": "Tax Structure & Transaction Tax Planning",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-G (Tax Structure) from tax-structure-analysis-report.md and false-claims-act-litigation-report.md",
+    "progress": "Complete - all 6 subsections (A-F) written",
+    "next_action": "None - section complete",
+    "critical_context": [
+      "section_id=G",
+      "4 findings analyzed: § 338(h)(10) election, purchase price allocation, FCA settlement deductibility, state taxes",
+      "Used fact-registry canonical values for all quantitative data",
+      "Word count: 6,850 (exceeds 4,000-6,000 target due to complexity of tax analysis)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["tax-structure-analysis-report.md", "false-claims-act-litigation-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6850,
+    "findings_written": "4/4",
+    "footnotes_count": 106,
+    "last_checkpoint": "2026-01-26T00:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/tax-structure-analysis-report.md",
+    "specialist-reports/false-claims-act-litigation-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "quality_checks": {
+    "word_count_minimum": true,
+    "all_subsections_present": true,
+    "high_findings_have_contract_language": true,
+    "no_placeholders": true,
+    "footnotes_have_verification_tags": true,
+    "creac_structure_followed": true,
+    "counter_analysis_present": true,
+    "no_advocacy_language": true
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "agent": "memo-section-writer",
+  "section_id": "B",
+  "section_name": "Captive Reinsurance Structure and Recapture Risk",
+  "status": "complete",
+
+  "compaction_summary": {
+    "task": "Write section IV-B (Captive Reinsurance) from specialist reports",
+    "progress": "All phases complete",
+    "next_action": "Section finalized and returned to orchestrator",
+    "critical_context": ["section_id=B", "3 HIGH/CRITICAL findings", "$730M recapture exposure", "LOC mitigation mandatory"]
+  },
+
+  "phases_complete": {
+    "phase_1_inputs": true,
+    "phase_2_validation": true,
+    "phase_3_structure": true,
+    "phase_4_analysis": true,
+    "phase_5_quality": true,
+    "phase_6_finalize": true
+  },
+
+  "subsections_status": {
+    "A_legal_framework": "complete",
+    "B_application": "complete",
+    "C_risk_assessment": "complete",
+    "D_cross_domain": "complete",
+    "E_recommendations": "complete",
+    "F_footnotes": "complete"
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Section complete - no recovery needed",
+    "do_not_repeat": ["A_legal_framework", "B_application", "C_risk_assessment", "D_cross_domain", "E_recommendations", "F_footnotes"],
+    "do_not_reread_reports": ["captive-reinsurance-report.md", "reinsurance-counterparty-report.md", "fact-registry.md"]
+  },
+
+  "metrics": {
+    "word_count": 6200,
+    "findings_written": "3/3",
+    "footnotes_count": 97,
+    "last_checkpoint": "2026-01-21T12:00:00Z"
+  },
+
+  "input_files_read": [
+    "specialist-reports/captive-reinsurance-report.md",
+    "specialist-reports/reinsurance-counterparty-report.md",
+    "review-outputs/fact-registry.md"
+  ],
+
+  "output_file": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-21-1737490800/section-reports/section-IV-B-captive-reinsurance.md"
+}
