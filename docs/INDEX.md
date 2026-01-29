@@ -7,9 +7,31 @@ Comprehensive documentation for the Super-Legal MCP Server.
 | Document | Description |
 |----------|-------------|
 | [README](../README.md) | Project overview and quick start |
+| [API Reference](API-REFERENCE.md) | Complete tool documentation |
+| [Tutorials](tutorials/README.md) | Step-by-step guides |
 | [CONTRIBUTING](../CONTRIBUTING.md) | Contribution guidelines |
 | [CHANGELOG](../CHANGELOG.md) | Version history |
 | [SECURITY](../SECURITY.md) | Security policy |
+
+---
+
+## Tutorials
+
+Step-by-step guides for using Super-Legal:
+
+| Tutorial | Description |
+|----------|-------------|
+| [01 - Getting Started](tutorials/01-getting-started.md) | Installation, setup, first queries |
+| [02 - Legal Research Workflows](tutorials/02-legal-research-workflows.md) | Common research patterns |
+| [03 - M&A Due Diligence](tutorials/03-ma-due-diligence.md) | Enterprise due diligence workflows |
+| [04 - Memorandum Generation](tutorials/04-memorandum-generation.md) | Multi-agent document generation |
+| [05 - Advanced Features](tutorials/05-advanced-features.md) | Code execution, custom APIs, deployment |
+
+---
+
+## API Reference
+
+- [Complete API Reference](API-REFERENCE.md) - All 51 tools with parameters
 
 ---
 
