@@ -70,6 +70,44 @@ grep -c "Under.*does.*when" remediation-outputs/W2-001.md  # Expected: >= 12
 grep -c "Probably.*because" remediation-outputs/W2-002.md  # Expected: >= 12
 ```
 
+### Wave 2: Risk Assessment Tables (W2-RISK-001 through W2-RISK-006)
+
+**Purpose**: Generate standardized 5-column risk assessment tables for each Section IV subsection.
+
+**Task Definitions**:
+
+| Task ID | Target Section | Minimum Rows | Success Criteria |
+|---------|----------------|--------------|------------------|
+| W2-RISK-001 | IV.A Bankruptcy Patterns | 5 | Table with `\| Finding \| Severity \| Probability \| Exposure \| Mitigation \|` header present |
+| W2-RISK-002 | IV.B Environmental Violations | 8 | Table covers all CRITICAL/HIGH environmental risks |
+| W2-RISK-003 | IV.C Remediation Costs | 6 | Table covers all facility size categories |
+| W2-RISK-004 | IV.D IP Retention | 5 | Table covers all HIGH/CRITICAL IP risks |
+| W2-RISK-005 | IV.E Environmental Offset | 10 | Table covers all major offset mechanisms |
+| W2-RISK-006 | IV.F Strategic Recommendations | 5 | Table covers deal execution risks |
+
+**Operation Type**: INSERT (new content, not replacement)
+
+**Insertion Point**: After section introduction, before first `### A.` subsection header.
+
+**Table Format**:
+```
+| Finding | Severity | Probability | Exposure | Mitigation |
+|---------|----------|-------------|----------|------------|
+| [1-sentence description] | CRITICAL/HIGH/MEDIUM/LOW | [%] with basis | [$range] | [action + owner] |
+```
+
+**Wave 2 Gate Check** (updated):
+```bash
+# Questions format
+grep -cE "Under .* does .* when" final-memorandum-v2.md  # Expected: 12
+
+# Risk tables present
+grep -c "| Finding | Severity | Probability | Exposure | Mitigation |" final-memorandum-v2.md  # Expected: 6
+
+# Provisions drafted
+grep -c "DRAFT CONTRACT PROVISION" final-memorandum-v2.md  # Expected: 3
+```
+
 ---
 
 ## Wave 3: Hybrid Processing (Depends: Wave 2)

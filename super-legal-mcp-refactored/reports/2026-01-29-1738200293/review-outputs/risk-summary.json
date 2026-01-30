@@ -1,0 +1,386 @@
+{
+  "status": "COMPLETE",
+  "generated_date": "2026-01-29T00:00:00Z",
+  "methodology": {
+    "description": "Risk aggregation based on pre-extracted exposures from orchestrator-state.md QUANTIFIED_EXPOSURES section. Time-based classification applied with DCF adjustments for multi-year liabilities. Correlation adjustments applied to related environmental exposures.",
+    "sources_scanned": 5,
+    "findings_extracted": 10,
+    "probability_methodology": "Per-finding analyst estimates from specialist reports, with severity-based defaults where not stated",
+    "currency": "USD",
+    "discount_rate": "8%",
+    "as_of_date": "2026-01-29"
+  },
+
+  "aggregate_exposure": {
+    "gross_total": 870044000,
+    "gross_total_formatted": "$870.0M",
+    "probability_weighted": 845854000,
+    "probability_weighted_formatted": "$845.9M",
+    "correlation_adjusted": 825800000,
+    "correlation_adjusted_formatted": "$825.8M",
+    "net_after_offsets": 808090000,
+    "net_after_offsets_formatted": "$808.1M",
+
+    "by_category": {
+      "environmental_cercla": {
+        "gross": 22000000,
+        "weighted": 22000000,
+        "exposure_count": 1,
+        "formatted": "$22.0M"
+      },
+      "environmental_remediation": {
+        "gross": 155800000,
+        "weighted": 131400000,
+        "exposure_count": 3,
+        "formatted": "$155.8M gross, $131.4M weighted"
+      },
+      "environmental_penalties": {
+        "gross": 32744000,
+        "weighted": 32744000,
+        "exposure_count": 2,
+        "formatted": "$32.7M"
+      },
+      "ip_value_destruction": {
+        "gross": 19500000,
+        "weighted": 19500000,
+        "exposure_count": 2,
+        "note": "One exposure is percentage-based (80% discount), dollar amount represents $500M manufacturer case study",
+        "formatted": "$19.5M"
+      },
+      "reclamation_obligations": {
+        "gross": 640000000,
+        "weighted": 640000000,
+        "exposure_count": 1,
+        "formatted": "$640.0M"
+      },
+      "deal_adjustments": {
+        "gross": -23000000,
+        "weighted": -17710000,
+        "exposure_count": 1,
+        "note": "Negative values represent offsets/benefits that reduce total exposure",
+        "formatted": "-$23.0M gross, -$17.7M weighted (benefit)"
+      }
+    }
+  },
+
+  "exposure_ranges": {
+    "p10_optimistic": 744000000,
+    "p10_formatted": "$744.0M",
+    "p50_expected": 870044000,
+    "p50_formatted": "$870.0M",
+    "p90_stress": 996000000,
+    "p90_formatted": "$996.0M",
+    "methodology": "P10/P50/P90 calculated for range-based exposures (Westinghouse $40-60M, Large facility $40-200M, Medium facility $10-35M)"
+  },
+
+  "correlation_adjustments": {
+    "methodology": "Environmental exposures (CERCLA, remediation, penalties) show 70% correlation due to same-facility overlap. Applied 0.7 correlation factor with 30% overlap assumption.",
+    "raw_environmental_total": 210544000,
+    "adjusted_environmental_total": 166300000,
+    "adjustment_applied": 44244000,
+    "adjustment_percentage": "21% reduction",
+    "pairs_adjusted": [
+      {
+        "finding_a": "Environmental CERCLA",
+        "finding_b": "Environmental Remediation + Penalties",
+        "correlation": 0.7,
+        "overlap": 0.3,
+        "reduction": 44244000,
+        "rationale": "Same manufacturing facilities appear in multiple environmental categories (e.g., LTV Steel had CERCLA sites AND violations)"
+      }
+    ]
+  },
+
+  "time_profile_analysis": {
+    "one_time": {
+      "count": 7,
+      "gross": 119744000,
+      "note": "Historical penalties, filed claims, and single-event exposures"
+    },
+    "multi_year": {
+      "count": 3,
+      "nominal": 192500000,
+      "present_value": 155800000,
+      "dcf_adjustment": 36700000,
+      "note": "Remediation programs over 5-10 years, discounted at 8%"
+    },
+    "perpetual": {
+      "count": 1,
+      "gross": 640000000,
+      "note": "Arch Coal reclamation liability (disclosed liability already at NPV)"
+    }
+  },
+
+  "escrow_recommendation": {
+    "calculation_basis": "HIGH severity exposures + 20% buffer, adjusted for correlation",
+    "high_severity_gross": 870044000,
+    "recommended_amount": 970000000,
+    "recommended_formatted": "$970M",
+    "minimum_floor": 640000000,
+    "minimum_floor_formatted": "$640M (largest single exposure - Arch Coal)",
+
+    "by_facility_size": {
+      "small_facility": {
+        "description": "Small metal fabrication (<5 acres)",
+        "lifecycle_exposure": "3-8M",
+        "recommended_escrow": "5-10M",
+        "rationale": "1.25x-1.67x multiplier on midpoint"
+      },
+      "medium_facility": {
+        "description": "Medium manufacturing (5-50 acres)",
+        "lifecycle_exposure": "10-35M",
+        "recommended_escrow": "15-45M",
+        "rationale": "1.5x multiplier on midpoint, accounts for remediation uncertainty"
+      },
+      "large_facility": {
+        "description": "Large steel/coke plant (>50 acres)",
+        "lifecycle_exposure": "40-200M",
+        "recommended_escrow": "60-250M",
+        "rationale": "1.25x-1.5x multiplier, includes 30-year monitoring NPV"
+      }
+    },
+
+    "escrow_analysis": {
+      "coverage_ratio": 1.15,
+      "coverage_rating": "CONSERVATIVE",
+      "largest_exposure": 640000000,
+      "largest_exposure_covered": true,
+      "time_horizon_status": "MIXED",
+      "time_horizon_note": "Most exposures are ONE_TIME or completed. Multi-year remediation programs require extended escrow periods (5-10 years) or R&W insurance.",
+      "recommended_release_schedule": "20% at 12 months, 30% at 24 months, 30% at 36 months, 20% at 60 months (extended for multi-year remediation)",
+      "adequacy_flags": [
+        "Escrow exceeds correlation-adjusted expected exposure ($970M vs $808M)",
+        "Multi-year remediation exposures require extended hold periods",
+        "Reclamation liability ($640M) is perpetual - consider R&W insurance wrap"
+      ]
+    }
+  },
+
+  "severity_summary": {
+    "high_severity_count": 8,
+    "critical_findings_count": 2,
+    "critical_findings": [
+      {
+        "finding": "Arch Coal reclamation liability",
+        "exposure": 640000000,
+        "rationale": "Represents 73% of total documented exposure, perpetual obligation"
+      },
+      {
+        "finding": "Large steel/coke remediation (typical)",
+        "exposure": 95000000,
+        "rationale": "10+ year multi-phase program with 30-year monitoring tail"
+      }
+    ]
+  },
+
+  "top_10_exposures": [
+    {
+      "rank": 1,
+      "domain": "Environmental - Reclamation",
+      "finding": "Arch Coal reclamation liability",
+      "exposure": 640000000,
+      "exposure_formatted": "$640.0M",
+      "probability": 1.0,
+      "weighted": 640000000,
+      "weighted_formatted": "$640.0M",
+      "time_profile": "PERPETUAL",
+      "severity": "CRITICAL",
+      "source": "securities-researcher-company-profiles.md"
+    },
+    {
+      "rank": 2,
+      "domain": "Environmental - Remediation",
+      "finding": "Large steel/coke remediation (typical)",
+      "exposure": 95000000,
+      "exposure_formatted": "$95.0M (PV)",
+      "probability": 0.80,
+      "weighted": 76000000,
+      "weighted_formatted": "$76.0M",
+      "time_profile": "MULTI_YEAR",
+      "severity": "CRITICAL",
+      "source": "environmental-compliance-analyst-epa-violations.md"
+    },
+    {
+      "rank": 3,
+      "domain": "Environmental - Remediation",
+      "finding": "Westinghouse Sharon remediation",
+      "exposure": 42800000,
+      "exposure_formatted": "$42.8M (PV)",
+      "probability": 1.0,
+      "weighted": 42800000,
+      "weighted_formatted": "$42.8M",
+      "time_profile": "MULTI_YEAR",
+      "severity": "HIGH",
+      "source": "environmental-compliance-analyst-epa-violations.md"
+    },
+    {
+      "rank": 4,
+      "domain": "Environmental - Penalties",
+      "finding": "U.S. Steel Clairton consent decree",
+      "exposure": 24500000,
+      "exposure_formatted": "$24.5M",
+      "probability": 1.0,
+      "weighted": 24500000,
+      "weighted_formatted": "$24.5M",
+      "time_profile": "ONE_TIME",
+      "severity": "HIGH",
+      "source": "environmental-compliance-analyst-epa-violations.md"
+    },
+    {
+      "rank": 5,
+      "domain": "Environmental - CERCLA",
+      "finding": "LTV Steel CERCLA claims (14 sites)",
+      "exposure": 22000000,
+      "exposure_formatted": "$22.0M",
+      "probability": 1.0,
+      "weighted": 22000000,
+      "weighted_formatted": "$22.0M",
+      "time_profile": "ONE_TIME",
+      "severity": "HIGH",
+      "source": "environmental-compliance-analyst-epa-violations.md"
+    },
+    {
+      "rank": 6,
+      "domain": "IP",
+      "finding": "IP expected impairment ($500M manufacturer)",
+      "exposure": 19500000,
+      "exposure_formatted": "$19.5M",
+      "probability": 1.0,
+      "weighted": 19500000,
+      "weighted_formatted": "$19.5M",
+      "time_profile": "ONE_TIME",
+      "severity": "HIGH",
+      "source": "patent-analyst-ip-retention.md"
+    },
+    {
+      "rank": 7,
+      "domain": "Environmental - Remediation",
+      "finding": "Medium facility remediation (typical)",
+      "exposure": 18000000,
+      "exposure_formatted": "$18.0M (PV)",
+      "probability": 0.70,
+      "weighted": 12600000,
+      "weighted_formatted": "$12.6M",
+      "time_profile": "MULTI_YEAR",
+      "severity": "MEDIUM",
+      "source": "environmental-compliance-analyst-epa-violations.md"
+    },
+    {
+      "rank": 8,
+      "domain": "Environmental - Penalties",
+      "finding": "Allegheny Ludlum CWA penalty",
+      "exposure": 8244000,
+      "exposure_formatted": "$8.2M",
+      "probability": 1.0,
+      "weighted": 8244000,
+      "weighted_formatted": "$8.2M",
+      "time_profile": "ONE_TIME",
+      "severity": "MEDIUM",
+      "source": "environmental-compliance-analyst-epa-violations.md"
+    },
+    {
+      "rank": 9,
+      "domain": "Deal Adjustments",
+      "finding": "Environmental offset potential (plan treatment)",
+      "exposure": -23000000,
+      "exposure_formatted": "-$23.0M (benefit)",
+      "probability": 0.77,
+      "weighted": -17710000,
+      "weighted_formatted": "-$17.7M (benefit)",
+      "time_profile": "ONE_TIME",
+      "severity": "N/A",
+      "note": "Offset mechanism reduces net exposure",
+      "source": "case-law-analyst-environmental-discharge.md"
+    },
+    {
+      "rank": 10,
+      "domain": "IP",
+      "finding": "IP value destruction (distressed auction)",
+      "exposure": null,
+      "exposure_formatted": "80% discount",
+      "probability": 0.40,
+      "weighted": null,
+      "weighted_formatted": "N/A (percentage-based)",
+      "time_profile": "ONE_TIME",
+      "severity": "HIGH",
+      "note": "Percentage-based exposure based on Kodak case study (80% value destruction in distressed sale)",
+      "source": "patent-analyst-ip-retention.md"
+    }
+  ],
+
+  "findings_by_domain": [
+    {
+      "domain": "Environmental - Reclamation",
+      "specialist": "securities-researcher",
+      "exposure": 640000000,
+      "probability": 1.0,
+      "weighted_exposure": 640000000,
+      "severity": "CRITICAL",
+      "finding_summary": "Arch Coal reclamation liability (11% of assets, perpetual obligation)"
+    },
+    {
+      "domain": "Environmental - Remediation",
+      "specialist": "environmental-compliance-analyst",
+      "exposure": 155800000,
+      "probability": 0.83,
+      "weighted_exposure": 131400000,
+      "severity": "HIGH",
+      "finding_summary": "Three remediation programs: Westinghouse Sharon ($42.8M PV), Large facility typical ($95M PV), Medium facility typical ($18M PV)"
+    },
+    {
+      "domain": "Environmental - Penalties",
+      "specialist": "environmental-compliance-analyst",
+      "exposure": 32744000,
+      "probability": 1.0,
+      "weighted_exposure": 32744000,
+      "severity": "HIGH",
+      "finding_summary": "Historical enforcement penalties: U.S. Steel Clairton ($24.5M), Allegheny Ludlum CWA ($8.2M)"
+    },
+    {
+      "domain": "Environmental - CERCLA",
+      "specialist": "environmental-compliance-analyst",
+      "exposure": 22000000,
+      "probability": 1.0,
+      "weighted_exposure": 22000000,
+      "severity": "HIGH",
+      "finding_summary": "LTV Steel CERCLA claims across 14 Superfund sites"
+    },
+    {
+      "domain": "IP Value Destruction",
+      "specialist": "patent-analyst",
+      "exposure": 19500000,
+      "probability": 0.70,
+      "weighted_exposure": 19500000,
+      "severity": "HIGH",
+      "finding_summary": "IP impairment risk in distressed sales: 80% discount in auction (40% probability), $19.5M expected value for $500M manufacturer"
+    },
+    {
+      "domain": "Deal Adjustments",
+      "specialist": "case-law-analyst",
+      "exposure": -23000000,
+      "probability": 0.77,
+      "weighted_exposure": -17710000,
+      "severity": "N/A",
+      "finding_summary": "Environmental liability offset potential through strategic bankruptcy plan classification (46-83% offset range)"
+    }
+  ],
+
+  "key_insights": [
+    "Reclamation liability dominates exposure: $640M (73% of total) from single energy sector case",
+    "Environmental exposures are correlated: 70% correlation factor applied, reducing combined exposure by $44M (21%)",
+    "Multi-year remediation programs require extended escrow periods (5-10 years) due to long-tail monitoring obligations",
+    "IP value destruction risk is event-driven: 80% discount in distressed auctions vs. 16% in going-concern restructuring",
+    "Environmental offset potential: 46-83% of environmental liabilities can be discharged/offset through strategic bankruptcy planning",
+    "Time-based classification matters: $36.7M difference between nominal and present value for multi-year programs",
+    "Typical facility exposure ranges: Small ($3-8M), Medium ($10-35M), Large ($40-200M) lifecycle costs"
+  ],
+
+  "limitations": {
+    "data_sources": "Based on 5 specialist reports covering 10 major manufacturing bankruptcies (2000-2025)",
+    "geographic_scope": "Western Pennsylvania manufacturing sector",
+    "temporal_scope": "Historical cases, current regulatory framework may differ",
+    "quantification_uncertainty": "Ranges provided for typical facilities ($40-200M), actual exposure depends on facility size, contamination type, and regulatory approach",
+    "correlation_assumptions": "70% correlation for environmental exposures based on same-facility overlap patterns in dataset",
+    "offset_probability": "46-83% offset range based on strategic bankruptcy planning outcomes, actual results depend on plan structure and court approval"
+  }
+}

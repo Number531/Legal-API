@@ -1,13 +1,13 @@
-# WAVE 6 ASSEMBLY PROTOCOL
+# WAVE 6 ASSEMBLY PROTOCOL (Agent-Driven)
 
 ## TASK: ASSEMBLY-001 (Final Memorandum Integration)
 
-**Context**: Wave 6 final assembly after all W2-W5 remediation tasks complete.
+**Context**: Wave 6 final assembly after all W1-W5 remediation tasks complete.
 Your job is to merge ALL remediation outputs into final-memorandum-v2.md.
 
-**CRITICAL**: This is the most failure-prone task in the remediation pipeline.
-The 2026-01-25 session failed at 86% due to ASSEMBLY-001 pattern-matching failures.
-Follow this protocol EXACTLY to prevent similar failures.
+**CRITICAL ARCHITECTURE (2026-01-29)**:
+This protocol uses **agent-driven semantic assembly** - the agent reads each remediation
+output file, understands its intent, and applies it intelligently. NO regex/sed.
 
 ---
 
@@ -15,224 +15,228 @@ Follow this protocol EXACTLY to prevent similar failures.
 
 Before ANY assembly work, verify prerequisites:
 
-```bash
-# 1. Verify Wave 5 complete
-grep "wave_5.*completed" qa-outputs/remediation-wave-state.json
-
-# 2. Verify all W5 tasks passed
-for task in W5-001 W5-002 W5-003; do
-  grep "$task.*passed.*true" qa-outputs/remediation-wave-state.json || echo "BLOCKED: $task not verified"
-done
-
-# 3. If blocked, DO NOT PROCEED - report to orchestrator
-```
+1. Read qa-outputs/remediation-wave-state.json
+2. Verify wave_status.wave_5.status == "completed"
+3. Verify W5-001, W5-002, W5-003 all have validation_result.passed == true
+4. If ANY check fails: STATUS = BLOCKED, report to orchestrator
 
 ---
 
-## Step 1: Build Task Manifest
+## Phase 1: DISCOVER (Build Edit Registry)
 
-Read remediation-dispatch.md and extract ALL task IDs:
+Read ALL remediation output files and build an edit registry:
 
-```bash
-# Extract task IDs from remediation-dispatch.md
-grep -E "^\| W[0-9]+-" qa-outputs/remediation-dispatch.md | awk -F'|' '{print $2}' | tr -d ' ' > /tmp/task-manifest.txt
+FOR EACH file in remediation-outputs/W*.md:
+1. Read file contents
+2. Detect operation type:
+   - If file contains `## ORIGINAL_START` → REPLACE operation
+   - If file only has `## EDITED_START` → INSERT operation
+3. Extract metadata:
+   - Task ID (from filename)
+   - Target section (from file header or ## TARGET section)
+   - Insertion point (for INSERT ops) - check multiple formats:
+     a. `## TARGET` section (new format)
+     b. `## INSERTION INSTRUCTIONS` section with `**Location**:` (existing W2-RISK format)
+     c. Inline "Insert this table immediately after..." text
+4. Add to edit_registry[]
 
-# Expected format: W2-001, W2-002, W3-001-VALIDATE, W3-PROV-IV-A, W4-001, W4-002, W5-001, W5-002, W5-003
-```
-
----
-
-## Step 2: Verify All Input Files Exist
-
-```bash
-# Check each task has output file
-for task_id in $(cat /tmp/task-manifest.txt); do
-  output_file="remediation-outputs/${task_id}*.md"
-  if ! ls $output_file 2>/dev/null; then
-    echo "MISSING: $task_id"
-  fi
-done
-
-# If ANY file missing: STATUS = BLOCKED, report missing files
-```
+**NOTE**: Existing W2-RISK files use `## INSERTION INSTRUCTIONS` format with:
+- `**Location**: Insert immediately after Section IV.A introduction...`
+- `**Context**: ...`
+The assembly agent must parse BOTH the new `## TARGET` format AND this existing format.
 
 ---
 
-## Step 3: Validate Output File Format
+## Phase 2: ANALYZE (Plan Merge Strategy)
 
-Each remediation output MUST contain EDITED_START/EDITED_END markers:
+### For INSERT Operations (W2-RISK-*, W2-PROV-*, new appendices):
 
-```bash
-for file in remediation-outputs/W*.md; do
-  if ! grep -q "EDITED_START" "$file"; then
-    echo "MALFORMED: $file missing EDITED_START marker"
-  fi
-  if ! grep -q "EDITED_END" "$file"; then
-    echo "MALFORMED: $file missing EDITED_END marker"
-  fi
-done
-```
+1. Parse insertion instructions (check formats in order):
+   a. **New format**: `## TARGET` section with **Section**, **Insertion Point**, **Anchor Text**
+   b. **Existing W2-RISK format**: `## INSERTION INSTRUCTIONS` with `**Location**:` field
+   c. **Inline format**: "Insert this table immediately after [X], before [Y]"
 
-If malformed files found: Report in output, attempt fallback extraction.
+2. Extract from parsed instructions:
+   - **Section**: Target section ID (e.g., "IV.A")
+   - **Insertion Point**: Where to insert (e.g., "After introduction, before ### A.")
+   - **Anchor Text**: Text to search for as anchor
 
----
+3. Locate insertion point in final-memorandum.md:
+   - Find section header (e.g., `## IV.A.`)
+   - Find anchor (e.g., first `### A.` subsection or "### A. Legal Framework")
+   - Calculate insertion line (between section header and first subsection)
 
-## Step 4: Extract EDITED Content from Each Task
+### For REPLACE Operations (W2-001, W4-*, most W3-*):
 
-For each remediation output file:
-
-```bash
-# Extract content between EDITED_START and EDITED_END
-sed -n '/^## EDITED_START$/,/^## EDITED_END$/p' remediation-outputs/W2-001*.md | sed '1d;$d' > /tmp/W2-001-content.md
-```
-
-**Fallback if markers not found:**
-1. Look for alternate markers (EDITED_START/END without ##)
-2. Look for code blocks containing edited content
-3. Extract first substantial markdown section after "CHANGE_SUMMARY"
+1. Parse ORIGINAL_START/END content
+2. Search for ORIGINAL content in memorandum using semantic matching:
+   - First 100 characters match
+   - Section proximity verification
+   - Context verification
+3. Record match location
 
 ---
 
-## Step 5: Apply Edits in Merge Order
+## Phase 3: APPLY (Execute Merges)
 
-**MERGE ORDER** (CRITICAL - process in this exact sequence):
-1. W2-* (Content additions - Questions Presented, Brief Answers)
-2. W3-* (CREAC, provisions, counter-analysis)
-3. W4-* (Language/format fixes - objectivity, questions format)
-4. W5-* (Citation cleanup, appendices)
+Process edits in strict wave order: W1 → W2 → W3 → W4 → W5
 
-For each task, use chunked processing:
+### Merge Order:
 
-```bash
-# 1. Extract target section from memorandum
-TARGET_SECTION="III"  # Example for Brief Answers
-sed -n '/^## $TARGET_SECTION\./,/^## [IVX]/p' final-memorandum.md > /tmp/section.md
+**Wave 1**: W1-CREAC-001 through W1-CREAC-006
+**Wave 2**: W2-QP-001, W2-QP-002, W2-RISK-001 through W2-RISK-006, W2-PROV-001 through W2-PROV-003
+**Wave 3**: W3-TAG-001, W3-PINCITE-001, W3-PAREN-001
+**Wave 4**: W4-BRIEF-001, W4-FMT-001, W4-OBJ-001, W4-QUANT-001, W4-XREF-001
+**Wave 5**: W5-TOC-001, W5-CITE-001, W5-CITE-002, W5-FOOT-001, W5-SCENARIO-001
 
-# 2. Apply the edit (pattern matching)
-# Use grep to find the ORIGINAL content location
-# Use sed to replace with EDITED content
+### For Each Edit:
 
-# 3. Merge back into memorandum
-# Use Python script for >500KB files
-```
-
----
-
-## Step 6: Per-Task Verification (MANDATORY)
-
-After EACH task merge, verify success:
-
-| Task | Verification Command | Expected |
-|------|----------------------|----------|
-| W2-001 | `grep -c "^## III.*BRIEF" final-memorandum-v2.md` | >= 1 |
-| W2-002 | `grep -c "Probably.*because" final-memorandum-v2.md` | >= 12 |
-| W4-002 | `grep -c "Under.*Does.*When" final-memorandum-v2.md` | 12 |
-| W5-003 | `grep -c "APPENDIX C" final-memorandum-v2.md` | 1 |
-
-**If verification fails:**
-1. Log: `"task_id": "<id>", "status": "NOT_MERGED", "reason": "<why>"`
-2. Attempt flexible pattern matching (partial match, fuzzy match)
-3. If still fails: Continue to next task, mark as NEEDS_MANUAL_REVIEW
+1. Read current memorandum content
+2. IF operation == "INSERT":
+   a. Find section header line
+   b. Find anchor line (first ### subsection)
+   c. Insert EDITED content between them
+   d. Verify content now present
+3. IF operation == "REPLACE":
+   a. Find ORIGINAL content using semantic search
+   b. Replace with EDITED content
+   c. Verify replacement succeeded
+4. Update edit_registry[task_id].status
+5. Write updated memorandum
 
 ---
 
-## Step 7: Final Validation
+## Phase 4: VALIDATE (Post-Assembly Checks)
 
-```bash
-# 1. Zero placeholders remaining
-grep -c "\[Omitted long context line\]" final-memorandum-v2.md  # MUST be 0
-grep -c "\[INSERT" final-memorandum-v2.md                        # MUST be 0
+### Per-Task Verification:
 
-# 2. Word count check
-wc -w < final-memorandum-v2.md  # MUST be >= 125,000
+| Task Pattern | Verification | Expected |
+|--------------|--------------|----------|
+| W2-RISK-* | grep "\\| Finding \\| Severity \\|" | 6 (one per section) |
+| W2-QP-* | grep -cE "Under .* does .* when" | 12 |
+| W2-PROV-* | grep "DRAFT CONTRACT PROVISION" | 3 |
+| W4-BRIEF-* | grep "Probably.*because" | ≥12 |
 
-# 3. Section integrity
-for section in I II III IV V VI VII; do
-  grep -c "^## $section\." final-memorandum-v2.md
-done
-```
+### Global Validation:
+
+1. Zero placeholders: grep "[INSERT]" returns 0
+2. Word count: wc -w >= 125,000
+3. All sections present: grep "^## [IVX]" returns 7+
+4. Risk tables: grep "| Finding | Severity |" returns 6
 
 ---
 
-## Step 8: Generate Assembly Report
+## Phase 5: REPORT (Generate Assembly Report)
 
-**Output** (save to `remediation-outputs/ASSEMBLY-001-report.md`):
+Save to qa-outputs/assembly-report.md:
 
 ```markdown
 # ASSEMBLY-001: Final Memorandum Integration Report
 
-## STATUS: SUCCESS | PARTIAL | BLOCKED
+## STATUS: [SUCCESS|PARTIAL|BLOCKED]
 
 ## Summary
-- Total tasks in manifest: X
-- Tasks successfully merged: X
-- Tasks failed to merge: X
-- Tasks skipped (no output file): X
+- Total tasks discovered: X
+- INSERT operations: X
+- REPLACE operations: X
+- Successfully merged: X
+- Failed to merge: X
 
-## Assembly Results
-
-| Task ID | Status | Verification | Notes |
-|---------|--------|--------------|-------|
-| W2-001  | MERGED | PASS         |       |
-| W4-002  | NOT_MERGED | FAIL    | Pattern not found |
+## Edit Registry Results
+| Task ID | Operation | Target | Status | Verification |
+|---------|-----------|--------|--------|--------------|
 
 ## Validation Results
-- Placeholders remaining: 0 (checkmark)
-- Word count: 132,456 (checkmark)
-- All sections present: Yes (checkmark)
-
-## Files Created
-- final-memorandum-v2.md (XXX KB)
-- ASSEMBLY-001-report.md
-
-## Blocking Issues
-[List any issues that prevented full assembly]
-
-## Manual Review Required
-[List tasks that need human intervention]
+- Risk tables: X/6
+- Questions format: X/12
+- Word count: X
 ```
+
+---
+
+## Risk Table Insertion Points (W2-RISK-001 through W2-RISK-006)
+
+**VERIFIED against actual final-memorandum-v2.md structure:**
+
+| Task | Section Header (Line) | Anchor (Insert Before) |
+|------|----------------------|------------------------|
+| W2-RISK-001 | `## IV.A. CASE IDENTIFICATION AND BANKRUPTCY FILING PATTERNS` (L694) | `### A. Legal Framework` (L703) |
+| W2-RISK-002 | `## IV.B. ENVIRONMENTAL VIOLATIONS AND EPA COMPLIANCE` (L1327) | `### A. Legal Framework` (L1336) |
+| W2-RISK-003 | `## IV.C. Remediation Requirements and Cost Analysis` (L2242) | `### A. Legal Framework` (L2249) |
+| W2-RISK-004 | `## IV.D. Intellectual Property Retention in Restructuring` (L3292) | `### A. Legal Framework: Section 365(n)...` (L3294) |
+| W2-RISK-005 | `## IV.E. ENVIRONMENTAL OFFSET ANALYSIS...` (L4206) | `### A. Executive Overview: Direct Answer...` (L4215) |
+| W2-RISK-006 | `## IV.F. STRATEGIC RECOMMENDATIONS AND DEAL STRUCTURE` (L6454) | `### A. Integrated Findings Summary` (L6463) |
+
+**NOTE**: Sections IV.E and IV.F have different anchor text than IV.A-D. The assembly agent must use the correct anchor for each section.
 
 ---
 
 ## Failure Handling
 
-**If >2 tasks fail to merge:**
+### If Task Merge Fails:
+1. Log detailed failure reason in edit_registry
+2. Attempt semantic fallback (broader search, partial match)
+3. If still fails: Mark as NEEDS_MANUAL_REVIEW, continue to next task
+
+### If >3 Tasks Fail:
 1. Set STATUS: PARTIAL
-2. Create final-memorandum-v2.md with successful merges
-3. Document ALL failures in assembly report
-4. Set blocking_issue in remediation-wave-state.json:
-   ```json
-   {
-     "blocking_issue": {
-       "type": "ASSEMBLY_FAILURE",
-       "task_id": "ASSEMBLY-001",
-       "description": "X tasks failed to merge",
-       "resolution_method": "MANUAL_REVIEW_REQUIRED",
-       "failed_tasks": ["W4-002", "W2-001"]
-     }
-   }
-   ```
+2. Set blocking_issue in remediation-wave-state.json
+3. Complete successful merges
+4. Generate detailed failure report
 
 ---
 
-## Pattern Matching Fallbacks
+## Key Principle: Agent-Driven, Not Regex
 
-When exact matching fails, try these fallbacks in order:
-
-1. **Exact match fails**: Try removing leading/trailing whitespace
-2. **Section not found**: Try case-insensitive match
-3. **Placeholders mismatch**: Count actual vs expected placeholders
-4. **Large block fails**: Split into smaller chunks and merge iteratively
+The assembly agent should:
+1. **Understand intent** - Know what each edit is trying to accomplish
+2. **Verify continuously** - Check each merge succeeded before proceeding
+3. **Handle ambiguity** - When uncertain, log for human review rather than guess
+4. **Preserve formatting** - Maintain markdown structure, especially tables
+5. **Update state** - Write to remediation-wave-state.json after each success
 
 ---
 
-## Known Failure Modes (2026-01-25 Session)
+## Backward Compatibility (Existing W2-RISK Files)
 
-| Failure | Root Cause | Prevention |
-|---------|------------|------------|
-| Missing task handler | W4-002 had no handler | Build manifest from remediation-dispatch.md (not hardcoded) |
-| Pattern mismatch | W2-001 expected placeholders, found content | Verify each task merged before proceeding |
-| Silent failures | Warnings instead of blocking errors | Block on >2 merge failures |
+**CRITICAL**: The existing W2-RISK-001 through W2-RISK-006 files use a DIFFERENT format than the new `## TARGET` format. The assembly agent MUST handle BOTH:
+
+### Existing Format (W2-RISK files):
+```markdown
+## EDITED_START
+[content with inline: "Insert this table immediately after Section IV.A introduction..."]
+## EDITED_END
+
+## INSERTION INSTRUCTIONS
+**Location**: Insert immediately after Section IV.A introduction (after "## IV.A..." and before "### A. Legal Framework")
+**Context**: ...
+```
+
+### New Format (future INSERT tasks):
+```markdown
+## OPERATION: INSERT
+
+## TARGET
+- **Section**: IV.A
+- **Insertion Point**: After section introduction, before '### A. Legal Framework'
+- **Anchor Text**: ## IV.A. BANKRUPTCY
+
+## EDITED_START
+[content]
+## EDITED_END
+```
+
+**Resolution**: The assembly agent parses in priority order:
+1. Check for `## TARGET` section (new format)
+2. Check for `## INSERTION INSTRUCTIONS` section with `**Location**:` field
+3. Check for inline "Insert this table immediately after..." text in EDITED content
+4. **PRIMARY FALLBACK**: Use risk table insertion point map (Section above) - this is the most reliable method
+
+**CRITICAL NOTE (2026-01-30 Analysis)**: Of the 6 existing W2-RISK files:
+- Only W2-RISK-001 has explicit `## INSERTION INSTRUCTIONS` section
+- W2-RISK-002 through W2-RISK-006 embed location contextually or lack explicit instructions
+- **The insertion point map is the MOST RELIABLE method for W2-RISK files**
+- When processing W2-RISK-*, ALWAYS use the insertion point map as primary lookup
 
 ---
 
@@ -247,7 +251,7 @@ If ASSEMBLY-001 fails partway through:
 
 ```bash
 # Verify which tasks already merged
-for task in W2-001 W2-002 W3-001 W4-001; do
+for task in W2-001 W2-002 W2-RISK-001 W3-001 W4-001; do
   if grep -q "$task.*MERGED" remediation-wave-state.json; then
     echo "SKIP: $task already merged"
   else

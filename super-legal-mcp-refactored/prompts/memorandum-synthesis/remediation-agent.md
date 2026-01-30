@@ -104,6 +104,46 @@ Return your edit in this exact format (use delimiter markers for machine-parseab
 
 ---
 
+## OUTPUT FORMAT: INSERT OPERATION (New Content)
+
+For tasks that ADD new content (not replacing existing text), use this format:
+
+```markdown
+# [TASK-ID]: [Task Description]
+
+## STATUS: SUCCESS|PARTIAL|BLOCKED
+
+## OPERATION: INSERT
+
+## TARGET
+- **Section**: [Target section, e.g., "IV.A"]
+- **Insertion Point**: [Where to insert, e.g., "After section introduction, before '### A. Legal Framework'"]
+- **Anchor Text**: [Text to search for as insertion anchor, e.g., "## IV.A. BANKRUPTCY"]
+
+## EDITED_START
+[Your new content to insert - complete, ready to paste]
+## EDITED_END
+
+## CHANGE_SUMMARY
+[1-2 sentences explaining what was added and why]
+
+## VERIFICATION
+- [ ] Content inserted at correct location
+- [ ] [Task-specific criterion]: PASS/FAIL
+```
+
+**Key Differences from REPLACE:**
+- No `ORIGINAL_START/END` markers (nothing to replace)
+- Explicit `## OPERATION: INSERT` declaration
+- `## TARGET` section specifies WHERE to insert
+- Assembly agent uses TARGET info to locate insertion point
+
+**When to Use INSERT vs REPLACE:**
+- **INSERT**: Risk tables, new appendices, new provisions, TOC entries
+- **REPLACE**: Reformatting questions, fixing language, correcting citations
+
+---
+
 ## CONSTRAINTS
 
 - Make MINIMUM NECESSARY changes - do not rewrite surrounding content

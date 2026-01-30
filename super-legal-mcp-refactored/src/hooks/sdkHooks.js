@@ -178,13 +178,9 @@ CONSOLIDATION ORDER:
 - High confidence detections (>0.8) first within each section`,
 
     'ASSEMBLY-001': `
-WAVE 6 ASSEMBLY PROTOCOL (Agent-Driven with Manifest):
+WAVE 6 ASSEMBLY PROTOCOL (Agent-Driven):
 
-**ROOT CAUSE OF 86% FAILURE (2026-01-25):**
-- W4-002 (Questions Presented) content created but NOT merged
-- W2-001 (Brief Answers) pattern matching failed silently
-- "[Omitted long context line]" placeholders remained
-- FOLLOW THIS PROTOCOL EXACTLY to prevent similar failures
+**ARCHITECTURE**: Agent reads and applies edits semantically (NOT regex).
 
 1. GATE CHECK (MANDATORY - BLOCK if fails):
    - Read remediation-wave-state.json
@@ -192,52 +188,63 @@ WAVE 6 ASSEMBLY PROTOCOL (Agent-Driven with Manifest):
    - Verify W5-001, W5-002, W5-003 all have validation_result.passed == true
    - If ANY check fails: STATUS = BLOCKED, report to orchestrator
 
-2. PRE-ASSEMBLY FILE VALIDATION (NEW - Critical):
-   a) Build manifest from remediation-dispatch.md:
-      grep -E "^\\| W[0-9]+-" qa-outputs/remediation-dispatch.md | awk '{print $2}'
+2. BUILD EDIT REGISTRY:
+   - Read ALL remediation-outputs/W*.md files
+   - For each file, detect operation type:
+     - Has ORIGINAL_START → REPLACE operation
+     - Only EDITED_START → INSERT operation
+   - Extract target section from file header/comments
 
-   b) For EACH task in manifest, verify file exists:
-      ls remediation-outputs/W2-001*.md || echo "MISSING: W2-001"
+3. PROCESS IN WAVE ORDER (W1 → W2 → W3 → W4 → W5):
 
-   c) Verify EDITED markers exist in each file:
-      grep -l "EDITED_START" remediation-outputs/W*.md | wc -l
-      # Must equal number of tasks in manifest
+   For INSERT operations (e.g., W2-RISK-*):
+   a) Find target section header (e.g., "## IV.A.")
+   b) Find anchor text (e.g., "### A. Legal Framework")
+   c) Insert EDITED content BEFORE anchor
+   d) Verify content now present
 
-   d) If ANY file missing or malformed: STATUS = BLOCKED, list missing files
+   For REPLACE operations:
+   a) Find ORIGINAL content using semantic search
+   b) Replace with EDITED content
+   c) Verify replacement succeeded
 
-3. MERGE ORDER (CRITICAL - exact sequence):
-   W2-001 → W2-002 → W3-* → W4-001 → W4-002 → W5-*
+4. VERIFY AFTER EACH EDIT:
+   - Risk tables: grep "| Finding | Severity |" (expect 6)
+   - Questions: grep "Under.*does.*when" (expect 12)
+   - Provisions: grep "DRAFT CONTRACT PROVISION" (expect 3)
 
-   For each task:
-   a) Extract EDITED content: sed -n '/EDITED_START/,/EDITED_END/p' file.md
-   b) Identify target section in memorandum
-   c) Apply edit with chunked processing (sed for >500KB)
-   d) IMMEDIATELY verify after each merge (grep check)
-   e) Log result: {"task_id": "X", "status": "MERGED|NOT_MERGED"}
+5. GENERATE REPORT:
+   - Save to qa-outputs/assembly-report.md
+   - List all tasks with MERGED/FAILED status
+   - Include validation results
 
-4. PATTERN MATCHING FALLBACKS:
-   If exact pattern match fails:
-   a) Try removing leading/trailing whitespace from pattern
-   b) Try case-insensitive match
-   c) Try matching first 50 chars of ORIGINAL content
-   d) If all fail: Log "NOT_MERGED" with reason, continue to next task
+RISK TABLE INSERTION POINTS (verified line numbers):
+- W2-RISK-001: After "## IV.A." (L694), before "### A. Legal Framework" (L703)
+- W2-RISK-002: After "## IV.B." (L1327), before "### A. Legal Framework" (L1336)
+- W2-RISK-003: After "## IV.C." (L2242), before "### A. Legal Framework" (L2249)
+- W2-RISK-004: After "## IV.D." (L3292), before "### A. Legal Framework:" (L3294)
+- W2-RISK-005: After "## IV.E." (L4206), before "### A. Executive Overview:" (L4215)
+- W2-RISK-006: After "## IV.F." (L6454), before "### A. Integrated Findings" (L6463)
 
-5. PER-TASK VERIFICATION (MANDATORY after each merge):
-   - W2-001: grep -c "^\\*\\*[0-9]" (≥12 Brief Answer headers)
-   - W2-002: grep -c "Probably.*because" (≥12)
-   - W4-002: grep -cE "Under.*Does.*When" (12)
-   - W5-003: grep -c "APPENDIX C" (1)
+BACKWARD COMPATIBILITY (existing W2-RISK files):
+CRITICAL: Only W2-RISK-001 has explicit ## INSERTION INSTRUCTIONS.
+W2-RISK-002 through W2-RISK-006 embed location contextually.
 
-6. FINAL VALIDATION:
-   - grep -c "\\[Omitted long context line\\]" == 0 (CRITICAL)
-   - grep -c "\\[INSERT" == 0
-   - grep -c "\\[TBD" == 0
-   - wc -w >= 125,000
+FOR W2-RISK-* FILES: Use insertion points map as PRIMARY method:
+1. Match task ID (W2-RISK-001 through W2-RISK-006)
+2. Look up section header and anchor from map above
+3. Insert EDITED content between header and anchor
 
-7. FAILURE HANDLING:
-   - If task merge fails: Log NOT_MERGED, attempt fallbacks, continue
-   - If >2 tasks fail: Set blocking_issue in state, ESCALATE
-   - NEVER fail silently - always log and report`
+FOR OTHER INSERT TASKS: Parse in priority order:
+1. Check for ## TARGET section (new format)
+2. Check for ## INSERTION INSTRUCTIONS with **Location**: field
+3. Check for inline "Insert this table..." text
+4. Fall back to insertion points map if available
+
+FAILURE HANDLING:
+- If edit fails: Log reason, attempt semantic fallback, continue
+- If >3 tasks fail: Set STATUS = PARTIAL, escalate
+- Never fail silently - always log and report`
   };
 
   return guidanceMap[scriptName] || '';

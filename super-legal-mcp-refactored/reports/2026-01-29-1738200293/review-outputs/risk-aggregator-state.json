@@ -1,0 +1,108 @@
+{
+  "agent": "risk-aggregator",
+  "status": "COMPLETE",
+  "session_start": "2026-01-29T00:00:00Z",
+  "session_end": "2026-01-29T00:10:00Z",
+
+  "compaction_summary": {
+    "task": "Aggregate and classify quantified risk exposures",
+    "progress": "COMPLETE - All phases finished",
+    "next_action": "Return status to orchestrator",
+    "critical_context": [
+      "10 exposures classified and aggregated",
+      "$870M gross exposure (P50)",
+      "$808M net after correlation adjustments and offsets",
+      "$970M escrow recommendation"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_input_loading": true,
+    "phase_2_time_classification": true,
+    "phase_3_category_aggregation": true,
+    "phase_4_probability_weighting": true,
+    "phase_5_correlation_adjustment": true,
+    "phase_6_recommendations": true,
+    "phase_7_output_files": true,
+    "phase_8_return_status": true
+  },
+
+  "input_source": {
+    "primary": "orchestrator-state.md QUANTIFIED_EXPOSURES section",
+    "exposures_count": 10,
+    "methodology": "Pre-extracted by research-review-gate"
+  },
+
+  "final_metrics": {
+    "exposures_total": 10,
+    "exposures_classified": 10,
+    "exposures_weighted": 10,
+    "gross_total_nominal": 870044000,
+    "gross_total_pv": 870044000,
+    "probability_weighted": 845854000,
+    "correlation_adjusted": 825800000,
+    "net_after_offsets": 808090000,
+    "escrow_recommendation": 970000000,
+    "high_severity_count": 8,
+    "critical_findings_count": 2,
+    "top_exposure_domain": "Environmental - Reclamation ($640M)",
+    "last_checkpoint": "2026-01-29T00:10:00Z"
+  },
+
+  "outputs_created": [
+    "risk-summary.json"
+  ],
+
+  "aggregation_summary": {
+    "by_category": {
+      "environmental_cercla": {
+        "gross": 22000000,
+        "weighted": 22000000
+      },
+      "environmental_remediation": {
+        "gross": 155800000,
+        "weighted": 131400000
+      },
+      "environmental_penalties": {
+        "gross": 32744000,
+        "weighted": 32744000
+      },
+      "ip_value_destruction": {
+        "gross": 19500000,
+        "weighted": 19500000
+      },
+      "reclamation_obligations": {
+        "gross": 640000000,
+        "weighted": 640000000
+      },
+      "deal_adjustments": {
+        "gross": -23000000,
+        "weighted": -17710000,
+        "note": "Negative = benefit/offset"
+      }
+    },
+    "correlation_adjustments_applied": {
+      "environmental_cluster": {
+        "raw_total": 210544000,
+        "adjusted_total": 166300000,
+        "reduction": 44244000
+      }
+    }
+  },
+
+  "time_profile_breakdown": {
+    "one_time_count": 7,
+    "multi_year_count": 3,
+    "perpetual_count": 1,
+    "dcf_adjustments_total": 36700000
+  },
+
+  "validation_checks": {
+    "all_exposures_classified": true,
+    "all_exposures_weighted": true,
+    "correlation_adjustments_applied": true,
+    "escrow_analysis_complete": true,
+    "output_file_created": true,
+    "totals_reconciled": true
+  }
+}

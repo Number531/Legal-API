@@ -911,14 +911,17 @@ Invoke `memo-remediation-writer` with task ASSEMBLY-001:
 
 **Instructions for Agent:**
 ```
-For each task in merge_order (W2-* → W3-* → W4-* → W5-*):
+For each task in merge_order (W1-* → W2-* → W3-* → W4-* → W5-*):
 1. Read remediation-outputs/[task-id].md
-2. Extract content between EDITED_START and EDITED_END markers
-3. Locate target section in final-memorandum.md
-4. Apply edit using chunked processing for >500KB files
-5. Run verification grep to confirm edit applied
-6. Log result to assembly_results[]
-7. If merge fails: Log with status "NOT_MERGED", attempt flexible pattern matching
+2. Detect operation type:
+   - If file contains `## ORIGINAL_START` → REPLACE operation
+   - If file only has `## EDITED_START` → INSERT operation
+3. For INSERT: Parse ## TARGET or ## INSERTION INSTRUCTIONS for location
+4. For REPLACE: Find ORIGINAL content in memorandum using semantic search
+5. Apply edit (insert or replace) using agent intelligence
+6. Run verification grep to confirm edit applied
+7. Log result to assembly_results[]
+8. If merge fails: Log with status "NOT_MERGED", attempt semantic fallback
 ```
 
 **Output**: `final-memorandum-v2.md`
@@ -1069,11 +1072,17 @@ This section documents actual Wave 6 failures and their root causes to prevent r
    done
    ```
 
-3. **EDITED_START/EDITED_END Marker Validation**: Verify all output files contain proper markers:
+3. **Remediation Output Validation**: Verify all output files contain required markers:
    ```bash
    for file in remediation-outputs/W*.md; do
      if ! grep -q "EDITED_START" "$file"; then
        echo "MALFORMED: $file missing EDITED_START"
+     fi
+     # Detect operation type
+     if grep -q "ORIGINAL_START" "$file"; then
+       echo "$file: REPLACE operation"
+     else
+       echo "$file: INSERT operation (check for TARGET or INSERTION INSTRUCTIONS)"
      fi
    done
    ```

@@ -1,0 +1,146 @@
+{
+  "agent": "memo-qa-diagnostic",
+  "status": "complete",
+  "session_directory": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-29-1738200293/",
+
+  "qa_cycle": {
+    "current_cycle": 2,
+    "max_cycles": 3,
+    "cycle_history": [
+      {
+        "cycle": 1,
+        "score": 71.2,
+        "outcome": "REMEDIATE",
+        "issues_before": 36,
+        "issues_resolved": 0,
+        "issues_remaining": 36,
+        "timestamp": "2026-01-29T00:00:00Z"
+      },
+      {
+        "cycle": 2,
+        "score": 89.8,
+        "outcome": "CERTIFY_WITH_LIMITATIONS",
+        "issues_before": 36,
+        "issues_resolved": 28,
+        "issues_remaining": 8,
+        "timestamp": "2026-01-29T20:00:00Z"
+      }
+    ]
+  },
+
+  "gate_attempts": {
+    "A1_to_A2": { "attempts": 2, "max": 3, "last_failure_reason": null }
+  },
+
+  "compaction_summary": {
+    "task": "Second diagnostic assessment complete - CERTIFY WITH LIMITATIONS",
+    "progress": "All 12 dimensions re-scored, 18.6% improvement achieved",
+    "next_action": "Orchestrator should invoke certification agent for delivery decision",
+    "critical_context": [
+      "Score: 89.8% (+18.6% from baseline 71.2%)",
+      "Target of 93% not reached but within CERTIFY_WITH_LIMITATIONS range (88-92%)",
+      "Major improvements: CREAC structure (+10%), Questions Presented (+10%), Verification tags (+12%)",
+      "Remaining gaps: Risk tables (0/6 present), Draft provisions (3/6 present), Pincites (30% coverage)"
+    ]
+  },
+
+  "phases_complete": {
+    "phase_1_prerequisite": true,
+    "phase_2_dimension_scoring": true,
+    "phase_3_issue_cataloging": true,
+    "phase_4_remediation_planning": false,
+    "phase_5_output_files": true,
+    "phase_6_return_status": true
+  },
+
+  "prerequisite_checks": {
+    "expected_sections": ["IV.A", "IV.B", "IV.C", "IV.D", "IV.E", "IV.F"],
+    "expected_count": 6,
+    "min_file_size_kb": 150,
+    "sections_found": ["IV.A", "IV.B", "IV.C", "IV.D", "IV.E", "IV.F"],
+    "sections_count": 6,
+    "actual_file_size_kb": 876,
+    "executive_summary_present": true,
+    "footnotes_section_present": true,
+    "placeholders_found": 0,
+    "verdict": "PASS"
+  },
+
+  "dimensions_scored": {
+    "dim_0_questions_presented": { "status": "complete", "score": 10.0, "max": 10.0, "change": 10.0 },
+    "dim_1_creac_structure": { "status": "complete", "score": 10.0, "max": 10.0, "change": 10.0 },
+    "dim_2_objectivity": { "status": "complete", "score": 7.5, "max": 8.0, "change": 0.0 },
+    "dim_3_brief_answer": { "status": "complete", "score": 4.5, "max": 5.0, "change": 0.0 },
+    "dim_4_exec_summary": { "status": "complete", "score": 7.0, "max": 7.0, "change": 0.0 },
+    "dim_5_citation_quality": { "status": "complete", "score": 10.8, "max": 12.0, "change": 5.4 },
+    "dim_6_quantification": { "status": "complete", "score": 9.5, "max": 10.0, "change": 0.0 },
+    "dim_7_cross_reference": { "status": "complete", "score": 8.0, "max": 8.0, "change": 0.5 },
+    "dim_8_risk_tables": { "status": "complete", "score": 0.0, "max": 8.0, "change": 0.0 },
+    "dim_9_draft_contracts": { "status": "complete", "score": 9.0, "max": 10.0, "change": 1.5 },
+    "dim_10_formatting": { "status": "complete", "score": 6.5, "max": 7.0, "change": 0.0 },
+    "dim_11_completeness": { "status": "complete", "score": 10.0, "max": 10.0, "change": 0.0 }
+  },
+
+  "recovery_instructions": {
+    "on_compaction": "Second diagnostic complete. Proceed to certification phase.",
+    "do_not_repeat": ["dim_0", "dim_1", "dim_2", "dim_3", "dim_4", "dim_5", "dim_6", "dim_7", "dim_8", "dim_9", "dim_10", "dim_11"],
+    "do_not_rescore": true
+  },
+
+  "issues_found": [
+    {
+      "id": "DIM8-RISK-001",
+      "dimension": 8,
+      "severity": "HIGH",
+      "description": "0/6 sections have 5-column risk tables (Finding|Severity|Probability|Exposure|Mitigation)",
+      "location": "Sections IV.A-IV.F",
+      "remediation_agent": "memo-remediation-writer",
+      "estimated_time_minutes": 90
+    },
+    {
+      "id": "DIM5-CITE-002",
+      "dimension": 5,
+      "severity": "MEDIUM",
+      "description": "Pincite coverage at 30% (167 detected vs 562 total citations)",
+      "location": "Throughout document",
+      "remediation_agent": "citation-validator",
+      "estimated_time_minutes": 45
+    },
+    {
+      "id": "DIM9-PROV-001",
+      "dimension": 9,
+      "severity": "MEDIUM",
+      "description": "Missing draft provisions for 3 HIGH findings (Ongoing Compliance, IP Loss, Administrative Expense)",
+      "location": "Sections IV.B, IV.D, IV.E",
+      "remediation_agent": "memo-remediation-writer",
+      "estimated_time_minutes": 60
+    }
+  ],
+
+  "metrics": {
+    "dimensions_total": 12,
+    "dimensions_scored": 12,
+    "base_score": 83.3,
+    "adjustments": 6.5,
+    "aggregate_score": 89.8,
+    "score_improvement": 18.6,
+    "critical_issues": 0,
+    "high_issues": 1,
+    "medium_issues": 2,
+    "low_issues": 5,
+    "total_issues": 8,
+    "last_checkpoint": "2026-01-29T20:00:00Z"
+  },
+
+  "output_files": {
+    "diagnostic_assessment_pass1": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-29-1738200293/qa-outputs/diagnostic-assessment.md",
+    "diagnostic_assessment_pass2": "/Users/ej/Super-Legal/super-legal-mcp-refactored/reports/2026-01-29-1738200293/qa-outputs/qa-diagnostic-pass2.md"
+  },
+
+  "next_step": {
+    "phase": "CERTIFICATION",
+    "agent": "memo-qa-certifier",
+    "action": "Generate certification decision and delivery recommendations",
+    "expected_outcome": "CERTIFY_WITH_LIMITATIONS - disclose gaps in risk tables and pincite coverage"
+  }
+}
